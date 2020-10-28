@@ -98,7 +98,7 @@
         </div>
 
         <div class="mainArticle_article">
-            <a href="" class="article_frame">
+            <div class="article_frame">
                 <div class="img_frame"><img src="../Common/images/20190220_194753.jpg" alt=""></div>
                 <div class="product_title">
                     <h6 class="popular_board_title">똠양꿈 팝니다!!</h6>
@@ -108,7 +108,7 @@
                     <p>조회수:xx 찜:xx</p>
                 </div>
                 <div class="price_display">1,400,000</div>
-            </a>
+            </div>
           
         </div>
         
