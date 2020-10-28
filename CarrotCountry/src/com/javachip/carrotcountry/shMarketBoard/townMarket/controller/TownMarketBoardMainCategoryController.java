@@ -34,7 +34,6 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	
 		
 		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
-		System.out.println(list.get(0));
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);
 		
