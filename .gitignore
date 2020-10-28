@@ -15,6 +15,7 @@ Servers/
 .recommenders
 .project
 .classpath
+.gitignore
 .settings/
 
 # External tool builders

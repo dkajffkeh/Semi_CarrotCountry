@@ -18,15 +18,16 @@ public class JDBCtemplate {
 		Connection conn = null;
 		Properties prop = new Properties();
 		
-		String path = JDBCtemplate.class.getResource("/sql/driver/driver.xml").getPath();
-		
+		String path = JDBCtemplate.class.getResource("/sql/driver/driver.properties").getPath();
 		
 		try {
-			prop.loadFromXML(new FileInputStream(path));
+			prop.load(new FileInputStream(path));
 			Class.forName(prop.getProperty("driver"));
 			conn = DriverManager.getConnection(prop.getProperty("url")
 					                          ,prop.getProperty("id")
 					                          ,prop.getProperty("pwd"));
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

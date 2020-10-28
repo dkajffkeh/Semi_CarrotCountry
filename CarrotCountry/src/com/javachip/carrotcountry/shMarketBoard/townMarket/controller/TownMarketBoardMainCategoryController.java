@@ -1,25 +1,28 @@
-package com.javachip.carrotcountry.shMarketBoard.mainPage.controller;
+package com.javachip.carrotcountry.shMarketBoard.townMarket.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 
 /**
- * Servlet implementation class shMarketMainBoardController
+ * Servlet implementation class TownMarketBoardMainCategoryController
  */
-@WebServlet("/shMarketDetail.sh")
-public class shMarketMainBoardController extends HttpServlet {
+@WebServlet("/shMarketBoardMain.sh")
+public class TownMarketBoardMainCategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public shMarketMainBoardController() {
+    public TownMarketBoardMainCategoryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +33,11 @@ public class shMarketMainBoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		
+		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
+		System.out.println(list.get(0));
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);
 		
-		
-		
-	
 	}
 
 	/**

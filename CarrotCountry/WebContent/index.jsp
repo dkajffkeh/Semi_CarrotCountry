@@ -71,7 +71,9 @@
     town_btn.addEventListener('click',toTown);
     
     function toTown(){
-    	location.href="<%=contextPath%>/shMarket.sh"
+    	
+    	location.href="<%=contextPath%>/shMarketBoardMain.sh";
+    
     }
     </script>
     <button type="button" class="btn btn-outline-success">공구마켓</button>
@@ -84,7 +86,7 @@
 
     <!-- =============================== 인기 게시글 섹션  ======================= -->
 
-    <div id="top8_board_wrapper" style="border:1px solid red; margin-bottom:100px;">
+    <div id="top8_board_wrapper" style="margin-bottom:100px;">
         <div class="top8_board_floor">
           <div href="" class="product_display_wrapper">
              <div class="img_wraper"><img src="" alt="" style="width:100%; height:100%; border-radius: 10px;" ></div>
