@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 
@@ -34,6 +35,9 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	
 		
 		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
+		ArrayList<PostBoard> boardList = new TownMarketService().MainArticleSelector();
+		
+		request.setAttribute("boardList", boardList);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);
 		
@@ -43,7 +47,7 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

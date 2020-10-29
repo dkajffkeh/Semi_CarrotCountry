@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>  
-<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>  
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard" %>  
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 //카테고리 이름
-
+ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
+//게시글 번호, 맴버번호 , 지역정보, 글제목, 카테고리 , 카테고리 이름,썸네일 경로 파일이름,파일명, views , like , 가격  
 %>    
     
 <!DOCTYPE html>
@@ -128,7 +130,7 @@ img {height:100%; width:100%; border-radius: 5px;}
      justify-content: center;
  }
  .mainArticle_sidebar {
-     height:35%;
+     height:39.5%;
      width:200px;
      
      background-color: rgb(255, 213, 122);
@@ -136,11 +138,15 @@ img {height:100%; width:100%; border-radius: 5px;}
  .side_bar.font {
      width:100%;
      height:5%;
-     font-size: 2.0rem;
+     font-size: 1.5rem;
      text-align: center;
      border-bottom:2px solid rgb(226, 226, 226);
-     
+     cursor:pointer;
 
+ }
+ .side_bar.font:hover {
+  background-color:lightgreen;
+ 
  }
  /*사이트바*/
  /*오른쪽 아티클 구간*/
@@ -336,20 +342,21 @@ img {height:100%; width:100%; border-radius: 5px;}
        
         </div>
 
-        <div class="mainArticle_article">
+        <d iv class="mainArticle_article">
+        <% for(int i = 0 ; i < boardList.size(); i++){ %>
             <div class="article_frame">
-            	<div id="borderNo">10</div>
+            	<div id="borderNo"><%=boardList.get(i).getPostNo()%></div>
                 <div class="img_frame"><img src="../Common/images/20190220_194753.jpg" alt=""></div>
                 <div class="product_title">
-                    <h6 class="popular_board_title">똠양꿈 팝니다!!</h6>
+                    <h6 class="popular_board_title"><%=boardList.get(i).getPostName() %></h6>
                 </div>
-                <div class="location_area">XXX XXX</div>
+                <div class="location_area"><%=boardList.get(i).getLocalNo() %></div>
                 <div class="ratring_counter">
-                    <p>조회수:xx 찜:xx</p>
+                    <p>조회수:<%=boardList.get(i).getPostViews() %> 찜:<%=boardList.get(i).getPostLikes() %></p>
                 </div>
-                <div class="price_display">1,400,000</div>
+                <div class="price_display"><%=boardList.get(i).getProdPrice() %></div>
             </div>
-       
+       <% } %>
           
         </div>
         

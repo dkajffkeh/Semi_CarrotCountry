@@ -4,6 +4,7 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 
@@ -17,6 +18,15 @@ public class TownMarketService {
 		
 		
 		return list;
+	}
+
+	public ArrayList<PostBoard> MainArticleSelector() {
+		
+		Connection conn = getConnection();
+		ArrayList<PostBoard> boardList = new TownMarketDao().MainArticleSelector(conn);
+		
+		
+		return boardList;
 	}
 
 }

@@ -5,9 +5,9 @@ import java.sql.Date;
 public class PostBoard {
 	
 	private int postNo;
-	private int categoryNo;
+	private String categoryNo;
 	private int memNo;
-	private int localNo;
+	private String localNo;
 	private String memNickname;
 	private String postName;
 	private String postContent;
@@ -30,7 +30,23 @@ public class PostBoard {
 		
 	}
 
-	public PostBoard(int postNo, int categoryNo, int memNo, int localNo, String memNickname, String postName,
+	public PostBoard(int postNo, int memNo, String localNo, String postName, String categoryName, String thumbnailPath,
+			String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes, int prodPrice) {
+		super();
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+	}
+
+	public PostBoard(int postNo, String categoryNo, int memNo, String localNo, String memNickname, String postName,
 			String postContent, String categoryName, String parcelNum, String prodStatus, String dealType, String site,
 			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postReports,
 			int postLikes, int prodPrice, Date enrollDate, String blindCheck) {
@@ -66,11 +82,11 @@ public class PostBoard {
 		this.postNo = postNo;
 	}
 
-	public int getCategoryNo() {
+	public String getCategoryNo() {
 		return categoryNo;
 	}
 
-	public void setCategoryNo(int categoryNo) {
+	public void setCategoryNo(String categoryNo) {
 		this.categoryNo = categoryNo;
 	}
 
@@ -82,11 +98,11 @@ public class PostBoard {
 		this.memNo = memNo;
 	}
 
-	public int getLocalNo() {
+	public String getLocalNo() {
 		return localNo;
 	}
 
-	public void setLocalNo(int localNo) {
+	public void setLocalNo(String localNo) {
 		this.localNo = localNo;
 	}
 

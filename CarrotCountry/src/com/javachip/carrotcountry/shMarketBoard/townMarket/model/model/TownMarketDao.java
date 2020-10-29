@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
+
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 
@@ -58,6 +60,44 @@ Properties prop = new Properties();
 		}
 		
 		
+		return list;
+	}
+
+
+	public ArrayList<PostBoard> MainArticleSelector(Connection conn) {
+		
+		ArrayList<PostBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("MainArticleSelector");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				PostBoard pb = new PostBoard(rs.getInt("POST_NO")
+											,rs.getInt("MEM_NO")
+											,rs.getString("LOCATION")
+											,rs.getString("POST_NAME")
+											,rs.getString("CATEGORY_NAME")
+											,rs.getString("THUMBNAIL_PATH")
+											,rs.getString("THUMBNAIL_FILENAME")
+											,rs.getString("THUMBNAIL_LOADPATH")
+											,rs.getInt("POST_VIEWS")
+											,rs.getInt("POST_LIKES")
+											,rs.getInt("PROD_PRICE"));
+				list.add(pb);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
 		return list;
 	}
 

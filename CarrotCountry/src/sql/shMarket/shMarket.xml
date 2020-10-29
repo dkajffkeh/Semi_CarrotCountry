@@ -7,4 +7,24 @@ SELECT
 FROM 
       CATEGORY
 </entry>
+<entry key="MainArticleSelector"> 
+SELECT
+         POST_NO 
+        ,MEM_NO
+        ,LOCAL_SI || LOCAL_GU LOCATION
+        ,POST_NAME
+        ,CATEGORY_NAME
+        ,THUMBNAIL_PATH
+        ,THUMBNAIL_FILENAME
+        ,THUMBNAIL_LOADPATH
+        ,POST_VIEWS
+        ,POST_LIKES
+        ,PROD_PRICE
+  FROM 
+      POST
+  JOIN 
+      LOCATION USING(LOCAL_NO)
+  WHERE 
+  	   BLIND_CHECK='N'
+</entry>
 </properties>
