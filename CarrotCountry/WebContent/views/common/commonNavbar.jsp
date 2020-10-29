@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.javachip.carrotcountry.member.model.vo.Member" %>
 <%
+
+Member loginMember = (Member)session.getAttribute("loginMember");
+
 String contextPath = request.getContextPath();
+
 %>    
 <!DOCTYPE html>
 <html>
@@ -65,7 +70,15 @@ a {text-decoration: none;}
         <div class="navbar_sizeWraper_1200px">
             <div class="user_info_display_sectionWrapper">
                 <div><a href=""><i class="fas fa-user"></i></a></div>
-                <div><a href="">OOO님</a></div>
+                
+                <% if(loginMember == null) { %>
+                	<!-- 로그아웃 상태 -->
+                	<div><a href="">비회원</a></div>
+                <% }else { %>
+                	<!-- 로그인 상태 -->
+                	<div><a href=""><%= loginMember.getMemNickname() %></a></div>
+                <% } %>
+                
             </div>
             <div class=MainLogo_Wrapper>
                 <div><a href=""><i class="fas fa-carrot"></i></a></div>
@@ -74,14 +87,27 @@ a {text-decoration: none;}
             <div class="menu_bar">
                 <table>
                     <tr align="center" class="user_inter_icon">
-                        <td><a href=""><i class="fas fa-sign-in-alt"></i></a></td>
-                        <td><a href=""><i class="far fa-plus-square"></i></a></td>
-                        <td><a href=""><i class="fas fa-money-check"></i></a></td>
+                    
+                    	<% if(loginMember == null){ %>
+	                    	<!-- 로그아웃 상태 -->
+	                        <td><a href="<%= contextPath %>/loginPage.me.ng"><i class="fas fa-sign-in-alt"></i></a></td>
+	                        <td><a href=""><i class="far fa-plus-square"></i></a></td>
+                        <% }else { %>
+	                        <!-- 로그인 상태 -->
+	                        <td><a href="<%= contextPath %>/logout.me.ng"><i class="fas fa-sign-out-alt"></i></a></td>
+	                        <td><a href=""><i class="fas fa-money-check"></i></a></td>
+                        <% } %>
                     </tr>
                     <tr class="user_inter_font">
-                        <td><a href="">로그인</a></td>
-                        <td><a href="">회원가입</a></td>
-                        <td><a href="">마이페이지</a></td>
+                    	<% if(loginMember == null){ %>
+	                    	<!-- 로그아웃 상태 -->
+	                        <td><a href="<%= contextPath %>/loginPage.me.ng">로그인</a></td>
+	                        <td><a href="">회원가입</a></td>
+                        <% }else { %>
+                        	<!-- 로그인 상태 -->
+	                        <td><a href="<%= contextPath %>/logout.me.ng">로그아웃</a></td>
+	                        <td><a href="">마이페이지</a></td>
+                        <% } %>
                     </tr>
                 </table>
             </div>
