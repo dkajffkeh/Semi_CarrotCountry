@@ -62,6 +62,22 @@ a {text-decoration: none;}
 .menu_bar>table tr td a {color: white}
 .user_inter_font 		{font-size: 0.7rem;}
 .menu_bar table tr td   {padding-left: 10px;}
+
+        a {
+            text-decoration: none
+        }
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+            text-decoration: none;
+        }
     </style>
 <title>Insert title here</title>
 </head>
@@ -109,7 +125,7 @@ a {text-decoration: none;}
 	                        <td><a href="">마이페이지</a></td>
                         <% } %>
                     </tr>
-                </table>
+                </table>        
             </div>
         </div>
     </nav>

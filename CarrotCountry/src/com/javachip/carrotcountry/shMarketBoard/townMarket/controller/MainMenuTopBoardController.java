@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.shMarketBoard.mainPage.controller;
+package com.javachip.carrotcountry.shMarketBoard.townMarket.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
-
 /**
- * Servlet implementation class shMarketMainBoardController
+ * Servlet implementation class MainMenuTopBoardController
  */
-@WebServlet("/shMarketMainPostBoard.sh")
-public class shMarketMainBoardController extends HttpServlet {
+@WebServlet("/mainBoardTopEight.sh")
+public class MainMenuTopBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public shMarketMainBoardController() {
+    public MainMenuTopBoardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,13 +26,9 @@ public class shMarketMainBoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
-		
-		
-		
-	
 	}
 
 	/**

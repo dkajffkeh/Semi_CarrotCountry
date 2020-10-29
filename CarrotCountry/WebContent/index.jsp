@@ -67,13 +67,16 @@
     <div class="board_button_wrapper">
     <button type="button" class="btn btn-outline-warning" id="townMarket_button">동네마켓</button>
     <script>
-    let town_btn = document.getElementById("townMarket_button");
-    town_btn.addEventListener('click',toTown);
     
+    let town_btn0 = document.getElementById("townMarket_button");
+    
+    town_btn0.addEventListener('click',toTown);
+  
     function toTown(){
     	
-    	location.href="<%=contextPath%>/shMarketBoardMain.sh";
-    
+    	
+        location.href="<%=contextPath%>/shMarketBoardMain.sh";
+	
     }
     </script>
     <button type="button" class="btn btn-outline-success">공구마켓</button>
@@ -88,7 +91,7 @@
 
     <div id="top8_board_wrapper" style="margin-bottom:100px;">
         <div class="top8_board_floor">
-          <div href="" class="product_display_wrapper">
+          <div class="product_display_wrapper">
              <div class="img_wraper"><img src="" alt="" style="width:100%; height:100%; border-radius: 10px;" ></div>
              <div class="product_title"><h5 class="popular_board_title">제목</h5></div>
              <div class="location_area">서울시 송파구</div>
@@ -96,11 +99,11 @@
                  <p>조회수:xx 찜:xx</p>
              </div>
              <div class="price_display">30000</div>
-            </div>
+          </div>
        
         </div>
         <div class="top8_board_floor">
-                <div href="" class="product_display_wrapper">
+                <div class="product_display_wrapper">
              <div class="img_wraper"><img src="" alt="" style="width:100%; height:100%; border-radius: 10px;" ></div>
              <div class="product_title"><h5 class="popular_board_title">제목</h5></div>
              <div class="location_area">서울시 송파구</div>
@@ -110,7 +113,20 @@
              <div class="price_display">30000</div>
             </div>
         </div>
-        <a href=""><div class="bottom_font" align="center">매물 더 보기</div></a>  
+        <div  align="center"><a class="bottom_font" style="cursor:pointer;" id="townMarket_button1">매물 더 보기</a></div>
+        <script>
+        let town_btn1 = document.getElementById("townMarket_button1");
+        town_btn1.addEventListener('click',toTown1);
+     
+        function toTown1(){
+        	
+        	console.log("??");
+            location.href="<%=contextPath%>/shMarketBoardMain.sh";
+        }
+        </script>
+          
+
+        
 </div>
   <%@ include file="views/common/footerbar.jsp" %>
   

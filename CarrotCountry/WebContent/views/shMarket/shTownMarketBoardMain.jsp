@@ -4,7 +4,7 @@
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>  
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
-
+//카테고리 이름
 
 %>    
     
@@ -160,7 +160,15 @@ img {height:100%; width:100%; border-radius: 5px;}
      margin-bottom: 15px;
      height:300px;
      width:23%;
+     cursor:pointer;
+     
  }
+ .article_frame:hover {
+ border:1px solid lightgrey;
+ border-radius:10px;
+ }
+ #borderNo {display:none;}
+ 
  .img_frame {
      height:60%;
      width:100%;
@@ -329,6 +337,7 @@ img {height:100%; width:100%; border-radius: 5px;}
 
         <div class="mainArticle_article">
             <div class="article_frame">
+            	<div id="borderNo">10</div>
                 <div class="img_frame"><img src="../Common/images/20190220_194753.jpg" alt=""></div>
                 <div class="product_title">
                     <h6 class="popular_board_title">똠양꿈 팝니다!!</h6>
@@ -339,6 +348,7 @@ img {height:100%; width:100%; border-radius: 5px;}
                 </div>
                 <div class="price_display">1,400,000</div>
             </div>
+       
           
         </div>
         
