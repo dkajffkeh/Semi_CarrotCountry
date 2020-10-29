@@ -174,7 +174,7 @@ img {height:100%; width:100%; border-radius: 5px;}
  border:1px solid lightgrey;
  border-radius:10px;
  }
- #borderNo {display:none;}
+ .borderNo {display:none;}
  
  .img_frame {
      height:60%;
@@ -342,11 +342,11 @@ img {height:100%; width:100%; border-radius: 5px;}
        
         </div>
 
-        <d iv class="mainArticle_article">
+        <div class="mainArticle_article">
         <% for(int i = 0 ; i < boardList.size(); i++){ %>
             <div class="article_frame">
-            	<div id="borderNo"><%=boardList.get(i).getPostNo()%></div>
-                <div class="img_frame"><img src="../Common/images/20190220_194753.jpg" alt=""></div>
+            	<div class="borderNo"><%=boardList.get(i).getPostNo()%></div>
+                <div class="img_frame"><img src="" alt=""></div>
                 <div class="product_title">
                     <h6 class="popular_board_title"><%=boardList.get(i).getPostName() %></h6>
                 </div>
@@ -359,6 +359,21 @@ img {height:100%; width:100%; border-radius: 5px;}
        <% } %>
           
         </div>
+        <script>
+       $(function(){
+    	   
+    	   $(".article_frame").click(function(){
+    		   
+    		   let bno = $(this).children().eq(0).text();
+    		   
+    		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
+    		   
+    		   
+    	   });
+    	   
+       });
+        
+        </script>
         
      </div>
     
