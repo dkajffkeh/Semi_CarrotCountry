@@ -348,9 +348,8 @@ img {height:100%; width:100%; border-radius: 5px;}
                 </div>
                 <div class="price_display">1,400,000</div>
             </div>
-       
-          
         </div>
+        
         
      </div>
     
