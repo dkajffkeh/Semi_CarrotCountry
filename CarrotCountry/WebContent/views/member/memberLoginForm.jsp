@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String loginFail = (String)request.getAttribute("loginFail");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +16,7 @@
         .wrap{
             border:5px solid darkgray;
             width:400px;
-            height:500px;
+            height:550px;
             margin:auto;
             margin-top:100px;
             margin-bottom:100px;
@@ -58,6 +61,7 @@
             width:80%;
         }
         .button3{width:90%;}
+        #p{font-size:12px; color:red;}
     </style>
 
     <div class="wrap">
@@ -74,8 +78,11 @@
                     <td colspan="2"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호"></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <!-- 로그인 오류시 출력문구 입력 -->
+                    	<% if(loginFail != null){ %>
+                    		<label id="p"><%= loginFail %><label>
+                    	<% } %>
                     </td>
                 </tr>
                 <tr>
@@ -86,7 +93,6 @@
                 </tr>
             </form>    
 
-            
             <tr align="center" >
                 <td><a href="" class="button1 btn btn-outline-secondary">아이디 찾기</a></td>
                 <td><a href="" class="button2 btn btn-outline-secondary">비밀번호 찾기</a></td>

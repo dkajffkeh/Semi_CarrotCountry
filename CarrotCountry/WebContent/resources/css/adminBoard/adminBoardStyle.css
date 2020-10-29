@@ -1,0 +1,88 @@
+div, form, input {
+    box-sizing: border-box;
+}
+
+/* #content>div {
+    border: 1px solid blue;
+}
+
+#content>div>div {
+    border: 1px solid blue;
+}
+
+#footer {
+    border: 1px solid green;
+}
+ */
+.wrap {
+    width: 1200px;
+    height: 800px;
+    margin: auto;
+}
+
+/* 전체 페이지 레이아웃 */
+.wrap>div,form {
+    width: 100%;
+}
+
+#content {
+	padding-top: 10px;
+    height: 100%;
+}
+
+/* 콘텐트영역 레이아웃 */
+#content>div {
+    height: 100%;
+    float: left;
+}
+
+#content1 {
+    width: 20%;
+}
+
+#content2 {
+    width: 80%
+}
+
+#content2>div {
+    width: auto;
+    padding: 1%;
+}
+
+#pageName {
+    height: 10%;
+}
+
+#pageName h3 {
+    padding-top: 10px;
+}
+
+#pageContent {
+    height: 90%;
+}
+
+#pageContent>div,form {
+    /* border: 1px solid skyblue; */
+    width: auto;
+}
+
+#search {
+    height: 6%;
+    float: right;
+}
+
+#board {
+    height: 84%;
+}
+
+#board table {
+    text-align: center;
+}
+
+#boardNum {
+    height: 10%;
+}
+
+#boardNum {
+    padding-top: 20px;
+}

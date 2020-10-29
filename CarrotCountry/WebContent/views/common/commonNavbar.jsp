@@ -4,7 +4,23 @@
 <%
 
 Member loginMember = (Member)session.getAttribute("loginMember");
-
+/* 	
+	int memNo;			회원번호
+	int localNo;		지역번호
+	String memUserId;	회원아이디
+	String memUserPwd;	회원비밀번호
+	String memName;		회원명
+	String memNickname;	회원닉네임
+	String memBirthday;	생일(6자리)
+	String memGender;	성별(남, 여)
+	String memPhone;	전화번호()
+	String memEmail;	이메일
+	String memLocation;	지역 시,구,동
+	Date memEnrollDate;	회원가입일
+	String bListCheck;	블랙리스트 유무(N, Y)
+	String leaveCheck;	회원탈퇴 유무(N, Y)
+	String managerCheck;관리자 유무(N, Y)
+*/
 String contextPath = request.getContextPath();
 
 %>    
