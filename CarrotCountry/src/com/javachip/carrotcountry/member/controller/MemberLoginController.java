@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.javachip.carrotcountry.member.model.service.MemberService;
 import com.javachip.carrotcountry.member.model.vo.Member;
@@ -39,15 +40,20 @@ public class MemberLoginController extends HttpServlet {
 		Member loginMember = new MemberService().loginMember(memUserId, memUserPwd);
 		
 		if(loginMember == null) { 
-			// 로그인 실패
-			System.out.println("아직 안함");
 			
+			// 로그인 실패
+			request.setAttribute("loginFail", "ID 혹은 비밀번호를 잘못 입력하셨거나 가입하지 않은 ID 입니다.");
+			request.getRequestDispatcher("/views/member/memberLoginForm.jsp").forward(request, response);
+
 			
 			
 			
 		}else { 
 			// 로그인 성공		
-			request.getSession().setAttribute("loginMember", loginMember);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginMember", loginMember);
+			session.setMaxInactiveInterval(-1);
+			
 			
 			response.sendRedirect(request.getContextPath());
 		}
