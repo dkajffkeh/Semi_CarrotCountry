@@ -1,0 +1,212 @@
+html {
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+body {min-height: 100%; }
+img {height:100%; width:100%; border-radius: 5px;}
+
+/*   <!-- ===============================최 상단 bar  ======================= -->       */
+.navbar_Wrapper {
+    background-color: orange;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid green;
+    font-size: 1.5rem;
+}
+.navbar_sizeWraper_1200px {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    height: 100%;
+}
+.banner_cursor_wrapper div i {font-size: 30px;}
+
+.navbar_sizeWraper_1200px div {
+    display: flex;
+    justify-content: center;
+}
+.user_info_display_sectionWrapper {margin-left: 50px;}
+
+.user_info_display_sectionWrapper div {
+    display: flex;
+    align-items: center;
+}
+.MainLogo_Wrapper {
+    display: flex;
+    align-items: center;
+}
+.MainLogo_Wrapper>div i {font-size: 2rem;}
+
+.menu_bar {margin-right: 50px;}
+
+.menu_bar>table tr td a {color: white}
+
+.user_inter_font {font-size: 0.7rem;}
+
+.menu_bar table tr td {padding-left: 10px; margin-left: 50px}
+/*   <!-- ============= 인기 게시물 썸내일 사진 display  ====================== --> */
+
+ .banner_Wrapper {
+    height:400px;
+    width:1200px;
+     margin:auto;
+     margin-top: 15px;
+     margin-bottom: 15px;
+     
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .banner_Wrapper > div {
+     height:100%;
+     width:47%;
+     
+ }
+
+ .carousel-inner {
+     height:100%;
+     width:100%;   
+    
+ }
+ 
+ .carousel-item {
+    height:100%;
+    width:100%;
+ }
+ 
+ .carousel-item > img {
+    height:100%;
+    width:100%;
+    border-radius: 5px;
+ }
+ 
+
+/*   <!-- ============= 인기 게시물 썸내일 사진 display  ====================== --> */
+
+/* <!-- =============================== 중고게시판 공동구매 게시판 버튼  ======================= --> */
+
+.board_button_wrapper {
+    display: flex;
+    width:700px;
+    height:80px;
+  
+    margin: auto;
+    justify-content: space-around;
+   
+}
+
+.board_button_wrapper > button {
+    width:200px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* <!-- =============================== 중고게시판 공동구매 게시판 버튼  ======================= --> */
+
+/* <!-- =============================== 인기 게시글 섹션  ======================= --> */
+
+#top8_board_wrapper {
+    width:1200px;
+    height:750px;
+    border-radius: 20px;
+    margin:auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.top8_board_floor {
+    width:100%;
+    height:50%;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+.product_display_wrapper{
+	cursor: pointer;
+}
+
+.top8_board_floor .product_display_wrapper {
+    width:280px;
+    height:100%;
+    border-radius: 10px;
+}
+
+.top8_board_floor .product_display_wrapper > .img_wraper {
+    width:90%;
+    height:65%;
+    margin-left: 12px;
+    background-color: aliceblue;
+    border-radius: 3px;
+    
+}
+.product_title {
+    width:100%;
+    height:10%;
+}
+
+.popular_board_title {
+   text-decoration: none;
+   color:black;
+   margin-left:10px;
+   margin-top:2px;
+   font-weight: bold;
+}
+
+.location_area {
+    height:7%;
+    width:96.5%;
+    margin-left: 10px;
+    color:black;
+    
+}
+
+.ratring_counter {   
+    width:100%;
+    height:6%;
+    display: flex;
+    float: left;
+}
+
+.ratring_counter > p {
+    font-size: 0.7rem;
+    display:inline-block;
+    height:100%;
+    margin-left: 10px;
+    color:grey;
+}
+
+.price_display {
+    height:18%;
+    text-align: right;
+    line-height: 250%;
+    margin-right: 10px;;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:orange;
+}
+
+.bottom_font {
+    width:200px;
+    height:20px;
+    margin:auto;
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+/* <!-- =============================== 인기 게시글 섹션  ======================= --> */
