@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectQnAList">
+		SELECT
+		       GQ_NO
+		     , MEM_USERID
+		     , GQ_CONTENT
+		     , GQ_VIEWS
+		     , GQ_ENROLLDATE
+		  FROM GROUPBUY_QUESTION 
+		  JOIN MEMBER USING(MEM_NO)
+		 ORDER
+		    BY GQ_NO DESC; 
+			
+	</entry>
+
+
+
+</properties>
+
+
+
+
+
+
+
+
+
+
+
+
