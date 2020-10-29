@@ -136,9 +136,10 @@ img {height:100%; width:100%; border-radius: 5px;}
  .side_bar.font {
      width:100%;
      height:5%;
-     font-size: 2.5rem;
+     font-size: 2.0rem;
      text-align: center;
-     border-bottom:2px solid rgb(226, 226, 226) ;
+     border-bottom:2px solid rgb(226, 226, 226);
+     
 
  }
  /*사이트바*/
@@ -324,7 +325,7 @@ img {height:100%; width:100%; border-radius: 5px;}
 
     <div id="mainArticle_wrapper">
 
-        <div class="mainArticle_sidebar" style="font-family:Times New Roman;">
+        <div class="mainArticle_sidebar">
             <div>
             <% for(int i = 0 ; i<list.size(); i++) { %>
                 <div class="side_bar font">

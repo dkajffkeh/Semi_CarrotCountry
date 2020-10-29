@@ -74,7 +74,7 @@ public class FaqDao {
 
 	public int insertFaq(Connection conn, Faq f) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 	
 	
