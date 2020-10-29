@@ -1,14 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.QnA"%>
+    pageEncoding="UTF-8"%>
+<%@
+	page import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.*"
+ %>    
+
 <%
 	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" href="../../resources/css/coBuyingcss/buyerQnAListView.css">
+<style>
+
+/* 전반적인 큰 틀 */
+.wrap{width:1200px;height:600px;margin:auto;}
+#content{height: 100%;}
+
+#content>div{width: 100%; float: left;}
+#content1{height: 15%; padding: 20px;}
+#content2{height: 85%;}
+
+
+/* 컨텐츠의 틀 */
+#content2>div{width: 100%; float: left;}
+#qList{height: 70%;}
+#paginationArea{height: 30%;}
+
+/* 타이틀 (content1) */
+#title{
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    background: lightgray;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#title>h5{font-weight: 900;}
+#content>h4{
+    display: inline-block;
+    padding: 30px;
+    padding-bottom: 0px;
+    color: gray;
+}
+/* 질문리스트 */
+#content2{
+    display: inline-block;
+    margin-top: 100px;
+}
+table{
+    text-align: center;
+}
+thead{
+    background: lightgray;
+    text-align: center;
+    font-weight: 600;
+    height: 50px;
+}
+
+tbody td:hover{cursor: pointer;}
+
+#writeBtn{
+    display: inline-block;
+    margin: 100px;
+}
+
+/* 페이징 */
+#paginationArea>ul{
+    padding-left: 450px;
+
+}
+
+
+
+/* 푸터바의 전반적인 틀 */
+#footerbar {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 270px;
+    background-color: #00251a
+}
+
+.footerbar_totalWrapper {
+    width: 1200px;
+    height: 100%;
+    border-bottom: 1px solid white;
+    margin: auto;
+}
+
+.footer_upperWrapper {
+    width: 100%;
+    height: 52px;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_upperWrapper>button {
+    margin-left: 40px;
+}
+
+.footer_belowWrapper {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>
+
 </head>
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
@@ -76,15 +180,23 @@
 
                 </div>
 
-                <div id="paginationArea" align="center">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul> 
-                </div>
+                
+                <div class="paginationArea" align="center">
+
+					<% if(pi.getCurrentPage() != 1){ %>
+		           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+		            <% } %>
+					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+		            	
+		            	<a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= p %>"><%= p %></a>
+		            
+		            <% } %>
+		            
+		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+		           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
+		            <% } %>
+		        </div>
+                
                 
                 
                
