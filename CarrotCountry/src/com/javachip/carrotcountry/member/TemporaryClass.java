@@ -2,6 +2,6 @@ package com.javachip.carrotcountry.member;
 
 public class TemporaryClass {
 	
-	//git ¾÷·Îµå ¸ñÀûÀ¸·Î ¸¸µé¾îÁø class »èÁ¦ ¿ä¸Á.
+	//git ì—…ë¡œë“œ ëª©ì ìœ¼ë¡œ ë§Œë“¤ì–´ì§„ class ì‚­ì œ ìš”ë§..
 
 }
