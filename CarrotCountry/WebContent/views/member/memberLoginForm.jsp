@@ -98,7 +98,7 @@
                 <td><a href="" class="button2 btn btn-outline-secondary">비밀번호 찾기</a></td>
             </tr>
             <tr align="center" >
-                <td colspan="2"><a href="" class="button3 btn btn-outline-secondary">회원가입</a></td>
+                <td colspan="2"><a href="<%= contextPath %>/enrollAgree.me.ng" class="button3 btn btn-outline-secondary">회원가입</a></td>
             </tr>
         </table>
 
