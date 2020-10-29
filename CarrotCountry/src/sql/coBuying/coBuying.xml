@@ -11,7 +11,7 @@
 		  FROM GROUPBUY_QUESTION 
 		  JOIN MEMBER USING(MEM_NO)
 		 ORDER
-		    BY GQ_NO DESC; 
+		    BY GQ_NO DESC
 			
 	</entry>
 
