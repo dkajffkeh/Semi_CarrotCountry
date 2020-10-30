@@ -63,5 +63,21 @@ WHERE
 	     BLIND_CHECK='N'
 	  AND 
 		 POST_NO = ?
+</entry>
+<entry key="marketCommentSelector">
+ SELECT 
+        COMM_NO
+       ,USER_NICKNAME
+       ,ENT_DATE
+       ,CONTENT
+       ,PRIVATE
+       ,POST_NO
+       ,MEM_NICKNAME
+   FROM
+       POST_COMMENT
+   JOIN 
+  	   MEMBER USING(MEM_NO)
+  WHERE 
+       POST_NO =?
 </entry>	
 </properties>
