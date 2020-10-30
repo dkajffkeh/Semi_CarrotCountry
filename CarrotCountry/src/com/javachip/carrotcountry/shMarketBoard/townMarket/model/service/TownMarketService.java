@@ -29,4 +29,34 @@ public class TownMarketService {
 		return boardList;
 	}
 
+	public int increaseBoardViews(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().increaseBoardViews(conn,bno);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public PostBoard PostBoardDetailSelector(int bno) {
+		
+		Connection conn = getConnection();
+		
+		PostBoard pb = new TownMarketDao().PostBoardDetailSelector(conn,bno);
+		
+		close(conn);
+		
+		
+		return pb;
+	}
+
 }

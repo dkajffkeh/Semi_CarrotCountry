@@ -365,10 +365,8 @@ img {height:100%; width:100%; border-radius: 5px;}
     	   $(".article_frame").click(function(){
     		   
     		   let bno = $(this).children().eq(0).text();
-    		   
     		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
-    		   
-    		   
+	   
     	   });
     	   
        });

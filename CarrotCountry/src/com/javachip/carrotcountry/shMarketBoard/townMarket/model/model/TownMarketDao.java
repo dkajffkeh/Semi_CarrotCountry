@@ -101,4 +101,76 @@ Properties prop = new Properties();
 		return list;
 	}
 
+
+	public int increaseBoardViews(Connection conn, int bno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseBoardViews");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+
+
+	public PostBoard PostBoardDetailSelector(Connection conn, int bno) {
+		
+		
+		PostBoard pb = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("PostBoardDetailSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pb = new PostBoard();
+				
+				pb.setPostNo(rs.getInt("POST_NO"));
+				pb.setCategoryNo(Integer.toString(rs.getInt("CATEGORY_NO")));
+				pb.setMemNo(rs.getInt("MEM_NO"));
+				pb.setLocalNo(rs.getString("LOCATION"));
+				pb.setMemNickname(rs.getString("MEM_NICKNAME"));
+				pb.setPostName(rs.getString("POST_NAME"));
+				pb.setPostContent(rs.getString("POST_COMMENT"));
+				pb.setCategoryName(rs.getString("CATEGORY_NAME"));
+				pb.setProdStatus(rs.getString("PROD_STATUS"));
+				pb.setDealType(rs.getString("DEAL_TYPE"));
+				pb.setSite(rs.getString("site"));
+				pb.setThumbnailPath(rs.getString("THUMBNAIL_PATH"));
+				pb.setThumbnailFilename(rs.getString("THUMBNAIL_FILENAME"));
+				pb.setThumbnailLoadPath(rs.getString("THUMBNAIL_LOADPATH"));
+				pb.setPostViews(rs.getInt("post_views"));
+				pb.setPostLikes(rs.getInt("post_likes"));
+				pb.setProdPrice(rs.getInt("prod_price"));
+				pb.setEnrollDate(rs.getDate("POST_ENROLL_DATE"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return pb;
+	}
+
 }

@@ -27,4 +27,41 @@ SELECT
   WHERE 
   	   BLIND_CHECK='N'
 </entry>
+<entry key="increaseBoardViews">
+UPDATE
+      POST
+   SET
+      POST_VIEWS=POST_VIEWS+1
+WHERE 
+	  POST_NO = ?
+</entry>
+<entry key="PostBoardDetailSelector">
+	SELECT
+         POST_NO
+        ,CATEGORY_NO               
+        ,MEM_NO                      
+        ,LOCAL_SI||LOCAL_GU LOCATION 
+        ,MEM_NICKNAME                  
+        ,POST_NAME  
+        ,POST_COMMENT   
+        ,CATEGORY_NAME   
+        ,PROD_STATUS
+        ,DEAL_TYPE
+        ,SITE
+        ,THUMBNAIL_PATH
+        ,THUMBNAIL_FILENAME
+        ,THUMBNAIL_LOADPATH
+        ,POST_VIEWS
+        ,POST_LIKES
+        ,PROD_PRICE
+        ,POST_ENROLL_DATE       
+	 FROM
+         POST P
+	 JOIN 
+		 LOCATION USING(LOCAL_NO)
+	WHERE 
+	     BLIND_CHECK='N'
+	  AND 
+		 POST_NO = ?
+</entry>	
 </properties>
