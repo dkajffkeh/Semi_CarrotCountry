@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
 public class TownMarketService {
 	
@@ -27,6 +28,46 @@ public class TownMarketService {
 		
 		
 		return boardList;
+	}
+
+	public int increaseBoardViews(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().increaseBoardViews(conn,bno);
+		
+		if(result>0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public PostBoard PostBoardDetailSelector(int bno) {
+		
+		Connection conn = getConnection();
+		
+		PostBoard pb = new TownMarketDao().PostBoardDetailSelector(conn,bno);
+		
+		close(conn);
+		
+		
+		return pb;
+	}
+
+	public ArrayList<CommentHY> marketCommentSelector(int bno) {
+		
+		Connection conn = getConnection();
+		ArrayList<CommentHY> list = new TownMarketDao().marketCommentSelector(conn,bno);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

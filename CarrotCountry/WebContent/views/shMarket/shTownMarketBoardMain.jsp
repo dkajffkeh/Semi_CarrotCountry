@@ -45,7 +45,7 @@ ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
     vertical-align: baseline;
     box-sizing: border-box;
 }
-body {min-height: 100%; }
+body {min-height: 100%;}
 img {height:100%; width:100%; border-radius: 5px;}
 /*   <!-- ===============================최 상단 bar  ======================= -->       */
 .navbar_Wrapper {
@@ -365,10 +365,8 @@ img {height:100%; width:100%; border-radius: 5px;}
     	   $(".article_frame").click(function(){
     		   
     		   let bno = $(this).children().eq(0).text();
-    		   
     		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
-    		   
-    		   
+	   
     	   });
     	   
        });

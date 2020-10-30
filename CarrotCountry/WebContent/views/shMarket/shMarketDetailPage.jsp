@@ -1,11 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY" %>
+<%
+PostBoard pb = (PostBoard)request.getAttribute("pb");
+//String 게시글번호,String 카테고리번호,int member번호, String 시역 ex 서울시 송파구 , 닉네임 , 게시글번호 , 게시글 제목, 내용 , 카테고리 이름, 상품상태, 거래유형,거래지역, 썸네일 패스, 썸네일 이름, 썸내일 로드패스, 조회수, likes,가격,게시일.
+ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
+//댓글식별값,닉네임,게시일,내용,공개비공개 체크,보드넘버.
+%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../resources/css/shMarketBoardcss/shMarketDetailPage.css">
+<style>
+.outer {
+    width: 800px;
+    min-height:100%;
+    margin:auto;
+    border:2px solid rgb(255, 166, 0);
+    border-radius: 15px;
+    box-shadow: 3px 3px 0.5px 0.5px rgb(255, 189, 35);
+    background-color: whitesmoke;
+}
+.carousel-item.active > img {
+    border-radius: 10px;
+}
+.userInfo_display {
+    height:75px;
+    width:100%;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0px 30px 0px 30px;
+}
+/* like 버튼 CSS */
+.like_button{
+   cursor: pointer;
+   background-color: green;
+}
+.like_button:active {
+    background-color:red;
+}
+.like_button > i {
+    color:orange;
+    font-size: larger;
+}
+.like_button:active , i:active {
+    font-size:1.5rem;
+    color:white;
+}
+.userContent {
+    text-align: center;
+    min-height: 200px;
+}
+/* Comment CSS 구간. */
+.comment_display {
+    width:750px;
+    margin: auto;
+    display: flex;
+    padding-left: 26px;
+    margin-top: 10px;
+}
+.comment_content {
+    min-height: 100px;
+    width:81.8%;
+    background-color: white;
+    padding:0px 10px 0px 10px;
+}
+.comment_control_button {
+    display:flex;
+    justify-content: space-between;
+}
+.left_date {
+    font-size: 1rem;
+    color:darkgray;
+}
+.comment_user_info {margin:0px;}
+.right_icons > i {
+    font-size: 1.5rem;
+    margin-left: 15px;
+}
+.comment_condition {
+    display: flex;
+    align-items: center;
+}
+.comment_condition > i {
+    font-size:1.5rem;
+    margin-left: 10px;
+}
+
+.comment_textarea {min-height: 50px;}
+.navbar.navbar-8 .navbar-toggler-icon {background-image: url('https://mdbootstrap.com/img/svg/hamburger4.svg?color=1729B0');}
+.nav-item {
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+.nav-link {color:black;}
+</style>
 </head>
 <body>
   <!-- ↓ 토글버튼. + 신고버튼 부모 div ↓ -->
@@ -20,7 +114,7 @@
         <nav class="navbar navbar-light navbar-8 white"
              style="display: inline-flex;
                     position: relative;
-                    top:26px;
+                    top:45px;
                     left:888px;
                     z-index: 1;">
 
@@ -56,7 +150,7 @@
           <!-- 신고버튼 -->
          
     </div>
-    <div class="outer">
+    <div class="outer" style="margin-top:15px">
         <i  
         class="fas fa-exclamation-triangle" 
         data-toggle="modal" 
@@ -107,33 +201,27 @@
             align-content: center;">
              <div class="user_icon" ><i class="fas fa-user" style="font-size: 3.5rem; margin-right: 15px;"></i></div>
              <div class="user_info_text">
-                <h4 style="margin-bottom: 0px; margin-top: 5px;">판매자XX</h4>
-                <p style="margin-top: 0px;">주소XXX</p>
+                <h4 style="margin-bottom: 0px; margin-top: 5px;"><%=pb.getMemNickname()%></h4>
+                <p style="margin-top: 0px;"><%=pb.getLocalNo() %></p>
              </div>
          </div>
          <div class="right_price" 
               style="font-size: 1.5rem; 
-              font-weight: bold;">가격:15000</div>
+              font-weight: bold;"><%=pb.getProdPrice() %></div>
      </div>
      
      <!-- ↓ 본문 제목 ↓ -->
      <div class="title_section">
          <h4 align="center">
-             XXXX제목XXXX
+             <%=pb.getPostName() %>
          </h4>
-         <p align="center" style="font-size:small;">XXX카테고리XXXX</p>
+         <p align="center" style="font-size:small;"><%=pb.getCategoryName() %></p>
          <hr style="border-bottom: 2px solid gray;"> 
      </div>
      
      <!-- ↓ 본문 내용 ↓ -->  
-     <div class="userContent">He as compliment unreserved projecting. Between had observe pretend delight for
-          believe. Do newspaper questions consulted sweetness do. Our sportsman his unwilling fulfilled departure law.
-          Now world own total saved above her cause table. Wicket myself her square remark the should far secure sex.
-          Smiling cousins warrant law explain for whether.
-
-          No depending be convinced in unfeeling he. Excellence she unaffected and too sentiments her. Rooms he doors
-          there ye aware in by shall. Education remainder in so cordially. His remainder and own dejection daughters
-          sportsmen. Is easy took he shed to kind.
+     <div class="userContent">
+     <%=pb.getPostContent() %>
           </div>
     
           <!-- ↓ 조회수 + 찜버튼 ↓ -->   
@@ -142,7 +230,7 @@
           align-items: center;
           padding:0px 30px 0px 30px;">
          <div class="view_counter_display" style="color:darkgray">
-             조회:xx 찜:xx
+             조회:<%=pb.getPostViews() %> 찜:<%= pb.getPostLikes() %>
          </div>
     
          <div class="like_button" style="width:40px; 
@@ -185,30 +273,96 @@
                     <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="Y">
                     </div>
          </form>
-
           <!-- ↓ 댓글 출력 구간↓ -->
          <div id="comment_display_outer">
+         <% for(int i =0 ; i<list.size(); i++ ) { 
+         if(loginMember==null) {
+        	 if(!list.get(i).getSecretCheck().equals("Y")) {
+         %>
          <div class="comment_display">
              <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
              <div class="comment_content">
-                 <p class="comment_user_info">[작성자닉네임][주소] </p>
-                 <div class="comment_textarea"></div>
+                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
+                 <div class="comment_textarea"><%=list.get(i).getContent() %></div>
                  <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
                  <div class="comment_control_button">
-                     <div class="left_date">업로드 날짜</div>
+                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
                      <div class="right_icons">
+
+                     </div>
+                 </div>
+             </div>   
+         </div>
+       <% } else { %>        
+         <div class="comment_display">
+            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+            <div class="comment_content" style="padding:0;">
+                <div class="secret_Comment" 
+                     style="width:100%; 
+                            height:100%; 
+                            background-color:rgb(255, 235, 197); 
+                            box-sizing: border-box;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                    <i class="fas fa-carrot">비밀댓글입니다!</i>
+                    <div>ㅇㅅㅇ</div>
+                    
+                </div>           
+            </div>
+            <div class="comment_condition"><i class="fas fa-lock"></i></div>
+        </div>        
+       			<%} %>
+            <% } else if (loginMember!=null) { %>                  
+           <% if(!list.get(i).getSecretCheck().equals("Y")||loginMember.getManagerCheck().equals("Y")||pb.getMemNo()==loginMember.getMemNo()||list.get(i).getUserNickName().equals(loginMember.getMemNickname())) { %>       
+            <div class="comment_display">
+             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+             <div class="comment_content">
+                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
+                 <div class="comment_textarea"><%=list.get(i).getContent() %></div>
+                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+                 <div class="comment_control_button">
+                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
+                     <div class="right_icons">
+                     <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())){ %>
                          <i class="fas fa-pen" title="댓글 수정"></i>
+                         <%} %>
+                      <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())||loginMember.getManagerCheck().equals("Y")){ %>   
                          <i class="fas fa-trash" title="댓글 삭제"></i>
+                         <%} %>
                          <i class="fas fa-exclamation" title="댓글 신고"></i>
                      </div>
                  </div>
-             </div>
-             <div class="comment_condition"><i class="fas fa-lock"></i></div>
-         </div>   
-        </div>            
-     </div>
+             </div>   
+         </div>
+            <% } else { %>        
+            <div class="comment_display">
+            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+            <div class="comment_content" style="padding:0;">
+                <div class="secret_Comment" 
+                     style="width:100%; 
+                            height:100%; 
+                            background-color:rgb(255, 235, 197); 
+                            box-sizing: border-box;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                    <i class="fas fa-carrot">비밀댓글입니다!</i>  
+                </div>           
+            </div>
+            <div class="comment_condition"><i class="fas fa-lock"></i></div>
+        </div>       
+            <% } %>
+         <% } %>
+       <%} %>
+           
+        	</div>                    
+     	</div>
+   </div>
+     
      <br>
-     </div>
+     <div align="center">목록으로</div>
+     <br>
      <!-- 신고 버튼 모달 -->
 
        <!-- The Modal -->
@@ -242,8 +396,10 @@
             </form>
           </div>
         </div>
-    
       </div>
-<%@ include file="../common/footerbar.jsp"%>
+      
+      
+
+
 </body>
 </html>

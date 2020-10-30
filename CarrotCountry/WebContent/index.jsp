@@ -119,8 +119,7 @@
         town_btn1.addEventListener('click',toTown1);
      
         function toTown1(){
-        	
-        	console.log("??");
+  
             location.href="<%=contextPath%>/shMarketBoardMain.sh";
         }
         </script>

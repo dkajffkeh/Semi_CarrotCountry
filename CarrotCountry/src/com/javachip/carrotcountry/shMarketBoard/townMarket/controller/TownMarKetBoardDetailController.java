@@ -1,11 +1,17 @@
 package com.javachip.carrotcountry.shMarketBoard.townMarket.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
 /**
  * Servlet implementation class TownMarKetBoardDetailController
@@ -26,8 +32,24 @@ public class TownMarKetBoardDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		request.setCharacterEncoding("utf-8");
+		int bno = Integer.parseInt(request.getParameter("bno"));		
+		
+		int result = new TownMarketService().increaseBoardViews(bno);
+		
+		if(result>0) {
+			
+			PostBoard pb = new TownMarketService().PostBoardDetailSelector(bno);
+			ArrayList<CommentHY> list = new TownMarketService().marketCommentSelector(bno);
+			
+			
+			request.setAttribute("pb", pb);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/shMarket/shMarketDetailPage.jsp").forward(request, response);
+			
+		}
+		
 	}
 
 	/**
