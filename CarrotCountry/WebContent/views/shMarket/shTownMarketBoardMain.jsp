@@ -45,7 +45,7 @@ ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
     vertical-align: baseline;
     box-sizing: border-box;
 }
-body {min-height: 100%; }
+body {min-height: 100%;}
 img {height:100%; width:100%; border-radius: 5px;}
 /*   <!-- ===============================최 상단 bar  ======================= -->       */
 .navbar_Wrapper {

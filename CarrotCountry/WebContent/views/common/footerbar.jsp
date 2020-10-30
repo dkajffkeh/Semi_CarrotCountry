@@ -9,13 +9,15 @@
         * {
             box-sizing: border-box;
         }
-    
+  
         #footerbar {
             position: absolute;
             top: 100%;
             width: 100%;
             height: 270px;
-            background-color: #00251a
+            background-color: #00251a;
+            border:1px solid pink;
+            
         }
         .footerbar_totalWrapper {
             width: 1200px;
