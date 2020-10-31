@@ -72,10 +72,10 @@
         <table border="1px" width="100%">
             <form action="<%= contextPath %>/login.me.ng" method="post">
                 <tr>
-                    <td colspan="2"><input type="text" name="userId" id="userId" placeholder="아이디"></td>
+                    <td colspan="2"><input type="text" name="userId" id="userId" placeholder="아이디" required></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호"></td>
+                    <td colspan="2"><input type="password" name="userPwd" id="userPwd" placeholder="비밀번호" required></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -98,7 +98,7 @@
                 <td><a href="" class="button2 btn btn-outline-secondary">비밀번호 찾기</a></td>
             </tr>
             <tr align="center" >
-                <td colspan="2"><a href="<%= contextPath %>/enrollAgree.me.ng" class="button3 btn btn-outline-secondary">회원가입</a></td>
+                <td colspan="2"><a href="<%= contextPath %>/enrollAgreePage.me.ng" class="button3 btn btn-outline-secondary">회원가입</a></td>
             </tr>
         </table>
 
