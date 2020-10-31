@@ -22,8 +22,47 @@
 	    AND MEM_USERPWD = ?
 	    AND  LEAVE_CHECK = 'N'
 </entry>
-
-
+<entry key="idCheck">
+	SELECT
+	       COUNT(*)
+	  FROM MEMBER
+	 WHERE MEM_USERID = ?
+</entry>
+<entry key="nickNameCheck">
+	SELECT
+	      COUNT(*)
+	 FROM MEMBER
+	WHERE MEM_NICKNAME = ?
+</entry>
+<entry key="insertMember">
+	INSERT
+	  INTO MEMBER
+	  ( 
+	    MEM_NO
+	  , LOCAL_NO
+	  , MEM_USERID
+	  , MEM_USERPWD
+	  , MEM_NAME
+	  , MEM_NICKNAME
+	  , MEM_BIRTHDAY
+	  , MEM_GENDER
+	  , MEM_PHONE
+	  , MEM_EMAIL
+	  )
+	VALUES
+	  (
+	    SEQ_MNO.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )
+</entry>
 
 
 

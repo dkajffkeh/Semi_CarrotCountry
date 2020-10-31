@@ -22,9 +22,9 @@
     margin:10px;
     padding: 10px;
 }
-#min-count{
-    width: 150px;
-}
+#min-count{width: 150px;}
+#gpDRate{width: 150px;}
+#gpDeadline{width: 300px;}
 input[type="text" i] {
     padding: 1px 2px;
     width: 300px;
@@ -128,7 +128,7 @@ select {
                 </tr>
                 <tr>
                     <td>모집기간</td>
-                    <td><input type="date" name="" class="form-control"></td>
+                    <td><input type="date" name="" id="gpDeadline" class="form-control"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -138,6 +138,16 @@ select {
                 </tr>
                 <tr>
                     <td>가격</td>
+                    <td><input type="number" name="" class="form-control" min="0" placeholder="원 단위로 입력해주세요"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>할인율</td>
+                    <td><input type="number" name="" id="gpDRate" class="form-control" min="0" max="100" placeholder="% 단위"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>할인된 가격(판매가)</td>
                     <td><input type="number" name="" class="form-control" min="0" placeholder="원 단위로 입력해주세요"></td>
                     <td></td>
                 </tr>

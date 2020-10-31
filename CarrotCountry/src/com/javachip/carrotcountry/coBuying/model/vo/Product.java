@@ -2,7 +2,7 @@ package com.javachip.carrotcountry.coBuying.model.vo;
 
 import java.sql.Date;
 
-public class CoBuyingProduct {
+public class Product {
 	
 	private int postNo;  
 	private int gpPrice;
@@ -14,10 +14,10 @@ public class CoBuyingProduct {
 	private Date gpDeadline;
 
 	
-	public CoBuyingProduct() {}
+	public Product() {}
 
 
-	public CoBuyingProduct(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople,
+	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople,
 			String gpStatus, Date gpDeadline) {
 		super();
 		this.postNo = postNo;
@@ -113,7 +113,7 @@ public class CoBuyingProduct {
 
 	@Override
 	public String toString() {
-		return "CoBuyingProduct [postNo=" + postNo + ", gpPrice=" + gpPrice + ", gpDPrice=" + gpDPrice + ", gpDRate="
+		return "Product [postNo=" + postNo + ", gpPrice=" + gpPrice + ", gpDPrice=" + gpDPrice + ", gpDRate="
 				+ gpDRate + ", gpMinPeople=" + gpMinPeople + ", gpPeople=" + gpPeople + ", gpStatus=" + gpStatus
 				+ ", gpDeadline=" + gpDeadline + "]";
 	}

@@ -1,5 +1,20 @@
+<%@page import="oracle.net.aso.a"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@
+	page import="com.javachip.carrotcountry.coBuying.model.vo.*
+				, com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*
+				, java.util.ArrayList
+				, com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.* "
+ %>    
+
+<%
+	Product p = (Product)request.getAttribute("p");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	CategoryHY c = (CategoryHY)request.getAttribute("c");
+	ArrayList<Option> oList = (ArrayList<Option>)request.getAttribute("oList");
+	ArrayList<Account> aList = (ArrayList<Account>)request.getAttribute("aList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,9 +90,12 @@
        #content3_2{height: 90%;}
        #content3_1>div{
             height: 100%; 
-            width: 25%; 
+            width: 33.3%; 
             float: left;
-            display:block
+            display:block;
+        }
+         #showContent{
+            padding-left:100px;
         }
         #content3_1>div>button{
             width: 90%;
@@ -178,20 +196,27 @@
                
                     <form action="">
                         <div id="content2_2_1">
-                            <span>모집 기간 :</span> 2020/10/01 ~ 2020/10/15 <br>
-                            <span>남은 기간 :</span> 14일 <br>
-                            <span>최소 인원 :</span> 30명 <br>
+                            <span>모집 기간 :</span> <%= pb.getEnrollDate() %> ~ <%= p.getGpDeadline() %> <br>
+                            <span>최소 인원 :</span> <%= p.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
-                              <div class="progress">
-                                <div class="progress-bar bg-success" style="width:70%">70명</div>
+                              <div class="progress" style="width: 100%">
+                                <div class="progress-bar bg-success" style="width:<%= p.getGpPeople() %> %"> <%= p.getGpPeople() %>명 </div>
                               </div> <br>
-                            <span>가격 :</span> 150000원 <br>
+                            <span>가격 :</span> <%= p.getGpDPrice() %> <br>
                             <span>옵션 : </span>
-                                <select name="product" id="product">
-                                    <option value="red">red</option>
-                                    <option value="white">white</option>
-                                    <option value="black">black</option>
-                                </select>
+                           		 <select name="product" id="product">
+	                            	<% if(oList.isEmpty()){ %>
+						                <!-- 조회된 옵션이 없을 경우-->
+						                	<option>옵션이 없습니다.</option>
+						                
+									<%}else{ %>
+						                	<!-- 조회된 옵션이 있을 경우-->
+							            <% for(Option o : oList){ %>	
+							                <option><%= o.getOptionName() %>></option>
+							             <%} %>
+					                <%} %>
+					                </select>
+                            
                            
                         </div>
                        
@@ -216,27 +241,36 @@
             </div>
             <div id="content3">
               
-                    <div id="content3_1">
+                     <div id="content3_1">
                         <div id="content3_1_1">
                             <button type="button" onclick="showExplan()" class="btn btn-dark">상세설명</button>
                         </div>
                         <div id="content3_1_2">
-                            <button type="button" onclick="showMoney()" class="btn btn-dark">입금방법</button>
+                            <button type="button" class="btn btn-dark">Q&A</button>
                         </div>
                         <div id="content3_1_3">
-                            <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</a>
-                        </div>
-                        <div id="content3_1_4">
                             <button type="button" onclick="showRefund()" class="btn btn-dark">교환 및 환불</button>
                         </div>
                         
                         
                     </div>
                     <div id="content3_2">
-                        <div id="showExplan"><b>상세설명 버튼클릭시 보여질 내용(에디터로 서술한 것), 아무버튼누르지 않았을땐 이 창이 default</b></div>
-                        <div id="showMoney" style="display: none;"><b>입금방법 버튼클릭시 보여질 내용(에디터로 서술한 것)</b></div>
-                        <div id="showRefund" style="display: none;"><b>교환 및 환불 버튼클릭시 보여질 내용(에디터로 서술한 것)</b></div>
+                        <div id="showContent"><%= pb.getPostContent() %></div>
                     </div>
+
+
+
+                    <script>
+                        function showExplan(){
+	                        var showArea = document.getElementById("showContent");
+	                        showArea.innerHTML = <%= pb.getPostContent() %>
+                        }
+                        
+                        function showRefund(){
+                            var showArea = document.getElementById("showContent");
+                            showArea.innerHTML = <%= pb.getPostRefund() %>
+                        }
+                    </script>
 
                     
 

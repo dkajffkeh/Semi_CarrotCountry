@@ -29,6 +29,22 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="selectProduct">
+		SELECT
+		       POST_NO
+		     , POST_ENROLL_DATE
+		     , GP_DEADLINE
+		     , GP_MINPEOPLE
+		     , GP_PEOPLE
+		     , GP_DPRICE
+             , POST_COMMENT
+             , POST_REFUND
+		  FROM GROUP_PURCHASE 
+		  LEFT
+		  JOIN POST USING(POST_NO)
+		 WHERE POST_NO = ?
+	</entry>
 
 
 
