@@ -46,6 +46,21 @@ public class Member {
 		this.managerCheck = managerCheck;
 	}
 	
+	// 매개변수 생성자 (회원가입용)
+	public Member(int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
+			String memBirthday, String memGender, String memPhone, String memEmail) {
+		super();
+		this.localNo = localNo;
+		this.memUserId = memUserId;
+		this.memUserPwd = memUserPwd;
+		this.memName = memName;
+		this.memNickname = memNickname;
+		this.memBirthday = memBirthday;
+		this.memGender = memGender;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+	}
+
 	// setter / getter 메소드
 	public int getMemNo() {
 		return memNo;

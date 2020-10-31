@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberEnrollAgreeController
+ * Servlet implementation class MemberEnrollAgreePageController
  */
-@WebServlet("/enrollAgree.me.ng")
-public class MemberEnrollAgreeController extends HttpServlet {
+@WebServlet("/enrollAgreePage.me.ng")
+public class MemberEnrollAgreePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollAgreeController() {
+    public MemberEnrollAgreePageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,9 @@ public class MemberEnrollAgreeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.getRequestDispatcher("views/member/memberEnrollAgreeForm.jsp").forward(request, response);
-	
-	
+		
 	}
 
 	/**

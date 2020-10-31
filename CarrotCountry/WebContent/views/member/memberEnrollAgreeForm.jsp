@@ -87,7 +87,7 @@
         <h1>약관 동의</h1>
 
         <table border="1px" width="100%">
-            <form action="<%= contextPath %>/enrollInput.me.ng" method="get">
+            <form action="<%= contextPath %>/enrollInputPage.me.ng" method="get">
                 <tr>
                     <td colspan="2"><input type="checkbox" class="check" id="agree1" required><label class="checkLabel" for="agree1">당근나라 이용약관 동의 (필수)</label></td>
                 </tr>
@@ -134,7 +134,7 @@
                     </td>
                 </tr>
                 <tr align="center" >
-                    <td><a href="" class="button1 btn btn-outline-secondary">뒤로가기</a></td>
+                    <td><a onclick="history.back();" class="button1 btn btn-outline-secondary">뒤로가기</a></td>
                     <td><button type="submit" class="button2 btn btn-warning">회원가입</button></td>
                 </tr>
             </form>

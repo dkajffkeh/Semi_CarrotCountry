@@ -124,7 +124,7 @@ a {text-decoration: none;}
                     	<% if(loginMember == null){ %>
 	                    	<!-- 로그아웃 상태 -->
 	                        <td><a href="<%= contextPath %>/loginPage.me.ng"><i class="fas fa-sign-in-alt"></i></a></td>
-	                        <td><a href=""><i class="far fa-plus-square"></i></a></td>
+	                        <td><a href="<%= contextPath %>/enrollAgreePage.me.ng"><i class="far fa-plus-square"></i></a></td>
                         <% }else { %>
 	                        <!-- 로그인 상태 -->
 	                        <td><a href="<%= contextPath %>/logout.me.ng"><i class="fas fa-sign-out-alt"></i></a></td>
@@ -135,7 +135,7 @@ a {text-decoration: none;}
                     	<% if(loginMember == null){ %>
 	                    	<!-- 로그아웃 상태 -->
 	                        <td><a href="<%= contextPath %>/loginPage.me.ng">로그인</a></td>
-	                        <td><a href="">회원가입</a></td>
+	                        <td><a href="<%= contextPath %>/enrollAgreePage.me.ng">회원가입</a></td>
                         <% }else { %>
                         	<!-- 로그인 상태 -->
 	                        <td><a href="<%= contextPath %>/logout.me.ng">로그아웃</a></td>
