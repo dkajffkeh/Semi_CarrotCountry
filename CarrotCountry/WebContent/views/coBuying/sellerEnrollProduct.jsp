@@ -164,29 +164,73 @@ select {
                 </tr>
 
 
+                
+
                 <tr>
                     <td> <br> 주소입력</td>
                     <td> <br>
-                        서울특별시
-                        <select id="local_gu">
-                            <option value="gn">강남구</option>
-                            <option value="gs">강서구</option>
-                            <option value="sp">송파구</option>
-                        </select> 
-                        <select id="local_dong">
-                            <option value="1">오금동</option>
-                            <option value="2">오류동</option>
-                            <option value="3">상일동</option>
-                            <option value="4">화곡동</option>
-                            <option value="5">목동</option>
-                            <option value="6">오금동</option>
-                            <option value="7">상일동</option>
-                            <option value="8">화곡동</option>
-                            <option value="9">상일동</option>
-                            <option value="10">화곡동</option>
-                        </select>
+                   	    서울특별시
                         
-                    </td>
+                        <select name="gu" id="gu">
+
+                            <option value="">구 선택</option>
+
+                            <option value="gn">강남구</option>
+
+                            <option value="gs">강서구</option>
+
+                            <option value="sp">송파구</option>
+
+                        </select>
+
+                        <select id="dong">
+                            <option value="">동 선택</option>
+                        </select>
+
+                        <script type="text/javascript">
+
+                            $(function() {
+
+                                $('#gu').change(function() {
+
+                                    var gn = ["역삼동", "개포동", "삼성동"];
+
+                                    var gs = ["가양동", "등촌동", "우장산동"];
+
+                                    var sp = ["오류동", "오금동", "잠실동"];
+
+                                    var changeItem;
+
+                                    if (this.value == "gn") {
+
+                                        changeItem = gn;
+
+                                    } else if (this.value == "gs") {
+
+                                        changeItem = gs;
+
+                                    } else if (this.value == "sp") {
+
+                                        changeItem = sp;
+                                    }
+
+                                    $('#dong').empty();
+
+                                    for (var count = 0; count < changeItem.length; count++) {
+
+                                        var option = $("<option>" + changeItem[count] + "</option>");
+
+                                        $('#dong').append(option);
+
+
+
+                                    }
+
+                                });
+
+                            });
+
+                        </script>
                     <td></td>
                 </tr>
                 <tr>
