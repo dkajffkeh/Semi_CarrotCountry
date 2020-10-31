@@ -2,7 +2,7 @@ package com.javachip.carrotcountry.adminBoard.model.vo;
 
 import java.sql.Date;
 
-public class AdminMemeber {
+public class AdminMember {
 	
 		private int memNo;				// 회원 식별번호
 		private int localNo;			// 회원 지역번호
@@ -10,7 +10,7 @@ public class AdminMemeber {
 		private String memUserPwd;		// 회원 비밀번호
 		private String memName;			// 회원 이름
 		private String memNickName;		// 회원 닉네임
-		private Date memBirthday;		// 회원 생년월일
+		private String memBirthday;		// 회원 생년월일
 		private String memGender;		// 회원 성별
 		private String memPhone;		// 회원 전화번호
 		private String memEmail;		// 회원 이메일
@@ -20,10 +20,10 @@ public class AdminMemeber {
 		private String leaveCheck;		// 탈퇴여부 'N/Y'
 		private String managerCheck;	// 관리자여부 'N/Y'
 		
-		public AdminMemeber() {}
+		public AdminMember() {}
 
-		public AdminMemeber(int memNo, int localNo, String memUserId, String memUserPwd, String memName,
-				String memNickName, Date memBirthday, String memGender, String memPhone, String memEmail,
+		public AdminMember(int memNo, int localNo, String memUserId, String memUserPwd, String memName,
+				String memNickName, String memBirthday, String memGender, String memPhone, String memEmail,
 				String memLocation, Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck) {
 			super();
 			this.memNo = memNo;
@@ -41,6 +41,19 @@ public class AdminMemeber {
 			this.bListCheck = bListCheck;
 			this.leaveCheck = leaveCheck;
 			this.managerCheck = managerCheck;
+		}
+
+		public AdminMember(int memNo, String memUserId, String memName, String memBirthday, String memPhone,
+				String memEmail, Date memEnrollDate, String bListCheck) {
+			super();
+			this.memNo = memNo;
+			this.memUserId = memUserId;
+			this.memName = memName;
+			this.memBirthday = memBirthday;
+			this.memPhone = memPhone;
+			this.memEmail = memEmail;
+			this.memEnrollDate = memEnrollDate;
+			this.bListCheck = bListCheck;
 		}
 
 		public int getMemNo() {
@@ -91,11 +104,11 @@ public class AdminMemeber {
 			this.memNickName = memNickName;
 		}
 
-		public Date getMemBirthday() {
+		public String getMemBirthday() {
 			return memBirthday;
 		}
 
-		public void setMemBirthday(Date memBirthday) {
+		public void setMemBirthday(String memBirthday) {
 			this.memBirthday = memBirthday;
 		}
 

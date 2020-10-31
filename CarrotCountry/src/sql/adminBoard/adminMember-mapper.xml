@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	
+	<entry key="userSelectAll">
+		select
+		       mem_no
+		     , mem_userid
+		     , mem_name
+		     , mem_birthday
+		     , mem_phone
+		     , mem_email
+		     , mem_enroll_date
+		     , b_list_check
+		  from 
+		       member
+		 where leave_check = 'N'
+		   and manager_check = 'N'
+	</entry>
 </properties>
