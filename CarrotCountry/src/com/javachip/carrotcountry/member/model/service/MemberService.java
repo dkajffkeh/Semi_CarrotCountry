@@ -57,6 +57,10 @@ public class MemberService {
 		
 	}
 	
+	/** 회원가입
+	 * @param m
+	 * @return
+	 */
 	public int insertMember(Member m) {
 		
 		Connection conn = getConnection();
@@ -72,6 +76,18 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+		
+	}
+	
+	public String findIdMember(String memName, String memBirthday, String memPhone) {
+		
+		Connection conn = getConnection();
+		
+		String findId = new MemberDao().findIdMember(conn, memName, memBirthday, memPhone);
+		
+		close(conn);
+		
+		return findId;
 		
 	}
 		
