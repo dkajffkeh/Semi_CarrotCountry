@@ -179,7 +179,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
              </ol>
              <div class="carousel-inner">
                  <div class="carousel-item active">
-                     <img class="d-block w-100" src="../Common/images/20190220_205501.jpg">
+                     <img class="d-block w-100" src="">
                  </div>
              </div>
              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -212,7 +212,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
      
      <!-- ↓ 본문 제목 ↓ -->
      <div class="title_section">
-         <h4 align="center">
+         <h4 align="center" style="margin-top:15px">
              <%=pb.getPostName() %>
          </h4>
          <p align="center" style="font-size:small;"><%=pb.getCategoryName() %></p>
@@ -248,7 +248,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
      <hr style="border-bottom: 2px solid gray;"> 
      <!-- ↓ 댓글 입력 구간↓ --> 
      <div class="comment_area" style="width:100%;">
-         <form action="#" style="display:flex; 
+         <div style="display:flex; 
                                  justify-content: center;">
             <input type="text" 
                    class="form-control" 
@@ -262,7 +262,8 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                     id="insert_comment"
                     style="font-weight: bold;
                     ">댓글입력</button>
-                    <div class="comment_check_wrapper" style="
+                    <div class="comment_check_wrapper" style=
+                    "
                     height:40px; 
                     width:40px; 
                     margin-left: 10px; 
@@ -272,18 +273,19 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                               font-weight: bold;"> 비공개</p>
                     <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="Y">
                     </div>
-         </form>
+         </div>      
+    
           <!-- ↓ 댓글 출력 구간↓ -->
          <div id="comment_display_outer">
          <% for(int i =0 ; i<list.size(); i++ ) { 
-         if(loginMember==null) {
+         if(loginMember==null) { // 로그인이 안돼있을경우 조건문 실행
         	 if(!list.get(i).getSecretCheck().equals("Y")) {
          %>
          <div class="comment_display">
              <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
              <div class="comment_content">
-                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
                  <div class="comment_textarea"><%=list.get(i).getContent() %></div>
+                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
                  <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
                  <div class="comment_control_button">
                      <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
@@ -306,7 +308,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                             justify-content: center;
                             align-items: center;">
                     <i class="fas fa-carrot">비밀댓글입니다!</i>
-                    <div>ㅇㅅㅇ</div>
+                    
                     
                 </div>           
             </div>
@@ -381,7 +383,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
             <!-- Modal body -->
             <div class="modal-body">
               <label for="">신고유형:</label>
-              <select name="report_type" id="" style="border:1px solid black; border-radius: 3px;">
+              <select name="report_type" style="border:1px solid black; border-radius: 3px;">
                   <option value="사기">사기</option>
               </select>
               <br><br>
@@ -397,9 +399,46 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
           </div>
         </div>
       </div>
-      
-      
+ 
+<script>
+         $(function(){
+        	 let $scContent = $("#exampleInputPassword1")
+        	 let $sCheck = $(".comment_check_wrapper input[name=comment_condition]");
+        	 
+        	 $("#insert_comment").click(function(){
+  		
+        		 <%if(loginMember!=null) {%>
+        		 
+        		 $.ajax({
+        			url:"insertComment.sh",
+        			type:"post",
+        			data:{
+					      cContent:$scContent.val(),
+					      sCheck:$sCheck.val(),
+					      userNick:"<%=loginMember.getMemNickname()%>",
+					      postNo:"<%=pb.getPostNo()%>",
+					      memNo:"<%=loginMember.getMemNo()%>"
+        			     },
+        			success:function(){
+        			
 
-
+        			}, 
+        			error:function(){
+        				
+        			}  	 
+        		 })
+        		 
+        		 <%} else {%>
+        			
+        		 if(confirm("댓글은 회원만 작성할수 있습니다 로그인 페이지로 이동하시겠습니까?")){
+        			 location.href="<%=contextPath%>/loginPage.me.ng";
+        		 }
+        		 <% } %>
+        	 })
+         })
+         </script>
+      
+      <%@ include file="../common/footerbar.jsp"%>   
+         
 </body>
 </html>

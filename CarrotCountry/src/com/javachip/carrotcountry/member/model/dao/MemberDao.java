@@ -162,6 +162,40 @@ public class MemberDao {
 		
 	}
 	
+	public String findIdMember(Connection conn, String memName, String memBirthday, String memPhone) {
+		// SELECT문 => 한 행
+		String findId = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findIdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memName);
+			pstmt.setString(2, memBirthday);
+			pstmt.setString(3, memPhone);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				findId = rset.getString(1);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return findId;
+		
+	}
+	
 	
 	
 }

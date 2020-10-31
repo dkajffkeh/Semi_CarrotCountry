@@ -12,7 +12,6 @@
   
         #footerbar {
             position: absolute;
-            top: 100%;
             width: 100%;
             height: 270px;
             background-color: #00251a;

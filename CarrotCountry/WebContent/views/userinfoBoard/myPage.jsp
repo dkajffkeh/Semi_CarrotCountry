@@ -112,7 +112,7 @@
 <body>
 	<!--상단바, 메뉴바, 푸터 -->
 	<%@ include file= "../common/commonNavbar.jsp"%>
-	<%@ include file= "../common/mypageMenubar.jsp" %>
+	<%-- <%@ include file= "../common/mypageMenubar.jsp" %> --%> 
 	<%@ include file= "../common/footerbar.jsp" %>
 
 	<div class="outer">

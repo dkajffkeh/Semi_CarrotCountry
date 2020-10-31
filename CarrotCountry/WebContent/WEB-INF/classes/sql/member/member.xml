@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+<!-- 로그인 -->
 <entry key="loginMember">
 	SELECT MEM_NO
 	     , LOCAL_NO
@@ -22,18 +23,24 @@
 	    AND MEM_USERPWD = ?
 	    AND  LEAVE_CHECK = 'N'
 </entry>
+
+<!-- 아이디 중복체크 -->
 <entry key="idCheck">
 	SELECT
 	       COUNT(*)
 	  FROM MEMBER
 	 WHERE MEM_USERID = ?
 </entry>
+
+<!-- 닉네임 중복체크 -->
 <entry key="nickNameCheck">
 	SELECT
 	      COUNT(*)
 	 FROM MEMBER
 	WHERE MEM_NICKNAME = ?
 </entry>
+
+<!-- 회원가입 -->
 <entry key="insertMember">
 	INSERT
 	  INTO MEMBER
@@ -63,6 +70,15 @@
 	  , ?
 	  )
 </entry>
+
+<entry key="findIdMember">
+	SELECT MEM_USERID
+	  FROM MEMBER
+	 WHERE MEM_NAME = ?
+	   AND MEM_BIRTHDAY = ?
+	   AND MEM_PHONE = ?
+</entry>
+
 
 
 
