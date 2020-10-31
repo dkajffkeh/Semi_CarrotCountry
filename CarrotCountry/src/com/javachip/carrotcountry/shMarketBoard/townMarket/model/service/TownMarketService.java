@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
 public class TownMarketService {
 	
@@ -57,6 +58,16 @@ public class TownMarketService {
 		
 		
 		return pb;
+	}
+
+	public ArrayList<CommentHY> marketCommentSelector(int bno) {
+		
+		Connection conn = getConnection();
+		ArrayList<CommentHY> list = new TownMarketDao().marketCommentSelector(conn,bno);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

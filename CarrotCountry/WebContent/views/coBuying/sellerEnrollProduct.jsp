@@ -16,14 +16,14 @@
     
 }
 
-
 .GPForm table{margin:auto;}
+.GPForm table img:hover{cursor: pointer;}
 .GPForm table input{
     margin:10px;
     padding: 10px;
 }
 #min-count{
-    width: 100;
+    width: 150px;
 }
 input[type="text" i] {
     padding: 1px 2px;
@@ -41,81 +41,6 @@ select {
 }
 
 
-
-
-* {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    box-sizing: border-box;
-    }
-    
-    a {
-    text-decoration: none;
-    }
-    
-    .navbar_Wrapper {
-    background-color: orange;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    }
-    
-    .navbar_sizeWraper_1200px {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1200px;
-    height: 100%;
-    
-    }
-    
-    .navbar_sizeWraper_1200px div {
-    display: flex;
-    justify-content: center;
-    
-    }
-    
-    .user_info_display_sectionWrapper {
-    margin-left: 50px;
-    }
-    
-    .user_info_display_sectionWrapper div {
-    display: flex;
-    align-items: center;
-    }
-    
-    .MainLogo_Wrapper {
-    display: flex;
-    align-items: center;
-    }
-    
-    .MainLogo_Wrapper>div i {
-    font-size: 2rem;
-    }
-    
-    .menu_bar {
-    margin-right: 50px;
-    }
-    
-    .menu_bar>table tr td a {
-    color: white
-    }
-    
-    .user_inter_font {
-    font-size: 0.7rem;
-    }
-    
-    .menu_bar table tr td {
-    padding-left: 10px;
-    
-    
-    }
 </style>
 
 </head>
@@ -124,18 +49,75 @@ select {
 
 <%@ include file="../common/commonNavbar.jsp"%>
 
+
+
+
     <div class="CS_content">
         <form action="" method="post" class="GPForm">
             <table>
                 <tr>
-                    <td width="150">대표 이미지 등록 0/4</td>
+                    <td width="150">대표 이미지 등록 0/3</td>
                     <td width="400">
-                        <input type="image" name="" ><input type="image" name="">
-                        <input type="image" name=""><input type="image" name="">
+                        <img id="titleImg" width="100" height="100">
+                        <img id="contentImg1" width="100" height="100">
+                        <img id="contentImg2" width="100" height="100">
                     </td>
                     <td></td>
                 </tr>
 
+                <div id="fileArea">
+                    <input type="file" name="file1" id="file1" onchange="loadImg(this, 1)" required>
+                    <input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
+                    <input type="file" name="file3" id="file3" onchange="loadImg(this, 3)">
+                </div>
+    
+                <script>
+                    $(function(){
+                        $("#fileArea").hide();
+    
+                        $("#titleImg").click(function(){
+                            $("#file1").click();
+                        });
+                        $("#contentImg1").click(function(){
+                            $("#file2").click();
+                        });
+                        $("#contentImg2").click(function(){
+                            $("#file3").click();
+                        });
+                    });
+    
+                    function loadImg(inputFile, num){
+    
+                        if(inputFile.files.length == 1){
+                            var reader = new FileReader();
+    
+                            // 파일을 읽어들이는 메소드 호출
+                            // --> 해당 파일을 읽어들이는 순간 해당 그 파일만의 고유한 url 주어짐
+                            reader.readAsDataURL(inputFile.files[0]); 
+    
+                            // 파일 읽어들이기가 다 완료가 되었을 때 실행할 함수를 정의
+                            reader.onload = function(e){
+                                // 각 영역에 맞춰서 이미지 미리보기
+                                switch(num){
+                                    case 1 : $("#titleImg").attr("src", e.target.result); break;
+                                    case 2 : $("#contentImg1").attr("src", e.target.result); break;
+                                    case 3 : $("#contentImg2").attr("src", e.target.result); break;
+                                }
+                            };
+    
+                        }else{ 
+                            // 현재 선택된 file이 사라졌을 경우 => 미리보기 해제
+                            switch(num){
+                                case 1 : $("#titleImg").attr("src", null); break;
+                                case 2 : $("#contentImg1").attr("src", null); break;
+                                case 3 : $("#contentImg2").attr("src", null); break;
+                            }
+    
+                        }
+    
+    
+                    }
+                </script>
 
 
 
@@ -151,12 +133,12 @@ select {
                 </tr>
                 <tr>
                     <td>최소 인원</td>
-                    <td><input type="text" name="" class="form-control" id="min-count"></td>
+                    <td><input type="number" name="" class="form-control" id="min-count" min="0"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>가격</td>
-                    <td><input type="text" name="" class="form-control"></td>
+                    <td><input type="number" name="" class="form-control" min="0" placeholder="원 단위로 입력해주세요"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -173,71 +155,55 @@ select {
 
 
                 <tr>
-                    <td>주소입력</td>
-                    <td>
-                        <select name="" class="" id="address1">
-                            <option selected>Custom Select Menu</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                    <td> <br> 주소입력</td>
+                    <td> <br>
+                        서울특별시
+                        <select id="local_gu">
+                            <option value="gn">강남구</option>
+                            <option value="gs">강서구</option>
+                            <option value="sp">송파구</option>
                         </select> 
-                        <select name="" class="" id="address2">
-                            <option selected>Custom Select Menu</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                        <select id="local_dong">
+                            <option value="1">오금동</option>
+                            <option value="2">오류동</option>
+                            <option value="3">상일동</option>
+                            <option value="4">화곡동</option>
+                            <option value="5">목동</option>
+                            <option value="6">오금동</option>
+                            <option value="7">상일동</option>
+                            <option value="8">화곡동</option>
+                            <option value="9">상일동</option>
+                            <option value="10">화곡동</option>
                         </select>
                         
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>카테고리 선택</td>
-                    <td>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">디지털/가전</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">가구/인테리어</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">유아동/유아도서</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">생활/가공식품</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">스포츠/레저</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">여성잡화</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">여성의류</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">남선패션/잡화</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">여성의류</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">남선패션/잡화</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">게임/취미</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">뷰티/미용</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">반려동물용품</label>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">도서/티켓/음반</label>
-                        <br>
-                        <input type="checkbox" id="" name="category" value="">
-                        <label for="">기타물품</label>
-                       
+                    <td> <br> 카테고리 선택</td>
+                    <td> <br>
+                        <select id="categoty" name="category">
+                            <option value="20">디지털/가전</option>
+                            <option value="30">가구/인테리어</option>
+                            <option value="40">유아동/유아도서</option>
+                            <option value="50">생활/가공식품</option>
+                            <option value="60">스포츠/레저</option>
+                            <option value="70">여성잡화</option>
+                            <option value="80">여성의류</option>
+                            <option value="90">남성패션/잡화</option>
+                            <option value="100">게임/취미</option>
+                            <option value="110">뷰티/미용</option>
+                            <option value="120">반려동물용품</option>
+                            <option value="130">도서/티켓/음반</option>
+                            <option value="140">기타물품</option>
+                        </select>
+
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>상세 설명 첨부</td>
-                    <td><textarea name="content" id="editor" style="min-height: 500px;"></textarea></td>
+                    <td><br> 상세 설명 첨부</td>
+                    <td><br> <textarea name="content" id="editor" style="min-height: 500px;"></textarea></td>
                     <td></td>
                 </tr>
 
@@ -272,7 +238,7 @@ select {
                     var valOption = 0;
                     var valAccount = 0;
                     function add1(){
-                       
+
                         $("#option").append("<option value=" + (valOption ++ ) +">" + $("#option-add").val() + "</option>");
 
                         $("#option-add").val(" ");
@@ -304,6 +270,5 @@ select {
 
 
     <br><br><br><br><br><br><br><br><br><br><br><br>
-
 </body>
 </html>

@@ -15,6 +15,7 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
 public class TownMarketDao {
 	
@@ -173,4 +174,40 @@ Properties prop = new Properties();
 		return pb;
 	}
 
+	
+	public ArrayList<CommentHY> marketCommentSelector(Connection conn, int bno){
+		
+		ArrayList<CommentHY> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("marketCommentSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CommentHY c = new CommentHY(rs.getInt("comm_no")
+										   ,rs.getString("user_nickname")
+										   ,rs.getDate("ent_date")
+										   ,rs.getString("content")
+										   ,rs.getString("private")
+										   ,rs.getInt("post_no")
+										   );
+				list.add(c);
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return list ;
+	}
+	
 }

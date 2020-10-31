@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class QnA {
 	
-	private int gqNo;
-	private String memNo;
-	private int postNo;
-	private String gqContent;
-	private String gqAnswer;
-	private int gqViews;
-	private Date gqEnrollDate;
+	private int gqNo;			// 문의번호
+	private String memNo;		// 유저식별번호(유저아이디 받아와야돼서 String)
+	private int postNo;			// 게시글번호
+	private String gqContent;	// 문의내용
+	private String gqAnswer;	// 문의답변
+	private int gqViews;		// 조회수
+	private Date gqEnrollDate;	// 등록일자
 	
 	
 	public QnA() {}
