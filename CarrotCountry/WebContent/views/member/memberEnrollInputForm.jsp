@@ -34,7 +34,6 @@
         width:400px;
         height:1350px;
         margin:auto;
-        margin-top:100px;
         margin-bottom:100px;
         padding:20px;
     }
@@ -88,6 +87,13 @@
 	
 	<%@ include file="../common/commonNavbar.jsp" %>
 
+    <div class="img">
+        <div><img src="<%= contextPath %>/resources/images/member/check.png" class="imgA"></div>
+        <div><img src="<%= contextPath %>/resources/images/member/right.png" class="imgB"></div>
+        <div><img src="<%= contextPath %>/resources/images/member/writePage.png" class="imgA"></div>
+        <div><img src="<%= contextPath %>/resources/images/member/right.png" class="imgB"></div>
+        <div><img src="<%= contextPath %>/resources/images/member/user.png" class="imgA"></div>
+    </div>
     <div class="wrap">
 
         <h1>회원정보 입력</h1>
