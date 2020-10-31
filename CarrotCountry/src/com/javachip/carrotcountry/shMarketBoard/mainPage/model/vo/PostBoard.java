@@ -25,6 +25,39 @@ public class PostBoard {
 	private int prodPrice;
 	private Date EnrollDate;
 	private String blindCheck;
+	
+	private String postRefund;
+	
+	
+
+	public PostBoard(int postNo, String categoryNo, int memNo, String localNo, String memNickname, String postName,
+			String postContent, String categoryName, String parcelNum, String prodStatus, String dealType, String site,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postReports,
+			int postLikes, int prodPrice, Date enrollDate, String blindCheck, String postRefund) {
+		super();
+		this.postNo = postNo;
+		this.categoryNo = categoryNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.memNickname = memNickname;
+		this.postName = postName;
+		this.postContent = postContent;
+		this.categoryName = categoryName;
+		this.parcelNum = parcelNum;
+		this.prodStatus = prodStatus;
+		this.dealType = dealType;
+		this.site = site;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postReports = postReports;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		EnrollDate = enrollDate;
+		this.blindCheck = blindCheck;
+		this.postRefund = postRefund;
+	}
 
 	public PostBoard() {
 		
@@ -240,6 +273,18 @@ public class PostBoard {
 
 	public void setBlindCheck(String blindCheck) {
 		this.blindCheck = blindCheck;
+		
+	}
+	
+	
+	
+
+	public String getPostRefund() {
+		return postRefund;
+	}
+
+	public void setPostRefund(String postRefund) {
+		this.postRefund = postRefund;
 	}
 
 	@Override
@@ -250,7 +295,11 @@ public class PostBoard {
 				+ ", dealType=" + dealType + ", site=" + site + ", thumbnailPath=" + thumbnailPath
 				+ ", thumbnailFilename=" + thumbnailFilename + ", thumbnailLoadPath=" + thumbnailLoadPath
 				+ ", postViews=" + postViews + ", postReports=" + postReports + ", postLikes=" + postLikes
-				+ ", prodPrice=" + prodPrice + ", EnrollDate=" + EnrollDate + ", blindCheck=" + blindCheck + "]";
+				+ ", prodPrice=" + prodPrice + ", EnrollDate=" + EnrollDate + ", blindCheck=" + blindCheck
+				+ ", postRefund=" + postRefund + "]";
 	}
+	
+	
+	
 	
 }
