@@ -196,6 +196,7 @@
                
                     <form action="">
                         <div id="content2_2_1">
+                        	<input type="hidden" name="postNo" value="<%= pb.getPostNo() %>">
                             <span>모집 기간 :</span> <%= pb.getEnrollDate() %> ~ <%= p.getGpDeadline() %> <br>
                             <span>최소 인원 :</span> <%= p.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
