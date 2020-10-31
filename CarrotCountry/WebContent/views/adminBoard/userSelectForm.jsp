@@ -1,9 +1,11 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@page
 	import="com.javachip.carrotcountry.adminBoard.model.vo.AdminMember"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
 	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -56,7 +58,7 @@
 									<th width="100">블랙리스트</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="tbody">
 								<% for (AdminMember am : list) { %>
 									<tr>
 										<td><%= am.getMemNo() %></td>
@@ -68,9 +70,14 @@
 										<td><%= am.getMemEnrollDate() %></td>
 										<td><%= am.getbListCheck() %></td>
 										<!-- 블랙 Y/N이 Y일 경우 안보임 -->
-										<td>
-											<!-- 클릭 시 블랙리스트 등록  -->
-											<a href=""class="btn btn-outline-danger btn-sm">등록</a>											</td>
+										<% if (am.getbListCheck().equals("N")) { %>
+											<td>
+												<!-- 클릭 시 블랙리스트 등록  -->
+												<a href="<%= contextPath %>/blacklistEnroll.sb?memNo=<%= am.getMemNo() %>" class="btn btn-outline-danger btn-sm" name="memNo">등록</a>	
+											</td>
+										<% } else { %>
+											<td></td>
+										<% } %>
 									</tr>
 								<% } %>
 							</tbody>
@@ -78,8 +85,17 @@
 					</div>
 					<!-- 페이지 번호 -->
 					<div id="boardNum" align="center">
-						<a href="">&lt; 이전</a> <a href="">1</a> <a href="">2</a> <a
-							href="">3</a> <a href="">4</a> <a href="">다음 &gt;</a>
+						<% if (pi.getCurrentPage() != 1) { %>
+				            <a href="<%= contextPath %>/userList.sb?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+						<% } %>
+			
+						<% for (int p = pi.getStartPage(); p <= pi.getEndPage(); p++) { %>
+				            <a href="<%= contextPath %>/userList.sb?currentPage=<%= p %>"><%= p %></a>
+						<% } %>
+			
+						<% if (pi.getCurrentPage() != pi.getMaxPage()) { %>
+				            <a href="<%= contextPath %>/userList.sb?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt;</a>
+						<% } %>
 					</div>
 				</div>
 			</div>

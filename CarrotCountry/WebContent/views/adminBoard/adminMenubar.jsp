@@ -22,7 +22,7 @@
                 <th>회원 관리</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathAdmin %>/userList.sb">회원조회</a></td>
+                <td><a href="<%= contextPathAdmin %>/userList.sb?currentPage=1">회원조회</a></td>
             </tr>
                 <td><a href="<%= contextPathAdmin %>/blackList.sb">블랙리스트관리</a></td>
             <tr>
