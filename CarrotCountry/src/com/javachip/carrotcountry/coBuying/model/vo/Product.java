@@ -13,8 +13,35 @@ public class Product {
 	private String gpStatus;
 	private Date gpDeadline;
 
+	private Date postEnrollDate;
+	private String postComment;
+	private String postRefund;
 	
 	public Product() {}
+
+	
+	
+	
+	
+	
+
+	public Product(int postNo, Date postEnrollDate, Date gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
+			String postComment, String postRefund) {
+		super();
+		this.postNo = postNo;
+		this.postEnrollDate = postEnrollDate;
+		this.gpDeadline = gpDeadline;
+		this.gpMinPeople = gpMinPeople;
+		this.gpPeople = gpPeople;
+		this.gpDPrice = gpDPrice;
+		this.postComment = postComment;
+		this.postRefund = postRefund;
+	}
+
+
+
+
+
 
 
 	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople,
@@ -109,6 +136,59 @@ public class Product {
 	public void setGpDeadline(Date gpDeadline) {
 		this.gpDeadline = gpDeadline;
 	}
+
+
+	
+	
+	
+	
+	
+	public Date getPostEnrollDate() {
+		return postEnrollDate;
+	}
+
+
+
+
+
+	public void setPostEnrollDate(Date postEnrollDate) {
+		this.postEnrollDate = postEnrollDate;
+	}
+
+
+
+
+
+	public String getPostComment() {
+		return postComment;
+	}
+
+
+
+
+
+	public void setPostComment(String postComment) {
+		this.postComment = postComment;
+	}
+
+
+
+
+
+	public String getPostRefund() {
+		return postRefund;
+	}
+
+
+
+
+
+	public void setPostRefund(String postRefund) {
+		this.postRefund = postRefund;
+	}
+
+
+
 
 
 	@Override

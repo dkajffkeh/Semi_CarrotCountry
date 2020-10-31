@@ -85,7 +85,7 @@
 		     , PHOTO_FILENAME
 		     , PHOTO_LOADPATH
 		  FROM PHOTO
-		 WHERE POST_NO = 
+		 WHERE POST_NO = ?
 	</entry>
 
 

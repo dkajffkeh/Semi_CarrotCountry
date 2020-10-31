@@ -29,6 +29,15 @@ public class PostBoard {
 	private String postRefund;
 	
 	
+	
+
+	public PostBoard(int postNo, String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath) {
+		super();
+		this.postNo = postNo;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+	}
 
 	public PostBoard(int postNo, String categoryNo, int memNo, String localNo, String memNickname, String postName,
 			String postContent, String categoryName, String parcelNum, String prodStatus, String dealType, String site,
