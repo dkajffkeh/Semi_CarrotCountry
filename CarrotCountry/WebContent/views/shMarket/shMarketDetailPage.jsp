@@ -273,7 +273,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                               font-weight: bold;"> 비공개</p>
                     <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="Y">
                     </div>
-         </div>
+         </div>      
     
           <!-- ↓ 댓글 출력 구간↓ -->
          <div id="comment_display_outer">
@@ -308,7 +308,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                             justify-content: center;
                             align-items: center;">
                     <i class="fas fa-carrot">비밀댓글입니다!</i>
-                    <div>ㅇㅅㅇ</div>
+                    
                     
                 </div>           
             </div>
@@ -399,9 +399,46 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
           </div>
         </div>
       </div>
-      
-      
+ 
+<script>
+         $(function(){
+        	 let $scContent = $("#exampleInputPassword1")
+        	 let $sCheck = $(".comment_check_wrapper input[name=comment_condition]");
+        	 
+        	 $("#insert_comment").click(function(){
+  		
+        		 <%if(loginMember!=null) {%>
+        		 
+        		 $.ajax({
+        			url:"insertComment.sh",
+        			type:"post",
+        			data:{
+					      cContent:$scContent.val(),
+					      sCheck:$sCheck.val(),
+					      userNick:"<%=loginMember.getMemNickname()%>",
+					      postNo:"<%=pb.getPostNo()%>",
+					      memNo:"<%=loginMember.getMemNo()%>"
+        			     },
+        			success:function(){
+        			
 
-
+        			}, 
+        			error:function(){
+        				
+        			}  	 
+        		 })
+        		 
+        		 <%} else {%>
+        			
+        		 if(confirm("댓글은 회원만 작성할수 있습니다 로그인 페이지로 이동하시겠습니까?")){
+        			 location.href="<%=contextPath%>/loginPage.me.ng";
+        		 }
+        		 <% } %>
+        	 })
+         })
+         </script>
+      
+      <%@ include file="../common/footerbar.jsp"%>   
+         
 </body>
 </html>

@@ -79,5 +79,28 @@ WHERE
   	   MEMBER USING(MEM_NO)
   WHERE 
        POST_NO =?
+</entry>
+<entry key="shBoardInsertComment">
+	INSERT INTO
+        POST_COMMENT
+       (
+         COMM_NO
+        ,USER_NICKNAME
+        ,ENT_DATE
+        ,CONTENT
+        ,PRIVATE
+        ,POST_NO
+        ,MEM_NO
+       )
+       VALUES
+       (
+       SEQ_CNO.NEXTVAL
+       ,?
+       ,SYSDATE
+       ,?
+       ,?
+       ,?
+       ,?
+       )
 </entry>	
 </properties>

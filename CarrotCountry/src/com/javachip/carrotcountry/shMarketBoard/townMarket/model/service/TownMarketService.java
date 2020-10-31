@@ -70,4 +70,21 @@ public class TownMarketService {
 		return list;
 	}
 
+	public int shBoardInsertComment(CommentHY c) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shBoardInsertComment(conn,c);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

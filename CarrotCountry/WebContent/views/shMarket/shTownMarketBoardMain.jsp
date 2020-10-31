@@ -281,7 +281,7 @@ img {height:100%; width:100%; border-radius: 5px;}
     <section class="search-sec">
         <div class="container">
             <form action="#" method="post" novalidate="novalidate">
-
+				
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="section_contatiner">
@@ -338,10 +338,8 @@ img {height:100%; width:100%; border-radius: 5px;}
                     <%= list.get(i).getCategoryName() %>
                 </div>
               <% } %>
-            </div>
-       
+            </div>      
         </div>
-
         <div class="mainArticle_article">
         <% for(int i = 0 ; i < boardList.size(); i++){ %>
             <div class="article_frame">
@@ -372,7 +370,6 @@ img {height:100%; width:100%; border-radius: 5px;}
        });
         
         </script>
-        
      </div>
     
      <div class="page_display" style="margin-bottom:25px; margin-top: 10px;">
@@ -395,11 +392,28 @@ img {height:100%; width:100%; border-radius: 5px;}
               </li>
             </ul>
           </nav>
-          <button type="button" class="btn btn-warning">게시글 올리기</button>
+          
+          <button type="button" class="btn btn-warning" id="postEnroll_btn">게시글 올리기</button>
      </div>
-      <!-- main 아티클 구간 -->
-
-
+     <script>
+     let enrollBtn = document.getElementById("postEnroll_btn");
+     
+     enrollBtn.addEventListener('click',goToEnroll)
+     
+     function goToEnroll(){
+		<%if(loginMember!=null) {%>	 
+    	 location.href="<%=contextPath%>/shPostBoardEnroll.sh"; 
+    	 <% } else {%>
+    	 
+    	 if(confirm("게시글은 회원분만 이용이 가능합니다 로그인 페이지로 이동하시겠습니까?")){
+    		 location.href="<%=contextPath%>/loginPage.me.ng";
+    	 }
+    	 
+    	 <%}%>
+     }
+     
+     </script>
+   
 <%@ include file="../common/footerbar.jsp"%>
 
 </body>

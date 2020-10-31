@@ -209,5 +209,33 @@ Properties prop = new Properties();
 
 		return list ;
 	}
+
+
+	public int shBoardInsertComment(Connection conn, CommentHY c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shBoardInsertComment");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getUserNickName());
+			pstmt.setString(2, c.getContent());
+			pstmt.setString(3, c.getSecretCheck());
+			pstmt.setInt(4, c.getPostNo());
+			pstmt.setInt(5, c.getMemNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 }
