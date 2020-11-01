@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 
 /**
  * Servlet implementation class TownMarKetBoardDetailController
@@ -42,10 +43,11 @@ public class TownMarKetBoardDetailController extends HttpServlet {
 			
 			PostBoard pb = new TownMarketService().PostBoardDetailSelector(bno);
 			ArrayList<CommentHY> list = new TownMarketService().marketCommentSelector(bno);
-			
+			ArrayList<PhotoBoardVo> pList = new TownMarketService().shMarketPhotoSelector(bno);
 			
 			request.setAttribute("pb", pb);
 			request.setAttribute("list", list);
+			request.setAttribute("pList", pList);
 			request.getRequestDispatcher("views/shMarket/shMarketDetailPage.jsp").forward(request, response);
 			
 		}

@@ -34,22 +34,20 @@ public class FaqInsertController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		
-		String faqWriter = request.getParameter("userNo");
+		String faqWriter = request.getParameter("memNo");
 		String faqContent = request.getParameter("faqContent");
 		String faqTitle = request.getParameter("faqTitle");
 		String category = request.getParameter("category");
 	
-		Faq f = new Faq();
-		
-		f.setMemNo(faqWriter);
-		f.setFaqTitle(faqTitle);
-		f.setFaqTitle(faqTitle);
-		f.setCategory(category);
-		
+		Faq f = new Faq(faqWriter, faqContent, faqTitle, category);
 		
 		int result = new FaqService().insertFaq(f);
 		
-		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
+		}
 		
 	}
 
