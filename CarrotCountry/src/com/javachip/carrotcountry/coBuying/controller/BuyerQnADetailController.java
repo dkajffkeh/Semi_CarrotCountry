@@ -11,16 +11,16 @@ import com.javachip.carrotcountry.coBuying.model.service.QnAService;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 
 /**
- * Servlet implementation class BuyerQnAInsertController
+ * Servlet implementation class BuyerQnADetailController
  */
-@WebServlet("/buyerinsert.qna.jy")
-public class BuyerQnAInsertController extends HttpServlet {
+@WebServlet("/detail.qna.jy")
+public class BuyerQnADetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyerQnAInsertController() {
+    public BuyerQnADetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,32 +30,26 @@ public class BuyerQnAInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		
-		String userNo = request.getParameter("userNo");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		int result = new QnAService().increaseQnACount(qno);
 		
-		QnA qa = new QnA();
-		qa.setMemNo(userNo);
-		qa.setGqTitle(title);
-		qa.setGqContent(content);
-		
-		int result = new QnAService().insertQuestion(qa);
-		
-		if(result > 0) { // 성공 => 질문리스트 띄워주기
+		if(result > 0) { // 유효한 게시글
 			
-			request.getSession().setAttribute("alertMsg", "성공적으로 질문이 등록됐습니다!");
+			QnA qa = new QnAService().selectQnADetail(qno);
 			
-			response.sendRedirect(request.getContextPath() + "/buyerlist.qna.jy?currentPage=1");
+			request.setAttribute("qa", qa);
 			
-		}else { // 실패
+			request.getRequestDispatcher("views/coBuying/buyerQnADetail.jsp").forward(request, response);
 			
-			request.setAttribute("errorMsg", "질문등록에 실패하였습니다!");
+		}else { // 유효 X => 에러문구
+			
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
+			
 		}
-
+	
 	}
 
 	/**

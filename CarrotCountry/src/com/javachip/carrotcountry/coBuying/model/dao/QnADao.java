@@ -86,7 +86,7 @@ public class QnADao {
 			while(rs.next()) {
 				list.add(new QnA(rs.getInt("gq_no"),
 						rs.getString("mem_userid"),
-						rs.getString("gq_content"),
+						rs.getString("gq_title"),
 						rs.getInt("gq_views"),
 						rs.getDate("gq_enrolldate")));
 }
@@ -112,8 +112,9 @@ public class QnADao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, qa.getGqContent());
-			pstmt.setString(2, qa.getMemNo());
+			pstmt.setString(1, qa.getGqTitle());
+			pstmt.setString(2, qa.getGqContent());
+			pstmt.setString(3, qa.getMemNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -127,6 +128,64 @@ public class QnADao {
 	}
 	
 	
+	public int increaseQnACount(Connection conn, int qno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseQnACount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, qno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public QnA selectQnADetail(Connection conn, int qno) {
+		
+		QnA qa = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectQnADetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, qno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				qa = new QnA(rs.getInt("gq_no"),
+							 rs.getString("gp_title"),
+							 rs.getString("mem_no"),
+							 rs.getDate("gq_enrolldate"),
+							 rs.getString("gq_content"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return qa;
+	}
 	
 	
 	

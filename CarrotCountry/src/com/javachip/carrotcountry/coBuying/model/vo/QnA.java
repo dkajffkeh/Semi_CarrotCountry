@@ -11,6 +11,8 @@ public class QnA {
 	private String gqAnswer;	// 문의답변
 	private int gqViews;		// 조회수
 	private Date gqEnrollDate;	// 등록일자
+	private String gqStatus; // N/Y
+	private String gqTitle; // 문의글제목
 	
 	
 	public QnA() {}
@@ -20,13 +22,15 @@ public class QnA {
 	
 	
 
-	public QnA(int gqNo, String memNo, String gqContent, int gqViews, Date gqEnrollDate) {
+
+
+	public QnA(int gqNo, String gqTitle, String memNo, Date gqEnrollDate, String gqContent) {
 		super();
 		this.gqNo = gqNo;
+		this.gqTitle = gqTitle;
 		this.memNo = memNo;
-		this.gqContent = gqContent;
-		this.gqViews = gqViews;
 		this.gqEnrollDate = gqEnrollDate;
+		this.gqContent = gqContent;
 	}
 
 
@@ -34,7 +38,26 @@ public class QnA {
 
 
 
-	public QnA(int gqNo, String memNo, int postNo, String gqContent, String gqAnswer, int gqViews, Date gqEnrollDate) {
+
+
+	public QnA(int gqNo, String memNo, String gqTitle, int gqViews, Date gqEnrollDate) {
+		super();
+		this.gqNo = gqNo;
+		this.memNo = memNo;
+		this.gqEnrollDate = gqEnrollDate;
+		this.gqTitle = gqTitle;
+		this.gqViews = gqViews;
+	}
+
+
+
+
+
+
+
+
+	public QnA(int gqNo, String memNo, int postNo, String gqContent, String gqAnswer, int gqViews, Date gqEnrollDate,
+			String gqStatus, String gqTitle) {
 		super();
 		this.gqNo = gqNo;
 		this.memNo = memNo;
@@ -43,7 +66,13 @@ public class QnA {
 		this.gqAnswer = gqAnswer;
 		this.gqViews = gqViews;
 		this.gqEnrollDate = gqEnrollDate;
+		this.gqStatus = gqStatus;
+		this.gqTitle = gqTitle;
 	}
+
+
+
+
 
 
 	public int getGqNo() {
@@ -114,6 +143,46 @@ public class QnA {
 	public void setGqEnrollDate(Date gqEnrollDate) {
 		this.gqEnrollDate = gqEnrollDate;
 	}
+	
+	
+	
+	
+	
+
+	public String getGqStatus() {
+		return gqStatus;
+	}
+
+
+
+
+
+
+	public void setGqStatus(String gqStatus) {
+		this.gqStatus = gqStatus;
+	}
+
+
+
+
+
+
+	public String getGqTitle() {
+		return gqTitle;
+	}
+
+
+
+
+
+
+	public void setGqTitle(String gqTitle) {
+		this.gqTitle = gqTitle;
+	}
+
+
+
+
 
 
 	@Override

@@ -215,9 +215,13 @@
      
             </div>
             <div id="header3">
+            
+            
                 <div id="createPro">
                     <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-secondary">새 공동구매 만들기</a>
                 </div>
+                
+                
                 <br><br>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
             </div>

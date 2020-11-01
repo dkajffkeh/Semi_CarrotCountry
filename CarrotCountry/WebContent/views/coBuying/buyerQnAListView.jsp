@@ -127,7 +127,7 @@ tbody td:hover{cursor: pointer;}
         
             <div id="content2" align="center">
                 <div id="qList">
-                    <table width="1000" class="table-hover">
+                    <table id="list-area" width="1000" class="table-hover">
                         <thead>
                             <tr>
                                 <th width="100"><span>No.</span></th>
@@ -148,7 +148,7 @@ tbody td:hover{cursor: pointer;}
 		                            <tr>
 		                                <td><%= qa.getGqNo() %></td>		<!-- 질문글번호 -->
 		                                <td><%= qa.getMemNo() %></td>		<!-- 유저아이디 -->
-		                                <td><%= qa.getGqContent() %></td>	<!-- 질문내용 -->
+		                                <td><%= qa.getGqTitle() %></td>		<!-- 질문제목 -->
 		                                <td><%= qa.getGqViews() %></td>		<!-- 조회수 -->
 		                                <input type="hidden" name="qnaEnrollDate" value="<%= qa.getGqEnrollDate() %>">
 		                            </tr>
@@ -161,7 +161,7 @@ tbody td:hover{cursor: pointer;}
                     
 					<script>
 						$(function(){
-							$(".list-area>tbody>tr").click(function(){
+							$("#list-area>tbody>tr").click(function(){
 								
 								// 클릭했을 때의 행에 존재하는 글번호
 								var qno = $(this).children().eq(0).text();

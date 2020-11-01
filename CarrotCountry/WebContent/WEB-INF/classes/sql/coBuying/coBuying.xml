@@ -9,6 +9,14 @@
 		 WHERE BLIND_CHECK = 'Y'
 		   AND POST_NO = ?
 	</entry>
+	
+	<entry key="increaseQnACount">
+		UPDATE
+		       GROUPBUY_QUESTION
+		   SET GQ_VIEWS = GQ_VIEWS + 1
+		 WHERE GQ_NO = ?
+		   AND GQ_STATUS = 'Y'
+	</entry>
 
 	<entry key="selectQnAListCount">
 		SELECT
@@ -26,11 +34,12 @@
 		                SELECT
 		                       GQ_NO
 		                     , MEM_USERID
-		                     , GQ_CONTENT
+		                     , GQ_TITLE
 		                     , GQ_VIEWS
 		                     , GQ_ENROLLDATE
 		                  FROM GROUPBUY_QUESTION 
 		                  JOIN MEMBER USING(MEM_NO)
+		                 WHERE GQ_STATUS = 'Y'
 		                 ORDER
 		                    BY GQ_NO DESC
 		                ) A 
@@ -43,6 +52,7 @@
 		  INTO GROUPBUY_QUESTION
 		  (
 		    GQ_NO
+		  , GQ_TITLE
 		  , GQ_CONTENT
 		  , MEM_NO
 		  )
@@ -51,7 +61,21 @@
 		    SEQ_GQNO.NEXTVAL
 		  , ?
 		  , ?
+		  , ?
 		  )
+	</entry>
+	
+	<entry key="selectQnADetail">
+		SELECT
+		       GQ_NO
+		     , GQ_TITLE
+		     , MEM_NAME
+		     , GQ_ENROLLDATE
+		     , GQ_CONTENT
+		  FROM GROUPBUY_QUESTION
+		  JOIN MEMBER USING (MEM_NO)
+		 WHERE GQ_STATUS = 'Y'
+		   AND GQ_NO = ?
 	</entry>
 	
 	

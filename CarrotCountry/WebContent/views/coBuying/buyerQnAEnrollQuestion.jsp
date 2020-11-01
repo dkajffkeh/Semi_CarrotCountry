@@ -67,7 +67,7 @@
             </div>
             <div id="content2"  align="center">
             <input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
-                    <!-- 에디터 -->
+                   <!-- 에디터 -->
                 <table id="editorTable" width="1000" class="table-bordered">
                     <thead>
                         <tr>
@@ -76,11 +76,13 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td> &nbsp;&nbsp;<input name="title" id="textTitle" type="text" name="title" placeholder="제목을 입력하세요"></td>
+                        </tr>
+                        <tr>
                             <td>
                                 <textarea name="content" id="editor" style="max-height: 10px;"></textarea>
                             </td>
                         </tr>
-                    </tbody>
                 </table>
                
             </div>
