@@ -93,8 +93,7 @@
     coBuying_btn0.addEventListener('click',toCoBuying);
   
     function toCoBuying(){
-    	
-    	
+ 
         location.href="<%=contextPath%>/mainpage.co.jy";
 	
     }
