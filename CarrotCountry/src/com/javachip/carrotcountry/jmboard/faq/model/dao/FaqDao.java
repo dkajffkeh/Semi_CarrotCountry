@@ -1,14 +1,12 @@
 package com.javachip.carrotcountry.jmboard.faq.model.dao;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -21,12 +19,9 @@ public class FaqDao {
 	public FaqDao() {
 		
 		try {
-			prop.loadFromXML(new FileInputStream(FaqDao.class.getResource("sql/faqBoard/faqBoard-mapper.xml").getPath()));
-		} catch (InvalidPropertiesFormatException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+			prop.loadFromXML(new FileInputStream
+			(FaqDao.class.getResource("sql/faq/faq-mapper.xml").getPath()));
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -45,7 +40,7 @@ public class FaqDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("selectFaqList");
 		
 		try {
 			stmt = conn.createStatement();
@@ -55,11 +50,12 @@ public class FaqDao {
 			while(rset.next()) {
 				list.add(new Faq(
 						         rset.getInt("faq_no"),
-						         rset.getString("mem_name"),
 						         rset.getString("faq_title"),
 						         rset.getString("faq_content"),
+						         rset.getString("faq_category"),
 						         rset.getDate("faq_enroll_date"),
-						         rset.getString("faq_category")));
+						         rset.getString("faq_writer"),
+						         rset.getString("faq_status")));
 			}
 			
 		} catch (SQLException e) {
@@ -72,10 +68,7 @@ public class FaqDao {
 		return list;
 	}
 
-	public int insertFaq(Connection conn, Faq f) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 	
 	
 	
