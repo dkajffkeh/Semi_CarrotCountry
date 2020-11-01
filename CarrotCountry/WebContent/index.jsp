@@ -66,6 +66,8 @@
 
     <div class="board_button_wrapper">
     <button type="button" class="btn btn-outline-warning" id="townMarket_button">동네마켓</button>
+    
+   
     <script>
     
     let town_btn0 = document.getElementById("townMarket_button");
@@ -79,7 +81,24 @@
 	
     }
     </script>
-    <button type="button" class="btn btn-outline-success">공구마켓</button>
+    <button type="button" class="btn btn-outline-success" id="coBuying_button">공구마켓</button>
+    
+       
+    <script>
+    
+    let coBuying_btn0 = document.getElementById("coBuying_button");
+    
+    coBuying_btn0.addEventListener('click',toCoBuying);
+  
+    function toCoBuying(){
+    	
+    	
+        location.href="<%=contextPath%>/mainpage.co.jy";
+	
+    }
+    </script>
+    
+    
     </div>
     
 

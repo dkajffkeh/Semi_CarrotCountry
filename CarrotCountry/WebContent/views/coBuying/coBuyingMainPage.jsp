@@ -227,17 +227,6 @@
             <!--카테고리-->
             <div id="content1">
             
-            
-            
-            <ul>
-            <% for(int i = 0 ; i<cList.size(); i++) { %>
-                <li>
-                    <a href=""><%= cList.get(i).getCategoryName() %></a>
-                </li>
-              <% } %>
-            </ul>      
-            
-              <!-- 
                 <ul>
                     <li><a href="">디지털/가전</a></li>
                     <li><a href="">가구/인테리어</a></li>
@@ -253,9 +242,7 @@
                     <li><a href="">도서/티켓/음반</a></li>
                     <li><a href="">기타물품</a></li>
                 </ul>
-              -->
-               
-            
+              
             </div>
             <div id="content2">
                 <div id="array">
