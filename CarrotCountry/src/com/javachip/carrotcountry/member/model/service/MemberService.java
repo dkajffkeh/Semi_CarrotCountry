@@ -38,7 +38,6 @@ public class MemberService {
 		
 		close(conn);
 		
-		
 		return count;
 	}
 	
@@ -50,6 +49,21 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		int count = new MemberDao().nickNameCheck(conn, nickName);
+		
+		close(conn);
+		
+		return count;
+		
+	}
+	
+	/** 전화번호 중복체크
+	 * @param phone
+	 * @return
+	 */
+	public int phoneCheck(String phone) {
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().phoneCheck(conn, phone);
 		
 		close(conn);
 		
@@ -79,6 +93,12 @@ public class MemberService {
 		
 	}
 	
+	/** 아이디찾기
+	 * @param memName
+	 * @param memBirthday
+	 * @param memPhone
+	 * @return
+	 */
 	public String findIdMember(String memName, String memBirthday, String memPhone) {
 		
 		Connection conn = getConnection();
@@ -90,6 +110,45 @@ public class MemberService {
 		return findId;
 		
 	}
+	
+	/** 비밀번호 찾기1
+	 *  정보 입력후 -> 비밀번호 수정을 위해 유저넘버 반환
+	 * @param m
+	 * @return
+	 */
+	public int findPwdMember(Member m) {
+		Connection conn = getConnection();
+		
+		int memNo = new MemberDao().findPwdMember(conn, m);
+		
+		close(conn);
+		
+		return memNo;
+	}
+	
+	/** 비밀번호 찾기2
+	 *  반환된 정보를 통해 비밀번호 변경
+	 * @param memUserId
+	 * @param memUserPwd
+	 * @return
+	 */
+	public int updatePwdMember(String memUserId, String memUserPwd) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwdMember(conn, memUserId, memUserPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
 		
 		
 		

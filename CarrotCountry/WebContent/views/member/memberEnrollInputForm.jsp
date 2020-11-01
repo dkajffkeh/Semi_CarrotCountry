@@ -145,7 +145,7 @@
             <input type="radio" name="gender" id="F" value="여" required onclick="checkGenderF();">
             <label for="F" onclick="checkGenderF();">여</label>
             <p id="checkGender">필수선택</p>
-
+            
             <br>
             <label for="phone">전화번호(-포함 입력)</label>
             <br>
@@ -212,6 +212,7 @@
             if(!regExp.test(userId.value)){
                 checkId.innerHTML = "<p class='fail'>4~12자 영문 소문자, 숫자만 사용가능합니다.<p>";
                 cId = false;
+                buttonAble();
             }else{
                 $.ajax({
                 	url:"idCheck.me.ng",
@@ -220,15 +221,16 @@
                 	success:function(result){
                 		if(result == "fail"){
                 			checkId.innerHTML = "<p class='fail'>" + userId.value +" 사용중인 아이디입니다. <p>";
+                			cId = false;
+                			buttonAble();
                 		}else{
                             checkId.innerHTML = "<p class='success'>" + userId.value + " 사용가능한 아이디입니다!<p>";
                             cId = true;
+                            buttonAble();
                 		}
                 	}
                 });
-                
             }
-            buttonAble();
         }
 
         // 비밀번호 유효성검사
@@ -239,12 +241,13 @@
 
             if(!regExp.test(userPwd.value)){
                 checkPwd.innerHTML = "<p class='fail'>8~16자 영문, 숫자, 특수문자만 사용가능합니다.<p>";
-                    cPwd = false;
+                cPwd = false;
+                buttonAble();
             }else{
                 checkPwd.innerHTML = "<p class='success'>안전한 비밀번호입니다!<p>";
                 cPwd = true;
+                buttonAble();
             }
-            buttonAble();
         }
 
         // 비밀번호 확인 유효성검사
@@ -260,12 +263,13 @@
                 if(userPwd.value != userPwdCheck.value){
                     checkPwdCheck.innerHTML = "<p class='fail'>비밀번호가 일치하지 않습니다.<p>";
                     cPwdCheck = false;
+                    buttonAble();
                 }else{
                     checkPwdCheck.innerHTML = "<p class='success'>비밀번호가 일치합니다!<p>";
                     cPwdCheck = true;
+                    buttonAble();
                 }
             }
-            buttonAble();
         }
 
         // 이름 유효성검사
@@ -277,11 +281,12 @@
             if(!regExp.test(userName.value)){
                 checkName.innerHTML = "<p class='fail'>2~6자 한글만 가능합니다.<p>";
                 cName = false;
+                buttonAble();
             }else{
                 checkName.innerHTML = "<p class='success'>" + userName.value + "님 반갑습니다!<p>";
                 cName = true;
+                buttonAble();
             }
-            buttonAble();
         }
 
         // 닉네임 유효성검사 / 중복확인
@@ -292,7 +297,8 @@
 
             if(!regExp.test(nickName.value)){
                 checkNickName.innerHTML = "<p class='fail'>2~8자 한글, 영문, 숫자만 사용가능합니다.<p>";
-                    cNickName = false;
+                cNickName = false;
+                buttonAble();
             }else{
             	$.ajax({
             		url:"nickNameCheck.me.ng",
@@ -301,14 +307,16 @@
             		success:function(result){
             			if(result == "fail"){
                             checkNickName.innerHTML = "<p class='fail'>" + nickName.value + " 사용중인 닉네임입니다.<p>";
+                            cNickName = false;
+                            buttonAble();
             			}else{
             				checkNickName.innerHTML = "<p class='success'>" + nickName.value + " 사용가능한 닉네임입니다!<p>";
             				cNickName = true;
+            				buttonAble();
             			}
             		}
             	})
             }
-            buttonAble();
         }
 
         // 생일 유효성검사
@@ -319,13 +327,13 @@
 
             if(!regExp.test(birthday.value)){
                 checkBirthday.innerHTML = "<p class='fail'>6자 숫자만 사용가능합니다.<p>";
-
-                    cBirthday = false;
+                cBirthday = false;
+                buttonAble();
             }else{
                 checkBirthday.innerHTML = "<p class='success''>입력 완료되었습니다!<p>";
                 cBirthday = true;
+                buttonAble();
             }
-            buttonAble();
         }
 
         // 성별
@@ -350,12 +358,27 @@
 
             if(!regExp.test(phone.value)){
                 checkPhone.innerHTML = "<p class='fail'>'-', 숫자 포함한 13자만 사용가능합니다.<p>";
-                    cPhone = false;
+                cPhone = false;
+                buttonAble();
             }else{
-                checkPhone.innerHTML = "<p class='success''>입력 완료되었습니다!<p>";
-                cPhone = true;
+            	
+            	$.ajax({
+            		url:"phoneCheck.me.ng",
+            		type:"get",
+            		data:{phone:phone.value},
+            		success:function(result){
+            			if(result == "fail"){
+                            checkPhone.innerHTML = "<p class='fail'>사용중인 전화번호입니다.<p>";
+                            cPhone = false;
+                            buttonAble();
+            			}else{
+			                checkPhone.innerHTML = "<p class='success''>사용가능한 전화번호입니다!<p>";
+			                cPhone = true;
+			                buttonAble();
+            			}
+            		}            		
+            	})  
             }
-            buttonAble();
         }
 
     </script>

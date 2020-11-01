@@ -27,6 +27,7 @@ public class MemberDao {
 		
 	}
 	
+	// 로그인
 	public Member loginMember(Connection conn, String memUserId, String memUserPwd) {
 		// select문 => ResultSet 한 행
 		
@@ -74,6 +75,7 @@ public class MemberDao {
 		
 	}
 	
+	// 아이디 중복체크
 	public int idCheck(Connection conn, String userId) {
 		// SELECT문 => 한 행 (count)
 		int count = 0;
@@ -103,6 +105,7 @@ public class MemberDao {
 		
 	}
 	
+	// 닉네임 중복체크
 	public int nickNameCheck(Connection conn, String nickName) {
 		// SELECT문 => 한 행 (count)
 		int count = 0;
@@ -131,6 +134,38 @@ public class MemberDao {
 		
 	}
 	
+	// 전화번호 중복체크
+	public int phoneCheck(Connection conn, String phone) {
+		// SELECT문 => 한 행 (count)
+		
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("phoneCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, phone);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;	
+	}
+	
+	
+	
+	// 회원가입
 	public int insertMember(Connection conn, Member m) {
 		// INSERT문 => result
 		int result = 0;
@@ -162,10 +197,10 @@ public class MemberDao {
 		
 	}
 	
+	// 아이디 찾기
 	public String findIdMember(Connection conn, String memName, String memBirthday, String memPhone) {
 		// SELECT문 => 한 행
 		String findId = "";
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("findIdMember");
@@ -195,6 +230,69 @@ public class MemberDao {
 		return findId;
 		
 	}
+	
+	public int findPwdMember(Connection conn, Member m) {
+		// SELECT문 -> 한 행
+		int memNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("findPwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemName());
+			pstmt.setString(2, m.getMemUserId());
+			pstmt.setString(3, m.getMemBirthday());
+			pstmt.setString(4, m.getMemPhone());
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				memNo = rset.getInt("MEM_NO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memNo;
+	}
+	
+	public int updatePwdMember(Connection conn, String memUserId, String memUserPwd) {
+		// UPDATE문 => result
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwdMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memUserPwd);
+			pstmt.setString(2, memUserId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

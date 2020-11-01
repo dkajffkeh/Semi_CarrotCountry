@@ -97,7 +97,7 @@
                 <td><a href="<%= contextPath %>/findIdPage.me.ng" class="button1 btn btn-outline-secondary">아이디 찾기</a></td>
             </tr>
             <tr align="center">
-                <td><a href="" class="button2 btn btn-outline-secondary">비밀번호 찾기</a></td>
+                <td><a href="<%= contextPath %>/findPwdPage.me.ng" class="button2 btn btn-outline-secondary">비밀번호 찾기</a></td>
             </tr>
             <tr align="center">
                 <td colspan="2"><a href="<%= contextPath %>/enrollAgreePage.me.ng" id="button3" class="button3 btn btn-secondary">회원가입</a></td>
