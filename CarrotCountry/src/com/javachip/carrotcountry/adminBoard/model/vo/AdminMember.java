@@ -19,12 +19,14 @@ public class AdminMember {
 		private String bListCheck;		// 블랙리스트여부 'N/Y'
 		private String leaveCheck;		// 탈퇴여부 'N/Y'
 		private String managerCheck;	// 관리자여부 'N/Y'
+		private int reportCount;
 		
 		public AdminMember() {}
 
 		public AdminMember(int memNo, int localNo, String memUserId, String memUserPwd, String memName,
 				String memNickName, String memBirthday, String memGender, String memPhone, String memEmail,
-				String memLocation, Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck) {
+				String memLocation, Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck,
+				int reportCount) {
 			super();
 			this.memNo = memNo;
 			this.localNo = localNo;
@@ -41,6 +43,7 @@ public class AdminMember {
 			this.bListCheck = bListCheck;
 			this.leaveCheck = leaveCheck;
 			this.managerCheck = managerCheck;
+			this.reportCount = reportCount;
 		}
 
 		public AdminMember(int memNo, String memUserId, String memName, String memBirthday, String memPhone,
@@ -176,13 +179,21 @@ public class AdminMember {
 			this.managerCheck = managerCheck;
 		}
 
+		public int getReportCount() {
+			return reportCount;
+		}
+
+		public void setReportCount(int reportCount) {
+			this.reportCount = reportCount;
+		}
+
 		@Override
 		public String toString() {
-			return "AdminMemeber [memNo=" + memNo + ", localNo=" + localNo + ", memUserId=" + memUserId
-					+ ", memUserPwd=" + memUserPwd + ", memName=" + memName + ", memNickName=" + memNickName
-					+ ", memBirthday=" + memBirthday + ", memGender=" + memGender + ", memPhone=" + memPhone
-					+ ", memEmail=" + memEmail + ", memLocation=" + memLocation + ", memEnrollDate=" + memEnrollDate
-					+ ", bListCheck=" + bListCheck + ", leaveCheck=" + leaveCheck + ", managerCheck=" + managerCheck
+			return "AdminMember [memNo=" + memNo + ", localNo=" + localNo + ", memUserId=" + memUserId + ", memUserPwd="
+					+ memUserPwd + ", memName=" + memName + ", memNickName=" + memNickName + ", memBirthday="
+					+ memBirthday + ", memGender=" + memGender + ", memPhone=" + memPhone + ", memEmail=" + memEmail
+					+ ", memLocation=" + memLocation + ", memEnrollDate=" + memEnrollDate + ", bListCheck=" + bListCheck
+					+ ", leaveCheck=" + leaveCheck + ", managerCheck=" + managerCheck + ", reportCount=" + reportCount
 					+ "]";
 		}
 

@@ -1,6 +1,5 @@
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
-<%@page
-	import="com.javachip.carrotcountry.adminBoard.model.vo.AdminMember"%>
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminMember"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -70,14 +69,12 @@
 										<td><%= am.getMemEnrollDate() %></td>
 										<td><%= am.getbListCheck() %></td>
 										<!-- 블랙 Y/N이 Y일 경우 안보임 -->
-										<% if (am.getbListCheck().equals("N")) { %>
-											<td>
+										<td>
+											<% if (am.getbListCheck().equals("N")) { %>
 												<!-- 클릭 시 블랙리스트 등록  -->
-												<a href="<%= contextPath %>/blacklistEnroll.sb?memNo=<%= am.getMemNo() %>" class="btn btn-outline-danger btn-sm" name="memNo">등록</a>	
-											</td>
-										<% } else { %>
-											<td></td>
-										<% } %>
+												<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>	
+											<% } %>
+										</td>
 									</tr>
 								<% } %>
 							</tbody>
