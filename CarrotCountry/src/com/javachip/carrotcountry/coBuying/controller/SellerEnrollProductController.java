@@ -20,7 +20,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class ThumbnailInsertController
  */
-@WebServlet("/insert.th")
+@WebServlet("/enroll.pro.jy")
 public class SellerEnrollProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

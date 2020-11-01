@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@
-	page import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.*"
+	page import="java.util.ArrayList
+			   , com.javachip.carrotcountry.coBuying.model.vo.*
+			   , com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
+			   ,  com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*"
  %>    
 
 <%
-	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+	ArrayList<Product> pList = (ArrayList<Product>)request.getAttribute("pList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<CategoryHY> cList = (ArrayList<CategoryHY>)request.getAttribute("cList");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
 %>    
     
 <!DOCTYPE html>
@@ -211,7 +216,7 @@
             </div>
             <div id="header3">
                 <div id="createPro">
-                    <a href="<%= contextPath %>/buyerProduct.qna." type="button" class="btn btn-secondary">새 공동구매 만들기</a>
+                    <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-secondary">새 공동구매 만들기</a>
                 </div>
                 <br><br>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
@@ -221,7 +226,18 @@
             
             <!--카테고리-->
             <div id="content1">
-                
+            
+            
+            
+            <ul>
+            <% for(int i = 0 ; i<cList.size(); i++) { %>
+                <li>
+                    <a href=""><%= cList.get(i).getCategoryName() %></a>
+                </li>
+              <% } %>
+            </ul>      
+            
+              <!-- 
                 <ul>
                     <li><a href="">디지털/가전</a></li>
                     <li><a href="">가구/인테리어</a></li>
@@ -237,7 +253,7 @@
                     <li><a href="">도서/티켓/음반</a></li>
                     <li><a href="">기타물품</a></li>
                 </ul>
-                
+              -->
                
             
             </div>
@@ -260,83 +276,45 @@
                    
                 </div>
                 <div id="proContent">
+                
+                 <% for(Product pd : pList) {%>
+                 
                     <div id="proName">
+                    	<input type="hidden" value="<%= pd.getPostNo() %>>">
                         <div id="proImg">
-                            <a href=""><img src="../Common/images/무선청소기1.jpg" alt="" width="100" height="100"></a>
+                            <a href=""><img src="<%= contextPath %>/<%= pb.getThumbnailLoadPath() %>" width="100" height="100"></a>
                         </div>
                         <div id="proText">
                             <div id="proText-title">
-                                <a href=""><h4>[4차 공구] 우아우아앙무선청소기</h4></a>
+                                <a href=""><h4><%= pb.getPostName() %></h4></a>
                             </div>
                             <div id="proText-like">
-                                <h6>현재 인원 11명 | ♡ (22)</h6> 
+                                <h6><%= pd.getGpPeople() %> | ♡ (<%= pb.getPostLikes() %>)</h6> 
                             </div>
                         </div>
                         <div id="proPrice">
-                            <h6 id="realPrice"><s>원래가격</s></h6>
-                            <span id="discount">공구할인률 nn%</span>
-                            <span id="discountPrice">100000원</span>
+                            <h6 id="realPrice"><s><%= pd.getGpPrice() %></s></h6>
+                            <span id="discount">공구할인률<%= pd.getGpDRate() %>%</span>
+                            <span id="discountPrice"><%= pd.getGpDPrice() %>원</span>
                         </div>
                     </div>
+                    <%} %>
+                    
+                    
+                    
+		        <script>
+		        	$(function(){
+		        		$("#proName").click(function(){
+		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?pno=" + $(this).children().eq(0).val();
+		        		})
+		        	});
+		        </script>
+		                    
+		                    
+		                    
+		                    
 
-                    <div id="proName">
-                        <div id="proImg">
-                            <a href=""><img src="../Common/images/무선청소기1.jpg" alt="" width="100" height="100"></a>
-                        </div>
-                        <div id="proText">
-                            <div id="proText-title">
-                                <a href=""><h4>[4차 공구] 우아우아앙무선청소기</h4></a>
-                            </div>
-                            <div id="proText-like">
-                                <h6>현재 인원 11명 | ♡ (22)</h6> 
-                            </div>
-                        </div>
-                        <div id="proPrice">
-                            <h6 id="realPrice"><s>원래가격</s></h6>
-                            <span id="discount">공구할인률 nn%</span>
-                            <span id="discountPrice">100000원</span>
-                        </div>
-                    </div>
-
-                    <div id="proName">
-                        <div id="proImg">
-                            <a href=""><img src="../Common/images/무선청소기1.jpg" alt="" width="100" height="100"></a>
-                        </div>
-                        <div id="proText">
-                            <div id="proText-title">
-                                <a href=""><h4>[4차 공구] 우아우아앙무선청소기</h4></a>
-                            </div>
-                            <div id="proText-like">
-                                <h6>현재 인원 11명 | ♡ (22)</h6> 
-                            </div>
-                        </div>
-                        <div id="proPrice">
-                            <h6 id="realPrice"><s>원래가격</s></h6>
-                            <span id="discount">공구할인률 nn%</span>
-                            <span id="discountPrice">100000원</span>
-                        </div>
-                    </div>
-
-                    <div id="proName">
-                        <div id="proImg">
-                            <a href=""><img src="../Common/images/무선청소기1.jpg" alt="" width="100" height="100"></a>
-                        </div>
-                        <div id="proText">
-                            <div id="proText-title">
-                                <a href=""><h4>[4차 공구] 우아우아앙무선청소기</h4></a>
-                            </div>
-                            <div id="proText-like">
-                                <h6>현재 인원 11명 | ♡ (22)</h6> 
-                            </div>
-                        </div>
-                        <div id="proPrice">
-                            <h6 id="realPrice"><s>원래가격</s></h6>
-                            <span id="discount">공구할인률 nn%</span>
-                            <span id="discountPrice">100000원</span>
-                        </div>
-                    </div>
-
-                    <div class="paginationArea" align="center">
+                <div class="paginationArea" align="center">
 
 					<% if(pi.getCurrentPage() != 1){ %>
 		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
@@ -350,7 +328,7 @@
 		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
 		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
 		            <% } %>
-		       		</div>
+	       		</div>
                 
                    
 
