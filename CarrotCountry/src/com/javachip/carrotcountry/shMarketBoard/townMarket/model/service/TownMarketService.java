@@ -130,8 +130,7 @@ public class TownMarketService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<PhotoBoardVo> list = new TownMarketDao().shMarketPhotoSelector(bno,conn);
-		
+		ArrayList<PhotoBoardVo> list = new TownMarketDao().shMarketPhotoSelector(bno,conn);	
 		
 		close(conn);
 		

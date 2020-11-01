@@ -76,9 +76,11 @@
   
     function toTown(){
     	
-    	
-        location.href="<%=contextPath%>/shMarketBoardMain.sh";
-	
+    	<%if(loginMember!=null){%>
+        location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
+		<%} else {%>
+		location.href="<%=contextPath%>/shMarketBoardMain.sh";
+		<%}%>
     }
     </script>
     <button type="button" class="btn btn-outline-success" id="coBuying_button">공구마켓</button>
@@ -91,14 +93,12 @@
     coBuying_btn0.addEventListener('click',toCoBuying);
   
     function toCoBuying(){
-    	
-    	
+ 
         location.href="<%=contextPath%>/mainpage.co.jy";
 	
     }
     </script>
-    
-    
+
     </div>
     
 

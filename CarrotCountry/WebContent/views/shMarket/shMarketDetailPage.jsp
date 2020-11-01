@@ -287,7 +287,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                     <p style="font-size: 0.4rem; 
                               margin:3px 0px 0px 0px;
                               font-weight: bold;"> 비공개</p>
-                    <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="Y">
+                    <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="">
                     </div>
          </div>      
     
@@ -295,23 +295,21 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
          <div id="comment_display_outer">
          <% for(int i =0 ; i<list.size(); i++ ) { 
          if(loginMember==null) { // 로그인이 안돼있을경우 조건문 실행
-        	 if(!list.get(i).getSecretCheck().equals("Y")) {
+        	 if(list.get(i).getSecretCheck().equals("N")) {   		 
          %>
          <div class="comment_display">
              <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
              <div class="comment_content">
-                 <div class="comment_textarea"><%=list.get(i).getContent() %></div>
-                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
+                 <div class="comment_textarea">[<%=list.get(i).getUserNickName()%>]</div>
+                 <p class="comment_user_info"><%=list.get(i).getContent() %></p>
                  <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
                  <div class="comment_control_button">
                      <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
-                     <div class="right_icons">
-
-                     </div>
+                     
                  </div>
              </div>   
          </div>
-       <% } else { %>        
+       <% } else if(list.get(i).getSecretCheck().equals("Y")){%>        
          <div class="comment_display">
             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
             <div class="comment_content" style="padding:0;">
@@ -323,9 +321,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                             display: flex;
                             justify-content: center;
                             align-items: center;">
-                    <i class="fas fa-carrot">비밀댓글입니다!</i>
-                    
-                    
+                    <i class="fas fa-carrot">비밀댓글입니다!</i>    
                 </div>           
             </div>
             <div class="comment_condition"><i class="fas fa-lock"></i></div>
@@ -404,7 +400,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
               </select>
               <br><br>
               <label for="">신고 사유</label>
-              <br><textarea name="" id="" cols="64" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
+              <br><textarea name="" id="" cols="61" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
             </div>
       
             <!-- Modal footer -->
@@ -430,7 +426,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         			type:"post",
         			data:{
 					      cContent:$scContent.val(),
-					      sCheck:$sCheck.val(),
+					      sCheck:$('input[name="comment_condition"]').is(":checked")?'Y':'N',
 					      userNick:"<%=loginMember.getMemNickname()%>",
 					      postNo:"<%=pb.getPostNo()%>",
 					      memNo:"<%=loginMember.getMemNo()%>"

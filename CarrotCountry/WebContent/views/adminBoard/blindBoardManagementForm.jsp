@@ -1,5 +1,13 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
+	ArrayList<AdminBoard> list = (ArrayList<AdminBoard>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,20 +58,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>중고거래</td>
-                                        <td>카테고리</td>
-                                        <td>자전거</td>
-                                        <td>4</td>
-                                        <td>USER02</td>
-                                        <td>20-10-01</td>
-                                        <td>6</td>
-                                        <td>
-                                            <!-- 클릭시 블라인드 해제 -->
-                                            <a href="" class="btn btn-outline-danger btn-sm">해제</a>
-                                        </td>
-                                    </tr>
+                                	<c:forEach items="${list}" var="ab">
+	                                    <tr>
+	                                        <td>${ab.postNo}</td>
+	                                        <c:choose>
+												<c:when test="${ab.usedPostCheck > 0}">
+													<td>중고거래</td>
+												</c:when>
+												<c:otherwise>
+													<td>공동구매</td>
+												</c:otherwise>
+											</c:choose>
+	                                        <td>${ab.categoryName}</td>
+	                                        <td>${ab.postName}</td>
+	                                        <td>${ab.postViews}</td>
+	                                        <td>${ab.memNo}</td>
+	                                        <td>${ab.postEnrollDate}</td>
+	                                        <td>${ab.reportCount}</td>
+	                                        <td>
+	                                            <!-- 클릭시 블라인드 해제 -->
+	                                            <a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=N" class="btn btn-outline-danger btn-sm">해제</a>
+	                                        </td>
+	                                    </tr>
+                                	</c:forEach>
                                 </tbody>
                             </table>
 
@@ -71,14 +88,17 @@
                     </div>
                     <!-- 페이지 번호 -->
                     <div id="boardNum" align="center">
-                        <a href="">&lt; 이전</a>
-
-                        <a href="">1</a>
-                        <a href="">2</a>
-                        <a href="">3</a>
-                        <a href="">4</a>
-
-                        <a href="">다음 &gt;</a>
+                        <% if (pi.getCurrentPage() != 1) { %>
+				            <a href="<%= contextPath %>/blindList.sb?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+						<% } %>
+			
+						<% for (int p = pi.getStartPage(); p <= pi.getEndPage(); p++) { %>
+				            <a href="<%= contextPath %>/blindList.sb?currentPage=<%= p %>"><%= p %></a>
+						<% } %>
+			
+						<% if (pi.getCurrentPage() != pi.getMaxPage()) { %>
+				            <a href="<%= contextPath %>/blindList.sb?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt;</a>
+						<% } %>
                     </div>
                 </div>
             </div>

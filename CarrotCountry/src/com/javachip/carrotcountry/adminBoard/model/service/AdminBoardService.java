@@ -41,5 +41,33 @@ public class AdminBoardService {
 
 		return list;
 	}
+
+	public int blindListEnroll(int postNo, String bCheck) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminBoardDao().blindListEnroll(conn, postNo, bCheck);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<AdminBoard> blindListSelectAll(AdminPageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<AdminBoard> list = new AdminBoardDao().blindListSelectAll(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 }
