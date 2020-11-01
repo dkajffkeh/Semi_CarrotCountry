@@ -38,7 +38,7 @@
 	<entry key="blackListEnroll">
 		update 
 		       member
-		   set b_list_check = '?'
+		   set b_list_check = ?
 		 where mem_no = ?
 	</entry>
 	<entry key="blackListSelectAll">

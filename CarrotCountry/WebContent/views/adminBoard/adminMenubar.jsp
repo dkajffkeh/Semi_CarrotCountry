@@ -29,7 +29,7 @@
                 <th>게시물관리</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathAdmin %>/boardSelect.sb">게시물조회</a></td>
+                <td><a href="<%= contextPathAdmin %>/boardSelect.sb?currentPage=1">게시물조회</a></td>
             </tr>
             <tr>
                 <td><a href="<%= contextPathAdmin %>/blindList.sb">블라인드게시물 관리</a></td>

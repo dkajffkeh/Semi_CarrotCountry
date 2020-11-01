@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		select 
+               count(*) listCount
+          from member
+         where leave_check = 'N'
+           and manager_check = 'N'
+	</entry>
+	<entry key="postSelectAll">
+		select
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+		                select
+		                       post_no
+		                     , c.category_name category_name
+		                     , post_name
+		                     , mem_userid
+		                     , post_enroll_date
+		                     , post_views
+		                     , blind_check
+		                     , used_post_check
+                             , null gp_post_check
+		                  from 
+		                       post
+		                  join member using(mem_no)
+		                  join category c using(category_no)
+		                  join usedprod using(post_no)
+		                  union all
+		                  select
+		                       post_no
+		                     , c.category_name category_name
+		                     , post_name
+		                     , mem_userid
+		                     , post_enroll_date
+		                     , post_views
+		                     , blind_check
+		                     , null used_post_check
+                     		 , gp_post_check
+		                  from 
+		                       post
+		                  join member using(mem_no)
+		                  join category c using(category_no)
+		                  join group_purchase using(post_no)
+		                  order by post_no
+		            ) a
+		     )
+		where rnum between ? and ?
+	</entry>
+</properties>

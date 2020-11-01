@@ -71,7 +71,7 @@
 											<td>욕설/비방에 따른 제재</td>
 											<td>
 												<!-- 클릭 시 블랙리스트 해제  -->
-												<a href="<%= contextPath %>/blacklistEnroll.sb?memNo=<%= am.getMemNo() %>?bList=N" class="btn btn-outline-danger btn-sm">해제</a>	
+												<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=N" class="btn btn-outline-danger btn-sm">해제</a>
 											</td>
 										</tr>
 									<% } %>
@@ -80,6 +80,7 @@
 							</tbody>
 						</table>
 					</div>
+					
 					<!-- 페이지 번호 -->
                     <div id="boardNum" align="center">
 						<% if (pi.getCurrentPage() != 1) { %>

@@ -1,5 +1,12 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
+	ArrayList<AdminBoard> list = (ArrayList<AdminBoard>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,8 +47,8 @@
                                     <tr class="d-flax">
                                         <th width="100">게시글번호</th>
                                         <th width="100">게시글종류</th>
-                                        <th width="100">카테고리</th>
-                                        <th width="100">게시글명</th>
+                                        <th width="150">카테고리</th>
+                                        <th width="200">게시글명</th>
                                         <th width="100">작성자</th>
                                         <th width="100">작성일</th>
                                         <th width="100">조회수</th>
@@ -50,21 +57,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>중고거래</td>
-                                        <td>의류</td>
-                                        <td >청바지</td>
-                                        <td>USER02</td>
-                                        <td>20-10-01</td>
-                                        <td>4</td>
-                                        <td>N</td>
-                                        <!-- 블라인드 Y/N이 Y일 경우 안보임 -->
-                                        <td>
-                                            <!-- 클릭시 게시물 블라인드 => 알림 -->
-                                            <a href="" class="btn btn-outline-danger btn-sm">등록</a>
-                                        </td>
-                                    </tr>
+                                	<% for (AdminBoard ab : list) { %>
+	                                    <tr>
+	                                        <td><%= ab.getPostNo() %></td>
+	                                        <td>중고거래</td>
+	                                        <td><%= ab.getCategoryName() %></td>
+	                                        <td><%= ab.getPostName() %></td>
+	                                        <td><%= ab.getMemNo() %></td>
+	                                        <td><%= ab.getPostEnrollDate() %></td>
+	                                        <td><%= ab.getPostViews() %></td>
+	                                        <td><%= ab.getBlindCheck() %></td>
+	                                        <!-- 블라인드 Y/N이 Y일 경우 안보임 -->
+	                                        <td>
+	                                            <!-- 클릭시 게시물 블라인드 => 알림 -->
+	                                            <a href="" class="btn btn-outline-danger btn-sm">등록</a>
+	                                        </td>
+	                                    </tr>
+                                	<% } %>
                                 </tbody>
                             </table>
 
@@ -72,14 +81,17 @@
                     </div>
                     <!-- 페이지 번호 -->
                     <div id="boardNum" align="center">
-                        <a href="">&lt; 이전</a>
-
-                        <a href="">1</a>
-                        <a href="">2</a>
-                        <a href="">3</a>
-                        <a href="">4</a>
-            
-                        <a href="">다음 &gt;</a>
+                        <% if (pi.getCurrentPage() != 1) { %>
+				            <a href="<%= contextPath %>/boardSelect.sb?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+						<% } %>
+			
+						<% for (int p = pi.getStartPage(); p <= pi.getEndPage(); p++) { %>
+				            <a href="<%= contextPath %>/boardSelect.sb?currentPage=<%= p %>"><%= p %></a>
+						<% } %>
+			
+						<% if (pi.getCurrentPage() != pi.getMaxPage()) { %>
+				            <a href="<%= contextPath %>/boardSelect.sb?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt;</a>
+						<% } %>
                     </div>
                 </div>
             </div>

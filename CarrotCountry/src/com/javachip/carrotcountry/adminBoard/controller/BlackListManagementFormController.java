@@ -50,7 +50,7 @@ public class BlackListManagementFormController extends HttpServlet {
 		ArrayList<AdminMember> list = new AdminMemberService().blackListSelectAll(pi);
 
 		request.setAttribute("pi", pi);
-		request.setAttribute("lsit", list);
+		request.setAttribute("list", list);
 
 		request.getRequestDispatcher("views/adminBoard/blackListManagementForm.jsp").forward(request, response);
 		
