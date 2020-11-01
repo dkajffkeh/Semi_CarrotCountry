@@ -8,6 +8,7 @@
 	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
