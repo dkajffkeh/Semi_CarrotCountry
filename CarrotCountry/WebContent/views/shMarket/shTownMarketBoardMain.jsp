@@ -337,7 +337,7 @@ img {height:100%; width:100%; border-radius: 5px;}
         <% for(int i = 0 ; i < boardList.size(); i++){ %>
             <div class="article_frame">
             	<div class="borderNo"><%=boardList.get(i).getPostNo()%></div>
-                <div class="img_frame"><img src="" alt=""></div>
+                <div class="img_frame"><img src="<%=contextPath%>/<%=boardList.get(i).getThumbnailPath()+boardList.get(i).getThumbnailFilename()%>" alt=""></div>
                 <div class="product_title">
                     <h6 class="popular_board_title"><%=boardList.get(i).getPostName() %></h6>
                 </div>

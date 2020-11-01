@@ -60,7 +60,6 @@
 	 .btn-warning{
 	     margin:auto;
 	     width:100%;
-	     color:white;
 	 }
 </style>
 </head>
@@ -72,7 +71,7 @@
         <div class="imgId">
                 <img src="<%= contextPath %>/resources/images/member/id.png" width="50%" height="100%">
         </div>
-        <div class="imgPwd" onclick="location.href=''">
+        <div class="imgPwd" onclick="location.href='<%= contextPath %>/findPwdPage.me.ng'">
                 <img src="<%= contextPath %>/resources/images/member/password.png" width="50%" height="100%">
         </div>
     </div>
@@ -84,14 +83,14 @@
 
         <div align="center">
         	<% if(memName != null && findId != null){ %>
-            	<label><%= memName %> 님의 아이디는 <u><%= findId %></u> 입니다!</label> 
+            	<label><%= memName %> 님의 아이디는 <u><%= findId %></u> 입니다.</label> 
             <% }else{ %>
             	<label>일치하는 아이디를 조회하지 못했습니다.<br> 잠시 후 다시 시도해주세요.</label> 
             <% } %>
         </div>
 
         <br>
-        <a href="<%= contextPath %>/loginPage.me.ng" class="btn btn-warning">로그인하러 가기</a>
+        <a href="<%= contextPath %>/loginPage.me.ng" class="btn btn-warning" style="color:white;">로그인페이지로 가기</a>
     </div>
     
     <%@ include file="../common/footerbar.jsp" %>

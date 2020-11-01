@@ -16,6 +16,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 
 public class TownMarketDao {
 	
@@ -233,6 +234,117 @@ Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
+		
+		
+		return result;
+	}
+
+
+	public int shMarketBoardInsert(Connection conn, PostBoard pb, ArrayList<PhotoBoardVo> list) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketBoardInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		    pstmt.setInt(1, Integer.parseInt(pb.getCategoryNo()));
+		    pstmt.setInt(2, pb.getMemNo());
+		    pstmt.setString(3, pb.getMemNickname());
+		    pstmt.setString(4, pb.getPostName());
+		    pstmt.setString(5, pb.getPostContent());
+		    pstmt.setInt(6,Integer.parseInt(pb.getCategoryNo()));
+		    pstmt.setString(7,pb.getProdStatus());
+		    pstmt.setString(8, list.get(0).getPhotoPath());
+		    pstmt.setString(9, list.get(0).getPhotoFileName());
+		    pstmt.setString(10, list.get(0).getPhotoLoadPath());
+		    pstmt.setInt(11, pb.getProdPrice());
+		    
+		    result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} close (pstmt);
+		
+		
+		return result;
+	}
+
+	public int shMarketBordConditionInsert(Connection conn,PostBoard pb) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketBordConditionInsert");
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pb.getProdStatus());
+			pstmt.setInt(2, pb.getProdPrice());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		 } finally { 
+			 close(pstmt);
+		 }
+		
+		return result;
+	}
+	
+	
+	
+	public int shMarketPhotoInsert(Connection conn, ArrayList<PhotoBoardVo> list) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketPhotoInsert");
+		
+		try {
+			
+		for(PhotoBoardVo pbv : list) {	
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pbv.getPhotoPath());
+			pstmt.setString(2, pbv.getPhotoFileName());
+			pstmt.setString(3, pbv.getPhotoLoadPath());
+			
+			result = pstmt.executeUpdate();
+			
+			if(result==0) {
+				return 0;
+			}
+		}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public int townMarketDeleteForm(Connection conn, int bno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("townMarketDeleteForm");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		
 		
 		return result;

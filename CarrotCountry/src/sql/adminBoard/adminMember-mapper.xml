@@ -38,26 +38,38 @@
 	<entry key="blackListEnroll">
 		update 
 		       member
-		   set b_list_check = 'Y'
+		   set b_list_check = '?'
 		 where mem_no = ?
 	</entry>
 	<entry key="blackListSelectAll">
 		select
-		       mem_no
-		     , mem_userid
-		     , mem_name
-		     , mem_phone
-		     , mem_email
-		     , (
-		        select
-		               count(*)
-		          from report r 
-		         where r.mem_no = m.mem_no
-		       ) report_count
-		  from 
-		       member m
-		 where leave_check = 'N'
-		   and b_list_check = 'Y'
-		   and manager_check = 'N'
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+		                select
+		                       mem_no
+		                     , mem_userid
+		                     , mem_name
+		                     , mem_phone
+		                     , mem_email
+		                     , (
+		                        select
+		                               count(*)
+		                          from report r 
+		                         where r.mem_no = m.mem_no
+		                       ) report_count
+		                  from 
+		                       member m
+		                where manager_check = 'N'
+		                  and leave_check = 'N'
+		                  and b_list_check = 'Y'
+		            ) a
+		     )
+		where rnum between ? and ?
 	</entry>
 </properties>

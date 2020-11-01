@@ -80,6 +80,7 @@ public class AdminMemberDao {
 			
 			while (rset.next()) {
 				AdminMember am = new AdminMember();
+				
 				am.setMemNo(rset.getInt("mem_no"));
 				am.setMemUserId(rset.getString("mem_userid"));
 				am.setMemName(rset.getString("mem_name"));
@@ -101,7 +102,7 @@ public class AdminMemberDao {
 		return list;
 	}
 	
-	public int blackListEnroll(Connection conn, int memNo) {
+	public int blackListEnroll(Connection conn, String memNo, String bList) {
 		
 		int result = 0;
 		
@@ -112,7 +113,8 @@ public class AdminMemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, memNo);
+			pstmt.setString(1, bList);
+			pstmt.setString(2, memNo);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -124,7 +126,7 @@ public class AdminMemberDao {
 		return result;
 	}
 
-	public ArrayList<AdminMember> blackListSelectAll(Connection conn) {
+	public ArrayList<AdminMember> blackListSelectAll(Connection conn, AdminPageInfo pi) {
 
 		ArrayList<AdminMember> list = new ArrayList<>();
 		
@@ -135,11 +137,25 @@ public class AdminMemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
 				AdminMember am = new AdminMember();
+
+				am.setMemNo(rset.getInt("mem_no"));
+				am.setMemUserId(rset.getString("mem_userid"));
+				am.setMemPhone(rset.getString("mem_phone"));
+				am.setMemEmail(rset.getString("mem_email"));
+				am.setReportCount(rset.getInt("report_count"));
+
+				list.add(am);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

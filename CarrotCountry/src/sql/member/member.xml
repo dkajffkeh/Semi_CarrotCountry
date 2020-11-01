@@ -40,6 +40,16 @@
 	WHERE MEM_NICKNAME = ?
 </entry>
 
+<!-- 전화번호 중복체크 -->
+<!-- (회원 탈퇴 후 재가입시를 위해 LEAVE_CHECK = 'Y'는 조회 되지 않음) -->
+<entry key="phoneCheck">
+	SELECT
+	      COUNT(*)
+	 FROM MEMBER
+	WHERE MEM_PHONE = ?
+	  AND LEAVE_CHECK = 'N'
+</entry>
+
 <!-- 회원가입 -->
 <entry key="insertMember">
 	INSERT
@@ -71,15 +81,33 @@
 	  )
 </entry>
 
+<!-- 아이디 찾기 -->
 <entry key="findIdMember">
 	SELECT MEM_USERID
 	  FROM MEMBER
 	 WHERE MEM_NAME = ?
 	   AND MEM_BIRTHDAY = ?
 	   AND MEM_PHONE = ?
+	  AND LEAVE_CHECK = 'N'
 </entry>
 
+<!-- 비밀번호찾기1 ()-->
+<entry key= "findPwdMember">
+	SELECT MEM_NO
+	  FROM MEMBER
+	 WHERE MEM_NAME = ?
+	   AND MEM_USERID = ?
+	   AND MEM_BIRTHDAY = ?
+	   AND MEM_PHONE = ?
+	   AND LEAVE_CHECK = 'N'
+</entry>
 
-
+<!-- 비밀번호찾기2 (비밀번호 수정) -->
+<entry key="updatePwdMember">
+	UPDATE 
+	       MEMBER
+	   SET MEM_USERPWD = ?
+	 WHERE MEM_USERID = ?
+</entry>
 
 </properties>

@@ -18,7 +18,7 @@ import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
 /**
  * Servlet implementation class FaqListController
  */
-@WebServlet("/List.fa.jm")
+@WebServlet("/list.fa.jm")
 public class FaqListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

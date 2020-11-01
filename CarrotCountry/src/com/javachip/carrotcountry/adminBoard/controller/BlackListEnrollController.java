@@ -19,15 +19,14 @@ public class BlackListEnrollController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		String memNo = request.getParameter("memNo");
+		String bList = request.getParameter("bList");
 		
-		int result = new AdminMemberService().blackListEnroll(memNo);
+		int result = new AdminMemberService().blackListEnroll(memNo, bList);
 		
 		if (result > 0) { 	// 블랙리스트 등록 성공 시
-			request.getSession().setAttribute("alertMsg", "블랙리스트 등록 성공!!");
 			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");
 		} else {	// 블랙리스트 등록 실패 시
-			request.getSession().setAttribute("alertMsg", "블랙리스트 등록 실패!!");
 			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");	
 		}
 		

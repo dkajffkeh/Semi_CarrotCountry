@@ -5,8 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="resources/css/faq/faqListView.css">
 </head>
 <body>
+
+	<!-- 상단바 -->
+	<%@ include file="../common/commonNavbar.jsp"%>
+
     <div class="CS_content">
         <div class="content_1">
             <table class="table table-bordered center list-area"  align="center">

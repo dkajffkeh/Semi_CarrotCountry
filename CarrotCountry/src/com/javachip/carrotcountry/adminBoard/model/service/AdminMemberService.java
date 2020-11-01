@@ -40,11 +40,11 @@ public class AdminMemberService {
 		return list;
 	}
 	
-	public int blackListEnroll(int memNo) {
+	public int blackListEnroll(String memNo, String bList) {
 		
 		Connection conn = getConnection();
 		
-		int result = new AdminMemberDao().blackListEnroll(conn, memNo);
+		int result = new AdminMemberDao().blackListEnroll(conn, memNo, bList);
 		
 		if (result > 0) {
 			commit(conn);
@@ -57,11 +57,11 @@ public class AdminMemberService {
 		return 0;
 	}
 
-	public ArrayList<AdminMember> blackListSelectAll() {
+	public ArrayList<AdminMember> blackListSelectAll(AdminPageInfo pi) {
 
 		Connection conn = getConnection();
 		
-		ArrayList<AdminMember> list = new AdminMemberDao().blackListSelectAll(conn);
+		ArrayList<AdminMember> list = new AdminMemberDao().blackListSelectAll(conn, pi);
 		
 		close(conn);
 		

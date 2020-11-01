@@ -57,8 +57,7 @@
 	    margin-left:50px;
 	}
 	.btn-warning{
-	    margin-left:80px;
-	    color:white;
+	    margin-left:50px;
 	}
 </style>
 </head>
@@ -70,7 +69,7 @@
         <div class="imgId">
                 <img src="<%= contextPath %>/resources/images/member/id.png" width="50%" height="100%">
         </div>
-        <div class="imgPwd" onclick="location.href=''">
+        <div class="imgPwd" onclick="location.href='<%=contextPath%>/findPwdPage.me.ng'">
                 <img src="<%= contextPath %>/resources/images/member/password.png" width="50%" height="100%">
         </div>
     </div>
@@ -94,8 +93,8 @@
                 <br>
                 <input type="text" name="phone" id="phone" required minlength="13" maxlength="13">
                 <br>
-                <a href="" class="btn btn-secondary">취소</a>
-                <button type="submit" class="btn btn-warning">아이디찾기</button>
+                <a href="<%= contextPath %>/loginPage.me.ng" class="btn btn-secondary" style="color:white;">뒤로가기</a>
+                <button type="submit" class="btn btn-warning" style="color:white;">아이디찾기</button>
             </form>
         <br>
         <br>
