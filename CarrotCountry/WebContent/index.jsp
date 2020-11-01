@@ -77,9 +77,9 @@
     function toTown(){
     	
     	<%if(loginMember!=null){%>
-        location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1&";
+        location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
 		<%} else {%>
-		location.href="<%=contextPath%>/shMarketBoardMain.sh;
+		location.href="<%=contextPath%>/shMarketBoardMain.sh";
 		<%}%>
     }
     </script>
@@ -98,8 +98,7 @@
 	
     }
     </script>
-    
-    
+
     </div>
     
 

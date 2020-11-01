@@ -33,14 +33,16 @@ public class ShMarketBoardCommentController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		String sContent = request.getParameter("cContent");
-		String cCheck = request.getParameter("sCheck");
+		String sCheck = request.getParameter("sCheck");
 		String userNick = request.getParameter("userNick");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
+		System.out.println(sCheck);
+		
 		CommentHY c = new CommentHY();
 		c.setContent(sContent);
-		c.setSecretCheck(cCheck);
+		c.setSecretCheck(sCheck);
 		c.setUserNickName(userNick);
 		c.setPostNo(postNo);
 		c.setMemNo(memNo);
