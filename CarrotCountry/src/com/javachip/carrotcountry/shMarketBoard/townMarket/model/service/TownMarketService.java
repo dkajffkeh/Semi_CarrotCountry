@@ -126,4 +126,16 @@ public class TownMarketService {
 		return result;
 	}
 
+	public ArrayList<PhotoBoardVo> shMarketPhotoSelector(int bno) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PhotoBoardVo> list = new TownMarketDao().shMarketPhotoSelector(bno,conn);
+		
+		
+		close(conn);
+		
+		return list;
+	}
+
 }
