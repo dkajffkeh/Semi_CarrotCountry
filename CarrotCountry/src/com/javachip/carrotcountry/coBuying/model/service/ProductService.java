@@ -90,6 +90,17 @@ public class ProductService {
 		
 	}
 	
+	public ArrayList<Product> selectMainProductList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectMainProductList(conn);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
 	
 	
 	

@@ -1,14 +1,16 @@
 package com.javachip.carrotcountry.jmboard.faq.model.dao;
 
+import static com.javachip.carrotcountry.common.JDBCtemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
 
@@ -20,7 +22,7 @@ public class FaqDao {
 		
 		try {
 			prop.loadFromXML(new FileInputStream
-			(FaqDao.class.getResource("sql/faq/faq-mapper.xml").getPath()));
+			(FaqDao.class.getResource("/sql/faq/faq-mapper.xml").getPath()));
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +59,6 @@ public class FaqDao {
 						         rset.getString("faq_writer"),
 						         rset.getString("faq_status")));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -67,7 +68,94 @@ public class FaqDao {
 		
 		return list;
 	}
+//FAQ추가
+	public int insertFaq(Connection conn, Faq f) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
 
+			pstmt.setString(1, f.getFaqTitle());
+			pstmt.setString(2, f.getFaqContent());
+			pstmt.setString(3, f.getCategory());
+			pstmt.setInt(4, Integer.parseInt(f.getMemNo()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+//카운트
+	public int increaseCount(Connection conn, int nno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql
+			
+			pstmt.setInt(1, nno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+//게시판
+	public Faq selectFaq(Connection conn, int nno) {
+
+		Faq f = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				f = new Faq(rset.getInt("faq_no"),
+						    rset.getString("faq_title"),
+						    rset.getString("faq_content"),
+						    rset.getString("mem_name"),
+						    rset.getDate("faq_enroll_date"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return f;
+		
+		
+		
+	}
 
 	
 	

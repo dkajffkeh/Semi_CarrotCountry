@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.javachip.carrotcountry.jmboard.faq.model.vo.Faq" %>
+<%
+	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,13 +44,27 @@
         <center><b>사용자들이 자주 묻는 질문을 확인해보세요!</b></center>
         <br>
        </div>
+	        <div align="right" style="width:700px;">
+	            <a href="<%= contextPath %>/enrollForm.fa.jm" class="btn btn-secondary btn-sm">글작성</a>
+	            <br><br>
+	        </div>
        <div class="content_3">
-        <ul class="list-group" id="myList">
-            <li class="list-group-item">공지사항</li>
-            <li class="list-group-item">Second item</li>
-            <li class="list-group-item">Third item</li>
-            <li class="list-group-item">Fourth</li>
-          </ul>  
+	        <ul class="list-group" id="myList">
+	           <% if(list.isEmpty()){ %>
+	                <!-- 공지사항이 없을경우 -->
+	                <tr>
+	                    <td colspan="5">존재하는 공지사항이 없습니다.</td>
+	                </tr>
+                <% }else{ %>
+	                <!-- 공지사항이 있을경우 -->
+	                <% for(Faq f : list){ %>
+		                <tr>
+		                	<td><%= f.getFaqNo() %>
+		                    <td><%= f.getFaqTitle() %></td>
+		                </tr>
+	                <% } %>
+                <% } %>
+        	</ul>  
           <br><br><br>
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
 
@@ -67,6 +85,19 @@
        </div>
 
        <script>
+	   	$(function(){
+			$(".list-group>tbody>tr").click(function(){
+				
+				// 클릭했을 때의 행에 존재하는 글번호
+				var nno = $(this).children().eq(0).text();
+				
+				location.href = "<%=contextPath%>/detail.fa.jm?nno=" + nno;       			
+				
+			});
+		});
+       
+       
+       
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();

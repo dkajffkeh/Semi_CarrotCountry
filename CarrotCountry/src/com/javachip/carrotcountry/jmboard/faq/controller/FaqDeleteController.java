@@ -1,28 +1,23 @@
-package com.javachip.carrotcountry.coBuying.controller;
+package com.javachip.carrotcountry.jmboard.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.coBuying.model.service.ProductService;
-import com.javachip.carrotcountry.coBuying.model.vo.Product;
-
 /**
- * Servlet implementation class MainPageController
+ * Servlet implementation class FaqDeleteController
  */
-@WebServlet("/mainpage.co.jy")
-public class MainPageController extends HttpServlet {
+@WebServlet("/delete.fa.jm")
+public class FaqDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageController() {
+    public FaqDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +26,9 @@ public class MainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		
-
-		// 메인에 띄울 공동구매 상품리스트 조회
-		ArrayList<Product> pList = new ProductService().selectMainProductList();
-		
-		request.setAttribute("pList", pList);
-		
-		request.getRequestDispatcher("views/coBuying/coBuyingMainPage.jsp").forward(request, response);
-		
-		
+	
 	}
 
 	/**

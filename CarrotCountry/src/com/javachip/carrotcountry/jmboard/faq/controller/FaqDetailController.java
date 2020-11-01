@@ -1,7 +1,6 @@
-package com.javachip.carrotcountry.coBuying.controller;
+package com.javachip.carrotcountry.jmboard.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.coBuying.model.service.ProductService;
-import com.javachip.carrotcountry.coBuying.model.vo.Product;
+import com.javachip.carrotcountry.jmboard.faq.model.service.FaqService;
+import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class MainPageController
+ * Servlet implementation class FaqDetailController
  */
-@WebServlet("/mainpage.co.jy")
-public class MainPageController extends HttpServlet {
+@WebServlet("/detail.fa.jm")
+public class FaqDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageController() {
+    public FaqDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +30,23 @@ public class MainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int nno = Integer.parseInt(request.getParameter("nno"));
 		
-
-		// 메인에 띄울 공동구매 상품리스트 조회
-		ArrayList<Product> pList = new ProductService().selectMainProductList();
+		int result = new FaqService().increaseCount(nno);
 		
-		request.setAttribute("pList", pList);
-		
-		request.getRequestDispatcher("views/coBuying/coBuyingMainPage.jsp").forward(request, response);
-		
+		if(result > 0) { // 유효한 공지사항 번호일 경우 => 해당공지사항상세조회한 후 => 상세페이지 띄우기
+			
+			Faq f = new FaqService().selectFaq(nno);
+			
+			request.setAttribute("f", f);
+			request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
+			
+		}else { // 유효한 공지사항이 아님 => 에러페이지 (에러문구 담아서)
+			
+			
+			
+		}
 		
 	}
 

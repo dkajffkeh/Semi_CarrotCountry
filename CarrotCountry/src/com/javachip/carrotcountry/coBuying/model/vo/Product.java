@@ -17,6 +17,13 @@ public class Product {
 	private String postComment;
 	private String postRefund;
 	
+	
+	private String thumbnailLoadpath;
+	private String postName;
+	private int postLikes;
+	
+	
+	
 	public Product() {}
 
 	
@@ -139,7 +146,7 @@ public class Product {
 
 
 	
-	
+	//========== 추가 ===========
 	
 	
 	
@@ -187,6 +194,80 @@ public class Product {
 		this.postRefund = postRefund;
 	}
 
+	
+	
+	//============== 추가 ==================
+	
+	
+	
+
+
+	public String getThumbnailLoadpath() {
+		return thumbnailLoadpath;
+	}
+
+
+
+
+
+
+
+	public void setThumbnailLoadpath(String thumbnailLoadpath) {
+		this.thumbnailLoadpath = thumbnailLoadpath;
+	}
+
+
+
+
+
+
+
+	public String getPostName() {
+		return postName;
+	}
+
+
+
+
+
+
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
+
+
+
+
+
+
+	public int getPostLikes() {
+		return postLikes;
+	}
+
+
+
+
+
+
+
+	public void setPostLikes(int postLikes) {
+		this.postLikes = postLikes;
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 
 
 
@@ -197,8 +278,11 @@ public class Product {
 				+ gpDRate + ", gpMinPeople=" + gpMinPeople + ", gpPeople=" + gpPeople + ", gpStatus=" + gpStatus
 				+ ", gpDeadline=" + gpDeadline + "]";
 	}
-	
-	
+
+
+
+
+
 	
 	
 	

@@ -243,6 +243,48 @@ private Properties prop = new Properties();
 	}
 	
 	
+	public ArrayList<Product> selectMainProductList(Connection conn){
+		// select문 => 여러행 조회
+		ArrayList<Product> pList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectMainProductList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product p = new Product();
+				PostBoard pb = new PostBoard();
+				
+				p.setPostNo(rs.getInt("post_no"));
+				p.setThumbnailLoadpath(rs.getString("thumbnail_loadpath"));
+				p.setPostName(rs.getString("post_name"));
+				p.setGpPeople(rs.getInt("gp_people"));
+				p.setPostLikes(rs.getInt("post_likes"));
+				p.setGpPrice(rs.getInt("gp_price"));
+				p.setGpDRate(rs.getInt("gp_drate"));
+				p.setGpDPrice(rs.getInt("gp_dprice"));
+				
+				pList.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+ 		
+		return pList;
+		
+	}
+	
+	
+	
 	
 	
 	
