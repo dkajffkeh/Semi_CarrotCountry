@@ -3,6 +3,7 @@
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
 	ArrayList<AdminBoard> list = (ArrayList<AdminBoard>)request.getAttribute("list");
@@ -41,44 +42,53 @@
                     </form>
                     <!-- 게시글 리스트 -->
                     <div id="board">
-                        <form action="">
-                            <table class="table table-sm table-hover" align="center">
-                                <thead class="thead">
-                                    <tr class="d-flax">
-                                        <th width="100">게시글번호</th>
-                                        <th width="100">게시글종류</th>
-                                        <th width="150">카테고리</th>
-                                        <th width="200">게시글명</th>
-                                        <th width="100">작성자</th>
-                                        <th width="100">작성일</th>
-                                        <th width="100">조회수</th>
-                                        <th width="150">블라인드Y/N</th>
-                                        <th width="100">블라인드</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<% for (AdminBoard ab : list) { %>
-	                                    <tr>
-	                                        <td><%= ab.getPostNo() %></td>
-	                                        <td>중고거래</td>
-	                                        <td><%= ab.getCategoryName() %></td>
-	                                        <td><%= ab.getPostName() %></td>
-	                                        <td><%= ab.getMemNo() %></td>
-	                                        <td><%= ab.getPostEnrollDate() %></td>
-	                                        <td><%= ab.getPostViews() %></td>
-	                                        <td><%= ab.getBlindCheck() %></td>
-	                                        <!-- 블라인드 Y/N이 Y일 경우 안보임 -->
-	                                        <td>
-	                                            <!-- 클릭시 게시물 블라인드 => 알림 -->
-	                                            <a href="" class="btn btn-outline-danger btn-sm">등록</a>
-	                                        </td>
-	                                    </tr>
-                                	<% } %>
-                                </tbody>
-                            </table>
-
-                        </form>
-                    </div>
+						<table class="table table-sm table-hover" align="center">
+							<thead class="thead">
+								<tr class="d-flax">
+									<th width="100">게시글번호</th>
+									<th width="100">게시글종류</th>
+									<th width="150">카테고리</th>
+									<th width="200">게시글명</th>
+									<th width="100">작성자</th>
+									<th width="100">작성일</th>
+									<th width="100">조회수</th>
+									<th width="150">블라인드Y/N</th>
+									<th width="100">블라인드</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="ab">
+									<tr>
+										<td>${ab.postNo}</td>
+										<c:choose>
+											<c:when test="${ab.usedPostCheck > 0}">
+												<td>중고거래</td>
+											</c:when>
+											<c:otherwise>
+												<td>공동구매</td>
+											</c:otherwise>
+										</c:choose>
+										<td>${ab.categoryName}</td>
+										<td>${ab.postName}</td>
+										<td>${ab.memNo}</td>
+										<td>${ab.postEnrollDate}</td>
+										<td>${ab.postViews}</td>
+										<td>${ab.blindCheck}</td>
+										<!-- 블라인드 Y/N이 Y일 경우 안보임 -->
+										<!-- 클릭시 게시물 블라인드 => 알림 -->
+										<c:if test="${ab.blindCheck eq 'N'}">
+											<td>
+												<a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=Y" class="btn btn-outline-danger btn-sm">등록</a>
+											</td>
+										</c:if>
+										<c:if test="${ab.blindCheck eq 'Y'}">
+											<td></td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
                     <!-- 페이지 번호 -->
                     <div id="boardNum" align="center">
                         <% if (pi.getCurrentPage() != 1) { %>

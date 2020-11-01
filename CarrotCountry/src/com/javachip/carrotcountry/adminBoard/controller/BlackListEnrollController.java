@@ -1,6 +1,8 @@
 package com.javachip.carrotcountry.adminBoard.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +29,10 @@ public class BlackListEnrollController extends HttpServlet {
 		if (result > 0) { 	// 블랙리스트 등록 성공 시
 			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");
 		} else {	// 블랙리스트 등록 실패 시
-			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");	
+			PrintWriter writer = response.getWriter();
+			writer.println("<script>alert('등록에 실패했습니다.');</script>");
+			
+			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");
 		}
 		
 	}

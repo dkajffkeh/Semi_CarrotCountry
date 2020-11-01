@@ -102,5 +102,75 @@ public class AdminBoardDao {
 		
 		return list;
 	}
+
+	public int blindListEnroll(Connection conn, int postNo, String bCheck) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("blindListEnroll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bCheck);
+			pstmt.setInt(2, postNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<AdminBoard> blindListSelectAll(Connection conn, AdminPageInfo pi) {
+		
+		ArrayList<AdminBoard> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("blindListSelectAll");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				AdminBoard ab = new AdminBoard();
+				
+				ab.setPostNo(rset.getInt("post_no"));
+				ab.setUsedPostCheck(rset.getInt("used_post_check"));
+				ab.setGpPostCheck(rset.getInt("gp_post_check"));
+				ab.setCategoryName(rset.getString("category_name"));
+				ab.setPostName(rset.getString("post_name"));
+				ab.setPostViews(rset.getInt("post_views"));
+				ab.setMemNo(rset.getString("mem_userid"));
+				ab.setPostEnrollDate(rset.getDate("post_enroll_date"));
+				ab.setReportCount(rset.getInt("report_count"));
+				
+				list.add(ab);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 }

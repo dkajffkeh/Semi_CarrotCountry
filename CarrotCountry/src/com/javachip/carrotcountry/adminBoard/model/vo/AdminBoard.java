@@ -14,6 +14,7 @@ public class AdminBoard {
 	private String blindCheck;
 	private int usedPostCheck;
 	private int gpPostCheck;
+	private int reportCount;
 	
 	public AdminBoard() {}
 
@@ -108,6 +109,14 @@ public class AdminBoard {
 
 	public void setGpPostCheck(int gpPostCheck) {
 		this.gpPostCheck = gpPostCheck;
+	}
+
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
 	@Override
