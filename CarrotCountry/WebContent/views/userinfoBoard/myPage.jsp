@@ -14,6 +14,21 @@
 	<%@ include file= "../common/commonNavbar.jsp"%>
 	
 
+	<%
+	String userId = loginMember.getMemUserId();
+	String memName = loginMember.getMemName();
+
+	
+	String gender = (loginMember.getMemGender() == null) ? "" : loginMember.getMemGender();
+	String birthday = (loginMember.getMemBirthday() == null) ? "" : loginMember.getMemBirthday();
+	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
+	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
+	String location = (loginMember.getMemLocation() == null) ? "" : loginMember.getMemLocation();
+	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
+
+	
+	%>
+		
 	
 	
 	<div class="myPageWrapper">
@@ -95,35 +110,35 @@
         <table>
             <tr>
                 <td>아이디</td>
-                <td>xxxx</td>
+                <td><%= userId %></td>
             </tr>
             <tr>
                 <td>성함</td>
-                <td>xxx</td>
+                <td><%= memName %></td>
             </tr>
             <tr>
                 <td>성별</td>
-                <td>xx</td>
+                <td><%= gender %></td>
             </tr>
             <tr>
                 <td>생년월일</td>
-                <td>xxxx-xx-xx</td>
+                <td><%= birthday %></td>
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td>xx</td>
+                <td><%= nickName %></td>
             </tr>
             <tr>
                 <td>연락처</td>
-                <td>xxxxxx</td>
+                <td><%= phone %></td>
             </tr>
             <tr>
                 <td>주소</td>
-                <td>xxxxxxxx이 칸은 주소적는부분입니다다다다다다다다다.</td>
+                <td><%= location %></td>
             </tr>
             <tr>
                 <td>E-Mail</td>
-                <td>xxxxxx</td>
+                <td><%= email %></td>
             </tr>
         </table>
         </div>
