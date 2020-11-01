@@ -38,6 +38,24 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="insertQuestion">
+	INSERT
+		  INTO GROUPBUY_QUESTION
+		  (
+		    GQ_NO
+		  , GQ_CONTENT
+		  , MEM_NO
+		  )
+		  VALUES
+		  (
+		    SEQ_GQNO.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	
+	
 	<entry key="selectProduct">
 		SELECT
 		       POST_NO
@@ -104,6 +122,9 @@
 		 ORDER
 		    BY POST_NO DESC 
 	</entry>
+	
+	
+	
 
 
 </properties>

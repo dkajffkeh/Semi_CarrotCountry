@@ -102,7 +102,29 @@ public class QnADao {
 	}
 	
 	
-	
+	public int insertQuestion(Connection conn, QnA qa) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, qa.getGqContent());
+			pstmt.setString(2, qa.getMemNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

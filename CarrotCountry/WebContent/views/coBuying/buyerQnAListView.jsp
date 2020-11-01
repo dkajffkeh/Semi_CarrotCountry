@@ -176,7 +176,7 @@ tbody td:hover{cursor: pointer;}
                     
                     <!-- 현재 로그인한 회원일경우에만 보여지는 버튼 -->
                     <% if(loginMember != null){ %>
-                    <a href="<%= contextPath %>/buyerEnroll.qna.jy" id="writeBtn" class="btn btn-secondary" style="float: right;">글 작성하기</a>
+                    <a href="<%= contextPath %>/buyerenroll.qna.jy" id="writeBtn" class="btn btn-secondary" style="float: right;">글 작성하기</a>
                 	<%} %>
 
                 </div>
