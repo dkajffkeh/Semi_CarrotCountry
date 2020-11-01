@@ -60,11 +60,28 @@ public class Member {
 		this.memPhone = memPhone;
 		this.memEmail = memEmail;
 	}
+	
+	// 매개변수 생성자 (회원정보수정용)
+	
+	public Member(String memUserId, String memName, String memNickname, String memBirthday, String memGender,
+			String memPhone, String memEmail, String memLocation) {
+		super();
+		this.memUserId = memUserId;
+		this.memName = memName;
+		this.memNickname = memNickname;
+		this.memBirthday = memBirthday;
+		this.memGender = memGender;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.memLocation = memLocation;
+	}
+	
 
 	// setter / getter 메소드
 	public int getMemNo() {
 		return memNo;
 	}
+
 
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
