@@ -117,14 +117,14 @@ border:2px solid green;
 
 <div id="page_total_wrapper">
         <form action="shBoardEnrollForm.sh.hy" id="form1" enctype="multipart/form-data" method="post">
-        <input type="hidden" value="<%=loginMember.getMemNo()%>">
-        <input type="hidden" value="<%=loginMember.getMemNickname()%>">
+        <input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
+        <input type="hidden" name="memNick" value="<%=loginMember.getMemNickname()%>">
             <h5>물품등록</h5>
             <hr>
             <div class="product_info_input" style="display: flex;">
-                <input type="text" name="Title" class="form-control" placeholder="상품명을 입력해주세요"
+                <input type="text" name="title" class="form-control" placeholder="상품명을 입력해주세요"
                     style="margin-right: 5px;">
-                <select name="Category" id="" class="form-control" style="color:gray">
+                <select name="category" id="" class="form-control" style="color:gray">
                    		<% for(int i =0 ; i<list.size(); i++){ %>
 						<option value="<%=10+10*i%>"><%=list.get(i).getCategoryName() %></option>
 						<% } %>
@@ -137,11 +137,11 @@ border:2px solid green;
             </div>
             <h5>상품상태</h5>
             <div class="product_condition_radio">
-                <input type="radio" name="p_condition" value="미개봉" id="Pradio_1">
+                <input type="radio" name="p_condition" value="B" id="Pradio_1">
                 <label for="Pradio_1">미개봉</label>
-                <input type="radio" name="p_condition" value="거의 새것" id="Pradio_2">
+                <input type="radio" name="p_condition" value="N" id="Pradio_2">
                 <label for="Pradio_2">거의 새것</label>
-                <input type="radio" name="p_condition" value="사용감 있음" id="Pradio_3"> 
+                <input type="radio" name="p_condition" value="G" id="Pradio_3"> 
                 <label for="Pradio_3">사용감
                     있음</label>
             </div>
@@ -196,7 +196,7 @@ border:2px solid green;
         </div>
             <div class="submit_button_wrapper">
                 <div></div>
-                <button type="submit" form="form1" class="btn btn-success" style="margin-bottom:10px">게시글 올리기</button>
+                <button type="submit" class="btn btn-success" style="margin-bottom:10px">게시글 올리기</button>
             </div>
         </form>
     </div>

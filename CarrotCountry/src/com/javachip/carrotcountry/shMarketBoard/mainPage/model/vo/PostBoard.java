@@ -28,8 +28,9 @@ public class PostBoard {
 	
 	private String postRefund;
 	
-	
-	
+	public PostBoard() {
+		
+	}
 
 	public PostBoard(int postNo, String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath) {
 		super();
@@ -66,10 +67,6 @@ public class PostBoard {
 		EnrollDate = enrollDate;
 		this.blindCheck = blindCheck;
 		this.postRefund = postRefund;
-	}
-
-	public PostBoard() {
-		
 	}
 
 	public PostBoard(int postNo, int memNo, String localNo, String postName, String categoryName, String thumbnailPath,
@@ -114,6 +111,22 @@ public class PostBoard {
 		this.prodPrice = prodPrice;
 		EnrollDate = enrollDate;
 		this.blindCheck = blindCheck;
+	}
+	
+	
+
+	public PostBoard(String categoryNo, int memNo,String memNickname,int prodPrice,String postName, String postContent,
+			String prodStatus, String dealType, String site) {
+		super();
+		this.categoryNo = categoryNo;
+		this.memNo = memNo;
+		this.prodPrice = prodPrice;
+		this.memNickname = memNickname;
+		this.postName = postName;
+		this.postContent = postContent;
+		this.prodStatus = prodStatus;
+		this.dealType = dealType;
+		this.site = site;
 	}
 
 	public int getPostNo() {

@@ -8,6 +8,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 
 public class TownMarketService {
 	
@@ -77,6 +78,44 @@ public class TownMarketService {
 		int result = new TownMarketDao().shBoardInsertComment(conn,c);
 		
 		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int shMarketBoardInsert(PostBoard pb, ArrayList<PhotoBoardVo> list) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new TownMarketDao().shMarketBoardInsert(conn,pb,list);
+		
+		int result2 = new TownMarketDao().shMarketBordConditionInsert(conn,pb);
+		
+		int result3 = new TownMarketDao().shMarketPhotoInsert(conn,list);
+		
+		if(result1>0 && result2 >0 && result3>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1;
+	}
+
+	public int townMarketDeleteForm(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().townMarketDeleteForm(conn,bno);
+		
+		if(result>0){
 			commit(conn);
 		} else {
 			rollback(conn);

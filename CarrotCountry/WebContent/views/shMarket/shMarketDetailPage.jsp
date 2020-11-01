@@ -136,7 +136,7 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                   <a class="nav-link" href="#">게시글 수정 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item" style="background-color: rgb(219, 91, 91);">
-                  <a class="nav-link" href="#">게시글 삭제</a>
+                  <a class="nav-link" onclick="askFunction();" style="cursor:pointer;">게시글 삭제</a>
                 </li>
                 <li class="nav-item" style="background-color:lightskyblue;">
                   <a class="nav-link" href="#">판매완료</a>
@@ -436,6 +436,14 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
         		 <% } %>
         	 })
          })
+         
+         function askFunction(){
+        	 
+        	 if(confirm("게시글을 삭제하시겠습니까?")){
+        		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
+        	 }
+        	 
+         }
          </script>
       
       <%@ include file="../common/footerbar.jsp"%>   

@@ -63,6 +63,8 @@ WHERE
 	     BLIND_CHECK='N'
 	  AND 
 		 POST_NO = ?
+	  AND
+	 	 BLIND_CHECK='N'		 
 </entry>
 <entry key="marketCommentSelector">
  SELECT 
@@ -103,4 +105,103 @@ WHERE
        ,?
        )
 </entry>	
+<entry key="shMarketBoardInsert">
+INSERT INTO 
+          POST
+           (
+             POST_NO
+            ,CATEGORY_NO
+            ,MEM_NO
+            ,LOCAL_NO
+            ,MEM_NICKNAME
+            ,POST_NAME
+            ,POST_COMMENT            
+            ,CATEGORY_NAME          
+            ,PARCEL_NUM
+            ,PROD_STATUS
+            ,DEAL_TYPE
+            ,SITE
+            ,THUMBNAIL_PATH
+            ,THUMBNAIL_FILENAME
+            ,THUMBNAIL_LOADPATH
+            ,POST_VIEWS
+            ,POST_REPORTS
+            ,POST_LIKES
+            ,PROD_PRICE
+            ,POST_ENROLL_DATE
+            ,BLIND_CHECK
+           )
+           VALUES
+           (
+           SEQ_PNO.NEXTVAL
+          ,?
+          ,?
+          ,1
+          ,?
+          ,?
+          ,?
+          ,(SELECT 
+                 CATEGORY_NAME
+             FROM
+                 CATEGORY
+           WHERE CATEGORY_NO=?)
+          ,'ABC'
+          ,?
+          ,'D'
+          ,'서울'
+          ,?
+          ,?
+          ,?
+          ,DEFAULT
+          ,DEFAULT
+          ,DEFAULT
+          ,?
+          ,SYSDATE
+          ,DEFAULT
+           )
+</entry>
+<entry key="shMarketPhotoInsert">
+INSERT INTO
+           PHOTO
+           (
+             PHOTO_NO
+            ,POST_NO
+            ,PHOTO_PATH
+            ,PHOTO_FILENAME
+            ,PHOTO_LOADPATH
+           )
+           VALUES
+           (
+           SEQ_IMGNO.NEXTVAL
+          ,SEQ_PNO.CURRVAL
+          ,?
+          ,?
+          ,?
+           )
+</entry>
+<entry key="shMarketBordConditionInsert">
+INSERT INTO
+           USEDPROD
+           (
+            POST_NO
+           ,DEAL_STATUS
+           ,USED_PRODSTATUS
+           ,USED_PRICE
+           )
+      VALUES
+           (
+            SEQ_PNO.CURRVAL
+           ,DEFAULT
+           ,?
+           ,?   
+           )
+</entry>
+<entry key="townMarketDeleteForm">
+UPDATE 
+      POST
+SET 
+      BLIND_CHECK='Y'
+WHERE 
+      POST_NO=?
+</entry>
 </properties>
