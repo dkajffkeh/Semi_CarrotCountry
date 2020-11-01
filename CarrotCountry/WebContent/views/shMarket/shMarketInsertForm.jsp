@@ -202,7 +202,7 @@ border:2px solid green;
     </div>
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) , {
+            .create(document.querySelector( '#editor' ) , {
                
                 removePlugins: ['ImageUpload']
             } )  

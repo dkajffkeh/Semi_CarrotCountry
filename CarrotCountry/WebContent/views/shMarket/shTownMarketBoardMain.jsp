@@ -121,11 +121,9 @@ img {height:100%; width:100%; border-radius: 5px;}
 /*사이트바*/
  #mainArticle_wrapper {
      width:1200px;
-     height:1250px;
-     
+     height:1250px;    
      margin:auto;
-     margin-top: 20px;
-    
+     margin-top: 20px;   
      display: flex;
      justify-content: center;
  }
@@ -142,11 +140,9 @@ img {height:100%; width:100%; border-radius: 5px;}
      text-align: center;
      border-bottom:2px solid rgb(226, 226, 226);
      cursor:pointer;
-
  }
  .side_bar.font:hover {
   background-color:lightgreen;
- 
  }
  /*사이트바*/
  /*오른쪽 아티클 구간*/
@@ -167,15 +163,13 @@ img {height:100%; width:100%; border-radius: 5px;}
      margin-bottom: 15px;
      height:300px;
      width:23%;
-     cursor:pointer;
-     
+     cursor:pointer;  
  }
  .article_frame:hover {
  border:1px solid lightgrey;
  border-radius:10px;
  }
  .borderNo {display:none;}
- 
  .img_frame {
      height:60%;
      width:100%;
@@ -193,8 +187,7 @@ img {height:100%; width:100%; border-radius: 5px;}
 .location_area {
     height:7%;
     width:96.5%;
-    margin-left: 10px;
-    
+    margin-left: 10px;  
 }
 .ratring_counter {   
     width:100%;
@@ -358,15 +351,12 @@ img {height:100%; width:100%; border-radius: 5px;}
           
         </div>
         <script>
-       $(function(){
-    	   
+       $(function(){    	   
     	   $(".article_frame").click(function(){
     		   
     		   let bno = $(this).children().eq(0).text();
-    		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
-	   
-    	   });
-    	   
+    		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;	   
+    	   });    	   
        });
         
         </script>
@@ -407,8 +397,7 @@ img {height:100%; width:100%; border-radius: 5px;}
     	 
     	 if(confirm("게시글은 회원분만 이용이 가능합니다 로그인 페이지로 이동하시겠습니까?")){
     		 location.href="<%=contextPath%>/loginPage.me.ng";
-    	 }
-    	 
+    	 }	 
     	 <%}%>
      }
      
