@@ -54,6 +54,8 @@
                 <label for="file1">프로필변경</label>
         </div>
 
+
+		<!-- 프로필 사진 미리보기, 변경 -->
         <script>
             $(function(){
                 $("#fileArea").hide();
@@ -64,14 +66,11 @@
             });
             function loadImg(inputFile, num){
                 if(inputFile.files.length == 1){
-                  
                     var reader = new FileReader();
-
+                    
                     reader.readAsDataURL(inputFile.files[0]);
-
-                
                     reader.onload = function(e){
-                      
+                    	
                         switch(num){
                             case 1: $("#profileImg").attr("src", e.target.result); break;
                         }
@@ -79,11 +78,8 @@
                 }else{ 
                     switch(num){
                         case 1: $("#profileImg").attr("src", null); break;
- 
                     }
-
                 }
-
             }
         </script>
 
@@ -98,15 +94,15 @@
         </div>
         <!-- 버튼 2개 부분 -->
        <div id="content_top3">
-        <button type="button"class="btn btn-secondary ">회원 정보 수정</button><br><br>
-        <button type="button" class="btn btn-secondary ">비밀번호 변경</button>
+        <button type="button"class="btn btn-secondary" onclick="location.href='<%= contextPath%>/updateForm.me.jw'">회원 정보 수정</button><br><br>
+        <button type="button" class="btn btn-secondary" onclick="location.href='<%= contextPath%>/findPwdPage.me.ng'">비밀번호 변경</button>
        </div>
-    </div>
-    <br><br><br><br>
-    <!-- content영역의 아랫부분 (회원정보, 배송지정보) -->
-    <div id="content_bottom">
-            <!--회원정보 -->
-     <div id="content_bottom1">
+	    </div>
+	    <br><br><br><br>
+	    <!-- content영역의 아랫부분 (회원정보, 배송지정보) -->
+	    <div id="content_bottom">
+	            <!--회원정보 -->
+	     <div id="content_bottom1">
         <table>
             <tr>
                 <td>아이디</td>
@@ -144,7 +140,7 @@
         </div>
         <!-- 배송지 정보  -->
         <div id="content_bottom2">
-            <h3><b>배송지 등록 정보</b></h3> 
+            <h3  align="center" ><b>배송지 등록 정보</b></h3> 
             <br>
             <div id = "content_bottom2_1">
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#addAdressForm">등록</button>
@@ -164,101 +160,101 @@
             
             <!------------------------------------------------------------------------>
 
-            <br>
-            서울특별시 xxx xxx xxx xxxxssssssssdddddddddddddddd
-
-            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address2" value="address2">
-            &nbsp;&nbsp; 배송지2 )
-            
-            
-            <br>
-            경기도 xxxx xxxxx xxxxxx
-
-            
-            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address3" value="address3">
-            &nbsp;&nbsp; 배송지3 )
-            
-            
-            
-            <br>
-            인천광역시 xxx xxxxxx xxxxx
-        </div>
-        </div>
-
-
-    </div>
-
-    <div id="updateButton" align="center">
-        
-        <button type="submit" class="btn btn-primary ">변경하기</button>
-       
-    </div>
-    
-</div>
+			            <br>
+			            서울특별시 xxx xxx xxx xxxxssssssssdddddddddddddddd
+			
+			            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address2" value="address2">
+			            &nbsp;&nbsp; 배송지2 )
+			            
+			            
+			            <br>
+			            경기도 xxxx xxxxx xxxxxx
+			
+			            
+			            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address3" value="address3">
+			            &nbsp;&nbsp; 배송지3 )
+			            
+			            
+			            
+			            <br>
+			            인천광역시 xxx xxxxxx xxxxx
+			        </div>
+			        </div>
+			
+			
+			    </div>
+			
+			    <div id="updateButton" align="center">
+			        
+			        <button type="submit" class="btn btn-primary ">변경하기</button>
+			       
+			    </div>
+			    
+			</div>
 
 
 <!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-    <div class="modal fade" id="addAdressForm">
-      <div class="modal-dialog">
-        <div class="modal-content">
-        
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">배송지 추가</h4>
-            <button type="button" class="close" data-dismiss="modal">×</button>
-          </div>
-          
-          <!-- Modal body -->
-          <div class="modal-body" align="center">
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <th>수령인</th>
-                        <td><input type="text" name="userName" required></td>
-                    </tr>
-                    <tr>
-                        <th>배송지</th>
-                        <td>
-                            <select id="Address_1" style="width:110px;" required>
-                                <option value=''>선택하세요</option>
-                                <option value='서울특별시'>서울특별시</option>
-                                <option value='인천광역시'>인천광역시</option>
-                                <option value='경기도'>경기도</option>
-                            </select>
-                            <select id="Address_2" style="width:110px;" required>
-                                <option value=''>선택하세요</option>
-                                <option value='강북구'>강북구</option>
-                                <option value='성북구'>성북구</option>
-                                <option value='강남구'>강남구</option>
-                            </select>
-                            <br>
-                            <input type="text" style="width:300px;" name="address" required>
-                        </td>
-                            
-                    </tr>
-                    <tr>
-                        <th>연락처</th>
-                        <td><input type="text" name= "phone" required></td>
-                    </tr>
-                         
-                </table>
-                <br>
-                <!-- Modal footer -->
-            <div class="modal-footer">
-                <input id="default" type="checkbox" name="defaultAddress" value="defalutAddress">&nbsp;
-                <label for="default">기본 배송지로 등록</label>
-            </div>
-       
-                <br>
-                <button type="submit" class="btn btn-primary">등록</button>
-
-            </form>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-    
+	    <div class="modal fade" id="addAdressForm">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	        
+	          <!-- Modal Header -->
+	          <div class="modal-header">
+	            <h4 class="modal-title">배송지 추가</h4>
+	            <button type="button" class="close" data-dismiss="modal">×</button>
+	          </div>
+	          
+	          <!-- Modal body -->
+	          <div class="modal-body" align="center">
+	            <form action="" method="post">
+	                <table>
+	                    <tr>
+	                        <th>수령인</th>
+	                        <td><input type="text" name="userName" required></td>
+	                    </tr>
+	                    <tr>
+	                        <th>배송지</th>
+	                        <td>
+	                            <select id="Address_1" style="width:110px;" required>
+	                                <option value=''>선택하세요</option>
+	                                <option value='서울특별시'>서울특별시</option>
+	                                <option value='인천광역시'>인천광역시</option>
+	                                <option value='경기도'>경기도</option>
+	                            </select>
+	                            <select id="Address_2" style="width:110px;" required>
+	                                <option value=''>선택하세요</option>
+	                                <option value='강북구'>강북구</option>
+	                                <option value='성북구'>성북구</option>
+	                                <option value='강남구'>강남구</option>
+	                            </select>
+	                            <br>
+	                            <input type="text" style="width:300px;" name="address" required>
+	                        </td>
+	                            
+	                    </tr>
+	                    <tr>
+	                        <th>연락처</th>
+	                        <td><input type="text" name= "phone" required></td>
+	                    </tr>
+	                         
+	                </table>
+	                <br>
+	                <!-- Modal footer -->
+	            <div class="modal-footer">
+	                <input id="default" type="checkbox" name="defaultAddress" value="defalutAddress">&nbsp;
+	                <label for="default">기본 배송지로 등록</label>
+	            </div>
+	       
+	                <br>
+	                <button type="submit" class="btn btn-primary">등록</button>
+	
+	            </form>
+	          </div>
+	          
+	        </div>
+	      </div>
+	    </div>
+	    
  
   
 <!------------------------------------------------------------------------------- -->
@@ -266,29 +262,29 @@
 <!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
 
 
- <div class="modal" id="deleteAddress">
-    <div class="modal-dialog">
-    <div class="modal-content"> 
-    
-        <!-- Modal body -->
-        <div class="modal-body" align="center">
-           삭제하시겠습니까?
-           <br><br>
-           <button type="button" class="btn btn-primary">확인</button>
-           
-        </div>
-        
-    </div>
-    </div>
-</div>
+			 <div class="modal" id="deleteAddress">
+			    <div class="modal-dialog">
+			    <div class="modal-content"> 
+			    
+			        <!-- Modal body -->
+			        <div class="modal-body" align="center">
+			           삭제하시겠습니까?
+			           <br><br>
+			           <button type="button" class="btn btn-primary">확인</button>
+			           
+			        </div>
+			        
+			    </div>
+			    </div>
+			</div>
+				
+				
+				</div>
+				</div>
+				
 	
-	
-	</div>
-	</div>
-	
-	
-	<!-- footerbar -->
-	<%@ include file="../common/footerbar.jsp" %>
+		<!-- footerbar -->
+		<%@ include file="../common/footerbar.jsp" %>
 	
 
 

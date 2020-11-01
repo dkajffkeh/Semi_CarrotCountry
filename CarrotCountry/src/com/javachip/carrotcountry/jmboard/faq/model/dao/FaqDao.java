@@ -68,7 +68,7 @@ public class FaqDao {
 		
 		return list;
 	}
-//FAQ추가
+//FAQ추가 (Null에러)
 	public int insertFaq(Connection conn, Faq f) {
 		
 		int result = 0;
@@ -82,8 +82,8 @@ public class FaqDao {
 
 			pstmt.setString(1, f.getFaqTitle());
 			pstmt.setString(2, f.getFaqContent());
-			pstmt.setString(3, f.getCategory());
-			pstmt.setInt(4, Integer.parseInt(f.getMemNo()));
+			pstmt.setString(3, f.getCategory()); // 숫자로 변경해야함
+			pstmt.setString(4, f.getFaqWriter());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -155,6 +155,70 @@ public class FaqDao {
 		
 		
 		
+	}
+	//update
+	public int updateFaq(Connection conn, Faq f) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, f.getFaqTitle());
+			pstmt.setString(2, f.getFaqContent());
+			pstmt.setInt(3, f.getFaqNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+		
+		
+	}
+	
+	
+	
+	
+//faq게시판 삭제
+	public int deleteFaq(Connection conn, int nno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("delectFaq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return result;
 	}
 
 	

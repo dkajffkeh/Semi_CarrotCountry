@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% String contextPathUserinfo = request.getContextPath(); %>   
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,9 +83,9 @@
                 <th>회원 정보</th>
             </tr>
             <tr>
-                <td><a href="">회원 정보 설정</a></td>
+                <td><a href="<%= contextPathUserinfo %>/myPage.me.jw">회원 정보 설정</a></td>
             </tr>
-                <td><a href="">회원 탈퇴</a></td>
+                <td><a href="<%= contextPathUserinfo %>//deleteForm.me.jw">회원 탈퇴</a></td>
             <tr>
                 <th>관심 상품</th>
             </tr>
@@ -95,7 +99,7 @@
                 <th>판매 이력 조회</th>
             </tr>
             <tr>
-                <td><a href="">판매 현황</a></td>
+                <td><a href="<%= contextPathUserinfo %>/onSale.me.jw">판매 현황</a></td>
             </tr>
             <tr>
                 <th>공동구매</th>

@@ -47,6 +47,12 @@ public class FaqInsertController extends HttpServlet {
 			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
 			
 			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
+		}else {
+			
+			request.setAttribute("errorMsg", "공지사항 작성 실패");
+			request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
+			
+			
 		}
 		
 	}

@@ -33,8 +33,8 @@
         <br>
         <!-- 메뉴선택 버튼 -->
         <div class="navWrap">
-            <div class="menu" align ="center"><a href="">판매중</a></div>
-            <div class="menu" align ="center"><a href="">판매완료</a></div>
+            <div class="menu" align ="center"><a href="<%= contextPath %>/onSale.me.jw">판매중</a></div>
+            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw">판매완료</a></div>
         </div>
         <br>
         <!-- 검색필터 드롭다운 -->
