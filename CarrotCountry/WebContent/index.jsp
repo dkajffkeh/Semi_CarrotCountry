@@ -74,9 +74,11 @@
   
     function toTown(){
     	
-    	
-        location.href="<%=contextPath%>/shMarketBoardMain.sh";
-	
+    	<%if(loginMember!=null){%>
+        location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1&";
+		<%} else {%>
+		location.href="<%=contextPath%>/shMarketBoardMain.sh;
+		<%}%>
     }
     </script>
     <button type="button" class="btn btn-outline-success">공구마켓</button>
