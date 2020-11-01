@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@
+	page import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.*"
+ %>    
+
+<%
+	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -202,7 +211,7 @@
             </div>
             <div id="header3">
                 <div id="createPro">
-                    <button type="button" class="btn btn-secondary">새 공동구매 만들기</button>
+                    <a href="<%= contextPath %>/buyerProduct.qna." type="button" class="btn btn-secondary">새 공동구매 만들기</a>
                 </div>
                 <br><br>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
@@ -327,15 +336,22 @@
                         </div>
                     </div>
 
-                    <div id="paginationArea">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                          </ul>    
-                    </div>
+                    <div class="paginationArea" align="center">
+
+					<% if(pi.getCurrentPage() != 1){ %>
+		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+		            <% } %>
+					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+		            	
+		            	<a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= p %>"><%= p %></a>
+		            
+		            <% } %>
+		            
+		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
+		            <% } %>
+		       		</div>
+                
                    
 
                 </div>
