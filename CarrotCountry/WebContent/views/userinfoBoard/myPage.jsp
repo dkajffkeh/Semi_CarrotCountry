@@ -1,135 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-/* ¸¶ÀÌÆäÀÌÁö(¸ÞÀÎ) cssÀÔ´Ï´Ù */
-/* content¿µ¿ª ÀüÃ¼ */
-    .outer{
-           margin-top:50px;
-           margin-left:50px;
-           width:1000px;
-           font-family: 'Nanum Gothic', sans-serif; 
 
-    }
-/* content_bottom¿µ¿ª¿¡ ´ëÇÑ Àü¹ÝÀûÀÎ ±¸Á¶ */
-    #content_bottom>div{float:left;height:100%;}
-    #content_bottom1{
-        width:40%;
-        }
-    #content_bottom2{
-        width:50%;
-    }
-    #content_bottom2_1{
-        float:right;
-        line-height:10px;
-    }
-    
-        
-/* content_top ¿µ¿ª¿¡ ´ëÇÑ ¼¼ºÎ ½ºÅ¸ÀÏ */
-    #content_top{
-        border:3px solid black;
-        padding:10px;
-        width: 800px;
-        height:220px;
-        margin-left:100px;
-    }
-    #content_top1{
-        width:20%;
-        height:100%;
-        float:left;
-        margin-left:40px;
-        margin-top:10px;
-    }
-    #content_top1 label {
-        float:right;
-        background:lightgray;
-        padding: 3px 25px;
-        border-radius:5px;
-        cursor:pointer;
-        margin-top:5px;
-    }
-    #content_top2{
-        width:50%;
-        height:100%;
-        float:left;
-        padding:10px;
-        margin-left:20px;
-    }
-    #content_top3{
-        height:100%;
-        float:left;
-        line-height:20px;
-        margin-top:50px;
-    }
-    #content_top2>span{
-        float:left; 
-        padding:10px;
-        font-size:30px;
-        margin-top:40px;
-       
-    }
-    #content_top2 a{color:orange;}
+<link rel="stylesheet" href="resources/css/userinfoBoard/myPage.css">
 
-    /* content_bottom¿µ¿ª¿¡ ´ëÇÑ ¼¼ºÎ½ºÅ¸ÀÏ */
-    #content_bottom1{
-    margin-left:50px;
-    border: 3px solid gray;
-    }
-    #content_bottom1>table{
-    font-size:20px;
-    margin-top:50px;
-    margin-bottom:50px;
-    margin-left:100px;
-    }
-    td{
-    width:90px;
-    height:45px;
-    }
-    #content_bottom2{
-    padding:30px;
-    font-size:20px;
-    }
-    #content_bottom2{
-    margin:auto;
-    padding:50px;
-    }
-    #content_bottom2_2{
-    margin:20px;
-    }
-    #content_bottom2_3{
-        float:right;
-    }
-    #updateButton{
-        float:right;
-        margin-right:100px;
-    }
-</style>
 </head>
 <body>
-	<!--»ó´Ü¹Ù, ¸Þ´º¹Ù, ÇªÅÍ -->
+	<!--  headerNavbar -->
 	<%@ include file= "../common/commonNavbar.jsp"%>
-	<%-- <%@ include file= "../common/mypageMenubar.jsp" %> --%> 
-	<%@ include file= "../common/footerbar.jsp" %>
+	
 
+	
+	
+	<div class="myPageWrapper">
+	
+	<!--  mypageMenubar -->
+	<%@ include file= "./mypageMenubar.jsp" %>
+	
+	<div class="myPageWrapper_content">
 	<div class="outer">
     <br>
-    <h2>È¸¿ø Á¤º¸</h2>
+    <h2>íšŒì› ì •ë³´</h2>
      <hr color="gray">
      <br><br>
-     <!-- content¿µ¿ªÀÇ À­ºÎºÐ -->
+     <!-- contentì˜ì—­ì˜ ìœ—ë¶€ë¶„ -->
      <div id="content_top">
-         <!-- ÇÁ·ÎÇÊ »çÁø -->
+         <!-- í”„ë¡œí•„ ì‚¬ì§„ -->
         <div id="content_top1">
                 <div id="fileArea">
                 <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
                 </div>
                 <img id="profileImg" width="150" height="150" style="border-radius:1500px; border:1px solid lightgray;">
                 <br>
-                <label for="file1">ÇÁ·ÎÇÊº¯°æ</label>
+                <label for="file1">í”„ë¡œí•„ë³€ê²½</label>
         </div>
 
         <script>
@@ -168,51 +75,51 @@
 
 
 
-        <!-- 3°¡Áö °Ç¼ö ³ëÃâºÎºÐ -->
+        <!-- 3ê°€ì§€ ê±´ìˆ˜ ë…¸ì¶œë¶€ë¶„ -->
         <div id="content_top2">
-            <span align="center"><h4><b>±¸¸Å/ÆÇ¸Å</b></h4><a href="">2</a> °Ç</span>
-            <span align="center"><h4><b>°øµ¿±¸¸Å</b></h4><a href="">3</a> °Ç</span>
-            <span align="center"><h4><b>¹®ÀÇ</b></h4><a href="">1</a>°Ç</span>    
+            <span align="center"><h4>êµ¬ë§¤/íŒë§¤</h4><a href="">2</a> ê±´</span>
+            <span align="center"><h4>ê³µë™êµ¬ë§¤</h4><a href="">3</a> ê±´</span>
+            <span align="center"><h4>ë¬¸ì˜</h4><a href="">1</a>ê±´</span>    
         </div>
-        <!-- ¹öÆ° 2°³ ºÎºÐ -->
+        <!-- ë²„íŠ¼ 2ê°œ ë¶€ë¶„ -->
        <div id="content_top3">
-        <button type="button"class="btn btn-secondary ">È¸¿ø Á¤º¸ ¼öÁ¤</button><br><br>
-        <button type="button" class="btn btn-secondary ">ºñ¹Ð¹øÈ£ º¯°æ</button>
+        <button type="button"class="btn btn-secondary ">íšŒì› ì •ë³´ ìˆ˜ì •</button><br><br>
+        <button type="button" class="btn btn-secondary ">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</button>
        </div>
     </div>
     <br><br><br><br>
-    <!-- content¿µ¿ªÀÇ ¾Æ·§ºÎºÐ (È¸¿øÁ¤º¸, ¹è¼ÛÁöÁ¤º¸) -->
+    <!-- contentì˜ì—­ì˜ ì•„ëž«ë¶€ë¶„ (íšŒì›ì •ë³´, ë°°ì†¡ì§€ì •ë³´) -->
     <div id="content_bottom">
-            <!--È¸¿øÁ¤º¸ -->
+            <!--íšŒì›ì •ë³´ -->
      <div id="content_bottom1">
         <table>
             <tr>
-                <td>¾ÆÀÌµð</td>
+                <td>ì•„ì´ë””</td>
                 <td>xxxx</td>
             </tr>
             <tr>
-                <td>¼ºÇÔ</td>
+                <td>ì„±í•¨</td>
                 <td>xxx</td>
             </tr>
             <tr>
-                <td>¼ºº°</td>
+                <td>ì„±ë³„</td>
                 <td>xx</td>
             </tr>
             <tr>
-                <td>»ý³â¿ùÀÏ</td>
+                <td>ìƒë…„ì›”ì¼</td>
                 <td>xxxx-xx-xx</td>
             </tr>
             <tr>
-                <td>´Ð³×ÀÓ</td>
+                <td>ë‹‰ë„¤ìž„</td>
                 <td>xx</td>
             </tr>
             <tr>
-                <td>¿¬¶ôÃ³</td>
+                <td>ì—°ë½ì²˜</td>
                 <td>xxxxxx</td>
             </tr>
             <tr>
-                <td>ÁÖ¼Ò</td>
-                <td>xxxxxxxx</td>
+                <td>ì£¼ì†Œ</td>
+                <td>xxxxxxxxì´ ì¹¸ì€ ì£¼ì†Œì ëŠ”ë¶€ë¶„ìž…ë‹ˆë‹¤ë‹¤ë‹¤ë‹¤ë‹¤ë‹¤ë‹¤ë‹¤ë‹¤.</td>
             </tr>
             <tr>
                 <td>E-Mail</td>
@@ -220,46 +127,46 @@
             </tr>
         </table>
         </div>
-        <!-- ¹è¼ÛÁö Á¤º¸  -->
+        <!-- ë°°ì†¡ì§€ ì •ë³´  -->
         <div id="content_bottom2">
-            <h3><b>¹è¼ÛÁö µî·Ï Á¤º¸</b></h3> 
+            <h3><b>ë°°ì†¡ì§€ ë“±ë¡ ì •ë³´</b></h3> 
             <br>
             <div id = "content_bottom2_1">
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#addAdressForm">µî·Ï</button>
-                <button type="button" class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#deleteAddress">»èÁ¦</button>    
+                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#addAdressForm">ë“±ë¡</button>
+                <button type="button" class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#deleteAddress">ì‚­ì œ</button>    
             </div>
          <br><br>
             <div id="content_bottom2_2">
             <input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address1" value="address1">
-            &nbsp;&nbsp;¹è¼ÛÁö1 )
+            &nbsp;&nbsp;ë°°ì†¡ì§€1 )
 
             
-            <!----------------------±âº»¹è¼ÛÁö ¼³Á¤ ½Ã º¸¿©Áú ¹®±¸---------------------->
+            <!----------------------ê¸°ë³¸ë°°ì†¡ì§€ ì„¤ì • ì‹œ ë³´ì—¬ì§ˆ ë¬¸êµ¬---------------------->
 
             <div id="content_bottom2_3">
-                <p style="color:blue;">±âº»¹è¼ÛÁö</p>
+                <p style="color:blue;">ê¸°ë³¸ë°°ì†¡ì§€</p>
             </div>
             
             <!------------------------------------------------------------------------>
 
             <br>
-            ¼­¿ïÆ¯º°½Ã xxx xxx xxx xxxxssssssssdddddddddddddddd
+            ì„œìš¸íŠ¹ë³„ì‹œ xxx xxx xxx xxxxssssssssdddddddddddddddd
 
             <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address2" value="address2">
-            &nbsp;&nbsp; ¹è¼ÛÁö2 )
+            &nbsp;&nbsp; ë°°ì†¡ì§€2 )
             
             
             <br>
-            °æ±âµµ xxxx xxxxx xxxxxx
+            ê²½ê¸°ë„ xxxx xxxxx xxxxxx
 
             
             <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address3" value="address3">
-            &nbsp;&nbsp; ¹è¼ÛÁö3 )
+            &nbsp;&nbsp; ë°°ì†¡ì§€3 )
             
             
             
             <br>
-            ÀÎÃµ±¤¿ª½Ã xxx xxxxxx xxxxx
+            ì¸ì²œê´‘ì—­ì‹œ xxx xxxxxx xxxxx
         </div>
         </div>
 
@@ -268,23 +175,22 @@
 
     <div id="updateButton" align="center">
         
-        <button type="submit" class="btn btn-primary ">º¯°æÇÏ±â</button>
+        <button type="submit" class="btn btn-primary ">ë³€ê²½í•˜ê¸°</button>
        
     </div>
     
 </div>
 
 
-
-<!-------------------------------- ¹è¼ÛÁö µî·Ï ¹öÆ° Å¬¸¯½Ã º¸¿©Áú modal------------------>
+<!-------------------------------- ë°°ì†¡ì§€ ë“±ë¡ ë²„íŠ¼ í´ë¦­ì‹œ ë³´ì—¬ì§ˆ modal------------------>
     <div class="modal fade" id="addAdressForm">
       <div class="modal-dialog">
         <div class="modal-content">
         
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">¹è¼ÛÁö Ãß°¡</h4>
-            <button type="button" class="close" data-dismiss="modal">¡¿</button>
+            <h4 class="modal-title">ë°°ì†¡ì§€ ì¶”ê°€</h4>
+            <button type="button" class="close" data-dismiss="modal">Ã—</button>
           </div>
           
           <!-- Modal body -->
@@ -292,23 +198,23 @@
             <form action="" method="post">
                 <table>
                     <tr>
-                        <th>¼ö·ÉÀÎ</th>
+                        <th>ìˆ˜ë ¹ì¸</th>
                         <td><input type="text" name="userName" required></td>
                     </tr>
                     <tr>
-                        <th>¹è¼ÛÁö</th><br>
+                        <th>ë°°ì†¡ì§€</th>
                         <td>
                             <select id="Address_1" style="width:110px;" required>
-                                <option value=''>¼±ÅÃÇÏ¼¼¿ä</option>
-                                <option value='¼­¿ïÆ¯º°½Ã'>¼­¿ïÆ¯º°½Ã</option>
-                                <option value='ÀÎÃµ±¤¿ª½Ã'>ÀÎÃµ±¤¿ª½Ã</option>
-                                <option value='°æ±âµµ'>°æ±âµµ</option>
+                                <option value=''>ì„ íƒí•˜ì„¸ìš”</option>
+                                <option value='ì„œìš¸íŠ¹ë³„ì‹œ'>ì„œìš¸íŠ¹ë³„ì‹œ</option>
+                                <option value='ì¸ì²œê´‘ì—­ì‹œ'>ì¸ì²œê´‘ì—­ì‹œ</option>
+                                <option value='ê²½ê¸°ë„'>ê²½ê¸°ë„</option>
                             </select>
                             <select id="Address_2" style="width:110px;" required>
-                                <option value=''>¼±ÅÃÇÏ¼¼¿ä</option>
-                                <option value='°­ºÏ±¸'>°­ºÏ±¸</option>
-                                <option value='¼ººÏ±¸'>¼ººÏ±¸</option>
-                                <option value='°­³²±¸'>°­³²±¸</option>
+                                <option value=''>ì„ íƒí•˜ì„¸ìš”</option>
+                                <option value='ê°•ë¶êµ¬'>ê°•ë¶êµ¬</option>
+                                <option value='ì„±ë¶êµ¬'>ì„±ë¶êµ¬</option>
+                                <option value='ê°•ë‚¨êµ¬'>ê°•ë‚¨êµ¬</option>
                             </select>
                             <br>
                             <input type="text" style="width:300px;" name="address" required>
@@ -316,7 +222,7 @@
                             
                     </tr>
                     <tr>
-                        <th>¿¬¶ôÃ³</th>
+                        <th>ì—°ë½ì²˜</th>
                         <td><input type="text" name= "phone" required></td>
                     </tr>
                          
@@ -325,11 +231,11 @@
                 <!-- Modal footer -->
             <div class="modal-footer">
                 <input id="default" type="checkbox" name="defaultAddress" value="defalutAddress">&nbsp;
-                <label for="default">±âº» ¹è¼ÛÁö·Î µî·Ï</label>
+                <label for="default">ê¸°ë³¸ ë°°ì†¡ì§€ë¡œ ë“±ë¡</label>
             </div>
        
                 <br>
-                <button type="submit" class="btn btn-primary">µî·Ï</button>
+                <button type="submit" class="btn btn-primary">ë“±ë¡</button>
 
             </form>
           </div>
@@ -338,11 +244,11 @@
       </div>
     </div>
     
-  </div>
+ 
   
 <!------------------------------------------------------------------------------- -->
 
-<!----------------------»èÁ¦¹öÆ° Å¬¸¯½Ã º¸¿©Áú modal---------------------------------------->
+<!----------------------ì‚­ì œë²„íŠ¼ í´ë¦­ì‹œ ë³´ì—¬ì§ˆ modal---------------------------------------->
 
 
  <div class="modal" id="deleteAddress">
@@ -351,15 +257,24 @@
     
         <!-- Modal body -->
         <div class="modal-body" align="center">
-           »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?
+           ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?
            <br><br>
-           <button type="button" class="btn btn-primary">È®ÀÎ</button>
+           <button type="button" class="btn btn-primary">í™•ì¸</button>
            
         </div>
         
     </div>
     </div>
 </div>
+	
+	
+	</div>
+	</div>
+	
+	
+	<!-- footerbar -->
+	<%@ include file="../common/footerbar.jsp" %>
+	
 
 
 </body>

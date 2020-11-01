@@ -16,16 +16,26 @@
          #myPageTable td{
         width:200px;
         height:50px;
+        padding:15px;
+        
             }
         #myPageForm table{
         margin:auto;
+        background-color:rgb(255, 244, 223);
          }
         #updateButton{width:1500px;}
 </style>
 </head>
 <body>
-
-
+	<!--  headerNavbar -->
+	<%@ include file= "../common/commonNavbar.jsp"%>
+	
+	<div class="myPageWrapper">
+	
+	<!--  mypageMenubar -->
+	<%@ include file= "./mypageMenubar.jsp" %>
+	
+	<div class="myPageWrapper_content">
     <div class="outer">
         <br>
         <h2>회원 정보 수정</h2>
@@ -69,7 +79,7 @@
                             <option value='광주광역시'>경기도</option>
                             <option value='인천광역시'>인천광역시</option>
                             </select>
-                        </td><br><br>
+                        </td>
                         <td>
                             <select style="width:180px;" id="Address_2">
                                 <option value=''>선택하세요</option>
@@ -96,7 +106,12 @@
     
         </div>
     </div>
-    <br><br><br>
+    </div>
+    </div>
+    
+    <!-- footerbar -->
+	<%@ include file="../common/footerbar.jsp" %>
+	
 	
 
 

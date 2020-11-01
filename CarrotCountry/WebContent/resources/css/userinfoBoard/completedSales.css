@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+           
+        /* 판매완료 css */
+         .outer{
+           margin-top:50px;
+           margin-left:50px;
+           width:1000px;
+           font-family: 'Nanum Gothic', sans-serif; 
+           }
+             /* 메뉴선택 세부영역 */
+     
+        .menu{
+            display:table-cell;
+            height:50px;
+            width:140px;
+             }
+        .menu a{
+            text-decoration:none;
+            color:black;
+            font-weight:bold;
+            display:block;
+            width:100%;
+            height:100%;
+            font-size:20px;
+            line-height:50px;
+            background-color:rgb(250, 240, 220);
+            border-radius:80px;
+             }
+        .menu a:hover{
+            background:rgb(248, 141, 2);
+               font-size:30px;
+              color:white;
+              border-radius:80px;
+            }
+     
+             /* 내용 세부영역 */
+            /* #content{margin:auto;} */
+        th{ font-size:25px;}
+        #content{
+            border:3px solid rgb(255, 178, 34);
+            border-radius:50px;
+            padding:80px;
+        }
+        #saleStatusTable{
+         margin:auto;
+         font-size:20px;
+             }
+         #saleStatusTable td{
+         width:230px;
+         height:90px;
+         margin-bottom:30px;
+            }
+        #price{
+            margin-bottom:10px;
+        }
+        #saleStatusTable{
+            border-bottom:1px;
+        }
+        #saleImage:hover {
+                box-shadow:5px 5px 10px 5px gray;
+                cursor:pointer;
+             }
+     
+    
