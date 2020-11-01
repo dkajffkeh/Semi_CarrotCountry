@@ -3,11 +3,14 @@
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY" %>
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo" %>
 <%
 PostBoard pb = (PostBoard)request.getAttribute("pb");
 //String 게시글번호,String 카테고리번호,int member번호, String 시역 ex 서울시 송파구 , 닉네임 , 게시글번호 , 게시글 제목, 내용 , 카테고리 이름, 상품상태, 거래유형,거래지역, 썸네일 패스, 썸네일 이름, 썸내일 로드패스, 조회수, likes,가격,게시일.
 ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
 //댓글식별값,닉네임,게시일,내용,공개비공개 체크,보드넘버.
+ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
+
 %>    
 <!DOCTYPE html>
 <html>
@@ -26,6 +29,10 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
 }
 .carousel-item.active > img {
     border-radius: 10px;
+}
+.carousel-inner{
+    width:100%;
+    height:100%;
 }
 .userInfo_display {
     height:75px;
@@ -172,25 +179,34 @@ ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
                    width:100%;
                    margin:auto;
                    ">
-             <ol class="carousel-indicators">
-                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-             </ol>
-             <div class="carousel-inner">
-                 <div class="carousel-item active">
-                     <img class="d-block w-100" src="">
-                 </div>
-             </div>
-             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                 <span class="sr-only">Previous</span>
-             </a>
-             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                 <span class="sr-only">Next</span>
-             </a>
-         </div>
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleIndicators" data-slide-to="0"
+						class="active"></li>
+				<% for(int i = 1 ; i<pList.size(); i++) {%>	
+					<li data-target="#carouselExampleIndicators" data-slide-to="<%=i%>"></li>
+					<% } %>
+				</ol>
+				<div class="carousel-inner">
+				
+					<div class="carousel-item active">
+						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
+					</div>
+					<% for(int i = 1 ; i<pList.size() ; i++ ){ %>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
+					</div>
+					<% } %>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleIndicators"
+					role="button" data-slide="prev"> <span
+					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="carousel-control-next"
+					href="#carouselExampleIndicators" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
      </div>
 
      <!-- ↓ 유저 정보및 가격 ↓ -->

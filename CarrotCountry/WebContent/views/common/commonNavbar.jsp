@@ -128,7 +128,7 @@ a {text-decoration: none;}
                         <% }else { %>
 	                        <!-- 로그인 상태 -->
 	                        <td><a href="<%= contextPath %>/logout.me.ng"><i class="fas fa-sign-out-alt"></i></a></td>
-	                        <td><a href=""><i class="fas fa-money-check"></i></a></td>
+	                        <td><a href="<%= contextPath %>/myPage.me.jw"><i class="fas fa-money-check"></i></a></td>
                         <% } %>
                     </tr>
                     <tr class="user_inter_font">

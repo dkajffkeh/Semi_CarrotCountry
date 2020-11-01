@@ -349,5 +349,36 @@ Properties prop = new Properties();
 		
 		return result;
 	}
+
+
+	public ArrayList<PhotoBoardVo> shMarketPhotoSelector(int bno, Connection conn) {
+		
+		ArrayList<PhotoBoardVo> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketPhotoSelector");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PhotoBoardVo pbv = new PhotoBoardVo();
+				pbv.setPhotoPath(rs.getString("PHOTO_PATH"));
+				pbv.setPhotoFileName(rs.getString("PHOTO_FILENAME"));
+				
+				list.add(pbv);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return list;
+	}
 	
 }

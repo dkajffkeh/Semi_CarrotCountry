@@ -204,4 +204,13 @@ SET
 WHERE 
       POST_NO=?
 </entry>
+<entry key="shMarketPhotoSelector">
+SELECT 
+       PHOTO_PATH
+      ,PHOTO_FILENAME
+  FROM 
+      PHOTO  
+ WHERE
+      POST_NO=?
+</entry>
 </properties>
