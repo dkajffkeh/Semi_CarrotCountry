@@ -47,6 +47,7 @@ public class QnADao {
 			
 			if(rs.next()) {	
 				listCount = rs.getInt("LISTCOUNT");
+				
 			}
 			
 		} catch (SQLException e) {

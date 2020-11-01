@@ -213,7 +213,7 @@
 									<%}else{ %>
 						                	<!-- 조회된 옵션이 있을 경우-->
 							            <% for(Option o : oList){ %>	
-							                <option><%= o.getOptionName() %>></option>
+							                <option><%= o.getOptionName() %></option>
 							             <%} %>
 					                <%} %>
 					                </select>
@@ -247,7 +247,7 @@
                             <button type="button" onclick="showExplan()" class="btn btn-dark">상세설명</button>
                         </div>
                         <div id="content3_1_2">
-                            <button type="button" class="btn btn-dark">Q&A</button>
+                            <button href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</button>
                         </div>
                         <div id="content3_1_3">
                             <button type="button" onclick="showRefund()" class="btn btn-dark">교환 및 환불</button>
