@@ -12,16 +12,16 @@ import com.javachip.carrotcountry.jmboard.faq.model.service.FaqService;
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqInsertController
+ * Servlet implementation class FaqDetailController
  */
-@WebServlet("/insert.fa.jm")
-public class FaqInsertController extends HttpServlet {
+@WebServlet("/detail.fa.jm")
+public class FaqDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqInsertController() {
+    public FaqDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,21 @@ public class FaqInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.setCharacterEncoding("utf-8");
+		int nno = Integer.parseInt(request.getParameter("nno"));
 		
+		int result = new FaqService().increaseCount(nno);
 		
-		String faqWriter = request.getParameter("memNo");
-		String faqContent = request.getParameter("faqContent");
-		String faqTitle = request.getParameter("faqTitle");
-		String category = request.getParameter("category");
-	
-		Faq f = new Faq(faqWriter, faqContent, faqTitle, category);
-		
-		int result = new FaqService().insertFaq(f);
-		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
+		if(result > 0) { // 유효한 공지사항 번호일 경우 => 해당공지사항상세조회한 후 => 상세페이지 띄우기
 			
-			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
+			Faq f = new FaqService().selectFaq(nno);
+			
+			request.setAttribute("f", f);
+			request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
+			
+		}else { // 유효한 공지사항이 아님 => 에러페이지 (에러문구 담아서)
+			
+			
+			
 		}
 		
 	}
