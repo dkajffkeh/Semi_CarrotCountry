@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberUpdateFormController
+ * Servlet implementation class MemberDeleteFormController
  */
-@WebServlet("/updateForm.me.jw")
-public class MemberUpdateFormController extends HttpServlet {
+@WebServlet("/deleteForm.me.jw")
+public class MemberDeleteFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateFormController() {
+    public MemberDeleteFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class MemberUpdateFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher view = request.getRequestDispatcher("views/userinfoBoard/memberUpdateForm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/userinfoBoard/memberDeleteForm.jsp");
 		view.forward(request, response);
 	
 	
