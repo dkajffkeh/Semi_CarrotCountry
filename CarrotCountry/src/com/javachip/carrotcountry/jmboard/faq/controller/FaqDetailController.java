@@ -26,7 +26,8 @@ public class FaqDetailController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/**(오류중)DB수정하고 다시 확인
+	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,16 +36,17 @@ public class FaqDetailController extends HttpServlet {
 		
 		int result = new FaqService().increaseCount(nno);
 		
-		if(result > 0) { // 유효한 공지사항 번호일 경우 => 해당공지사항상세조회한 후 => 상세페이지 띄우기
+		if(result > 0) {
 			
 			Faq f = new FaqService().selectFaq(nno);
 			
 			request.setAttribute("f", f);
 			request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
 			
-		}else { // 유효한 공지사항이 아님 => 에러페이지 (에러문구 담아서)
+		}else {
 			
-			
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
 		}
 		

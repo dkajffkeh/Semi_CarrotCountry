@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.jmboard.faq.model.service.FaqService;
+import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
+
 /**
  * Servlet implementation class FaqUpdateFormController
  */
@@ -26,8 +29,15 @@ public class FaqUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		
+		Faq f = new FaqService().selectFaq(nno);
+	
+		request.setAttribute("f", f);
+		
+		request.getRequestDispatcher("views/faq/faqUpdateForm.jsp");
+	
 	}
 
 	/**
