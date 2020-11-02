@@ -34,6 +34,20 @@ public class Product {
 	
 	
 
+	public Product(String thumbnailLoadpath, String postName) {
+		super();
+		this.thumbnailLoadpath = thumbnailLoadpath;
+		this.postName = postName;
+	}
+
+
+
+
+
+
+
+
+
 	public Product(int postNo, String thumbnailLoadpath, String postName, int gpPeople,
 			int postLikes, int gpPrice, int gpDRate, int gpDPrice) {
 		super();

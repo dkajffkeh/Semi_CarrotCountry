@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.javachip.carrotcountry.coBuying.model.dao.QnADao;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
+import com.javachip.carrotcountry.coBuying.model.vo.Product;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -36,6 +37,37 @@ public class QnAService {
 			return list;
 			
 		}
+	
+	
+	public ArrayList<QnA> selectSellerQnAList(PageInfo pi, int bno){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<QnA> list = new QnADao().selectSellerQnAList(conn, pi, bno);
+		
+		close(conn);
+		
+		return list;
+		
+	}
+	
+	
+	public Product selectProductQnAList(int bno) {
+		
+		Connection conn = getConnection();
+		
+		Product pd = new QnADao().selectProductQnAList(conn, bno);
+		
+		close(conn);
+		return pd;
+		
+		
+	}
+
+	
+	
+	
+	
 	
 	
 	public int insertQuestion(QnA qa) {

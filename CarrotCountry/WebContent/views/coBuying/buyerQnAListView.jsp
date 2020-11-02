@@ -18,7 +18,7 @@
 <style>
 
 /* 전반적인 큰 틀 */
-.wrap{width:1200px;height:600px;margin:auto;}
+.wrap{width:1200px;height:800px;margin:auto;}
 #content{height: 100%;}
 
 #content>div{width: 100%; float: left;}
@@ -69,49 +69,6 @@ tbody td:hover{cursor: pointer;}
     margin: 100px;
 }
 
-/* 페이징 */
-#paginationArea>ul{
-    padding-left: 450px;
-
-}
-
-
-
-/* 푸터바의 전반적인 틀 */
-#footerbar {
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    height: 270px;
-    background-color: #00251a
-}
-
-.footerbar_totalWrapper {
-    width: 1200px;
-    height: 100%;
-    border-bottom: 1px solid white;
-    margin: auto;
-}
-
-.footer_upperWrapper {
-    width: 100%;
-    height: 52px;
-    border-bottom: 1px solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer_upperWrapper>button {
-    margin-left: 40px;
-}
-
-.footer_belowWrapper {
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 </style>
 
@@ -163,6 +120,7 @@ tbody td:hover{cursor: pointer;}
                         	<%}else{%>
 	                        	<%for(QnA qa : list){ %>
 		                            <tr>
+		                            	<input type="hidden" name="postNo" value="<%= qa.getPostNo() %>">
 		                                <td><%= qa.getGqNo() %></td>		<!-- 질문글번호 -->
 		                                <td><%= qa.getMemNo() %></td>		<!-- 유저아이디 -->
 		                                <td><%= qa.getGqTitle() %></td>		<!-- 질문제목 -->
@@ -181,7 +139,7 @@ tbody td:hover{cursor: pointer;}
 							$("#list-area>tbody>tr").click(function(){
 								
 								// 클릭했을 때의 행에 존재하는 글번호
-								var bno = $(this).children().eq(0).text();
+								var bno = $(this).children().eq(1).text();
 								
 								
 								// 쿼리스트링으로 만들어서 요청시 값 전달
@@ -199,21 +157,23 @@ tbody td:hover{cursor: pointer;}
                 </div>
 
                 
-                <div class="paginationArea" align="center">
-
-					<% if(pi.getCurrentPage() != 1){ %>
-		           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
-		            <% } %>
-					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-		            	
-		            	<a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= p %>"><%= p %></a>
-		            
-		            <% } %>
-		            
-		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-		           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
-		            <% } %>
-		        </div>
+                
+	         <!-- 페이징 처리 -->
+	         <div class="paginationArea" align="center">
+	
+				<% if(pi.getCurrentPage() != 1){ %>
+	           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+	            <% } %>
+				<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+	            	
+	            	<a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= p %>"><%= p %></a>
+	            
+	            <% } %>
+	            
+	            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+	           		 <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
+	            <% } %>
+	        </div>
                 
                 
                 
@@ -225,24 +185,8 @@ tbody td:hover{cursor: pointer;}
     </div>
 
 
-    
-    <footer id="footerbar">
-        <div class=footerbar_totalWrapper>
-            <div class="footer_upperWrapper">
-                <button class="btn btn-secondary">공지사항</button>
-                <button class="btn btn-secondary">고객센터</button>
-                <button class="btn btn-secondary">개인정보 취급방침</button>
-                <button class="btn btn-secondary">회사소개</button>
-            </div>
-            <div class="footer_belowWrapper">
-                <p style="color:white">footer</p>
-            </div>
-        </div>
 
-    </footer>
-
-
-
+<%@ include file="../common/footerbar.jsp"%>
 
 
 </body>

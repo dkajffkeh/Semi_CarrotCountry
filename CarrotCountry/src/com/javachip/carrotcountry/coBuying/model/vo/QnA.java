@@ -24,6 +24,23 @@ public class QnA {
 
 
 
+	public QnA(int postNo, int gqNo, String memNo, String gqTitle, int gqViews, Date gqEnrollDate) {
+		super();
+		this.postNo = postNo;
+		this.gqNo = gqNo;
+		this.memNo = memNo;
+		this.gqTitle = gqTitle;
+		this.gqViews = gqViews;
+		this.gqEnrollDate = gqEnrollDate;
+	}
+
+
+
+
+
+
+
+
 	public QnA(int gqNo, String gqTitle, String memNo, Date gqEnrollDate, String gqContent) {
 		super();
 		this.gqNo = gqNo;

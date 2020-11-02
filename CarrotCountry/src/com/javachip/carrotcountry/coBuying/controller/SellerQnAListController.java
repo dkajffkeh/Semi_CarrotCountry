@@ -9,23 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.coBuying.model.service.ProductService;
 import com.javachip.carrotcountry.coBuying.model.service.QnAService;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 
 /**
- * Servlet implementation class MainPageController
+ * Servlet implementation class SellerQnAListController
  */
-@WebServlet("/mainpage.co.jy")
-public class MainPageController extends HttpServlet {
+@WebServlet("/sellerlist.qna.jy")
+public class SellerQnAListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageController() {
+    public SellerQnAListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +33,14 @@ public class MainPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		//=========== bno numberformatexception 뜸  왜..?============ 
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		int result = new QnAService().increaseQnACount(bno);
+
+		if(result > 0) { // 유효한게시글
+			
+		// 사용자가 요청한 페이지에 뿌려줄 공구물품 Product
+		Product pd = new QnAService().selectProductQnAList(bno);
 		
 		// ---------------------------- 페이징 처리 -------------------------------------
 		int listCount;					// 현재 일반게시판 총 갯수
@@ -49,16 +54,16 @@ public class MainPageController extends HttpServlet {
 		
 		
 		// * listCount : 현재 일반 게시판 총 갯수
-		listCount = new ProductService().selectProductListCount();
+		listCount = new QnAService().selectQnAListCount();
 		
 		// * currentPage : 사용자가 요청한 페이지 (즉, 현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대갯수 (몇 개 단위씩 보여지게 할건지)
-		pageLimit = 5;
+		pageLimit = 10;
 		
 		// * boardLimit : 한 페이지 내에 보여질 게시글 최대갯수 (몇 개 단위씩 보여지게 할건지)
-		boardLimit = 5;
+		boardLimit = 10;
 		
 		// * maxPage : 제일 마지막 페이지 수
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
@@ -75,17 +80,23 @@ public class MainPageController extends HttpServlet {
 		// 페이징바를 만들때 필요한 정보들이 담겨있는 pageInfo 객체
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
-		// 메인에 띄울 공동구매 상품리스트 조회
-		ArrayList<Product> pList = new ProductService().selectMainProductList(pi);
+		// 사용자가 요청한 페이지에 뿌려줄 게시글 리스트
+		ArrayList<QnA> list = new QnAService().selectSellerQnAList(pi,bno);
 		
 		
 		request.setAttribute("pi", pi);
-		request.setAttribute("pList", pList);
+		request.setAttribute("list", list);
+		request.setAttribute("pd", pd);
 		
-		request.getRequestDispatcher("views/coBuying/coBuyingMainPage.jsp").forward(request, response);
+		request.getRequestDispatcher("views/coBuying/sellerQnAListView.jsp").forward(request, response);
 		
-		
+		}else {
+			
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+		}
+	
 	}
 
 	/**

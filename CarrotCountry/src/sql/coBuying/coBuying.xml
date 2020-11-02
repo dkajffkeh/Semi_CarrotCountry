@@ -32,7 +32,8 @@
 		             , A.*
 		          FROM (
 		                SELECT
-		                       GQ_NO
+		                	   POST_NO
+		                     , GQ_NO
 		                     , MEM_USERID
 		                     , GQ_TITLE
 		                     , GQ_VIEWS
@@ -94,6 +95,38 @@
 	
 	</entry>
 	
+	<entry key="selectSellerQnAList">
+			SELECT *
+			  FROM (
+			        SELECT 
+			               ROWNUM RNUM
+			             , A.*
+			          FROM (
+			                SELECT
+	                             , GQ_NO
+			                     , MEM_USERID
+			                     , GQ_TITLE
+			                     , GQ_VIEWS
+			                     , GQ_ENROLLDATE
+			                  FROM GROUPBUY_QUESTION 
+			                  JOIN MEMBER USING(MEM_NO)
+			                 WHERE GQ_STATUS = 'Y'
+	                           AND POST_NO = ?
+			                 ORDER
+			                    BY GQ_NO DESC
+			                ) A 
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectProductQnAList">
+		SELECT
+		       THUMBNAIL_LOADPATH
+		     , POST_NAME
+		  FROM POST
+		 WHERE POST_NO=?
+	
+	</entry>
 	
 	
 	

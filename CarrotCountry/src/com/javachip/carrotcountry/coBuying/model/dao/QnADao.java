@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
+import com.javachip.carrotcountry.coBuying.model.vo.Product;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -84,6 +85,47 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
+				list.add(new QnA(rs.getInt("post_no"),
+						rs.getInt("gq_no"),
+						rs.getString("mem_userid"),
+						rs.getString("gq_title"),
+						rs.getInt("gq_views"),
+						rs.getDate("gq_enrolldate")));
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	
+	public ArrayList<QnA> selectSellerQnAList(Connection conn, PageInfo pi, int bno){
+		// select문 => 여러행 => ArrayList
+		
+		ArrayList<QnA> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectSellerQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); 
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
 				list.add(new QnA(rs.getInt("gq_no"),
 						rs.getString("mem_userid"),
 						rs.getString("gq_title"),
@@ -100,6 +142,43 @@ public class QnADao {
 		
 		return list;
 	}
+	
+	
+public Product selectProductQnAList(Connection conn, int bno) {
+		
+		Product pd = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectProductQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pd = new Product(rs.getString("thumbnail_loadpath"),
+							 rs.getString("post_name"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return pd;
+	}
+	
+	
+	
+	
 	
 	
 	public int insertQuestion(Connection conn, QnA qa) {

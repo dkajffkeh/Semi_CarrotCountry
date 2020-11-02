@@ -177,7 +177,7 @@
                 <div id="header2_2">
                     <form action="" id="searchForm">
                         <input type="search" name="keyword">
-                        <button type="submit">검색</button>
+                        <button class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
                     </form>
                 </div>
                
@@ -188,7 +188,7 @@
             
             
                 <div id="createPro">
-                    <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-secondary">새 공동구매 만들기</a>
+                    <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-warning">새 공동구매 만들기</a>
                 </div>
                 
                 
