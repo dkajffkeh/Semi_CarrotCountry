@@ -20,13 +20,16 @@
     <br><br>
         
     <div class="container">
-      <h5>제목</h5>
+      <h5><%=f.getFaqTitle() %></h5>
       <hr>
+
+	
+	
 
     <pre><%=f.getFaqWriter() %>                                                                 작성일 <%=f.getFaqEnrollDate() %></pre>
       
         <div class="form-group">
-          <textarea class="border border-warning" cols="60" rows="20" id="comment" name="text" style="resize: none">test</textarea>
+          <textarea class="border border-warning" cols="60" rows="20" id="comment" name="text" style="resize: none"><%=f.getFaqContent() %></textarea>
         </div>
     <div align="center">
         <input type="submit" value="수정하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;
