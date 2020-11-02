@@ -13,6 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="navWrap">
@@ -38,7 +40,7 @@
                 <th>신고관리</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathAdmin %>/reportSelect.sb">신고조회</a></td>
+                <td><a href="<%= contextPathAdmin %>/reportSelect.sb?currentPage=1">신고조회</a></td>
             </tr>
             <tr>
                 <th>공지사항관리</th>
