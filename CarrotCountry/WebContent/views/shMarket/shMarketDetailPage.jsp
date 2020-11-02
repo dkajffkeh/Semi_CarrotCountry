@@ -118,13 +118,14 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                 max-height: 0px;
                 margin:auto;            
                 " >
+                <% if(loginMember!=null) {%>
         <nav class="navbar navbar-light navbar-8 white"
              style="display: inline-flex;
                     position: relative;
                     top:45px;
                     left:888px;
                     z-index: 1;">
-
+ <%if(loginMember.getMemNickname().equals(pb.getMemNickname())){%>
             <button class="navbar-toggler" 
                     type="button" 
                     data-toggle="collapse" 
@@ -137,26 +138,30 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
           
            
             <div class="collapse navbar-collapse" id="navbarSupportedContent15"  >
- 
+
               <ul class="navbar-nav mr-auto" >
                 <li class="nav-item active" style="background-color: orange;">
                   <a class="nav-link" href="#">게시글 수정 <span class="sr-only">(current)</span></a>
                 </li>
+                
                 <li class="nav-item" style="background-color: rgb(219, 91, 91);">
                   <a class="nav-link" onclick="askFunction();" style="cursor:pointer;">게시글 삭제</a>
                 </li>
                 <li class="nav-item" style="background-color:lightskyblue;">
-                  <a class="nav-link" href="#">판매완료</a>
+                  <a class="nav-link" style="cursor:pointer" onclick="statusUpdate();">판매완료</a>
                 </li>
                 <li class="nav-item" style="background-color: lightgray; ">
                     <a class="nav-link" href="#">끌어올리기</a>
-                  </li>
+                  </li>        
               </ul>
+              <% } %>
             </div>
           </nav>
+          <% } %>
           <!-- 신고버튼 -->       
     </div>
     <div class="outer" style="margin-top:15px">
+        <% if(loginMember!=null&&!loginMember.getMemNickname().equals(pb.getMemNickname())) {%>
         <i  
         class="fas fa-exclamation-triangle" 
         data-toggle="modal" 
@@ -169,6 +174,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         color:rgb(255, 55, 55);
        ">
      </i>
+     <% } %>
         <!-- ↓ 사진 코드. ↓ -->
      <div class="image_section" style="width:100%; ">
          <div id="carouselExampleIndicators" 
@@ -222,7 +228,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
          </div>
          <div class="right_price" 
               style="font-size: 1.5rem; 
-              font-weight: bold;"><%=pb.getProdPrice() %></div>
+              font-weight: bold;"><%=pb.getProdPrice() %> 원</div>
      </div>
      
      <!-- ↓ 본문 제목 ↓ -->
@@ -248,16 +254,20 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
              조회:<%=pb.getPostViews() %> 찜:<%= pb.getPostLikes() %>
          </div>
     
-         <div class="like_button" style="width:40px; 
+         <div class="like_button" 
+              style="width:40px; 
                      height:40px; 
                      display: flex; 
                      justify-content: center; 
                      align-items: center;
                      border-radius: 5px;
                      "
+                     id="like_button"
                      >
+                
              <i class="fas fa-heart">      
              </i>
+           
          </div>
      </div>
      <hr style="border-bottom: 2px solid gray;"> 
@@ -377,9 +387,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
      <div align="center">목록으로</div>
      <br>
      <!-- 신고 버튼 모달 -->
-
-       <!-- The Modal -->
-       
+       <!-- The Modal -->   
        <div class="modal" id="myModal">
            
         <div class="modal-dialog">
@@ -431,7 +439,6 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 					      memNo:"<%=loginMember.getMemNo()%>"
         			     },
         			success:function(){
-        			
 
         			}, 
         			error:function(){
@@ -446,15 +453,47 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		 }
         		 <% } %>
         	 })
-         })
-         
+         })      
          function askFunction(){
-        	 
+       	 
         	 if(confirm("게시글을 삭제하시겠습니까?")){
         		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
-        	 }
+        	 }      	 
+         }        
+         function statusUpdate(){
         	 
-         }
+        	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){
+        		 location.href="<%=contextPath%>/shMarketStatusUpdate.sh?bno=<%=pb.getPostNo()%>"
+        	 }       	 
+         } 
+         $(function(){
+        	 
+        	 $("#like_button").click(function(){
+        		 <%if(loginMember!=null) {%>  
+        		 
+        		 if(confirm("찜목록에 추가하시겠습니까?")) {
+        		 
+        			 $.ajax({
+        				 url:"dibsbtn.sh",
+        				 data:{bno:"<%=pb.getPostNo()%>",
+        					   userNo:"<%=loginMember.getMemNo()%>"},
+        			     type:"post",
+        			  	 success:function(result){
+        			  		 alert(result);
+        			  	 },	
+        				 error:function(){      					 
+        				 }
+        			 })
+        		 }
+        		 <%} else { %>
+        		 
+        		 alert("찜은 회원만 가능합니다.")
+        		<% }%>
+    		 
+        	 })
+        	 
+         })
+        
          </script>
       
       <%@ include file="../common/footerbar.jsp"%>   

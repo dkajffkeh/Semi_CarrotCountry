@@ -32,6 +32,8 @@ FROM
       LOCATION USING(LOCAL_NO)
   WHERE 
   	   BLIND_CHECK='N'
+  	AND
+  	   PROD_STATUS='Y'	   
   ORDER BY POST_NO DESC)
        A
 )
@@ -230,5 +232,38 @@ SELECT
       PHOTO  
  WHERE
       POST_NO=?
+</entry>
+<entry key="postStatusUpdate">
+UPDATE 
+      POST
+   SET 
+      PROD_STATUS='N'
+ WHERE 
+      POST_NO=?
+   AND 
+      BLIND_CHECK='N'
+</entry>
+<entry key="dibsCheck"> 
+SELECT
+      COUNT(MEM_NO) COUNT
+ FROM
+      LIKE_POST
+WHERE 
+      MEM_NO = ?
+AND 
+      POST_NO = ?
+</entry>
+<entry key="insertLike">
+INSERT INTO
+          LIKE_POST
+          (
+           MEM_NO
+          ,POST_NO
+          )
+          VALUES
+          (
+          ?
+         ,?
+          )
 </entry>
 </properties>

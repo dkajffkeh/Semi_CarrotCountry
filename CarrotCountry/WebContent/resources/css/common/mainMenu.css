@@ -79,7 +79,6 @@ img {height:100%; width:100%; border-radius: 5px;}
     border-radius: 5px;
  }
 /*   <!-- ============= 인기 게시물 썸내일 사진 display  ====================== --> */
-
 /* <!-- =============================== 중고게시판 공동구매 게시판 버튼  ======================= --> */
 
 .board_button_wrapper {
@@ -95,26 +94,3 @@ img {height:100%; width:100%; border-radius: 5px;}
     font-weight: bold;
 }
 /* <!-- =============================== 중고게시판 공동구매 게시판 버튼  ======================= --> */
-#top8_board_wrapper {
-    width:1200px;
-    height:750px;
-    border-radius: 20px;
-    margin:auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border:2px solid grey; 
-}
-#top8_board_wrapper > .product_display_wrapper{
-    width:23%;
-    height:50%;
-    border:1px solid grey;
-    float: left;
-}
-.product_display_wrapper > div {margin-bottom: 5px;}
-#top8_board_wrapper > .product_display_wrapper > .img_wraper{
-    width:100%;
-    height:60%;
-}
-
-/* <!-- =============================== 인기 게시글 섹션  ======================= --> */
-
