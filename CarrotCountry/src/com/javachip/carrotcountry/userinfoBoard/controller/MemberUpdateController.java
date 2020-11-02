@@ -41,10 +41,10 @@ public class MemberUpdateController extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String nickName = request.getParameter("nickName");
 		String phone = request.getParameter("phone");
-		String location = request.getParameter("location");
+		int localNo = Integer.parseInt(request.getParameter("local"));
 		String email = request.getParameter("email");
 		
-		Member m = new Member(userId, memName, gender, birthday, nickName, phone, location, email);
+		Member m = new Member(userId, memName, gender, birthday, nickName, phone, localNo, email);
 		
 		Member updateMem = new UserInfoBoardService().updateMember(m);
 		
@@ -56,7 +56,7 @@ public class MemberUpdateController extends HttpServlet {
 			view.forward(request, response);
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateMem); // 동일한 키값으로 담으면 덮어씌워짐
+			session.setAttribute("loginMember", updateMem); // 동일한 키값으로 담으면 덮어씌워짐
 			session.setAttribute("alertMsg", "성공적으로 회원정보를 수정했습니다!!");
 			
 			response.sendRedirect(request.getContextPath() + "/updateForm.me.jw");
