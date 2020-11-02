@@ -157,7 +157,7 @@ public class AdminMemberDao {
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
 			pstmt.setString(1, category);
-			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(2, search);
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, endRow);
 			
