@@ -258,17 +258,15 @@ private Properties prop = new Properties();
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Product p = new Product();
-				PostBoard pb = new PostBoard();
+				Product p = new Product(rs.getInt("post_no"),
+										rs.getString("thumbnail_loadpath"),
+										rs.getString("post_name"),
+										rs.getInt("gp_people"),
+										rs.getInt("post_likes"),
+										rs.getInt("gp_price"),
+										rs.getInt("gp_drate"),
+										rs.getInt("gp_dprice"));
 				
-				p.setPostNo(rs.getInt("post_no"));
-				p.setThumbnailLoadpath(rs.getString("thumbnail_loadpath"));
-				p.setPostName(rs.getString("post_name"));
-				p.setGpPeople(rs.getInt("gp_people"));
-				p.setPostLikes(rs.getInt("post_likes"));
-				p.setGpPrice(rs.getInt("gp_price"));
-				p.setGpDRate(rs.getInt("gp_drate"));
-				p.setGpDPrice(rs.getInt("gp_dprice"));
 				
 				pList.add(p);
 			}

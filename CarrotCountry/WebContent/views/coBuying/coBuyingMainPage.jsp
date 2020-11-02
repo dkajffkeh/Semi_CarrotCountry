@@ -231,10 +231,34 @@
                 </div>
                 <div id="proContent">
                 
+                <% for(int i = 0 ; i < pList.size(); i++){ %>
+		            <div id="proName">
+		           		<input type="hidden" value="<%= pList.get(i).getPostNo() %>">
+		            	<div id="proImg"><a href=""><img src="<%= contextPath %>/<%= pList.get(i).getThumbnailLoadpath() %>" width="100" height="100"></a></div>
+			           
+			            <div id="proText">
+			                <div id="proText-title">
+                               <a href=""><h4><%= pList.get(i).getPostName() %></h4></a>
+                            </div>
+                            <div id="proText-like">
+                                <h6><%= pList.get(i).getGpPeople() %> | ♡ (<%= pList.get(i).getPostLikes() %>)</h6> 
+                            </div>
+				        </div>
+				        <div id="proPrice">
+	                            <h6 id="realPrice"><s><%= pList.get(i).getGpPrice() %></s></h6>
+	                            <span id="discount">공구할인률<%= pList.get(i).getGpDRate() %>%</span>
+	                            <span id="discountPrice"><%= pList.get(i).getGpDPrice() %>원</span>
+	                     </div>
+		            </div>
+		       <% } %>
+		                
+                
+                
+               <!-- 
                  <% for(Product pd : pList) {%>
                  
                     <div id="proName">
-                    	<input type="hidden" value="<%= pd.getPostNo() %>>">
+                    	<input type="hidden" value="<%= pd.getPostNo() %>">
                         <div id="proImg">
                             <a href=""><img src="<%= contextPath %>/<%= pb.getThumbnailLoadPath() %>" width="100" height="100"></a>
                         </div>
@@ -253,7 +277,7 @@
                         </div>
                     </div>
                     <%} %>
-                    
+                   -->  
                     
                     
 		        <script>

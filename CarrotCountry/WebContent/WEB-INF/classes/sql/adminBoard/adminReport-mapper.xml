@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		select 
+               count(*) listCount
+          from member
+         where leave_check = 'N'
+           and manager_check = 'N'
+	</entry>
+	<entry key="reportListSelectAll">
+		select
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+		                select
+		                       report_no
+		                     , report_date
+		                     , report_type_name
+		                     , report_post_no
+		                     , report_reason
+		                     , mem_userid
+		                  from
+		                       report
+		                  join member using(mem_no)
+		                  join report_type using(report_type_no)
+		                 order
+		                    by report_no desc
+		            ) a
+		     )
+		where rnum between ? and ?
+	</entry>
+</properties>

@@ -31,6 +31,29 @@ public class Product {
 	
 	
 	
+	
+	
+
+	public Product(int postNo, String thumbnailLoadpath, String postName, int gpPeople,
+			int postLikes, int gpPrice, int gpDRate, int gpDPrice) {
+		super();
+		this.postNo = postNo;
+		this.thumbnailLoadpath = thumbnailLoadpath;
+		this.postName = postName;
+		this.gpPeople = gpPeople;
+		this.postLikes = postLikes;
+		this.gpPrice = gpPrice;
+		this.gpDRate = gpDRate;
+		this.gpDPrice = gpDPrice;
+	}
+
+
+
+
+
+
+
+
 
 	public Product(int postNo, Date postEnrollDate, Date gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
 			String postComment, String postRefund) {
