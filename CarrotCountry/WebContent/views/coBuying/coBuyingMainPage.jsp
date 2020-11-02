@@ -125,7 +125,7 @@
 
 
 /* 카테고리영역 */
-#content1 ul{list-style: none;}
+#content1 ul{padding-top: 28px;list-style: none;}
 #content1 ul li{
     height: 58px;
     background: #3f3f3f;
@@ -149,43 +149,6 @@
 #array a{
     text-decoration: none;
     color: black;
-}
-
-
-/* 푸터바의 전반적인 틀 */
-#footerbar {
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    height: 270px;
-    background-color: #00251a
-}
-
-.footerbar_totalWrapper {
-    width: 1200px;
-    height: 100%;
-    border-bottom: 1px solid white;
-    margin: auto;
-}
-
-.footer_upperWrapper {
-    width: 100%;
-    height: 52px;
-    border-bottom: 1px solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer_upperWrapper>button {
-    margin-left: 40px;
-}
-
-.footer_belowWrapper {
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
@@ -296,7 +259,7 @@
 		        <script>
 		        	$(function(){
 		        		$("#proName").click(function(){
-		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?pno=" + $(this).children().eq(0).val();
+		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
 		        		})
 		        	});
 		        </script>
@@ -330,20 +293,7 @@
 
     </div>
     
-    <footer id="footerbar">
-        <div class=footerbar_totalWrapper>
-            <div class="footer_upperWrapper">
-                <button class="btn btn-secondary">공지사항</button>
-                <button class="btn btn-secondary">고객센터</button>
-                <button class="btn btn-secondary">개인정보 취급방침</button>
-                <button class="btn btn-secondary">회사소개</button>
-            </div>
-            <div class="footer_belowWrapper">
-                <p style="color:white">footer</p>
-            </div>
-        </div>
-
-    </footer>
+<%@ include file="../common/footerbar.jsp" %>
 
 
 </body>

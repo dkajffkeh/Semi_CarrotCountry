@@ -128,7 +128,7 @@ public class QnADao {
 	}
 	
 	
-	public int increaseQnACount(Connection conn, int qno) {
+	public int increaseQnACount(Connection conn, int bno) {
 		
 		int result = 0;
 		
@@ -139,7 +139,7 @@ public class QnADao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, qno);
+			pstmt.setInt(1, bno);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -152,7 +152,7 @@ public class QnADao {
 	}
 	
 	
-	public QnA selectQnADetail(Connection conn, int qno) {
+	public QnA selectQnADetail(Connection conn, int bno) {
 		
 		QnA qa = null;
 		
@@ -164,7 +164,7 @@ public class QnADao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, qno);
+			pstmt.setInt(1, bno);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

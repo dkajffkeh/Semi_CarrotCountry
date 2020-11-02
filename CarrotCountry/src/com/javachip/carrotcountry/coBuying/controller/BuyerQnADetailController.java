@@ -30,13 +30,13 @@ public class BuyerQnADetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int qno = Integer.parseInt(request.getParameter("qno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		int result = new QnAService().increaseQnACount(qno);
+		int result = new QnAService().increaseQnACount(bno);
 		
 		if(result > 0) { // 유효한 게시글
 			
-			QnA qa = new QnAService().selectQnADetail(qno);
+			QnA qa = new QnAService().selectQnADetail(bno);
 			
 			request.setAttribute("qa", qa);
 			

@@ -55,10 +55,10 @@ public class QnAService {
 	}
 	
 	
-	public int increaseQnACount(int qno) {
+	public int increaseQnACount(int bno) {
 		Connection conn = getConnection();
 		
-		int result = new QnADao().increaseQnACount(conn, qno);
+		int result = new QnADao().increaseQnACount(conn, bno);
 		
 		if(result > 0) {
 			commit(conn);
@@ -71,11 +71,11 @@ public class QnAService {
 	}
 	
 	
-	public QnA selectQnADetail(int qno) {
+	public QnA selectQnADetail(int bno) {
 		
 		Connection conn = getConnection();
 		
-		QnA qa = new QnADao().selectQnADetail(conn, qno);
+		QnA qa = new QnADao().selectQnADetail(conn, bno);
 		
 		close(conn);
 		return qa;

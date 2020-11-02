@@ -164,11 +164,11 @@ tbody td:hover{cursor: pointer;}
 							$("#list-area>tbody>tr").click(function(){
 								
 								// 클릭했을 때의 행에 존재하는 글번호
-								var qno = $(this).children().eq(0).text();
+								var bno = $(this).children().eq(0).text();
 								
 								
 								// 쿼리스트링으로 만들어서 요청시 값 전달
-								location.href = "<%=contextPath%>/detail.qna.jy?qno=" + qno;
+								location.href = "<%=contextPath%>/detail.qna.jy?bno=" + bno;
 								
 							});
 						});
