@@ -9,7 +9,6 @@ ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
 //게시글 번호, 맴버번호 , 지역정보, 글제목, 카테고리 , 카테고리 이름,썸네일 경로 파일이름,파일명, views , like , 가격  
 %>    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,7 +146,7 @@ img {height:100%; width:100%; border-radius: 5px;}
  /*사이트바*/
  /*오른쪽 아티클 구간*/
  .location_display {
-     width:150px;
+     width:200px;
      margin: auto;
      font-size: 1.5rem;
     
@@ -253,7 +252,6 @@ img {height:100%; width:100%; border-radius: 5px;}
 .footer_upperWrapper>button {
     margin-left: 40px;
 }
-
 .footer_belowWrapper {
     height: 200px;
     display: flex;
@@ -263,7 +261,6 @@ img {height:100%; width:100%; border-radius: 5px;}
     </style>
 </head>
 <body>
-
 <%@ include file="../common/commonNavbar.jsp"%>
 
 <!-- 제목 -->
@@ -314,16 +311,21 @@ img {height:100%; width:100%; border-radius: 5px;}
     </div>
 
     <hr style="border-bottom: 2px solid grey; margin-top: 2px;">
-
     <!-- 정렬 구현 구간 -->
 
     <!-- main 아티클 구간 -->
-
-    <div class="location_display">XX구 XX동</div>
-
-
+	<%if(loginMember!=null) {%>
+				<%if(loginMember.getMemLocation()==null){ %>
+    <div class="location_display">서울특별시 송파구</div>
+    			<% } else { %>
+    <div class="location_display"><%=loginMember.getMemLocation()%></div>		
+    	<%} %>			
+	<% } else {%>
+	<div class="location_display">서울특별시 송파구</div>
+	<% } %>
+	
+	
     <div id="mainArticle_wrapper">
-
         <div class="mainArticle_sidebar">
             <div>
             <% for(int i = 0 ; i<list.size(); i++) { %>

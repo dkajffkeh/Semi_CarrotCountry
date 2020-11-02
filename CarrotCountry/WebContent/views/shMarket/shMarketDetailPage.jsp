@@ -154,8 +154,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
               </ul>
             </div>
           </nav>
-          <!-- 신고버튼 -->
-         
+          <!-- 신고버튼 -->       
     </div>
     <div class="outer" style="margin-top:15px">
         <i  
@@ -189,11 +188,11 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 				<div class="carousel-inner">
 				
 					<div class="carousel-item active">
-						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
+						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
 					</div>
 					<% for(int i = 1 ; i<pList.size() ; i++ ){ %>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
+						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
 					</div>
 					<% } %>
 				</div>
