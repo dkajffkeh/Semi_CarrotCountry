@@ -18,7 +18,7 @@ import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
 
 public class AdminReportDao {
 	
-private Properties prop = new Properties();
+	private Properties prop = new Properties();
 	
 	public AdminReportDao() {
 		
@@ -30,33 +30,6 @@ private Properties prop = new Properties();
 			e.printStackTrace();
 		}
 		
-	}
-	
-	public int selectListCount(Connection conn) {
-
-		int listCount = 0;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			
-			rset = stmt.executeQuery(sql);
-			
-			if (rset.next()) {
-				listCount = rset.getInt("listCount");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		
-		return listCount;
 	}
 
 	public ArrayList<AdminReport> reportListSelectAll(Connection conn, AdminPageInfo pi) {
@@ -99,6 +72,49 @@ private Properties prop = new Properties();
 		}
 		
 		return list;
+	}
+
+	public ArrayList<AdminReport> reportSearchList(Connection conn, AdminPageInfo pi, String category, String search) {
+
+		ArrayList<AdminReport> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("reportSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				AdminReport ar = new AdminReport();
+				
+				ar.setReportNo(rset.getInt("report_no"));
+				ar.setReportDate(rset.getDate("report_date"));
+				ar.setReportTypeNo(rset.getString("report_type_name"));
+				ar.setReportPostNo(rset.getString("report_post_no"));
+				ar.setReportReason(rset.getString("report_reason"));
+				ar.setMemNo(rset.getString("mem_userid"));
+				
+				list.add(ar);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return null;
 	}
 
 }

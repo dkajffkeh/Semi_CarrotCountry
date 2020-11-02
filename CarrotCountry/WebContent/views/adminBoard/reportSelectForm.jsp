@@ -36,12 +36,14 @@
 				</div>
 				<div id="pageContent">
 					<!-- search -->
-					<form action="" class="form-inline my-2 my-lg-0" id="search">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-secondary my-2 my-sm-0"
-							type="submit">Search</button>
-					</form>
+					<form action="<%= contextPath %>/reportSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
+                    	<input type="hidden" name="currentPage" value=1>
+						<select name="searchCategory" id="searchCategory">
+						  <option value="post_name">작성자</option>
+						</select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
 					<!-- 신고자 리스트 -->
 					<div id="board">
 						<form action="">

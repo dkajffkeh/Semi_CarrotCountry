@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.adminBoard.model.service.AdminMemberService;
 import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
-import com.javachip.carrotcountry.adminBoard.model.vo.AdminMember;
+import com.javachip.carrotcountry.adminBoard.model.service.AdminReportService;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
 
-@WebServlet("/blackListSearch.sb")
-public class BlackListSearchController extends HttpServlet {
+@WebServlet("/reportSearchList.sb")
+public class ReportSearchListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public BlackListSearchController() {
+    public ReportSearchListController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		request.setCharacterEncoding("utf-8");
 		
 		int listCount;
@@ -37,7 +37,6 @@ public class BlackListSearchController extends HttpServlet {
 		
 		listCount = new AdminPageInfoService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
 		pageLimit = 10;
 		boardLimit = 10;
 		
@@ -50,18 +49,17 @@ public class BlackListSearchController extends HttpServlet {
 		}
 		
 		AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
+
 		String category = request.getParameter("searchCategory");
 		String search = request.getParameter("search");
-		System.out.println(search);
 		
-		ArrayList<AdminMember> list = new AdminMemberService().blackListSearch(pi, category, search);
+		ArrayList<AdminReport> list = new AdminReportService().reportSearchList(pi, category, search);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+
+		request.getRequestDispatcher("views/adminBoard/reportSelectForm.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("views/adminBoard/blackListManagementForm.jsp").forward(request, response);
-	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

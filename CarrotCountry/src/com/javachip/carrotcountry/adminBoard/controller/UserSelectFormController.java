@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.adminBoard.model.service.AdminMemberService;
+import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminMember;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
@@ -33,7 +34,7 @@ public class UserSelectFormController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new AdminMemberService().selectListCount();
+		listCount = new AdminPageInfoService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		pageLimit = 10;
 		boardLimit = 10;
