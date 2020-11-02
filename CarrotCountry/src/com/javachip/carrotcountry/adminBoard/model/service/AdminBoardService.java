@@ -14,23 +14,6 @@ import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 
 public class AdminBoardService {
 
-	public int selectListCount() {
-		
-		Connection conn = getConnection();
-		
-		int listCount = new AdminBoardDao().selectListCount(conn);
-		
-		if (listCount > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return listCount;
-	}
-
 	public ArrayList<AdminBoard> postSelectAll(AdminPageInfo pi) {
 
 		Connection conn = getConnection();
@@ -68,6 +51,29 @@ public class AdminBoardService {
 		close(conn);
 		
 		return list;
+	}
+
+	public ArrayList<AdminBoard> postSearchList(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminBoard> list = new AdminBoardDao().postSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<AdminBoard> blindSearchList(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminBoard> list = new AdminBoardDao().blindSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+		
 	}
 	
 }

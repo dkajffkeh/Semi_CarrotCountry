@@ -17,6 +17,7 @@ import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMar
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 public class TownMarketDao {
 	
@@ -64,16 +65,48 @@ Properties prop = new Properties();
 		
 		return list;
 	}
+	
+
+	public int selectListCount(Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt =null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("BOARD_COUNT");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 
-	public ArrayList<PostBoard> MainArticleSelector(Connection conn) {
+	public ArrayList<PostBoard> mainArticleSelector(Connection conn,ShmarketPageInfo sp) {
 		
 		ArrayList<PostBoard> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
 		String sql = prop.getProperty("MainArticleSelector");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery();
 			

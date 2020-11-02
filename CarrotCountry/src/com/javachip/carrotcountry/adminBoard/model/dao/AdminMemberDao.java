@@ -30,33 +30,6 @@ public class AdminMemberDao {
 		}
 		
 	}
-	
-	public int selectListCount(Connection conn) {
-		
-		int listCount = 0;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			
-			rset = stmt.executeQuery(sql);
-			
-			if (rset.next()) {
-				listCount = rset.getInt("listCount");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		
-		return listCount;
-	}
 
 	public ArrayList<AdminMember> userSelectAll(Connection conn, AdminPageInfo pi) {
 
@@ -150,6 +123,7 @@ public class AdminMemberDao {
 				AdminMember am = new AdminMember();
 
 				am.setMemNo(rset.getInt("mem_no"));
+				am.setMemName(rset.getString("mem_name"));
 				am.setMemUserId(rset.getString("mem_userid"));
 				am.setMemPhone(rset.getString("mem_phone"));
 				am.setMemEmail(rset.getString("mem_email"));
@@ -157,6 +131,97 @@ public class AdminMemberDao {
 
 				list.add(am);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<AdminMember> userSearchList(Connection conn, AdminPageInfo pi, String category, String search) {
+		
+		ArrayList<AdminMember> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("userSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, category);
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				AdminMember am = new AdminMember();
+				
+				am.setMemNo(rset.getInt("mem_no"));
+				am.setMemUserId(rset.getString("mem_userid"));
+				am.setMemName(rset.getString("mem_name"));
+				am.setMemBirthday(rset.getString("mem_birthday"));
+				am.setMemPhone(rset.getString("mem_phone"));
+				am.setMemEmail(rset.getString("mem_email"));
+				am.setMemEnrollDate(rset.getDate("mem_enroll_date"));
+				am.setbListCheck(rset.getString("b_list_check"));
+				
+				list.add(am);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<AdminMember> blackListSearch(Connection conn, AdminPageInfo pi, String category, String search) {
+		
+		ArrayList<AdminMember> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("blackListSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, category);
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				AdminMember am = new AdminMember();
+
+				am.setMemNo(rset.getInt("mem_no"));
+				am.setMemName(rset.getString("mem_name"));
+				am.setMemUserId(rset.getString("mem_userid"));
+				am.setMemPhone(rset.getString("mem_phone"));
+				am.setMemEmail(rset.getString("mem_email"));
+				am.setReportCount(rset.getInt("report_count"));
+
+				list.add(am);
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

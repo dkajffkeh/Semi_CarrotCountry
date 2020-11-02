@@ -35,4 +35,32 @@
 		     )
 		where rnum between ? and ?
 	</entry>
+	<entry key="reportSearchList">
+		select
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+		                select
+		                       report_no
+		                     , report_date
+		                     , report_type_name
+		                     , report_post_no
+		                     , report_reason
+		                     , mem_userid
+		                  from
+		                       report
+		                  join member using(mem_no)
+		                  join report_type using(report_type_no)
+		                 where mem_userid like ?
+		                 order
+		                    by report_no desc
+		            ) a
+		     )
+		where rnum between ? and ?
+	</entry>
 </properties>

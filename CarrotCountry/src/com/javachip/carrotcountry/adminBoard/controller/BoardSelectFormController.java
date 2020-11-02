@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.adminBoard.model.service.AdminBoardService;
 import com.javachip.carrotcountry.adminBoard.model.service.AdminMemberService;
+import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 
@@ -33,7 +34,7 @@ public class BoardSelectFormController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new AdminBoardService().selectListCount();
+		listCount = new AdminPageInfoService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		pageLimit = 10;
 		boardLimit = 10;

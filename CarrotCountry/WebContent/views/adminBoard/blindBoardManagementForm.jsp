@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페잊</title>
+<title>관리자 페이지</title>
 
 <link rel="stylesheet" href="resources/css/adminBoard/adminBoardStyle.css">
 
@@ -36,8 +36,14 @@
                 </div>
                 <div id="pageContent">
                     <!-- search -->
-                    <form action="" class="form-inline my-2 my-lg-0" id="search">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form action="<%= contextPath %>/blindSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
+                    	<input type="hidden" name="currentPage" value=1>
+						<select name="searchCategory" id="searchCategory">
+						  <option value="post_name">게시글명</option>
+						  <!-- <option value="mem_userid">작성자</option>
+						  <option value="category_name">카테고리명</option> -->
+						</select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <!-- 블라인드 게시글 리스트 -->
@@ -50,37 +56,43 @@
                                         <th width="100">게시글종류</th>
                                         <th width="100">카테고리</th>
                                         <th width="150">게시글명</th>
-                                        <th width="80">조회수</th>
                                         <th width="100">작성자</th>
                                         <th width="100">작성일</th>
+                                        <th width="80">조회수</th>
                                         <th width="100">신고횟수</th>
                                         <th width="100"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	<c:forEach items="${list}" var="ab">
-	                                    <tr>
-	                                        <td>${ab.postNo}</td>
-	                                        <c:choose>
-												<c:when test="${ab.usedPostCheck > 0}">
-													<td>중고거래</td>
-												</c:when>
-												<c:otherwise>
-													<td>공동구매</td>
-												</c:otherwise>
-											</c:choose>
-	                                        <td>${ab.categoryName}</td>
-	                                        <td>${ab.postName}</td>
-	                                        <td>${ab.postViews}</td>
-	                                        <td>${ab.memNo}</td>
-	                                        <td>${ab.postEnrollDate}</td>
-	                                        <td>${ab.reportCount}</td>
-	                                        <td>
-	                                            <!-- 클릭시 블라인드 해제 -->
-	                                            <a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=N" class="btn btn-outline-danger btn-sm">해제</a>
-	                                        </td>
-	                                    </tr>
-                                	</c:forEach>
+                                	<% if (list.isEmpty()) { %>
+                                		<tr>
+											<th colspan="8">조회된 리스트가 없습니다.</th>
+										</tr>
+                                	<% } else { %>
+	                                	<c:forEach items="${list}" var="ab">
+		                                    <tr>
+		                                        <td>${ab.postNo}</td>
+		                                        <c:choose>
+													<c:when test="${ab.usedPostCheck > 0}">
+														<td>중고거래</td>
+													</c:when>
+													<c:otherwise>
+														<td>공동구매</td>
+													</c:otherwise>
+												</c:choose>
+		                                        <td>${ab.categoryName}</td>
+		                                        <td>${ab.postName}</td>
+		                                        <td>${ab.memNo}</td>
+		                                        <td>${ab.postEnrollDate}</td>
+		                                        <td>${ab.postViews}</td>
+		                                        <td>${ab.reportCount}</td>
+		                                        <td>
+		                                            <!-- 클릭시 블라인드 해제 -->
+		                                            <a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=N" class="btn btn-outline-danger btn-sm">해제</a>
+		                                        </td>
+		                                    </tr>
+	                                	</c:forEach>
+                                	<% } %>
                                 </tbody>
                             </table>
 

@@ -6,6 +6,8 @@
 
 <%
 	QnA qa = (QnA)request.getAttribute("qa");
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -58,6 +60,18 @@
     
 <%@ include file="../common/commonNavbar.jsp"%>
 
+	<!-- 성공적으로 수정되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
+
+
     <div class="wrap">
         <div id="content">
             <div id="content1">
@@ -102,10 +116,10 @@
             <!-- 현재 로그인한 사용자가 해당 게시글을 작성한 본인일 경우 -->
             
             <div align="center">
-            <% if(loginMember != null && loginMember.getMemUserId().equals(qa.getMemNo())){ %>
-                <a href="수정하기페이지만들기" class="btn btn-secondary btn-sm">수정하기</a>
+            <% if(loginMember != null && loginMember.getMemName().equals(qa.getMemNo())){%>
+                <a href="<%= contextPath %>/buyerupdateform.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-secondary btn-sm">수정하기</a>
                 &nbsp; &nbsp;
-                <a href="삭제하기 만들기" class="btn btn-danger btn-sm">삭제하기</a>
+                <a href="<%= contextPath %>/buyerdelete.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
             <%} %>
             </div>
 

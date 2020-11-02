@@ -45,7 +45,7 @@ public class UserInfoBoardDao {
 			pstmt.setString(3, m.getMemBirthday());
 			pstmt.setString(4, m.getMemNickname());
 			pstmt.setString(5, m.getMemPhone());
-			pstmt.setString(6, m.getMemLocation());
+			pstmt.setInt(6, m.getLocalNo());
 			pstmt.setString(7, m.getMemEmail());
 			pstmt.setString(8, m.getMemUserId());
 

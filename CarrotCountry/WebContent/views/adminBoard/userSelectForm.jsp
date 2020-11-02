@@ -37,8 +37,16 @@
 				</div>
 				<div id="pageContent">
 					<!-- search -->
-					<form action="" class="form-inline my-2 my-lg-0" id="search">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<form action="<%= contextPath %>/userSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
+						<input type="hidden" name="currentPage" value=1>
+						<select name="searchCategory" id="searchCategory">
+						  <option value="mem_name">회원명</option>
+						  <option value="mem_userid">회원아이디</option>
+						  <option value="mem_email">이메일</option>
+						  <option value="mem_birthday">생년월일</option>
+						  <option value="mem_phone">전화번호</option>
+						</select>
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
 						<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
 					</form>
 					<!-- 회원조회 리스트 -->
@@ -58,24 +66,30 @@
 								</tr>
 							</thead>
 							<tbody class="tbody">
-								<% for (AdminMember am : list) { %>
+								<% if (list.isEmpty()) { %>
 									<tr>
-										<td><%= am.getMemNo() %></td>
-										<td><%= am.getMemUserId() %></td>
-										<td><%= am.getMemName() %></td>
-										<td><%= am.getMemPhone() %></td>
-										<td><%= am.getMemEmail() %></td>
-										<td><%= am.getMemBirthday() %></td>
-										<td><%= am.getMemEnrollDate() %></td>
-										<td><%= am.getbListCheck() %></td>
-										<!-- 블랙 Y/N이 Y일 경우 안보임 -->
-										<td>
-											<% if (am.getbListCheck().equals("N")) { %>
-												<!-- 클릭 시 블랙리스트 등록  -->
-												<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>	
-											<% } %>
-										</td>
+										<th colspan="9">조회된 리스트가 없습니다.</th>
 									</tr>
+								<% } else { %>
+									<% for (AdminMember am : list) { %>
+										<tr>
+											<td><%= am.getMemNo() %></td>
+											<td><%= am.getMemUserId() %></td>
+											<td><%= am.getMemName() %></td>
+											<td><%= am.getMemPhone() %></td>
+											<td><%= am.getMemEmail() %></td>
+											<td><%= am.getMemBirthday() %></td>
+											<td><%= am.getMemEnrollDate() %></td>
+											<td><%= am.getbListCheck() %></td>
+											<!-- 블랙 Y/N이 Y일 경우 안보임 -->
+											<td>
+												<% if (am.getbListCheck().equals("N")) { %>
+													<!-- 클릭 시 블랙리스트 등록  -->
+													<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>	
+												<% } %>
+											</td>
+										</tr>
+									<% } %>
 								<% } %>
 							</tbody>
 						</table>

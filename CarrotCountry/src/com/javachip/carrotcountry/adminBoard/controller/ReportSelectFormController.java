@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
 import com.javachip.carrotcountry.adminBoard.model.service.AdminReportService;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
@@ -32,7 +33,7 @@ public class ReportSelectFormController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new AdminReportService().selectListCount();
+		listCount = new AdminPageInfoService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		pageLimit = 10;
 		boardLimit = 10;

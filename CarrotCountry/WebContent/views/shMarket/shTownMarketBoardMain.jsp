@@ -2,14 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>  
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>
-<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard" %>  
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard" %> 
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo" %> 
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 //카테고리 이름
 ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
 //게시글 번호, 맴버번호 , 지역정보, 글제목, 카테고리 , 카테고리 이름,썸네일 경로 파일이름,파일명, views , like , 가격  
+ShmarketPageInfo sp = (ShmarketPageInfo)request.getAttribute("sp");
+/*
+		currentPage	//현재페이지				
+		listCount;  //게시글 총 갯수.
+		boardLimit; //한페이지에 몇개 보여줄건지
+		pageLimit;  //페이지 하단에 보여질 페이지 갯수
+		maxPage;    //마지막페이지
+		startPage;  //첫 페이지
+		endPage;    //마지막 페이지
+*/
 %>    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -147,7 +157,7 @@ img {height:100%; width:100%; border-radius: 5px;}
  /*사이트바*/
  /*오른쪽 아티클 구간*/
  .location_display {
-     width:150px;
+     width:200px;
      margin: auto;
      font-size: 1.5rem;
     
@@ -253,7 +263,6 @@ img {height:100%; width:100%; border-radius: 5px;}
 .footer_upperWrapper>button {
     margin-left: 40px;
 }
-
 .footer_belowWrapper {
     height: 200px;
     display: flex;
@@ -263,7 +272,6 @@ img {height:100%; width:100%; border-radius: 5px;}
     </style>
 </head>
 <body>
-
 <%@ include file="../common/commonNavbar.jsp"%>
 
 <!-- 제목 -->
@@ -314,16 +322,21 @@ img {height:100%; width:100%; border-radius: 5px;}
     </div>
 
     <hr style="border-bottom: 2px solid grey; margin-top: 2px;">
-
     <!-- 정렬 구현 구간 -->
 
     <!-- main 아티클 구간 -->
-
-    <div class="location_display">XX구 XX동</div>
-
-
+	<%if(loginMember!=null) {%>
+				<%if(loginMember.getMemLocation()==null){ %>
+    <div class="location_display">서울특별시 송파구</div>
+    			<% } else { %>
+    <div class="location_display"><%=loginMember.getMemLocation()%></div>		
+    	<%} %>			
+	<% } else {%>
+	<div class="location_display">서울특별시 송파구</div>
+	<% } %>
+	
+	
     <div id="mainArticle_wrapper">
-
         <div class="mainArticle_sidebar">
             <div>
             <% for(int i = 0 ; i<list.size(); i++) { %>
@@ -347,42 +360,43 @@ img {height:100%; width:100%; border-radius: 5px;}
                 </div>
                 <div class="price_display"><%=boardList.get(i).getProdPrice() %></div>
             </div>
-       <% } %>
-          
+       <% } %>        
         </div>
         <script>
        $(function(){    	   
-    	   $(".article_frame").click(function(){
-    		   
+    	   $(".article_frame").click(function(){  		   
     		   let bno = $(this).children().eq(0).text();
     		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;	   
     	   });    	   
-       });
-        
+       });      
         </script>
      </div>
-    
      <div class="page_display" style="margin-bottom:25px; margin-top: 10px;">
         <div style="width:100px"><!-- 간격 유지용 div --></div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
+            <% if(sp.getCurrentPage()!=1) { %>
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()-1%>" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
-                </a>
+                </a>         
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <% } %>
+              <% for(int i = sp.getStartPage() ; i<=sp.getEndPage() ; i++) { %>
+              <li class="page-item"><a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=i%>"><%=i%></a></li>
+             <% } %>
              
+             <% if(sp.getCurrentPage()!=sp.getMaxPage()) { %>
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()+1%>" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
               </li>
+              <% } %>
             </ul>
-          </nav>
-          
+          </nav>         
           <button type="button" class="btn btn-warning" id="postEnroll_btn">게시글 올리기</button>
      </div>
      <script>
@@ -399,10 +413,8 @@ img {height:100%; width:100%; border-radius: 5px;}
     		 location.href="<%=contextPath%>/loginPage.me.ng";
     	 }	 
     	 <%}%>
-     }
-     
-     </script>
-   
+     }  
+     </script>   
 <%@ include file="../common/footerbar.jsp"%>
 
 </body>

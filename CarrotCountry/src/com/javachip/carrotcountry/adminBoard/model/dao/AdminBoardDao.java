@@ -30,33 +30,6 @@ public class AdminBoardDao {
 		}
 		
 	}
-	
-	public int selectListCount(Connection conn) {
-
-		int listCount = 0;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			
-			rset = stmt.executeQuery(sql);
-			
-			if (rset.next()) {
-				listCount = rset.getInt("listCount");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		
-		return listCount;
-	}
 
 	public ArrayList<AdminBoard> postSelectAll(Connection conn, AdminPageInfo pi) {
 
@@ -163,6 +136,100 @@ public class AdminBoardDao {
 				list.add(ab);
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<AdminBoard> postSearchList(Connection conn, AdminPageInfo pi, String category, String search) {
+
+		ArrayList<AdminBoard> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("postSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				AdminBoard ab = new AdminBoard();
+
+				ab.setPostNo(rs.getInt("post_no"));
+				ab.setCategoryName(rs.getString("category_name"));
+				ab.setPostName(rs.getString("post_name"));
+				ab.setMemNo(rs.getString("mem_userid"));
+				ab.setPostEnrollDate(rs.getDate("post_enroll_date"));
+				ab.setPostViews(rs.getInt("post_views"));
+				ab.setBlindCheck(rs.getString("blind_check"));
+				ab.setUsedPostCheck(rs.getInt("used_post_check"));
+				ab.setGpPostCheck(rs.getInt("gp_post_check"));
+
+				list.add(ab);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<AdminBoard> blindSearchList(Connection conn, AdminPageInfo pi, String category, String search) {
+
+		ArrayList<AdminBoard> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("blindSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				AdminBoard ab = new AdminBoard();
+
+				ab.setPostNo(rset.getInt("post_no"));
+				ab.setUsedPostCheck(rset.getInt("used_post_check"));
+				ab.setGpPostCheck(rset.getInt("gp_post_check"));
+				ab.setCategoryName(rset.getString("category_name"));
+				ab.setPostName(rset.getString("post_name"));
+				ab.setMemNo(rset.getString("mem_userid"));
+				ab.setPostEnrollDate(rset.getDate("post_enroll_date"));
+				ab.setPostViews(rset.getInt("post_views"));
+				ab.setReportCount(rset.getInt("report_count"));
+
+				list.add(ab);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

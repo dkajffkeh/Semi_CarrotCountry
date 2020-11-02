@@ -43,7 +43,7 @@
 	String birthday = (loginMember.getMemBirthday() == null) ? "" : loginMember.getMemBirthday();
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
-	String location = (loginMember.getMemLocation() == null) ? "" : loginMember.getMemLocation();
+	int local = loginMember.getLocalNo();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 
 	
@@ -67,7 +67,10 @@
                 </tr>
                 <tr>
                     <th>* 성함</th>
-                    <td><input type="text" id="userName" maxlength="6" required value="<%= memName %>"></td>
+                    <td>
+                    <input type="text" id="userName" maxlength="6" required value="<%= memName %>">
+                    <b style="color:red;">&nbsp;&nbsp;2-6자 한글</b>
+                    </td>
                 </tr>
                 <tr>
                     <th>성별</th>
@@ -83,23 +86,36 @@
                     <th>생년월일</th>
  					<td colspan="2">
                         <input type="text" id="birthday" maxlength="6" value="<%= birthday %>">
-                        <b style="color:red;">&nbsp;&nbsp;숫자 6자리만 입력해주세요.</b>
+                        <b style="color:red;">&nbsp;&nbsp;숫자 6자리</b>
                     </td>               
                </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" id="nickname" maxlength="8" value="<%= nickName %>"></td>
+                    <td>
+                   		 <input type="text" id="nickname" maxlength="8" value="<%= nickName %>">
+                   		 <b style="color:red;">&nbsp;&nbsp;2-8자 한글, 영문, 숫자</b>
+                    </td>
+                    
+                	
                 </tr>
                 <tr>
                     <th>연락처</th>
                     <td colspan="3">
                         <input type="text" id="phone" maxlength="13" value="<%= phone %>">
-                        <b style="color:red;">&nbsp;&nbsp;  - 와 숫자를 포함한 13자만 입력해주세요. </b>
+                        <b style="color:red;">&nbsp;&nbsp;  - 와 숫자를 포함한 13자 </b>
                     </td> 
                 </tr>
                 <tr>
-                    <th>주소</th>
-                    <td><input type="text" id="address" value="<%= location %>" style="width:600px;"></td>
+                    <th>지역</th>
+                    <td>
+                    <select name="local">
+		                <option value="1">서울특별시 송파구 오금동</option>
+		                <option value="2">서울특별시 송파구 오류동</option>
+		                <option value="3">서울특별시 송파구 상일동</option>
+		                <option value="4">서울특별시 강서구 화곡동</option>
+		                <option value="5">서울특별시 강서구 목동</option>
+		            </select>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -121,6 +137,18 @@
             			
             		});
             		
+            		// 지역값 가져오기
+            		$(function() {
+            			
+			             var local = "<%= local %>";
+			      		
+			      		$("select[name=Local]").each(function(){
+			      			
+			      		})if(local.search($(this).val()) != -1) {
+			      			$(this).attr("selected", true);
+			      		}
+			      	})
+            		
             		// 유효성 검사
             	function validate() {
             			
@@ -132,18 +160,7 @@
                     var address = document.getElementById("address");
 
                     
-                    
-            		// 아이디 검사
-                    var regExp = /^[a-z\d]{4,12}$/;
-					
-                    if(!regExp.test(userId.value)){
-                        alert("유효한 아이디를 입력하세요!");
-
-                        userId.value = "";
-                        userId.focus();
-                        return false;
-                    }
-                    
+        
                     // 이름 검사
                     var regExp = /^[가-힇]{2,6}$/;
                     

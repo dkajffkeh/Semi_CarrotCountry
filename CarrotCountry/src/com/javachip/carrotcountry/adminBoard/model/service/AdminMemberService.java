@@ -12,23 +12,6 @@ import com.javachip.carrotcountry.common.JDBCtemplate;;
 
 public class AdminMemberService {
 
-	public int selectListCount() {
-		
-		Connection conn = getConnection();
-		
-		int listCount = new AdminMemberDao().selectListCount(conn);
-		
-		if (listCount > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return listCount;
-	}
-
 	public ArrayList<AdminMember> userSelectAll(AdminPageInfo pi) {
 
 		Connection conn = getConnection();
@@ -62,6 +45,28 @@ public class AdminMemberService {
 		Connection conn = getConnection();
 		
 		ArrayList<AdminMember> list = new AdminMemberDao().blackListSelectAll(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<AdminMember> userSearchList(AdminPageInfo pi, String category, String search) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<AdminMember> list = new AdminMemberDao().userSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<AdminMember> blackListSearch(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminMember> list = new AdminMemberDao().blackListSearch(conn, pi, category, search);
 		
 		close(conn);
 		
