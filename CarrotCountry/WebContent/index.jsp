@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        
-    
+          
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/css/common/mainMenu.css">
     <title>CarrotCountry</title>
+    <style>
+#top8_board_wrapper {
+    width:1200px;
+    height:750px;
+    margin:auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#top8_board_wrapper > .product_display_wrapper{
+    width:23%;
+    height:50%;
+    float: left;
+    box-sizing: border-box; 
+}
+.product_display_wrapper > div {margin-bottom: 5px;}
+    </style>
 </head>
 <body>
   <%@ include file="views/common/commonNavbar.jsp" %>
@@ -107,32 +125,28 @@
     <h2 align="center" style="margin-top: 15px; font-weight: bold;">인기 매물</h2>
 
     <!-- =============================== 인기 게시글 섹션  ======================= -->
-
-    <div id="top8_board_wrapper" style="margin-bottom:100px;">
-        <div class="top8_board_floor">
-          <div class="product_display_wrapper">
-             <div class="img_wraper"><img src="" alt="" style="width:100%; height:100%; border-radius: 10px;" ></div>
-             <div class="product_title"><h5 class="popular_board_title">제목</h5></div>
-             <div class="location_area">서울시 송파구</div>
-             <div class="ratring_counter">
-                 <p>조회수:xx 찜:xx</p>
-             </div>
-             <div class="price_display">30000</div>
-          </div>
-       
-        </div>
-        <div class="top8_board_floor">
-                <div class="product_display_wrapper">
-             <div class="img_wraper"><img src="" alt="" style="width:100%; height:100%; border-radius: 10px;" ></div>
-             <div class="product_title"><h5 class="popular_board_title">제목</h5></div>
-             <div class="location_area">서울시 송파구</div>
-             <div class="ratring_counter">
-                 <p>조회수:xx 찜:xx</p>
-             </div>
-             <div class="price_display">30000</div>
+      <div id="top8_board_wrapper">
+            <div class="product_display_wrapper"
+                 style="width:23%;
+                        height:50%;
+                        float: left;">
+             <div class="img_wraper" 
+             style="width:100%; 
+             height:60%;">
+             <img src="../Common/images/1.jpg" alt="" style="border-radius: 5px;" >
             </div>
-        </div>
+             <div class="product_title"
+                  style="font-size: 1.3rem;">XXX</div>
+             <div class="location_area">XXX XXX</div>
+             <div class="ratring_counter">
+                 <p style="font-size: small; color:darkgray">조회수:xx 찜:xx</p>
+             </div>
+             <div class="price_display" style="float:right; color:orange; font-size: 1.5rem;">30000</div>
+            </div>
+    </div>
         <div  align="center"><a class="bottom_font" style="cursor:pointer;" id="townMarket_button1">매물 더 보기</a></div>
+        
+        
         <script>
         let town_btn1 = document.getElementById("townMarket_button1");
         town_btn1.addEventListener('click',toTown1);

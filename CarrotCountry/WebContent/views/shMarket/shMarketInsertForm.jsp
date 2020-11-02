@@ -124,9 +124,9 @@ border:2px solid green;
             <div class="product_info_input" style="display: flex;">
                 <input type="text" name="title" class="form-control" placeholder="상품명을 입력해주세요"
                     style="margin-right: 5px;">
-                <select name="category" id="" class="form-control" style="color:gray">
+                <select name="category" id="" class="form-control" style="color:gray;">
                    		<% for(int i =0 ; i<list.size(); i++){ %>
-						<option value="<%=10+10*i%>"><%=list.get(i).getCategoryName() %></option>
+						<option value="<%=40+10*i%>"><%=list.get(i).getCategoryName() %></option>
 						<% } %>
                 </select>
             </div>
@@ -137,7 +137,7 @@ border:2px solid green;
             </div>
             <h5>상품상태</h5>
             <div class="product_condition_radio">
-                <input type="radio" name="p_condition" value="B" id="Pradio_1">
+                <input type="radio" name="p_condition" value="B" id="Pradio_1" checked>
                 <label for="Pradio_1">미개봉</label>
                 <input type="radio" name="p_condition" value="N" id="Pradio_2">
                 <label for="Pradio_2">거의 새것</label>
@@ -169,19 +169,19 @@ border:2px solid green;
             </div>
             <div id="preview_frame">
                 <div class="image_wrapper">
-                  <img src="" alt="" title="썸네일 업로드">
+                  <img src="" alt="썸네일 업로드" title="썸네일 업로드">
                 </div>
                 <div class="image_wrapper">
-                    <img src="" alt="">
+                    <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>    
             </div>
             <div class="image_upload" style="margin-top:15px ;">
