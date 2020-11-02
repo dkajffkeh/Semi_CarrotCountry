@@ -6,6 +6,8 @@
 
 <%
 	QnA qa = (QnA)request.getAttribute("qa");
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +59,18 @@
 <body>
     
 <%@ include file="../common/commonNavbar.jsp"%>
+
+	<!-- 성공적으로 수정되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
+
 
     <div class="wrap">
         <div id="content">

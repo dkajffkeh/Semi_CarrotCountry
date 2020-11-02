@@ -7,6 +7,7 @@
 <%
 	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 
 <!DOCTYPE html>
@@ -117,6 +118,22 @@ tbody td:hover{cursor: pointer;}
 </head>
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
+
+
+
+	<!-- 성공적으로 삭제되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
+
+
+
 <div class="wrap">
         <div id="content">
             <div id="content1">
