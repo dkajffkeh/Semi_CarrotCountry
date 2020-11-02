@@ -250,9 +250,9 @@ public class AdminBoardDao {
 				ab.setGpPostCheck(rset.getInt("gp_post_check"));
 				ab.setCategoryName(rset.getString("category_name"));
 				ab.setPostName(rset.getString("post_name"));
-				ab.setPostViews(rset.getInt("post_views"));
 				ab.setMemNo(rset.getString("mem_userid"));
 				ab.setPostEnrollDate(rset.getDate("post_enroll_date"));
+				ab.setPostViews(rset.getInt("post_views"));
 				ab.setReportCount(rset.getInt("report_count"));
 
 				list.add(ab);

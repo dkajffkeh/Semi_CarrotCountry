@@ -57,7 +57,7 @@ public class BlindSearchListController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("views/adminBoard/blackListManagementForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/adminBoard/blindBoardManagementForm.jsp").forward(request, response);
 	
 	}
 

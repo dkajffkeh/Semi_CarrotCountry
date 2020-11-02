@@ -58,16 +58,22 @@
 									</tr>
 								</thead>
 								<tbody>
-									<% for (AdminReport ar : list) { %>
+									<% if (list.isEmpty()) { %>
 										<tr>
-											<td><%= ar.getReportNo() %></td>
-											<td><%= ar.getReportDate() %></td>
-											<td><%= ar.getReportTypeNo() %></td>
-											<td><%= ar.getReportNo() %></td>
-											<td><%= ar.getReportReason() %></td>
-											<td><%= ar.getMemNo() %></td>
-											<td></td>
+											<th colspan="7">조회된 리스트가 없습니다.</th>
 										</tr>
+									<% } else { %>
+										<% for (AdminReport ar : list) { %>
+											<tr>
+												<td><%= ar.getReportNo() %></td>
+												<td><%= ar.getReportDate() %></td>
+												<td><%= ar.getReportTypeNo() %></td>
+												<td><%= ar.getReportNo() %></td>
+												<td><%= ar.getReportReason() %></td>
+												<td><%= ar.getMemNo() %></td>
+												<td></td>
+											</tr>
+										<% } %>
 									<% } %>
 								</tbody>
 							</table>

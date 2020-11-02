@@ -183,9 +183,9 @@
 		                     , null gp_post_check
 		                     , c.category_name category_name
 		                     , post_name
-		                     , post_views
 		                     , mem_userid
 		                     , post_enroll_date
+		                     , post_views
 		                     , (
 		                        select
 		                               count(*)
@@ -206,9 +206,9 @@
 		                     , gp_post_check
 		                     , c.category_name category_name
 		                     , post_name
-		                     , post_views
 		                     , mem_userid
 		                     , post_enroll_date
+		                     , post_views
 		                     , (
 		                        select
 		                               count(*)
