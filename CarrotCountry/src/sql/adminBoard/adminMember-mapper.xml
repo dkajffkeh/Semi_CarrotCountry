@@ -95,7 +95,10 @@
 		                    member
 		              where leave_check = 'N'
 		                and manager_check = 'N'
-		                and ? like '%'||?||'%'
+		                and mem_name like '%'|| nvl(?, '') ||'%'
+		                and mem_userid like '%'|| nvl(?, '') ||'%'
+		                and mem_birthday like '%'|| nvl(?, '') ||'%'
+		                and mem_phone like '%'|| nvl(?, '') ||'%'
 		              order
 		                 by
 		                    mem_no asc
