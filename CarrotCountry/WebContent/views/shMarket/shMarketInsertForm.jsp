@@ -12,27 +12,16 @@ ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
-    <style type="text/css">
-        a {
-            text-decoration: none
-        }
-
-        a:link {
-            color: black;
-            text-decoration: none;
-        }
-
-        a:visited {
-            color: black;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
 <style>
+  a 		{text-decoration: none}
+  a:link 	{color: black;
+         	 text-decoration: none;}
+  a:visited {
+            color: black;
+            text-decoration: none;}
+  a:hover   {
+            color: black;
+            text-decoration: none;}
 body {min-height: 100%;}
 #page_total_wrapper {
     width:850px;
@@ -164,7 +153,7 @@ border:2px solid green;
             </div>
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
-                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;">XXXX  XXXX</h4>
+                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>
                 <button type="button" class="btn btn-success btn-sm">본인인증</button>
             </div>
             <div id="preview_frame">
