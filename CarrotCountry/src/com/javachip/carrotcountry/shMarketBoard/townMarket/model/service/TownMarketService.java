@@ -149,4 +149,48 @@ public class TownMarketService {
 		return result;
 	}
 
+	public int postStatusUpdate(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().postStatusUpdate(conn,bno);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int dibsCheck(int bno, int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int checking = new TownMarketDao().dibsCheck(conn,bno,userNo);
+		
+		close(conn);
+		
+		return checking;
+	}
+
+	public int insertLike(int bno, int userNo) {
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().insertLike(conn,bno,userNo);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
