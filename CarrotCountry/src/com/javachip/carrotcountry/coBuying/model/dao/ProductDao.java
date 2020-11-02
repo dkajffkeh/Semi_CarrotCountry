@@ -6,12 +6,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
+import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
+import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 
@@ -54,6 +57,42 @@ private Properties prop = new Properties();
 				return result;
 				}
 	
+
+	
+	//
+	public int selectProductListCount(Connection conn) {
+		// select문 => int (총 갯수)
+		
+		int listCount = 0;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectProductListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {	
+				listCount = rs.getInt("LISTCOUNT");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+	
+
+	
+	//
 	
 	
 	
@@ -243,7 +282,7 @@ private Properties prop = new Properties();
 	}
 	
 	
-	public ArrayList<Product> selectMainProductList(Connection conn){
+	public ArrayList<Product> selectMainProductList(Connection conn, PageInfo pi){
 		// select문 => 여러행 조회
 		ArrayList<Product> pList = new ArrayList<>();
 		
@@ -254,21 +293,25 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Product p = new Product(rs.getInt("post_no"),
+				pList.add(new Product(rs.getInt("post_no"),
 										rs.getString("thumbnail_loadpath"),
 										rs.getString("post_name"),
 										rs.getInt("gp_people"),
 										rs.getInt("post_likes"),
 										rs.getInt("gp_price"),
 										rs.getInt("gp_drate"),
-										rs.getInt("gp_dprice"));
+										rs.getInt("gp_dprice")));
 				
-				
-				pList.add(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

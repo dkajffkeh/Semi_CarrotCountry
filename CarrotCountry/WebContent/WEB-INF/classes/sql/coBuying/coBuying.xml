@@ -96,6 +96,19 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	<entry key="selectProductListCount">
+		SELECT
+		       COUNT(*) "LISTCOUNT"
+		  FROM GROUP_PURCHASE
+	</entry>
+	
+	
+	
 	<entry key="selectProduct">
 		SELECT
 		       POST_NO
@@ -147,20 +160,29 @@
 	</entry>
 	
 	<entry key="selectMainProductList">
-		SELECT
-		       POST_NO
-		     , THUMBNAIL_LOADPATH
-		     , POST_NAME
-		     , GP_PEOPLE
-		     , POST_LIKES
-		     , GP_PRICE
-		     , GP_DRATE
-		     , GP_DPRICE
-		  FROM GROUP_PURCHASE
-		  JOIN POST USING (POST_NO)
-		 WHERE BLIND_CHECK = 'Y'
-		 ORDER
-		    BY POST_NO DESC 
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'Y'
+		                 ORDER
+		                    BY POST_NO DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	

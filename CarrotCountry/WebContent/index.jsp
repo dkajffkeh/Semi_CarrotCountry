@@ -112,7 +112,7 @@
   
     function toCoBuying(){
  
-        location.href="<%=contextPath%>/mainpage.co.jy";
+        location.href="<%=contextPath%>/mainpage.co.jy?currentPage=1";
 	
     }
     </script>

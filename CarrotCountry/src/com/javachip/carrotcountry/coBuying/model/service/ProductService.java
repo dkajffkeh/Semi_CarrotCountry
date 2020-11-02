@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.javachip.carrotcountry.coBuying.model.dao.ProductDao;
+import com.javachip.carrotcountry.coBuying.model.dao.QnADao;
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
+import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
+import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 
@@ -30,6 +33,25 @@ public class ProductService {
 			return result;
 			
 		}
+	
+	//
+	
+		
+		public int selectProductListCount() {
+			
+			Connection conn = getConnection();
+			
+			int listCount = new ProductDao().selectProductListCount(conn);
+			
+			close(conn);
+			
+			return listCount;
+			
+		}
+		
+		
+
+	//
 	
 	
 
@@ -90,10 +112,10 @@ public class ProductService {
 		
 	}
 	
-	public ArrayList<Product> selectMainProductList(){
+	public ArrayList<Product> selectMainProductList(PageInfo pi){
 		Connection conn = getConnection();
 		
-		ArrayList<Product> pList = new ProductDao().selectMainProductList(conn);
+		ArrayList<Product> pList = new ProductDao().selectMainProductList(conn, pi);
 		
 		close(conn);
 		return pList;

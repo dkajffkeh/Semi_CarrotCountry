@@ -89,7 +89,7 @@ public class QnADao {
 						rs.getString("gq_title"),
 						rs.getInt("gq_views"),
 						rs.getDate("gq_enrolldate")));
-}
+					}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
