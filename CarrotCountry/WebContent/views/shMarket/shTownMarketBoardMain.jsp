@@ -2,12 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>  
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>
-<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard" %>  
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard" %> 
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo" %> 
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 //카테고리 이름
 ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
 //게시글 번호, 맴버번호 , 지역정보, 글제목, 카테고리 , 카테고리 이름,썸네일 경로 파일이름,파일명, views , like , 가격  
+ShmarketPageInfo sp = (ShmarketPageInfo)request.getAttribute("sp");
+/*
+		currentPage	//현재페이지				
+		listCount;  //게시글 총 갯수.
+		boardLimit; //한페이지에 몇개 보여줄건지
+		pageLimit;  //페이지 하단에 보여질 페이지 갯수
+		maxPage;    //마지막페이지
+		startPage;  //첫 페이지
+		endPage;    //마지막 페이지
+*/
 %>    
 <!DOCTYPE html>
 <html>
@@ -349,42 +360,43 @@ img {height:100%; width:100%; border-radius: 5px;}
                 </div>
                 <div class="price_display"><%=boardList.get(i).getProdPrice() %></div>
             </div>
-       <% } %>
-          
+       <% } %>        
         </div>
         <script>
        $(function(){    	   
-    	   $(".article_frame").click(function(){
-    		   
+    	   $(".article_frame").click(function(){  		   
     		   let bno = $(this).children().eq(0).text();
     		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;	   
     	   });    	   
-       });
-        
+       });      
         </script>
      </div>
-    
      <div class="page_display" style="margin-bottom:25px; margin-top: 10px;">
         <div style="width:100px"><!-- 간격 유지용 div --></div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
+            <% if(sp.getCurrentPage()!=1) { %>
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()-1%>" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
-                </a>
+                </a>         
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <% } %>
+              <% for(int i = sp.getStartPage() ; i<=sp.getEndPage() ; i++) { %>
+              <li class="page-item"><a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=i%>"><%=i%></a></li>
+             <% } %>
              
+             <% if(sp.getCurrentPage()!=sp.getMaxPage()) { %>
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()+1%>" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
               </li>
+              <% } %>
             </ul>
-          </nav>
-          
+          </nav>         
           <button type="button" class="btn btn-warning" id="postEnroll_btn">게시글 올리기</button>
      </div>
      <script>
@@ -401,10 +413,8 @@ img {height:100%; width:100%; border-radius: 5px;}
     		 location.href="<%=contextPath%>/loginPage.me.ng";
     	 }	 
     	 <%}%>
-     }
-     
-     </script>
-   
+     }  
+     </script>   
 <%@ include file="../common/footerbar.jsp"%>
 
 </body>
