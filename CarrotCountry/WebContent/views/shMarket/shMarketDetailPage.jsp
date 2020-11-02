@@ -264,8 +264,10 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                      "
                      id="like_button"
                      >
+                
              <i class="fas fa-heart">      
              </i>
+           
          </div>
      </div>
      <hr style="border-bottom: 2px solid gray;"> 
@@ -468,13 +470,14 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         	 } 
         	 
          }
-         
+      
          $(function(){
         	 
         	 $("#like_button").click(function(){
+        		 <%if(loginMember!=null) {%>  
         		 
-        		 if(confirm("찜목록에 추가 하시겠습니까?")){
-        			 
+        		 if(confirm("찜목록에 추가하시겠습니까?")) {
+        		 
         			 $.ajax({
         				 url:"dibsbtn.sh",
         				 data:{bno:"<%=pb.getPostNo()%>",
@@ -483,17 +486,19 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         			  	 success:function(result){
         			  		 alert(result);
         			  	 },	
-        				 error:function(){
-        					 
+        				 error:function(){      					 
         				 }
-	 
         			 })
-        			 
-         		 }
+        		 }
+        		 <%} else { %>
         		 
+        		 alert("찜은 회원만 가능합니다.")
+        		<% }%>
+    		 
         	 })
         	 
          })
+        
          </script>
       
       <%@ include file="../common/footerbar.jsp"%>   
