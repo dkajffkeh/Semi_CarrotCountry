@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페잊</title>
+<title>관리자 페이지</title>
 
 <link rel="stylesheet" href="resources/css/adminBoard/adminBoardStyle.css">
 
@@ -39,9 +39,9 @@
                     <form action="<%= contextPath %>/blindSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <!-- <option value="post_name">게시글명</option>
-						  <option value="mem_userid">작성자</option> -->
-						  <option value="category_name">카테고리명</option>
+						  <option value="post_name">게시글명</option>
+						  <!-- <option value="mem_userid">작성자</option>
+						  <option value="category_name">카테고리명</option> -->
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>

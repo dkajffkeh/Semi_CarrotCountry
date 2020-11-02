@@ -97,7 +97,7 @@
     	<%if(loginMember!=null){%>
         location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
 		<%} else {%>
-		location.href="<%=contextPath%>/shMarketBoardMain.sh";
+		location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
 		<%}%>
     }
     </script>
@@ -133,7 +133,7 @@
              <div class="img_wraper" 
              style="width:100%; 
              height:60%;">
-             <img src="../Common/images/1.jpg" alt="" style="border-radius: 5px;" >
+             <img src="" alt="" style="border-radius: 5px;" >
             </div>
              <div class="product_title"
                   style="font-size: 1.3rem;">XXX</div>

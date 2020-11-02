@@ -36,7 +36,6 @@ public class TownMarKetBoardDetailController extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 		int bno = Integer.parseInt(request.getParameter("bno"));		
-		
 		int result = new TownMarketService().increaseBoardViews(bno);
 		
 		if(result>0) {

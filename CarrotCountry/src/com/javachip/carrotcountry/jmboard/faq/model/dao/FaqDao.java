@@ -82,8 +82,8 @@ public class FaqDao {
 
 			pstmt.setString(1, f.getFaqTitle());
 			pstmt.setString(2, f.getFaqContent());
-			pstmt.setString(3, f.getCategory()); // 숫자로 변경해야함
-			pstmt.setString(4, f.getFaqWriter());
+			pstmt.setInt(3, Integer.parseInt(f.getCategory())); // 숫자로 변경해야함
+			pstmt.setInt(4, Integer.parseInt(f.getMemNo()));
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

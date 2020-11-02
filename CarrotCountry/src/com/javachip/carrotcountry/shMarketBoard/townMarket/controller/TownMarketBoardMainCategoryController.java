@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 /**
  * Servlet implementation class TownMarketBoardMainCategoryController
@@ -33,10 +34,40 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		int currentPage;
+		int listCount; //게시글 총 갯수.
+		int boardLimit;//한페이지에 몇개 보여줄건지
+		int pageLimit; //페이지 하단에 보여질 페이지 갯수
+		int maxPage; //마지막페이지
+		int startPage; // 첫 페이지
+		int endPage; // 마지막 페이지
 		
+		listCount = new TownMarketService().selectListCount();
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		boardLimit = 16;
+		pageLimit=5;
+		maxPage = (int)Math.ceil(((double)listCount/boardLimit));
+		
+		startPage =((currentPage-1)/pageLimit)*pageLimit+1; 
+		
+		endPage = startPage + pageLimit-1;
+		
+		if(endPage>maxPage) {
+			endPage = maxPage;
+		}
+		
+		ShmarketPageInfo sp = new ShmarketPageInfo(currentPage
+				                                  ,listCount
+				                                  ,boardLimit
+				                                  ,pageLimit
+				                                  ,maxPage
+				                                  ,startPage
+				                                  ,endPage);
+			
 		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
-		ArrayList<PostBoard> boardList = new TownMarketService().MainArticleSelector();
+		ArrayList<PostBoard> boardList = new TownMarketService().mainArticleSelector(sp);
 		
+		request.setAttribute("sp", sp);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);

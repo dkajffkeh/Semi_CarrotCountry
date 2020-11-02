@@ -50,7 +50,7 @@ public class FaqInsertController extends HttpServlet {
 		}else {
 			
 			request.setAttribute("errorMsg", "공지사항 작성 실패");
-			request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
 			
 		}

@@ -15,32 +15,26 @@ import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
 
 public class AdminReportService {
 
-public int selectListCount() {
-		
+	public ArrayList<AdminReport> reportListSelectAll(AdminPageInfo pi) {
+	
 		Connection conn = getConnection();
 		
-		int listCount = new AdminReportDao().selectListCount(conn);
-		
-		if (listCount > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
+		ArrayList<AdminReport> list = new AdminReportDao().reportListSelectAll(conn, pi);
 		
 		close(conn);
 		
-		return listCount;
+		return list;
 	}
 
-public ArrayList<AdminReport> reportListSelectAll(AdminPageInfo pi) {
-
-	Connection conn = getConnection();
-	
-	ArrayList<AdminReport> list = new AdminReportDao().reportListSelectAll(conn, pi);
-	
-	close(conn);
-	
-	return list;
-}
+	public ArrayList<AdminReport> reportSearchList(AdminPageInfo pi, String category, String search) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<AdminReport> list = new AdminReportDao().reportSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 }

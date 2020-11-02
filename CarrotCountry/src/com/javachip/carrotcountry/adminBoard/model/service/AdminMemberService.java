@@ -12,23 +12,6 @@ import com.javachip.carrotcountry.common.JDBCtemplate;;
 
 public class AdminMemberService {
 
-	public int selectListCount() {
-		
-		Connection conn = getConnection();
-		
-		int listCount = new AdminMemberDao().selectListCount(conn);
-		
-		if (listCount > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return listCount;
-	}
-
 	public ArrayList<AdminMember> userSelectAll(AdminPageInfo pi) {
 
 		Connection conn = getConnection();

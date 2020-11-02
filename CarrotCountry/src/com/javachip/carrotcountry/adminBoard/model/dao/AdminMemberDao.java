@@ -30,33 +30,6 @@ public class AdminMemberDao {
 		}
 		
 	}
-	
-	public int selectListCount(Connection conn) {
-		
-		int listCount = 0;
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			
-			rset = stmt.executeQuery(sql);
-			
-			if (rset.next()) {
-				listCount = rset.getInt("listCount");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(stmt);
-		}
-		
-		return listCount;
-	}
 
 	public ArrayList<AdminMember> userSelectAll(Connection conn, AdminPageInfo pi) {
 

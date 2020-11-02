@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.adminBoard.model.service.AdminBoardService;
+import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 
@@ -34,7 +35,7 @@ public class BlindSearchListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new AdminBoardService().selectListCount();
+		listCount = new AdminPageInfoService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		pageLimit = 10;
 		boardLimit = 10;
@@ -57,7 +58,7 @@ public class BlindSearchListController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("views/adminBoard/blackListManagementForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/adminBoard/blindBoardManagementForm.jsp").forward(request, response);
 	
 	}
 

@@ -9,6 +9,7 @@ import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarke
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 public class TownMarketService {
 	
@@ -22,10 +23,10 @@ public class TownMarketService {
 		return list;
 	}
 
-	public ArrayList<PostBoard> MainArticleSelector() {
+	public ArrayList<PostBoard> mainArticleSelector(ShmarketPageInfo sp) {
 		
 		Connection conn = getConnection();
-		ArrayList<PostBoard> boardList = new TownMarketDao().MainArticleSelector(conn);
+		ArrayList<PostBoard> boardList = new TownMarketDao().mainArticleSelector(conn,sp);
 		
 		
 		return boardList;
@@ -135,6 +136,17 @@ public class TownMarketService {
 		close(conn);
 		
 		return list;
+	}
+
+	public int selectListCount() {
+		
+		Connection conn = getConnection();
+		int result = 0;
+		result = new TownMarketDao().selectListCount(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

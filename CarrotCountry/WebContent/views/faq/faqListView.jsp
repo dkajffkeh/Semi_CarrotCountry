@@ -52,16 +52,11 @@
 	        <ul class="list-group" id="myList">
 	           <% if(list.isEmpty()){ %>
 	                <!-- 공지사항이 없을경우 -->
-	                <tr>
-	                    <td colspan="5">존재하는 공지사항이 없습니다.</td>
-	                </tr>
+	                <li class="list-group-item">공지사항이 없습니다.</li>
                 <% }else{ %>
 	                <!-- 공지사항이 있을경우 -->
 	                <% for(Faq f : list){ %>
-		                <tr>
-		                	<td><%= f.getFaqNo() %>
-		                    <td><%= f.getFaqTitle() %></td>
-		                </tr>
+						<li class="list-group-item faq" onclick='location.href="<%=contextPath%>/detail.fa.jm?fno="<%=f.getFaqNo() %>>'><%=f.getFaqContent() %></li>
 	                <% } %>
                 <% } %>
         	</ul>  
