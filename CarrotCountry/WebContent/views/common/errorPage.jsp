@@ -13,7 +13,8 @@
 
 	<%@ include file="commonNavbar.jsp" %>
 
-	<h1 align="center" style="color:red"><%= errorMsg %></h1>
+	<br><br><br><br><br>
+	<h4 align="center" style="color:orange"><b><%= errorMsg %></b></h4>
 
 
 
