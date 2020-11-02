@@ -10,7 +10,7 @@
 		     , MEM_BIRTHDAY=?
 		     , MEM_NICKNAME=?
 		     , MEM_PHONE=?
-		     , MEM_LOCATION=?
+		     , LOCAL_NO=?
 		     , MEM_EMAIL=?
 		 WHERE MEM_USERID=?
 	</entry>

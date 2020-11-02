@@ -69,5 +69,28 @@ public class AdminBoardService {
 		
 		return list;
 	}
+
+	public ArrayList<AdminBoard> postSearchList(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminBoard> list = new AdminBoardDao().postSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<AdminBoard> blindSearchList(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminBoard> list = new AdminBoardDao().blindSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+		
+	}
 	
 }

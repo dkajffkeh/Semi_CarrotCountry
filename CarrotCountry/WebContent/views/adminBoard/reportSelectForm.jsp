@@ -1,5 +1,12 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminReport"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
+	ArrayList<AdminReport> list = (ArrayList<AdminReport>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,31 +50,42 @@
 									<tr class="d-flax">
 										<th width="70">신고번호</th>
 										<th width="100">신고일</th>
-										<th width="100">게시글유형</th>
+										<th width="100">글번호</th>
+										<th width="100">글유형</th>
 										<th width="200">신고사유</th>
 										<th width="100">작성자</th>
-										<th width="100">신고자</th>
 										<th width="50">비고</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>20-10-02</td>
-										<td>게시글</td>
-										<td>욕설/비방</td>
-										<td>USER01</td>
-										<td>USER02</td>
-										<td></td>
-									</tr>
+									<% for (AdminReport ar : list) { %>
+										<tr>
+											<td><%= ar.getReportNo() %></td>
+											<td><%= ar.getReportDate() %></td>
+											<td><%= ar.getReportTypeNo() %></td>
+											<td><%= ar.getReportNo() %></td>
+											<td><%= ar.getReportReason() %></td>
+											<td><%= ar.getMemNo() %></td>
+											<td></td>
+										</tr>
+									<% } %>
 								</tbody>
 							</table>
 						</form>
 					</div>
 					<!-- 페이지 번호 -->
 					<div id="boardNum" align="center">
-						<a href="">&lt; 이전</a> <a href="">1</a> <a href="">2</a> <a
-							href="">3</a> <a href="">4</a> <a href="">다음 &gt;</a>
+						<% if (pi.getCurrentPage() != 1) { %>
+				            <a href="<%= contextPath %>/reportSelect.sb?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+						<% } %>
+			
+						<% for (int p = pi.getStartPage(); p <= pi.getEndPage(); p++) { %>
+				            <a href="<%= contextPath %>/reportSelect.sb?currentPage=<%= p %>"><%= p %></a>
+						<% } %>
+			
+						<% if (pi.getCurrentPage() != pi.getMaxPage()) { %>
+				            <a href="<%= contextPath %>/reportSelect.sb?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt;</a>
+						<% } %>
 					</div>
 				</div>
 			</div>

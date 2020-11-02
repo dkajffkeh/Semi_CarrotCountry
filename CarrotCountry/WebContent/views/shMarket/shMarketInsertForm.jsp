@@ -12,27 +12,16 @@ ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
-    <style type="text/css">
-        a {
-            text-decoration: none
-        }
-
-        a:link {
-            color: black;
-            text-decoration: none;
-        }
-
-        a:visited {
-            color: black;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
 <style>
+  a 		{text-decoration: none}
+  a:link 	{color: black;
+         	 text-decoration: none;}
+  a:visited {
+            color: black;
+            text-decoration: none;}
+  a:hover   {
+            color: black;
+            text-decoration: none;}
 body {min-height: 100%;}
 #page_total_wrapper {
     width:850px;
@@ -124,9 +113,9 @@ border:2px solid green;
             <div class="product_info_input" style="display: flex;">
                 <input type="text" name="title" class="form-control" placeholder="상품명을 입력해주세요"
                     style="margin-right: 5px;">
-                <select name="category" id="" class="form-control" style="color:gray">
+                <select name="category" id="" class="form-control" style="color:gray;">
                    		<% for(int i =0 ; i<list.size(); i++){ %>
-						<option value="<%=10+10*i%>"><%=list.get(i).getCategoryName() %></option>
+						<option value="<%=40+10*i%>"><%=list.get(i).getCategoryName() %></option>
 						<% } %>
                 </select>
             </div>
@@ -137,7 +126,7 @@ border:2px solid green;
             </div>
             <h5>상품상태</h5>
             <div class="product_condition_radio">
-                <input type="radio" name="p_condition" value="B" id="Pradio_1">
+                <input type="radio" name="p_condition" value="B" id="Pradio_1" checked>
                 <label for="Pradio_1">미개봉</label>
                 <input type="radio" name="p_condition" value="N" id="Pradio_2">
                 <label for="Pradio_2">거의 새것</label>
@@ -164,24 +153,24 @@ border:2px solid green;
             </div>
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
-                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;">XXXX  XXXX</h4>
+                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>
                 <button type="button" class="btn btn-success btn-sm">본인인증</button>
             </div>
             <div id="preview_frame">
                 <div class="image_wrapper">
-                  <img src="" alt="" title="썸네일 업로드">
+                  <img src="" alt="썸네일 업로드" title="썸네일 업로드">
                 </div>
                 <div class="image_wrapper">
-                    <img src="" alt="">
+                    <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
-                  <img src="" alt="">
+                  <img src="" alt="사진업로드">
                 </div>    
             </div>
             <div class="image_upload" style="margin-top:15px ;">

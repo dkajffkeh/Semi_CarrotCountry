@@ -67,5 +67,27 @@ public class AdminMemberService {
 		
 		return list;
 	}
+
+	public ArrayList<AdminMember> userSearchList(AdminPageInfo pi, String category, String search) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<AdminMember> list = new AdminMemberDao().userSearchList(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<AdminMember> blackListSearch(AdminPageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<AdminMember> list = new AdminMemberDao().blackListSearch(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 }

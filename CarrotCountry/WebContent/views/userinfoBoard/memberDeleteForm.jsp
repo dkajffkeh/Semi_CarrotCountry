@@ -35,6 +35,13 @@
 
 	<!--  headerNavbar -->
 	<%@ include file= "../common/commonNavbar.jsp"%>
+	
+	<%
+		String userId = loginMember.getMemUserId();
+	%>
+	
+	
+	
 
 	<div class="myPageWrapper">
 	
@@ -94,7 +101,8 @@
                     
                     </b><br>
     
-                    <form action="" method="post">
+                    <form action="<%= contextPath %>/delete.me.jw" method="post">
+                        <input type="hidden" name="userId" value="<%= userId %>">
                         
                         <input type="password" name="userPwd" required>
                         <br><br>

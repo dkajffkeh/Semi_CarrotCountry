@@ -34,8 +34,15 @@
                 </div>
                 <div id="pageContent">
                     <!-- search -->
-                    <form action="" class="form-inline my-2 my-lg-0" id="search">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form action="<%= contextPath %>/blackListSearch.sb" class="form-inline my-2 my-lg-0" id="search">
+                    	<input type="hidden" name="currentPage" value=1>
+						<select name="searchCategory" id="searchCategory">
+						  <option value="mem_name">회원명</option>
+						  <option value="mem_userid">회원아이디</option>
+						  <option value="mem_email">이메일</option>
+						  <option value="mem_phone">전화번호</option>
+						</select>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <!-- 블랙리스트회원 리스트 조회 -->
@@ -45,7 +52,7 @@
 								<tr class="d-flax">
 									<th width="50">번호</th>
 									<th width="100">아이디</th>
-									<th width="80">이름</th>
+									<th width="80">회원명</th>
 									<th width="150">연락처</th>
 									<th width="200">이메일</th>
 									<th width="100">신고횟수</th>
