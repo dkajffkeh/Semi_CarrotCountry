@@ -84,6 +84,41 @@ public class QnAService {
 	}
 
 	
+	public int updateBuyerQnA(QnA qa) {
+		
+		Connection conn = getConnection();
+		
+		int result = new QnADao().updateBuyerQnA(conn, qa);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+			close(conn);
+		
+		return result;
+	}
+	
+	
+	
+	public int deleteBuyerQnA(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new QnADao().deleteBuyerQnA(conn, bno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 	
 	

@@ -78,6 +78,22 @@
 		   AND GQ_NO = ?
 	</entry>
 	
+	<entry key="updateBuyerQnA">
+		UPDATE
+		       GROUPBUY_QUESTION
+		   SET GQ_TITLE = ?
+		     , GQ_CONTENT = ? 
+		 WHERE GQ_NO = ?
+	</entry>
+	
+	<entry key="deleteBuyerQnA">
+		UPDATE 
+		       GROUPBUY_QUESTION
+		   SET GQ_STATUS = 'N'
+		 WHERE GQ_NO = ?
+	
+	</entry>
+	
 	
 	
 	<entry key="selectProduct">

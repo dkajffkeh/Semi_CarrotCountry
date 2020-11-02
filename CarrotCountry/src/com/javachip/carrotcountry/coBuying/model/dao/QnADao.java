@@ -169,8 +169,8 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				qa = new QnA(rs.getInt("gq_no"),
-							 rs.getString("gp_title"),
-							 rs.getString("mem_no"),
+							 rs.getString("gq_title"),
+							 rs.getString("mem_name"),
 							 rs.getDate("gq_enrolldate"),
 							 rs.getString("gq_content"));
 			}
@@ -187,6 +187,56 @@ public class QnADao {
 		return qa;
 	}
 	
+	
+	public int updateBuyerQnA(Connection conn, QnA qa) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateBuyerQnA");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, qa.getGqTitle());
+			pstmt.setString(2, qa.getGqContent());
+			pstmt.setInt(3, qa.getGqNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	
+	public int deleteBuyerQnA(Connection conn, int bno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBuyerQnA");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

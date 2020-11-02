@@ -13,7 +13,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
 /* 전반적인 큰 틀 */
 .wrap{width:1200px;height:800px;margin:auto;}
 #content{height: 100%;}
@@ -51,34 +50,39 @@
     height: 50px;
 }
 
+
 </style>
 
 </head>
 <body>
-    
+
 <%@ include file="../common/commonNavbar.jsp"%>
+
 
     <div class="wrap">
         <div id="content">
             <div id="content1">
                 <div id="title">
-                    <h5 align="center">질문 상세보기</h5>
+                    <h5 align="center">질문 수정하기</h5>
                 </div>
             </div>
-            <form>
+            <form action="<%= contextPath %>/buyerupdate.qna.jy" id="updateForm" method="POST">
             <br><br><br>
             <div id="content2"  align="center">
                 <div id="tableArea">
-                      <table id="questionDetail" class="table-bordered">
+                    <table id="questionDetail" class="table-bordered" >
+                        <input type="hidden" name="bno" value="<%= qa.getGqNo() %>">
                         <thead>
                           <tr>
                             <td colspan="4" width="800px">
-                             	 문의내용
+                        	      문의내용
                             </td>
                          </tr>
                             <tr>
                               <td>제목</td>
-                              <td colspan="3" style="background: white;" align="left">&nbsp;&nbsp;<%= qa.getGqTitle() %></td>
+                              <td colspan="3" style="background: white;" align="left">
+                              	<input name="title" required value="&nbsp;&nbsp;<%= qa.getGqTitle() %>">
+                              </td>
                             </tr>
                             <tr>
                               <td>작성자</td>
@@ -90,7 +94,7 @@
                         <tbody>
                           <tr>
                             <td colspan="4" height="250">
-                             	  <%= qa.getGqContent() %>
+                               <textarea name="content" id="textContent" style="width: 100%; height: 100%; resize: none;"><%= qa.getGqContent() %></textarea>
                             </td>
                           </tr>
                         </tbody>
@@ -99,14 +103,8 @@
             </div>
 
 
-            <!-- 현재 로그인한 사용자가 해당 게시글을 작성한 본인일 경우 -->
-            
             <div align="center">
-            <% if(loginMember != null && loginMember.getMemName().equals(qa.getMemNo())){%>
-                <a href="<%= contextPath %>/buyerupdateform.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-secondary btn-sm">수정하기</a>
-                &nbsp; &nbsp;
-                <a href="<%= contextPath %>/buyerdelete.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-            <%} %>
+                <button type="submit" class="btn btn-secondary btn-sm">수정하기</button>
             </div>
 
 
@@ -114,8 +112,12 @@
         </div>
 
     </div>
-    
-    
-<%@ include file="../common/footerbar.jsp"%>
+
+
+        
+        
+        
+        <%@ include file="../common/footerbar.jsp"%>
+        
 </body>
 </html>
