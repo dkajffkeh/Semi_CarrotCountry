@@ -51,7 +51,7 @@
 					<!-- 회원조회 리스트 -->
 					<div id="board">
 						<table class="table table-sm table-hover">
-							<thead class="thead">
+							<thead class="thead-dark">
 								<tr class="d-flax">
 									<th width="80">회원번호</th>
 									<th width="100">아이디</th>

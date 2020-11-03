@@ -46,11 +46,11 @@
                     <!-- 블랙리스트회원 리스트 조회 -->
 					<div id="board">
 						<table class="table table-sm table-hover">
-							<thead class="thead">
-								<tr class="d-flax">
-									<th width="80">회원번호</th>
+							<thead class="thead-dark">
+								<tr>
+									<th width="70">회원번호</th>
 									<th width="100">아이디</th>
-									<th width="80">회원명</th>
+									<th width="60">회원명</th>
 									<th width="150">전화번호</th>
 									<th width="150">이메일</th>
 									<th width="100">신고횟수</th>
