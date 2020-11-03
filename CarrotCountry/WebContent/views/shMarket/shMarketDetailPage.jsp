@@ -453,13 +453,15 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		 }
         		 <% } %>
         	 })
-         })      
+         }) 
+         
          function askFunction(){
        	 
         	 if(confirm("게시글을 삭제하시겠습니까?")){
         		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
         	 }      	 
-         }        
+         } 
+         
          function statusUpdate(){
         	 
         	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){

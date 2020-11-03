@@ -35,7 +35,7 @@ public class ShMarketBoardDeleteFormController extends HttpServlet {
 		
 		if(result>0) {
 			
-			response.sendRedirect(request.getContextPath()+"/shMarketBoardMain.sh");
+			response.sendRedirect(request.getContextPath()+"/shMarketBoardMain.sh?currentPage=1");
 			
 		}
 	}
