@@ -56,11 +56,14 @@ public class MemberDao {
 						 rset.getString("MEM_GENDER"),
 						 rset.getString("MEM_PHONE"),
 						 rset.getString("MEM_EMAIL"),
-						 rset.getString("MEM_LOCATION"),
 						 rset.getDate("MEM_ENROLL_DATE"),
 						 rset.getString("B_LIST_CHECK"),
 						 rset.getString("LEAVE_CHECK"),
-						 rset.getString("MANAGER_CHECK")
+						 rset.getString("MANAGER_CHECK"),
+						 rset.getString("PROFILE_PATH"),
+						 rset.getString("PROFILE_MODIFYNAME"),
+						 rset.getString("PROFILE_ORIGNNAME"),
+						 rset.getString("PROFILE_LOADNAME")
 						);
 			}
 			

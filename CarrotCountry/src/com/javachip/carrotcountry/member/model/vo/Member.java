@@ -5,29 +5,33 @@ import java.sql.Date;
 public class Member {
 
 	// 필드
-	private int memNo;
-	private int localNo;
-	private String memUserId;
-	private String memUserPwd;
-	private String memName;
-	private String memNickname;
-	private String memBirthday;
-	private String memGender;
-	private String memPhone;
-	private String memEmail;
-	private String memLocation;
-	private Date memEnrollDate;
-	private String bListCheck;
-	private String leaveCheck;
-	private String managerCheck;
+	private int memNo; 				// 유저 번호
+	private int localNo;			// 지역 번호
+	private String memUserId;		// 아이디
+	private String memUserPwd;		// 비밀번호
+	private String memName;			// 이름
+	private String memNickname;		// 닉네임
+	private String memBirthday;		// 생일
+	private String memGender;		// 성별 	'남/'여'
+	private String memPhone;		// 전화번호
+	private String memEmail;		// 이메일
+	private Date memEnrollDate;		// 가입일 
+	private String bListCheck;		// 블랙리스트 'N'/'Y'
+	private String leaveCheck;		// 회원탈퇴 'N'/'Y'
+	private String managerCheck;	// 관리자 'N'/'Y'
+	private String profilePath; 	// 프로필 사진 경로
+    private String profileModifyName;	// 프로필 사진 수정명
+    private String profileOrignname;	// 프로필 사진 원본명
+    private String profileLoadname;		// 경로 + 수정명?
 	
 	// 기본생성자
 	public Member() {}
 
 	// 매개변수 생성자 (전체)
 	public Member(int memNo, int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
-			String memBirthday, String memGender, String memPhone, String memEmail, String memLocation,
-			Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck) {
+			String memBirthday, String memGender, String memPhone, String memEmail, Date memEnrollDate,
+			String bListCheck, String leaveCheck, String managerCheck, String profilePath, String profileModifyName,
+			String profileOrignname, String profileLoadname) {
 		super();
 		this.memNo = memNo;
 		this.localNo = localNo;
@@ -39,13 +43,16 @@ public class Member {
 		this.memGender = memGender;
 		this.memPhone = memPhone;
 		this.memEmail = memEmail;
-		this.memLocation = memLocation;
 		this.memEnrollDate = memEnrollDate;
 		this.bListCheck = bListCheck;
 		this.leaveCheck = leaveCheck;
 		this.managerCheck = managerCheck;
+		this.profilePath = profilePath;
+		this.profileModifyName = profileModifyName;
+		this.profileOrignname = profileOrignname;
+		this.profileLoadname = profileLoadname;
 	}
-	
+
 	// 매개변수 생성자 (회원가입용)
 	public Member(int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
 			String memBirthday, String memGender, String memPhone, String memEmail) {
@@ -62,7 +69,6 @@ public class Member {
 	}
 	
 	// 매개변수 생성자 (회원정보수정용)
-	
 	public Member(String memUserId, String memName, String memGender, String memBirthday, String memNickname,
 			String memPhone, int localNo, String memEmail) {
 		super();
@@ -76,8 +82,7 @@ public class Member {
 		this.memEmail = memEmail;
 	}
 
-
-	// setter / getter 메소드
+	// setter/getter 메소드
 	public int getMemNo() {
 		return memNo;
 	}
@@ -158,14 +163,6 @@ public class Member {
 		this.memEmail = memEmail;
 	}
 
-	public String getMemLocation() {
-		return memLocation;
-	}
-
-	public void setMemLocation(String memLocation) {
-		this.memLocation = memLocation;
-	}
-
 	public Date getMemEnrollDate() {
 		return memEnrollDate;
 	}
@@ -198,14 +195,47 @@ public class Member {
 		this.managerCheck = managerCheck;
 	}
 
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+
+	public String getProfileModifyName() {
+		return profileModifyName;
+	}
+
+	public void setProfileModifyName(String profileModifyName) {
+		this.profileModifyName = profileModifyName;
+	}
+
+	public String getProfileOrignname() {
+		return profileOrignname;
+	}
+
+	public void setProfileOrignname(String profileOrignname) {
+		this.profileOrignname = profileOrignname;
+	}
+
+	public String getProfileLoadname() {
+		return profileLoadname;
+	}
+
+	public void setProfileLoadname(String profileLoadname) {
+		this.profileLoadname = profileLoadname;
+	}
+
 	// toString 메소드
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", localNo=" + localNo + ", memUserId=" + memUserId + ", memUserPwd="
 				+ memUserPwd + ", memName=" + memName + ", memNickname=" + memNickname + ", memBirthday=" + memBirthday
-				+ ", memGender=" + memGender + ", memPhone=" + memPhone + ", memEmail=" + memEmail + ", memLocation="
-				+ memLocation + ", memEnrollDate=" + memEnrollDate + ", bListCheck=" + bListCheck + ", leaveCheck="
-				+ leaveCheck + ", managerCheck=" + managerCheck + "]";
+				+ ", memGender=" + memGender + ", memPhone=" + memPhone + ", memEmail=" + memEmail + ", memEnrollDate="
+				+ memEnrollDate + ", bListCheck=" + bListCheck + ", leaveCheck=" + leaveCheck + ", managerCheck="
+				+ managerCheck + ", profilePath=" + profilePath + ", profileModifyName=" + profileModifyName
+				+ ", profileOrignname=" + profileOrignname + ", profileLoadname=" + profileLoadname + "]";
 	}
 	
 }

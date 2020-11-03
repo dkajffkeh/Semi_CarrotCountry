@@ -144,8 +144,9 @@
 		                  join category c using(category_no)
 		                  join usedprod using(post_no)
 		                  where post_name like '%'|| nvl(?, '') ||'%'
-		                    and category_name like '%'|| nvl(?, '') ||'%'
+		                    and c.category_name like '%'|| nvl(?, '') ||'%'
 		                    and mem_userid like '%'|| nvl(?, '') ||'%'
+		                  union all
 		                  select
 		                       post_no
 		                     , c.category_name category_name
@@ -162,7 +163,7 @@
 		                  join category c using(category_no)
 		                  join group_purchase using(post_no)
 		                 where post_name like '%'|| nvl(?, '') ||'%'
-		                    and category_name like '%'|| nvl(?, '') ||'%'
+		                    and c.category_name like '%'|| nvl(?, '') ||'%'
 		                    and mem_userid like '%'|| nvl(?, '') ||'%'
 		                 order 
 		                    by post_no
@@ -202,7 +203,7 @@
 		                  join usedprod using(post_no)
 		                  where blind_check = 'Y'
 		                    and post_name like '%'|| nvl(?, '') ||'%'
-		                    and category_name like '%'|| nvl(?, '') ||'%'
+		                    and c.category_name like '%'|| nvl(?, '') ||'%'
 		                    and mem_userid like '%'|| nvl(?, '') ||'%'
 		                  union all
 		                  select
@@ -227,7 +228,7 @@
 		                  join group_purchase using(post_no)
 		                  where blind_check = 'Y'
 		                    and post_name like '%'|| nvl(?, '') ||'%'
-		                    and category_name like '%'|| nvl(?, '') ||'%'
+		                    and c.category_name like '%'|| nvl(?, '') ||'%'
 		                    and mem_userid like '%'|| nvl(?, '') ||'%'
 		                  order by post_no
 		            ) a

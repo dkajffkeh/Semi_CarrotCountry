@@ -47,42 +47,40 @@
                     </form>
 					<!-- 신고자 리스트 -->
 					<div id="board">
-						<form action="">
-							<table class="table table-sm table-hover">
-								<thead class="thead">
-									<tr class="d-flax">
-										<th width="60">신고번호</th>
-										<th width="70">신고일</th>
-										<th width="90">글유형</th>
-										<th width="55">글번호</th>
-										<th width="200">글제목</th>
-										<th width="100">신고사유</th>
-										<th width="100">작성자</th>
-										<th width="40"></th>
+						<table class="table table-sm table-hover">
+							<thead class="thead-dark table-fixed">
+								<tr class="d-flax">
+									<th width="60">신고번호</th>
+									<th width="70">신고일</th>
+									<th width="90">글유형</th>
+									<th width="55">글번호</th>
+									<th width="200">글제목</th>
+									<th width="100">신고사유</th>
+									<th width="100">작성자</th>
+									<th width="40"></th>
+								</tr>
+							</thead>
+							<tbody class="tbody">
+								<% if (list.isEmpty()) { %>
+									<tr>
+										<th colspan="7">조회된 리스트가 없습니다.</th>
 									</tr>
-								</thead>
-								<tbody>
-									<% if (list.isEmpty()) { %>
+								<% } else { %>
+									<% for (AdminReport ar : list) { %>
 										<tr>
-											<th colspan="7">조회된 리스트가 없습니다.</th>
+											<td><%= ar.getReportNo() %></td>
+											<td><%= ar.getReportDate() %></td>
+											<td><%= ar.getReportTypeNo() %></td>
+											<td><%= ar.getReportPostNo() %></td>
+											<td><%= ar.getPostName() %></td>
+											<td><%= ar.getReportReason() %></td>
+											<td><%= ar.getMemNo() %></td>
+											<td></td>
 										</tr>
-									<% } else { %>
-										<% for (AdminReport ar : list) { %>
-											<tr>
-												<td><%= ar.getReportNo() %></td>
-												<td><%= ar.getReportDate() %></td>
-												<td><%= ar.getReportTypeNo() %></td>
-												<td><%= ar.getReportPostNo() %></td>
-												<td><%= ar.getPostName() %></td>
-												<td><%= ar.getReportReason() %></td>
-												<td><%= ar.getMemNo() %></td>
-												<td></td>
-											</tr>
-										<% } %>
 									<% } %>
-								</tbody>
-							</table>
-						</form>
+								<% } %>
+							</tbody>
+						</table>
 					</div>
 					<!-- 페이지 번호 -->
 					<div id="boardNum" align="center">
