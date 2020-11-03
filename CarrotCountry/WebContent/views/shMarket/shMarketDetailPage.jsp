@@ -273,20 +273,25 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
      <hr style="border-bottom: 2px solid gray;"> 
      <!-- ↓ 댓글 입력 구간↓ --> 
      <div class="comment_area" style="width:100%;">
-         <div style="display:flex; 
-                                 justify-content: center;">
+        
+           <% if(loginMember==null) { %>  
+            <div style="display:flex; 
+                     justify-content: center;">                    
             <input type="text" 
                    class="form-control" 
                    name="userComment" 
                    id="exampleInputPassword1" 
-                   placeholder="댓글을 입력해주세요"
+                   placeholder="로그인 후 댓글이용이 가능합니다!"
                    style="width:500px;
                           ">
             <button type="button" 
+                    disabled
                     class="btn btn-warning" 
                     id="insert_comment"
                     style="font-weight: bold;
+                    
                     ">댓글입력</button>
+                    
                     <div class="comment_check_wrapper" style=
                     "
                     height:40px; 
@@ -298,7 +303,38 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                               font-weight: bold;"> 비공개</p>
                     <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="">
                     </div>
-         </div>      
+                    </div> 
+                    <% } else {%>
+                       <div style="display:flex; 
+                     justify-content: center;">                    
+            <input type="text" 
+                   class="form-control" 
+                   name="userComment" 
+                   id="exampleInputPassword1" 
+                   placeholder="댓글을 입력해주세요!"
+                   style="width:500px;
+                          ">
+            <button type="button" 
+                    class="btn btn-warning" 
+                    id="insert_comment"
+                    style="font-weight: bold;                  
+                    ">댓글입력</button>                 
+                    <div class="comment_check_wrapper" style=
+                    "
+                    height:40px; 
+                    width:40px; 
+                    margin-left: 10px; 
+                    ">
+                    <p style="font-size: 0.4rem; 
+                              margin:3px 0px 0px 0px;
+                              font-weight: bold;"> 비공개</p>
+                    <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="">
+                    </div>
+                    </div>
+                    
+                    
+                    <% } %>
+              
     
           <!-- ↓ 댓글 출력 구간↓ -->
          <div id="comment_display_outer">
@@ -313,8 +349,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                  <p class="comment_user_info"><%=list.get(i).getContent() %></p>
                  <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
                  <div class="comment_control_button">
-                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
-                     
+                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>                   
                  </div>
              </div>   
          </div>
@@ -348,12 +383,14 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                      <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
                      <div class="right_icons">
                      <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())){ %>
-                         <i class="fas fa-pen" title="댓글 수정"></i>
+                         <i class="fas fa-pen" title="댓글 수정" onclick="testFun(this)"></i>
                          <%} %>
                       <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())||loginMember.getManagerCheck().equals("Y")){ %>   
                          <i class="fas fa-trash" title="댓글 삭제"></i>
                          <%} %>
+                      <% if(!loginMember.getMemNickname().equals(list.get(i).getUserNickName())) { %>  
                          <i class="fas fa-exclamation" title="댓글 신고"></i>
+                        <% } %>
                      </div>
                  </div>
              </div>   
@@ -381,6 +418,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
            
         	</div>                    
      	</div>
+     	<br>
    </div>
      
      <br>
@@ -420,6 +458,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
       </div>
  
 <script>
+//댓글 작성 ajax
          $(function(){
         	 let $scContent = $("#exampleInputPassword1")
         	 let $sCheck = $(".comment_check_wrapper input[name=comment_condition]");
@@ -438,28 +477,48 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 					      postNo:"<%=pb.getPostNo()%>",
 					      memNo:"<%=loginMember.getMemNo()%>"
         			     },
-        			success:function(){
-
-        			}, 
-        			error:function(){
-        				
-        			}  	 
+        			
+        		    success:function(result){
+								
+        		    let commentAppend = 
+        		    	 `<div class="comment_display">
+        	             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+        	             <div class="comment_content">
+        	                 <p class="comment_user_info">[\${result.userNickName}]</p>
+        	                 <div class="comment_textarea">\${result.Content}</div>
+        	                 
+        	                 <div class="comment_control_button">
+        	                     <div class="left_date">\${result.enrollDate}</div>
+        	                     <div class="right_icons">       	                    
+        	                         <i class="fas fa-pen" title="댓글 수정"></i>                                          
+        	                         <i class="fas fa-trash" title="댓글 삭제"></i>
+        	                     </div>
+        	                 </div>
+        	             </div>   
+        	         </div>`;
+      
+        	         $scContent.val('');
+        	         $("#comment_display_outer").prepend(commentAppend);
+	         
+        		    },
+ 	 
         		 })
         		 
-        		 <%} else {%>
-        			
+        		 <%} else {%>	
         		 if(confirm("댓글은 회원만 작성할수 있습니다 로그인 페이지로 이동하시겠습니까?")){
         			 location.href="<%=contextPath%>/loginPage.me.ng";
         		 }
         		 <% } %>
         	 })
-         })      
+         }) 
+         
          function askFunction(){
        	 
         	 if(confirm("게시글을 삭제하시겠습니까?")){
         		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
         	 }      	 
-         }        
+         } 
+         
          function statusUpdate(){
         	 
         	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){
@@ -488,14 +547,17 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		 <%} else { %>
         		 
         		 alert("찜은 회원만 가능합니다.")
-        		<% }%>
-    		 
-        	 })
-        	 
+        		<% }%> 		 
+        	 })	 
          })
-        
          </script>
-      
+<script>
+function testFun(from){
+	
+	console.log(from.parentNode.parentNode.parentNode);
+}
+
+</script>      
       <%@ include file="../common/footerbar.jsp"%>   
          
 </body>

@@ -79,6 +79,11 @@ div, form, input {
     text-align: center;
 }
 
+#tbody {
+	display: block;
+	height: 60px;
+}
+
 #boardNum {
     height: 10%;
 }

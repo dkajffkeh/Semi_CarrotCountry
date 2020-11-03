@@ -1,7 +1,8 @@
-@charset "UTF-8";
 /* 마이페이지(메인) css입니다 */
 /* content영역 전체 */
-    .outer{
+.outer{ 
+            /* margin-top:0px; */
+           margin:auto; 
            margin-top:50px;
            margin-left:50px;
            width:1000px;
@@ -84,10 +85,7 @@
     #content_bottom2{
     padding:30px;
     font-size:20px;
-    }
-    #content_bottom2{
     margin:auto;
-    padding:50px;
     }
     #content_bottom2_2{
     margin:20px;
@@ -97,5 +95,9 @@
     }
     #updateButton{
         float:right;
-        margin-right:100px;
+        width:100%;
+    }
+    #updateButton button{
+        float:right;
+        margin-right:50px;
     }

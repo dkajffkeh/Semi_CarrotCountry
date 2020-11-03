@@ -35,7 +35,7 @@ public class MemberLoginController extends HttpServlet {
 		
 		String memUserId = request.getParameter("userId");
 		String memUserPwd = request.getParameter("userPwd");
-		String userCheck = request.getParameter("userCheck");
+		String userCheck = request.getParameter("userCheck"); // 로그인 유지(쿠키사용)
 		
 		Member loginMember = new MemberService().loginMember(memUserId, memUserPwd);
 		

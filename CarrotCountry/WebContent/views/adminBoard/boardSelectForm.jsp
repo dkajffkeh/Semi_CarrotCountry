@@ -40,29 +40,29 @@
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
 						  <option value="post_name">게시글명</option>
-						  <!-- <option value="mem_userid">작성자</option>
-						  <option value="category_name">카테고리명</option> -->
+						  <option value="category_name">카테고리</option>
+						  <option value="mem_userid">작성자</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <!-- 게시글 리스트 -->
                     <div id="board">
-						<table class="table table-sm table-hover" align="center">
-							<thead class="thead">
-								<tr class="d-flax">
-									<th width="100">게시글번호</th>
-									<th width="100">게시글종류</th>
+						<table class="table table-sm table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th width="60">글번호</th>
+									<th width="80">글종류</th>
 									<th width="150">카테고리</th>
-									<th width="200">게시글명</th>
-									<th width="100">작성자</th>
+									<th width="200">글제목</th>
+									<th width="80">작성자</th>
 									<th width="100">작성일</th>
-									<th width="100">조회수</th>
-									<th width="150">블라인드Y/N</th>
-									<th width="100">블라인드</th>
+									<th width="60">조회수</th>
+									<th width="100">블라인드Y/N</th>
+									<th width="80">블라인드</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="tbody">
 								<% if (list.isEmpty()) { %>
 									<tr>
 										<th colspan="8">조회된 리스트가 없습니다.</th>

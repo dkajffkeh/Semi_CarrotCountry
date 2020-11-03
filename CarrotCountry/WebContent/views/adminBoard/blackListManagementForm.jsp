@@ -39,8 +39,6 @@
 						<select name="searchCategory" id="searchCategory">
 						  <option value="mem_name">회원명</option>
 						  <option value="mem_userid">회원아이디</option>
-						  <option value="mem_email">이메일</option>
-						  <option value="mem_phone">전화번호</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -48,23 +46,22 @@
                     <!-- 블랙리스트회원 리스트 조회 -->
 					<div id="board">
 						<table class="table table-sm table-hover">
-							<thead class="thead">
-								<tr class="d-flax">
-									<th width="50">번호</th>
+							<thead class="thead-dark">
+								<tr>
+									<th width="70">회원번호</th>
 									<th width="100">아이디</th>
-									<th width="80">회원명</th>
-									<th width="150">연락처</th>
-									<th width="200">이메일</th>
+									<th width="60">회원명</th>
+									<th width="150">전화번호</th>
+									<th width="150">이메일</th>
 									<th width="100">신고횟수</th>
-									<th width="200">사유</th>
-									<th width="100">블랙</th>
+									<th width="100">블랙리스트</th>
 								</tr>
 							</thead>
 							<tbody class="tbody">
 							
 								<% if (list.isEmpty()) { %>
 									<tr>
-										<th colspan="8">조회된 리스트가 없습니다.</th>
+										<th colspan="7">조회된 리스트가 없습니다.</th>
 									</tr>
 								<% } else { %>
 									<% for (AdminMember am : list) { %>
@@ -75,7 +72,6 @@
 											<td><%= am.getMemPhone() %></td>
 											<td><%= am.getMemEmail() %></td>
 											<td><%= am.getReportCount() %></td>
-											<td>욕설/비방에 따른 제재</td>
 											<td>
 												<!-- 클릭 시 블랙리스트 해제  -->
 												<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=N" class="btn btn-outline-danger btn-sm">해제</a>

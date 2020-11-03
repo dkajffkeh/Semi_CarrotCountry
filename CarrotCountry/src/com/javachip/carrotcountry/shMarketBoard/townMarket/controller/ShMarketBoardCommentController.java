@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
@@ -32,14 +33,13 @@ public class ShMarketBoardCommentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		
 		String sContent = request.getParameter("cContent");
 		String sCheck = request.getParameter("sCheck");
 		String userNick = request.getParameter("userNick");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
-		System.out.println(sCheck);
-		
+
 		CommentHY c = new CommentHY();
 		c.setContent(sContent);
 		c.setSecretCheck(sCheck);
@@ -47,7 +47,19 @@ public class ShMarketBoardCommentController extends HttpServlet {
 		c.setPostNo(postNo);
 		c.setMemNo(memNo);
 		
-		int count = new TownMarketService().shBoardInsertComment(c);
+		CommentHY newc = new TownMarketService().shBoardInsertComment(c);
+		response.setContentType("application/json; charset=utf-8"); 
+		if(newc!=null) {
+			
+			Gson gson = new Gson();
+			gson.toJson(newc,response.getWriter());
+			
+		} else {
+			
+			Gson gson = new Gson();
+			gson.toJson("로드에 실패했습니다.",response.getWriter());
+		}
+		
 	}
 
 	/**

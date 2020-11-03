@@ -56,11 +56,14 @@ public class MemberDao {
 						 rset.getString("MEM_GENDER"),
 						 rset.getString("MEM_PHONE"),
 						 rset.getString("MEM_EMAIL"),
-						 rset.getString("MEM_LOCATION"),
 						 rset.getDate("MEM_ENROLL_DATE"),
 						 rset.getString("B_LIST_CHECK"),
 						 rset.getString("LEAVE_CHECK"),
-						 rset.getString("MANAGER_CHECK")
+						 rset.getString("MANAGER_CHECK"),
+						 rset.getString("PROFILE_PATH"),
+						 rset.getString("PROFILE_MODIFYNAME"),
+						 rset.getString("PROFILE_ORIGNNAME"),
+						 rset.getString("PROFILE_LOADNAME")
 						);
 			}
 			
@@ -215,11 +218,8 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				
 				findId = rset.getString(1);
-				
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -285,7 +285,30 @@ public class MemberDao {
 		return result;
 	}
 	
-	
+	public int myPwdUpdate(Connection conn, String userId, String myPwd, String updatePwd) {
+		// UPDATE문 => result
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("myPwdUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, myPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

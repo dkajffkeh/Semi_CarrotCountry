@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.member.model.vo.Member;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 
 public class UserInfoBoardDao {
@@ -132,6 +134,50 @@ public class UserInfoBoardDao {
 		
 	
 	}
+	
+	public ArrayList<ShippingLocation> selectShippingLocation(Connection conn, String memNo) {
+		
+		ArrayList<ShippingLocation> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectShippingLocation");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+				while(rset.next()) { 
+					ShippingLocation sl = new ShippingLocation();
+					
+					sl.setShippingNo(rset.getInt("shipping_no"));
+					sl.setMemNo(rset.getInt("mem_no"));
+					sl.setShippingAddress(rset.getString("shipping_address"));
+					sl.setMemUserName(rset.getString("mem_username"));
+					sl.setMemPhone(rset.getString("mem_phone"));
+					sl.setShippingDefault(rset.getNString("shipping_default"));
+				
+					list.add(sl);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	
+	
+	
 	
 
 }

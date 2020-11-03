@@ -205,8 +205,8 @@ public class AdminMemberDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setString(1, category);
-			pstmt.setString(2, "%" + search + "%");
+			pstmt.setString(1, "mem_name".equals(category) ? search : "");
+			pstmt.setString(2, "mem_userid".equals(category) ? search : "");
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, endRow);
 			

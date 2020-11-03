@@ -140,11 +140,11 @@
             var regExp = /^[a-z\d!@#$%^&*]{8,16}$/i
 
             if(!regExp.test(userPwd.value)){
-                checkPwd.innerHTML = "<p class='fail'>8~16자 영문, 숫자, 특수문자만 사용가능합니다.<p>";
+                checkPwd.innerHTML = "<p class='fail'>8~16자 영문, 숫자, 특수문자만 사용가능합니다.</p>";
                 cPwd = false;
                 buttonAble();
             }else{
-                checkPwd.innerHTML = "<p class='success'>안전한 비밀번호입니다!<p>";
+                checkPwd.innerHTML = "<p class='success'>안전한 비밀번호입니다!</p>";
                 cPwd = true;
                 buttonAble();
             }
@@ -158,14 +158,14 @@
             var regExp = /^[a-z\d!@#$%^&*]{8,16}$/i
 
             if(!regExp.test(userPwdCheck.value)){
-                checkPwdCheck.innerHTML = "<p class='fail'>8~16자 영문, 숫자, 특수문자만 사용가능합니다.<p>";
+                checkPwdCheck.innerHTML = "<p class='fail'>8~16자 영문, 숫자, 특수문자만 사용가능합니다.</p>";
             }else{
                 if(userPwd.value != userPwdCheck.value){
-                    checkPwdCheck.innerHTML = "<p class='fail'>비밀번호가 일치하지 않습니다.<p>";
+                    checkPwdCheck.innerHTML = "<p class='fail'>비밀번호가 일치하지 않습니다.</p>";
                     cPwdCheck = false;
                     buttonAble();
                 }else{
-                    checkPwdCheck.innerHTML = "<p class='success'>비밀번호가 일치합니다!<p>";
+                    checkPwdCheck.innerHTML = "<p class='success'>비밀번호가 일치합니다!</p>";
                     cPwdCheck = true;
                     buttonAble();
                 }

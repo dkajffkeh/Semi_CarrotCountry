@@ -287,11 +287,10 @@ Properties prop = new Properties();
 		    pstmt.setString(4, pb.getPostName());
 		    pstmt.setString(5, pb.getPostContent());
 		    pstmt.setInt(6,Integer.parseInt(pb.getCategoryNo()));
-		    pstmt.setString(7,pb.getProdStatus());
-		    pstmt.setString(8, list.get(0).getPhotoPath());
-		    pstmt.setString(9, list.get(0).getPhotoFileName());
-		    pstmt.setString(10, list.get(0).getPhotoLoadPath());
-		    pstmt.setInt(11, pb.getProdPrice());
+		    pstmt.setString(7, list.get(0).getPhotoPath());
+		    pstmt.setString(8, list.get(0).getPhotoFileName());
+		    pstmt.setString(9, list.get(0).getPhotoLoadPath());
+		    pstmt.setInt(10, pb.getProdPrice());
 		    
 		    result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -487,6 +486,96 @@ Properties prop = new Properties();
 		}
 	
 		return result;
+	}
+
+
+	public ArrayList<Integer> likeCountSelector(Connection conn, ShmarketPageInfo sp) {
+		
+		ArrayList<Integer> likeCount = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("likeCountSelector");
+		
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				likeCount.add(rs.getInt("LIKECOUNT"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return likeCount;
+	}
+
+
+	public int insertPostBoardLike(Connection conn, int bno, int userNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPostBoardLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public CommentHY shMarketBoardCommentSelector(Connection conn, CommentHY c) {
+		
+		CommentHY newc = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketBoardCommentSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c.getMemNo());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				newc = new CommentHY();
+				newc.setUserNickName(rs.getString("USER_NICKNAME"));
+				newc.setEnrollDate(rs.getDate("ENT_DATE"));
+				newc.setContent(rs.getString("CONTENT"));
+		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return newc;
 	}
 	
 }

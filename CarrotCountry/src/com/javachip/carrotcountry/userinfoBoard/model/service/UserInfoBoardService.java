@@ -4,8 +4,10 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 
 public class UserInfoBoardService {
@@ -59,6 +61,25 @@ public class UserInfoBoardService {
 		
 		return result;
 	}
+	
+	/**
+	 * 3. 배송지 조회
+	 * @param memNo 	배송지 조회한 회원번호
+	 * @return 			처리된 list
+	 *
+	 */
+	public ArrayList<ShippingLocation> selectShippingLocation(String memNo){
+		Connection conn = getConnection();
+		
+		ArrayList<ShippingLocation> list = new UserInfoBoardDao().selectShippingLocation(conn, memNo);
+	
+		close(conn);
+		
+		return list;
+	
+	}
+	
+	
 	
 
 }

@@ -66,10 +66,13 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 			
 		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
 		ArrayList<PostBoard> boardList = new TownMarketService().mainArticleSelector(sp);
+		ArrayList<Integer> likeCount = new TownMarketService().likeCountSelector(sp);
+		
 		
 		request.setAttribute("sp", sp);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("list", list);
+		request.setAttribute("likeCount", likeCount);
 		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);
 		
 	}

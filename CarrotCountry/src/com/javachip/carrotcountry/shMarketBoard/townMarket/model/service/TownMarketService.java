@@ -72,21 +72,25 @@ public class TownMarketService {
 		return list;
 	}
 
-	public int shBoardInsertComment(CommentHY c) {
+	public CommentHY shBoardInsertComment(CommentHY c) {
 		
 		Connection conn = getConnection();
+		CommentHY reSelect = null;
 		
 		int result = new TownMarketDao().shBoardInsertComment(conn,c);
 		
 		if(result>0) {
 			commit(conn);
+			
+			reSelect = new TownMarketDao().shMarketBoardCommentSelector(conn,c);
+			
 		} else {
 			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return result;
+		return reSelect;
 	}
 
 	public int shMarketBoardInsert(PostBoard pb, ArrayList<PhotoBoardVo> list) {
@@ -180,9 +184,10 @@ public class TownMarketService {
 	public int insertLike(int bno, int userNo) {
 		Connection conn = getConnection();
 		
-		int result = new TownMarketDao().insertLike(conn,bno,userNo);
+		int result1 = new TownMarketDao().insertLike(conn,bno,userNo);
+		int result2 = new TownMarketDao().insertPostBoardLike(conn,bno,userNo);
 		
-		if(result>0) {
+		if(result1>0 && result2>0) {
 			commit(conn);
 		} else {
 			rollback(conn);
@@ -190,7 +195,17 @@ public class TownMarketService {
 		
 		close(conn);
 		
-		return result;
+		return result1*result2;
+	}
+
+	public ArrayList<Integer> likeCountSelector(ShmarketPageInfo sp) {
+		
+		Connection conn = getConnection();
+		ArrayList<Integer> likeCount = new TownMarketDao().likeCountSelector(conn,sp);
+
+		close(conn);
+		
+		return likeCount;
 	}
 
 }

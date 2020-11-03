@@ -133,7 +133,8 @@
 		                where manager_check = 'N'
 		                  and leave_check = 'N'
 		                  and b_list_check = 'Y'
-		                  and ? like ?
+		                  and mem_name like '%'|| nvl(?, '') ||'%'
+		                  and mem_userid like '%'|| nvl(?, '') ||'%'
 		            ) a
 		     )
 		where rnum between ? and ?
