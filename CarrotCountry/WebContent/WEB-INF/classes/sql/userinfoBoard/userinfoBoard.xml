@@ -44,6 +44,17 @@
 		 WHERE MEM_USERID=?
 		   AND MEM_USERPWD=?
 	</entry>
-
+	
+	<entry key="selectShippingLocation">
+	   SELECT
+		      SHIPPING_NO
+		    , MEM_NO
+		    , SHIPPING_ADDRESS
+		    , MEM_USERNAME
+		    , MEM_PHONE
+		    , SHIPPING_DEFAULT
+		 FROM SHIPPING_LOCATION 
+		WHERE MEM_NO=?
+	</entry>
 
 </properties>
