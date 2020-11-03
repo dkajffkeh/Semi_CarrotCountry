@@ -22,7 +22,7 @@ public class FaqDao {
 		
 		try {
 			prop.loadFromXML(new FileInputStream
-			(FaqDao.class.getResource("/sql/faq/faq-mapper.xml").getPath()));
+			(FaqDao.class.getResource("/sql/jmboard/faq-mapper.xml").getPath()));
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,12 +52,8 @@ public class FaqDao {
 			while(rset.next()) {
 				list.add(new Faq(
 						         rset.getInt("faq_no"),
-						         rset.getString("faq_title"),
-						         rset.getString("faq_content"),
-						         rset.getString("faq_category"),
-						         rset.getDate("faq_enroll_date"),
-						         rset.getString("faq_writer"),
-						         rset.getString("faq_status")));
+						         rset.getString("faq_title")));
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,6 +65,7 @@ public class FaqDao {
 		return list;
 	}
 //FAQ추가 (Null에러)
+	/*
 	public int insertFaq(Connection conn, Faq f) {
 		
 		int result = 0;
@@ -221,7 +218,7 @@ public class FaqDao {
 		return result;
 	}
 
-	
+	*/
 	
 	
 

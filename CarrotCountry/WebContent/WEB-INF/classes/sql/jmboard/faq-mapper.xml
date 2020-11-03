@@ -6,11 +6,6 @@
 		SELECT
 		       FAQ_NO
 		     , FAQ_TITLE
-		     , FAQ_CONTENT
-		     , FAQ_CATEGORY
-		     , FAQ_ENROLL_DATE
-		     , FAQ_WRITER
-		     , FAQ_STATUS
 		  FROM FAQ 
 		 WHERE FAQ_STATUS='Y'
 		 ORDER

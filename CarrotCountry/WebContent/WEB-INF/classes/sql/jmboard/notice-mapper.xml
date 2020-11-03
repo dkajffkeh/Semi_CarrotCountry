@@ -6,7 +6,7 @@
 		SELECT 
 		       COUNT(*) LISTCOUNT
 		  FROM NOTICE
-		 WHERE STATUS = 'Y'
+		 WHERE NOTICE_STATUS = 'Y'
 	</entry>
 
 	<entry key="selectList">

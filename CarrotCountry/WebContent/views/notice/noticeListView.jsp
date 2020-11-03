@@ -17,9 +17,10 @@
         height:800px;
         margin:auto;
         margin-top:50px;
+        
     }
     .list-area{
-        border:1px solid white;
+        border:1px solid orange;
         text-align:center;
         }
     .list-area tbody>tr:hover{
@@ -48,7 +49,7 @@
                 <th width="70">글번호</th>
                 <th width="300">제목</th>
                 <th width="100">작성자</th>
-                <th width="50">조회수</th>
+                <th width="70">조회수</th>
                 <th width="100">작성일</th>
 	        </tr>
 	    </thead>
@@ -97,17 +98,17 @@
         <div class="paging-area" align="center">
 			
 			<% if(pi.getCurrentPage() != 1){ %>			
-            	<a href="<%=contextPath%>/list.bo?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+            	<a href="<%=contextPath%>/list.no.jm?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 			<% } %>
 
 			<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
 			
-            	<a href="<%=contextPath%>/list.bo?currentPage=<%= p %>"><%= p %></a>
+            	<a href="<%=contextPath%>/list.no.jm?currentPage=<%= p %>"><%= p %></a>
             	
             <% } %>
 
 			<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-            	<a href="<%=contextPath%>/list.bo?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+            	<a href="<%=contextPath%>/list.no.jm?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
 			<% } %>
         </div>
 	</div>
