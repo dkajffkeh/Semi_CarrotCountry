@@ -24,11 +24,11 @@ public class NoticeService {
 
 	public ArrayList<Notice> selectList(PageInfo pi) {
 
+		Connection conn = getConnection();
 		
+		ArrayList<Notice> list = new NoticeDao().selectList(conn,pi);
 		
-		
-		
-		return null;
+		return list;
 	}
 
 
