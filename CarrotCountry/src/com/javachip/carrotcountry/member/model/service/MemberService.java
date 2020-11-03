@@ -150,6 +150,26 @@ public class MemberService {
 	}
 	
 		
+	/** 마이페이지에서 비밀번호 변경하기
+	 * @param userId
+	 * @param myPwd
+	 * @param updatePwd
+	 * @return
+	 */
+	public int myPwdUpdate(String userId, String myPwd, String updatePwd) {
+		Connection conn = getConnection();
 		
+		int result = new MemberDao().myPwdUpdate(conn, userId, myPwd, updatePwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
+	}
 		
 }

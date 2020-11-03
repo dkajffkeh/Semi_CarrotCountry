@@ -215,11 +215,8 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				
 				findId = rset.getString(1);
-				
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -285,7 +282,30 @@ public class MemberDao {
 		return result;
 	}
 	
-	
+	public int myPwdUpdate(Connection conn, String userId, String myPwd, String updatePwd) {
+		// UPDATE문 => result
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("myPwdUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, myPwd);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

@@ -95,7 +95,7 @@
         <!-- 버튼 2개 부분 -->
        <div id="content_top3">
         <button type="button"class="btn btn-secondary" onclick="location.href='<%= contextPath%>/updateForm.me.jw'">회원 정보 수정</button><br><br>
-        <button type="button" class="btn btn-secondary" onclick="location.href='<%= contextPath%>/findPwd.me.ng'">비밀번호 변경</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='<%= contextPath%>/pwdUpdatePage.me.ng'">비밀번호 변경</button>
        </div>
 	    </div>
 	    <br><br><br><br>

@@ -110,4 +110,12 @@
 	 WHERE MEM_USERID = ?
 </entry>
 
+<!-- 마이페이지에서 비밀번호 변경 -->
+<entry key="myPwdUpdate">
+	UPDATE
+	       MEMBER
+	   SET MEM_USERPWD = ?
+	 WHERE MEM_USERID = ?
+	   AND MEM_USERPWD = ?
+</entry>
 </properties>
