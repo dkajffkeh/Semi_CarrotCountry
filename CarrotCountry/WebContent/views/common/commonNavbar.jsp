@@ -15,7 +15,10 @@ Member loginMember = (Member)session.getAttribute("loginMember");
 	String memGender;	성별(남, 여)
 	String memPhone;	전화번호()
 	String memEmail;	이메일
-	String memLocation;	지역 시,구,동
+	String profilePath	프로필 사진 경로
+	String profileModifyname 	프로필 사진 수정명
+	String profileOrignname 	프로필 사진 원본명
+	String profileLoadname		경로 + 수정명?
 	Date memEnrollDate;	회원가입일
 	String bListCheck;	블랙리스트 유무(N, Y)
 	String leaveCheck;	회원탈퇴 유무(N, Y)
