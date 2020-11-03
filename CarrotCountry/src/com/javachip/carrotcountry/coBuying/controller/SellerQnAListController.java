@@ -33,7 +33,7 @@ public class SellerQnAListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//=========== bno numberformatexception 뜸  왜..?============ 
+		//=========== bno numberformatexception 뜸  아마도 넘어오는 bno이 없어서? ajax로 다시 해보기 / 나중에 마이페이지랑 연결하기============ 
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		int result = new QnAService().increaseQnACount(bno);
 
