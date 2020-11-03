@@ -544,5 +544,38 @@ Properties prop = new Properties();
 		
 		return result;
 	}
+
+
+	public CommentHY shMarketBoardCommentSelector(Connection conn, CommentHY c) {
+		
+		CommentHY newc = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketBoardCommentSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c.getMemNo());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				newc = new CommentHY();
+				newc.setUserNickName(rs.getString("USER_NICKNAME"));
+				newc.setEnrollDate(rs.getDate("ENT_DATE"));
+				newc.setContent(rs.getString("CONTENT"));
+		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return newc;
+	}
 	
 }

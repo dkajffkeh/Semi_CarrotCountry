@@ -101,6 +101,7 @@ SELECT
   	   MEMBER USING(MEM_NO)
   WHERE 
        POST_NO =?
+  ORDER BY COMM_NO DESC      
 </entry>
 <entry key="shBoardInsertComment">
 	INSERT INTO
@@ -297,5 +298,30 @@ SET
       POST_LIKES=POST_LIKES+1
 WHERE 
       POST_NO=?
+</entry>
+<entry key="shMarketBoardCommentSelector">
+SELECT *
+FROM(     
+SELECT 
+      ROWNUM RNUM
+     ,A.*
+FROM     
+(SELECT 
+      COMM_NO
+      ,USER_NICKNAME
+      ,ENT_DATE
+      ,CONTENT
+      ,PRIVATE
+      ,POST_NO
+      ,MEM_NO
+  FROM 
+      POST_COMMENT
+WHERE
+     MEM_NO=?
+ORDER BY COMM_NO DESC
+		  )
+		  A
+		  )
+WHERE RNUM =1
 </entry>
 </properties>

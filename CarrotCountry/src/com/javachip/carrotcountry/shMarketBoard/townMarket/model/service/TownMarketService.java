@@ -72,21 +72,25 @@ public class TownMarketService {
 		return list;
 	}
 
-	public int shBoardInsertComment(CommentHY c) {
+	public CommentHY shBoardInsertComment(CommentHY c) {
 		
 		Connection conn = getConnection();
+		CommentHY reSelect = null;
 		
 		int result = new TownMarketDao().shBoardInsertComment(conn,c);
 		
 		if(result>0) {
 			commit(conn);
+			
+			reSelect = new TownMarketDao().shMarketBoardCommentSelector(conn,c);
+			
 		} else {
 			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return result;
+		return reSelect;
 	}
 
 	public int shMarketBoardInsert(PostBoard pb, ArrayList<PhotoBoardVo> list) {
