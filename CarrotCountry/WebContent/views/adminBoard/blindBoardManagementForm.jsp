@@ -40,8 +40,8 @@
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
 						  <option value="post_name">게시글명</option>
-						  <!-- <option value="mem_userid">작성자</option>
-						  <option value="category_name">카테고리명</option> -->
+						  <option value="category_name">카테고리명</option>
+						  <option value="mem_userid">작성자</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -52,14 +52,14 @@
                             <table class="table table-sm table-hover">
                                 <thead class="thead">
                                     <tr class="d-flax">
-                                        <th width="100">번호</th>
+                                        <th width="100">게시글번호</th>
                                         <th width="100">게시글종류</th>
                                         <th width="100">카테고리</th>
                                         <th width="150">게시글명</th>
                                         <th width="100">작성자</th>
                                         <th width="100">작성일</th>
                                         <th width="80">조회수</th>
-                                        <th width="100">신고횟수</th>
+                                        <th width="80">신고수</th>
                                         <th width="100"></th>
                                     </tr>
                                 </thead>

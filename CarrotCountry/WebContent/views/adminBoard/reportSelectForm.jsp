@@ -39,7 +39,8 @@
 					<form action="<%= contextPath %>/reportSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <option value="post_name">작성자</option>
+						  <option value="mem_userid">작성자</option>
+						  <option value="report_type_name">글유형</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
@@ -50,13 +51,14 @@
 							<table class="table table-sm table-hover">
 								<thead class="thead">
 									<tr class="d-flax">
-										<th width="70">신고번호</th>
-										<th width="100">신고일</th>
-										<th width="100">글번호</th>
-										<th width="100">글유형</th>
-										<th width="200">신고사유</th>
+										<th width="60">신고번호</th>
+										<th width="70">신고일</th>
+										<th width="90">글유형</th>
+										<th width="55">글번호</th>
+										<th width="200">글제목</th>
+										<th width="100">신고사유</th>
 										<th width="100">작성자</th>
-										<th width="50">비고</th>
+										<th width="40"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -70,7 +72,8 @@
 												<td><%= ar.getReportNo() %></td>
 												<td><%= ar.getReportDate() %></td>
 												<td><%= ar.getReportTypeNo() %></td>
-												<td><%= ar.getReportNo() %></td>
+												<td><%= ar.getReportPostNo() %></td>
+												<td><%= ar.getPostName() %></td>
 												<td><%= ar.getReportReason() %></td>
 												<td><%= ar.getMemNo() %></td>
 												<td></td>

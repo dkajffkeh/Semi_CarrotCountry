@@ -10,12 +10,13 @@ public class AdminReport {
 	private String reportReason;
 	private Date reportDate;
 	private String reportPostNo;
+	private String postName;
 	private String reportCheck;
 	
 	public AdminReport() {}
 
 	public AdminReport(int reportNo, String memNo, String reportTypeNo, String reportReason, Date reportDate,
-			String reportPostNo, String reportCheck) {
+			String reportPostNo, String postName, String reportCheck) {
 		super();
 		this.reportNo = reportNo;
 		this.memNo = memNo;
@@ -23,6 +24,7 @@ public class AdminReport {
 		this.reportReason = reportReason;
 		this.reportDate = reportDate;
 		this.reportPostNo = reportPostNo;
+		this.postName = postName;
 		this.reportCheck = reportCheck;
 	}
 
@@ -82,11 +84,19 @@ public class AdminReport {
 		this.reportCheck = reportCheck;
 	}
 
+	public String getPostName() {
+		return postName;
+	}
+
+	public void setPostName(String postName) {
+		this.postName = postName;
+	}
+
 	@Override
 	public String toString() {
 		return "AdminReport [reportNo=" + reportNo + ", memNo=" + memNo + ", reportTypeNo=" + reportTypeNo
-				+ ", reportReason=" + reportReason + ", reqortDate=" + reportDate + ", reportPostNo=" + reportPostNo
-				+ ", reportCheck=" + reportCheck + "]";
+				+ ", reportReason=" + reportReason + ", reportDate=" + reportDate + ", reportPostNo=" + reportPostNo
+				+ ", postName=" + postName + ", reportCheck=" + reportCheck + "]";
 	}
 	
 }

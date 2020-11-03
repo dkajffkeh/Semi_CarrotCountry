@@ -42,7 +42,6 @@
 						<select name="searchCategory" id="searchCategory">
 						  <option value="mem_name">회원명</option>
 						  <option value="mem_userid">회원아이디</option>
-						  <option value="mem_email">이메일</option>
 						  <option value="mem_birthday">생년월일</option>
 						  <option value="mem_phone">전화번호</option>
 						</select>
@@ -56,8 +55,8 @@
 								<tr class="d-flax">
 									<th width="80">회원번호</th>
 									<th width="100">아이디</th>
-									<th width="80">이름</th>
-									<th width="150">연락처</th>
+									<th width="80">회원명</th>
+									<th width="150">전화번호</th>
 									<th width="150">이메일</th>
 									<th width="100">생년월일</th>
 									<th width="100">가입일</th>

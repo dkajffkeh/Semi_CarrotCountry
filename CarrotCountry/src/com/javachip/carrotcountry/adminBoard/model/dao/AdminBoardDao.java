@@ -161,10 +161,14 @@ public class AdminBoardDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setString(1, "%" + search + "%");
-			pstmt.setString(2, "%" + search + "%");
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setString(1, "post_name".equals(category) ? search : "");
+			pstmt.setString(2, "category_name".equals(category) ? search : "");
+			pstmt.setString(3, "mem_userid".equals(category) ? search : "");
+			pstmt.setString(4, "post_name".equals(category) ? search : "");
+			pstmt.setString(5, "category_name".equals(category) ? search : "");
+			pstmt.setString(6, "mem_userid".equals(category) ? search : "");
+			pstmt.setInt(7, startRow);
+			pstmt.setInt(8, endRow);
 			
 			rs = pstmt.executeQuery();
 			
@@ -208,10 +212,14 @@ public class AdminBoardDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setString(1, "%" + search + "%");
-			pstmt.setString(2, "%" + search + "%");
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setString(1, "post_name".equals(category) ? search : "");
+			pstmt.setString(2, "category_name".equals(category) ? search : "");
+			pstmt.setString(3, "mem_userid".equals(category) ? search : "");
+			pstmt.setString(4, "post_name".equals(category) ? search : "");
+			pstmt.setString(5, "category_name".equals(category) ? search : "");
+			pstmt.setString(6, "mem_userid".equals(category) ? search : "");
+			pstmt.setInt(7, startRow);
+			pstmt.setInt(8, endRow);
 			
 			rset = pstmt.executeQuery();
 			
