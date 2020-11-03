@@ -89,7 +89,7 @@
                 <th>관심 상품</th>
             </tr>
             <tr>
-                <td><a href="">찜</a></td>
+                <td><a href="<%= contextPathUserinfo %>/wishList.jw">찜</a></td>
             </tr>
             <tr>
                 <td><a href="">최근 본 상품</a></td>
@@ -113,7 +113,7 @@
                 <th><a href="">신고내역</a></th>
             </tr>
             <tr>
-                <th id="admin"><a href="" >관리자 페이지</a></th>
+                <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
             </tr>
             </table>
         </div>

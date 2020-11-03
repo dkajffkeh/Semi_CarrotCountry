@@ -1,5 +1,11 @@
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation" %>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<% 
+	ArrayList<ShippingLocation> list = (ArrayList<ShippingLocation>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +14,13 @@
 
 <link rel="stylesheet" href="resources/css/userinfoBoard/myPage.css">
 
+
 </head>
 <body>
 	<!--  headerNavbar -->
 	<%@ include file= "../common/commonNavbar.jsp"%>
 	
-
+	<!-- 회원정보 -->
 	<%
 	String userId = loginMember.getMemUserId();
 	String memName = loginMember.getMemName();
@@ -23,12 +30,14 @@
 	String birthday = (loginMember.getMemBirthday() == null) ? "" : loginMember.getMemBirthday();
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
+	int local = loginMember.getLocalNo();
 	String location = (loginMember.getMemLocation() == null) ? "" : loginMember.getMemLocation();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 
+	int memNo = loginMember.getMemNo();
 	
 	%>
-		
+	
 	
 	
 	<div class="myPageWrapper">
@@ -148,41 +157,39 @@
             </div>
          <br><br>
             <div id="content_bottom2_2">
+            	<input type="hidden" name="memNo" value="<%= memNo %>">
+   			<% for (ShippingLocation sl : list)  { %>
+   
+            
             <input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address1" value="address1">
             &nbsp;&nbsp;배송지1 )
 
             
             <!----------------------기본배송지 설정 시 보여질 문구---------------------->
 
-            <div id="content_bottom2_3">
-                <p style="color:blue;">기본배송지</p>
-            </div>
-            
+					<% if(sl.getShippingDefault().equals("Y")) { %>
+					
+					
+		            <div id="content_bottom2_3">
+		                <p style="color:blue;">기본배송지</p>
+		            </div>
+		 
+		            
+		            <% } %>
             <!------------------------------------------------------------------------>
 
 			            <br>
-			            서울특별시 xxx xxx xxx xxxxssssssssdddddddddddddddd
-			
-			            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address2" value="address2">
-			            &nbsp;&nbsp; 배송지2 )
-			            
-			            
-			            <br>
-			            경기도 xxxx xxxxx xxxxxx
-			
-			            
-			            <br><br><input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address3" value="address3">
-			            &nbsp;&nbsp; 배송지3 )
-			            
-			            
-			            
-			            <br>
-			            인천광역시 xxx xxxxxx xxxxx
-			        </div>
-			        </div>
+			       <%= sl.getShippingAddress() %>
+			       
+			 		  <% } %>
+			 
+			   </div>
+	</div>
 			
 			
-			    </div>
+	</div>
+			    
+			  
 			
 			    <div id="updateButton" align="center">
 			        
@@ -190,7 +197,7 @@
 			       
 			    </div>
 			    
-			</div>
+	</div>
 
 
 <!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
@@ -215,19 +222,6 @@
 	                    <tr>
 	                        <th>배송지</th>
 	                        <td>
-	                            <select id="Address_1" style="width:110px;" required>
-	                                <option value=''>선택하세요</option>
-	                                <option value='서울특별시'>서울특별시</option>
-	                                <option value='인천광역시'>인천광역시</option>
-	                                <option value='경기도'>경기도</option>
-	                            </select>
-	                            <select id="Address_2" style="width:110px;" required>
-	                                <option value=''>선택하세요</option>
-	                                <option value='강북구'>강북구</option>
-	                                <option value='성북구'>성북구</option>
-	                                <option value='강남구'>강남구</option>
-	                            </select>
-	                            <br>
 	                            <input type="text" style="width:300px;" name="address" required>
 	                        </td>
 	                            
@@ -282,7 +276,8 @@
 				</div>
 				</div>
 				
-	
+<!------------------------------------------------------------------------------- -->
+
 		<!-- footerbar -->
 		<%@ include file="../common/footerbar.jsp" %>
 	
