@@ -19,6 +19,7 @@ ShmarketPageInfo sp = (ShmarketPageInfo)request.getAttribute("sp");
 		startPage;  //첫 페이지
 		endPage;    //마지막 페이지
 */
+ArrayList<Integer> likeCount = (ArrayList)request.getAttribute("likeCount");
 %>    
 <!DOCTYPE html>
 <html>

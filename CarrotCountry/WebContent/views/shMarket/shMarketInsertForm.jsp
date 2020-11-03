@@ -126,11 +126,11 @@ border:2px solid green;
             </div>
             <h5>상품상태</h5>
             <div class="product_condition_radio">
-                <input type="radio" name="p_condition" value="B" id="Pradio_1" checked>
+                <input type="radio" name="p_condition" value="미개봉" id="Pradio_1" checked>
                 <label for="Pradio_1">미개봉</label>
-                <input type="radio" name="p_condition" value="N" id="Pradio_2">
+                <input type="radio" name="p_condition" value="거의 새것" id="Pradio_2">
                 <label for="Pradio_2">거의 새것</label>
-                <input type="radio" name="p_condition" value="G" id="Pradio_3"> 
+                <input type="radio" name="p_condition" value="사용감" id="Pradio_3"> 
                 <label for="Pradio_3">사용감
                     있음</label>
             </div>

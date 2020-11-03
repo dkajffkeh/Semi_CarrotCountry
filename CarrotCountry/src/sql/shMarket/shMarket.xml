@@ -166,7 +166,7 @@ INSERT INTO
                  CATEGORY
            WHERE CATEGORY_NO=?)
           ,'ABC'
-          ,?
+          ,DEFAULT
           ,'D'
           ,'서울'
           ,?
@@ -207,13 +207,15 @@ INSERT INTO
            ,DEAL_STATUS
            ,USED_PRODSTATUS
            ,USED_PRICE
+           ,USED_POST_CHECK
            )
       VALUES
            (
             SEQ_PNO.CURRVAL
            ,DEFAULT
            ,?
-           ,?   
+           ,?  
+           ,1 
            )
 </entry>
 <entry key="townMarketDeleteForm">
@@ -265,5 +267,35 @@ INSERT INTO
           ?
          ,?
           )
+</entry>
+<entry key="likeCountSelector">
+SELECT *
+FROM(
+SELECT ROWNUM RNUM
+      ,A.*
+FROM
+(  
+SELECT
+        COUNT(LP.POST_NO) LIKECOUNT
+  FROM 
+      POST P
+LEFT JOIN 
+    LIKE_POST LP ON(P.POST_NO=LP.POST_NO)
+WHERE 
+  	   BLIND_CHECK='N'
+  	AND
+  	   PROD_STATUS='Y'
+GROUP BY P.POST_NO
+ORDER BY P.POST_NO DESC
+)A)
+WHERE RNUM BETWEEN ? AND ?
+</entry>
+<entry key="insertPostBoardLike">
+UPDATE
+      POST
+SET 
+      POST_LIKES=POST_LIKES+1
+WHERE 
+      POST_NO=?
 </entry>
 </properties>
