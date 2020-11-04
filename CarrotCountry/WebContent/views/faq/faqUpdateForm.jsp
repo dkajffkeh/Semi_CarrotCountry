@@ -27,7 +27,8 @@
       <hr>
 
       
-    <form action="<%=contextPath %>update.fa.jm">
+    <form action="<%=contextPath %>/update.fa.jm">
+    <input type="hidden" name="fno" value="<%= f.getFaqNo() %>">
       <table>
         <tr>
           <td>제목 :</td>

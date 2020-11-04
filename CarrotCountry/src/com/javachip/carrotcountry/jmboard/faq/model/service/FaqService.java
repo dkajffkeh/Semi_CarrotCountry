@@ -62,7 +62,6 @@ public class FaqService {
 		
 		
 		if(result > 0) {
-			
 			commit(conn);
 		}else {
 			rollback(conn);

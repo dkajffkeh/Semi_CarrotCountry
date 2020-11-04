@@ -159,7 +159,6 @@ public class FaqDao {
 			close(pstmt);
 			
 		}
-		
 		return result;
 		
 		
