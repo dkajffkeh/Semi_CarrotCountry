@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 
@@ -32,7 +33,7 @@ public class UserInfoBoardDao {
 	
 	
 	// 회원정보수정
-	public int updateMember(Connection conn, Member m) {
+	public int updateMember(Connection conn, UserinfoMember m) {
 		
 		int result = 0;
 		
@@ -48,7 +49,7 @@ public class UserInfoBoardDao {
 			pstmt.setString(3, m.getMemBirthday());
 			pstmt.setString(4, m.getMemNickname());
 			pstmt.setString(5, m.getMemPhone());
-			pstmt.setInt(6, m.getLocalNo());
+			pstmt.setString(6, m.getLocalNo());
 			pstmt.setString(7, m.getMemEmail());
 			pstmt.setString(8, m.getMemUserId());
 
@@ -62,8 +63,8 @@ public class UserInfoBoardDao {
 		return result;
 	}
 	
-	public Member selectMember(Connection conn, String userId) {
-		Member m = null;
+	public UserinfoMember selectMember(Connection conn, String userId) {
+		UserinfoMember m = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -78,9 +79,9 @@ public class UserInfoBoardDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m = new Member
+				m = new UserinfoMember
 						(rset.getInt("MEM_NO"),
-						 rset.getInt("LOCAL_NO"),
+						 rset.getString("LOCAL_NO"),
 						 rset.getString("MEM_USERID"),
 						 rset.getString("MEM_USERPWD"),
 						 rset.getString("MEM_NAME"),
@@ -96,7 +97,10 @@ public class UserInfoBoardDao {
 						 rset.getString("PROFILE_PATH"),
 						 rset.getString("PROFILE_MODIFYNAME"),
 						 rset.getString("PROFILE_ORIGNNAME"),
-						 rset.getString("PROFILE_LOADNAME")
+						 rset.getString("PROFILE_LOADNAME"),
+						 rset.getString("LOCAL_SI"),
+						 rset.getString("LOCAL_GU"),
+						 rset.getString("LOCAL_DONG")
 						);
 			}
 			

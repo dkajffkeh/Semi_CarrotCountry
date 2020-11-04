@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.service.UserInfoBoardService;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
 
 /**
  * Servlet implementation class MemberUpdateController
@@ -41,12 +41,12 @@ public class MemberUpdateController extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String nickName = request.getParameter("nickName");
 		String phone = request.getParameter("phone");
-		int localNo = Integer.parseInt(request.getParameter("local"));
+		String localNo = request.getParameter("local");
 		String email = request.getParameter("email");
 		
-		Member m = new Member(userId, memName, gender, birthday, nickName, phone, localNo, email);
+		UserinfoMember m = new UserinfoMember(userId, memName, gender, birthday, nickName, phone, localNo, email);
 		
-		Member updateMem = new UserInfoBoardService().updateMember(m);
+		UserinfoMember updateMem = new UserInfoBoardService().updateMember(m);
 		
 		if(updateMem == null) {
 			

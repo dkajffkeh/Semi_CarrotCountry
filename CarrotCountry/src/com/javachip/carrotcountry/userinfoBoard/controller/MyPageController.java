@@ -44,9 +44,6 @@ public class MyPageController extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("lo", lo);
-		HttpSession session = request.getSession();
-		session.setAttribute("list", list);
-		session.setAttribute("lo", lo);
 		
 		request.getRequestDispatcher("views/userinfoBoard/myPage.jsp").forward(request, response);
 	}

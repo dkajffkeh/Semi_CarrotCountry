@@ -5,7 +5,7 @@
 
 <% 
 	ArrayList<ShippingLocation> list = (ArrayList<ShippingLocation>)request.getAttribute("list");
-	Location lo = (Location)session.getAttribute("lo");
+	Location lo = (Location)request.getAttribute("lo");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +33,7 @@
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 	int memNo = loginMember.getMemNo();
+	String 
 	
 	%>
 	
@@ -138,6 +139,7 @@
             <tr>
                 <td>지역</td>
                 <td>
+           
                 </td>
             </tr>
             <tr>

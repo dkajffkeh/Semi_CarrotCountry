@@ -4,31 +4,35 @@ import java.sql.Date;
 
 public class UserinfoMember {
 	
-	private String memNo; 				// 유저 번호
-	private String localNo;			// 지역 번호
-	private String memUserId;		// 아이디
-	private String memUserPwd;		// 비밀번호
-	private String memName;			// 이름
-	private String memNickname;		// 닉네임
-	private String memBirthday;		// 생일
-	private String memGender;		// 성별 	'남/'여'
-	private String memPhone;		// 전화번호
-	private String memEmail;		// 이메일
-	private Date memEnrollDate;		// 가입일 
-	private String bListCheck;		// 블랙리스트 'N'/'Y'
-	private String leaveCheck;		// 회원탈퇴 'N'/'Y'
-	private String managerCheck;	// 관리자 'N'/'Y'
-	private String profilePath; 	// 프로필 사진 경로
+	private int memNo; 				
+	private String localNo;			// 지역 (string)			
+	private String memUserId;		
+	private String memUserPwd;		
+	private String memName;			
+	private String memNickname;		
+	private String memBirthday;		
+	private String memGender;		
+	private String memPhone;		
+	private String memEmail;		
+	private Date memEnrollDate;		
+	private String bListCheck;		
+	private String leaveCheck;		
+	private String managerCheck;	
+	private String profilePath; 	    // 프로필 사진 경로
     private String profileModifyname;	// 프로필 사진 수정명
     private String profileOrignname;	// 프로필 사진 원본명
-    private String profileLoadname;		// 경로 + 수정명?
+    private String profileLoadname;		// 경로 + 수정명
+    private String localSi;
+    private String localGu;
+    private String localDong;
 
     public UserinfoMember() {}
 
-	public UserinfoMember(String memNo, String localNo, String memUserId, String memUserPwd, String memName,
+	public UserinfoMember(int memNo, String localNo, String memUserId, String memUserPwd, String memName,
 			String memNickname, String memBirthday, String memGender, String memPhone, String memEmail,
 			Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck, String profilePath,
-			String profileModifyname, String profileOrignname, String profileLoadname) {
+			String profileModifyname, String profileOrignname, String profileLoadname, String localSi, String localGu,
+			String localDong) {
 		super();
 		this.memNo = memNo;
 		this.localNo = localNo;
@@ -48,13 +52,32 @@ public class UserinfoMember {
 		this.profileModifyname = profileModifyname;
 		this.profileOrignname = profileOrignname;
 		this.profileLoadname = profileLoadname;
+		this.localSi = localSi;
+		this.localGu = localGu;
+		this.localDong = localDong;
+	}
+	
+	
+	
+
+	public UserinfoMember(String memUserId, String memName, String memGender, String memBirthday, String memNickname,
+			String memPhone, String localNo, String memEmail) {
+		super();
+		this.memUserId = memUserId;
+		this.memName = memName;
+		this.memGender = memGender;
+		this.memBirthday = memBirthday;
+		this.memNickname = memNickname;
+		this.memPhone = memPhone;
+		this.localNo = localNo;
+		this.memEmail = memEmail;
 	}
 
-	public String getMemNo() {
+	public int getMemNo() {
 		return memNo;
 	}
 
-	public void setMemNo(String memNo) {
+	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
 
@@ -194,6 +217,30 @@ public class UserinfoMember {
 		this.profileLoadname = profileLoadname;
 	}
 
+	public String getLocalSi() {
+		return localSi;
+	}
+
+	public void setLocalSi(String localSi) {
+		this.localSi = localSi;
+	}
+
+	public String getLocalGu() {
+		return localGu;
+	}
+
+	public void setLocalGu(String localGu) {
+		this.localGu = localGu;
+	}
+
+	public String getLocalDong() {
+		return localDong;
+	}
+
+	public void setLocalDong(String localDong) {
+		this.localDong = localDong;
+	}
+
 	@Override
 	public String toString() {
 		return "UserinfoMember [memNo=" + memNo + ", localNo=" + localNo + ", memUserId=" + memUserId + ", memUserPwd="
@@ -201,8 +248,11 @@ public class UserinfoMember {
 				+ ", memGender=" + memGender + ", memPhone=" + memPhone + ", memEmail=" + memEmail + ", memEnrollDate="
 				+ memEnrollDate + ", bListCheck=" + bListCheck + ", leaveCheck=" + leaveCheck + ", managerCheck="
 				+ managerCheck + ", profilePath=" + profilePath + ", profileModifyname=" + profileModifyname
-				+ ", profileOrignname=" + profileOrignname + ", profileLoadname=" + profileLoadname + "]";
+				+ ", profileOrignname=" + profileOrignname + ", profileLoadname=" + profileLoadname + ", localSi="
+				+ localSi + ", localGu=" + localGu + ", localDong=" + localDong + "]";
 	}
+    
+	
     
     
 }

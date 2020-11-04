@@ -35,8 +35,13 @@
 		     , PROFILE_MODIFYNAME
 		     , PROFILE_ORIGNNAME
 		     , PROFILE_LOADNAME
-		  FROM MEMBER
-		 WHERE MEM_USERID = ?
+             , LOCAL_SI
+             , LOCAL_GU
+             , LOCAL_DONG
+		  FROM MEMBER M
+          LEFT
+          JOIN LOCATION USING(LOCAL_NO)
+		 WHERE MEM_USERID =?
 		   AND LEAVE_CHECK = 'N'
 	</entry>
 	

@@ -6,6 +6,7 @@ import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -18,13 +19,13 @@ public class UserInfoBoardService {
 	 * @param m		변경할 내용들+변경요청한회원의아이디 가 담겨있는 객체
 	 * @return		갱신된 회원 객체/null
 	 */
-	public Member updateMember(Member m) {
+	public UserinfoMember updateMember(UserinfoMember m) {
 		
 		Connection conn = getConnection();
 		
 		int result = new UserInfoBoardDao().updateMember(conn, m);
 		
-		Member updateMem = null;
+		UserinfoMember updateMem = null;
 		
 		if(result >0) {
 			commit(conn);
