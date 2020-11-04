@@ -15,18 +15,15 @@ public class Faq {
 	
 public Faq() {}
 
-public Faq(int faqNo, String memNo, String faqTitle, String faqContent, String category, Date faqEnrollDate,
-		String faqWriter, String faqstatus) {
+
+
+public Faq(int faqNo, String faqTitle) {
 	super();
 	this.faqNo = faqNo;
-	this.memNo = memNo;
 	this.faqTitle = faqTitle;
-	this.faqContent = faqContent;
-	this.category = category;
-	this.faqEnrollDate = faqEnrollDate;
-	this.faqWriter = faqWriter;
-	this.faqstatus = faqstatus;
 }
+
+
 
 public Faq(String memNo, String faqTitle, String faqContent, String category) {
 	super();
@@ -36,17 +33,7 @@ public Faq(String memNo, String faqTitle, String faqContent, String category) {
 	this.category = category;
 }
 
-public Faq(int faqNo, String faqTitle, String faqContent, String category, Date faqEnrollDate, String faqWriter,
-		String faqstatus) {
-	super();
-	this.faqNo = faqNo;
-	this.faqTitle = faqTitle;
-	this.faqContent = faqContent;
-	this.category = category;
-	this.faqEnrollDate = faqEnrollDate;
-	this.faqWriter = faqWriter;
-	this.faqstatus = faqstatus;
-}
+
 
 @Override
 public String toString() {

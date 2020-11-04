@@ -40,7 +40,7 @@ public class NoticeListController extends HttpServlet {
 		int maxPage;
 		int startPage;
 		int endPage;
-		
+		//
 		listCount = new NoticeService().selectListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -62,7 +62,7 @@ public class NoticeListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
+		//
 		ArrayList<Notice> list = new NoticeService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
