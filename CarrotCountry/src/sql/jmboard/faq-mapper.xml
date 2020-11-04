@@ -34,15 +34,29 @@
 		  )
 	</entry>
 	<!-- FAQ게시판 조회수 증가 -->
-	<entry key="">
+	<entry key="increaseCount">
 	UPDATE 
 	       FAQ
 	   SET FAQ_COUNT = FAQ_COUNT + 1
 	 WHERE FAQ_NO = ?
-	   AND FAQ_STATUS = 'Y';
+	   AND FAQ_STATUS = 'N';
 	</entry>
-	<!--  -->
-	<entry key=""></entry>
+	<!-- FAQ selectFaq -->
+	<entry key="selectFaq">
+		SELECT 
+		       FAQ_NO
+		     , MEM_USERID
+		     , FAQ_TITLE
+		     , FAQ_CONTENT
+		     , FAQ_CATEGORY_NAME
+		     , FAQ_ENROLL_DATE
+		  FROM FAQ 
+		  LEFT 
+		  JOIN MEMBER USING(MEM_NO)
+		  JOIN FAQ_CATEGORY ON(FAQ_CATEGORY = FAQ_CATEGORY_NO)
+		 WHERE FAQ_STATUS = 'N'
+		   AND FAQ_NO = ?
+	</entry>
 	<!--  -->
 	
 

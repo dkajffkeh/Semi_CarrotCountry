@@ -26,7 +26,7 @@
 	
 	
 
-    <pre><%=f.getFaqWriter() %>                                                                 작성일 <%=f.getFaqEnrollDate() %></pre>
+    <pre><%=f.getMemNo() %>                                                                 작성일 <%=f.getFaqEnrollDate() %></pre>
       
         <div class="form-group">
           <textarea class="border border-warning" cols="60" rows="20" id="comment" name="text" style="resize: none"><%=f.getFaqContent() %></textarea>

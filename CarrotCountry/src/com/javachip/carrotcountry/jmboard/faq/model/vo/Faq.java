@@ -10,7 +10,6 @@ public class Faq {
 	private String faqContent;
 	private String category;
 	private Date faqEnrollDate;
-	private String faqWriter;
 	private String faqstatus;
 	
 public Faq() {}
@@ -25,6 +24,18 @@ public Faq(int faqNo, String faqTitle) {
 
 
 
+public Faq(int faqNo, String memNo, String faqTitle, String faqContent, String category, Date faqEnrollDate) {
+	super();
+	this.faqNo = faqNo;
+	this.memNo = memNo;
+	this.faqTitle = faqTitle;
+	this.faqContent = faqContent;
+	this.category = category;
+	this.faqEnrollDate = faqEnrollDate;
+}
+
+
+
 public Faq(String memNo, String faqTitle, String faqContent, String category) {
 	super();
 	this.memNo = memNo;
@@ -32,14 +43,21 @@ public Faq(String memNo, String faqTitle, String faqContent, String category) {
 	this.faqContent = faqContent;
 	this.category = category;
 }
+public Faq(int faqNo, String faqTitle, String faqContent, String faqWriter, Date faqEnrollDate) {
+	super();
+	this.faqNo = faqNo;
+	this.faqTitle = faqTitle;
+	this.faqContent = faqContent;
+	this.faqEnrollDate = faqEnrollDate;
+}
 
 
 
 @Override
 public String toString() {
 	return "Faq [faqNo=" + faqNo + ", memNo=" + memNo + ", faqTitle=" + faqTitle + ", faqContent=" + faqContent
-			+ ", category=" + category + ", faqEnrollDate=" + faqEnrollDate + ", faqWriter=" + faqWriter
-			+ ", faqstatus=" + faqstatus + "]";
+			+ ", category=" + category + ", faqEnrollDate=" + faqEnrollDate + 
+			 ", faqstatus=" + faqstatus + "]";
 }
 
 public int getFaqNo() {
@@ -90,14 +108,6 @@ public void setFaqEnrollDate(Date faqEnrollDate) {
 	this.faqEnrollDate = faqEnrollDate;
 }
 
-public String getFaqWriter() {
-	return faqWriter;
-}
-
-public void setFaqWriter(String faqWriter) {
-	this.faqWriter = faqWriter;
-}
-
 public String getFaqstatus() {
 	return faqstatus;
 }
@@ -106,14 +116,7 @@ public void setFaqstatus(String faqstatus) {
 	this.faqstatus = faqstatus;
 }
 
-public Faq(int faqNo, String faqTitle, String faqContent, String faqWriter, Date faqEnrollDate) {
-	super();
-	this.faqNo = faqNo;
-	this.faqTitle = faqTitle;
-	this.faqContent = faqContent;
-	this.faqWriter = faqWriter;
-	this.faqEnrollDate = faqEnrollDate;
-}
+
 
 
 

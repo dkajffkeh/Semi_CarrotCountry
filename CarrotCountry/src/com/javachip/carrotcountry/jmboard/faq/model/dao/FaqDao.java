@@ -136,10 +136,11 @@ public class FaqDao {
 			
 			if(rset.next()) {
 				f = new Faq(rset.getInt("faq_no"),
+							rset.getString("MEM_USERID"),
 						    rset.getString("faq_title"),
 						    rset.getString("faq_content"),
-						    rset.getString("mem_name"),
-						    rset.getDate("faq_enroll_date"));
+						    rset.getString("FAQ_CATEGORY_NAME"),
+						    rset.getDate("FAQ_ENROLL_DATE"));
 			}
 			
 		} catch (SQLException e) {
