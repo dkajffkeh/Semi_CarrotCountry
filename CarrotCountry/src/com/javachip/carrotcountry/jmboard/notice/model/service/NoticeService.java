@@ -75,6 +75,17 @@ public class NoticeService {
 		return n;
 	}
 
+	public int updateNotice(Notice n) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().updateNotice(conn, n);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 
 }

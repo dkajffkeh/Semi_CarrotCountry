@@ -27,7 +27,7 @@
 	<div class="outer">
 
         <br>
-        <h2 align="center">일반게시판 상세보기</h2>
+        <h2 align="center">공지사항 상세보기</h2>
         <br>
 
         <table id="detail-area" align="center" border="1">
@@ -68,7 +68,7 @@
 	            <a href="<%= contextPath %>/updateForm.no.jm?nno=<%= n.getNoticeNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            <a href="<%= contextPath %>/delete.no.jm?nno=<%= n.getNoticeNo() %>" class="btn btn-danger btn-sm">삭제하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <% } %>
-            <input type="button" value="공지사항바로가기" class="btn btn-warning btn-sm"  onclick='location.href="<%=contextPath%>/list.no.jm?nno=1"'>
+            <input type="button" value="공지사항바로가기" class="btn btn-warning btn-sm"  onclick='location.href="<%=contextPath%>/list.no.jm?currentPage=1"'>
 		</div>
 
     </div>

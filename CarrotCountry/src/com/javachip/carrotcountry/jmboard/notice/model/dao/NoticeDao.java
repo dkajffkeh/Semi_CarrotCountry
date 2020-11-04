@@ -203,6 +203,35 @@ public class NoticeDao {
 		return n;
 		
 	}
+
+	public int updateNotice(Connection conn, Notice n) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setString(3, n.getFilePath());
+			pstmt.setString(4, n.getFileModifyName());
+			pstmt.setString(5, n.getFileOriginName());
+			pstmt.setInt(6, n.getNoticeNo());
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 	
 	
