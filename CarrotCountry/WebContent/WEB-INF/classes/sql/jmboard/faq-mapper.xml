@@ -7,7 +7,7 @@
 		       FAQ_NO
 		     , FAQ_TITLE
 		  FROM FAQ 
-		 WHERE FAQ_STATUS='Y'
+		 WHERE FAQ_STATUS='N'
 		 ORDER
 		    BY FAQ_NO DESC
 	</entry>
@@ -20,7 +20,7 @@
 		   , FAQ_TITLE
 		   , FAQ_CONTENT
            , FAQ_CATEGORY
-		   , FAQ_WRITER
+           , MEM_NO
            , FAQ_ENROLL_DATE
 		  )
 		  VALUES
@@ -29,7 +29,7 @@
 		   , ?
 		   , ?
 		   , ?
-		   , ? 
+		   , ?
 		   , SYSDATE
 		  )
 	</entry>

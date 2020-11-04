@@ -65,7 +65,7 @@ public class FaqDao {
 		return list;
 	}
 //FAQ추가 (Null에러)
-	/*
+	
 	public int insertFaq(Connection conn, Faq f) {
 		
 		int result = 0;
@@ -79,7 +79,7 @@ public class FaqDao {
 
 			pstmt.setString(1, f.getFaqTitle());
 			pstmt.setString(2, f.getFaqContent());
-			pstmt.setInt(3, Integer.parseInt(f.getCategory())); // 숫자로 변경해야함
+			pstmt.setInt(3, Integer.parseInt(f.getCategory()));
 			pstmt.setInt(4, Integer.parseInt(f.getMemNo()));
 			
 			result = pstmt.executeUpdate();
@@ -116,6 +116,7 @@ public class FaqDao {
 		return result;
 		
 	}
+	
 //게시판
 	public Faq selectFaq(Connection conn, int nno) {
 
@@ -153,6 +154,7 @@ public class FaqDao {
 		
 		
 	}
+	/*
 	//update
 	public int updateFaq(Connection conn, Faq f) {
 		

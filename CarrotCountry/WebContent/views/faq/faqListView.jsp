@@ -56,7 +56,7 @@
                 <% }else{ %>
 	                <!-- 공지사항이 있을경우 -->
 	                <% for(Faq f : list){ %>
-						<li class="list-group-item faq" onclick='location.href="<%=contextPath%>/detail.fa.jm?fno="<%=f.getFaqNo() %>>'><%=f.getFaqContent() %></li>
+						<li class="list-group-item faq" onclick='location.href="<%=contextPath%>/detail.fa.jm?fno="<%=f.getFaqNo() %>'><%=f.getFaqTitle() %></li>
 	                <% } %>
                 <% } %>
         	</ul>  

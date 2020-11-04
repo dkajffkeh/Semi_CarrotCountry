@@ -40,7 +40,7 @@ public class FaqInsertController extends HttpServlet {
 		String category = request.getParameter("category");
 	
 		Faq f = new Faq(faqWriter, faqTitle, faqContent, category);
-		
+		System.out.println(f);
 		int result = new FaqService().insertFaq(f);
 		
 		if(result > 0) {

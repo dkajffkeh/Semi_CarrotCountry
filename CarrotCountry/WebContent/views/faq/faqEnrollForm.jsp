@@ -18,6 +18,7 @@
         <h2>FAQ게시판작성하기</h2>
         <hr>
         <form action="<%=contextPath%>/insert.fa.jm" method="POST">
+        <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
             <table>
             <tr>
               <td width="55">제목:</td>&nbsp;
@@ -25,7 +26,7 @@
             </tr>
             <tr>
               <td width="80">카테고리 :</td>
-              <td>
+              <td width="500">
                 <select name="category" id="category">
                   <option value="11">운영정책</option>
                   <option value="22">계정/인증</option>
@@ -41,7 +42,7 @@
               </tr>
             </table>
             <br>
-        <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+        
          
         <div class="form-group">
           <textarea class="border border-warning" cols="60" rows="20" id="comment" name="faqContent" style="resize: none"></textarea>

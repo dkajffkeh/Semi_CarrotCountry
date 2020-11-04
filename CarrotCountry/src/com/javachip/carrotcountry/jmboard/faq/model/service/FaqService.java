@@ -26,8 +26,7 @@ public class FaqService {
 		return list;
 	}
 
-//faq게시판 작성하기
-	/*
+
 	public int insertFaq(Faq f) {
 		
 		Connection conn = getConnection();
@@ -58,6 +57,7 @@ public class FaqService {
 		
 		return result;
 	}
+	/*
 //faq게시판
 	public Faq selectFaq(int nno) {
 		Connection conn = getConnection();
