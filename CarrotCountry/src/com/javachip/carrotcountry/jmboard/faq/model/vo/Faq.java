@@ -25,6 +25,16 @@ public Faq(int faqNo, String faqTitle) {
 
 
 
+public Faq(String memNo, String faqTitle, String faqContent, String category) {
+	super();
+	this.memNo = memNo;
+	this.faqTitle = faqTitle;
+	this.faqContent = faqContent;
+	this.category = category;
+}
+
+
+
 @Override
 public String toString() {
 	return "Faq [faqNo=" + faqNo + ", memNo=" + memNo + ", faqTitle=" + faqTitle + ", faqContent=" + faqContent
