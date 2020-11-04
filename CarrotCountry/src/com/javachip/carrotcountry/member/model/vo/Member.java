@@ -20,7 +20,7 @@ public class Member {
 	private String leaveCheck;		// 회원탈퇴 'N'/'Y'
 	private String managerCheck;	// 관리자 'N'/'Y'
 	private String profilePath; 	// 프로필 사진 경로
-    private String profileModifyName;	// 프로필 사진 수정명
+    private String profileModifyname;	// 프로필 사진 수정명
     private String profileOrignname;	// 프로필 사진 원본명
     private String profileLoadname;		// 경로 + 수정명?
 	
@@ -30,7 +30,7 @@ public class Member {
 	// 매개변수 생성자 (전체)
 	public Member(int memNo, int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
 			String memBirthday, String memGender, String memPhone, String memEmail, Date memEnrollDate,
-			String bListCheck, String leaveCheck, String managerCheck, String profilePath, String profileModifyName,
+			String bListCheck, String leaveCheck, String managerCheck, String profilePath, String profileModifyname,
 			String profileOrignname, String profileLoadname) {
 		super();
 		this.memNo = memNo;
@@ -48,11 +48,11 @@ public class Member {
 		this.leaveCheck = leaveCheck;
 		this.managerCheck = managerCheck;
 		this.profilePath = profilePath;
-		this.profileModifyName = profileModifyName;
+		this.profileModifyname = profileModifyname;
 		this.profileOrignname = profileOrignname;
 		this.profileLoadname = profileLoadname;
 	}
-
+	
 	// 매개변수 생성자 (회원가입용)
 	public Member(int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
 			String memBirthday, String memGender, String memPhone, String memEmail) {
@@ -67,7 +67,8 @@ public class Member {
 		this.memPhone = memPhone;
 		this.memEmail = memEmail;
 	}
-	
+
+
 	// 매개변수 생성자 (회원정보수정용)
 	public Member(String memUserId, String memName, String memGender, String memBirthday, String memNickname,
 			String memPhone, int localNo, String memEmail) {
@@ -81,7 +82,7 @@ public class Member {
 		this.localNo = localNo;
 		this.memEmail = memEmail;
 	}
-
+	
 	// setter/getter 메소드
 	public int getMemNo() {
 		return memNo;
@@ -203,12 +204,12 @@ public class Member {
 		this.profilePath = profilePath;
 	}
 
-	public String getProfileModifyName() {
-		return profileModifyName;
+	public String getProfileModifyname() {
+		return profileModifyname;
 	}
 
-	public void setProfileModifyName(String profileModifyName) {
-		this.profileModifyName = profileModifyName;
+	public void setProfileModifyname(String profileModifyname) {
+		this.profileModifyname = profileModifyname;
 	}
 
 	public String getProfileOrignname() {
@@ -234,8 +235,8 @@ public class Member {
 				+ memUserPwd + ", memName=" + memName + ", memNickname=" + memNickname + ", memBirthday=" + memBirthday
 				+ ", memGender=" + memGender + ", memPhone=" + memPhone + ", memEmail=" + memEmail + ", memEnrollDate="
 				+ memEnrollDate + ", bListCheck=" + bListCheck + ", leaveCheck=" + leaveCheck + ", managerCheck="
-				+ managerCheck + ", profilePath=" + profilePath + ", profileModifyName=" + profileModifyName
+				+ managerCheck + ", profilePath=" + profilePath + ", profileModifyname=" + profileModifyname
 				+ ", profileOrignname=" + profileOrignname + ", profileLoadname=" + profileLoadname + "]";
 	}
-	
+
 }
