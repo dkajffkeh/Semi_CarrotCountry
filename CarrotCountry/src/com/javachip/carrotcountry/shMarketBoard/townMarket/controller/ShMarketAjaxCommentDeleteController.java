@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
-import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 
 /**
- * Servlet implementation class ShMarketCommentModifyController
+ * Servlet implementation class ShMarketAjaxCommentDeleteController
  */
-@WebServlet("/modifybtn.sh.hy")
-public class ShMarketCommentModifyController extends HttpServlet {
+@WebServlet("/deleteComment.sh.hy")
+public class ShMarketAjaxCommentDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShMarketCommentModifyController() {
+    public ShMarketAjaxCommentDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +31,17 @@ public class ShMarketCommentModifyController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("application/json; charset=utf-8"); 
-		String userInput = request.getParameter("userInput");
-		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int delCommentNo = Integer.parseInt(request.getParameter("delCommentNo"));
 		
-		CommentHY c = new CommentHY();
-		c.setCommentNo(commentNo);
-		c.setContent(userInput);
-		c.setMemNo(memNo);
+		int result = new TownMarketService().shMarketcommentDelete(delCommentNo);
 		
-		CommentHY newc = new TownMarketService().shmarketCommentModifier(c);
-		response.setContentType("application/json; charset=utf-8"); 
-		if(newc!=null) {
-			
+		if(result>0) {
 			Gson gson = new Gson();
-			gson.toJson(newc,response.getWriter());
-			
-		} else {
-			
-			Gson gson = new Gson();
-			gson.toJson("로드에 실패했습니다.",response.getWriter());
+			gson.toJson("성공",response.getWriter());
 		}
+		
+		
+		
 		
 	}
 

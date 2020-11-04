@@ -504,9 +504,9 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 				 }
 			 })	 
 		 }
-		 <%}%>	 
+		 <%}%>	//댓글 수정버튼 눌렀을떄 나오는 textarea js 
 		 function modifyComment(e,num,userNum){
-			 
+	
 			 commentNoScope = num;
 			 userNoScope = userNum;
 			 let commentContent = e.parentNode.parentNode.parentNode.parentNode;
@@ -515,24 +515,32 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                                          <div class="comment_content">  
                                          <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
                                          </div>
-                                         <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick="commentUpdate(this);">수정하기</button>`     
-       		 
+                                         <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
 		 }
-		 function commentUpdate(event){
+		
+		
+		 
+		 //댓글 삭제js
+		 function deleteFunc(deleteNo){
 			 
-			 $.ajax({
-				 url:"modifybtn.sh.hy",
-				 type:"post",
-			 	 data:{
-			 		userInput: $("#UserModify").val(),
-			 		commentNo:commentNoScope,
-			 		memNo:userNoScope
-			 		 
-			 	 },
-			 	 success:function(result){
-			 		CommentListUpdate();
-			 	 }
-			 })			 
+			 if(confirm("삭제하시겠습니까?")){
+				 
+				 console.log(deleteNo);
+				 
+				 $.ajax({
+					 url:"deleteComment.sh.hy",
+					 type:"post",
+					 data:{delCommentNo:deleteNo},
+					 success:function(result){
+						 
+						 CommentListUpdate();
+						 
+						 
+					 }		 
+				 })
+				 
+			 }
+			 
 		 }
          function askFunction(){
        	 
@@ -573,6 +581,8 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		<% }%> 		 
         	 })	 
          })
+         
+         
          </script>  
   
       <%@ include file="../common/footerbar.jsp"%>   

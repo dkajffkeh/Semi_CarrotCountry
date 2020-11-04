@@ -326,7 +326,7 @@ WHERE
       POST_NO=?
 </entry>
 
-<entry key="shmarketCommentModifier">
+<entry key="shMarketCommentUpdate">
 UPDATE
       POST_COMMENT
    SET    
@@ -346,5 +346,11 @@ SELECT
       POST_COMMENT
  WHERE
       COMM_NO=?
+</entry>
+<entry key="shMarketcommentDelete">
+DELETE 
+      FROM
+           POST_COMMENT
+WHERE COMM_NO=? 
 </entry>
 </properties>

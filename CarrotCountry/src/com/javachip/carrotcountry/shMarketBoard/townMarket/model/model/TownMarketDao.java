@@ -489,7 +489,6 @@ Properties prop = new Properties();
 		return result;
 	}
 
-
 	public ArrayList<Integer> likeCountSelector(Connection conn, ShmarketPageInfo sp) {
 		
 		ArrayList<Integer> likeCount = new ArrayList();
@@ -505,7 +504,7 @@ Properties prop = new Properties();
 			pstmt.setInt(1, startNum);
 			pstmt.setInt(2, endRow);
 			
-			rs=pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				
@@ -522,7 +521,6 @@ Properties prop = new Properties();
 
 		return likeCount;
 	}
-
 
 	public int insertPostBoardLike(Connection conn, int bno, int userNo) {
 		
@@ -541,11 +539,9 @@ Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
-		
-		
+				
 		return result;
 	}
-
  
 	public CommentHY shMarketBoardCommentSelector(Connection conn, CommentHY c) {
 		
@@ -573,22 +569,18 @@ Properties prop = new Properties();
 			close(rs);
 			close(pstmt);
 		}
-		
-		
+	
 		return newc;
 	}
-
-
-	public int shmarketCommentModifier(Connection conn, CommentHY c) {
+	public int shMarketcommentDelete(Connection conn,int delCommentNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("shmarketCommentModifier");
+		String sql = prop.getProperty("shMarketcommentDelete");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, c.getContent());
-			pstmt.setInt(2, c.getMemNo());
+			pstmt.setInt(1, delCommentNo);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -598,41 +590,9 @@ Properties prop = new Properties();
 			close(pstmt);
 		}
 		
-		
 		return result;
 	}
 
 
-	public CommentHY shMarketCommentReSelector(Connection conn, CommentHY c) {
-		
-		CommentHY newc = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = prop.getProperty("shMarketCommentReSelector");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, c.getCommentNo());
-			
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				newc = new CommentHY(rs.getInt("COMM_NO")
-						            ,rs.getString("USER_NICKNAME")
-						            ,rs.getDate("ENT_DATE")
-						            ,rs.getString("CONTENT")
-						            ,rs.getString("PRIVATE")
-						            ,rs.getInt("MEM_NO"));		
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		
-		return newc;
-	}
 	
 }
