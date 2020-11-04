@@ -50,11 +50,11 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>신고번호</th>
-							<th>거래유형</th>
-							<th>물품명</th>
+							<th width="80px">신고번호</th>
+							<th>게시글 명</th>
 							<th>신고유형</th>
 							<th>신고사유</th>
+							<th>신고받은사람</th>
 							<th>신고일</th>
 							<th>상태</th>
 						</tr>
@@ -62,22 +62,22 @@
 					<tbody>
 						<tr>
 							<td>1</td>
-							<td>공동 구매</td>
-							<td>물품2</td>
-							<td>물품 정보 부정확</td>
-							<td>사유....</td>
+							<td>컴퓨터 팔아요@@</td>
+							<td>중고 거래</td>
+							<td>사기</td>
+							<td>난사기꾼임</td>
 							<td>2020.01.01</td>
 							<td>완료</td>
 						</tr>	
 						<tr>
-							<td>2</td>
+							<td>1</td>
+							<td>노트북팔아요@</td>
 							<td>중고 거래</td>
-							<td>물품1</td>
 							<td>사기</td>
-							<td>사유....</td>
-							<td>2020.01.02</td>
-							<td>처리중</td>
-						</tr>
+							<td>노트북사기꾼</td>
+							<td>2020.01.01</td>
+							<td>완료</td>
+						</tr>	
 					</tbody>
 				</table>
 			</div>

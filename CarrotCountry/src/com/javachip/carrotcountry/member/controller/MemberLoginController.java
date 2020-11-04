@@ -49,8 +49,7 @@ public class MemberLoginController extends HttpServlet {
 			
 			
 		}else { 
-			// 로그인 성공		
-			System.out.println(loginMember);
+			// 로그인 성공
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			session.setMaxInactiveInterval(-1);
