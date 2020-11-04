@@ -32,23 +32,27 @@ public class FaqDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		int nno = Integer.parseInt(request.getParameter("nno"));
+			int fno = Integer.parseInt(request.getParameter("fno"));
 		
-		int result = new FaqService().increaseCount(nno);
-		
-		if(result > 0) {
+
+			Faq f = new FaqService().selectFaq(fno);
 			
-			Faq f = new FaqService().selectFaq(nno);
+
+			if(f.getFaqstatus() == null) {
+
+				request.setAttribute("f", f);
+				request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
+			}else {
+				request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
+
 			
-			request.setAttribute("f", f);
-			request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
+
 			
-		}else {
+
 			
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
-		}
+
 		
 	}
 

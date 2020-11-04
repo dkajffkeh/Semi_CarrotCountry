@@ -31,5 +31,32 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="insertNotice">
+    INSERT
+		  INTO NOTICE
+		  (
+		     NOTICE_NO
+		   , MEM_NO
+		   , NOTICE_TITLE
+		   , NOTICE_CONTENT
+		   , FILE_PATH
+           , NOTICE_ENROLL_DATE
+		   , FILE_MODIFYNAME
+		   , FILE_ORIGINNAME
+		  )
+		  VALUES
+		  (
+		     SEQ_NOTICENO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , SYSDATE
+           
+           
+           , ?
+           , ?
+		  )
+	</entry>
 
 </properties>
