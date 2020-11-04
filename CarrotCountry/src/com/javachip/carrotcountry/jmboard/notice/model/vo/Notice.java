@@ -37,7 +37,7 @@ public class Notice {
 		this.noticeEnrollDate = noticeEnrollDate;
 		this.noticeCount = noticeCount;
 	}
-
+	//insert controller
 	public Notice(String memNo, String noticeTitle, String noticeContent, String filePath,
 			String fileModifyName, String fileOriginName) {
 		super();
@@ -48,6 +48,21 @@ public class Notice {
 		this.fileModifyName = fileModifyName;
 		this.fileOriginName = fileOriginName;
 	}
+	//insert Dao
+	public Notice(int noticeNo, String memNo, String noticeTitle, String noticeContent, String filePath,
+			Date noticeEnrollDate, String fileModifyName, String fileOriginName) {
+		super();
+		this.noticeNo = noticeNo;
+		this.memNo = memNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.filePath = filePath;
+		this.noticeEnrollDate = noticeEnrollDate;
+		this.fileModifyName = fileModifyName;
+		this.fileOriginName = fileOriginName;
+	}
+	
+
 
 	public int getNoticeNo() {
 		return noticeNo;

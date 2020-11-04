@@ -4,6 +4,7 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 import java.sql.Connection;
@@ -69,14 +70,25 @@ public class UserInfoBoardService {
 	 *
 	 */
 	public ArrayList<ShippingLocation> selectShippingLocation(String memNo){
+		
 		Connection conn = getConnection();
-		
 		ArrayList<ShippingLocation> list = new UserInfoBoardDao().selectShippingLocation(conn, memNo);
-	
 		close(conn);
-		
 		return list;
 	
+	}
+	/**
+	 * 4. 지역 조회
+	 * @param memNo 	지역번호
+	 * @return 			
+	 *
+	 */
+	public Location selectLocation(String memNo) {
+		Connection conn = getConnection();
+		Location lo = new UserInfoBoardDao().selectLocation(conn, memNo);
+		close(conn);
+		return lo;
+		
 	}
 	
 	

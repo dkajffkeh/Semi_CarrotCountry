@@ -33,17 +33,27 @@ public class FaqUpdateController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int nno = Integer.parseInt(request.getParameter("nno"));
+		int fno = Integer.parseInt(request.getParameter("fno"));
 		String faqTitle = request.getParameter("title");
 		String faqContent = request.getParameter("content");
 		
 		Faq f = new Faq();
 		
-		f.setFaqNo(nno);
+		f.setFaqNo(fno);
 		f.setFaqTitle(faqTitle);
 		f.setFaqContent(faqContent);
+		//System.out.println(f);
 		
 		int result = new FaqService().updateFaq(f);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 FAQ 수정되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.fa.jm?fno=" + fno);
+		}else {
+			request.setAttribute("errorMsg", "FAQ 수정 실패.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+		}
 		
 	}
 

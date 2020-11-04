@@ -56,7 +56,7 @@
                 <% }else{ %>
 	                <!-- 공지사항이 있을경우 -->
 	                <% for(Faq f : list){ %>
-						<li class="list-group-item faq" onclick='location.href="<%=contextPath%>/detail.fa.jm?fno="<%=f.getFaqNo() %>'><%=f.getFaqTitle() %></li>
+						<li class="list-group-item faq" onclick='location.href="<%=contextPath%>/detail.fa.jm?fno=<%=f.getFaqNo() %>"'><%=f.getFaqTitle() %></li>
 	                <% } %>
                 <% } %>
         	</ul>  
@@ -72,7 +72,7 @@
             </div>
         </div>
        </div>
-       <div class="content_5">
+       <div class="content_5" >
         <center><a href="">이용약관</a></center>
         <br>
         <center><a href="">개인정보이용방침</a></center>
@@ -86,7 +86,7 @@
 				// 클릭했을 때의 행에 존재하는 글번호
 				var nno = $(this).children().eq(0).text();
 				
-				location.href = "<%=contextPath%>/detail.fa.jm?nno=" + nno;       			
+				location.href = "<%=contextPath%>/detail.fa.jm?fno=" + fno;       			
 				
 			});
 		});

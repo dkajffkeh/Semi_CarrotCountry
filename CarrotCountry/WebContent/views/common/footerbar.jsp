@@ -46,7 +46,7 @@
         <div class=footerbar_totalWrapper>
             <div class="footer_upperWrapper">
                 <button class="btn btn-warning"><a href="<%=request.getContextPath()%>/list.no.jm?currentPage=1">공지사항</a></button>
-                <button class="btn btn-warning"><a href="<%=contextPath%>/list.fa.jm">고객센터</a></button>
+                <button class="btn btn-warning"><a href="<%=request.getContextPath()%>/list.fa.jm">고객센터</a></button>
                 <button class="btn btn-warning">개인정보 취급방침</button>
                 <button class="btn btn-warning">회사소개</button>
             </div>

@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.jmboard.faq.controller;
+package com.javachip.carrotcountry.userinfoBoard.controller.ng;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.jmboard.faq.model.service.FaqService;
-import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
-
 /**
- * Servlet implementation class FaqUpdateFormController
+ * Servlet implementation class MyPwdUpdatePageController
  */
-@WebServlet("/updateForm.fa.jm")
-public class FaqUpdateFormController extends HttpServlet {
+@WebServlet("/pwdUpdatePage.me.ng")
+public class MyPwdUpdatePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqUpdateFormController() {
+    public MyPwdUpdatePageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +26,12 @@ public class FaqUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int fno = Integer.parseInt(request.getParameter("fno"));
 		
-		Faq f = new FaqService().selectFaq(fno);
-	
-		request.setAttribute("f", f);
+		// 마이페이지에서 비밀번호 변경 페이지로 가기위한 서블릿
 		
-		request.getRequestDispatcher("views/faq/faqUpdateForm.jsp").forward(request, response);
+		request.getRequestDispatcher("views/userinfoBoard/ng/myPwdUpdateForm.jsp").forward(request, response);
 		
-	
+		
 	}
 
 	/**

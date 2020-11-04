@@ -41,44 +41,27 @@ public class FaqService {
 		
 		return result;
 	}
-	// 카운트없지만 일단 만들어둠
-	public int increaseCount(int nno) {
-		Connection conn = getConnection();
-		
-		int result = new FaqDao().increaseCount(conn, nno);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		return result;
-	}
 
 //faq게시판
-	public Faq selectFaq(int nno) {
+	public Faq selectFaq(int fno) {
 		Connection conn = getConnection();
 		
-		Faq f = new FaqDao().selectFaq(conn, nno);
+		Faq f = new FaqDao().selectFaq(conn, fno);
 		
 		close(conn);
 		
 		return f;
 	}
-	/*
+
 	//update
 	public int updateFaq(Faq f) {
 		
 		Connection conn = getConnection();
 		
-		int result = new FaqService().updateFaq(f);
+		int result = new FaqDao().updateFaq(conn,f);
 		
 		
 		if(result > 0) {
-			
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -95,11 +78,11 @@ public class FaqService {
 	
 	
 //FAQ게시판 삭제
-	public int delectFaq(int nno) {
+	public int delectFaq(int fno) {
 		
 		Connection conn = getConnection();
 		
-		int result = new FaqDao().deleteFaq(conn, nno);
+		int result = new FaqDao().deleteFaq(conn, fno);
 		
 		if(result > 0) {
 			commit(conn);
@@ -111,7 +94,7 @@ public class FaqService {
 		
 		return result;
 	}
-*/
+
 
 
 	

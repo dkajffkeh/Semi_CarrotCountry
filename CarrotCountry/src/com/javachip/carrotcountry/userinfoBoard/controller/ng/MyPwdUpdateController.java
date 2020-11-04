@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.member.controller;
+package com.javachip.carrotcountry.userinfoBoard.controller.ng;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

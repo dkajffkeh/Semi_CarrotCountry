@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.member.model.vo.Member;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 
@@ -77,22 +78,25 @@ public class UserInfoBoardDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m = new Member(
-						rset.getInt("mem_no"),
-						rset.getInt("local_no"),
-						rset.getString("mem_userid"),
-						rset.getString("mem_userpwd"),
-						rset.getString("mem_name"),
-						rset.getString("mem_nickname"),
-						rset.getString("mem_birthday"),
-						rset.getString("mem_gender"),
-						rset.getString("mem_phone"),
-						rset.getString("mem_email"),
-						rset.getString("mem_location"),
-						rset.getDate("mem_enroll_date"),
-						rset.getString("b_list_check"),
-						rset.getString("leave_check"),
-						rset.getString("manager_check")
+				m = new Member
+						(rset.getInt("MEM_NO"),
+						 rset.getInt("LOCAL_NO"),
+						 rset.getString("MEM_USERID"),
+						 rset.getString("MEM_USERPWD"),
+						 rset.getString("MEM_NAME"),
+						 rset.getString("MEM_NICKNAME"),
+						 rset.getString("MEM_BIRTHDAY"),
+						 rset.getString("MEM_GENDER"),
+						 rset.getString("MEM_PHONE"),
+						 rset.getString("MEM_EMAIL"),
+						 rset.getDate("MEM_ENROLL_DATE"),
+						 rset.getString("B_LIST_CHECK"),
+						 rset.getString("LEAVE_CHECK"),
+						 rset.getString("MANAGER_CHECK"),
+						 rset.getString("PROFILE_PATH"),
+						 rset.getString("PROFILE_MODIFYNAME"),
+						 rset.getString("PROFILE_ORIGNNAME"),
+						 rset.getString("PROFILE_LOADNAME")
 						);
 			}
 			
@@ -173,6 +177,39 @@ public class UserInfoBoardDao {
 		
 		return list;
 		
+	}
+	
+	public Location selectLocation(Connection conn, String memNo) {
+		
+		Location lo = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectLocation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				lo = new Location(rset.getString("local_no"),
+								  rset.getString("local_si"),
+								  rset.getString("local_gu"),
+								  rset.getString("local_dong"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return lo;
 	}
 	
 	
