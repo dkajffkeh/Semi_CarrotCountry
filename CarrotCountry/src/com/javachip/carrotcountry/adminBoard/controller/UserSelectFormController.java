@@ -32,11 +32,17 @@ public class UserSelectFormController extends HttpServlet {
 		Member member = (Member) request.getSession().getAttribute("loginMember");
 		
 		PrintWriter writer = response.getWriter();
+		
 		if(member == null) {
+			
 			writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href = '" + request.getContextPath() + "';</script>");
+		
 		} else if(!"Y".equals(member.getManagerCheck())) {			
+			
 			writer.println("<script>alert('권한이 없습니다.'); location.href = '" + request.getContextPath() + "';</script>");
+		
 		} else {
+			
 			int listCount = new AdminPageInfoService().selectListCount();
 			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			int pageLimit = 10;
@@ -58,6 +64,7 @@ public class UserSelectFormController extends HttpServlet {
 			request.setAttribute("list", list);
 			
 			request.getRequestDispatcher("views/adminBoard/userSelectForm.jsp").forward(request, response);
+		
 		}
 		
 	}
