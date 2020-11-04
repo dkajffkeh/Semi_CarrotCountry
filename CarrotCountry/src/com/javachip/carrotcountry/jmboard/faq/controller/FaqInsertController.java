@@ -35,11 +35,11 @@ public class FaqInsertController extends HttpServlet {
 		
 		
 		String faqWriter = request.getParameter("memNo");
-		String faqContent = request.getParameter("faqContent");
 		String faqTitle = request.getParameter("faqTitle");
+		String faqContent = request.getParameter("faqContent");
 		String category = request.getParameter("category");
 	
-		Faq f = new Faq(faqWriter, faqContent, faqTitle, category);
+		Faq f = new Faq(faqWriter, faqTitle, faqContent, category);
 		
 		int result = new FaqService().insertFaq(f);
 		
