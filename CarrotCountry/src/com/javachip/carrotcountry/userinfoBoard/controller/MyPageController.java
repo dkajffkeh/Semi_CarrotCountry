@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.javachip.carrotcountry.userinfoBoard.model.service.UserInfoBoardService;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 import com.javachip.carrotcountry.member.model.vo.Member;
 
@@ -38,7 +40,13 @@ public class MyPageController extends HttpServlet {
 		
 		ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
 		
+		Location lo = new UserInfoBoardService().selectLocation(memNo);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("lo", lo);
+		HttpSession session = request.getSession();
+		session.setAttribute("list", list);
+		session.setAttribute("lo", lo);
 		
 		request.getRequestDispatcher("views/userinfoBoard/myPage.jsp").forward(request, response);
 	}

@@ -16,25 +16,28 @@
 	</entry>
 	
 	<entry key="selectMember">
-		 SELECT
-		        MEM_NO
-		      , LOCAL_NO
-		      , MEM_USERID
-		      , MEM_USERPWD
-		      , MEM_NAME
-		      , MEM_NICKNAME
-		      , MEM_BIRTHDAY
-		      , MEM_GENDER
-		      , MEM_PHONE
-		      , MEM_EMAIL
-		      , MEM_LOCATION
-		      , MEM_ENROLL_DATE
-		      , B_LIST_CHECK
-		      , LEAVE_CHECK
-		      , MANAGER_CHECK
-		   FROM MEMBER
-		  WHERE MEM_USERID=?
-		    AND LEAVE_CHECK='N'
+		SELECT
+		       MEM_NO
+		     , LOCAL_NO
+		     , MEM_USERID
+		     , MEM_USERPWD
+		     , MEM_NAME
+		     , MEM_NICKNAME
+		     , MEM_BIRTHDAY
+		     , MEM_GENDER
+		     , MEM_PHONE
+		     , MEM_EMAIL
+		     , MEM_ENROLL_DATE
+		     , B_LIST_CHECK
+		     , LEAVE_CHECK
+		     , MANAGER_CHECK
+		     , PROFILE_PATH
+		     , PROFILE_MODIFYNAME
+		     , PROFILE_ORIGNNAME
+		     , PROFILE_LOADNAME
+		  FROM MEMBER
+		 WHERE MEM_USERID = ?
+		   AND LEAVE_CHECK = 'N'
 	</entry>
 	
 	<entry key="deleteMember">
@@ -55,6 +58,16 @@
 		    , SHIPPING_DEFAULT
 		 FROM SHIPPING_LOCATION 
 		WHERE MEM_NO=?
+	</entry>
+	
+	<entry key="selectLocation">
+		SELECT
+		      LOCAL_NO
+		    , LOCAL_SI
+		    , LOCAL_GU
+		    , LOCAL_DONG
+		 FROM LOCATION
+		WHERE LOCAL_NO=?
 	</entry>
 
 </properties>
