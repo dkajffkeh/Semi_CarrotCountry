@@ -62,6 +62,8 @@ public class Notice {
 		this.fileOriginName = fileOriginName;
 	}
 	
+	
+
 
 
 	public int getNoticeNo() {

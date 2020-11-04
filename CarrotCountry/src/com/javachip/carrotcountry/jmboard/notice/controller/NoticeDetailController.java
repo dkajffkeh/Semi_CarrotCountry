@@ -1,11 +1,15 @@
 package com.javachip.carrotcountry.jmboard.notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javachip.carrotcountry.jmboard.notice.model.service.NoticeService;
+import com.javachip.carrotcountry.jmboard.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class NoticeDetailController
@@ -26,8 +30,26 @@ public class NoticeDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		
+		int result = new NoticeService().increaseCount(nno);
+		
+		if(result > 0) {
+			Notice n = new NoticeService().selectNotice(nno);
+			request.setAttribute("n", n);
+			
+			request.getRequestDispatcher("views/notice/noticeDetailView.jsp").forward(request, response);
+			
+			
+		}else {
+			
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			
+		}
+	
+	
 	}
 
 	/**

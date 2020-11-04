@@ -125,23 +125,102 @@ public class NoticeDao {
 			pstmt.setString(6, n.getFileOriginName());
 			
 			result = pstmt.executeUpdate();
-			
+
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
 		
 		
+		return result;
+	}
+
+	public int increaseCount(Connection conn, int nno) {
+
+		int result = 0;
 		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		
 		return result;
 	}
+
+	public Notice selectNotice(Connection conn, int nno) {
+		
+		Notice n = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			// 제목 작성자 작성일 내용 첨부파일
+			if(rset.next()) {
+				n = new Notice(rset.getInt("NOTICE_NO"),
+							   rset.getString("MEM_USERID"),
+							   rset.getString("NOTICE_TITLE"),
+							   rset.getString("NOTICE_CONTENT"),
+							   rset.getString("FILE_PATH"),
+							   rset.getDate("NOTICE_ENROLL_DATE"),
+							   rset.getString("FILE_MODIFYNAME"),
+							   rset.getString("FILE_ORIGINNAME"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return n;
+		
+	}
+	
+	
 	
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
