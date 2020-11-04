@@ -38,6 +38,17 @@ public class Notice {
 		this.noticeCount = noticeCount;
 	}
 
+	public Notice(String memNo, String noticeTitle, String noticeContent, String filePath,
+			String fileModifyName, String fileOriginName) {
+		super();
+		this.memNo = memNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.filePath = filePath;
+		this.fileModifyName = fileModifyName;
+		this.fileOriginName = fileOriginName;
+	}
+
 	public int getNoticeNo() {
 		return noticeNo;
 	}
