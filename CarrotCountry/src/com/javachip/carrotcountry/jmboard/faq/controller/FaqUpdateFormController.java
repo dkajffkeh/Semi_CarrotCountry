@@ -30,13 +30,14 @@ public class FaqUpdateFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		int nno = Integer.parseInt(request.getParameter("nno"));
+		int fno = Integer.parseInt(request.getParameter("fno"));
 		
-		Faq f = new FaqService().selectFaq(nno);
+		Faq f = new FaqService().selectFaq(fno);
 	
 		request.setAttribute("f", f);
 		
-		request.getRequestDispatcher("views/faq/faqUpdateForm.jsp");
+		request.getRequestDispatcher("views/faq/faqUpdateForm.jsp").forward(request, response);
+		
 	
 	}
 

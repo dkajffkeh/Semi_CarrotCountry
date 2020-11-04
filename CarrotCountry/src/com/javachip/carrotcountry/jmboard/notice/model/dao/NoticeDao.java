@@ -105,6 +105,40 @@ public class NoticeDao {
 		
 		return list;
 	}
+
+	public int insertNotice(Connection conn, Notice n) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(n.getMemNo()));
+			pstmt.setString(2, n.getNoticeTitle());
+			pstmt.setString(3, n.getNoticeContent());
+			pstmt.setString(4, n.getFilePath());
+			pstmt.setString(5, n.getFileModifyName());
+			pstmt.setString(6, n.getFileOriginName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return result;
+	}
 	
 
 

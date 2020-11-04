@@ -64,7 +64,7 @@ public class FaqDao {
 		
 		return list;
 	}
-//FAQ추가 (Null에러)
+//FAQ추가 
 	
 	public int insertFaq(Connection conn, Faq f) {
 		
@@ -92,30 +92,7 @@ public class FaqDao {
 		
 		return result;
 	}
-//카운트
-	public int increaseCount(Connection conn, int nno) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("increaseCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql); // 미완성된 sql
-			
-			pstmt.setInt(1, nno);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-		
-	}
+
 	
 //게시판
 	public Faq selectFaq(Connection conn, int nno) {
@@ -155,7 +132,7 @@ public class FaqDao {
 		
 		
 	}
-	/*
+
 	//update
 	public int updateFaq(Connection conn, Faq f) {
 		
@@ -175,7 +152,7 @@ public class FaqDao {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}finally {
 			
@@ -190,7 +167,7 @@ public class FaqDao {
 	}
 	
 	
-	
+	/*
 	
 //faq게시판 삭제
 	public int deleteFaq(Connection conn, int nno) {

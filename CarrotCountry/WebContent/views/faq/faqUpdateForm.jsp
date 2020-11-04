@@ -10,11 +10,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.CS_content>div{
-    width:100%;
-    margin:auto;
-    padding:100px;
-
+.CS_content{
+       width:700px;
+       height:800px;
+       margin:auto;
+       margin-top:50px;
 }
 
 </style>
@@ -23,21 +23,29 @@
 
 	<%@ include file="../common/commonNavbar.jsp"%>
     <div class="CS_content">
-        <h2>FAQ수정하기</h2>
-        <hr>
-        <h5>제목</h5>
-        <pre>작성자                                          작성일 xxxx-xx-xx</pre>
-          
-        <div class="form-group">
-          <textarea class="border border-warning" cols="60" rows="20" id="comment" name="text" style="resize: none"></textarea>
-        </div>
-        <div align="center">
-          <input type="submit" value="업데이트" class="btn btn-warning btn-sm">&nbsp;&nbsp;
-          <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
-        </div>
+      <h5>FAQ수정하기</h5>
+      <hr>
 
-        
-        
-    </div>
+      
+    <form action="<%=contextPath %>update.fa.jm">
+      <table>
+        <tr>
+          <td>제목 :</td>
+          <td><input type="text" value="<%=f.getFaqTitle() %>" name="title"></td>
+        </tr>
+      </table>
+      
+      <br>
+      <div class="form-group" align="center">
+        <textarea class="border border-warning" cols="95" rows="20" id="comment" name="content" style="resize: none"><%=f.getFaqContent() %></textarea>
+      </div>
+      <div align="center">
+        <input type="submit" value="업데이트" class="btn btn-warning btn-sm">&nbsp;&nbsp;
+        <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
+      </div>
+    </form>
+      
+      
+  </div>
 </body>
 </html>
