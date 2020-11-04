@@ -6,7 +6,7 @@
 		SELECT 
 		       COUNT(*) LISTCOUNT
 		  FROM NOTICE
-		 WHERE NOTICE_STATUS = 'Y'
+		 WHERE NOTICE_STATUS = 'N'
 	</entry>
 
 	<entry key="selectList">
@@ -18,13 +18,13 @@
 		          FROM (
 		                SELECT 
 		                       NOTICE_NO
-		                     , MEM_NICKNAME
 		                     , NOTICE_TITLE
-		                     , NOTICE_CONTENT
+		                     , MEM_USERID
 		                     , NOTICE_COUNT
+		                     , NOTICE_ENROLL_DATE
 		                  FROM NOTICE 
 		                  JOIN MEMBER USING(MEM_NO)
-		                 WHERE NOTICE_STATUS = 'Y'
+		                 WHERE NOTICE_STATUS = 'N'
 		                 ORDER
 		                    BY NOTICE_NO DESC
 		               ) A

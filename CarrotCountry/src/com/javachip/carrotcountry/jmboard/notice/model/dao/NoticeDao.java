@@ -78,8 +78,8 @@ public class NoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow = startRow + pi.getBoardLimit() - 1;
+			int startRow = (pi.getCurrentPage() - 1) * pi.getNoticeLimit() + 1;
+			int endRow = startRow + pi.getNoticeLimit() - 1;
 			
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
@@ -87,8 +87,11 @@ public class NoticeDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				//list.add();
-			
+				list.add(new Notice(rset.getInt("NOTICE_NO"),
+									rset.getString("MEM_USERID"),
+									rset.getString("NOTICE_TITLE"),
+									rset.getDate("NOTICE_ENROLL_DATE"),
+									rset.getInt("NOTICE_COUNT")));
 			}
 			
 		} catch (SQLException e) {

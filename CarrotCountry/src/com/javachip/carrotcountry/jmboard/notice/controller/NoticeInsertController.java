@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 /**
  * Servlet implementation class NoticeInsertController
  */
@@ -26,8 +28,14 @@ public class NoticeInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		request.setCharacterEncoding("utf-8");
+	
+		if (ServletFileUpload.isMultipartContent(request)) {
+			int maxSize = 10 * 1024 * 1024;
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/notice_upfiles/");
+			
+		}
 	}
 
 	/**

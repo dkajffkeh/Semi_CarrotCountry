@@ -5,8 +5,65 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <style>
+
+
+    .outer{
+        width:700px;
+        height:800px;
+        margin:auto;
+        margin-top:50px;
+    }
+    
+    </style>
 </head>
 <body>
+<%@ include file="../common/commonNavbar.jsp"%>
+<div class="outer">
 
+
+	
+	<br><br>
+	<h4>공지사항 등록</h4>
+	<hr>
+	<form action="<%= contextPath %>/insert.no.jm" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+	    <ul>
+	        <li>
+	            <label for="title">
+	               	 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	            </label>
+	            <input type="text"  name="title" id="title">
+	        </li>
+	    </ul>
+	    <ul>
+	        <li>
+	            <label for="">
+	              	파일첨부&nbsp;&nbsp;
+	            </label>
+	            <input type="file" name="upfile">
+	            
+	        </li>
+	        <small>파일 총 용량이 10MB 미만인 경우만 등록 가능합니다 (등록가능파일:jpg,gif,bmp)</small>
+	    </ul>
+	    <ul>
+	        <li>
+	            <label for="">내용</label>
+	            <br>
+	            <textarea name="content" id="" cols="60" rows="10" style="resize: none">
+	            </textarea>
+	        </li>
+	    </ul>
+	    
+	    <div align="center">
+	        <input type="submit" class="btn btn-warning btn-sm">&nbsp;&nbsp;
+	        <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
+	
+	    </div>
+	
+	</form>
+	<br><br><br><br><br>
+        
+</div>
 </body>
 </html>

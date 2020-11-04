@@ -57,7 +57,7 @@ public class FaqService {
 		
 		return result;
 	}
-	/*
+
 //faq게시판
 	public Faq selectFaq(int nno) {
 		Connection conn = getConnection();
@@ -68,6 +68,7 @@ public class FaqService {
 		
 		return f;
 	}
+	/*
 	//update
 	public int updateFaq(Faq f) {
 		

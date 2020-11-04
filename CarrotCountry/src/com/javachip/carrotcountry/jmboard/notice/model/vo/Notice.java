@@ -25,41 +25,17 @@ public class Notice {
 		this.noticeContent = noticeContent;
 		this.noticeCount = noticeCount;
 	}
+	
 
-	public Notice(int noticeNo, String memNo, String noticeTitle, String noticeContent, String filePath,
-			String fileModifyName, String fileOriginName) {
+
+
+	public Notice(int noticeNo, String memNo, String noticeTitle, Date noticeEnrollDate, int noticeCount) {
 		super();
 		this.noticeNo = noticeNo;
 		this.memNo = memNo;
 		this.noticeTitle = noticeTitle;
-		this.noticeContent = noticeContent;
-		this.filePath = filePath;
-		this.fileModifyName = fileModifyName;
-		this.fileOriginName = fileOriginName;
-	}
-
-	public Notice(int noticeNo, String memNo, String noticeTitle, String noticeContent, String filePath,
-			Date noticeEnrollDate, String fileModifyName, String fileOriginName) {
-		super();
-		this.noticeNo = noticeNo;
-		this.memNo = memNo;
-		this.noticeTitle = noticeTitle;
-		this.noticeContent = noticeContent;
-		this.filePath = filePath;
 		this.noticeEnrollDate = noticeEnrollDate;
-		this.fileModifyName = fileModifyName;
-		this.fileOriginName = fileOriginName;
-	}
-
-	public Notice(int noticeNo, String noticeTitle, String noticeContent, String filePath, String fileModifyName,
-			String fileOriginName) {
-		super();
-		this.noticeNo = noticeNo;
-		this.noticeTitle = noticeTitle;
-		this.noticeContent = noticeContent;
-		this.filePath = filePath;
-		this.fileModifyName = fileModifyName;
-		this.fileOriginName = fileOriginName;
+		this.noticeCount = noticeCount;
 	}
 
 	public int getNoticeNo() {

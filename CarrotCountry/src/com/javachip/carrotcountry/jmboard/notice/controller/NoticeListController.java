@@ -36,7 +36,7 @@ public class NoticeListController extends HttpServlet {
 		int listCount;
 		int currentPage;
 		int pageLimit;
-		int boardLimit;
+		int noticeLimit;
 		int maxPage;
 		int startPage;
 		int endPage;
@@ -47,9 +47,9 @@ public class NoticeListController extends HttpServlet {
 		
 		pageLimit = 10;
 		
-		boardLimit = 10;
+		noticeLimit = 10;
 		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		maxPage = (int)Math.ceil((double)listCount/noticeLimit);
 		
 		startPage = (currentPage - 1)/pageLimit * pageLimit + 1;
 		
@@ -61,7 +61,7 @@ public class NoticeListController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, noticeLimit, maxPage, startPage, endPage);
 		//
 		ArrayList<Notice> list = new NoticeService().selectList(pi);
 		
