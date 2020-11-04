@@ -26,9 +26,9 @@ public class SellerInsertProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		/*
 		request.setCharacterEncoding("utf-8");
-		
+	
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			// 1_1. 용량 제한 (int maxSize)
@@ -99,7 +99,10 @@ public class SellerInsertProductController extends HttpServlet {
 			
 			
 		}
+		
+		*/
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
