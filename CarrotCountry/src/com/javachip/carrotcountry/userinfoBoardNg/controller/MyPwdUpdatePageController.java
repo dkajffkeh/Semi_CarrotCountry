@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.userinfoBoard.controller.ng;
+package com.javachip.carrotcountry.userinfoBoardNg.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReportDetailController
+ * Servlet implementation class MyPwdUpdatePageController
  */
-@WebServlet("/reportDetail.me.ng")
-public class ReportDetailController extends HttpServlet {
+@WebServlet("/pwdUpdatePage.me.ng")
+public class MyPwdUpdatePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportDetailController() {
+    public MyPwdUpdatePageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,12 @@ public class ReportDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// 마이페이지에서 비밀번호 변경 페이지로 가기위한 서블릿
+		
+		request.getRequestDispatcher("views/userinfoBoard/ng/myPwdUpdateForm.jsp").forward(request, response);
+		
+		
 	}
 
 	/**

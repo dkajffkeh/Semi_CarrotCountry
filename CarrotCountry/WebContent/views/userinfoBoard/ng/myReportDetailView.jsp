@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.javachip.carrotcountry.userinfoBoardNg.model.vo.*, java.util.ArrayList" %>
+    
+<%
+	RepPageInfo pi = (RepPageInfo)request.getAttribute("pi");
+	ArrayList<MyReport> list = (ArrayList)request.getAttribute("list");
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +18,7 @@
 	   margin-left:50px;
 	   width:1000px;
 	   font-family: 'Do Hyeon', sans-serif;
-	   height:780px;
+	   height:700px;
 	}
 	.outer>span{
 	    font-size:20px;
@@ -60,36 +67,42 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>컴퓨터 팔아요@@</td>
-							<td>중고 거래</td>
-							<td>사기</td>
-							<td>난사기꾼임</td>
-							<td>2020.01.01</td>
-							<td>완료</td>
-						</tr>	
-						<tr>
-							<td>1</td>
-							<td>노트북팔아요@</td>
-							<td>중고 거래</td>
-							<td>사기</td>
-							<td>노트북사기꾼</td>
-							<td>2020.01.01</td>
-							<td>완료</td>
-						</tr>	
+					<% if(list.isEmpty()){ %>
+						<tr align="center">
+							<td colspan="7">신고 내역이 존재하지 않습니다.</td>
+						</tr>
+					<%}else{ %>
+						<%for(MyReport rep : list){ %>
+							<tr>
+								<td><%= rep.getrNum() %></td>
+								<td><%= rep.getPostName() %></td>
+								<td><%= rep.getReportTypeName() %></td>
+								<td><%= rep.getReportReason() %></td>
+								<td><%= rep.getReportNickName() %></td>
+								<td><%= rep.getReportDate() %></td>
+								<td><%= rep.getReportCheck() %></td>
+							</tr>	
+						<%} %>
+					<%} %>
 					</tbody>
 				</table>
-			</div>
-				<div class="myReportBottom">
-					<button type="button" class="btn btn-warning">&lt;&nbsp;&nbsp;PREV</button>
-					<a href="">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					<a href="">4</a>
-					<a href="">5</a>																				
-					<button type="button" class="btn btn-warning">NEXT&nbsp;&nbsp;&gt;</button>
 				</div>
+				<p align="center" style="font-weight:900; font-size:20px"><%= pi.getRepCurrentPage() %>page</p>
+				<div class="myReportBottom">
+				
+				<% if(pi.getRepCurrentPage() != 1){ %>
+					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() -1 %>" class="btn btn-warning" style="color:white;">&lt;&nbsp;&nbsp;PREV</a>				
+				<% } %>
+				
+				
+				<% for(int i = pi.getRepStartPage(); i<=pi.getRepEndPage(); i++){ %>
+					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= i %>" class="btn btn-secondary btn-sm" style="color:white;"><%= i %></a>
+				<% } %>
+					
+				<% if(pi.getRepCurrentPage() != pi.getRepMaxPage()){ %>
+					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() +1 %>" class="btn btn-warning" style="color:white;">NEXT&nbsp;&nbsp;&gt;</a>																			
+				<% } %>
+			</div>
 		</div>
 	</div>
 

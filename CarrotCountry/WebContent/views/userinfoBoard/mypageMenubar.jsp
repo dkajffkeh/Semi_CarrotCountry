@@ -112,7 +112,7 @@
                 <td><a href="">진행 현황</a></td>
             </tr>
             <tr>
-                <th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>">신고내역</a></th>
+                <th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>
             </tr>
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
