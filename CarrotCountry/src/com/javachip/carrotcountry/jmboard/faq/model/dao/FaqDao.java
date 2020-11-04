@@ -166,20 +166,20 @@ public class FaqDao {
 	}
 	
 	
-	/*
+	
 	
 //faq게시판 삭제
-	public int deleteFaq(Connection conn, int nno) {
+	public int deleteFaq(Connection conn, int fno) {
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-	    String sql = prop.getProperty("delectFaq");
+	    String sql = prop.getProperty("deleteFaq");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, nno);
+			pstmt.setInt(1, fno);
 			result = pstmt.executeUpdate();
 			
 			
@@ -190,14 +190,10 @@ public class FaqDao {
 			close(pstmt);
 		}
 		
-		
-		
-		
-		
 		return result;
 	}
 
-	*/
+	
 	
 	
 

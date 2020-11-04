@@ -45,8 +45,9 @@
         <div align="center">
 			<% if(loginMember != null && loginMember.getMemUserId().equals(f.getMemNo())){ %>
 	            <a href="<%= contextPath %>/updateForm.fa.jm?fno=<%= f.getFaqNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	            <a href="<%= contextPath %>/delete.fa.jm?fno=<%= f.getFaqNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+	            <a href="<%= contextPath %>/delete.fa.jm?fno=<%= f.getFaqNo() %>" class="btn btn-danger btn-sm">삭제하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <% } %>
+            <input type="button" value="FAQ게시판" class="btn btn-warning btn-sm"  onclick='location.href="<%=contextPath%>/list.fa.jm"'>
 		</div>
    </div>
         

@@ -65,7 +65,13 @@
 		     , FAQ_CONTENT = ?
 		 WHERE FAQ_NO = ?
 	</entry>
-
+	
+	<entry key="deleteFaq">
+		UPDATE
+		       FAQ
+		   SET FAQ_STATUS = 'Y'
+		 WHERE FAQ_NO = ?
+	</entry>
 
 
 

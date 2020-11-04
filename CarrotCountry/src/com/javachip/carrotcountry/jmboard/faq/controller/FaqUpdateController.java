@@ -42,7 +42,7 @@ public class FaqUpdateController extends HttpServlet {
 		f.setFaqNo(fno);
 		f.setFaqTitle(faqTitle);
 		f.setFaqContent(faqContent);
-		System.out.println(f);
+		//System.out.println(f);
 		
 		int result = new FaqService().updateFaq(f);
 		

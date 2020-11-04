@@ -42,7 +42,7 @@
       </div>
       <div align="center">
         <input type="submit" value="업데이트" class="btn btn-warning btn-sm">&nbsp;&nbsp;
-        <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
+        <input type="button" value="뒤로가기" onclick="history.back();" class="btn btn-warning btn-sm">
       </div>
     </form>
       

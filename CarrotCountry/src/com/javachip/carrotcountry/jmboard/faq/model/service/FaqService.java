@@ -58,7 +58,7 @@ public class FaqService {
 		
 		Connection conn = getConnection();
 		
-		int result = new FaqService().updateFaq(f);
+		int result = new FaqDao().updateFaq(conn,f);
 		
 		
 		if(result > 0) {
@@ -76,13 +76,13 @@ public class FaqService {
 	
 	
 	
-	/*
+	
 //FAQ게시판 삭제
-	public int delectFaq(int nno) {
+	public int delectFaq(int fno) {
 		
 		Connection conn = getConnection();
 		
-		int result = new FaqDao().deleteFaq(conn, nno);
+		int result = new FaqDao().deleteFaq(conn, fno);
 		
 		if(result > 0) {
 			commit(conn);
@@ -94,7 +94,7 @@ public class FaqService {
 		
 		return result;
 	}
-*/
+
 
 
 	
