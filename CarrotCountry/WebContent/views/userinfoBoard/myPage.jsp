@@ -1,10 +1,11 @@
-<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation" %>
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <% 
 	ArrayList<ShippingLocation> list = (ArrayList<ShippingLocation>)request.getAttribute("list");
+	Location lo = (Location)session.getAttribute("lo");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,10 +31,7 @@
 	String birthday = (loginMember.getMemBirthday() == null) ? "" : loginMember.getMemBirthday();
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
-	int local = loginMember.getLocalNo();
-	String location = (loginMember.getMemLocation() == null) ? "" : loginMember.getMemLocation();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
-
 	int memNo = loginMember.getMemNo();
 	
 	%>
@@ -138,8 +136,9 @@
                 <td><%= phone %></td>
             </tr>
             <tr>
-                <td>주소</td>
-                <td><%= location %></td>
+                <td>지역</td>
+                <td>
+                </td>
             </tr>
             <tr>
                 <td>E-Mail</td>
