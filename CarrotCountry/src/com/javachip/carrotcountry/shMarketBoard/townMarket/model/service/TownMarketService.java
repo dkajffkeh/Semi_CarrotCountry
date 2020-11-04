@@ -208,4 +208,25 @@ public class TownMarketService {
 		return likeCount;
 	}
 
+	public CommentHY shmarketCommentModifier(CommentHY c) {
+		
+		Connection conn = getConnection();
+		CommentHY newc = null;
+		
+		int result = new TownMarketDao().shmarketCommentModifier(conn, c);
+		
+		if(result>0) {
+			commit(conn);
+			
+			
+			
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return newc;
+	}
+
 }

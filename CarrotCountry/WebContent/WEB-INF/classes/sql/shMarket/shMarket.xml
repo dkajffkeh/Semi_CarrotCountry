@@ -94,14 +94,15 @@ SELECT
        ,CONTENT
        ,PRIVATE
        ,POST_NO
-       ,MEM_NICKNAME
+       ,MEM_NO
+       
    FROM
        POST_COMMENT
    JOIN 
   	   MEMBER USING(MEM_NO)
   WHERE 
        POST_NO =?
-  ORDER BY COMM_NO DESC      
+  ORDER BY COMM_NO DESC     
 </entry>
 <entry key="shBoardInsertComment">
 	INSERT INTO
@@ -219,6 +220,31 @@ INSERT INTO
            ,1 
            )
 </entry>
+<entry key="shMarketBoardCommentSelector">
+SELECT *
+FROM(     
+SELECT 
+      ROWNUM RNUM
+     ,A.*
+FROM     
+(SELECT 
+      COMM_NO
+      ,USER_NICKNAME
+      ,ENT_DATE
+      ,CONTENT
+      ,PRIVATE
+      ,POST_NO
+      ,MEM_NO
+  FROM 
+      POST_COMMENT
+WHERE
+     MEM_NO=?
+ORDER BY COMM_NO DESC
+		  )
+		  A
+		  )
+WHERE RNUM =1
+</entry>
 <entry key="townMarketDeleteForm">
 UPDATE 
       POST
@@ -299,29 +325,26 @@ SET
 WHERE 
       POST_NO=?
 </entry>
-<entry key="shMarketBoardCommentSelector">
-SELECT *
-FROM(     
-SELECT 
-      ROWNUM RNUM
-     ,A.*
-FROM     
-(SELECT 
-      COMM_NO
+
+<entry key="shmarketCommentModifier">
+UPDATE
+      POST_COMMENT
+   SET    
+      CONTENT=?
+ WHERE
+      COMM_NO=?
+</entry>
+<entry key="shMarketCommentReSelector">
+SELECT
+       COMM_NO
       ,USER_NICKNAME
       ,ENT_DATE
       ,CONTENT
       ,PRIVATE
-      ,POST_NO
       ,MEM_NO
-  FROM 
+  FROM
       POST_COMMENT
-WHERE
-     MEM_NO=?
-ORDER BY COMM_NO DESC
-		  )
-		  A
-		  )
-WHERE RNUM =1
+ WHERE
+      COMM_NO=?
 </entry>
 </properties>

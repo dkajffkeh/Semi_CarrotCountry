@@ -40,12 +40,16 @@ public class ShMarketBoardCommentController extends HttpServlet {
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 
+	
+		
 		CommentHY c = new CommentHY();
 		c.setContent(sContent);
 		c.setSecretCheck(sCheck);
 		c.setUserNickName(userNick);
 		c.setPostNo(postNo);
 		c.setMemNo(memNo);
+		
+		
 		
 		CommentHY newc = new TownMarketService().shBoardInsertComment(c);
 		response.setContentType("application/json; charset=utf-8"); 
