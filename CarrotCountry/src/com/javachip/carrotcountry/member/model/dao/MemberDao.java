@@ -310,13 +310,4 @@ public class MemberDao {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
