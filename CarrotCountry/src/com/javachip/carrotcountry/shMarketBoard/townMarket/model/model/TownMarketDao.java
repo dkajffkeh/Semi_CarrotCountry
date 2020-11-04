@@ -229,6 +229,7 @@ Properties prop = new Properties();
 										   ,rs.getString("content")
 										   ,rs.getString("private")
 										   ,rs.getInt("post_no")
+										   ,rs.getInt("mem_no")
 										   );
 				list.add(c);
 			
@@ -545,7 +546,7 @@ Properties prop = new Properties();
 		return result;
 	}
 
-
+ 
 	public CommentHY shMarketBoardCommentSelector(Connection conn, CommentHY c) {
 		
 		CommentHY newc = null;
@@ -563,8 +564,64 @@ Properties prop = new Properties();
 				newc = new CommentHY();
 				newc.setUserNickName(rs.getString("USER_NICKNAME"));
 				newc.setEnrollDate(rs.getDate("ENT_DATE"));
-				newc.setContent(rs.getString("CONTENT"));
+				newc.setContent(rs.getString("CONTENT"));		
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
 		
+		
+		return newc;
+	}
+
+
+	public int shmarketCommentModifier(Connection conn, CommentHY c) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shmarketCommentModifier");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getContent());
+			pstmt.setInt(2, c.getMemNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public CommentHY shMarketCommentReSelector(Connection conn, CommentHY c) {
+		
+		CommentHY newc = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketCommentReSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c.getCommentNo());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				newc = new CommentHY(rs.getInt("COMM_NO")
+						            ,rs.getString("USER_NICKNAME")
+						            ,rs.getDate("ENT_DATE")
+						            ,rs.getString("CONTENT")
+						            ,rs.getString("PRIVATE")
+						            ,rs.getInt("MEM_NO"));		
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

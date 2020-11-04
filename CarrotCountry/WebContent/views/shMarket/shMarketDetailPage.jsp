@@ -7,9 +7,10 @@
 <%
 PostBoard pb = (PostBoard)request.getAttribute("pb");
 //String 게시글번호,String 카테고리번호,int member번호, String 시역 ex 서울시 송파구 , 닉네임 , 게시글번호 , 게시글 제목, 내용 , 카테고리 이름, 상품상태, 거래유형,거래지역, 썸네일 패스, 썸네일 이름, 썸내일 로드패스, 조회수, likes,가격,게시일.
-ArrayList<CommentHY> list = (ArrayList)request.getAttribute("list");
-//댓글식별값,닉네임,게시일,내용,공개비공개 체크,보드넘버.
+
 ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
+
+
 
 %>    
 <!DOCTYPE html>
@@ -281,6 +282,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                    class="form-control" 
                    name="userComment" 
                    id="exampleInputPassword1" 
+                   readonly
                    placeholder="로그인 후 댓글이용이 가능합니다!"
                    style="width:500px;
                           ">
@@ -316,8 +318,10 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                           ">
             <button type="button" 
                     class="btn btn-warning" 
+                    onclick="insertComment();"
                     id="insert_comment"
-                    style="font-weight: bold;                  
+                    style="font-weight: bold;
+                                      
                     ">댓글입력</button>                 
                     <div class="comment_check_wrapper" style=
                     "
@@ -331,93 +335,14 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                     <input type="checkbox" name="comment_condition" style="margin-left: 10px;" value="">
                     </div>
                     </div>
-                    
-                    
                     <% } %>
               
     
           <!-- ↓ 댓글 출력 구간↓ -->
-         <div id="comment_display_outer">
-         <% for(int i =0 ; i<list.size(); i++ ) { 
-         if(loginMember==null) { // 로그인이 안돼있을경우 조건문 실행
-        	 if(list.get(i).getSecretCheck().equals("N")) {   		 
-         %>
-         <div class="comment_display">
-             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-             <div class="comment_content">
-                 <div class="comment_textarea">[<%=list.get(i).getUserNickName()%>]</div>
-                 <p class="comment_user_info"><%=list.get(i).getContent() %></p>
-                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
-                 <div class="comment_control_button">
-                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>                   
-                 </div>
-             </div>   
-         </div>
-       <% } else if(list.get(i).getSecretCheck().equals("Y")){%>        
-         <div class="comment_display">
-            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-            <div class="comment_content" style="padding:0;">
-                <div class="secret_Comment" 
-                     style="width:100%; 
-                            height:100%; 
-                            background-color:rgb(255, 235, 197); 
-                            box-sizing: border-box;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;">
-                    <i class="fas fa-carrot">비밀댓글입니다!</i>    
-                </div>           
-            </div>
-            <div class="comment_condition"><i class="fas fa-lock"></i></div>
-        </div>        
-       			<%} %>
-            <% } else if (loginMember!=null) { %>                  
-           <% if(!list.get(i).getSecretCheck().equals("Y")||loginMember.getManagerCheck().equals("Y")||pb.getMemNo()==loginMember.getMemNo()||list.get(i).getUserNickName().equals(loginMember.getMemNickname())) { %>       
-            <div class="comment_display">
-             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-             <div class="comment_content">
-                 <p class="comment_user_info">[<%=list.get(i).getUserNickName()%>]</p>
-                 <div class="comment_textarea"><%=list.get(i).getContent() %></div>
-                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
-                 <div class="comment_control_button">
-                     <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
-                     <div class="right_icons">
-                     <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())){ %>
-                         <i class="fas fa-pen" title="댓글 수정" onclick="testFun(`<%=list.get(i).getCommentNo()%>`,this)"></i>
-                         <%} %>
-                      <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())||loginMember.getManagerCheck().equals("Y")){ %>   
-                         <i class="fas fa-trash" title="댓글 삭제"></i>
-                         <%} %>
-                      <% if(!loginMember.getMemNickname().equals(list.get(i).getUserNickName())) { %>  
-                         <i class="fas fa-exclamation" title="댓글 신고"></i>
-                        <% } %>
-                     </div>
-                 </div>
-             </div>   
-         </div>
-            <% } else { %>        
-            <div class="comment_display">
-            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-            <div class="comment_content" style="padding:0;">
-                <div class="secret_Comment" 
-                     style="width:100%; 
-                            height:100%; 
-                            background-color:rgb(255, 235, 197); 
-                            box-sizing: border-box;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;">
-                    <i class="fas fa-carrot">비밀댓글입니다!</i>  
-                </div>           
-            </div>
-            <div class="comment_condition"><i class="fas fa-lock"></i></div>
-        </div>       
-            <% } %>
-         <% } %>
-       <%} %>
-           
-        	</div>                    
-     	</div>
+    <div id="comment_display_outer">
+		                		
+        	 </div>                    
+     	  </div>
      	<br>
    </div>
      
@@ -457,61 +382,158 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         </div>
       </div>
  
+ 
+ 
+ 
 <script>
 //댓글 작성 ajax
          $(function(){
-        	 let $scContent = $("#exampleInputPassword1")
-        	 let $sCheck = $(".comment_check_wrapper input[name=comment_condition]");
-        	 
-        	 $("#insert_comment").click(function(){
-  		
-        		 <%if(loginMember!=null) {%>
-        		 
-        		 $.ajax({
-         			url:"insertComment.sh",
-         			type:"post",
-         			data:{
- 					      cContent:$scContent.val(),
- 					      sCheck:$('input[name="comment_condition"]').is(":checked")?'Y':'N',
- 					      userNick:"<%=loginMember.getMemNickname()%>",
- 					      postNo:"<%=pb.getPostNo()%>",
- 					      memNo:"<%=loginMember.getMemNo()%>"
-         			     },
-         			
-         		    success:function(result){
- 								
-         		    let commentAppend = 
-         		    	 `<div class="comment_display">
-         	             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-         	             <div class="comment_content">
-         	                 <p class="comment_user_info">[\${result.userNickName}]</p>
-         	                 <div class="comment_textarea">\${result.Content}</div>
-         	                 
-         	                 <div class="comment_control_button">
-         	                     <div class="left_date">\${result.enrollDate}</div>
-         	                     <div class="right_icons">       	                    
-         	                         <i class="fas fa-pen" title="댓글 수정"></i>                                          
-         	                         <i class="fas fa-trash" title="댓글 삭제"></i>
-         	                     </div>
-         	                 </div>
-         	             </div>   
-         	         </div>`;
-       
-         	         $scContent.val('');
-         	         $("#comment_display_outer").prepend(commentAppend);
- 	         
-         		    },
- 	 
-        		 })
-        		 
-        		 <%} else {%>	
-        		 if(confirm("댓글은 회원만 작성할수 있습니다 로그인 페이지로 이동하시겠습니까?")){
-        			 location.href="<%=contextPath%>/loginPage.me.ng";
-        		 }
-        		 <% } %>
-        	 })
+           	 
+        	 CommentListUpdate();      	 
+
          }) 
          
+         function CommentListUpdate(){
+			let $outer = $("#comment_display_outer");	
+			
+			$.ajax({
+				url:"CommentListSelector.sh.hy",
+				data:{bno:"<%=pb.getPostNo()%>"},
+				
+				success:function(list){
+					
+					let str="";
+					for(let i =0 ; i<list.length; i ++){
+				
+				<% if(loginMember==null){ %>	
+					
+				if(list[i].secretCheck=="N"){
+					str += 	 `<div class="comment_display">
+		             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+		             <div class="comment_content">
+		                 <p class="comment_user_info">\${list[i].userNickName}</p>
+		                 <div class="comment_textarea">\${list[i].Content}</div>
+		                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+		                 <div class="comment_control_button">
+		                     <div class="left_date">\${list[i].enrollDate}</div>
+		                     <div class="right_icons">                      
+		                     </div>
+		                 </div>
+		             </div>   
+		         </div>`
+				} else {
+					str += `<div class="comment_display">
+			            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+			            <div class="comment_content" style="padding:0;">
+			                <div class="secret_Comment" 
+			                     style="width:100%; 
+			                            height:100%; 
+			                            background-color:rgb(255, 235, 197); 
+			                            box-sizing: border-box;
+			                            display: flex;
+			                            justify-content: center;
+			                            align-items: center;">
+			                    <i class="fas fa-carrot">비밀댓글입니다!</i>    
+			                </div>           
+			            </div>
+			            <div class="comment_condition"><i class="fas fa-lock"></i></div>
+					 </div> `
+	
+				}
+		         <% } else if (loginMember!=null) { %>					
+		         if(<%=pb.getMemNickname().equals(loginMember.getMemNickname())%>||list[i].secretCheck=="N" || list[i].userNickName=="<%=loginMember.getMemNickname()%>"){
+						
+		        	 	str += 	 `<div class="comment_display">
+			             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+			             <div class="comment_content">
+			                 <p class="comment_user_info">\${list[i].userNickName}</p>
+			                 <div class="comment_textarea">\${list[i].Content}</div>
+			                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+			                 <div class="comment_control_button">
+			                     <div class="left_date">\${list[i].enrollDate}</div>
+			                     <div class="right_icons">             
+			                         <i class="fas fa-pen" title="댓글 수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>   
+			                         <i class="fas fa-trash" title="댓글 삭제" onclick=deleteFunc(\${list[i].commentNo})></i>  
+			                         <i class="fas fa-exclamation" title="댓글 신고"></i>
+			                     </div>
+			                 </div>
+			             </div>   
+			         </div>`
+					} else if(list[i].secretCheck=="Y" || list[i].userNickName!="<%=loginMember.getMemNickname()%>") {
+						str += `<div class="comment_display">
+				            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+				            <div class="comment_content" style="padding:0;">
+				                <div class="secret_Comment" 
+				                     style="width:100%; 
+				                            height:100%; 
+				                            background-color:rgb(255, 235, 197); 
+				                            box-sizing: border-box;
+				                            display: flex;
+				                            justify-content: center;
+				                            align-items: center;">
+				                    <i class="fas fa-carrot">비밀댓글입니다!</i>    
+				                </div>           
+				            </div>
+				            <div class="comment_condition"><i class="fas fa-lock"></i></div>
+						 </div> `		
+					}
+        <%}%>
+				}//for문 괄호
+			
+					$outer.html(str);
+				
+				
+					},//success
+			  })//.ajax 대활호			
+		 }//function 괄호
+	  <%if(loginMember!=null){%> 
+		 function insertComment(){
+			 
+			 $.ajax({
+				 url:"insertComment.sh",
+				 type:"post",
+				 data:{
+					 cContent:$("#exampleInputPassword1").val(),
+			 		 sCheck:$("input [name=comment_condition]").is(":checked")? 'Y' : 'N',
+			 		 userNick:"<%=loginMember.getMemNickname()%>",
+			 		 postNo:"<%=pb.getPostNo()%>",
+			 		memNo:"<%=loginMember.getMemNo()%>"
+				 },
+				 success:function(list){
+					 CommentListUpdate();
+				 }
+			 })	 
+		 }
+		 <%}%>	 
+		 function modifyComment(e,num,userNum){
+			 
+			 commentNoScope = num;
+			 userNoScope = userNum;
+			 let commentContent = e.parentNode.parentNode.parentNode.parentNode;
+			 
+             commentContent.innerHTML=`<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+                                         <div class="comment_content">  
+                                         <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
+                                         </div>
+                                         <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick="commentUpdate(this);">수정하기</button>`     
+       		 
+		 }
+		 function commentUpdate(event){
+			 
+			 $.ajax({
+				 url:"modifybtn.sh.hy",
+				 type:"post",
+			 	 data:{
+			 		userInput: $("#UserModify").val(),
+			 		commentNo:commentNoScope,
+			 		memNo:userNoScope
+			 		 
+			 	 },
+			 	 success:function(result){
+			 		CommentListUpdate();
+			 	 }
+			 })			 
+		 }
          function askFunction(){
        	 
         	 if(confirm("게시글을 삭제하시겠습니까?")){
@@ -525,6 +547,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		 location.href="<%=contextPath%>/shMarketStatusUpdate.sh?bno=<%=pb.getPostNo()%>"
         	 }       	 
          } 
+      
          $(function(){
         	 
         	 $("#like_button").click(function(){
@@ -550,11 +573,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		<% }%> 		 
         	 })	 
          })
-         </script>
-         <script type="text/javascript">
-        
-         
-         </script>
+         </script>  
   
       <%@ include file="../common/footerbar.jsp"%>   
          
