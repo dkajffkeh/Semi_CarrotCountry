@@ -5,7 +5,7 @@
 
 <% 
 	ArrayList<ShippingLocation> list = (ArrayList<ShippingLocation>)request.getAttribute("list");
-	Location lo = (Location)session.getAttribute("lo");
+	Location lo = (Location)request.getAttribute("lo");
 %>
 <!DOCTYPE html>
 <html>
@@ -138,6 +138,7 @@
             <tr>
                 <td>지역</td>
                 <td>
+           
                 </td>
             </tr>
             <tr>

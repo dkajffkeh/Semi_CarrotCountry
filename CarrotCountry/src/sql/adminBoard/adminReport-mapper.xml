@@ -29,7 +29,7 @@
 		                  from
 		                       report
 		                  join member using(mem_no)
-		                  join post on(report_post_no=post_no)
+		                  join post p on(report_post_no=post_no)
 		                  join report_type using(report_type_no)
 		                  join report_reason using(report_reason_no)
 		                 order

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <% String contextPathUserinfo = request.getContextPath(); %>   
+<%@ page import="com.javachip.carrotcountry.member.model.vo.Member" %> 
+<% Member loginMemberUserinfo = (Member)session.getAttribute("loginMember"); // 로그인된 유저 정보 %>
     
     
 <!DOCTYPE html>
@@ -110,7 +112,7 @@
                 <td><a href="">진행 현황</a></td>
             </tr>
             <tr>
-                <th><a href="">신고내역</a></th>
+                <th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>">신고내역</a></th>
             </tr>
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>

@@ -52,7 +52,7 @@
           <input type="button" value="뒤로가기" class="btn btn-warning btn-sm" onclick="history.back();">
         </div>
 
-        
+        </form>
         
     </div>
 
