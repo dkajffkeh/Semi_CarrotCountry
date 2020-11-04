@@ -7,17 +7,10 @@
 	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
 	ArrayList<AdminMember> list = (ArrayList<AdminMember>)request.getAttribute("list");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <title>관리자 페이지</title>
 
-<link rel="stylesheet"
-	href="resources/css/adminBoard/adminBoardStyle.css">
-
-</head>
-<body>
+<link rel="stylesheet" href="resources/css/adminBoard/adminBoardStyle.css">
 
 	<!-- nav 영역 -->
 	<%@ include file="../common/commonNavbar.jsp"%>
@@ -27,7 +20,7 @@
 		<div id="content">
 			<div id="content1">
 				<!-- 관리페이지 메뉴 리스트 -->
-				<%@ include file="./adminMenubar.jsp"%>
+				<%@ include file="./adminMenubar.jsp" %>
 			</div>
 
 			<div id="content2">
@@ -84,7 +77,7 @@
 											<td>
 												<% if (am.getbListCheck().equals("N")) { %>
 													<!-- 클릭 시 블랙리스트 등록  -->
-													<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>	
+													<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>
 												<% } %>
 											</td>
 										</tr>

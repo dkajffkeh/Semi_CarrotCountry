@@ -1,22 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String contextPathAdmin = request.getContextPath();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/adminBoard/adminMenubar.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="resources/css/adminBoard/adminMenubar.css">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 
-</head>
 <body>
     <div class="navWrap">
         <div id="menuTitle">관리페이지</div>
@@ -25,7 +16,7 @@
                 <th>회원 관리</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathAdmin %>/userList.sb?currentPage=1">회원조회</a></td>
+                <td><a href="<%= request.getContextPath() %>/userList.sb?currentPage=1">회원조회</a></td>
             </tr>
                 <td><a href="<%= contextPathAdmin %>/blackList.sb?currentPage=1">블랙리스트관리</a></td>
             <tr>
