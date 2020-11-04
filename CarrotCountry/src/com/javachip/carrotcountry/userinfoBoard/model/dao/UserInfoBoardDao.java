@@ -78,21 +78,21 @@ public class UserInfoBoardDao {
 			
 			if(rset.next()) {
 				m = new Member(
-								rset.getInt("mem_no"),
-								rset.getInt("local_no"),
-								rset.getString("mem_userid"),
-								rset.getString("mem_userpwd"),
-								rset.getString("mem_name"),
-								rset.getString("mem_nickname"),
-								rset.getString("mem_birthday"),
-								rset.getString("mem_gender"),
-								rset.getString("mem_phone"),
-								rset.getString("mem_email"),
-								rset.getString("mem_location"),
-								rset.getDate("mem_enroll_date"),
-								rset.getString("b_list_check"),
-								rset.getString("leave_check"),
-								rset.getString("manager_check")
+						rset.getInt("mem_no"),
+						rset.getInt("local_no"),
+						rset.getString("mem_userid"),
+						rset.getString("mem_userpwd"),
+						rset.getString("mem_name"),
+						rset.getString("mem_nickname"),
+						rset.getString("mem_birthday"),
+						rset.getString("mem_gender"),
+						rset.getString("mem_phone"),
+						rset.getString("mem_email"),
+						rset.getString("mem_location"),
+						rset.getDate("mem_enroll_date"),
+						rset.getString("b_list_check"),
+						rset.getString("leave_check"),
+						rset.getString("manager_check")
 						);
 			}
 			
