@@ -81,5 +81,32 @@
 	   AND NOTICE_NO = ?
 	</entry>
 	
+	<entry key="updateNotice">
+		UPDATE
+		       NOTICE
+		   SET NOTICE_TITLE = ?
+		     , NOTICE_CONTENT = ?
+		     , FILE_PATH = ?
+		     , FILE_MODIFYNAME = ?
+		     , FILE_ORIGINNAME = ?
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </properties>

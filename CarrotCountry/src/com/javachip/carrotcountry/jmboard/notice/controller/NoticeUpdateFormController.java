@@ -1,11 +1,15 @@
 package com.javachip.carrotcountry.jmboard.notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javachip.carrotcountry.jmboard.notice.model.service.NoticeService;
+import com.javachip.carrotcountry.jmboard.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class NoticeUpdateFormController
@@ -26,8 +30,16 @@ public class NoticeUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		
+		Notice n = new NoticeService().selectNotice(nno);
+		
+		request.setAttribute("n", n);
+		
+		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);
+		
 	}
 
 	/**
