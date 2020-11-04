@@ -383,7 +383,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                      <div class="left_date"><%=list.get(i).getEnrollDate()%></div>
                      <div class="right_icons">
                      <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())){ %>
-                         <i class="fas fa-pen" title="댓글 수정" onclick="testFun(this)"></i>
+                         <i class="fas fa-pen" title="댓글 수정" onclick="testFun(`<%=list.get(i).getCommentNo()%>`,this)"></i>
                          <%} %>
                       <%if(loginMember.getMemNickname().equals(list.get(i).getUserNickName())||loginMember.getManagerCheck().equals("Y")){ %>   
                          <i class="fas fa-trash" title="댓글 삭제"></i>
@@ -468,39 +468,39 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		 <%if(loginMember!=null) {%>
         		 
         		 $.ajax({
-        			url:"insertComment.sh",
-        			type:"post",
-        			data:{
-					      cContent:$scContent.val(),
-					      sCheck:$('input[name="comment_condition"]').is(":checked")?'Y':'N',
-					      userNick:"<%=loginMember.getMemNickname()%>",
-					      postNo:"<%=pb.getPostNo()%>",
-					      memNo:"<%=loginMember.getMemNo()%>"
-        			     },
-        			
-        		    success:function(result){
-								
-        		    let commentAppend = 
-        		    	 `<div class="comment_display">
-        	             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
-        	             <div class="comment_content">
-        	                 <p class="comment_user_info">[\${result.userNickName}]</p>
-        	                 <div class="comment_textarea">\${result.Content}</div>
-        	                 
-        	                 <div class="comment_control_button">
-        	                     <div class="left_date">\${result.enrollDate}</div>
-        	                     <div class="right_icons">       	                    
-        	                         <i class="fas fa-pen" title="댓글 수정"></i>                                          
-        	                         <i class="fas fa-trash" title="댓글 삭제"></i>
-        	                     </div>
-        	                 </div>
-        	             </div>   
-        	         </div>`;
-      
-        	         $scContent.val('');
-        	         $("#comment_display_outer").prepend(commentAppend);
-	         
-        		    },
+         			url:"insertComment.sh",
+         			type:"post",
+         			data:{
+ 					      cContent:$scContent.val(),
+ 					      sCheck:$('input[name="comment_condition"]').is(":checked")?'Y':'N',
+ 					      userNick:"<%=loginMember.getMemNickname()%>",
+ 					      postNo:"<%=pb.getPostNo()%>",
+ 					      memNo:"<%=loginMember.getMemNo()%>"
+         			     },
+         			
+         		    success:function(result){
+ 								
+         		    let commentAppend = 
+         		    	 `<div class="comment_display">
+         	             <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+         	             <div class="comment_content">
+         	                 <p class="comment_user_info">[\${result.userNickName}]</p>
+         	                 <div class="comment_textarea">\${result.Content}</div>
+         	                 
+         	                 <div class="comment_control_button">
+         	                     <div class="left_date">\${result.enrollDate}</div>
+         	                     <div class="right_icons">       	                    
+         	                         <i class="fas fa-pen" title="댓글 수정"></i>                                          
+         	                         <i class="fas fa-trash" title="댓글 삭제"></i>
+         	                     </div>
+         	                 </div>
+         	             </div>   
+         	         </div>`;
+       
+         	         $scContent.val('');
+         	         $("#comment_display_outer").prepend(commentAppend);
+ 	         
+         		    },
  	 
         		 })
         		 
@@ -551,13 +551,11 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         	 })	 
          })
          </script>
-<script>
-function testFun(from){
-	
-	console.log(from.parentNode.parentNode.parentNode);
-}
-
-</script>      
+         <script type="text/javascript">
+        
+         
+         </script>
+  
       <%@ include file="../common/footerbar.jsp"%>   
          
 </body>

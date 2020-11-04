@@ -326,15 +326,10 @@ img {height:100%; width:100%; border-radius: 5px;}
     <!-- 정렬 구현 구간 -->
 
     <!-- main 아티클 구간 -->
-	<%if(loginMember!=null) {%>
-				<%if(loginMember.getMemLocation()==null){ %>
-    <div class="location_display">서울특별시 송파구</div>
-    			<% } else { %>
-    <div class="location_display"><%=loginMember.getMemLocation()%></div>		
-    	<%} %>			
-	<% } else {%>
+	
+	
 	<div class="location_display">서울특별시 송파구</div>
-	<% } %>
+	
 	
 	
     <div id="mainArticle_wrapper">

@@ -153,7 +153,7 @@
      
         function toTown1(){
   
-            location.href="<%=contextPath%>/shMarketBoardMain.sh";
+            location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
         }
         </script>
           
