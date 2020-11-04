@@ -48,7 +48,7 @@ public class FaqUpdateController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 FAQ 수정되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.fa?fno=" + fno);
+			response.sendRedirect(request.getContextPath() + "/detail.fa.jm?fno=" + fno);
 		}else {
 			request.setAttribute("errorMsg", "FAQ 수정 실패.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
