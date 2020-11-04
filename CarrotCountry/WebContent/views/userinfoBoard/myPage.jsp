@@ -33,7 +33,6 @@
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 	int memNo = loginMember.getMemNo();
-	String 
 	
 	%>
 	
