@@ -145,7 +145,7 @@
 	<entry key="selectProduct">
 		SELECT
 		       POST_NO
-		     , GP_CREATDATE
+		     , POST_ENROLL_DATE
 		     , GP_DEADLINE
 		     , GP_MINPEOPLE
 		     , GP_PEOPLE
@@ -161,7 +161,8 @@
 	
 	<entry key="selectOption">
 		SELECT
-               OPTION_NAME
+			   OPTION_NO
+             , OPTION_NAME
           FROM PROD_OPTION
          WHERE POST_NO = ?
 	</entry>
