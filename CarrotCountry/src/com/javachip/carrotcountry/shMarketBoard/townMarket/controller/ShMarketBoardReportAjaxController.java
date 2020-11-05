@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 
 /**
- * Servlet implementation class ShMarketDibsBtnController
+ * Servlet implementation class ShMarketBoardReportAjaxController
  */
-@WebServlet("/dibsbtn.sh")
-public class ShMarketDibsBtnController extends HttpServlet {
+@WebServlet("/shMarketReport.sh.hy")
+public class ShMarketBoardReportAjaxController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShMarketDibsBtnController() {
+    public ShMarketBoardReportAjaxController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +33,31 @@ public class ShMarketDibsBtnController extends HttpServlet {
 		
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		String rReason = request.getParameter("rReason");
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		String rContent = request.getParameter("rContent");		
+		String alert="이미 신고한 게시글입니다.";
+		String success="신고가 접수되었습니다.";
+		String masaka="설마 이건가?";
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int precheck = new TownMarketService().reportPreCheck(memNo,postNo);
 		
-		int checking = new TownMarketService().dibsCheck(bno,userNo);
-		String responseData = "찜목록에 추가되었습니다!";
-		String errorMsg = "추가에 실패하였습니다";
-		String alert = "이미 추가되어있는 게시글 입니다.";
-		
-		if(checking==0) {			
-			int result = new TownMarketService().insertLike(bno,userNo);			
-			if(result>0) {				
-				out.print(responseData);				
+		if(precheck>0) {		
+			out.print(alert);	
+		} else {
+			int result = new TownMarketService().shMarketReportInsert(memNo,rReason,postNo,rContent);
+			
+			if(result>0) {
+				out.print(success);
 			} else {
-				out.print(errorMsg);
-				  }			
-		} else {			  
-			    out.print(alert);
-		}		
-		
+				out.print(masaka);
+			}
+			
+			
+		}
+	
+	
 	}
 
 	/**

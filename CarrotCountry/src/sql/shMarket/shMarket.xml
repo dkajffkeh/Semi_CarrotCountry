@@ -460,4 +460,46 @@ INSERT INTO
        ,?
         )
 </entry>
+<entry key="shMarketReportCategorySelector">
+SELECT
+	   REPORT_REASON_NO
+      ,REPORT_REASON
+  FROM
+      REPORT_REASON
+</entry>
+<entry key="reportPreCheck">
+SELECT
+      COUNT(*)
+  FROM
+       REPORT
+WHERE
+     MEM_NO=?
+AND
+     REPORT_POST_NO=?
+</entry>
+<entry key="shMarketReportInsert">
+INSERT INTO
+           REPORT
+           (
+             REPORT_NO
+            ,MEM_NO
+            ,REPORT_TYPE_NO
+            ,REPORT_REASON_NO
+            ,REPORT_DATE
+            ,REPORT_POST_NO
+            ,REPORT_CHECK
+            ,REPORT_CONTENT
+           )
+           VALUES
+           (
+           SEQ_REPORTNO.NEXTVAL
+          ,?
+          ,1
+          ,?
+          ,SYSDATE
+          ,?
+          ,DEFAULT
+          ,?
+           )
+</entry>
 </properties>

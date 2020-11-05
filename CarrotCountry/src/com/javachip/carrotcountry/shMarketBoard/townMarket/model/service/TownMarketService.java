@@ -1,6 +1,10 @@
 package com.javachip.carrotcountry.shMarketBoard.townMarket.model.service;
 
-import static com.javachip.carrotcountry.common.JDBCtemplate.*;
+import static com.javachip.carrotcountry.common.JDBCtemplate.close;
+import static com.javachip.carrotcountry.common.JDBCtemplate.commit;
+import static com.javachip.carrotcountry.common.JDBCtemplate.getConnection;
+import static com.javachip.carrotcountry.common.JDBCtemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -10,6 +14,7 @@ import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ReportReason;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 public class TownMarketService {
@@ -270,6 +275,43 @@ public class TownMarketService {
 		close(conn);
 		
 		return result1*result2*result3*result4;
+	}
+
+	public ArrayList<ReportReason> shMarketReportCategorySelector() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<ReportReason> rList = new TownMarketDao().shMarketReportCategorySelector(conn);
+		
+		close(conn);
+		
+		return rList;
+	}
+
+	public int reportPreCheck(int memNo, int postNo) {
+		
+		Connection conn = getConnection();
+		
+		int preCheck = new TownMarketDao().reportPreCheck(conn,memNo,postNo);
+				
+		close(conn);
+		
+		return preCheck;
+	}
+
+	public int shMarketReportInsert(int memNo, String rReason, int postNo, String rContent) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketReportInsert(conn,memNo,rReason,postNo,rContent);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 	
