@@ -143,7 +143,7 @@ public class UserInfoBoardDao {
 	
 	}
 	
-	public ArrayList<ShippingLocation> selectShippingLocation(Connection conn, String memNo) {
+	public ArrayList<ShippingLocation> selectShippingLocation(Connection conn, int memNo) {
 		
 		ArrayList<ShippingLocation> list = new ArrayList<>();
 		
@@ -156,7 +156,7 @@ public class UserInfoBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, memNo);
+			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -183,7 +183,7 @@ public class UserInfoBoardDao {
 		
 	}
 	
-	public Location selectLocation(Connection conn, String memNo) {
+	public Location selectLocation(Connection conn, int memNo) {
 		
 		Location lo = null;
 		
@@ -195,7 +195,7 @@ public class UserInfoBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, memNo);
+			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
 			

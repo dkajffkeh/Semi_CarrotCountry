@@ -111,9 +111,7 @@ public class PostBoard {
 		this.prodPrice = prodPrice;
 		EnrollDate = enrollDate;
 		this.blindCheck = blindCheck;
-	}
-	
-	
+	}	
 
 	public PostBoard(String categoryNo, int memNo,String memNickname,int prodPrice,String postName, String postContent,
 			String prodStatus, String dealType, String site) {
@@ -127,6 +125,15 @@ public class PostBoard {
 		this.prodStatus = prodStatus;
 		this.dealType = dealType;
 		this.site = site;
+	}		
+
+	public PostBoard(int postNo, String categoryNo, String postName, String postContent, int prodPrice) {
+		super();
+		this.postNo = postNo;
+		this.categoryNo = categoryNo;
+		this.postName = postName;
+		this.postContent = postContent;
+		this.prodPrice = prodPrice;
 	}
 
 	public int getPostNo() {

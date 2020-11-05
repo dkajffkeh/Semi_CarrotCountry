@@ -84,14 +84,14 @@
                 <th>회원 정보</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathUserinfo %>/myPage.me.jw">회원 정보 설정</a></td>
+                <td><a href="<%= contextPathUserinfo %>/myPage.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">회원 정보 설정</a></td>
             </tr>
-                <td><a href="<%= contextPathUserinfo %>//deleteForm.me.jw">회원 탈퇴</a></td>
+                <td><a href="<%= contextPathUserinfo %>/deleteForm.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">회원 탈퇴</a></td>
             <tr>
                 <th>관심 상품</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathUserinfo %>/wishList.jw">찜</a></td>
+                <td><a href="<%= contextPathUserinfo %>/wishList.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">찜</a></td>
             </tr>
             <tr>
                 <td><a href="">최근 본 상품</a></td>
@@ -100,7 +100,7 @@
                 <th>판매 이력 조회</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathUserinfo %>/onSale.me.jw">판매 현황</a></td>
+                <td><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매 현황</a></td>
             </tr>
             <tr>
                 <th>공동구매</th>
@@ -112,8 +112,7 @@
                 <td><a href="">진행 현황</a></td>
             </tr>
             <tr>
-                <th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>
-            </tr>
+				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>            </tr>
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
             </tr>

@@ -451,9 +451,11 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 			                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
 			                 <div class="comment_control_button">
 			                     <div class="left_date">\${list[i].enrollDate}</div>
-			                     <div class="right_icons">             
+			                     <div class="right_icons">   
+			                     <%if(pb.getMemNickname().equals(loginMember.getMemNickname())){%>
 			                         <i class="fas fa-pen" title="댓글 수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>   
 			                         <i class="fas fa-trash" title="댓글 삭제" onclick=deleteFunc(\${list[i].commentNo})></i>  
+			                     <% }%>
 			                         <i class="fas fa-exclamation" title="댓글 신고"></i>
 			                     </div>
 			                 </div>
@@ -494,12 +496,13 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 				 type:"post",
 				 data:{
 					 cContent:$("#exampleInputPassword1").val(),
-			 		 sCheck:$("input [name=comment_condition]").is(":checked")? 'Y' : 'N',
+			 		 sCheck:$("input:checkbox[name=comment_condition]").is(":checked")? "Y" : "N",
 			 		 userNick:"<%=loginMember.getMemNickname()%>",
 			 		 postNo:"<%=pb.getPostNo()%>",
 			 		memNo:"<%=loginMember.getMemNo()%>"
 				 },
 				 success:function(list){
+					 $("#exampleInputPassword1").val('');
 					 CommentListUpdate();
 				 }
 			 })	 
