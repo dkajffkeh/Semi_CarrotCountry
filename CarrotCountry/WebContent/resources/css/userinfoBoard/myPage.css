@@ -12,10 +12,10 @@
 /* content_bottom영역에 대한 전반적인 구조 */
     #content_bottom>div{float:left;height:100%;}
     #content_bottom1{
-        width:40%;
+        width:45%;
         }
     #content_bottom2{
-        width:50%;
+        width:45%;
     }
     #content_bottom2_1{
         float:right;
@@ -72,7 +72,7 @@
     #content_bottom1{
     margin-left:50px;
     border: 3px solid gray;
-    padding:50px;
+    padding:40px;
     }
     #content_bottom1>table{
     font-size:20px;

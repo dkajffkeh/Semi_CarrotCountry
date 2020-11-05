@@ -1,3 +1,4 @@
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,6 +61,7 @@
         <h2>회원 정보 수정</h2>
          <hr color="gray">
          <form action="<%= contextPath %>/update.me.jw" method="post" id="myPageForm">
+            <input type="hidden" value="<%= userId %>" name="userId">
             <table id="myPageTable">
                 <tr>
                     <th>* 아이디</th>
@@ -128,33 +130,41 @@
             
             	$(function(){
             		// 성별값 가져오기
-            		var gender = "<%= gender %>"
+            		var gender = "<%= gender %>";
+            		
             		$("input[type=radio]").each(function(){
             			
             			if(gender.search($(this).val()) != -1) {
             				$(this).attr("checked", true);
             			}
-            			
             		});
-            		
-            		// 지역값 가져오기
-            		$(function() {
-            			
-			             var local = "<%= local %>";
+            	});
+            	</script>
+            	
+            	<script>
+            	// 지역값 가져오기
+    			
+			     var local = "<%= local %>";
 			      		
-			      		$("select[name=Local]").each(function(){
+			     	$("select[name=Local]").each(function(){
 			      			
-			      		})if(local.search($(this).val()) != -1) {
+			      			
+			      		if(local.search($(this).val()) != -1) {
 			      			$(this).attr("selected", true);
 			      		}
-			      	})
-            		
+			      	});
+			     	});
+            	</script>
+            	
+            	
+            	<script>
+          
             		// 유효성 검사
             	function validate() {
             			
             		var userId = document.getElementById("userId");
                     var userName = document.getElementById("userName");
-ㅍ		            var birthday = document.getElementById("birthday");
+		            var birthday = document.getElementById("birthday");
                     var nickname = document.getElementById("nickname");
                     var phone = document.getElementById("phone");
                     var address = document.getElementById("address");
@@ -208,7 +218,7 @@
                     }
             	}
             		
-            	});
+          
             
     	
           

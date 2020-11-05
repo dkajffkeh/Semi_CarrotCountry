@@ -1,5 +1,13 @@
+<%@page import="java.util.ArrayList"%>
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<WishList> list = (ArrayList<WishList>)request.getAttribute("list");
+	
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +15,7 @@
 <title>Insert title here</title>
 
 <style>
- /* 찜 css */
-   			.outer{
+ 			.outer{
                    margin-top:50px;
                    margin-left:50px;
                    width:1000px;
@@ -24,14 +31,15 @@
                 padding:30px;
                 font-size:20px;
                 /* border:4px solid black; */
-                width:100%;
-                height:100%;
+                width:1000px;
+                height:500px;
+                /* background-color:blue; */
             }
             .content1{
                 box-shadow:5px 5px 10px 5px rgb(247, 233, 205);
                 border-bottom-right-radius:40px;
                 width:20%;
-                height:40%;
+                height:60%;
                 float:left;
                 margin:20px;
             }
@@ -51,6 +59,14 @@
                 float:right;
                 margin-right:100px;
             }
+
+            .paging-area {
+                width:1000px;
+                height:100px;
+                /* background-color:red; */
+                float:left;
+        }
+
 </style>
 </head>
 <body>
@@ -65,7 +81,7 @@
 	
 	<div class="myPageWrapper_content">
 	<!-- # 찜 body영역 -->
-	 <div class="outer">
+	<div class="outer">
 	    <br>
 	    <h1>찜 목록</h1>
 	    <hr color="gray">
@@ -155,6 +171,7 @@
 
 	<!------------------------------------------------------------------------------------->
 	
+        
 	</div>
 	</div>
 	

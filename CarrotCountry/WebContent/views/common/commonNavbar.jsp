@@ -131,7 +131,7 @@ a {text-decoration: none;}
                         <% }else { %>
 	                        <!-- 로그인 상태 -->
 	                        <td><a href="<%= contextPath %>/logout.me.ng"><i class="fas fa-sign-out-alt"></i></a></td>
-	                        <td><a href="<%= contextPath %>/myPage.me.jw"><i class="fas fa-money-check"></i></a></td>
+	                        <td><a href="<%= contextPath %>/myPage.me.jw?memNo=<%= loginMember.getMemNo() %>"><i class="fas fa-money-check"></i></a></td>
                         <% } %>
                     </tr>
                     <tr class="user_inter_font">
@@ -142,7 +142,7 @@ a {text-decoration: none;}
                         <% }else { %>
                         	<!-- 로그인 상태 -->
 	                        <td><a href="<%= contextPath %>/logout.me.ng">로그아웃</a></td>
-	                        <td><a href="<%= contextPath %>/myPage.me.jw">마이페이지</a></td>
+	                        <td><a href="<%= contextPath %>/myPage.me.jw?memNo=<%= loginMember.getMemNo() %>">마이페이지</a></td>
                         <% } %>
                     </tr>
                 </table>        
