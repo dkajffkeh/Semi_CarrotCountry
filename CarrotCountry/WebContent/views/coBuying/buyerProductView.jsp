@@ -10,6 +10,7 @@
 
 <%
 	Product p = (Product)request.getAttribute("p");
+ 	Account ac = (Account)request.getAttribute("ac");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	CategoryHY c = (CategoryHY)request.getAttribute("c");
 	ArrayList<Option> oList = (ArrayList<Option>)request.getAttribute("oList");
@@ -90,7 +91,7 @@
        #content3_2{height: 90%;}
        #content3_1>div{
             height: 100%; 
-            width: 33.3%; 
+            width: 25%; 
             float: left;
             display:block;
         }
@@ -109,43 +110,7 @@
             background: rgb(139, 139, 139);
         }
         
-      
-       /* 푸터바의 전반적인 틀 */
-    #footerbar {
-        position: absolute;
-        top: 100%;
-        width: 100%;
-        height: 270px;
-        background-color: #00251a
-    }
-
-    .footerbar_totalWrapper {
-        width: 1200px;
-        height: 100%;
-        border-bottom: 1px solid white;
-        margin: auto;
-    }
-
-    .footer_upperWrapper {
-        width: 100%;
-        height: 52px;
-        border-bottom: 1px solid white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .footer_upperWrapper>button {
-        margin-left: 40px;
-    }
-
-    .footer_belowWrapper {
-        height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
+    
 </style>
 
 </head>
@@ -247,9 +212,12 @@
                             <button type="button" onclick="showExplan()" class="btn btn-dark">상세설명</button>
                         </div>
                         <div id="content3_1_2">
-                            <button href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</button>
+                            <button type="button" onclick="showAccount()" class="btn btn-dark">입금방법</button>
                         </div>
                         <div id="content3_1_3">
+                            <button href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</button>
+                        </div>
+                        <div id="content3_1_4">
                             <button type="button" onclick="showRefund()" class="btn btn-dark">교환 및 환불</button>
                         </div>
                         
@@ -267,6 +235,15 @@
 	                        showArea.innerHTML = <%= pb.getPostContent() %>
                         }
                         
+
+                        function showAccount(){
+                            var showArea = document.getElementById("showContent");
+                            for(Account ac : aList){ 	
+							    showArea.innerHTML = "입금 가능 계좌 : " + <%= ac.getAccount() %>
+							  } 
+                        }
+                        
+                        
                         function showRefund(){
                             var showArea = document.getElementById("showContent");
                             showArea.innerHTML = <%= pb.getPostRefund() %>
@@ -282,21 +259,7 @@
 
     </div>
 
-    <footer id="footerbar">
-        <div class=footerbar_totalWrapper>
-            <div class="footer_upperWrapper">
-                <button class="btn btn-secondary">공지사항</button>
-                <button class="btn btn-secondary">고객센터</button>
-                <button class="btn btn-secondary">개인정보 취급방침</button>
-                <button class="btn btn-secondary">회사소개</button>
-            </div>
-            <div class="footer_belowWrapper">
-                <p style="color:white">footer</p>
-            </div>
-        </div>
-
-    </footer>
-
+	<%@ include file="../common/footerbar.jsp"%>
 
 </body>
 </html>

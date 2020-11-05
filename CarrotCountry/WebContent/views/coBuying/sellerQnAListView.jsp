@@ -112,6 +112,7 @@
             </div>
             <div id="content2_2">
                 <span><%= pd.getPostName() %></span>
+                <input type="hidden" name="bno" value="<%= pd.getPostNo() %>">
             </div>
         </div>
 

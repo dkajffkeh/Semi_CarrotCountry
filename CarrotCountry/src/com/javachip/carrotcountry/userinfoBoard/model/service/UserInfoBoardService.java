@@ -70,7 +70,7 @@ public class UserInfoBoardService {
 	 * @return 			처리된 list
 	 *
 	 */
-	public ArrayList<ShippingLocation> selectShippingLocation(String memNo){
+	public ArrayList<ShippingLocation> selectShippingLocation(int memNo){
 		
 		Connection conn = getConnection();
 		ArrayList<ShippingLocation> list = new UserInfoBoardDao().selectShippingLocation(conn, memNo);
@@ -84,7 +84,7 @@ public class UserInfoBoardService {
 	 * @return 			
 	 *
 	 */
-	public Location selectLocation(String memNo) {
+	public Location selectLocation(int memNo) {
 		Connection conn = getConnection();
 		Location lo = new UserInfoBoardDao().selectLocation(conn, memNo);
 		close(conn);

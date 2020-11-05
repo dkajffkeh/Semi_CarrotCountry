@@ -15,8 +15,12 @@ public class Product {
 
 	private Date postEnrollDate;
 	private String postComment;
-	private String postRefund;
-	
+	private String gpRefund;
+
+	private int memNo;
+	private String categoryNo;
+	private String gpContent; 
+	private int gpPostCheck; 
 	
 	private String thumbnailLoadpath;
 	private String postName;
@@ -26,7 +30,6 @@ public class Product {
 	
 	public Product() {}
 
-	
 	
 	
 	
@@ -70,7 +73,7 @@ public class Product {
 
 
 	public Product(int postNo, Date postEnrollDate, Date gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
-			String postComment, String postRefund) {
+			String postComment, String gpRefund) {
 		super();
 		this.postNo = postNo;
 		this.postEnrollDate = postEnrollDate;
@@ -79,17 +82,14 @@ public class Product {
 		this.gpPeople = gpPeople;
 		this.gpDPrice = gpDPrice;
 		this.postComment = postComment;
-		this.postRefund = postRefund;
+		this.gpRefund = gpRefund;
 	}
 
 
 
-
-
-
-
-	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople,
-			String gpStatus, Date gpDeadline) {
+	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople, String gpStatus,
+			Date gpDeadline, Date postEnrollDate, String postComment, String gpRefund, int memNo, String categoryNo,
+			String gpContent, int gpPostCheck, String thumbnailLoadpath, String postName, int postLikes) {
 		super();
 		this.postNo = postNo;
 		this.gpPrice = gpPrice;
@@ -99,7 +99,23 @@ public class Product {
 		this.gpPeople = gpPeople;
 		this.gpStatus = gpStatus;
 		this.gpDeadline = gpDeadline;
+		this.postEnrollDate = postEnrollDate;
+		this.postComment = postComment;
+		this.gpRefund = gpRefund;
+		this.memNo = memNo;
+		this.categoryNo = categoryNo;
+		this.gpContent = gpContent;
+		this.gpPostCheck = gpPostCheck;
+		this.thumbnailLoadpath = thumbnailLoadpath;
+		this.postName = postName;
+		this.postLikes = postLikes;
 	}
+
+
+
+
+
+
 
 
 	public int getPostNo() {
@@ -186,21 +202,6 @@ public class Product {
 	//========== 추가 ===========
 	
 	
-	
-	public Date getPostEnrollDate() {
-		return postEnrollDate;
-	}
-
-
-
-
-
-	public void setPostEnrollDate(Date postEnrollDate) {
-		this.postEnrollDate = postEnrollDate;
-	}
-
-
-
 
 
 	public String getPostComment() {
@@ -218,20 +219,6 @@ public class Product {
 
 
 
-
-	public String getPostRefund() {
-		return postRefund;
-	}
-
-
-
-
-
-	public void setPostRefund(String postRefund) {
-		this.postRefund = postRefund;
-	}
-
-	
 	
 	//============== 추가 ==================
 	
@@ -295,16 +282,136 @@ public class Product {
 	
 	
 	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
+
+	public Date getPostEnrollDate() {
+		return postEnrollDate;
+	}
+
+
+
+
+
+
+
+
+	public void setPostEnrollDate(Date postEnrollDate) {
+		this.postEnrollDate = postEnrollDate;
+	}
+
+
+
+
+
+
+
+
+	public String getGpRefund() {
+		return gpRefund;
+	}
+
+
+
+
+
+
+
+
+	public void setGpRefund(String gpRefund) {
+		this.gpRefund = gpRefund;
+	}
+
+
+
+
+
+
+
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+
+
+
+
+
+
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
+
+
+
+
+
+
+
+	public String getCategoryNo() {
+		return categoryNo;
+	}
+
+
+
+
+
+
+
+
+	public void setCategoryNo(String categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
+
+
+
+
+
+
+
+	public String getGpContent() {
+		return gpContent;
+	}
+
+
+
+
+
+
+
+
+	public void setGpContent(String gpContent) {
+		this.gpContent = gpContent;
+	}
+
+
+
+
+
+
+
+
+	public int getGpPostCheck() {
+		return gpPostCheck;
+	}
+
+
+
+
+
+
+
+
+	public void setGpPostCheck(int gpPostCheck) {
+		this.gpPostCheck = gpPostCheck;
+	}
+
+
+
+
 
 
 

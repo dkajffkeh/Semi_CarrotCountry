@@ -119,7 +119,7 @@
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="selectProductQnAList">
+	<entry key="selectProductQnAList"> 아직임
 		SELECT
 		       THUMBNAIL_LOADPATH
 		     , POST_NAME
@@ -131,7 +131,7 @@
 	
 	
 	
-	
+	// ==============================================
 	
 	
 	<entry key="selectProductListCount">
@@ -151,16 +151,18 @@
 		     , GP_PEOPLE
 		     , GP_DPRICE
              , POST_COMMENT
-             , POST_REFUND
+             , GP_REFUND
 		  FROM GROUP_PURCHASE 
 		  LEFT
 		  JOIN POST USING(POST_NO)
 		 WHERE POST_NO = ?
+		   AND GP_POST_CHECK = 2
 	</entry>
 	
 	<entry key="selectOption">
 		SELECT
-               OPTION_NAME
+			   OPTION_NO
+             , OPTION_NAME
           FROM PROD_OPTION
          WHERE POST_NO = ?
 	</entry>

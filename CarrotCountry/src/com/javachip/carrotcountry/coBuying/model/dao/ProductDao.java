@@ -114,13 +114,13 @@ private Properties prop = new Properties();
 			
 			if(rs.next()) {
 				p = new Product(rs.getInt("post_no"),
-							  rs.getDate("post_enroll_date"),
+							  rs.getDate("POST_ENROLL_DATE"),
 							  rs.getDate("gp_deadline"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),
 							  rs.getString("post_comment"),
-							  rs.getString("post_refund"));
+							  rs.getString("gp_refund"));
 			}
 			
 		} catch (SQLException e) {
@@ -155,6 +155,7 @@ private Properties prop = new Properties();
 				
 				while(rs.next()) {
 					Option o = new Option();
+					o.setOptionNo(rs.getInt("option_no"));
 					o.setOptionName(rs.getString("option_name"));
 					oList.add(o);
 				}
