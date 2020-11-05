@@ -3,8 +3,9 @@
     
 <% String contextPathUserinfo = request.getContextPath(); %>   
 <%@ page import="com.javachip.carrotcountry.member.model.vo.Member" %> 
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <% Member loginMemberUserinfo = (Member)session.getAttribute("loginMember"); // 로그인된 유저 정보 %>
-    
+
     
 <!DOCTYPE html>
 <html>
@@ -106,13 +107,13 @@
                 <th>공동구매</th>
             </tr>
             <tr>
-                <td><a href="">내 게시글</a></td>
+                <td><a href="<%= contextPathUserinfo %>/coBuying.po.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">내 게시글</a></td>
             </tr>
             <tr>
                 <td><a href="">진행 현황</a></td>
             </tr>
             <tr>
-				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>            </tr>
+				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>            
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
             </tr>
