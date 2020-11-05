@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
+import java.util.List;
 import java.util.Properties;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -18,6 +19,7 @@ import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ReportReason;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 public class TownMarketDao {
@@ -735,10 +737,90 @@ Properties prop = new Properties();
 	
 		return result;
 	}
-	
 
 
+	public ArrayList<ReportReason> shMarketReportCategorySelector(Connection conn) {
+		
+		ArrayList<ReportReason> rList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketReportCategorySelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ReportReason rr = new ReportReason(rs.getInt("REPORT_REASON_NO"),rs.getString("report_reason"));
+				
+				rList.add(rr);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return rList;
+	}
 
 
+	public int reportPreCheck(Connection conn, int memNo, int postNo) {
+		
+		int preCheck = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("reportPreCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, postNo);
+			
+		    rs = pstmt.executeQuery();
+		    if(rs.next()) {
+		    	preCheck = rs.getInt("COUNT(*)");
+		    }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return preCheck;
+	}
+
+
+	public int shMarketReportInsert(Connection conn, int memNo, String rReason, int postNo, String rContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketReportInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, Integer.parseInt(rReason));
+			pstmt.setInt(3, postNo);
+			pstmt.setString(4, rContent);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 }

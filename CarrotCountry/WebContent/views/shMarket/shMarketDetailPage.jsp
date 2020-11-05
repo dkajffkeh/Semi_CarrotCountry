@@ -4,12 +4,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY" %>
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo" %>
-<%
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ReportReason" %>
+<%  
 PostBoard pb = (PostBoard)request.getAttribute("pb");
 //String 게시글번호,String 카테고리번호,int member번호, String 시역 ex 서울시 송파구 , 닉네임 , 게시글번호 , 게시글 제목, 내용 , 카테고리 이름, 상품상태, 거래유형,거래지역, 썸네일 패스, 썸네일 이름, 썸내일 로드패스, 조회수, likes,가격,게시일.
 
 ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
-
+ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
 
 
 %>    
@@ -354,8 +355,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
        <div class="modal" id="myModal">
            
         <div class="modal-dialog">
-          <div class="modal-content">
-            <form action="">
+          <div class="modal-content">          
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">유저신고</h4>
@@ -366,18 +366,19 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
             <div class="modal-body">
               <label for="">신고유형:</label>
               <select name="report_type" style="border:1px solid black; border-radius: 3px;">
-                  <option value="사기">사기</option>
+                  <% for(int i = 0 ; i<rList.size(); i++){ %>
+                  <option value="<%=rList.get(i).getReportReasonNo()%>"><%=rList.get(i).getReportReason()%></option>
+                  <% } %>
               </select>
               <br><br>
               <label for="">신고 사유</label>
-              <br><textarea name="" id="" cols="61" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
+              <br><textarea name="" id="reportContent" cols="61" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
             </div>
       
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">신고하기</button>
-            </div>
-            </form>
+              <button type="button" class="btn btn-danger" id="boardReportBtn" data-dismiss="modal">신고하기</button>
+            </div>     
           </div>
         </div>
       </div>
@@ -519,10 +520,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
                                          <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
                                          </div>
                                          <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
-		 }
-		
-		
-		 
+		 }	 
 		 //댓글 삭제js
 		 function deleteFunc(deleteNo){
 			 
@@ -536,14 +534,11 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 					 data:{delCommentNo:deleteNo},
 					 success:function(result){
 						 
-						 CommentListUpdate();
-						 
-						 
+						 CommentListUpdate();						 						 
 					 }		 
 				 })
 				 
-			 }
-			 
+			 }			 
 		 }
          function askFunction(){
        	 
@@ -557,8 +552,8 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){
         		 location.href="<%=contextPath%>/shMarketStatusUpdate.sh?bno=<%=pb.getPostNo()%>"
         	 }       	 
-         } 
-      
+         }     
+         //찜목록 추가하는 AJAX
          $(function(){
         	 
         	 $("#like_button").click(function(){
@@ -571,7 +566,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         				 data:{bno:"<%=pb.getPostNo()%>",
         					   userNo:"<%=loginMember.getMemNo()%>"},
         			     type:"post",
-        			  	 success:function(result){
+        			     success:function(result){
         			  		 alert(result);
         			  	 },	
         				 error:function(){      					 
@@ -584,9 +579,36 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
         		<% }%> 		 
         	 })	 
          })
-         
-         
-         </script>  
+         //신고기능 AJAX
+         $(function(){
+        	 
+        	 $("#boardReportBtn").click(function(){
+        		 <%if(loginMember!=null){%>
+        		 //ajax 구간
+        		 
+        		 $.ajax({
+        			 url:"shMarketReport.sh.hy",
+        			 type:"post",
+        			 data:{
+        				 memNo:"<%=loginMember.getMemNo()%>",
+        				 rReason:$("select[name=report_type]").val(),
+        				 postNo:"<%=pb.getPostNo()%>",
+        				 rContent:$("#reportContent").val(),
+        			 },
+        			 success:function(result){
+    			  		 alert(result);
+    			  	 },
+        		     error:function(){
+        		     }
+        		 })//ajax 괄호
+	 
+        		 <%} else {%>
+        		 alert("신고는 회원만 가능합니다.")
+        		 <%}%>
+        	 })
+ 
+         })
+        </script>  
   
       <%@ include file="../common/footerbar.jsp"%>   
          
