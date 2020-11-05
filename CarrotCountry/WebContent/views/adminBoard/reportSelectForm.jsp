@@ -56,7 +56,7 @@
 									<th width="55">글번호</th>
 									<th width="200">글제목</th>
 									<th width="100">신고사유</th>
-									<th width="100">작성자</th>
+									<th width="100">신고자</th>
 									<th width="40"></th>
 								</tr>
 							</thead>

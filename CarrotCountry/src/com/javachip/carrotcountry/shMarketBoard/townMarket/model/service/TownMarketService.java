@@ -8,6 +8,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
@@ -224,6 +225,51 @@ public class TownMarketService {
 		close(conn);
 	
 		return result;
+	}
+
+	public int shMarketBoardModify(PostBoard b, Location l, String pCondition) {
+		
+		
+		
+		Connection conn = getConnection();
+		
+		int result1 = new TownMarketDao().shMarketBoardModify(conn,b,l,pCondition);
+		
+		int result2 = new TownMarketDao().shMarketUsedProdModify(conn,b,pCondition);
+		
+		if(result1>0 && result2>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1*result2;
+	}
+
+	public int shMarketBoardModifyPlusPhoto(PostBoard b, Location l, String pCondition, ArrayList<PhotoBoardVo> pList) {
+		
+		Connection conn = getConnection();
+		//PostBoard update // 이것도 웬만하면 됨
+		int result1 = new TownMarketDao().shMarketBoardAndPhotoModify(b,l,pCondition,pList,conn);
+		//UsedProd update  //업데이트 됨
+		int result2 = new TownMarketDao().shMarketUsedProdModify(conn,b,pCondition);
+		//PhotoBoard 있던거 삭제해줘야함. 한개는 무조건 삭제됨
+		int result3 = new TownMarketDao().shMarketPhotoDelete(conn,b);
+		//사진 업데이트 해줘야함. 업데이트도 무조건 됨
+		int result4 = new TownMarketDao().shMarketPhotoUpdate(conn,b,pList);
+		
+		
+		if(result1>0 && result2>0 && result3>0 && result4>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1*result2*result3*result4;
 	}
 
 	

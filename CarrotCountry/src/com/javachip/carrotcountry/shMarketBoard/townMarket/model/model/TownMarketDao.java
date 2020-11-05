@@ -16,6 +16,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
@@ -592,6 +593,151 @@ Properties prop = new Properties();
 		
 		return result;
 	}
+
+
+	public int shMarketBoardModify(Connection conn, PostBoard b, Location l, String pCondition) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketBoardModify");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(b.getCategoryNo()));
+			pstmt.setString(2, l.getLocal_si());
+			pstmt.setString(3, l.getLocal_gu());
+			pstmt.setString(4, l.getLocal_dong());
+			pstmt.setString(5, b.getPostName());
+			pstmt.setString(6, b.getPostContent());
+			pstmt.setInt(7, Integer.parseInt(b.getCategoryNo()));
+			pstmt.setInt(8, b.getProdPrice());
+			pstmt.setInt(9, b.getPostNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
+	}
+
+
+	public int shMarketUsedProdModify(Connection conn, PostBoard b, String pCondition) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketUsedProdModify");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,pCondition);
+			pstmt.setInt(2, b.getProdPrice());
+			pstmt.setInt(3, b.getPostNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int shMarketBoardAndPhotoModify(PostBoard b, Location l, String pCondition, ArrayList<PhotoBoardVo> pList,
+			Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketBoardAndPhotoModify");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(b.getCategoryNo()));
+			pstmt.setString(2, l.getLocal_si());
+			pstmt.setString(3, l.getLocal_gu());
+			pstmt.setString(4, l.getLocal_dong());
+			pstmt.setString(5, b.getPostName());
+			pstmt.setString(6, b.getPostContent());
+			pstmt.setInt(7, Integer.parseInt(b.getCategoryNo()));
+			pstmt.setString(8, pList.get(0).getPhotoPath());
+			pstmt.setString(9, pList.get(0).getPhotoFileName());
+			pstmt.setString(10,pList.get(0).getPhotoLoadPath());
+			pstmt.setInt(11,b.getProdPrice());
+			pstmt.setInt(12, b.getPostNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int shMarketPhotoDelete(Connection conn, PostBoard b) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketPhotoDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getPostNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
+	}
+
+
+	public int shMarketPhotoUpdate(Connection conn, PostBoard b, ArrayList<PhotoBoardVo> pList) {
+		
+		int result =0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketPhotoUpdate");
+		
+		try {
+			for(PhotoBoardVo pb : pList) {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b.getPostNo());
+			pstmt.setString(2, pb.getPhotoPath());
+			pstmt.setString(3, pb.getPhotoFileName());
+			pstmt.setString(4, pb.getPhotoLoadPath());
+			result = pstmt.executeUpdate();
+			
+			if(result==0) {
+				return 0;
+			}
+			};	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
+		return result;
+	}
+	
+
+
 
 
 	

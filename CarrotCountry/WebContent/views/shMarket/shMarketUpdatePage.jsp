@@ -8,6 +8,7 @@
 ArrayList<CategoryHY> clist = (ArrayList)request.getAttribute("clist");
 ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pblist");
 PostBoard pb = (PostBoard)request.getAttribute("pb");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -108,19 +109,31 @@ border:2px solid green;
 <%@ include file="../common/commonNavbar.jsp"%>
 
 <div id="page_total_wrapper">
-        <form action="shBoardEnrollForm.sh.hy" id="form1" enctype="multipart/form-data" method="post">
+        <form action="<%=contextPath%>/shBoardModifyForm.sh.hy?bno=<%=pb.getPostNo()%>" id="form1" enctype="multipart/form-data" method="post">
         <input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
         <input type="hidden" name="memNick" value="<%=loginMember.getMemNickname()%>">
+        <input type="hidden" name="preTPath" value="<%=pb.getThumbnailPath()%>">
+        <input type="hidden" name="preTFileName" value="<%=pb.getThumbnailFilename()%>">
             <h3>물품 수정</h5>
             <hr>
             <div class="product_info_input" style="display: flex;">
                 <input type="text" name="title" class="form-control" placeholder="상품명을 입력해주세요"
                     style="margin-right: 5px;" value="<%=pb.getPostName()%>">
-                <select name="category" id="" class="form-control" style="color:gray;">             
+                <select name="category" id="category" class="form-control" style="color:drakgray;">             
 						<% for(int i =0 ; i<clist.size(); i++){ %>
 						<option value="<%=40+10*i%>"><%=clist.get(i).getCategoryName()%></option>
 						<% } %>
                 </select>
+                <script>
+                $(function(){ 	
+                	let userTag = "<%=pb.getCategoryNo()%>";           	
+                	$("#category option").each(function(){ 		
+                		if($(this).val()==userTag){
+                			$(this).attr("selected", true);
+                		}    		
+                	})             	
+                })
+                </script>
             </div>
             <h5>가격입력</h5>
             <div class="price_info_input" style="display: flex;">
@@ -149,11 +162,11 @@ border:2px solid green;
                 <select id="town" name="town" class="form-control">
                     <option value="오금동">오금동</option>
                     <option value="오류동">오류동</option>
-                    <option value="상일동">상일동</option>
-                 
+                    <option value="상일동">상일동</option>   
                 </select>             
             </div>
             <script>
+            //option테그 주소선택 js
             $(function(){
             	
 					$("#district").click(function(){
@@ -181,11 +194,12 @@ border:2px solid green;
                 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%> <%=loginMember.getMemPhone() %></h4>
                 <button type="button" class="btn btn-success btn-sm">본인인증</button>
             </div>
+            <h5 align="center">사진업로드</h5>  
             <div id="preview_frame">
                 <div class="image_wrapper">
                   <img src="<%=contextPath%>/<%=pb.getThumbnailPath()+pb.getThumbnailFilename()%>" alt="썸네일 업로드" title="썸네일 업로드">
                 </div>
-                <div class="image_wrappe">
+               	<div class="image_wrapper">
                     <img src="" alt="사진업로드">
                 </div>
                 <div class="image_wrapper">
@@ -196,10 +210,10 @@ border:2px solid green;
                 </div>
                 <div class="image_wrapper">
                   <img src="" alt="사진업로드">
-                </div>    
+                </div>   
             </div>
             <div class="image_upload" style="margin-top:15px ;">
-                    <input type="file" name="pictures1" id="thumnail_input" onchange="loadImg(this,1);" accept="image/*">
+                    <input type="file" name="pictures1" id="file_input0" onchange="loadImg(this,1);" accept="image/*">
                     <input type="file" name="pictures2" id="file_input1" onchange="loadImg(this,2);" accept="image/*">
                     <input type="file" name="pictures3" id="file_input2" onchange="loadImg(this,3);" accept="image/*">
                     <input type="file" name="pictures4" id="file_input3" onchange="loadImg(this,4);" accept="image/*">
@@ -233,16 +247,13 @@ border:2px solid green;
 
         function loadImg(inputFile,num){
             if(inputFile.files.length==1){
-               
-            	
-            	
+ 	
                if(num<5){
                 pFrame.children[num].style.display="flex";
                } else {
                 pFrame.children[num-1].style.display="flex";   
                }
-               
-               
+ 
                let reader = new FileReader();
 
                reader.readAsDataURL(inputFile.files[0]);
@@ -270,7 +281,7 @@ border:2px solid green;
         	$(".image_upload").hide();
         	
             $("#preview_frame").children().eq(0).click(function(){
-                $("#thumnail_input").click();     
+                $("#file_input0").click();     
             })
             $("#preview_frame").children().eq(1).click(function(){
                 $("#file_input1").click();            

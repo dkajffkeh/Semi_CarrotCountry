@@ -13,7 +13,7 @@
 <entry key="selectRepList">
 	SELECT *
 	  FROM (
-	        SELECT ROWNUM RNUM
+	        SELECT ROWNUM RNUM					<!-- 순서 -->
 	             , A.*
 	          FROM (
 	                SELECT R.REPORT_NO          <!--신고번호-->

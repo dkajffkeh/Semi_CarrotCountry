@@ -1,5 +1,6 @@
 package com.javachip.carrotcountry.jmboard.notice.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import com.oreilly.servlet.MultipartRequest;
 /**
  * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/NoticeUpdateController")
+@WebServlet("/update.no.jm")
 public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,17 +49,37 @@ public class NoticeUpdateController extends HttpServlet {
 			int nno = Integer.parseInt(multiRequest.getParameter("nno"));
 			String noticeTitle = multiRequest.getParameter("title");
 			String noticeContent = multiRequest.getParameter("content");
+			String fileOrigin = multiRequest.getOriginalFileName("reUpfile");
+			String fileModify = multiRequest.getFilesystemName("reUpfile");
+			String filePath = "resources/notice_upfiles/";
 			
-			Notice n = new Notice();
-			n.setNoticeNo(nno);
-			n.setNoticeTitle(noticeTitle);
-			n.setNoticeContent(noticeContent);
-			n.setFileOriginName(multiRequest.getOriginalFileName("reUpfile"));
-			n.setFileModifyName(multiRequest.getFilesystemName("reUpfile"));
-			n.setFilePath("resources/notice_upfiles/");
+			Notice n = new Notice(nno, noticeTitle, noticeContent, 
+					 filePath, fileModify, fileOrigin);
 			
 			int result = new NoticeService().updateNotice(n);
 	
+			if(result > 0) {
+				
+				if(multiRequest.getParameter("originFileName") != null) {
+					
+					File deleteFile = new File(savePath + multiRequest.getParameter("originFileName"));
+					deleteFile.delete();
+					
+				}
+				
+				request.getSession().setAttribute("alertMsg", "공지사항 수정 성공했습니다.");
+				response.sendRedirect(request.getContextPath() + "/detail.no.jm?nno=" + nno);
+				
+			}else {
+				
+				request.setAttribute("errorPage", "공지사항 수정 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+				
+			}
+			
+			
+			
 		}
 	}
 	/**

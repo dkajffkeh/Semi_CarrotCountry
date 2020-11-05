@@ -78,7 +78,7 @@ public class FaqService {
 	
 	
 //FAQ게시판 삭제
-	public int delectFaq(int fno) {
+	public int deleteFaq(int fno) {
 		
 		Connection conn = getConnection();
 		

@@ -1,5 +1,5 @@
-<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -32,11 +32,12 @@
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
+	
 	int memNo = loginMember.getMemNo();
 	
+
+	
 	%>
-	
-	
 	
 	<div class="myPageWrapper">
 	
@@ -50,6 +51,9 @@
      <hr color="gray">
      <br><br>
      <!-- content영역의 윗부분 -->
+    <form action="<%= contextPath %>/myPage.me.jw" method="post" id="myPage">
+    	 <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
+    
      <div id="content_top">
          <!-- 프로필 사진 -->
         <div id="content_top1">
@@ -95,13 +99,13 @@
 
         <!-- 3가지 건수 노출부분 -->
         <div id="content_top2">
-            <span align="center"><h4>구매/판매</h4><a href="">2</a> 건</span>
+            <span align="center"><h4>구매/판매</h4><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">2</a> 건</span>
             <span align="center"><h4>공동구매</h4><a href="">3</a> 건</span>
             <span align="center"><h4>문의</h4><a href="">1</a>건</span>    
         </div>
         <!-- 버튼 2개 부분 -->
        <div id="content_top3">
-        <button type="button"class="btn btn-secondary" onclick="location.href='<%= contextPath%>/updateForm.me.jw'">회원 정보 수정</button><br><br>
+        <button type="button"class="btn btn-secondary" onclick="location.href='<%= contextPath%>/updateForm.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>'">회원 정보 수정</button><br><br>
         <button type="button" class="btn btn-secondary" onclick="location.href='<%= contextPath%>/pwdUpdatePage.me.ng'">비밀번호 변경</button>
        </div>
 	    </div>
@@ -110,6 +114,7 @@
 	    <div id="content_bottom">
 	            <!--회원정보 -->
 	     <div id="content_bottom1">
+	     
         <table>
             <tr>
                 <td>아이디</td>
@@ -138,7 +143,9 @@
             <tr>
                 <td>지역</td>
                 <td>
-           
+           			<%= lo.getLocalSi()  %>
+           			<%= lo.getLocalGu() %>
+           			<%= lo.getLocalDong() %>
                 </td>
             </tr>
             <tr>
@@ -162,7 +169,7 @@
    
             
             <input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address1" value="address1">
-            &nbsp;&nbsp;배송지1 )
+            &nbsp;&nbsp;배송지
 
             
             <!----------------------기본배송지 설정 시 보여질 문구---------------------->
@@ -180,7 +187,7 @@
 
 			            <br>
 			       <%= sl.getShippingAddress() %>
-			       
+			       		<br><br>
 			 		  <% } %>
 			 
 			   </div>
@@ -196,8 +203,10 @@
 			        <button type="submit" class="btn btn-primary ">변경하기</button>
 			       
 			    </div>
-			    
+		</form>	    
 	</div>
+  
+    
 
 
 <!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
@@ -214,25 +223,10 @@
 	          <!-- Modal body -->
 	          <div class="modal-body" align="center">
 	            <form action="" method="post">
-	                <table>
-	                    <tr>
-	                        <th>수령인</th>
-	                        <td><input type="text" name="userName" required></td>
-	                    </tr>
-	                    <tr>
-	                        <th>배송지</th>
-	                        <td>
-	                            <input type="text" style="width:300px;" name="address" required>
-	                        </td>
-	                            
-	                    </tr>
-	                    <tr>
-	                        <th>연락처</th>
-	                        <td><input type="text" name= "phone" required></td>
-	                    </tr>
-	                         
-	                </table>
-	                <br>
+	            	  <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
+	              	배송지를 입력하세요 <br><br>
+	              	<input type="text" name="shippingAddress" size="40" style="border: 3px solid orange;">
+	                <br><br><br><br>
 	                <!-- Modal footer -->
 	            <div class="modal-footer">
 	                <input id="default" type="checkbox" name="defaultAddress" value="defalutAddress">&nbsp;

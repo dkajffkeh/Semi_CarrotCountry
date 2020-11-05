@@ -36,17 +36,24 @@ public class MyPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memNo = request.getParameter("memNo");
 		
-		ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
+		System.out.println(request.getParameter("memNo"));
+			
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Location lo = new UserInfoBoardService().selectLocation(memNo);
+			ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
+			
 		
-		request.setAttribute("list", list);
-		request.setAttribute("lo", lo);
-		
-		request.getRequestDispatcher("views/userinfoBoard/myPage.jsp").forward(request, response);
-	}
+			Location lo = new UserInfoBoardService().selectLocation(memNo);
+			
+			
+			request.setAttribute("list", list);
+			request.setAttribute("lo", lo);
+			
+			request.getRequestDispatcher("views/userinfoBoard/myPage.jsp").forward(request, response);
+		}
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

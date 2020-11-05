@@ -222,14 +222,39 @@ public class NoticeDao {
 			pstmt.setString(5, n.getFileOriginName());
 			pstmt.setInt(6, n.getNoticeNo());
 			
+			
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
 		
 		
+		return result;
+	}
+	public int deleteNotice(Connection conn, int nno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		//System.out.println(result);
 		return result;
 	}
 	

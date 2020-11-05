@@ -18,10 +18,11 @@
     </style>
 </head>
 <body>
+<%@ include file="../common/commonNavbar.jsp"%>
 <div class="outer">
 
 
-	<%@ include file="../common/commonNavbar.jsp"%>
+	
 	<br><br>
 	<h4>공지사항 등록</h4>
 	<hr>
@@ -49,8 +50,7 @@
 	        <li>
 	            <label for="content">내용</label>
 	            <br>
-	            <textarea name="content" id="content" cols="60" rows="10"  name="" style="resize: none">
-	            </textarea>
+	            <textarea name="content" id="content" cols="60" rows="10"  name="" style="resize: none"></textarea>
 	        </li>
 	    </ul>
 	    

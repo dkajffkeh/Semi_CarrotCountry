@@ -74,7 +74,7 @@
 					<%}else{ %>
 						<%for(MyReport rep : list){ %>
 							<tr>
-								<td><%= rep.getrNum() %></td>
+								<td><%= rep.getReportNo() %></td>
 								<td><%= rep.getPostName() %></td>
 								<td><%= rep.getReportTypeName() %></td>
 								<td><%= rep.getReportReason() %></td>
@@ -90,18 +90,21 @@
 				<p align="center" style="font-weight:900; font-size:20px"><%= pi.getRepCurrentPage() %>page</p>
 				<div class="myReportBottom">
 				
-				<% if(pi.getRepCurrentPage() != 1){ %>
-					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() -1 %>" class="btn btn-warning" style="color:white;">&lt;&nbsp;&nbsp;PREV</a>				
-				<% } %>
-				
-				
-				<% for(int i = pi.getRepStartPage(); i<=pi.getRepEndPage(); i++){ %>
-					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= i %>" class="btn btn-secondary btn-sm" style="color:white;"><%= i %></a>
-				<% } %>
+				<% if(!list.isEmpty()){ %>
+					<% if(pi.getRepCurrentPage() != 1){ %>
+						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() -1 %>" class="btn btn-warning" style="color:white;">&lt;&nbsp;&nbsp;PREV</a>				
+					<% } %>
 					
-				<% if(pi.getRepCurrentPage() != pi.getRepMaxPage()){ %>
-					<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() +1 %>" class="btn btn-warning" style="color:white;">NEXT&nbsp;&nbsp;&gt;</a>																			
+					
+					<% for(int i = pi.getRepStartPage(); i<=pi.getRepEndPage(); i++){ %>
+						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= i %>" class="btn btn-secondary btn-sm" style="color:white;"><%= i %></a>
+					<% } %>
+						
+					<% if(pi.getRepCurrentPage() != pi.getRepMaxPage()){ %>
+						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() +1 %>" class="btn btn-warning" style="color:white;">NEXT&nbsp;&nbsp;&gt;</a>																			
+					<% } %>
 				<% } %>
+			
 			</div>
 		</div>
 	</div>

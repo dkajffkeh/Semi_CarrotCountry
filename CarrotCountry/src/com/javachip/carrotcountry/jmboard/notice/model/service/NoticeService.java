@@ -5,6 +5,7 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.javachip.carrotcountry.jmboard.faq.model.dao.FaqDao;
 import com.javachip.carrotcountry.jmboard.notice.model.dao.NoticeDao;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.Notice;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
@@ -80,6 +81,28 @@ public class NoticeService {
 		Connection conn = getConnection();
 		
 		int result = new NoticeDao().updateNotice(conn, n);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	public int deleteNotice(int nno) {
+		
+		Connection conn = getConnection();
+		//System.out.println(nno);
+		int result = new NoticeDao().deleteNotice(conn, nno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		

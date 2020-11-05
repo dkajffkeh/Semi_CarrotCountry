@@ -1,11 +1,14 @@
 package com.javachip.carrotcountry.jmboard.notice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.javachip.carrotcountry.jmboard.notice.model.service.NoticeService;
 
 /**
  * Servlet implementation class NoticeDeleteController
@@ -26,8 +29,19 @@ public class NoticeDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+		int result = new NoticeService().deleteNotice(Integer.parseInt(request.getParameter("nno")));
+		
+		if(result > 0) {
+			
+			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 삭제됐습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.no.jm?currentPage=1");
+			
+		}else {
+			request.setAttribute("errorMsg", "공지사항 삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+	
 	}
 
 	/**
