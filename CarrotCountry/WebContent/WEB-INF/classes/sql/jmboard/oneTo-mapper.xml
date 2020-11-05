@@ -1,1 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount">
+		SELECT 
+		       COUNT(*) LISTCOUNT
+		  FROM ONETOONE
+		 WHERE ANSWER_STATE = 'N' 
+	</entry>
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       ONETO_NO
+		                     , MEM_NAME
+		                     , ONETO_TYPE
+		                     , ONETO_NAME
+		                     , ANSWER_DATE
+		                     , ANSWER_STATE
+		                  FROM ONETOONE 
+		                  JOIN MEMBER ON(WRITER_NO=MEM_NO)
+		                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
+		                 WHERE ANSWER_STATE = 'N'
+		                 ORDER
+		                    BY ONETO_NO ASC
+		               ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+</properties>
