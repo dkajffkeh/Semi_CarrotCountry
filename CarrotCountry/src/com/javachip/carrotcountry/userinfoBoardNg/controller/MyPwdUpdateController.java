@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.userinfoBoard.controller.ng;
+package com.javachip.carrotcountry.userinfoBoardNg.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

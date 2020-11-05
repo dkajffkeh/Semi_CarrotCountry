@@ -142,7 +142,7 @@ ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 
               <ul class="navbar-nav mr-auto" >
                 <li class="nav-item active" style="background-color: orange;">
-                  <a class="nav-link" href="#">게시글 수정 <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="shMarketUpdate.sh?bno=<%=pb.getPostNo()%>">게시글 수정 <span class="sr-only">(current)</span></a>
                 </li>
                 
                 <li class="nav-item" style="background-color: rgb(219, 91, 91);">
