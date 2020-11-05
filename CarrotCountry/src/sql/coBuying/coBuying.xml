@@ -140,6 +140,155 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	<entry key="insertProductGroupPurchase">
+		INSERT
+		  INTO GROUP_PURCHASE
+		  (
+		       POST_NO
+		     , GP_DEADLINE
+		     , GP_MINPEOPLE
+		     , GP_PRICE
+		     , GP_DRATE
+		     , GP_DPRICE
+		     , GP_STATUS
+		     , GP_REFUND
+		     , GP_POST_CHECK
+		  )
+		  VALUES
+		  (
+		       SEQ_PNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'Y'
+		     , ?
+		     , 2
+		  )
+	</entry>
+	<entry key="insertProductPost">
+		INSERT
+		   INTO POST
+		   (
+		      POST_NO
+		    , CATEGORY_NO
+		    , MEM_NO
+		    , LOCAL_NO
+		    , MEM_NICKNAME
+		    , POST_NAME
+		    , POST_COMMENT
+		    , CATEGORY_NAME
+		    , PROD_STATUS
+		    , DEAL_TYPE
+		    , SITE
+		    , THUMBNAIL_PATH
+		    , THUMBNAIL_FILENAME
+		    , THUMBNAIL_LOADPATH
+		    , POST_VIEWS
+		    , POST_REPORTS
+		    , POST_LIKES
+		    , PROD_PRICE
+		    , POST_ENROLLDATE
+		   )
+		  VALUES
+		  (
+		      SEQ_PNO.CURRVAL
+		    , ?
+		    , ?
+		    , 1
+		    , ?
+		    , ?
+		    , ?
+		    ,(SELECT 
+	                 CATEGORY_NAME
+	             FROM
+	                 CATEGORY
+	           WHERE CATEGORY_NO=?)
+		    , DEFAULT
+		    , 'C'
+		    , '서울'
+		    , ?
+		    , ?
+		    , ?
+		    , DEFAULT
+		    , DEFAULT
+		    , DEFAULT
+		    , 1
+		    , SYSDATE
+		  )
+	</entry>
+	<entry key="insertProductLocation">
+		INSERT
+		  INTO LOCATION
+		  (
+		     LOCAL_NO
+		   , LOCAL_SI
+		   , LOCAL_GU
+		   , LOCAL_DONG
+		  )
+		  VALUES
+		  (
+		     seq_lno.NEXTVAL
+		   , '서울특별시'
+		   , ?
+		   , ?
+		  )
+	</entry>
+	<entry key="insertProductOption">
+		INSERT
+		  INTO PROD_OPTION
+		  (
+		      OPTION_NO
+		    , POST_NO
+		    , OPTION_NAME
+		  )
+		  VALUES
+		  (
+		      SEQ_PONO.NEXTVAL
+		    , SEQ_PNO.CURRVAL
+		    , ?
+		  )
+	</entry>
+	<entry key="insertProductAccount">
+		INSERT
+		  INTO ACCOUNT
+		  (
+		      POST_NO
+		    , ACCOUNT
+		  )
+		  VALUES
+		  (
+		      SEQ_PNO.CURRVAL
+		    , ?
+		  )
+	</entry>
+	<entry key="insertProductPhoto">
+		INSERT
+		  INTO PHOTO
+		  (
+		     PHOTO_NO
+		   , POST_NO
+		   , PHOTO_PATH
+		   , PHOTO_FILENAME
+		   , PHOTO_LOADPATH
+		  )
+		  VALUES
+		  (
+		      SEQ_IMGNO.NEXTVAL
+		    , SEQ_PNO.CURRVAL
+		    , ?
+		    , ?
+		    , ?
+		  )
+	</entry>
+	
+	
 	<entry key="selectProductListCount">
 		SELECT
 		       COUNT(*) "LISTCOUNT"
@@ -218,14 +367,14 @@
 		                     , GP_DPRICE
 		                  FROM GROUP_PURCHASE
 		                  JOIN POST USING (POST_NO)
-		                 WHERE BLIND_CHECK = 'Y'
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND GP_POST_CHECK = 2
 		                 ORDER
 		                    BY POST_NO DESC
 		                ) A 
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	
 	
 	
 

@@ -9,7 +9,7 @@
  %>    
 
 <%
-	Product p = (Product)request.getAttribute("p");
+	Product pd = (Product)request.getAttribute("pd");
  	Account ac = (Account)request.getAttribute("ac");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	CategoryHY c = (CategoryHY)request.getAttribute("c");
@@ -162,13 +162,13 @@
                     <form action="">
                         <div id="content2_2_1">
                         	<input type="hidden" name="postNo" value="<%= pb.getPostNo() %>">
-                            <span>모집 기간 :</span> <%= p.getPostEnrollDate() %> ~ <%= p.getGpDeadline() %> <br>
-                            <span>최소 인원 :</span> <%= p.getGpMinPeople() %> <br>
+                            <span>모집 기간 :</span> <%= pd.getPostEnrollDate() %> ~ <%= pd.getGpDeadline() %> <br>
+                            <span>최소 인원 :</span> <%= pd.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
                               <div class="progress" style="width: 100%">
-                                <div class="progress-bar bg-success" style="width:<%= p.getGpPeople() %> %"> <%= p.getGpPeople() %>명 </div>
+                                <div class="progress-bar bg-success" style="width:<%= pd.getGpPeople() %> %"> <%= pd.getGpPeople() %>명 </div>
                               </div> <br>
-                            <span>가격 :</span> <%= p.getGpDPrice() %> <br>
+                            <span>가격 :</span> <%= pd.getGpDPrice() %> <br>
                             <span>옵션 : </span>
                            		 <select name="product" id="product">
 	                            	<% if(oList.isEmpty()){ %>
@@ -239,7 +239,7 @@
                         function showAccount(){
                             var showArea = document.getElementById("showContent");
                             for(Account ac : aList){ 	
-							    showArea.innerHTML = "입금 가능 계좌 : " + <%= ac.getAccount() %>
+							    showArea.innerHTML = "입금 가능 계좌 : " + <%= ac.getAccount() %>;
 							  } 
                         }
                         

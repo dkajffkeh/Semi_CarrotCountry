@@ -11,16 +11,16 @@ public class Product {
 	private int gpMinPeople;
 	private int gpPeople;
 	private String gpStatus;
-	private Date gpDeadline;
+	private String gpDeadline;
 
 	private Date postEnrollDate;
 	private String postComment;
 	private String gpRefund;
 
-	private int memNo;
-	private String categoryNo;
-	private String gpContent; 
-	private int gpPostCheck; 
+	private int memNo;			// 얘네 안써요
+	private String categoryNo;	
+	private String gpContent; 	// 얘네 안써요
+	private int gpPostCheck;	
 	
 	private String thumbnailLoadpath;
 	private String postName;
@@ -72,7 +72,7 @@ public class Product {
 
 
 
-	public Product(int postNo, Date postEnrollDate, Date gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
+	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
 			String postComment, String gpRefund) {
 		super();
 		this.postNo = postNo;
@@ -88,7 +88,7 @@ public class Product {
 
 
 	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople, String gpStatus,
-			Date gpDeadline, Date postEnrollDate, String postComment, String gpRefund, int memNo, String categoryNo,
+			String gpDeadline, Date postEnrollDate, String postComment, String gpRefund, int memNo, String categoryNo,
 			String gpContent, int gpPostCheck, String thumbnailLoadpath, String postName, int postLikes) {
 		super();
 		this.postNo = postNo;
@@ -188,12 +188,12 @@ public class Product {
 	}
 
 
-	public Date getGpDeadline() {
+	public String getGpDeadline() {
 		return gpDeadline;
 	}
 
 
-	public void setGpDeadline(Date gpDeadline) {
+	public void setGpDeadline(String gpDeadline) {
 		this.gpDeadline = gpDeadline;
 	}
 

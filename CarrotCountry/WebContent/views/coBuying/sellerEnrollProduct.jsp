@@ -58,9 +58,12 @@ select {
 
     <div class="CS_content">
         <form name="form" action="<%= contextPath %>/insert.pro.jy" method="post" class="GPForm" enctype="multipart/form-data">
-        <%if(loginMember != null){ %>
-		<input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
+        
+         <%if(loginMember != null){ %>
+		<input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
+        <input type="hidden" name="memNick" value="<%=loginMember.getMemNickname()%>">
             <%} %>	<!-- 이거 나중에 지우기 어짜피 로그인된 유저임 -->
+        
             <table id="enrollTable">
 
                 <tr>
@@ -155,7 +158,7 @@ select {
                 </tr>
                 <tr>
                     <td class="textOrange">모집기간</td>
-                    <td><input type="date" name="gpDeadLine" id="gpDeadline" class="form-control"></td>
+                    <td><input type="date" name="gpDeadline" id="gpDeadline" class="form-control"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -226,15 +229,15 @@ select {
 
                             <option value="">구 선택</option>
 
-                            <option value="gn">강남구</option>
+                            <option name="gu" value="gn">강남구</option>
 
-                            <option value="gs">강서구</option>
+                            <option name="gu" value="gs">강서구</option>
 
-                            <option value="sp">송파구</option>
+                            <option name="gu" value="sp">송파구</option>
 
                         </select>
 
-                        <select id="dong">
+                        <select name="dong" id="dong">
                             <option value="">동 선택</option>
                         </select>
 
@@ -269,7 +272,7 @@ select {
 
                                     for (var count = 0; count < changeItem.length; count++) {
 
-                                        var option = $("<option>" + changeItem[count] + "</option>");
+                                        var option = $("<option name='dong'>" + changeItem[count] + "</option>");
 
                                         $('#dong').append(option);
 
@@ -378,16 +381,30 @@ select {
 
                 <tr>
                     <td class="textOrange"><br> 교환 및 환불 방법</td>
-                    <td><br><textarea class="form-control" cols="5" rows="5" id="comment" name="text" style="resize: none;"></textarea></td>
+                    <td><br><textarea class="form-control" cols="5" rows="5" id="comment" name="refund" style="resize: none;"></textarea></td>
                     <td></td>
                 </tr>
             </table>
 
             <br><br><br><br>
             <div align="center">
+                <button id="backbtn" type="button" class="btn btn-secondary btn-sm">뒤로가기</button>
                 <button type="submit" class="btn btn-warning btn-sm">등록하기</button>
-                <button type="button" class="btn btn-warning btn-sm">뒤로가기</button>
+                <button type="reset" class="btn btn-danger btn-sm">초기화하기</button>
             </div>
+            
+            
+            <script type="text/javascript">
+				
+				$(document).ready(function(){
+				
+					$("#backbtn").click(function(){
+						window.history.back();
+					});
+				});
+
+			</script>
+			
 
         </form>
 

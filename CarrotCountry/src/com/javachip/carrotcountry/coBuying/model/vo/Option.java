@@ -5,11 +5,19 @@ public class Option {
 	private int optionNo;
 	private int postNo;
 	private String optionName;
-	
+	private String[] optionList;
 	
 	public Option() {}
 	
 	
+
+
+	
+
+
+
+
+
 
 
 	public Option(int optionNo, String optionName) {
@@ -18,7 +26,7 @@ public class Option {
 		this.optionName = optionName;
 	}
 
-
+	
 
 
 	public Option(int optionNo, int postNo, String optionName) {
@@ -57,6 +65,41 @@ public class Option {
 	public void setOptionName(String optionName) {
 		this.optionName = optionName;
 	}
+	
+	
+	
+	
+	
+
+
+	public String[] getOptionList() {
+		return optionList;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setOptionList(String[] optionList) {
+		this.optionList = optionList;
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 	@Override
