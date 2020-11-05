@@ -59,6 +59,8 @@ public class NoticeInsertController extends HttpServlet {
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "게시글 등록 성공!");
 				response.sendRedirect(request.getContextPath() + "/list.no.jm?currentPage=1");
+				
+				
 			}else {
 				if(n.getFileOriginName() != null) {
 					File failedFile = new File(savePath + n.getFileModifyName());

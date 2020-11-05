@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.javachip.carrotcountry.jmboard.faq.model.vo.Faq" %>
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,17 @@
 
 	<!-- 상단바 -->
 	<%@ include file="../common/commonNavbar.jsp"%>
+	
+			<!-- 성공적으로 삭제되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
 
     <div class="CS_content">
         <div class="content_1">

@@ -30,8 +30,8 @@
 	<br><br>
 	<h4>공지사항 등록</h4>
 	<hr>
-	<form action="<%= contextPath %>/insert.no.jm" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+	<form action="<%= contextPath %>/update.no.jm" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
 	    <ul>
 	        <li>
 	            <label for="title">
@@ -61,12 +61,13 @@
 	            <label for="content">내용</label>
 	            <br>
 	            <textarea name="content" id="content" cols="60" rows="10" style="resize: none">
+	            <%=n.getNoticeContent() %>
 	            </textarea>
 	        </li>
 	    </ul>
 	    
         <div align="center">
-          <input type="submit" value="작성하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;
+          <input type="submit" value="수정하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;
           <input type="button" value="뒤로가기" class="btn btn-warning btn-sm" onclick="history.back();">
         </div>
 	

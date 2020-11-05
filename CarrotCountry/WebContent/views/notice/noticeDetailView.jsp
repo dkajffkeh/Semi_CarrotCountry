@@ -23,7 +23,7 @@
 </head>
 <body>
 	<%@ include file="../common/commonNavbar.jsp"%>
-	
+	<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
 	<div class="outer">
 
         <br>
@@ -44,7 +44,7 @@
             <tr>
                 <th>내용</th>
                 <td colspan="3">
-                    <p style="height:200px"><%= n.getNoticeContent()%></p>
+                    <p style="height:200px"><%=n.getNoticeContent()%></p>
                 </td>
             </tr>
             <tr>

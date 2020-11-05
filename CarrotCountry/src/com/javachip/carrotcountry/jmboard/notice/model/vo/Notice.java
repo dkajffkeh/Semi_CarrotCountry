@@ -29,6 +29,17 @@ public class Notice {
 
 
 
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String filePath, String fileModifyName,
+			String fileOriginName) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.filePath = filePath;
+		this.fileModifyName = fileModifyName;
+		this.fileOriginName = fileOriginName;
+	}
+
 	public Notice(int noticeNo, String memNo, String noticeTitle, Date noticeEnrollDate, int noticeCount) {
 		super();
 		this.noticeNo = noticeNo;

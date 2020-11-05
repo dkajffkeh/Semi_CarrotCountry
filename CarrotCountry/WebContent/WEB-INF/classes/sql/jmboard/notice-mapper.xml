@@ -91,21 +91,13 @@
 		     , FILE_ORIGINNAME = ?
 		 WHERE NOTICE_NO = ?
 	</entry>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<entry key="deleteFaq">
+		UPDATE
+		       NOTICE
+		   SET NOTICE_STATUS = 'Y'
+		 WHERE NOTICE_NO = ?
+	</entry>
+
 	
 	
 
