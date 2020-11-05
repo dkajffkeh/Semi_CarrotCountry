@@ -114,13 +114,13 @@ private Properties prop = new Properties();
 			
 			if(rs.next()) {
 				p = new Product(rs.getInt("post_no"),
-							  rs.getDate("post_enroll_date"),
+							  rs.getDate("gp_createdate"),
 							  rs.getDate("gp_deadline"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),
 							  rs.getString("post_comment"),
-							  rs.getString("post_refund"));
+							  rs.getString("gp_refund"));
 			}
 			
 		} catch (SQLException e) {
