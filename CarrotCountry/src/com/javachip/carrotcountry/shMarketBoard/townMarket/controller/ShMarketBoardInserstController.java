@@ -14,6 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.javachip.carrotcountry.common.MyFileRenamePolicy;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -53,14 +54,20 @@ public class ShMarketBoardInserstController extends HttpServlet {
 			String postTitle = mr.getParameter("title");
 			String userText = mr.getParameter("content");
 			String pCondition = mr.getParameter("p_condition");
+			//==주소에 들어가야함
+			String province = mr.getParameter("province");
+			String district = mr.getParameter("district");
+			String town = mr.getParameter("town");
+			//==주소 셋팅
 			String dealType ="D";
 			String site ="서울특별시";
 			int price = Integer.parseInt(mr.getParameter("price"));
 			
+			Location l = new Location(province,district,town);
 			PostBoard pb = new PostBoard(category,memNo,memNick,price,postTitle,userText,pCondition,dealType,site);
 			
 			ArrayList<PhotoBoardVo> list = new ArrayList();
-			
+			//사진파일 여기서 담음.
 			for(int i = 1 ; i<=5 ; i++) {
 				
 				String key = "pictures"+i;
@@ -76,7 +83,7 @@ public class ShMarketBoardInserstController extends HttpServlet {
 				}	
 			}
 			
-			int result = new TownMarketService().shMarketBoardInsert(pb,list);
+			int result = new TownMarketService().shMarketBoardInsert(pb,list,l);
 			
 			if(result>0) {
 				

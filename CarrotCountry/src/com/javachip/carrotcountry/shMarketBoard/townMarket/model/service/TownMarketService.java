@@ -99,14 +99,14 @@ public class TownMarketService {
 		return reSelect;
 	}
 
-	public int shMarketBoardInsert(PostBoard pb, ArrayList<PhotoBoardVo> list) {
+	public int shMarketBoardInsert(PostBoard pb, ArrayList<PhotoBoardVo> list,Location l) {
 		
 		Connection conn = getConnection();
-		
-		int result1 = new TownMarketDao().shMarketBoardInsert(conn,pb,list);
-		
+		//보드 인서트 하고옴.
+		int result1 = new TownMarketDao().shMarketBoardInsert(conn,pb,list,l);
+		//제품 상태 insert
 		int result2 = new TownMarketDao().shMarketBordConditionInsert(conn,pb);
-		
+		//
 		int result3 = new TownMarketDao().shMarketPhotoInsert(conn,list);
 		
 		if(result1>0 && result2 >0 && result3>0) {
@@ -312,6 +312,19 @@ public class TownMarketService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public Location shMarketLocationSelector(int bno) {
+
+		Connection conn = getConnection();
+		
+		Location l = new TownMarketDao().shMarketLocationSelector(conn,bno);
+		
+		close(conn);
+
+		
+		
+		return l;
 	}
 
 	

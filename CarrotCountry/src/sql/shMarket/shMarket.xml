@@ -158,7 +158,18 @@ INSERT INTO
            SEQ_PNO.NEXTVAL
           ,?
           ,?
-          ,1
+          ,(
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+           )
           ,?
           ,?
           ,?
@@ -501,5 +512,15 @@ INSERT INTO
           ,DEFAULT
           ,?
            )
+</entry>
+<entry key="shMarketLocationSelector">
+SELECT
+       LOCAL_SI
+      ,LOCAL_GU
+      ,LOCAL_DONG
+  FROM
+      LOCATION L
+JOIN POST P  USING(LOCAL_NO)
+WHERE P.POST_NO=?
 </entry>
 </properties>
