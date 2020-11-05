@@ -277,7 +277,7 @@ Properties prop = new Properties();
 	}
 
 
-	public int shMarketBoardInsert(Connection conn, PostBoard pb, ArrayList<PhotoBoardVo> list) {
+	public int shMarketBoardInsert(Connection conn, PostBoard pb, ArrayList<PhotoBoardVo> list,Location l) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -287,14 +287,17 @@ Properties prop = new Properties();
 			pstmt = conn.prepareStatement(sql);
 		    pstmt.setInt(1, Integer.parseInt(pb.getCategoryNo()));
 		    pstmt.setInt(2, pb.getMemNo());
-		    pstmt.setString(3, pb.getMemNickname());
-		    pstmt.setString(4, pb.getPostName());
-		    pstmt.setString(5, pb.getPostContent());
-		    pstmt.setInt(6,Integer.parseInt(pb.getCategoryNo()));
-		    pstmt.setString(7, list.get(0).getPhotoPath());
-		    pstmt.setString(8, list.get(0).getPhotoFileName());
-		    pstmt.setString(9, list.get(0).getPhotoLoadPath());
-		    pstmt.setInt(10, pb.getProdPrice());
+		    pstmt.setString(3, l.getLocal_si());
+		    pstmt.setString(4, l.getLocal_gu());
+		    pstmt.setString(5, l.getLocal_dong());		    
+		    pstmt.setString(6, pb.getMemNickname());
+		    pstmt.setString(7, pb.getPostName());
+		    pstmt.setString(8, pb.getPostContent());
+		    pstmt.setInt(9,Integer.parseInt(pb.getCategoryNo()));
+		    pstmt.setString(10, list.get(0).getPhotoPath());
+		    pstmt.setString(11, list.get(0).getPhotoFileName());
+		    pstmt.setString(12, list.get(0).getPhotoLoadPath());
+		    pstmt.setInt(13, pb.getProdPrice());
 		    
 		    result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -821,6 +824,33 @@ Properties prop = new Properties();
 		
 		
 		return result;
+	}
+
+
+	public Location shMarketLocationSelector(Connection conn,int bno) {
+		
+		Location l = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketLocationSelector");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				l = new Location(rs.getString("LOCAL_SI"),rs.getString("LOCAL_GU"),rs.getString("LOCAL_DONG"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return l;
 	}
 	
 }

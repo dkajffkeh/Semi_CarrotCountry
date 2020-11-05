@@ -136,21 +136,41 @@ border:2px solid green;
             </div>
             <h5>주소입력</h5>
             <div class="location_input" style="display: flex;">
-                <select name="province" class="form-control">
+                <select id="province" name="province" class="form-control">
                     <option value="서울특별시">서울특별시</option>
                 </select>
-                <select name="district" class="form-control">
+                <select id="district" name="district" class="form-control">
                     <option value="송파구">송파구</option>
                     <option value="강서구">강서구</option>
                 </select>
-                <select name="town" class="form-control">
+                <select id="town" name="town" class="form-control">
                     <option value="오금동">오금동</option>
                     <option value="오류동">오류동</option>
                     <option value="상일동">상일동</option>
-                    <option value="화곡동">화곡동</option>
-                    <option value="목동">목동</option>
                 </select>
             </div>
+               <script>
+            //option테그 주소선택 js
+            $(function(){
+            	
+					$("#district").click(function(){
+						let str="";
+						if($("#district option:selected").val()=="강서구")
+						{
+							str+=   `<option value="화곡동">화곡동</option>
+		                             <option value="목동">목동</option>`;
+							
+						   $("#town").html(str);				
+						} else {
+							str+= `<option value="오금동">오금동</option>
+			                   	   <option value="오류동">오류동</option>
+			                       <option value="상일동">상일동</option>`;
+			                       
+						   $("#town").html(str);        
+							   }					
+					})     	
+            })
+            </script>
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
                 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>

@@ -4,7 +4,9 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
 
@@ -92,7 +94,34 @@ public class UserInfoBoardService {
 		
 	}
 	
+	/**
+	 * 5. 공동구매 게시글 조회
+	 * @param memNo 	지역번호
+	 * @return 			
+	 *
+	 */
+		public ArrayList<CobuyingPost> selectCobuyingList(PageInfo pi){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<CobuyingPost> list = new UserInfoBoardDao().selectCobuyingList(conn, pi);
+		
+		close(conn);
+		
+		return list;
 	
+		}
+		
+		public int selectListCount() {
+			
+			Connection conn = getConnection();
+			
+			int listCount = new  UserInfoBoardDao().selectListCount(conn);
+			
+			close(conn);
+			
+			return listCount;
+		}
 	
 
 }

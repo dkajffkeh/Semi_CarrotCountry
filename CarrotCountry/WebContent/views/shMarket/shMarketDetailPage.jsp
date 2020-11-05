@@ -5,6 +5,7 @@
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CommentHY" %>
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo" %>
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ReportReason" %>
+<%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location" %>
 <%  
 PostBoard pb = (PostBoard)request.getAttribute("pb");
 //String 게시글번호,String 카테고리번호,int member번호, String 시역 ex 서울시 송파구 , 닉네임 , 게시글번호 , 게시글 제목, 내용 , 카테고리 이름, 상품상태, 거래유형,거래지역, 썸네일 패스, 썸네일 이름, 썸내일 로드패스, 조회수, likes,가격,게시일.
@@ -12,6 +13,7 @@ PostBoard pb = (PostBoard)request.getAttribute("pb");
 ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pList");
 ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
 
+Location l = (Location)request.getAttribute("l");
 
 %>    
 <!DOCTYPE html>
@@ -28,6 +30,9 @@ ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
     border-radius: 15px;
     box-shadow: 3px 3px 0.5px 0.5px rgb(255, 189, 35);
     background-color: whitesmoke;
+}
+i{
+cursor:pointer;
 }
 .carousel-item.active > img {
     border-radius: 10px;
@@ -225,7 +230,7 @@ ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
              <div class="user_icon" ><i class="fas fa-user" style="font-size: 3.5rem; margin-right: 15px;"></i></div>
              <div class="user_info_text">
                 <h4 style="margin-bottom: 0px; margin-top: 5px;"><%=pb.getMemNickname()%></h4>
-                <p style="margin-top: 0px;"><%=pb.getLocalNo() %></p>
+                <p style="margin-top: 0px; width:300px;"><%=l.getLocal_si()+" "+l.getLocal_gu()+" "+l.getLocal_dong()%></p>
              </div>
          </div>
          <div class="right_price" 
@@ -598,8 +603,6 @@ ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
         			 success:function(result){
     			  		 alert(result);
     			  	 },
-        		     error:function(){
-        		     }
         		 })//ajax 괄호
 	 
         		 <%} else {%>
