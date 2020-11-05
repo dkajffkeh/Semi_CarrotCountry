@@ -8,6 +8,17 @@ public class Option {
 	
 	
 	public Option() {}
+	
+	
+
+
+	public Option(int optionNo, String optionName) {
+		super();
+		this.optionNo = optionNo;
+		this.optionName = optionName;
+	}
+
+
 
 
 	public Option(int optionNo, int postNo, String optionName) {
