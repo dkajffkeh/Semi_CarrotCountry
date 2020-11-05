@@ -353,4 +353,111 @@ DELETE
            POST_COMMENT
 WHERE COMM_NO=? 
 </entry>
+<entry key="shMarketBoardModify">
+	UPDATE
+      POST
+   SET
+      CATEGORY_NO=?
+     ,LOCAL_NO=(
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+                )
+      ,POST_NAME=?
+      ,POST_COMMENT=?
+      ,CATEGORY_NAME=(
+			           SELECT 
+			                 CATEGORY_NAME
+			             FROM
+			                 CATEGORY
+			            WHERE 
+			                 CATEGORY_NO=?
+                    )
+       ,PROD_PRICE=?
+	WHERE 
+         POST_NO=?
+      AND
+         BLIND_CHECK='N'
+      AND
+         PROD_STATUS='Y'        
+</entry>
+<entry key="shMarketUsedProdModify">
+UPDATE
+      USEDPROD
+   SET
+      USED_PRODSTATUS=?
+     ,USED_PRICE=?
+WHERE 
+     POST_NO=?
+</entry>
+<entry key="shMarketBoardAndPhotoModify">
+UPDATE
+      POST
+   SET
+      CATEGORY_NO=?
+     ,LOCAL_NO=(
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+                )
+      ,POST_NAME=?
+      ,POST_COMMENT=?
+      ,CATEGORY_NAME=(
+			           SELECT 
+			                 CATEGORY_NAME
+			             FROM
+			                 CATEGORY
+			            WHERE 
+			                 CATEGORY_NO=?
+                    )
+       ,THUMBNAIL_PATH=?
+       ,THUMBNAIL_FILENAME=?
+       ,THUMBNAIL_LOADPATH=?            
+       ,PROD_PRICE=?
+	WHERE 
+         POST_NO=?
+      AND
+         BLIND_CHECK='N'
+      AND
+         PROD_STATUS='Y' 
+</entry>
+<entry key="shMarketPhotoDelete">
+  DELETE
+  FROM 
+       PHOTO
+  WHERE POST_NO=?
+</entry>
+<entry key="shMarketPhotoUpdate">
+INSERT INTO
+           PHOTO
+           (
+       PHOTO_NO
+      ,POST_NO
+      ,PHOTO_PATH
+      ,PHOTO_FILENAME
+      ,PHOTO_LOADPATH    
+            )
+        VALUES
+        (
+        SEQ_PNO.NEXTVAL
+       ,?
+       ,?
+       ,?
+       ,?
+        )
+</entry>
 </properties>
