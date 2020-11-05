@@ -12,6 +12,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -124,8 +125,30 @@ public class ProductService {
 	}
 	
 	
+	/*
 	
-	
+	public int insertProduct(Product pd, PostBoard pb, Location lo, ArrayList<Option> oList, ArrayList<Account> aList, ArrayList<Photo> pList) {
+			
+			Connection conn = getConnection();
+			
+			int result1 = new ProductDao().insertProductGroupPurchase(conn, pd);
+			int result2 = new ProductDao().insertProductPost(conn, pb);
+			int result3 = new ProductDao().insertProductLocation(conn, lo);
+			int result4 = new ProductDao().insertProductOption(conn, oList);
+			int result5 = new ProductDao().insertProductAccount(conn, aList);
+			int result6 = new ProductDao().insertProductPhoto(conn, pList);
+			
+			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 ) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return result1 * result2 * result3 * result4 * result5 * result6;
+		}
+		
+		*/
+		
 	
 	
 	

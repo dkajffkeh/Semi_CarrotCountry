@@ -17,6 +17,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -115,7 +116,7 @@ private Properties prop = new Properties();
 			if(rs.next()) {
 				p = new Product(rs.getInt("post_no"),
 							  rs.getDate("POST_ENROLL_DATE"),
-							  rs.getDate("gp_deadline"),
+							  rs.getString("gp_deadline"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),
@@ -327,11 +328,130 @@ private Properties prop = new Properties();
 	
 	
 	
+	/*
+	// insert
+	// 1. group_purchase
+	public int insertProductGroupPurchase(Connection conn, Product pd) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProductGroupPurchase");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pd.getGpDeadline());
+			pstmt.setInt(2, pd.getGpMinPeople());
+			pstmt.setInt(3, pd.getGpPrice());
+			pstmt.setInt(4, pd.getGpDRate());
+			pstmt.setInt(5, pd.getGpDPrice());
+			pstmt.setString(6, pd.getGpRefund());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
+		// 2. post
+		public int insertProductPost(Connection conn, PostBoard pb) {
+			// insert문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductPost");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, pb.getCategoryNo());
+				pstmt.setInt(2, pb.getMemNo());
+				pstmt.setString(3, pb.getMemNickname());
+				pstmt.setString(4, pb.getPostName());
+				pstmt.setString(5, pb.getPostContent());
+				pstmt.setString(6, pb.getThumbnailPath());
+				pstmt.setString(7, pb.getThumbnailFilename());
+				pstmt.setString(8, pb.getThumbnailLoadPath());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
 	
+		// 3. location
+		public int insertProductLocation(Connection conn, Location lo) {
+			// insert문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductLocation");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, lo.getLocal_gu());
+				pstmt.setString(2, lo.getLocal_dong());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
 	
-	
+		
+		// 4. option
+		public int insertProductOption(Connection conn, ArrayList<Option> oList) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductOption");
+			
+			try {
+				
+				for(Option op : oList) {		
+					// 반복문 돌 때마다 미완성된 sql문을 담은 pstmt 객체 생성
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setString[] (1, op.getOptionList());
+						
+					result = pstmt.executeUpdate();
+					
+					if(result == 0) {
+						return 0;
+					}
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return 0;
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+			
+		}
+		*/
 	
 	
 	
