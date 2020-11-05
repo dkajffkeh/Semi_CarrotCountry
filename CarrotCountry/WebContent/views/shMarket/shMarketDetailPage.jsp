@@ -598,8 +598,6 @@ ArrayList<ReportReason> rList = (ArrayList)request.getAttribute("rList");
         			 success:function(result){
     			  		 alert(result);
     			  	 },
-        		     error:function(){
-        		     }
         		 })//ajax 괄호
 	 
         		 <%} else {%>

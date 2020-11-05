@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- 마이페이지 나의 신고 전체 수 조회 -->
+<entry key="selectRepListCount">
+	SELECT 
+       COUNT(*)
+  FROM REPORT
+ WHERE MEM_NO = ?
+</entry>
+
+<!-- 마이페이지에서 나의 신고내역 리스트 조회 -->
+<entry key="selectRepList">
+	SELECT *
+	  FROM (
+	        SELECT ROWNUM RNUM					<!-- 순서 -->
+	             , A.*
+	          FROM (
+	                SELECT R.REPORT_NO          <!--신고번호-->
+	                     , P.POST_NAME          <!--"게시글 명"-->
+	                     , RT.REPORT_TYPE_NAME  <!--신고유형-->
+	                     , RE.REPORT_REASON     <!--신고사유-->
+	                     , P.MEM_NICKNAME       <!--신고받은사람-->
+	                     , R.REPORT_DATE        <!--신고일-->
+	                     , R.REPORT_CHECK       <!-- 상태-->
+	                FROM REPORT R
+	                JOIN REPORT_REASON RE USING(REPORT_REASON_NO)
+	                JOIN REPORT_TYPE RT USING(REPORT_TYPE_NO)
+	                JOIN POST P ON(R.report_post_no=P.POST_NO)
+	                WHERE R.MEM_NO = ?
+	                ORDER BY R.REPORT_NO DESC
+	                ) A
+	        )
+	  WHERE RNUM BETWEEN ? AND ?
+</entry>
+</properties>
