@@ -91,7 +91,7 @@
 		     , FILE_ORIGINNAME = ?
 		 WHERE NOTICE_NO = ?
 	</entry>
-	<entry key="deleteFaq">
+	<entry key="deleteNotice">
 		UPDATE
 		       NOTICE
 		   SET NOTICE_STATUS = 'Y'

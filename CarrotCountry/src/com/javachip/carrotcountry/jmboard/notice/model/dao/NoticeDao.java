@@ -249,12 +249,12 @@ public class NoticeDao {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
+		//System.out.println(result);
 		return result;
 	}
 	

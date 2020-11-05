@@ -95,8 +95,8 @@ public class NoticeService {
 	public int deleteNotice(int nno) {
 		
 		Connection conn = getConnection();
-		
-		int result = new FaqDao().deleteFaq(conn, nno);
+		//System.out.println(nno);
+		int result = new NoticeDao().deleteNotice(conn, nno);
 		
 		if(result > 0) {
 			commit(conn);

@@ -35,7 +35,7 @@ public class NoticeDeleteController extends HttpServlet {
 		if(result > 0) {
 			
 			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 삭제됐습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.no.jm");
+			response.sendRedirect(request.getContextPath() + "/list.no.jm?currentPage=1");
 			
 		}else {
 			request.setAttribute("errorMsg", "공지사항 삭제 실패");
