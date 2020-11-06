@@ -6,7 +6,7 @@ public class OneTo {
 
 	private int oneToNo;
 	private String writerNo;
-	private String answrerNo;
+	private String answererNo;
 	private String oneToType;
 	private String oneToName;
 	private String oneToContent;
@@ -17,12 +17,12 @@ public class OneTo {
 	
 	public OneTo() {}
 
-	public OneTo(int oneToNo, String writerNo, String answrerNo, String oneToType, String oneToName,
+	public OneTo(int oneToNo, String writerNo, String answererNo, String oneToType, String oneToName,
 			String oneToContent, String filePath, String answerContent, Date answerDate, String answerState) {
 		super();
 		this.oneToNo = oneToNo;
 		this.writerNo = writerNo;
-		this.answrerNo = answrerNo;
+		this.answererNo = answererNo;
 		this.oneToType = oneToType;
 		this.oneToName = oneToName;
 		this.oneToContent = oneToContent;
@@ -43,6 +43,24 @@ public class OneTo {
 		this.answerState = answerState;
 	}
 
+	public OneTo(String writerNo, String oneToType, String oneToName, String oneToContent) {
+		super();
+		this.writerNo = writerNo;
+		this.oneToType = oneToType;
+		this.oneToName = oneToName;
+		this.oneToContent = oneToContent;
+	}
+	
+	
+
+	public OneTo(int oneToNo, String oneToType, String oneToName, String oneToContent) {
+		super();
+		this.oneToNo = oneToNo;
+		this.oneToType = oneToType;
+		this.oneToName = oneToName;
+		this.oneToContent = oneToContent;
+	}
+
 	public int getOneToNo() {
 		return oneToNo;
 	}
@@ -59,16 +77,17 @@ public class OneTo {
 		this.writerNo = writerNo;
 	}
 
-	public String getAnswrerNo() {
-		return answrerNo;
-	}
-
-	public void setAnswrerNo(String answrerNo) {
-		this.answrerNo = answrerNo;
-	}
 
 	public String getOneToType() {
 		return oneToType;
+	}
+
+	public String getAnswererNo() {
+		return answererNo;
+	}
+
+	public void setAnswererNo(String answererNo) {
+		this.answererNo = answererNo;
 	}
 
 	public void setOneToType(String oneToType) {
@@ -125,7 +144,7 @@ public class OneTo {
 
 	@Override
 	public String toString() {
-		return "OneTo [oneToNo=" + oneToNo + ", writerNo=" + writerNo + ", answrerNo=" + answrerNo + ", oneToType="
+		return "OneTo [oneToNo=" + oneToNo + ", writerNo=" + writerNo + ", answrerNo=" + answererNo + ", oneToType="
 				+ oneToType + ", oneToName=" + oneToName + ", oneToContent=" + oneToContent + ", filePath=" + filePath
 				+ ", answerContent=" + answerContent + ", answerDate=" + answerDate + ", answerState=" + answerState
 				+ "]";

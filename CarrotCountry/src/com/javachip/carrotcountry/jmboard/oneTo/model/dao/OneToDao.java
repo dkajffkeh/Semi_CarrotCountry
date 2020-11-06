@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.javachip.carrotcountry.jmboard.notice.model.dao.NoticeDao;
-import com.javachip.carrotcountry.jmboard.notice.model.vo.Notice;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
@@ -110,7 +109,122 @@ public class OneToDao {
 		return list;
 	}
 
+	public int insertOneTo(Connection conn, OneTo o) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertOneTo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,Integer.parseInt(o.getWriterNo()));
+			pstmt.setString(2,o.getOneToType());
+			pstmt.setString(3,o.getOneToName());
+			pstmt.setString(4,o.getOneToContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		
+		return result;
+	}
+
+	public int answer(Connection conn, OneTo o) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("answer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, o.getAnswererNo());
+			pstmt.setString(2, o.getAnswerContent());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return result;
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+/*
+	public OneTo selectOneTo(Connection conn, int ono) {
+		
+		OneTo o = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOneTo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ono);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				o = new OneTo(rset.getInt("ONETO_NO"),
+							  rset.getString("MEM_USERID"),
+							  rset.getString("ANSWERER_NO"),
+							  rset.getString("ONETO_TYPE"),
+							  rset.getString("ONETO_NAME"),
+							  rset.getString("ONETO_CONTENT"),
+							  
+							  );
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return o;
+	}
+
+	*/
 	
 	
 }
