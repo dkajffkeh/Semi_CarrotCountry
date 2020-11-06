@@ -77,7 +77,8 @@
                 </tr>
             </thead>
             <tbody>
-
+			 <input type="hidden" value="<%= loginMember.getMemNo() %>">
+			
 			<% if(list.isEmpty()) { %>
                 <!-- 1-1. 조회결과가 없을경우 -->
                 <tr>

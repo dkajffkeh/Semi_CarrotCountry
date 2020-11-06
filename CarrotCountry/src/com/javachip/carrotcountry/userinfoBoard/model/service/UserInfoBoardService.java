@@ -3,6 +3,7 @@ package com.javachip.carrotcountry.userinfoBoard.model.service;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
@@ -102,11 +103,11 @@ public class UserInfoBoardService {
 	 * @return 			
 	 *
 	 */
-		public ArrayList<CobuyingPost> selectCobuyingList(PageInfo pi){
+		public ArrayList<CobuyingPost> selectCobuyingList(PageInfo pi, int memNo){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<CobuyingPost> list = new UserInfoBoardDao().selectCobuyingList(conn, pi);
+		ArrayList<CobuyingPost> list = new UserInfoBoardDao().selectCobuyingList(conn, pi, memNo);
 		
 		close(conn);
 		
@@ -159,6 +160,93 @@ public class UserInfoBoardService {
 			
 			return list;
 			
+		}
+		
+		/**
+		 * 8. 판매완료 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int deleteCompletedSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteCompletedSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 9.  판매중 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<SaleProduct> selectOnSales(int memNo, PageInfo pi){
+			Connection conn = getConnection();
+			
+			ArrayList<SaleProduct> list = new UserInfoBoardDao().selectOnSales(conn, memNo, pi);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+		
+		/**
+		 * 10.  판매중 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int deleteOnSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 11.  판매중 변경
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int updateOnSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().updateOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
 		}
 		
 

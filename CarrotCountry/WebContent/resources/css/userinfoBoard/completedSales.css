@@ -1,11 +1,9 @@
 @charset "UTF-8";
 
            
-        /* 판매완료 css */
-         .outer{
+        .outer{
             margin-top:50px;
            margin-left:50px;
-           width:90%;
            height:100%;
            font-family: 'Nanum Gothic', sans-serif; 
            }
@@ -39,9 +37,9 @@
             /* #content{margin:auto;} */
         th{ font-size:25px;}
         #content{
-            border:3px solid rgb(255, 178, 34);
+            border:5px solid rgb(255, 178, 34);
             border-radius:50px;
-            height:750px;
+            height:780px;
             padding:50px;
 
         }
@@ -51,15 +49,8 @@
              }
          #saleStatusTable td{
          width:230px;
-         height:90px;
-         margin-bottom:30px;
+         height:80px;
             }
-        #price{
-            margin-bottom:10px;
-        }
-        #saleStatusTable{
-            border-bottom:1px;
-        }
         #saleImage:hover {
                 box-shadow:5px 5px 10px 5px gray;
                 cursor:pointer;
@@ -72,5 +63,4 @@
                 font-size:25px;
                 font-weight:500;
             }
-     
     

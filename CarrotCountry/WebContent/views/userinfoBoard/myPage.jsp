@@ -166,7 +166,7 @@
    
             
             <input type="checkbox" style="height:24px; width:24px;" name="delivery" id="address1" value="address1">
-            &nbsp;&nbsp;배송지
+            &nbsp;&nbsp;배송지<%=list.indexOf(sl)+1%>)
 
             
             <!----------------------기본배송지 설정 시 보여질 문구---------------------->
@@ -197,7 +197,7 @@
 			
 			    <div id="updateButton" align="center">
 			        
-			        <button type="submit" class="btn btn-primary ">변경하기</button>
+			        <button type="submit" class="btn btn-primary">변경하기</button>
 			       
 			    </div>
 		</form>	    
