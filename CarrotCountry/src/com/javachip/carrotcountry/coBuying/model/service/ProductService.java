@@ -127,12 +127,12 @@ public class ProductService {
 	
 	
 	
-	public int insertProduct(Product pd, PostBoard pb, Location lo, String[] option, String[] account, ArrayList<Photo> pList) {
+	public int insertProduct(PostBoard pb, Product pd, Location lo, String[] option, String[] account, ArrayList<Photo> pList) {
 			
 			Connection conn = getConnection();
-			
-			int result1 = new ProductDao().insertProductGroupPurchase(conn, pd);
-			int result2 = new ProductDao().insertProductPost(conn, pb);
+
+			int result1 = new ProductDao().insertProductPost(conn, pb);
+			int result2 = new ProductDao().insertProductGroupPurchase(conn, pd);
 			int result3 = new ProductDao().insertProductLocation(conn, lo);
 			int result4 = new ProductDao().insertProductOption(conn, option);
 			int result5 = new ProductDao().insertProductAccount(conn, account);

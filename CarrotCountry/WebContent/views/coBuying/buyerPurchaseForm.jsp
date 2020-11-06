@@ -1,5 +1,18 @@
+<%@page import="com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation"%>
+<%@page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard"%>
+<%@page import="com.javachip.carrotcountry.coBuying.model.vo.Account"%>
+<%@page import="com.javachip.carrotcountry.coBuying.model.vo.Option"%>
+<%@page import="com.javachip.carrotcountry.coBuying.model.vo.Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Product p = (Product)request.getAttribute("p");
+	ArrayList<Option> optionList = (ArrayList<Option>)request.getAttribute("optionList");
+	ArrayList<Account> accountList = (ArrayList<Account>)request.getAttribute("accountList");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	ArrayList<ShippingLocation> shippingList = (ArrayList<ShippingLocation>)request.getAttribute("shippingList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,11 +124,11 @@
                     </tr>
                     <tr>
                         <td align="right"><span>이름 : </span></td>
-                        <td><input type="text"></td>
+                        <td><input type="text"><%-- <%= loginMember.getMemName() %> --%></td>
                     </tr>
                     <tr>
                         <td align="right"><span>연락처 : </span></td>
-                        <td><input type="tel" placeholder="(- 포함해서 입력)"></td>
+                        <td><input type="tel" placeholder="(- 포함해서 입력)"><%-- <%= loginMember.getMemPhone() %> --%></td>
                     </tr>
                     <tr>
                         <td align="right"><span>주소 : </span></td>
@@ -125,29 +138,31 @@
                     </tr>
                     <tr>
                         <td align="right"><span>배송시 요청사항 : </span></td>
-                        <td><select id="selbox" name="selbox">
-                            <option name="requests" value="1">부재시 경비실에 맡겨주세요</option>
-                            <option name="requests" value="2">배송 전 연락주세요</option>
-                            <option value="direct">직접입력</option>
-                        </select>
+                        <td>
+                        	<select id="selbox" name="selbox">
+	                            <option name="requests" value="1">부재시 경비실에 맡겨주세요</option>
+	                            <option name="requests" value="2">배송 전 연락주세요</option>
+	                            <option value="direct">직접입력</option>
+                        	</select>
                         
                         <input type="text" id="selboxDirect" name="requests"/>
                     
     
-                    <script>
-                        $(function(){
-                            $("#selboxDirect").hide();
-                            
-                            $("#selbox").change(function() {
-                            
-                                    if($("#selbox").val() == "direct") {
-                                        $("#selboxDirect").show();
-                                    }  else {
-                                        $("#selboxDirect").hide();
-                                    }
-                                }) 
-                        });
-                    </script></td>
+		                    <script>
+		                        $(function(){
+		                            $("#selboxDirect").hide();
+		                            
+		                            $("#selbox").change(function() {
+		                            
+		                                    if($("#selbox").val() == "direct") {
+		                                        $("#selboxDirect").show();
+		                                    }  else {
+		                                        $("#selboxDirect").hide();
+		                                    }
+		                                }) 
+		                        });
+		                    </script>
+                    	</td>
                     </tr>
                 </table>
             </div>

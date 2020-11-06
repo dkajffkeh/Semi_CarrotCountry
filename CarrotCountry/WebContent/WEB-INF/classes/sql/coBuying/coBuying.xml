@@ -144,34 +144,6 @@
 	
 	
 	
-	
-	<entry key="insertProductGroupPurchase">
-		INSERT
-		  INTO GROUP_PURCHASE
-		  (
-		       POST_NO
-		     , GP_DEADLINE
-		     , GP_MINPEOPLE
-		     , GP_PRICE
-		     , GP_DRATE
-		     , GP_DPRICE
-		     , GP_STATUS
-		     , GP_REFUND
-		     , GP_POST_CHECK
-		  )
-		  VALUES
-		  (
-		       SEQ_PNO.NEXTVAL
-		     , ?
-		     , ?
-		     , ?
-		     , ?
-		     , ?
-		     , 'Y'
-		     , ?
-		     , 2
-		  )
-	</entry>
 	<entry key="insertProductPost">
 		INSERT
 		   INTO POST
@@ -198,7 +170,7 @@
 		   )
 		  VALUES
 		  (
-		      SEQ_PNO.CURRVAL
+		      SEQ_PNO.NEXTVAL
 		    , ?
 		    , ?
 		    , 1
@@ -223,6 +195,33 @@
 		    , SYSDATE
 		  )
 	</entry>
+	<entry key="insertProductGroupPurchase">
+		INSERT
+		  INTO GROUP_PURCHASE
+		  (
+		       POST_NO
+		     , GP_DEADLINE
+		     , GP_MINPEOPLE
+		     , GP_PRICE
+		     , GP_DRATE
+		     , GP_DPRICE
+		     , GP_STATUS
+		     , GP_REFUND
+		     , GP_POST_CHECK
+		  )
+		  VALUES
+		  (
+		       SEQ_PNO.CURRVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'Y'
+		     , ?
+		     , 2
+		  )
+	</entry>
 	<entry key="insertProductLocation">
 		INSERT
 		  INTO LOCATION
@@ -234,7 +233,7 @@
 		  )
 		  VALUES
 		  (
-		     seq_lno.NEXTVAL
+		     SEQ_LNO.NEXTVAL
 		   , '서울특별시'
 		   , ?
 		   , ?

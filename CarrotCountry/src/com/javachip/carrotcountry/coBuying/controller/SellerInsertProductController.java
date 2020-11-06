@@ -57,24 +57,8 @@ public class SellerInsertProductController extends HttpServlet {
 			
 			MultipartRequest multiRequest =  new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			// 1. group_purchase
-			String gpDeadline = multiRequest.getParameter("gpDeadline");
-			int gpMinPeople = Integer.parseInt(multiRequest.getParameter("gpMinPeople"));
-			int gpPrice = Integer.parseInt(multiRequest.getParameter("gpPrice"));
-			int gpDRate = Integer.parseInt(multiRequest.getParameter("gpDRate"));
-			int gpDPrice = Integer.parseInt(multiRequest.getParameter("gpDPrice"));
-			String gpRefund = multiRequest.getParameter("gpRefund");
 			
-			Product pd = new Product();
-			pd.setGpDeadline(gpDeadline);
-			pd.setGpMinPeople(gpMinPeople);
-			pd.setGpPrice(gpPrice);
-			pd.setGpDRate(gpDRate);
-			pd.setGpDPrice(gpDPrice);
-			pd.setGpRefund(gpRefund);
-			
-			
-			// 2. post
+			// 1. post
 			String category = multiRequest.getParameter("category");
 			int memNo = Integer.parseInt(multiRequest.getParameter("memNo"));
 			String memNick = multiRequest.getParameter("memNick");
@@ -95,6 +79,27 @@ public class SellerInsertProductController extends HttpServlet {
 			pb.setThumbnailPath("resources/images/coBuying/");
 			pb.setThumbnailLoadPath("resources/images/coBuying/");
 			
+			
+			
+			
+			// 2. group_purchase
+			String gpDeadline = multiRequest.getParameter("gpDeadline");
+			int gpMinPeople = Integer.parseInt(multiRequest.getParameter("gpMinPeople"));
+			int gpPrice = Integer.parseInt(multiRequest.getParameter("gpPrice"));
+			int gpDRate = Integer.parseInt(multiRequest.getParameter("gpDRate"));
+			int gpDPrice = Integer.parseInt(multiRequest.getParameter("gpDPrice"));
+			String gpRefund = multiRequest.getParameter("gpRefund");
+			
+			Product pd = new Product();
+			pd.setGpDeadline(gpDeadline);
+			pd.setGpMinPeople(gpMinPeople);
+			pd.setGpPrice(gpPrice);
+			pd.setGpDRate(gpDRate);
+			pd.setGpDPrice(gpDPrice);
+			pd.setGpRefund(gpRefund);
+			
+			
+			
 			// 3. location
 			String localGu = multiRequest.getParameter("gu");
 			String localDong = multiRequest.getParameter("dong");
@@ -105,11 +110,11 @@ public class SellerInsertProductController extends HttpServlet {
 			
 			
 			// 4. option
-			String[] option = request.getParameterValues("option"); 
+			String[] option = multiRequest.getParameterValues("option"); 
 
 			
 			// 5. account
-			String[] account = request.getParameterValues("account"); 
+			String[] account = multiRequest.getParameterValues("account"); 
 
 
 			// 6. photo
@@ -132,9 +137,9 @@ public class SellerInsertProductController extends HttpServlet {
 			}
 			
 			
-			int result = new ProductService().insertProduct(pd, pb, lo, option, account, pList);
+			int result = new ProductService().insertProduct(pb, pd, lo, option, account, pList);
 			
-			if(result > 0) { // 성공 => 리스트페이지(list.th url로 재요청) 요청
+			if(result > 0) { // 성공 
 				
 				request.getSession().setAttribute("alertMsg", "공동구매가  성공적으로 등록되었습니다");
 				response.sendRedirect(request.getContextPath() + "/mainpage.co.jy?currentPage=1");
@@ -145,7 +150,7 @@ public class SellerInsertProductController extends HttpServlet {
 					new File(savePath + pt.getPhotoFileName()).delete();
 				}
 				
-				request.setAttribute("errorMsg", "공동구매 등록에 실패였습니다");
+				request.setAttribute("errorMsg", "공동구매 등록에 실패하였습니다");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				
 			}

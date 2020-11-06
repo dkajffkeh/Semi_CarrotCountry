@@ -57,7 +57,7 @@ select {
 
 
     <div class="CS_content">
-        <form name="form" action="<%= contextPath %>/insert.pro.jy" method="post" class="GPForm" enctype="multipart/form-data">
+        <form name="form" id="insertForm" action="<%= contextPath %>/insert.pro.jy" method="post" class="GPForm" enctype="multipart/form-data">
         
          <%if(loginMember != null){ %>
 		<input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
@@ -211,6 +211,8 @@ select {
 
                                 // select안에 value없는 option들 추가하기 (단지 시각용)
                                 $("#selectArea1").append("<option>" + optAdd + "</option>");
+                                
+                                $("#insertForm").append(a);
                             }else{
                                 alert("아무것도 입력하지 않았습니다. 다시 입력해주세요");
                             }
@@ -357,6 +359,8 @@ select {
 
                                 // select안에 value없는 option들 추가하기 (단지 시각용)
                                 $("#selectArea2").append("<option>" + accAdd + "</option>");
+                                
+                                $("#insertForm").append(a);
                             }else{
                                 alert("아무것도 입력하지 않았습니다. 다시 입력해주세요")
                             }
