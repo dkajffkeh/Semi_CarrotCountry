@@ -74,7 +74,7 @@
 											<td><%= am.getReportCount() %></td>
 											<td>
 												<!-- 클릭 시 블랙리스트 해제  -->
-												<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=N" class="btn btn-outline-danger btn-sm">해제</a>
+												<button onclick="registBlackList(<%= am.getMemNo() %>);" class="btn btn-outline-danger btn-sm">해제</button>
 											</td>
 										</tr>
 									<% } %>
@@ -102,7 +102,15 @@
             </div>
         </div>
     </div>
-    
+    <script>
+		function registBlackList(memNo) {
+			const registYN = confirm('해제하시겠습니까?');
+			const url = "<%= contextPath %>/blacklistEnroll.sb?&memNo=" + memNo + "&bList=N";
+			if(registYN){
+				location.href = url;
+			}
+		}
+	</script>    
     <!-- footer 영역 -->
     <%@ include file="../common/footerbar.jsp" %>
 

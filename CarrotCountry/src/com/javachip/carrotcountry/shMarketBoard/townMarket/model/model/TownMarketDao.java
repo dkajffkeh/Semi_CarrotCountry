@@ -852,5 +852,29 @@ Properties prop = new Properties();
 
 		return l;
 	}
+
+
+	public int shMarketCommentModifier(Connection conn, int commentNo, String userContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketCommentModifier");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userContent);
+			pstmt.setInt(2, commentNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 }
