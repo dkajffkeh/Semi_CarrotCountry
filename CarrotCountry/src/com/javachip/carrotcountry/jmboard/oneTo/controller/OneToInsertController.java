@@ -12,57 +12,48 @@ import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 /**
- * Servlet implementation class OneToAnswerController
+ * Servlet implementation class OneToInsertController
  */
-@WebServlet("/answer.on.jm")
-public class OneToAnswerController extends HttpServlet {
+@WebServlet("/insert.o"
+		+ "n.jm")
+public class OneToInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneToAnswerController() {
+    public OneToInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 답변 겸 답변 수정 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	
 		request.setCharacterEncoding("utf-8");
 		
+		String oneToWriter = request.getParameter("memNo");
+		String oneToType = request.getParameter("oneTotype");
+		String oneToTitle = request.getParameter("oneTotitle");
+		String oneToContent = request.getParameter("oneTocontent");
 		
+		OneTo o = new OneTo(oneToWriter,oneToType,oneToTitle,oneToContent);
 		
-		int ono = Integer.parseInt(request.getParameter("ono"));
-		String answererNo = request.getParameter("answererNo");
-		String content = request.getParameter("content");
-		
-		OneTo o = new OneTo();
-		
-		o.setOneToNo(ono);
-		o.setAnswererNo(answererNo);
-		o.setAnswerContent(content);
-		//System.out.println();
-		int result = new OneToService().answer(o); 
-		
+		int result = new OneToService().insertOneTo(o);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "답변완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.on.jm?ono=" + ono);
+			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
 		}else {
-			request.setAttribute("errorMsg", "답변등록 실패.");
+			
+			request.setAttribute("errorMsg", "공지사항 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
+		
 		}
-		
-
-		
-		
-	
-	
 	}
 
 	/**

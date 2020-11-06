@@ -116,7 +116,6 @@
             </div>
         </div>
     </div>
-    
     <!-- footer 영역 -->
     <%@ include file="../common/footerbar.jsp" %>
 	

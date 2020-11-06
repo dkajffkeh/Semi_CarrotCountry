@@ -1,4 +1,4 @@
-package com.javachip.carrotcountry.jmboard.oneTo.controller;
+package com.javachip.carrotcountry.shMarketBoard.townMarket.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
+
 /**
- * Servlet implementation class OneToEnrollFormController
+ * Servlet implementation class ShMarketCommentModifyFormController
  */
-@WebServlet("/enrollForm.on.jm")
-public class OneToEnrollFormController extends HttpServlet {
+@WebServlet("/commentModifier.sh.hy")
+public class ShMarketCommentModifyFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneToEnrollFormController() {
+    public ShMarketCommentModifyFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +29,12 @@ public class OneToEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("views/oneTo/oneToEnrollForm.jsp").forward(request, response);
-	
+		response.setCharacterEncoding("utf-8");	
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		String userContent = request.getParameter("userContent");
+		
+		int result = new TownMarketService().shMarketCommentModifier(commentNo,userContent);
+		
 	}
 
 	/**
