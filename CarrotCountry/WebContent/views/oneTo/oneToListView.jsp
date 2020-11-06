@@ -73,6 +73,18 @@
 
             </tbody>
         </table>
+        
+        
+        
+        <script>
+			$(function(){
+				$(".list-area>tbody>tr").click(function(){
+					location.href = "<%=contextPath%>/detail.no.jm?nno=" + $(this).children().eq(0).text();
+				});
+			});
+		</script>
+        
+        
         <div class="paging-area" align="center">
 			
 			<% if(pi.getCurrentPage() != 1){ %>			

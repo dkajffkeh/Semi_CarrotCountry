@@ -33,7 +33,7 @@
         <table id="detail-area" align="center" border="1">
             <tr>
                 <th width="70">제목</th>
-                <td width="350"colspan="3"><%= n.getNoticeTitle() %></td>
+                <td width="350"colspan="3" class="border border-warning"><%= n.getNoticeTitle() %></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -44,7 +44,7 @@
             <tr>
                 <th>내용</th>
                 <td colspan="3">
-                    <p style="height:200px"><%=n.getNoticeContent()%></p>
+                    <p style="height:200px" class="border border-warning"><%=n.getNoticeContent()%></p>
                 </td>
             </tr>
             <tr>

@@ -14,8 +14,7 @@ import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 /**
  * Servlet implementation class OneToInsertController
  */
-@WebServlet("/insert.o"
-		+ "n.jm")
+@WebServlet("/insert.on.jm")
 public class OneToInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,9 +34,9 @@ public class OneToInsertController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String oneToWriter = request.getParameter("memNo");
-		String oneToType = request.getParameter("oneTotype");
-		String oneToTitle = request.getParameter("oneTotitle");
-		String oneToContent = request.getParameter("oneTocontent");
+		String oneToType = request.getParameter("oneToType");
+		String oneToTitle = request.getParameter("oneToTitle");
+		String oneToContent = request.getParameter("oneToContent");
 		
 		OneTo o = new OneTo(oneToWriter,oneToType,oneToTitle,oneToContent);
 		
@@ -45,7 +44,7 @@ public class OneToInsertController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
-			
+			//마이페이지로 연결할 예정
 			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
 		}else {
 			

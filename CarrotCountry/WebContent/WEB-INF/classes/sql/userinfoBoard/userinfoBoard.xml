@@ -75,10 +75,9 @@
 	</entry>
 	
 	<entry key="selectCobuyingPostList">
-		 SELECT *
+		SELECT *
 		  FROM (
-		        SELECT 
-		                ROWNUM RNUM
+		        SELECT ROWNUM RNUM
 		               , A.*
 		         FROM (
 		               SELECT 
@@ -86,10 +85,11 @@
 		                    , POST_NAME
 		                    , GP_CREATEDATE
 		                    , GP_STATUS
-		                 FROM GROUP_PURCHASE    
-		                 JOIN POST USING(POST_NO)
+		                 FROM GROUP_PURCHASE G    
+		                 LEFT JOIN POST USING(POST_NO)
 		                 WHERE BLIND_CHECK = 'N'
 		                  AND GP_POST_CHECK = 2
+		                  AND G.MEM_NO =?
 		                 ORDER
 		                      BY POST_NO DESC
 		               ) A
@@ -142,12 +142,59 @@
 	                     , POST_ENROLL_DATE
 	                     , THUMBNAIL_PATH
 	                     , THUMBNAIL_FILENAME
-	                  FROM POST
+	                  FROM POST P
 	                 WHERE MEM_NO=?
+	                   AND P.BLIND_CHECK ='N'
 	                   AND PROD_STATUS='N'
 	               ) A
 	       )
 	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteCompletedSales">
+		  UPDATE
+		        POST
+		    SET BLIND_CHECK = 'Y'
+		  WHERE POST_NO=?
+	</entry>
+	
+	<entry key="selectOnSales">
+	            SELECT *
+				  FROM (
+				        SELECT 
+				                ROWNUM RNUM
+				               , A.*
+				         FROM (
+				                  SELECT
+				                       POST_NO
+				                     , MEM_NO
+				                     , POST_NAME
+				                     , PROD_PRICE
+				                     , PROD_STATUS
+				                     , POST_ENROLL_DATE
+				                     , THUMBNAIL_PATH
+				                     , THUMBNAIL_FILENAME
+				                  FROM POST P
+				                 WHERE MEM_NO=?
+				                   AND P.BLIND_CHECK ='N'
+				                   AND PROD_STATUS='Y'
+				               ) A
+				       )
+				WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteOnSales">
+	 	 UPDATE
+		        POST
+		    SET BLIND_CHECK = 'Y'
+		  WHERE POST_NO=?
+	</entry>
+	
+	<entry key="updateOnSales">
+		 UPDATE
+		        POST
+		    SET PROD_STATUS = 'N'
+		  WHERE POST_NO=?
 	</entry>
 
 </properties>

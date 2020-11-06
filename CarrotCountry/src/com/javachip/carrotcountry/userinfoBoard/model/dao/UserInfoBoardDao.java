@@ -222,7 +222,7 @@ public class UserInfoBoardDao {
 	}
 	
 	// 공동구매 내게시글 조회
-	public ArrayList<CobuyingPost> selectCobuyingList(Connection conn, PageInfo pi){
+	public ArrayList<CobuyingPost> selectCobuyingList(Connection conn, PageInfo pi, int memNo){
 		// select문 => 여러행 => ArrayList
 		ArrayList<CobuyingPost> list = new ArrayList<>();
 		
@@ -237,8 +237,9 @@ public class UserInfoBoardDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -332,6 +333,7 @@ public class UserInfoBoardDao {
 		
 	}
 	
+	// 판매완료 조회
 	public ArrayList<SaleProduct> selectCompletedSales(Connection conn, int memNo, PageInfo pi){
 
 		ArrayList<SaleProduct> list = new ArrayList<>();
@@ -377,6 +379,117 @@ public class UserInfoBoardDao {
 		
 		return list;
 		
+	}
+	
+	// 판매완료 삭제
+	
+	public int deleteCompletedSales(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCompletedSales");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
+	}
+	
+	// 판매중 조회
+	public ArrayList<SaleProduct> selectOnSales(Connection conn, int memNo, PageInfo pi){
+
+		ArrayList<SaleProduct> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOnSales");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+				while(rset.next()) { 
+					SaleProduct sp = new SaleProduct();
+					
+					sp.setPostNo(rset.getInt("POST_NO"));
+					sp.setMemNo(rset.getInt("MEM_NO"));
+					sp.setPostName(rset.getString("POST_NAME"));
+					sp.setProdPrice(rset.getInt("PROD_PRICE"));
+					sp.setProdStatus(rset.getString("PROD_STATUS"));
+					sp.setPostEnrollDate(rset.getDate("POST_ENROLL_DATE"));
+					sp.setThumbNailPath(rset.getString("THUMBNAIL_PATH"));
+					sp.setThumbNailFileName(rset.getNString("THUMBNAIL_FILENAME"));
+					
+					list.add(sp);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	//판매중 삭제
+	
+	public int deleteOnSales(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteOnSales");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
+	}
+	
+	//판매중 변경
+	
+	public int updateOnSales(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateOnSales");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
 	}
 	
 	
