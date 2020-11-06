@@ -387,7 +387,7 @@ cursor:pointer;
           </div>
         </div>
       </div>
- 
+    
  
  
  
@@ -396,7 +396,6 @@ cursor:pointer;
          $(function(){
            	 
         	 CommentListUpdate();      	 
-
          }) 
          
          function CommentListUpdate(){
@@ -407,7 +406,7 @@ cursor:pointer;
 				data:{bno:"<%=pb.getPostNo()%>"},
 				
 				success:function(list){
-					
+					console.log(list);
 					let str="";
 					for(let i =0 ; i<list.length; i ++){
 				
@@ -449,6 +448,7 @@ cursor:pointer;
 		         <% } else if (loginMember!=null) { %>					
 		         if(<%=pb.getMemNickname().equals(loginMember.getMemNickname())%>||list[i].secretCheck=="N" || list[i].userNickName=="<%=loginMember.getMemNickname()%>"){
 						
+		        	 if(list[i].memNo==<%=loginMember.getMemNo()%>){
 		        	 	str += 	 `<div class="comment_display">
 			             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
 			             <div class="comment_content">
@@ -457,16 +457,31 @@ cursor:pointer;
 			                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
 			                 <div class="comment_control_button">
 			                     <div class="left_date">\${list[i].enrollDate}</div>
-			                     <div class="right_icons">   
-			                     <%if(pb.getMemNickname().equals(loginMember.getMemNickname())){%>
-			                         <i class="fas fa-pen" title="댓글 수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>   
-			                         <i class="fas fa-trash" title="댓글 삭제" onclick=deleteFunc(\${list[i].commentNo})></i>  
-			                     <% }%>
-			                         <i class="fas fa-exclamation" title="댓글 신고"></i>
+			                     <div class="right_icons">
+			                     <i class="fas fa-pen" title="댓글수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>
+			                     <i class="fas fa-trash" title="댓글삭제" onclick=deleteFunc(\${list[i].commentNo})></i>    			                     
 			                     </div>
 			                 </div>
 			             </div>   
 			         </div>`
+		        	 } else {
+				        	 	str += 	 `<div class="comment_display">
+					             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+					             <div class="comment_content">
+					                 <p class="comment_user_info">\${list[i].userNickName}</p>
+					                 <div class="comment_textarea">\${list[i].Content}</div>
+					                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+					                 <div class="comment_control_button">
+					                     <div class="left_date">\${list[i].enrollDate}</div>
+					                     <div class="right_icons">		
+					                     <i class="fas fa-trash" title="댓글삭제" onclick=deleteFunc(\${list[i].commentNo})></i>
+					                     <i class="fas fa-exclamation" title="댓글신고"></i>
+					                     </div>
+					                 </div>
+					             </div>   
+					         </div>` 		        		 
+		        	       }
+        
 					} else if(list[i].secretCheck=="Y" || list[i].userNickName!="<%=loginMember.getMemNickname()%>") {
 						str += `<div class="comment_display">
 				            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
@@ -485,14 +500,15 @@ cursor:pointer;
 				            <div class="comment_condition"><i class="fas fa-lock"></i></div>
 						 </div> `		
 					}
-        <%}%>
-				}//for문 괄호
+        <%}%>	
+					}//for문 괄호
 			
 					$outer.html(str);
-				
-				
+					
+					
 					},//success
-			  })//.ajax 대활호			
+			  })//.ajax 대활호		
+			  
 		 }//function 괄호
 	  <%if(loginMember!=null){%> 
 		 function insertComment(){
@@ -525,7 +541,11 @@ cursor:pointer;
                                          <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
                                          </div>
                                          <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
-		 }	 
+		 }
+		 
+		 
+		 
+		 
 		 //댓글 삭제js
 		 function deleteFunc(deleteNo){
 			 
