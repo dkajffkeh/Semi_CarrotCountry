@@ -406,7 +406,7 @@ cursor:pointer;
 				data:{bno:"<%=pb.getPostNo()%>"},
 				
 				success:function(list){
-					console.log(list);
+					
 					let str="";
 					for(let i =0 ; i<list.length; i ++){
 				
@@ -545,14 +545,15 @@ cursor:pointer;
 		 }
 		 <%}%>	//댓글 수정버튼 눌렀을떄 나오는 textarea js 
 		 function modifyComment(e,num,userNum){
-	
+				
+			 let userText = e.parentNode.parentNode.parentNode.childNodes[3].innerHTML
 			 commentNoScope = num;
 			 userNoScope = userNum;
 			 let commentContent = e.parentNode.parentNode.parentNode.parentNode;
 			 
              commentContent.innerHTML=`<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
                                          <div class="comment_content">  
-                                         <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
+                                         <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;">\${userText}</textarea>
                                          </div>
                                          <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
 		 }
@@ -572,20 +573,17 @@ cursor:pointer;
 					CommentListUpdate();
 				},
 				error:function(){
-					console.log("실패");
+					
 				}
 				
 			})
 			 
 		 }
-	 
 		 //댓글 삭제js
 		 function deleteFunc(deleteNo){
 			 
 			 if(confirm("삭제하시겠습니까?")){
-				 
-				 console.log(deleteNo);
-				 
+		 
 				 $.ajax({
 					 url:"deleteComment.sh.hy",
 					 type:"post",
@@ -603,8 +601,7 @@ cursor:pointer;
         	 if(confirm("게시글을 삭제하시겠습니까?")){
         		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
         	 }      	 
-         } 
-         
+         }      
          function statusUpdate(){
         	 
         	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){
