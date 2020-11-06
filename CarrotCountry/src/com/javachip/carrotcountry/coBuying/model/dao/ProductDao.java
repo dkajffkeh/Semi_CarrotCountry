@@ -328,7 +328,7 @@ private Properties prop = new Properties();
 	
 	
 	
-	/*
+
 	// insert
 	// 1. group_purchase
 	public int insertProductGroupPurchase(Connection conn, Product pd) {
@@ -416,7 +416,7 @@ private Properties prop = new Properties();
 	
 		
 		// 4. option
-		public int insertProductOption(Connection conn, ArrayList<Option> oList) {
+		public int insertProductOption(Connection conn, String[] option) {
 			// 여러번의 insert문 
 			int result = 0;
 			
@@ -426,11 +426,60 @@ private Properties prop = new Properties();
 			
 			try {
 				
-				for(Option op : oList) {		
-					// 반복문 돌 때마다 미완성된 sql문을 담은 pstmt 객체 생성
+				for(int i=0; i<option.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, option[i]);
+				result = pstmt.executeUpdate();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
+		// 5. account
+		public int insertProductAccount(Connection conn, String[] account) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductAccount");
+			
+			try {
+				
+				for(int i=0; i<account.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, account[i]);
+				result = pstmt.executeUpdate();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
+		// 6. photo
+		public int insertProductPhoto(Connection conn, ArrayList<Photo> pList) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductPhoto");
+			
+			try {
+				
+				for(Photo pt : pList) {		
 					pstmt = conn.prepareStatement(sql);
 					
-					pstmt.setString[] (1, op.getOptionList());
+					pstmt.setString(1, pt.getPhotoPath());
+					pstmt.setString(2, pt.getPhotoFileName());
+					pstmt.setString(3, pt.getPhotoLoadPath());
 						
 					result = pstmt.executeUpdate();
 					
@@ -451,8 +500,8 @@ private Properties prop = new Properties();
 			
 			
 		}
-		*/
-	
-	
+		
+		
+
 	
 }

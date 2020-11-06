@@ -44,7 +44,7 @@ public class SellerInsertProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     
-    /*
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
@@ -107,33 +107,9 @@ public class SellerInsertProductController extends HttpServlet {
 			// 4. option
 			String[] option = request.getParameterValues("option"); 
 
-			ArrayList<Option> oList = new ArrayList<Option>();
-			
-			for(int i=0; i<oList.size(); i++) {
-				
-				if(multiRequest.getParameter("option") != null) {
-					Option op = new Option();
-					op.setOptionList(option);
-					
-					oList.add(op);
-				}
-			}
-			
 			
 			// 5. account
 			String[] account = request.getParameterValues("account"); 
-
-			ArrayList<Account> aList = new ArrayList<Account>();
-			
-			for(int i=0; i<aList.size(); i++) {
-				
-				if(multiRequest.getParameter("account") != null) {
-					Account ac = new Account();
-					ac.setAccountList(account);
-					
-					aList.add(ac);
-				}
-			}
 
 
 			// 6. photo
@@ -156,7 +132,7 @@ public class SellerInsertProductController extends HttpServlet {
 			}
 			
 			
-			int result = new ProductService().insertProduct(pd, pb, lo, oList, aList, pList);
+			int result = new ProductService().insertProduct(pd, pb, lo, option, account, pList);
 			
 			if(result > 0) { // 성공 => 리스트페이지(list.th url로 재요청) 요청
 				
@@ -180,7 +156,7 @@ public class SellerInsertProductController extends HttpServlet {
 		
 	}
 	
-*/
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -5,7 +5,6 @@ public class Option {
 	private int optionNo;
 	private int postNo;
 	private String optionName;
-	private String[] optionList;
 	
 	public Option() {}
 	
@@ -70,29 +69,6 @@ public class Option {
 	
 	
 	
-
-
-	public String[] getOptionList() {
-		return optionList;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	public void setOptionList(String[] optionList) {
-		this.optionList = optionList;
-	}
-
-
-
 
 
 
