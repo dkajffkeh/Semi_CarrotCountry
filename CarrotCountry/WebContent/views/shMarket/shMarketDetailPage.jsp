@@ -543,9 +543,10 @@ cursor:pointer;
                                          <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
 		 }
 		 
+		 function commentUpdate(from){
 		 
-		 
-		 
+		 }
+	 
 		 //댓글 삭제js
 		 function deleteFunc(deleteNo){
 			 
