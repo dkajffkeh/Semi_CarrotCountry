@@ -27,9 +27,8 @@ public class BuyerPurchaseController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		int bno = Integer.parseInt(request.getParameter("bno"));
-		int memNo = 1;
-		int bno = 1;
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		Product p = new ProductService().selectProduct(bno);
 		ArrayList<Option> optionList = new ProductService().selectOption(bno);
