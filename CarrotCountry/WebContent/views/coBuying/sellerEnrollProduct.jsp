@@ -229,8 +229,6 @@ select {
 
                             <option value="">구 선택</option>
 
-                            <option name="gu" value="gn">강남구</option>
-
                             <option name="gu" value="gs">강서구</option>
 
                             <option name="gu" value="sp">송파구</option>
@@ -247,19 +245,13 @@ select {
 
                                 $('#gu').change(function() {
 
-                                    var gn = ["역삼동", "개포동", "삼성동"];
+                                    var gs = ["화곡동", "목동"];
 
-                                    var gs = ["가양동", "등촌동", "우장산동"];
-
-                                    var sp = ["오류동", "오금동", "잠실동"];
+                                    var sp = ["오류동", "오금동", "상일동"];
 
                                     var changeItem;
 
-                                    if (this.value == "gn") {
-
-                                        changeItem = gn;
-
-                                    } else if (this.value == "gs") {
+                                	if (this.value == "gs") {
 
                                         changeItem = gs;
 

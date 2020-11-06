@@ -6,7 +6,6 @@ public class Account {
 	private String account;
 	private int postNo;
 	private String bank;
-	private String[] accountList;
 	
 	
 	
@@ -61,18 +60,6 @@ public class Account {
 	
 	
 	
-	
-
-	public String[] getAccountList() {
-		return accountList;
-	}
-
-
-
-	public void setAccountList(String[] accountList) {
-		this.accountList = accountList;
-	}
-
 
 
 	@Override
