@@ -32,6 +32,61 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="insertOneTo">
+	    INSERT
+		  INTO ONETOONE
+		  (
+		     ONETO_NO
+		   , WRITER_NO
+		   , ONETO_TYPE
+		   , ONETO_NAME
+		   , ONETO_CONTENT
+           , ANSWER_DATE
+		  )
+		  VALUES
+		  (
+		     SEQ_ONETONO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , SYSDATE
+		  )
+	
+	</entry>
+	<entry key="answer">
+			UPDATE
+		       ONETOONE
+		   SET ANSWERER_NO = ?
+		     , ANSWER_CONTENT = ?
+             , ANSWER_STATE = 'Y'
+		 WHERE ONETO_NO = ?
+	</entry>
+	<entry key="userModify">
+			UPDATE
+		       ONETOONE
+		   SET ONETO_TYPE = ?
+		     , ONETO_NAME = ?
+             , ONETO_CONTENT = ?
+		 WHERE ONETO_NO = ?
+	</entry>
+	<entry key="selectOneTo">
+		SELECT 
+	       ONETO_NO
+	     , U.MEM_NICKNAME WRITER
+	     , M.MEM_NICKNAME ANSWERER
+	     , ONETO_TYPE
+	     , ONETO_NAME
+	     , ONETO_CONTENT
+	     , ANSWER_CONTENT
+	     , ANSWER_DATE
+	     , ANSWER_STATE
+	  FROM ONETOONE 
+	  LEFT 
+	  JOIN MEMBER U ON(WRITER_NO=U.MEM_NO)
+      JOIN MEMBER M ON(ANSWERER_NO=M.MEM_NO)
+	 WHERE ONETO_NO = ?
+	 </entry>
 	
 	
 </properties>

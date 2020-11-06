@@ -60,6 +60,35 @@ public class OneTo {
 		this.oneToName = oneToName;
 		this.oneToContent = oneToContent;
 	}
+	
+
+	public OneTo(int oneToNo, String writerNo, String oneToType, String oneToName, String oneToContent, Date answerDate,
+			String answerState) {
+		super();
+		this.oneToNo = oneToNo;
+		this.writerNo = writerNo;
+		this.oneToType = oneToType;
+		this.oneToName = oneToName;
+		this.oneToContent = oneToContent;
+		this.answerDate = answerDate;
+		this.answerState = answerState;
+	}
+
+
+
+	public OneTo(int oneToNo, String writerNo, String answererNo, String oneToType, String oneToName,
+			String oneToContent, String answerContent, Date answerDate, String answerState) {
+		super();
+		this.oneToNo = oneToNo;
+		this.writerNo = writerNo;
+		this.answererNo = answererNo;
+		this.oneToType = oneToType;
+		this.oneToName = oneToName;
+		this.oneToContent = oneToContent;
+		this.answerContent = answerContent;
+		this.answerDate = answerDate;
+		this.answerState = answerState;
+	}
 
 	public int getOneToNo() {
 		return oneToNo;
