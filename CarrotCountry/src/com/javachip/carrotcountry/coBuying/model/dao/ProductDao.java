@@ -330,7 +330,40 @@ private Properties prop = new Properties();
 	
 
 	// insert
-	// 1. group_purchase
+	
+
+	// 1. post
+	public int insertProductPost(Connection conn, PostBoard pb) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProductPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pb.getCategoryNo());
+			pstmt.setInt(2, pb.getMemNo());
+			pstmt.setString(3, pb.getMemNickname());
+			pstmt.setString(4, pb.getPostName());
+			pstmt.setString(5, pb.getPostContent());
+			pstmt.setString(6, pb.getThumbnailPath());
+			pstmt.setString(7, pb.getThumbnailFilename());
+			pstmt.setString(8, pb.getThumbnailLoadPath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+
+	// 2. group_purchase
 	public int insertProductGroupPurchase(Connection conn, Product pd) {
 		// insert문 => 처리된 행 수
 		int result = 0;
@@ -358,37 +391,6 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-	
-		// 2. post
-		public int insertProductPost(Connection conn, PostBoard pb) {
-			// insert문 => 처리된 행 수
-			int result = 0;
-			
-			PreparedStatement pstmt = null;
-			
-			String sql = prop.getProperty("insertProductPost");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, pb.getCategoryNo());
-				pstmt.setInt(2, pb.getMemNo());
-				pstmt.setString(3, pb.getMemNickname());
-				pstmt.setString(4, pb.getPostName());
-				pstmt.setString(5, pb.getPostContent());
-				pstmt.setString(6, pb.getThumbnailPath());
-				pstmt.setString(7, pb.getThumbnailFilename());
-				pstmt.setString(8, pb.getThumbnailLoadPath());
-				
-				result = pstmt.executeUpdate();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-			}
-			return result;
-		}
-		
 	
 		// 3. location
 		public int insertProductLocation(Connection conn, Location lo) {
