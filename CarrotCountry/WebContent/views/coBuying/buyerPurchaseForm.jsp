@@ -98,7 +98,8 @@
 </head>
 <body>
 
-<%@ include file="../common/commonNavbar.jsp"%>
+	<%@ include file="../common/commonNavbar.jsp"%>
+	
     <div class="wrap">
         <div id="content">
             <div id="content1">
@@ -108,123 +109,131 @@
             </div>
             <h4>배송정보</h4>
             <hr style="border-bottom: 2px solid grey; border-top: none;">
-            <div id="content2">
-
-
-                <table id="deliveryInfo">
-                    <tr>
-                        <td align="right"><span>주문자 : </span></td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><span>배송지 선택 : </span></td>
-                        <td><button type="button" class="btn btn-secondary btn-sm">기본 배송지</button>
-                            <button type="button" class="btn btn-secondary btn-sm">신규 배송지</button>
-                            <button type="button" class="btn btn-secondary btn-sm">배송지 목록</button></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><span>이름 : </span></td>
-                        <td><input type="text"><%-- <%= loginMember.getMemName() %> --%></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><span>연락처 : </span></td>
-                        <td><input type="tel" placeholder="(- 포함해서 입력)"><%-- <%= loginMember.getMemPhone() %> --%></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><span>주소 : </span></td>
-                        <td><input type="text">
-                            <button type="button" id="address" class="btn btn-secondary btn-sm">우편번호찾기</button><br>
-                            <input type="text" id="particularAddress1"> &nbsp; <input type="text" id="particularAddress2" placeholder="상세주소 입력"></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><span>배송시 요청사항 : </span></td>
-                        <td>
-                        	<select id="selbox" name="selbox">
-	                            <option name="requests" value="1">부재시 경비실에 맡겨주세요</option>
-	                            <option name="requests" value="2">배송 전 연락주세요</option>
-	                            <option value="direct">직접입력</option>
-                        	</select>
-                        
-                        <input type="text" id="selboxDirect" name="requests"/>
-                    
-    
-		                    <script>
-		                        $(function(){
-		                            $("#selboxDirect").hide();
-		                            
-		                            $("#selbox").change(function() {
-		                            
-		                                    if($("#selbox").val() == "direct") {
-		                                        $("#selboxDirect").show();
-		                                    }  else {
-		                                        $("#selboxDirect").hide();
-		                                    }
-		                                }) 
-		                        });
-		                    </script>
-                    	</td>
-                    </tr>
-                </table>
-            </div>
-
-            <h4>상품정보</h4>
-            <hr style="border-bottom: 2px solid grey; border-top: none;">
-            <div id="content3">
-                <table id="proInfo" border="1">
-                    <tr>
-                        <th colspan="2" width=700><span>상품정보/수량</span></th>
-                        <th width=125><span>상품금액</span> </th>
-                        <th width=125><span>할인금액</span></th>
-                        <th width=125><span>할인적용금액</span></th>
-                        <th width=125><span>배송비</span></th>
-                    </tr>
-                    <tr>
-                        <td rowspan="2" width="200" height="200">
-                            <img src="../Common/images/무선청소기1.jpg" alt="" width="100%" height="100%">
-                        </td>
-                        <td><p>[4차 공구 진행중!] 상품제목 (Content)</p></td>
-                        <td rowspan="3" class="price">1111원</td>
-                        <td rowspan="3" class="price">2222원</td>
-                        <td rowspan="3" class="price">3333원</td>
-                        <td rowspan="3" class="price">444원</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="option" id="option">
-                                <option value="red">red</option>
-                                <option value="black">black</option>
-                                <option value="white">white</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <h4>결제정보</h4>
-            <hr style="border-bottom: 2px solid grey; border-top: none;">
-            <div id="content4">
-                            
-                <table id="purchaseInfo">
-                    <tr>
-                        <td>입금자명 :</td>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>입금계좌 :</td>
-                        <td>
-                            <select name="account" id="account">
-                                <option value="">:: 입금하실 계좌를 선택해주세요 ::</option>
-                                <option value="">판매자가 계좌 입력한 것 여기에 뿌려주기</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-
-                <b>* 입금정보 확인 후 일치할시, 발송됩니다. </b>
-                <br><br><br><br>
-                <button id="purchaseBtn" class="btn btn-dark">주문하기</button>
-                
-            </div>
+			<form action="<%= contextPath %>/purchaseInfo.pro.jy" method="POST">
+	            <div id="content2">
+	
+	                <table id="deliveryInfo">
+	                    <tr>
+	                        <td align="right"><span>주문자 : </span></td>
+	                        <td><input type="text"></td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"><span>배송지 선택 : </span></td>
+	                        <td>
+	                        	<button type="button" class="btn btn-secondary btn-sm">기본 배송지</button>
+	                            <button type="button" class="btn btn-secondary btn-sm">신규 배송지</button>
+	                            <button type="button" class="btn btn-secondary btn-sm">배송지 목록</button>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"><span>이름 : </span></td>
+	                        <td><input type="text" name="depositor" value="<%= loginMember.getMemName() %>" required></td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"><span>연락처 : </span></td>
+	                        <td><input type="tel" name="buyerPhone" placeholder="(- 포함해서 입력)" value="<%= loginMember.getMemPhone() %>" required></td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"><span>주소 : </span></td>
+	                        <td>
+	                        	<input type="text">
+	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
+	                            <input type="text" id="particularAddress1"> &nbsp; <input type="text" id="particularAddress2" placeholder="상세주소 입력">
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td align="right"><span>배송시 요청사항 : </span></td>
+	                        <td>
+	                        	<select id="selbox" name="selbox">
+		                            <option name="requests" value="1">부재시 경비실에 맡겨주세요</option>
+		                            <option name="requests" value="2">배송 전 연락주세요</option>
+		                            <option value="direct">직접입력</option>
+	                        	</select>
+	                        
+	                        <input type="text" id="selboxDirect" name="requests"/>
+	                    
+	    
+			                    <script>
+			                        $(function(){
+			                            $("#selboxDirect").hide();
+			                            
+			                            $("#selbox").change(function() {
+			                            
+			                                    if($("#selbox").val() == "direct") {
+			                                        $("#selboxDirect").show();
+			                                    }  else {
+			                                        $("#selboxDirect").hide();
+			                                    }
+			                                }) 
+			                        });
+			                    </script>
+	                    	</td>
+	                    </tr>
+	                </table>
+	            </div>
+	
+	            <h4>상품정보</h4>
+	            <hr style="border-bottom: 2px solid grey; border-top: none;">
+	            <div id="content3">
+	                <table id="proInfo" border="1">
+	                    <tr>
+	                        <th colspan="2" width=700><span>상품정보/수량</span></th>
+	                        <th width=125><span>상품금액</span> </th>
+	                        <th width=125><span>할인금액</span></th>
+	                        <th width=125><span>할인적용금액</span></th>
+	                        <th width=125><span>배송비</span></th>
+	                    </tr>
+	                    <tr>
+	                        <td rowspan="2" width="200" height="200">
+	                            <img src="../Common/images/무선청소기1.jpg" alt="" width="100%" height="100%">
+	                        </td>
+	                        <td><p><%= pb.getPostName() %></p></td>
+	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
+	                        <td rowspan="3" class="price"><%= p.getGpDPrice() %>원</td>
+	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() %>원</td>
+	                        <td rowspan="3" class="price">????원</td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <select name="option" id="option">
+	                            	<% for (int i = 0; i < optionList.size(); i++) { %>
+		                                <option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+	                            	<% } %>
+	                            </select>
+	                        </td>
+	                    </tr>
+	                </table>
+	            </div>
+	
+	            <h4>결제정보</h4>
+	            <hr style="border-bottom: 2px solid grey; border-top: none;">
+	            <div id="content4">
+	                            
+	                <table id="purchaseInfo">
+	                    <tr>
+	                        <td>입금자명 :</td>
+	                        <td><input type="text"><%= loginMember.getMemName() %></td>
+	                    </tr>
+	                    <tr>
+	                        <td>입금계좌 :</td>
+	                        <td>
+	                            <select name="account" id="account">
+	                                <option>:: 입금하실 계좌를 선택해주세요 ::</option>
+	                                <% for (int i = 0; i < accountList.size(); i++) { %>
+		                                <option value="<%= accountList.get(i).getAccount() %>"><%= accountList.get(i).getBank() %> <%= accountList.get(i).getAccount() %></option>
+	                                <% } %>
+	                            </select>
+	                        </td>
+	                    </tr>
+	                </table>
+	
+	                <b>* 입금정보 확인 후 일치할시, 발송됩니다. </b>
+	                
+	                <br><br><br><br>
+	                
+	                <button type="submit" id="purchaseBtn" class="btn btn-dark">주문하기</button>
+	            </div>
+			</form>
         </div>
         
 

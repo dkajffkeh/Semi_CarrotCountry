@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.javachip.carrotcountry.userinfoBoardNg.model.vo.MyPurchaseInfo;
 import com.javachip.carrotcountry.userinfoBoardNg.model.vo.MyReport;
 import com.javachip.carrotcountry.userinfoBoardNg.model.vo.RepPageInfo;
 
@@ -61,6 +62,7 @@ public class UserInfoBoardDaoNg {
 		
 		return repListCount;
 	}
+	
 	
 	public ArrayList<MyReport> selectRepList(Connection conn, RepPageInfo pi, int memNo){
 		// SELECT문 => 여러행
@@ -134,8 +136,79 @@ public class UserInfoBoardDaoNg {
 
 	}
 	
+	public int selectPurchaseCount(Connection conn, int memNo) {
+		// SELECT문 => 갯수 (count)
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPurchaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+
+	}
+
 	
-	
-	
+	public ArrayList<MyPurchaseInfo> selectPurchaseList(Connection conn, RepPageInfo pi, int memNo){
+		// SELECT문 => 여러행
+		ArrayList<MyPurchaseInfo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPurchaseList");
+		
+		try {
+			
+			int repStartRow = (pi.getRepCurrentPage() - 1) * pi.getRepBoardLimit() + 1;
+			int repEndRow = repStartRow + pi.getRepBoardLimit() - 1;
+
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, repStartRow);
+			pstmt.setInt(3, repEndRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new MyPurchaseInfo(rset.getInt("PURCHASE_NO"),
+										    rset.getInt("POST_NO"),
+										    rset.getString("THUMBNAIL_LOADPATH"),
+										    rset.getString("POST_NAME"),
+										    rset.getString("MEM_NICKNAME"),
+										    rset.getInt("GP_MINPEOPLE"),
+										    rset.getInt("GP_PEOPLE"),
+										    rset.getDate("GP_DEADLINE"),
+										    rset.getString("GP_STATUS")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 }
