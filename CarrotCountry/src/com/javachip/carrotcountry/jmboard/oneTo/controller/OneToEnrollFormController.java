@@ -27,7 +27,9 @@ public class OneToEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+	
 		request.getRequestDispatcher("views/oneTo/oneToEnrollForm.jsp").forward(request, response);
+	
 	
 	}
 
