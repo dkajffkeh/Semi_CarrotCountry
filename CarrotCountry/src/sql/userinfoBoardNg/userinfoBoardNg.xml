@@ -23,6 +23,8 @@
 	                     , P.MEM_NICKNAME       <!--신고받은사람-->
 	                     , R.REPORT_DATE        <!--신고일-->
 	                     , R.REPORT_CHECK       <!-- 상태-->
+	                     , R.REPORT_CONTENT     <!-- 신고내용 -->
+                     	 , R.REPORT_POST_NO     <!-- 신고한 게시글 번호 -->
 	                FROM REPORT R
 	                JOIN REPORT_REASON RE USING(REPORT_REASON_NO)
 	                JOIN REPORT_TYPE RT USING(REPORT_TYPE_NO)
@@ -32,5 +34,12 @@
 	                ) A
 	        )
 	  WHERE RNUM BETWEEN ? AND ?
+</entry>
+<entry key="updateRep">
+	UPDATE 
+	       REPORT
+	   SET REPORT_CONTENT = ?
+	 WHERE MEM_NO = ?
+	   AND REPORT_NO = ?
 </entry>
 </properties>

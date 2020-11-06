@@ -5,6 +5,8 @@
 <%
 	RepPageInfo pi = (RepPageInfo)request.getAttribute("pi");
 	ArrayList<MyReport> list = (ArrayList)request.getAttribute("list");
+	
+	String resultMsg = (String)request.getAttribute("resultMsg");
 %>    
 
 <!DOCTYPE html>
@@ -28,9 +30,7 @@
 		width:100%;
 		height:10%;
 		padding:12px;
-		
-
-		
+	}	
 </style>
 </head>
 <body>
@@ -50,28 +50,26 @@
 		        <hr color="gray">
 		        
 		        <br><br><br><br><br>
-				
-				
-				
-				<div class=""></div>
-				<table class="table table-striped table-hover">
+
+				<table class="table table-striped table-hover" style="text-align:center">
 					<thead>
-						<tr>
-							<th width="80px">신고번호</th>
-							<th>게시글 명</th>
-							<th>신고유형</th>
-							<th>신고사유</th>
-							<th>신고받은사람</th>
-							<th>신고일</th>
-							<th>상태</th>
+						<tr style="background:gray; color:white;">
+							<th width="8%">신고번호</th>
+							<th width="34%">게시글 명</th>
+							<th width="10%">신고유형</th>
+							<th width="10%">신고사유</th>
+							<th width="10%">신고받은사람</th>
+							<th width="12%">신고일</th>
+							<th width="8%">상태</th>
+							<th width="8%">신고내용</th>
 						</tr>
 					</thead>
-					<tbody>
 					<% if(list.isEmpty()){ %>
 						<tr align="center">
 							<td colspan="7">신고 내역이 존재하지 않습니다.</td>
 						</tr>
-					<%}else{ %>
+					<% }else{ %>
+					<tbody>
 						<%for(MyReport rep : list){ %>
 							<tr>
 								<td><%= rep.getReportNo() %></td>
@@ -80,8 +78,47 @@
 								<td><%= rep.getReportReason() %></td>
 								<td><%= rep.getReportNickName() %></td>
 								<td><%= rep.getReportDate() %></td>
-								<td><%= rep.getReportCheck() %></td>
-							</tr>	
+								<td><%= rep.getReportCheck().equals("N") ? "처리중" : "처리완료"%></td>
+								<td>				
+									<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target=".re<%= rep.getReportNo() %>">
+										보기
+									</button>
+								</td>
+							</tr>
+							
+							<!-- 모달 -->
+							<div class="modal fade re<%= rep.getReportNo() %>" id="myModal">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							
+							      <!-- Modal Header -->
+							      <div class="modal-header">
+							        <h4 class="modal-title">신고 내용</h4>
+							        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							      </div>
+							
+							      <!-- Modal body -->
+							      <div class="modal-body">
+							      
+							      	<form action="reportUpdate.re.ng" method="post">
+								      	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+								      	<input type="hidden" name="reportNo" value="<%= rep.getReportNo() %>">
+								      	<textarea cols="65" rows="10" style="resize:none;" name="reportContent"><%= rep.getReportContent() %></textarea>
+									  	
+									    </div>
+									
+									    <!-- Modal footer -->
+									    <div class="modal-footer">
+								      	<button type="submit"  class="btn btn-danger">수정하기</button>
+							      	</form>
+							      	
+							        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+							      </div>
+							
+							    </div>
+							  </div>
+							</div>
+
 						<%} %>
 					<%} %>
 					</tbody>
@@ -109,7 +146,7 @@
 		</div>
 	</div>
 
-		<!-- footerbar -->
-		<%@ include file="../../common/footerbar.jsp" %>
+	<!-- footerbar -->
+	<%@ include file="../../common/footerbar.jsp" %>
 </body>
 </html>
