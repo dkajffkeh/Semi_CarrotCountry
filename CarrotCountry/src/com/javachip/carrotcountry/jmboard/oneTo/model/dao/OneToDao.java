@@ -152,7 +152,7 @@ public class OneToDao {
 			
 			pstmt.setString(1, o.getAnswererNo());
 			pstmt.setString(2, o.getAnswerContent());
-			
+			pstmt.setInt(3, o.getOneToNo());
 			result = pstmt.executeUpdate();
 			
 			
@@ -169,6 +169,40 @@ public class OneToDao {
 		
 		return result;
 	}
+
+	public int userModify(Connection conn, OneTo o) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("userModify");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, o.getOneToType());
+			
+			pstmt.setString(2, o.getOneToName());
+			
+			pstmt.setString(3, o.getOneToContent());
+			
+			pstmt.setInt(4, o.getOneToNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+			
+		
+		return result;
+	}
 	
 	
 	
@@ -178,7 +212,7 @@ public class OneToDao {
 	
 	
 	
-/*
+
 	public OneTo selectOneTo(Connection conn, int ono) {
 		
 		OneTo o = null;
@@ -198,33 +232,29 @@ public class OneToDao {
 			
 			if(rset.next()) {
 				o = new OneTo(rset.getInt("ONETO_NO"),
-							  rset.getString("MEM_USERID"),
-							  rset.getString("ANSWERER_NO"),
+							  rset.getString("U.WRITER"),
+							  rset.getString("M.ANSWERER"),
 							  rset.getString("ONETO_TYPE"),
 							  rset.getString("ONETO_NAME"),
 							  rset.getString("ONETO_CONTENT"),
-							  
-							  );
+							  rset.getString("ANSWER_CONTENT"),
+							  rset.getDate("ANSWER_DATE"),
+							  rset.getString("ANSWER_STATE"));
 			}
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		return o;
 	}
 
-	*/
+	
 	
 	
 }

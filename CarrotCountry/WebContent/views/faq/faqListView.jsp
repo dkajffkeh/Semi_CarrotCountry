@@ -80,7 +80,7 @@
         <div class="container">
             <div class="jumbotron" align="center">
             <h6>안녕하세요</h1>      
-            <a href="<%=contextPath%>">1:1문의<a>
+            <a href="<%=contextPath%>/enrollForm.on.jm">1:1문의<a>
             </div>
         </div>
        </div>

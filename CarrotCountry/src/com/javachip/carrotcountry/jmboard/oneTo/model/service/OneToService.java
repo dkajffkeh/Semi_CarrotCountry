@@ -73,13 +73,18 @@ public class OneToService {
 		
 		int result = new OneToDao().userModify(conn,o);
 		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
-		
-		return 0;
+		close(conn);
+		return result;
 	}
 
-	/*
-	public Faq selectOneTo(int ono) {
+	
+	public OneTo selectOneTo(int ono) {
 		
 		Connection conn = getConnection();
 		
@@ -90,7 +95,7 @@ public class OneToService {
 		return o;
 	}
 	
-*/
+
 	
 	
 }
