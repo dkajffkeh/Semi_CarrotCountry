@@ -464,7 +464,7 @@ cursor:pointer;
 			                 </div>
 			             </div>   
 			         </div>`
-		        	 } else {
+		        	 } else if(<%=pb.getMemNo()==loginMember.getMemNo()%>) {
 				        	 	str += 	 `<div class="comment_display">
 					             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
 					             <div class="comment_content">
@@ -480,8 +480,22 @@ cursor:pointer;
 					                 </div>
 					             </div>   
 					         </div>` 		        		 
+		        	       } else if(list[i].memNo!=<%=loginMember.getMemNo()%>){
+		        	    	   str += 	 `<div class="comment_display">
+				             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+				             <div class="comment_content">
+				                 <p class="comment_user_info">\${list[i].userNickName}</p>
+				                 <div class="comment_textarea">\${list[i].Content}</div>
+				                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+				                 <div class="comment_control_button">
+				                     <div class="left_date">\${list[i].enrollDate}</div>
+				                     <div class="right_icons">		
+				                     <i class="fas fa-exclamation" title="댓글신고"></i>
+				                     </div>
+				                 </div>
+				             </div>   
+				         </div>`
 		        	       }
-        
 					} else if(list[i].secretCheck=="Y" || list[i].userNickName!="<%=loginMember.getMemNickname()%>") {
 						str += `<div class="comment_display">
 				            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
@@ -544,7 +558,25 @@ cursor:pointer;
 		 }
 		 
 		 function commentUpdate(from){
-		 
+		 	
+			$.ajax({
+				url:"commentModifier.sh.hy",
+				type:"post",
+				data:{
+					userNo:userNoScope,
+					commentNo:commentNoScope,
+					userContent:$("#UserModify").val(),
+					
+				},
+				success:function(){
+					CommentListUpdate();
+				},
+				error:function(){
+					console.log("실패");
+				}
+				
+			})
+			 
 		 }
 	 
 		 //댓글 삭제js

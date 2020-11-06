@@ -523,4 +523,12 @@ SELECT
 JOIN POST P  USING(LOCAL_NO)
 WHERE P.POST_NO=?
 </entry>
+<entry key="shMarketCommentModifier">
+UPDATE
+      POST_COMMENT
+   SET
+      CONTENT=?
+WHERE
+      COMM_NO=?
+</entry>
 </properties>
