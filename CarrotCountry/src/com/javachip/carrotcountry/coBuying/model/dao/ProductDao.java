@@ -306,6 +306,8 @@ private Properties prop = new Properties();
 			
 			while(rs.next()) {
 				pList.add(new Product(rs.getInt("post_no"),
+										rs.getString("thumbnail_path"),
+										rs.getString("thumbnail_filename"),
 										rs.getString("thumbnail_loadpath"),
 										rs.getString("post_name"),
 										rs.getInt("gp_people"),

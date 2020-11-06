@@ -12,9 +12,9 @@
 	Product pd = (Product)request.getAttribute("pd");
  	Account ac = (Account)request.getAttribute("ac");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
-	CategoryHY c = (CategoryHY)request.getAttribute("c");
 	ArrayList<Option> oList = (ArrayList<Option>)request.getAttribute("oList");
 	ArrayList<Account> aList = (ArrayList<Account>)request.getAttribute("aList");
+	ArrayList<Photo> ptList = (ArrayList<Photo>)request.getAttribute("ptList");
 %>
 <!DOCTYPE html>
 <html>
@@ -239,7 +239,7 @@
                         function showAccount(){
                             var showArea = document.getElementById("showContent");
                             for(Account ac : aList){ 	
-							    showArea.innerHTML = "입금 가능 계좌 : " + <%= ac.getAccount() %>;
+							    showArea.innerHTML = '입금 가능 계좌 : ' + <%= ac.getAccount() %>;
 							  } 
                         }
                         

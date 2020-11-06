@@ -167,6 +167,7 @@
 		    , POST_LIKES
 		    , PROD_PRICE
 		    , POST_ENROLL_DATE
+		    , POST_TYPE
 		   )
 		  VALUES
 		  (
@@ -193,6 +194,7 @@
 		    , DEFAULT
 		    , 1
 		    , SYSDATE
+		    , 2
 		  )
 	</entry>
 	<entry key="insertProductGroupPurchase">
@@ -207,7 +209,6 @@
 		     , GP_DPRICE
 		     , GP_STATUS
 		     , GP_REFUND
-		     , GP_POST_CHECK
 		  )
 		  VALUES
 		  (
@@ -219,7 +220,6 @@
 		     , ?
 		     , 'Y'
 		     , ?
-		     , 2
 		  )
 	</entry>
 	<entry key="insertProductLocation">
@@ -310,7 +310,7 @@
 		  LEFT
 		  JOIN POST USING(POST_NO)
 		 WHERE POST_NO = ?
-		   AND GP_POST_CHECK = 2
+		   AND POST_TYPE = 2
 	</entry>
 	
 	<entry key="selectOption">
@@ -357,6 +357,8 @@
 		          FROM (
 		                SELECT
 		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
 		                     , THUMBNAIL_LOADPATH
 		                     , POST_NAME
 		                     , GP_PEOPLE
@@ -367,7 +369,7 @@
 		                  FROM GROUP_PURCHASE
 		                  JOIN POST USING (POST_NO)
 		                 WHERE BLIND_CHECK = 'N'
-		                   AND GP_POST_CHECK = 2
+		                   AND POST_TYPE = 2
 		                 ORDER
 		                    BY POST_NO DESC
 		                ) A 

@@ -44,7 +44,7 @@ public class BuyerProductDetailController extends HttpServlet {
 		if(result > 0) { // 유효한 게시글
 			
 			// 게시글 정보 조회 (Product)
-			Product p = new ProductService().selectProduct(bno);
+			Product pd = new ProductService().selectProduct(bno);
 			
 			// 옵션리스트 조회 => 여러개
 			ArrayList<Option> oList = new ProductService().selectOption(bno);
@@ -59,7 +59,7 @@ public class BuyerProductDetailController extends HttpServlet {
 			ArrayList<Photo> ptList = new ProductService().selectPhoto(bno);
 			
 			
-			request.setAttribute("p", p);
+			request.setAttribute("pd", pd);
 			request.setAttribute("oList", oList);
 			request.setAttribute("aList", aList);
 			request.setAttribute("pb", pb);

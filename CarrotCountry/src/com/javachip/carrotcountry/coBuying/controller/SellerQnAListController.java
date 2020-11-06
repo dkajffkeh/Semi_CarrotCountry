@@ -37,6 +37,8 @@ public class SellerQnAListController extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		int result = new QnAService().increaseQnACount(bno);
 
+		System.out.println(result);
+		
 		if(result > 0) { // 유효한게시글
 			
 		// 사용자가 요청한 페이지에 뿌려줄 공구물품 Product
