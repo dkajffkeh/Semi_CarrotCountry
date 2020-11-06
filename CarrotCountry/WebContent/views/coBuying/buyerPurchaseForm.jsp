@@ -98,7 +98,8 @@
 </head>
 <body>
 
-<%@ include file="../common/commonNavbar.jsp"%>
+	<%@ include file="../common/commonNavbar.jsp"%>
+	
     <div class="wrap">
         <div id="content">
             <div id="content1">

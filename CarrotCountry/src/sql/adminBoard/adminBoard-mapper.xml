@@ -14,8 +14,7 @@
 					select
 					       p.post_no post_no
 					     , c.category_name category_name
-					     , used_post_check
-					     , gp_post_check
+					     , p.post_type post_type
 					     , post_name
 					     , mem_userid
 					     , post_enroll_date
@@ -27,12 +26,6 @@
 					       member m on m.mem_no = p.mem_no
 					  join 
 					       category c on c.category_no = p.category_no
-					  left outer
-					  join 
-					       group_purchase gp on p.post_no = gp.post_no
-					  left outer
-					  join 
-					       usedprod up on p.post_no = up.post_no
 					 order
 					    by p.post_no
 		            ) a
@@ -58,8 +51,7 @@
 					select
 					       p.post_no post_no
 					     , c.category_name category_name
-					     , used_post_check
-					     , gp_post_check
+					     , p.post_type
 					     , post_name
 					     , mem_userid
 					     , post_enroll_date
@@ -77,12 +69,6 @@
 					       member m on m.mem_no = p.mem_no
 					  join 
 					       category c on c.category_no = p.category_no
-					  left outer
-					  join 
-					       group_purchase gp on p.post_no = gp.post_no
-					  left outer
-					  join 
-					       usedprod up on p.post_no = up.post_no
 					 where blind_check = 'Y'
 					 order
 					    by p.post_no
@@ -103,8 +89,7 @@
 					select
 					       p.post_no post_no
 					     , c.category_name category_name
-					     , used_post_check
-					     , gp_post_check
+					     , p.post_type
 					     , post_name
 					     , mem_userid
 					     , post_enroll_date
@@ -116,12 +101,6 @@
 					       member m on m.mem_no = p.mem_no
 					  join 
 					       category c on c.category_no = p.category_no
-					  left outer
-					  join 
-					       group_purchase gp on p.post_no = gp.post_no
-					  left outer
-					  join 
-					       usedprod up on p.post_no = up.post_no
 					 where post_name like '%'|| nvl(?, '') ||'%'
 					   and c.category_name like '%'|| nvl(?, '') ||'%'
 					   and mem_userid like '%'|| nvl(?, '') ||'%'
@@ -144,8 +123,7 @@
 					select
 					       p.post_no post_no
 					     , c.category_name category_name
-					     , used_post_check
-					     , gp_post_check
+					     , p.post_type
 					     , post_name
 					     , mem_userid
 					     , post_enroll_date
@@ -163,12 +141,6 @@
 					       member m on m.mem_no = p.mem_no
 					  join 
 					       category c on c.category_no = p.category_no
-					  left outer
-					  join 
-					       group_purchase gp on p.post_no = gp.post_no
-					  left outer
-					  join 
-					       usedprod up on p.post_no = up.post_no
 					 where blind_check = 'Y'
 					   and post_name like '%'|| nvl(?, '') ||'%'
 					   and c.category_name like '%'|| nvl(?, '') ||'%'
