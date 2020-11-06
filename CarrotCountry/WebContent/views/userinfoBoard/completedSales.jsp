@@ -1,5 +1,16 @@
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import= "com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
+ 				,com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<SaleProduct> list = (ArrayList<SaleProduct>)request.getAttribute("list");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +61,7 @@
         <!-- 내용 -->
         <div id="content">
             <!-- form태그 진행상태값 받아와야해서 넣음 -->
-            <form action="" method="post" id="saleStatus">
+            
                 <table id="saleStatusTable">
                     <tr align="center">
                         <th></th>
@@ -59,50 +70,47 @@
                         <th><b>거래일자</b></th>
                     </tr>
                  
-                        
+                 <% for( SaleProduct s : list) { %> 
+			<input type="hidden" value="<%= s.getMemNo() %>">
                     <tr align="center">
                         <th rowspan="2">1</th>
                         <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>슈즈</td>
-                        <td>xxxx-xx-xx</td>
+                        <td><%= s.getPostName() %></td>
+                        <td><%= s.getPostEnrollDate() %></td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
                         </td>
                     </tr>
 
                     <tr align="center" valign="top">
-                        <td>xxxx원</td>
+                        <td><%= s.getProdPrice() %> 원</td>
                     </tr>
-
-                    <tr align="center">
-                        <th rowspan="2">2</th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/카메라.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>상품명ddddddddd</td>
-                        <td>xxxx-xx-xx</td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
-                        </td>
-                    </tr>
-                    
-                    <tr align="center" valign="top">
-                        <td >xxxx원</td>
-                    </tr>
-                    
-                    <tr align="center">
-                        <th rowspan="2">3</th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/1.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>상품명</td>
-                        <td>xxxx-xx-xx</td>
-                        <td>
-                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
-                        </td>
-                    </tr>
-                    <tr align="center" valign="top">
-                        <td>xxxx원</td>
-                    </tr>
+				<% } %>
+                   
                 </table>
-            </form>
+           
         </div>
+        
+        
+        <div class="paging-area" align="center">
+			
+        <% if(pi.getCurrentPage() != 1){ %>			
+            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+        <% } %>
+    
+        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+        
+            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%= p %>"><%= p %></a>
+            
+        <% } %>
+    
+        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+        <% } %>
+        
+    	</div>
+    
+    
 
     </div>
 

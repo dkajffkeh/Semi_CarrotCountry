@@ -32,10 +32,7 @@
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
-	
 	int memNo = loginMember.getMemNo();
-	
-
 	
 	%>
 	

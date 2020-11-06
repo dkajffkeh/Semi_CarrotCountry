@@ -101,5 +101,53 @@
 		       COUNT(*) "LISTCOUNT"
 		  FROM GROUP_PURCHASE
 	</entry>
+	<entry key="selectWihsiList">
+	     SELECT *
+		  FROM (
+		        SELECT 
+		                ROWNUM RNUM
+		               , A.*
+		         FROM (
+		                SELECT
+		                       MEM_NO 
+		                     , POST_LIKES
+		                     , POST_NAME
+		                     , PROD_PRICE
+		                     , BLIND_CHECK
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                  FROM LIKE_POST L
+		                  JOIN POST P USING (MEM_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND MEM_NO=?
+		                   AND THUMBNAIL_PATH!='NULL'
+		               ) A
+     		     )
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectCompletedSales">
+	SELECT *
+	  FROM (
+	        SELECT 
+	                ROWNUM RNUM
+	               , A.*
+	         FROM (
+	                 SELECT
+	                       POST_NO
+	                     , MEM_NO
+	                     , POST_NAME
+	                     , PROD_PRICE
+	                     , PROD_STATUS
+	                     , POST_ENROLL_DATE
+	                     , THUMBNAIL_PATH
+	                     , THUMBNAIL_FILENAME
+	                  FROM POST
+	                 WHERE MEM_NO=?
+	                   AND PROD_STATUS='N'
+	               ) A
+	       )
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
 
 </properties>

@@ -92,7 +92,9 @@ public class UserInfoBoardDaoNg {
 						 			  rset.getString("REPORT_REASON"),
 						 			  rset.getString("MEM_NICKNAME"),
 						 			  rset.getDate("REPORT_DATE"),
-						 			  rset.getString("REPORT_CHECK")));
+						 			  rset.getString("REPORT_CHECK"),
+						 			  rset.getString("REPORT_CONTENT"),
+						 			  rset.getInt("REPORT_POST_NO")));
 			}
 			
 			
@@ -107,7 +109,30 @@ public class UserInfoBoardDaoNg {
 		
 	}
 	
-	
+	public int updateRep(Connection conn, int memNo, int reportNo, String reportContent) {
+		// UPDATE문 => result
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRep");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, reportContent);
+			pstmt.setInt(2, memNo);
+			pstmt.setInt(3, reportNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+
+	}
 	
 	
 	

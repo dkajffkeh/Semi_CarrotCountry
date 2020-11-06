@@ -97,7 +97,7 @@
                         <a href="" class="btn btn-primary">수정</a>
                     </td>
                     <td>
-                        <a href="<%= contextPathUserinfo %>//sellerlist.qna.jy?bno=<%=c.getPostNo() %>" class="btn btn-secondary" > Q&A 답변하기</a>
+                        <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo() %>" class="btn btn-secondary"> Q&A 답변하기</a>
                     </td>
                 </tr>
                 
@@ -109,12 +109,12 @@
         </table>
     </div>
     
-    
+
     
      <script>
         	$(function(){
         		$(".list-area>tbody>tr").click(function(){
-        			location.href = "<%=contextPath%>/detail.bo?bno=" + $(this).children().eq(0).text();
+        			location.href = "<%= contextPathUserinfo %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).text();
         		});
         	});
      </script>

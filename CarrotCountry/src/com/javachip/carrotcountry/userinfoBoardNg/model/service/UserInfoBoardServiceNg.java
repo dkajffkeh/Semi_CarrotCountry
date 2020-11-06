@@ -34,5 +34,20 @@ public class UserInfoBoardServiceNg {
 		
 	}
 	
+	public int updateRep(int memNo, int reportNo, String reportContent) {
+		Connection conn = getConnection();
+		
+		int result = new UserInfoBoardDaoNg().updateRep(conn, memNo, reportNo, reportContent);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
+	}
 	
 }

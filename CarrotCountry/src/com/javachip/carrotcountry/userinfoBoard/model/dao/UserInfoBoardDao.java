@@ -15,7 +15,9 @@ import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.SaleProduct;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.WishList;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 
 
@@ -282,7 +284,100 @@ public class UserInfoBoardDao {
 		return listCount;
 	}
 	
+	public ArrayList<WishList> selectWishList(Connection conn ,PageInfo pi, int memNo){
+		
+		ArrayList<WishList> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectWihsiList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); 
 	
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				WishList w = new WishList();
+				w.setMemNo(rset.getInt("MEM_NO"));
+				w.setPostLikes(rset.getInt("POST_LIKES"));
+				w.setPostName(rset.getString("POST_NAME"));
+				w.setProdPrice(rset.getInt("PROD_PRICE"));
+				w.setBlindCheck(rset.getString("BLIND_CHECK"));
+				w.setThumbNailPath(rset.getString("BLIND_CHECK"));
+				w.setThumbNailFileName(rset.getString("BLIND_CHECK"));
+				w.setThumbNailLoadPath(rset.getString("BLIND_CHECK"));
+
+				
+				list.add(w);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
+	}
+	
+	public ArrayList<SaleProduct> selectCompletedSales(Connection conn, int memNo, PageInfo pi){
+
+		ArrayList<SaleProduct> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCompletedSales");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+				while(rset.next()) { 
+					SaleProduct sp = new SaleProduct();
+					
+					sp.setPostNo(rset.getInt("POST_NO"));
+					sp.setMemNo(rset.getInt("MEM_NO"));
+					sp.setPostName(rset.getString("POST_NAME"));
+					sp.setProdPrice(rset.getInt("PROD_PRICE"));
+					sp.setProdStatus(rset.getString("PROD_STATUS"));
+					sp.setPostEnrollDate(rset.getDate("POST_ENROLL_DATE"));
+					sp.setThumbNailPath(rset.getString("THUMBNAIL_PATH"));
+					sp.setThumbNailFileName(rset.getNString("THUMBNAIL_FILENAME"));
+					
+					list.add(sp);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
 	
 	
 	

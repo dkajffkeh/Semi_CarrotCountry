@@ -16,13 +16,14 @@ import com.javachip.carrotcountry.userinfoBoardNg.model.vo.RepPageInfo;
  * Servlet implementation class ReportDetailController
  */
 @WebServlet("/reportDetail.ng")
-public class ReportDetailController extends HttpServlet {
+// reportList.re.ng
+public class MyReportListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportDetailController() {
+    public MyReportListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -77,7 +78,7 @@ public class ReportDetailController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("views/userinfoBoard/ng/myReportDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/userinfoBoard/ng/myReportListView.jsp").forward(request, response);
 		
 	}
 
