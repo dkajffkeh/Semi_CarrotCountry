@@ -125,17 +125,17 @@ public class ProductService {
 	}
 	
 	
-	/*
 	
-	public int insertProduct(Product pd, PostBoard pb, Location lo, ArrayList<Option> oList, ArrayList<Account> aList, ArrayList<Photo> pList) {
+	
+	public int insertProduct(Product pd, PostBoard pb, Location lo, String[] option, String[] account, ArrayList<Photo> pList) {
 			
 			Connection conn = getConnection();
 			
 			int result1 = new ProductDao().insertProductGroupPurchase(conn, pd);
 			int result2 = new ProductDao().insertProductPost(conn, pb);
 			int result3 = new ProductDao().insertProductLocation(conn, lo);
-			int result4 = new ProductDao().insertProductOption(conn, oList);
-			int result5 = new ProductDao().insertProductAccount(conn, aList);
+			int result4 = new ProductDao().insertProductOption(conn, option);
+			int result5 = new ProductDao().insertProductAccount(conn, account);
 			int result6 = new ProductDao().insertProductPhoto(conn, pList);
 			
 			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 ) {
@@ -147,7 +147,7 @@ public class ProductService {
 			return result1 * result2 * result3 * result4 * result5 * result6;
 		}
 		
-		*/
+		
 		
 	
 	

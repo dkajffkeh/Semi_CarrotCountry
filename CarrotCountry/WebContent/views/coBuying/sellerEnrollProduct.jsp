@@ -184,7 +184,7 @@ select {
                 <tr>
                     <td class="textOrange">옵션</td>
                     <td>
-                        <input type="text" class="form-control" id="option-add">
+                        <input type="text" name="option" class="form-control" id="option-add">
                         <select name="selectArea1" id="selectArea1" style="width: 300px;"> 
                         </select>
                     </td>
