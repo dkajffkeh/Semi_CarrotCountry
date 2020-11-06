@@ -7,8 +7,10 @@ import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.SaleProduct;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.WishList;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class UserInfoBoardService {
 	
 	/**
 	 * 5. 공동구매 게시글 조회
-	 * @param memNo 	지역번호
+	 * @param 
 	 * @return 			
 	 *
 	 */
@@ -123,5 +125,41 @@ public class UserInfoBoardService {
 			return listCount;
 		}
 	
+		/**
+		 * 6. 찜목록 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<WishList> selectWishList(PageInfo pi, int memNo){
+			Connection conn = getConnection();
+			
+			ArrayList<WishList> list = new UserInfoBoardDao().selectWishList(conn, pi, memNo);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+
+		/**
+		 * 7. 판매완료 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<SaleProduct> selectCompletedSales(int memNo, PageInfo pi){
+			Connection conn = getConnection();
+			
+			ArrayList<SaleProduct> list = new UserInfoBoardDao().selectCompletedSales(conn, memNo, pi);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+		
 
 }

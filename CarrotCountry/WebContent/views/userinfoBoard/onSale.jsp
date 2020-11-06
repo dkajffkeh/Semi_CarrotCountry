@@ -34,7 +34,7 @@
         <!-- 메뉴선택 버튼 -->
         <div class="navWrap">
             <div class="menu" align ="center"><a href="<%= contextPath %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매중</a></div>
-            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매완료</a></div>
+            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">판매완료</a></div>
         </div>
         <br>
         <!-- 검색필터 드롭다운 -->
