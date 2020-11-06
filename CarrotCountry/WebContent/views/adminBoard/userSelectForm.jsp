@@ -77,7 +77,7 @@
 											<td>
 												<% if (am.getbListCheck().equals("N")) { %>
 													<!-- 클릭 시 블랙리스트 등록  -->
-													<a href="<%= contextPath %>/blacklistEnroll.sb?&memNo=<%= am.getMemNo() %>&bList=Y" class="btn btn-outline-danger btn-sm">등록</a>
+													<button onclick="registBlackList(<%= am.getMemNo() %>);" class="btn btn-outline-danger btn-sm">등록</button>
 												<% } %>
 											</td>
 										</tr>
@@ -104,7 +104,15 @@
 			</div>
 		</div>
 	</div>
-
+	<script>
+		function registBlackList(memNo) {
+			const registYN = confirm('등록하시겠습니까?');
+			const url = "<%= contextPath %>/blacklistEnroll.sb?&memNo=" + memNo + "&bList=Y";
+			if(registYN){
+				location.href = url;
+			}
+		}
+	</script>
 	<!-- footer 영역 -->
 	<%@ include file="../common/footerbar.jsp"%>
 

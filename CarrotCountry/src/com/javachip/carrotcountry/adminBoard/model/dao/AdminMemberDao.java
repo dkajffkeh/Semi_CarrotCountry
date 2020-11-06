@@ -85,7 +85,7 @@ public class AdminMemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(bList);
+
 			pstmt.setString(1, bList);
 			pstmt.setString(2, memNo);
 			

@@ -11,38 +11,30 @@
 		            , a.*
 		         from
 		            (
-		                select
-		                       post_no
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , blind_check
-		                     , used_post_check
-                             , null gp_post_check
-		                  from 
-		                       post
-		                  join member using(mem_no)
-		                  join category c using(category_no)
-		                  join usedprod using(post_no)
-		                  union all
-		                  select
-		                       post_no
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , blind_check
-		                     , null used_post_check
-                     		 , gp_post_check
-		                  from 
-		                       post
-		                  join member using(mem_no)
-		                  join category c using(category_no)
-		                  join group_purchase using(post_no)
-		                  order by post_no
+					select
+					       p.post_no post_no
+					     , c.category_name category_name
+					     , used_post_check
+					     , gp_post_check
+					     , post_name
+					     , mem_userid
+					     , post_enroll_date
+					     , post_views
+					     , blind_check
+					  from 
+					       post p
+					  join 
+					       member m on m.mem_no = p.mem_no
+					  join 
+					       category c on c.category_no = p.category_no
+					  left outer
+					  join 
+					       group_purchase gp on p.post_no = gp.post_no
+					  left outer
+					  join 
+					       usedprod up on p.post_no = up.post_no
+					 order
+					    by p.post_no
 		            ) a
 		     )
 		where rnum between ? and ?
@@ -63,50 +55,37 @@
 		            , a.*
 		         from
 		            (
-		                select
-		                       post_no
-		                     , used_post_check
-		                     , null gp_post_check
-		                     , c.category_name category_name
-		                     , post_name
-		                     , post_views
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , (
-		                        select
-		                               count(*)
-		                          from report r 
-		                         where post_no = report_post_no
-		                       ) report_count
-		                  from 
-		                       post p
-		                  join member m using(mem_no)
-		                  join category c using(category_no)
-		                  join usedprod using(post_no)
-		                  where blind_check = 'Y'
-		                  union all
-		                  select
-		                       post_no
-		                     , null used_post_check
-		                     , gp_post_check
-		                     , c.category_name category_name
-		                     , post_name
-		                     , post_views
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , (
-		                        select
-		                               count(*)
-		                          from report r
-		                         where post_no = report_post_no
-		                       ) report_count
-		                  from
-		                       post p
-		                  join member m using(mem_no)
-		                  join category c using(category_no)
-		                  join group_purchase using(post_no)
-		                  where blind_check = 'Y'
-		                  order by post_no
+					select
+					       p.post_no post_no
+					     , c.category_name category_name
+					     , used_post_check
+					     , gp_post_check
+					     , post_name
+					     , mem_userid
+					     , post_enroll_date
+					     , post_views
+					     , (
+					        select
+					               count(*)
+					          from 
+					               report r
+					         where p.post_no = report_post_no
+					        ) report_count
+					  from 
+					       post p
+					  join 
+					       member m on m.mem_no = p.mem_no
+					  join 
+					       category c on c.category_no = p.category_no
+					  left outer
+					  join 
+					       group_purchase gp on p.post_no = gp.post_no
+					  left outer
+					  join 
+					       usedprod up on p.post_no = up.post_no
+					 where blind_check = 'Y'
+					 order
+					    by p.post_no
 		            ) a
 		     )
 		where rnum between ? and ?
@@ -121,45 +100,33 @@
 		            , a.*
 		         from
 		            (
-		                select
-		                       post_no
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , blind_check
-		                     , used_post_check
-                             , null gp_post_check
-		                  from 
-		                       post
-		                  join member using(mem_no)
-		                  join category c using(category_no)
-		                  join usedprod using(post_no)
-		                  where post_name like '%'|| nvl(?, '') ||'%'
-		                    and c.category_name like '%'|| nvl(?, '') ||'%'
-		                    and mem_userid like '%'|| nvl(?, '') ||'%'
-		                  union all
-		                  select
-		                       post_no
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , blind_check
-		                     , null used_post_check
-                     		 , gp_post_check
-		                  from 
-		                       post
-		                  join member using(mem_no)
-		                  join category c using(category_no)
-		                  join group_purchase using(post_no)
-		                 where post_name like '%'|| nvl(?, '') ||'%'
-		                    and c.category_name like '%'|| nvl(?, '') ||'%'
-		                    and mem_userid like '%'|| nvl(?, '') ||'%'
-		                 order 
-		                    by post_no
+					select
+					       p.post_no post_no
+					     , c.category_name category_name
+					     , used_post_check
+					     , gp_post_check
+					     , post_name
+					     , mem_userid
+					     , post_enroll_date
+					     , post_views
+					     , blind_check
+					  from 
+					       post p
+					  join 
+					       member m on m.mem_no = p.mem_no
+					  join 
+					       category c on c.category_no = p.category_no
+					  left outer
+					  join 
+					       group_purchase gp on p.post_no = gp.post_no
+					  left outer
+					  join 
+					       usedprod up on p.post_no = up.post_no
+					 where post_name like '%'|| nvl(?, '') ||'%'
+					   and c.category_name like '%'|| nvl(?, '') ||'%'
+					   and mem_userid like '%'|| nvl(?, '') ||'%'
+					 order
+					    by p.post_no
 		            ) a
 		     )
 		where rnum between ? and ?
@@ -174,56 +141,40 @@
 		            , a.*
 		         from
 		            (
-		                select
-		                       post_no
-		                     , used_post_check
-		                     , null gp_post_check
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , (
-		                        select
-		                               count(*)
-		                          from report r 
-		                         where post_no = report_post_no
-		                       ) report_count
-		                  from 
-		                       post p
-		                  join member m using(mem_no)
-		                  join category c using(category_no)
-		                  join usedprod using(post_no)
-		                  where blind_check = 'Y'
-		                    and post_name like '%'|| nvl(?, '') ||'%'
-		                    and c.category_name like '%'|| nvl(?, '') ||'%'
-		                    and mem_userid like '%'|| nvl(?, '') ||'%'
-		                  union all
-		                  select
-		                       post_no
-		                     , null used_post_check
-		                     , gp_post_check
-		                     , c.category_name category_name
-		                     , post_name
-		                     , mem_userid
-		                     , post_enroll_date
-		                     , post_views
-		                     , (
-		                        select
-		                               count(*)
-		                          from report r
-		                         where post_no = report_post_no
-		                       ) report_count
-		                  from
-		                       post p
-		                  join member m using(mem_no)
-		                  join category c using(category_no)
-		                  join group_purchase using(post_no)
-		                  where blind_check = 'Y'
-		                    and post_name like '%'|| nvl(?, '') ||'%'
-		                    and c.category_name like '%'|| nvl(?, '') ||'%'
-		                    and mem_userid like '%'|| nvl(?, '') ||'%'
-		                  order by post_no
+					select
+					       p.post_no post_no
+					     , c.category_name category_name
+					     , used_post_check
+					     , gp_post_check
+					     , post_name
+					     , mem_userid
+					     , post_enroll_date
+					     , post_views
+					     , (
+					        select
+					               count(*)
+					          from 
+					               report r
+					         where p.post_no = report_post_no
+					        ) report_count
+					  from 
+					       post p
+					  join 
+					       member m on m.mem_no = p.mem_no
+					  join 
+					       category c on c.category_no = p.category_no
+					  left outer
+					  join 
+					       group_purchase gp on p.post_no = gp.post_no
+					  left outer
+					  join 
+					       usedprod up on p.post_no = up.post_no
+					 where blind_check = 'Y'
+					   and post_name like '%'|| nvl(?, '') ||'%'
+					   and c.category_name like '%'|| nvl(?, '') ||'%'
+					   and mem_userid like '%'|| nvl(?, '') ||'%'
+					 order
+					    by p.post_no
 		            ) a
 		     )
 		where rnum between ? and ?

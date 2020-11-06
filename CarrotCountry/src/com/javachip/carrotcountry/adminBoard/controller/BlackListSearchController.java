@@ -43,7 +43,6 @@ public class BlackListSearchController extends HttpServlet {
 		
 		String category = request.getParameter("searchCategory");
 		String search = request.getParameter("search");
-		System.out.println(search);
 		
 		ArrayList<AdminMember> list = new AdminMemberService().blackListSearch(pi, category, search);
 		
