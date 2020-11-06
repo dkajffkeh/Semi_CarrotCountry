@@ -88,7 +88,7 @@
 		                                        <td>${ab.reportCount}</td>
 		                                        <td>
 		                                            <!-- 클릭시 블라인드 해제 -->
-		                                            <a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=N" class="btn btn-outline-danger btn-sm">해제</a>
+		                                            <button onclick="registBlindList(${ab.postNo});" class="btn btn-outline-danger btn-sm">해제</button>
 		                                        </td>
 		                                    </tr>
 	                                	</c:forEach>
@@ -116,7 +116,15 @@
             </div>
         </div>
     </div>
-    
+    <script>
+		function registBlindList(postNo) {
+			const registYN = confirm('해제하시겠습니까?');
+			const url = "<%= contextPath %>/blindEnroll.sb?&postNo=" + postNo + "&bCheck=N";
+			if(registYN){
+				location.href = url;
+			}
+		}
+	</script>
     <!-- footer 영역 -->
     <%@ include file="../common/footerbar.jsp" %>
 	
