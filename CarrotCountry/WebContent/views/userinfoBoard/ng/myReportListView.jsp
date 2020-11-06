@@ -30,7 +30,11 @@
 		width:100%;
 		height:10%;
 		padding:12px;
-	}	
+	}
+	.wrapReport{
+		width:100%;
+		height:100%;
+	}
 </style>
 </head>
 <body>
@@ -49,8 +53,7 @@
 		       	<h1>신고 내역</h1>
 		        <hr color="gray">
 		        
-		        <br><br><br><br><br>
-
+				<div class="wrapReport">
 				<table class="table table-striped table-hover" style="text-align:center">
 					<thead>
 						<tr style="background:gray; color:white;">
@@ -66,7 +69,7 @@
 					</thead>
 					<% if(list.isEmpty()){ %>
 						<tr align="center">
-							<td colspan="7">신고 내역이 존재하지 않습니다.</td>
+							<td colspan="8">신고 내역이 존재하지 않습니다.</td>
 						</tr>
 					<% }else{ %>
 					<tbody>
@@ -93,58 +96,51 @@
 							
 							      <!-- Modal Header -->
 							      <div class="modal-header">
-							        <h4 class="modal-title">신고 내용</h4>
-							        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        <h4 class="modal-title">신고 내용</h4> 
 							      </div>
 							
-							      <!-- Modal body -->
-							      <div class="modal-body">
-							      
-							      	<form action="reportUpdate.re.ng" method="post">
-								      	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
-								      	<input type="hidden" name="reportNo" value="<%= rep.getReportNo() %>">
-								      	<textarea cols="65" rows="10" style="resize:none;" name="reportContent"><%= rep.getReportContent() %></textarea>
-									  	
-									    </div>
-									
-									    <!-- Modal footer -->
-									    <div class="modal-footer">
-								      	<button type="submit"  class="btn btn-danger">수정하기</button>
-							      	</form>
-							      	
-							        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-							      </div>
+							      <form action="reportUpdate.re.ng" method="post">
+								      <!-- Modal body -->
+								      <div class="modal-body">
+									      	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+									      	<input type="hidden" name="reportNo" value="<%= rep.getReportNo() %>">
+									      	<textarea cols="62" rows="10" style="resize:none;" name="reportContent"><%= rep.getReportContent() %></textarea>
+									  </div>
+										
+								      <!-- Modal footer -->
+								      <div class="modal-footer">
+							      	  <button type="submit"  class="btn btn-warning">수정하기</button> 	
+								      <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+								      </div>
 							
+							      </form>
 							    </div>
 							  </div>
-							</div>
-
+						    </div>
 						<%} %>
 					<%} %>
 					</tbody>
 				</table>
-				</div>
-				<p align="center" style="font-weight:900; font-size:20px"><%= pi.getRepCurrentPage() %>page</p>
-				<div class="myReportBottom">
-				
+			</div>
+			<p align="center" style="font-weight:900; font-size:20px"><%= pi.getRepCurrentPage() %>page</p>
+			<div class="myReportBottom">			
 				<% if(!list.isEmpty()){ %>
 					<% if(pi.getRepCurrentPage() != 1){ %>
 						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() -1 %>" class="btn btn-warning" style="color:white;">&lt;&nbsp;&nbsp;PREV</a>				
 					<% } %>
-					
-					
+						
 					<% for(int i = pi.getRepStartPage(); i<=pi.getRepEndPage(); i++){ %>
 						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= i %>" class="btn btn-secondary btn-sm" style="color:white;"><%= i %></a>
 					<% } %>
-						
+							
 					<% if(pi.getRepCurrentPage() != pi.getRepMaxPage()){ %>
 						<a href="<%= contextPath %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=<%= pi.getRepCurrentPage() +1 %>" class="btn btn-warning" style="color:white;">NEXT&nbsp;&nbsp;&gt;</a>																			
 					<% } %>
 				<% } %>
-			
 			</div>
 		</div>
 	</div>
+</div>
 
 	<!-- footerbar -->
 	<%@ include file="../../common/footerbar.jsp" %>
