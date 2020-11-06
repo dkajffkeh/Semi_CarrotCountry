@@ -25,8 +25,8 @@
 
 /* 전반적인 큰 틀 (3개의 영역) */
 #header{height:20%;}
-#content{height:80%;}
-#footer{height:100%; margin:10px 0px;}
+#content{height:70%;}
+.paginationArea{height:10%}
 
 /* 헤더영역의 전반적인 틀 */
 #header>div{width:100%;  float: left;}
@@ -309,32 +309,29 @@
 		        	});
 		        </script>
 		                    
-		                    
-		                    
-		                    
-
-                <div class="paginationArea" align="center">
-
-					<% if(pi.getCurrentPage() != 1){ %>
-		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
-		            <% } %>
-					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-		            	
-		            	<a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= p %>"><%= p %></a>
-		            
-		            <% } %>
-		            
-		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
-		            <% } %>
-	       		</div>
-                
-                   
 
                 </div>
 
             </div>
         </div>
+
+		 <div class="paginationArea" align="center">
+
+				<% if(pi.getCurrentPage() != 1){ %>
+		          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+		           <% } %>
+				<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+		           	
+		           	<a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= p %>"><%= p %></a>
+	           
+	            <% } %>
+	           
+	            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+	          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
+	            <% } %>
+     		</div>
+                
+
 
     </div>
     

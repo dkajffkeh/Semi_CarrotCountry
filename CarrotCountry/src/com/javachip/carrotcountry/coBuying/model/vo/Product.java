@@ -25,8 +25,8 @@ public class Product {
 	private String thumbnailLoadpath;
 	private String postName;
 	private int postLikes;
-	
-	
+	private String thumbnailPath;
+	private String thumbnailFilename;
 	
 	public Product() {}
 
@@ -36,6 +36,36 @@ public class Product {
 	
 	
 	
+	
+	
+	
+	
+
+	public Product(int postNo, String thumbnailPath, String thumbnailFilename, String thumbnailLoadpath,
+			String postName, int gpPeople, int postLikes, int gpPrice, int gpDRate, int gpDPrice) {
+		super();
+		this.postNo = postNo;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadpath = thumbnailLoadpath;
+		this.postName = postName;
+		this.gpPeople = gpPeople;
+		this.postLikes = postLikes;
+		this.gpPrice = gpPrice;
+		this.gpDRate = gpDRate;
+		this.gpDPrice = gpDPrice;
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 	public Product(String thumbnailLoadpath, String postName) {
 		super();
@@ -408,6 +438,70 @@ public class Product {
 	public void setGpPostCheck(int gpPostCheck) {
 		this.gpPostCheck = gpPostCheck;
 	}
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+	public String getThumbnailPath() {
+		return thumbnailPath;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setThumbnailPath(String thumbnailPath) {
+		this.thumbnailPath = thumbnailPath;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getThumbnailFilename() {
+		return thumbnailFilename;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setThumbnailFilename(String thumbnailFilename) {
+		this.thumbnailFilename = thumbnailFilename;
+	}
+
+
+
+
 
 
 

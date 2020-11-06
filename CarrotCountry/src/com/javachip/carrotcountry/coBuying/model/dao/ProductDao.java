@@ -348,9 +348,10 @@ private Properties prop = new Properties();
 			pstmt.setString(3, pb.getMemNickname());
 			pstmt.setString(4, pb.getPostName());
 			pstmt.setString(5, pb.getPostContent());
-			pstmt.setString(6, pb.getThumbnailPath());
-			pstmt.setString(7, pb.getThumbnailFilename());
-			pstmt.setString(8, pb.getThumbnailLoadPath());
+			pstmt.setString(6, pb.getCategoryNo());
+			pstmt.setString(7, pb.getThumbnailPath());
+			pstmt.setString(8, pb.getThumbnailFilename());
+			pstmt.setString(9, pb.getThumbnailLoadPath());
 			
 			result = pstmt.executeUpdate();
 			

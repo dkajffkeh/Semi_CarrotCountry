@@ -166,7 +166,7 @@
 		    , POST_REPORTS
 		    , POST_LIKES
 		    , PROD_PRICE
-		    , POST_ENROLLDATE
+		    , POST_ENROLL_DATE
 		   )
 		  VALUES
 		  (

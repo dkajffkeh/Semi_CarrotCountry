@@ -139,6 +139,8 @@ public class SellerInsertProductController extends HttpServlet {
 			
 			int result = new ProductService().insertProduct(pb, pd, lo, option, account, pList);
 			
+			
+			
 			if(result > 0) { // 성공 
 				
 				request.getSession().setAttribute("alertMsg", "공동구매가  성공적으로 등록되었습니다");

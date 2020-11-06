@@ -138,6 +138,16 @@ public class ProductService {
 			int result5 = new ProductDao().insertProductAccount(conn, account);
 			int result6 = new ProductDao().insertProductPhoto(conn, pList);
 			
+			
+
+			System.out.println(result1);
+			System.out.println(result2);
+			System.out.println(result3);
+			System.out.println(result4);
+			System.out.println(result5);
+			System.out.println(result6);
+			
+			
 			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 ) {
 				commit(conn);
 			}else {
