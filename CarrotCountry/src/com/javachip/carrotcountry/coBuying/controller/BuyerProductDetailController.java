@@ -37,6 +37,8 @@ public class BuyerProductDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		request.setCharacterEncoding("utf-8");
+		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		// 1. 조회수 증가

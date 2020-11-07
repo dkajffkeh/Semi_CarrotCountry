@@ -131,6 +131,9 @@
                           <li data-target="#demo" data-slide-to="0" class="active"></li>
                           <li data-target="#demo" data-slide-to="1"></li>
                           <li data-target="#demo" data-slide-to="2"></li>
+                          <li data-target="#demo" data-slide-to="3"></li>
+                          <li data-target="#demo" data-slide-to="4"></li>
+                          <li data-target="#demo" data-slide-to="5"></li>
                         </ul>
                       
                         <!-- The slideshow -->
@@ -156,9 +159,11 @@
                       </div>
                       
                 </div>
-                <div id="content2_2">
+                
+                    <form action="<%= contextPath %>/buyerPurchase.pro.jy" method="post"  enctype="multipart/form-data" >
+                       
+                       <div id="content2_2">
                
-                    <form action="">
                         <div id="content2_2_1">
                         	<input type="hidden" name="postNo" value="<%= pb.getPostNo() %>">
                             <span>모집 기간 :</span> <%= pd.getPostEnrollDate() %> ~ <%= pd.getGpDeadline() %> <br>
@@ -199,10 +204,10 @@
                             </div>
                             
                         </div>
-                    </form>
                    
+               		 </div>
+                  </form>
                    
-                </div>
             </div>
             <div id="content3">
               

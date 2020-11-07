@@ -260,10 +260,12 @@
 		  (
 		      POST_NO
 		    , ACCOUNT
+		    , BANK
 		  )
 		  VALUES
 		  (
 		      SEQ_PNO.CURRVAL
+		    , 'ACCOUNT'
 		    , ?
 		  )
 	</entry>
@@ -344,7 +346,7 @@
 	
 	<entry key="selectAccount">
 		SELECT
-               ACCOUNT
+               BANK
           FROM ACCOUNT
          WHERE POST_NO = ?
 	</entry>
