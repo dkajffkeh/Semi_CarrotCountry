@@ -43,7 +43,7 @@ public class OneToMyListView extends HttpServlet {
 		//
 		listCount = new OneToService().selectListCount();
 		
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		currentPage = Integer.parseInt(request.getParameter("repCurrentPage"));
 		
 		pageLimit = 10;
 		
@@ -68,7 +68,7 @@ public class OneToMyListView extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 	
-		request.getRequestDispatcher("views/userinfoBoard/ng/myOneToListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/userinfoBoard/ng/myOneToMyListView.jsp").forward(request, response);
 	
 	
 	}
