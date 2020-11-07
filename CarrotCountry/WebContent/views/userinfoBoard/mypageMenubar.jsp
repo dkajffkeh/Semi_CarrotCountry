@@ -116,7 +116,7 @@
 				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>
 				<!-- 작업중 -->
 			<tr>
-				<th><a href="<%= contextPathUserinfo %>/list.on.jm?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">1:1문의내역</a></th>
+				<th><a href="<%= contextPathUserinfo %>/myList.on.jm?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">1:1문의내역</a></th>
 			</tr>                     
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
