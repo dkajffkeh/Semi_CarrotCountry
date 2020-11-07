@@ -308,6 +308,8 @@
 	<entry key="selectPostBoard">
 		SELECT
 		       POST_NO
+		     , POST_NAME
+		     , POST_COMMENT
 		     , THUMBNAIL_PATH
 		     , THUMBNAIL_FILENAME
 		     , THUMBNAIL_LOADPATH
@@ -323,7 +325,6 @@
 		     , GP_MINPEOPLE
 		     , GP_PEOPLE
 		     , GP_DPRICE
-             , POST_COMMENT
              , GP_REFUND
 		  FROM GROUP_PURCHASE 
 		  LEFT

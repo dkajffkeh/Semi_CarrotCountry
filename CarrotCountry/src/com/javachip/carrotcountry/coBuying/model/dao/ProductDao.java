@@ -117,6 +117,8 @@ private Properties prop = new Properties();
 			
 			if(rs.next()) {
 				pb = new PostBoard(rs.getInt("post_no"),
+							  rs.getString("post_name"),
+							  rs.getString("post_comment"),
 							  rs.getString("thumbnail_path"),
 							  rs.getString("thumbnail_filename"),
 							  rs.getString("thumbnail_loadpath"));
@@ -138,7 +140,7 @@ private Properties prop = new Properties();
 	
 	public Product selectProduct(Connection conn, int bno) {
 		// select문 => 한 행 
-		Product p = null;
+		Product pd = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -153,13 +155,12 @@ private Properties prop = new Properties();
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				p = new Product(rs.getInt("post_no"),
+				pd = new Product(rs.getInt("post_no"),
 							  rs.getDate("POST_ENROLL_DATE"),
 							  rs.getString("gp_deadline"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),
-							  rs.getString("post_comment"),
 							  rs.getString("gp_refund"));
 			}
 			
@@ -171,7 +172,7 @@ private Properties prop = new Properties();
 			
 		}
 		
-		return p;
+		return pd;
 		
 	}
 	
