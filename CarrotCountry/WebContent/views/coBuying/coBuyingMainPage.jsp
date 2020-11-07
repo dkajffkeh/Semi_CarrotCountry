@@ -305,6 +305,8 @@
 		        <script>
 		        	$(function(){
 		        		$("#proName").click(function(){
+		        			
+		        			
 		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
 		        		})
 		        	});

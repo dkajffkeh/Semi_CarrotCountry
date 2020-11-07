@@ -236,22 +236,20 @@
                     <script>
                         function showExplan(){
 	                        var showArea = document.getElementById("showContent");
-	                        showArea.innerHTML = <%= pb.getPostContent() %>
-	                        console.log(<%= pb.getPostContent() %>);
+	                        showArea.innerHTML = "<%= pb.getPostContent() %>";
                         }
                         
 
                         function showAccount(){
                             var showArea = document.getElementById("showContent");
                             <%for(Account account : aList){ %>	
-							    showArea.innerHTML = '입금 가능 계좌 : ' + <%= account.getAccount() %>;
+							    showArea.innerHTML = '입금 가능 계좌 : ' + "<%= account.getAccount() %>";
 							 <% } %>
                         }
                 
                         function showRefund(){
                             var showArea = document.getElementById("showContent");
-                            showArea.innerHTML = <%= pd.getGpRefund() %>
-                            console.log(<%= pd.getGpRefund() %>);
+                            showArea.innerHTML = "<%= pd.getGpRefund() %>";
                         }
                     </script>
 
