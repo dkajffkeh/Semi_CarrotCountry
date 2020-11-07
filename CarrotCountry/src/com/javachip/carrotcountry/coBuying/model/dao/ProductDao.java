@@ -55,6 +55,7 @@ private Properties prop = new Properties();
 					close(pstmt);
 				}
 				
+				System.out.println(result);
 				return result;
 				}
 	
@@ -94,6 +95,44 @@ private Properties prop = new Properties();
 
 	
 	//
+	
+
+	
+	
+	public PostBoard selectPostBoard(Connection conn, int bno) {
+		// select문 => 한 행 
+		PostBoard pb = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectPostBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pb = new PostBoard(rs.getInt("post_no"),
+							  rs.getString("thumbnail_path"),
+							  rs.getString("thumbnail_filename"),
+							  rs.getString("thumbnail_loadpath"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return pb;
+		
+	}
 	
 	
 	
@@ -206,44 +245,6 @@ private Properties prop = new Properties();
 		
 		
 	}
-	
-	
-	
-	public PostBoard selectThumbnail(Connection conn, int bno) {
-		// select문 => 한 행 
-		PostBoard pb = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("selectThumbnail");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				pb = new PostBoard(rs.getInt("post_no"),
-							  rs.getString("thumbnail_path"),
-							  rs.getString("thumbnail_filename"),
-							  rs.getString("thumbnail_loadpath"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-			
-		}
-		
-		return pb;
-		
-	}
-	
 	
 	
 	public ArrayList<Photo> selectPhoto(Connection conn, int bno){

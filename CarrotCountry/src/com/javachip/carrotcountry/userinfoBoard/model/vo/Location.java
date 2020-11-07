@@ -7,6 +7,26 @@ public class Location {
 	private String localDong;
 	
 	public Location() {}
+	
+	
+	
+	
+
+
+
+
+	public Location(String localGu, String localDong) {
+		super();
+		this.localGu = localGu;
+		this.localDong = localDong;
+	}
+
+
+
+
+
+
+
 
 	public Location(String localNo, String localSi, String localGu, String localDong) {
 		super();

@@ -136,14 +136,13 @@
                         <!-- The slideshow -->
                         <div class="carousel-inner">
                           <div class="carousel-item active">
-                            <img src="../../resources/images/coBuying/무선청소기1.jpg" alt="" width="100%">
+                            <img src="<%=contextPath%>/<%=pb.getThumbnailPath() + pb.getThumbnailFilename() %>" alt="" width="100%">
                           </div>
+                          <%for(int i=0; i < ptList.size(); i++){ %>
                           <div class="carousel-item">
-                            <img src="../../resources/images/coBuying/무선청소기2.jpg" alt="">
+                            <img src="<%=contextPath%>/<%= ptList.get(i).getPhotoPath() + ptList.get(i).getPhotoFileName() %>" alt="">
                           </div>
-                          <div class="carousel-item">
-                            <img src="../../resources/images/coBuying/무선청소기3.jpeg" alt="">
-                          </div>
+                          <%} %>
                         </div>
                       
                         <!-- Left and right controls -->
@@ -170,7 +169,7 @@
                               </div> <br>
                             <span>가격 :</span> <%= pd.getGpDPrice() %> <br>
                             <span>옵션 : </span>
-                           		 <select name="product" id="product">
+                           		 <select name="option" id="product">
 	                            	<% if(oList.isEmpty()){ %>
 						                <!-- 조회된 옵션이 없을 경우-->
 						                	<option>옵션이 없습니다.</option>

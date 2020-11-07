@@ -54,7 +54,18 @@ public class ProductService {
 
 	//
 	
-	
+
+	public PostBoard selectPostBoard(int bno) {
+		
+		Connection conn = getConnection();
+		PostBoard pb = new ProductDao().selectPostBoard(conn, bno);
+		
+		close(conn);
+		
+		return pb;
+		
+	}
+		
 
 	public Product selectProduct(int bno) {
 		
@@ -67,6 +78,7 @@ public class ProductService {
 		
 	}
 	
+		
 	
 	public ArrayList<Option> selectOption(int bno){
 		
@@ -88,17 +100,6 @@ public class ProductService {
 		close(conn);
 		
 		return aList;
-		
-	}
-	
-	public PostBoard selectThumbnail(int bno) {
-		
-		Connection conn = getConnection();
-		PostBoard pb = new ProductDao().selectThumbnail(conn, bno);
-		
-		close(conn);
-		
-		return pb;
 		
 	}
 	

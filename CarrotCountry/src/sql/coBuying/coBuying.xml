@@ -6,7 +6,7 @@
 		UPDATE
 		       POST
 		   SET POST_VIEWS = POST_VIEWS + 1
-		 WHERE BLIND_CHECK = 'Y'
+		 WHERE BLIND_CHECK = 'N'
 		   AND POST_NO = ?
 	</entry>
 	
@@ -296,6 +296,18 @@
 	
 	
 	
+	
+	
+	<entry key="selectPostBoard">
+		SELECT
+		       POST_NO
+		     , THUMBNAIL_PATH
+		     , THUMBNAIL_FILENAME
+		     , THUMBNAIL_LOADPATH
+		  FROM POST
+		 WHERE POST_NO = ?
+	</entry>
+	
 	<entry key="selectProduct">
 		SELECT
 		       POST_NO
@@ -313,6 +325,15 @@
 		   AND POST_TYPE = 2
 	</entry>
 	
+	<entry key="selectLocation">
+		 SELECT
+	           LOCAL_GU
+	         , LOCAL_DONG
+	      FROM LOCATION
+	      JOIN POST USING(LOCAL_NO)
+	     WHERE POST_NO = ?
+	</entry>
+	
 	<entry key="selectOption">
 		SELECT
 			   OPTION_NO
@@ -326,16 +347,6 @@
                ACCOUNT
           FROM ACCOUNT
          WHERE POST_NO = ?
-	</entry>
-
-	<entry key="selectThumbnail">
-		SELECT
-		       POST_NO
-		     , THUMBNAIL_PATH
-		     , THUMBNAIL_FILENAME
-		     , THUMBNAIL_LOADPATH
-		  FROM POST
-		 WHERE POST_NO = ?
 	</entry>
 	
 	<entry key="selectPhoto">

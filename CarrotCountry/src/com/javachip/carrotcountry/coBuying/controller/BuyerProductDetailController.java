@@ -15,6 +15,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.Option;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 
 /**
  * Servlet implementation class BuyerProductDetailController
@@ -42,8 +43,12 @@ public class BuyerProductDetailController extends HttpServlet {
 		int result = new ProductService().increaseCount(bno);
 		
 		if(result > 0) { // 유효한 게시글
+
 			
-			// 게시글 정보 조회 (Product)
+			// 대표사진, post정보 조회 (Thumbnail)
+			PostBoard pb = new ProductService().selectPostBoard(bno);
+			
+			// group_purchase게시글 정보 조회 (Product)
 			Product pd = new ProductService().selectProduct(bno);
 			
 			// 옵션리스트 조회 => 여러개
@@ -52,17 +57,14 @@ public class BuyerProductDetailController extends HttpServlet {
 			// 계좌리스트 조회 => 여러개
 			ArrayList<Account> aList = new ProductService().selectAccount(bno);
 			
-			// 대표사진 정보 조회 (Thumbnail)
-			PostBoard pb = new ProductService().selectThumbnail(bno);
-			
 			// 상세사진 정보 조회 (Photo) => 여러개
 			ArrayList<Photo> ptList = new ProductService().selectPhoto(bno);
 			
-			
+
+			request.setAttribute("pb", pb);
 			request.setAttribute("pd", pd);
 			request.setAttribute("oList", oList);
 			request.setAttribute("aList", aList);
-			request.setAttribute("pb", pb);
 			request.setAttribute("ptList", ptList);
 			
 			
