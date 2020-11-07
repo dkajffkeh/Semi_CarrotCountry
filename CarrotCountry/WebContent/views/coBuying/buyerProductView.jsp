@@ -232,7 +232,7 @@
                     </div>
 
 					
-
+<!--
                     <script>
                         function showExplan(){
 	                        var showArea = document.getElementById("showContent");
@@ -254,7 +254,7 @@
                         }
                     </script>
 
-                    
+   -->                   
 
 
                     
