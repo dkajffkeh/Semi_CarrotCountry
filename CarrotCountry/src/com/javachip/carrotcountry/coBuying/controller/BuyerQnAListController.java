@@ -34,7 +34,13 @@ public class BuyerQnAListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+				int bno = Integer.parseInt(request.getParameter("bno"));
+				int result = new QnAService().increaseCount(bno);
+		
+				System.out.println(result);
+				
+				if(result > 0) { // 유효한게시글
+			
 		// ---------------------------- 페이징 처리 -------------------------------------
 				int listCount;					// 현재 일반게시판 총 갯수
 				int currentPage;				// 사용자가 요청한 페이지 (즉, 현재 페이지)
@@ -74,14 +80,19 @@ public class BuyerQnAListController extends HttpServlet {
 				PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 				
 				// 사용자가 요청한 페이지에 뿌려줄 게시글 리스트
-				ArrayList<QnA> list = new QnAService().selectQnAList(pi);
+				ArrayList<QnA> list = new QnAService().selectQnAList(pi, bno);
 				
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
 				
 				request.getRequestDispatcher("views/coBuying/buyerQnAListView.jsp").forward(request, response);
 				
-				
+				}else {
+					
+					request.setAttribute("errorMsg", "유효한 게시글이 아닙니다");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+					
+				}
 		
 		
 	}

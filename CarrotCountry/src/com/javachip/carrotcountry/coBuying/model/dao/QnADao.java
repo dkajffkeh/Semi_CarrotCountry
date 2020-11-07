@@ -62,9 +62,35 @@ public class QnADao {
 	}
 	
 	
+	public int increaseCount(Connection conn, int bno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		System.out.println(result);
+		return result;
+		}
+
 	
 	
-	public ArrayList<QnA> selectQnAList(Connection conn, PageInfo pi){
+	
+	public ArrayList<QnA> selectQnAList(Connection conn, PageInfo pi, int bno){
 		// select문 => 여러행 => ArrayList
 		
 		ArrayList<QnA> list = new ArrayList<>();
@@ -79,8 +105,9 @@ public class QnADao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rs = pstmt.executeQuery();
 			
@@ -191,9 +218,10 @@ public Product selectProductQnAList(Connection conn, int bno) {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, qa.getGqTitle());
-			pstmt.setString(2, qa.getGqContent());
-			pstmt.setString(3, qa.getMemNo());
+			pstmt.setInt(1, qa.getPostNo());
+			pstmt.setString(2, qa.getGqTitle());
+			pstmt.setString(3, qa.getGqContent());
+			pstmt.setString(4, qa.getMemNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

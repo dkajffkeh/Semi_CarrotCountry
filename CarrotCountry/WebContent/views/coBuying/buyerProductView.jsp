@@ -219,7 +219,7 @@
                             <button type="button" onclick="showAccount()" class="btn btn-dark">입금방법</button>
                         </div>
                         <div id="content3_1_3">
-                            <button href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</button>
+                            <button href="<%= contextPath %>/buyerlist.qna.jy?bno=<%= pb.getPostNo() %>" type="button" class="btn btn-dark">Q&A</button>
                         </div>
                         <div id="content3_1_4">
                             <button type="button" onclick="showRefund()" class="btn btn-dark">교환 및 환불</button>
@@ -258,7 +258,6 @@
 
 
                     
-            </div>
         </div>
 
     </div>

@@ -3,6 +3,7 @@ package com.javachip.carrotcountry.coBuying.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.javachip.carrotcountry.coBuying.model.dao.ProductDao;
 import com.javachip.carrotcountry.coBuying.model.dao.QnADao;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
@@ -25,12 +26,31 @@ public class QnAService {
 	}
 	
 	
+	public int increaseCount(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new QnADao().increaseCount(conn, bno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+		
+	}
 
-	public ArrayList<QnA> selectQnAList(PageInfo pi){
+	
+	
+
+	public ArrayList<QnA> selectQnAList(PageInfo pi, int bno){
 			
 			Connection conn = getConnection();
 			
-			ArrayList<QnA> list = new QnADao().selectQnAList(conn, pi);
+			ArrayList<QnA> list = new QnADao().selectQnAList(conn, pi, bno);
 			
 			close(conn);
 			
