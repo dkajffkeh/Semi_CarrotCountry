@@ -270,7 +270,7 @@
 		  VALUES
 		  (
 		      SEQ_PNO.CURRVAL
-		    , 'ACCOUNT'
+		    , SEQ_ACNO.NEXTVAL
 		    , ?
 		  )
 	</entry>
