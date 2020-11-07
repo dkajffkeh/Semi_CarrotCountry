@@ -231,7 +231,7 @@ private Properties prop = new Properties();
 			
 			while(rs.next()) {
 				Account a = new Account();
-				a.setAccount(rs.getString("account"));
+				a.setAccount(rs.getString("bank"));
 				aList.add(a);
 			}
 		} catch (SQLException e) {
