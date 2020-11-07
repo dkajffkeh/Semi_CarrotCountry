@@ -77,27 +77,29 @@
 	</entry>
 	
 	<entry key="selectCobuyingPostList">
-		SELECT *
-		  FROM (
-		        SELECT ROWNUM RNUM
-		               , A.*
-		         FROM (
-		               SELECT 
-		                      POST_NO
-		                    , POST_NAME
-		                    , GP_CREATEDATE
-		                    , GP_STATUS
-		                 FROM GROUP_PURCHASE G    
-		                 LEFT JOIN POST USING(POST_NO)
-		                 WHERE BLIND_CHECK = 'N'
-		                  AND GP_POST_CHECK = 2
-		                  AND G.MEM_NO =?
-		                 ORDER
-		                      BY POST_NO DESC
-		               ) A
-		       )
-		WHERE RNUM BETWEEN ? AND ?
+	 SELECT *
+	  FROM (
+	        SELECT 
+	                ROWNUM RNUM
+	               , A.*
+	         FROM (
+	               SELECT 
+	                      POST_NO
+	                    , POST_NAME
+	                    , POST_ENROLL_DATE
+	                    , POST_VIEWS
+	                 FROM GROUP_PURCHASE G    
+	                 JOIN POST USING(POST_NO)
+	                 WHERE BLIND_CHECK = 'N'
+	                  AND G.GP_POST_CHECK = 2
+	                  AND MEM_NO =?
+	                 ORDER
+	                      BY POST_NO DESC
+	               ) A
+	       )
+	 WHERE RNUM BETWEEN ? AND ?	
 	</entry>
+	
 	<entry key="selectCobuyingListCount">
 		SELECT
 		       COUNT(*) "LISTCOUNT"
@@ -128,6 +130,15 @@
      		     )
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="selectPhoto">
+	
+	
+	</entry>
+	
+	
+	
+	
 	<entry key="selectCompletedSales">
 	SELECT *
 	  FROM (
@@ -226,5 +237,7 @@
 		    SET SL_STATUS ='N'
 		  WHERE SHIPPING_NO=?
 	</entry>
+	
+
 
 </properties>

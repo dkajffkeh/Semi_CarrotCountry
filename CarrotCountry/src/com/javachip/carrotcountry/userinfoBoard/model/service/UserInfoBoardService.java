@@ -3,6 +3,7 @@ package com.javachip.carrotcountry.userinfoBoard.model.service;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
@@ -127,7 +128,7 @@ public class UserInfoBoardService {
 		}
 	
 		/**
-		 * 6. 찜목록 조회
+		 * 6_1 찜목록 조회
 		 * @param 
 		 * @return 			
 		 *
@@ -143,6 +144,24 @@ public class UserInfoBoardService {
 			return list;
 			
 		}
+		
+		/**
+		 * 6_2 찜목록 사진 조회 / 판매중, 판매완료 사진조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		/* --------수정할거임
+		public ArrayList<Photo> selectPhtoList(int bno){
+			Connection conn = getConnection();
+			
+			ArrayList<Photo> list = new UserInfoBoardDao().selectPhotoList(conn, bno);
+			
+			close(conn);
+			
+			return list;
+		}
+		*/
 
 		/**
 		 * 7. 판매완료 조회

@@ -100,9 +100,9 @@
 
         <!-- 3가지 건수 노출부분 -->
         <div id="content_top2">
-            <span align="center"><h4>구매/판매</h4><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">2</a> 건</span>
-            <span align="center"><h4>공동구매</h4><a href="">3</a> 건</span>
-            <span align="center"><h4>문의</h4><a href="">1</a>건</span>    
+            <span align="center"><h4>지역거래</h4><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">2</a> 건</span>
+            <span align="center"><h4>공동구매</h4><a href="<%= contextPathUserinfo %>/groupPurchaseList.gp.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">3</a> 건</span>
+            <span align="center"><h4>문의</h4><a href="<%= contextPathUserinfo %>/myList.on.jm?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">1</a>건</span>    
         </div>
         <!-- 버튼 2개 부분 -->
        <div id="content_top3">
@@ -355,18 +355,22 @@
           <div class="modal-footer">
              
          
-         <% for (ShippingLocation sl : list)  { %>
+         <% Boolean flag = false;  %>
          
-         
+         <% for (ShippingLocation sl : list)  {%>
+            
+		  <% if("Y".equals(sl.getShippingDefault())) { 
+          		flag = true;} %>
+          <%} %>
          
          <!-- 이미 기본배송지 있을 때 -->
-          <% if(sl.getShippingDefault().equals("Y")) { %>
+			<% if(flag){ %>
           
               <p style="color:gray;">기본 배송지로 설정하려면 기존의 기본배송지를 삭제하세요.</p>			
               <button type="submit" class="btn btn-primary">등록</button>
           	
           <!--  기본배송지 없을 때 --> 
-          <% } else {%>
+          <% }else {%>
               
               
               <input type="checkbox" name="defaultAddress"  onclick="defaultCheck()" value="">&nbsp;
@@ -381,7 +385,7 @@
               <br>
           
           
-           <% } %> <!--  (ShippingLocation sl : list)   -->
+            <!--  (ShippingLocation sl : list)   -->
           
           
   

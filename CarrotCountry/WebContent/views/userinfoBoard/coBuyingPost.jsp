@@ -71,8 +71,7 @@
                     <th>번호</th>
                     <th width="300">제목</th>
                     <th width="200">작성일</th>
-                    <th>진행상태</th>
-                    <th></th>
+                    <th>조회수</th>
                     <th>Q&A 답변하기</th>
                 </tr>
             </thead>
@@ -92,13 +91,10 @@
                 <tr>
                     <td><%= c.getPostNo() %></td>
                     <td><%= c.getPostName() %></td>
-                    <td><%= c.getGpCreateDate()%> </td>
-                    <td><%= c.getGpStatus() %></td>
+                    <td><%= c.getPostEnrollDate()%> </td>
+                    <td><%= c.getPostViews() %></td>
                     <td>
-                        <a href="" class="btn btn-primary">수정</a>
-                    </td>
-                    <td>
-                        <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo() %>" class="btn btn-secondary"> Q&A 답변하기</a>
+                        <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo() %>" class="btn btn-light "> Q&A 답변하기</a>
                     </td>
                 </tr>
                 
@@ -127,17 +123,17 @@
     <div class="paging-area" align="center">
 			
     <% if(pi.getCurrentPage() != 1){ %>			
-        <a href="<%=contextPath%>/coBuying.po.jw?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+        <a href="<%=contextPath%>/coBuying.po.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
     <% } %>
 
     <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
     
-        <a href="<%=contextPath%>/coBuying.po.jw?currentPage=<%= p %>"><%= p %></a>
+        <a href="<%=contextPath%>/coBuying.po.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
         
     <% } %>
 
     <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-        <a href="<%=contextPath%>/coBuying.po.jw?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+        <a href="<%=contextPath%>/coBuying.po.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
     <% } %>
 	</div>
     

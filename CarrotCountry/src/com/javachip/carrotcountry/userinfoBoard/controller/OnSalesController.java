@@ -33,6 +33,9 @@ public class OnSalesController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+
 		int listCount;			// 현재 일반 게시판 총 갯수
 		int currentPage;		// 사용자가 요청한 페이지 (즉, 현재 페이지)
 		int pageLimit;			// 한 페이지 하단에 보여질 페이지 최대갯수
@@ -45,7 +48,7 @@ public class OnSalesController extends HttpServlet {
 		listCount = new UserInfoBoardService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		boardLimit = 3;
-		pageLimit=5;
+		pageLimit=6;
 		maxPage = (int)Math.ceil(((double)listCount/boardLimit));
 		
 		startPage =((currentPage-1)/pageLimit)*pageLimit+1; 
@@ -56,8 +59,6 @@ public class OnSalesController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		ArrayList<SaleProduct> list= new UserInfoBoardService().selectOnSales(memNo, pi);
 		

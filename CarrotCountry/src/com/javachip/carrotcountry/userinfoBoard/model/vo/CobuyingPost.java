@@ -6,57 +6,90 @@ public class CobuyingPost {
 	
 	private int postNo;			//번호
 	private String postName;	// 제목
-	private Date gpCreateDate; //작성일
-	private String gpStatus; 	//진행상태
+	private Date postEnrollDate;
+	private int postViews;
+	private String blindCheck;
+	private int gpPostCheck;
+	private int memNo;
 	
-	public CobuyingPost() {}
-
-	public CobuyingPost(int postNo, String postName, Date gpCreateDate, String gpStatus) {
+	
+	public CobuyingPost(int postNo, String postName, Date postEnrollDate, int postViews, String blindCheck,
+			int gpPostCheck, int memNo) {
 		super();
 		this.postNo = postNo;
 		this.postName = postName;
-		this.gpCreateDate = gpCreateDate;
-		this.gpStatus = gpStatus;
+		this.postEnrollDate = postEnrollDate;
+		this.postViews = postViews;
+		this.blindCheck = blindCheck;
+		this.gpPostCheck = gpPostCheck;
+		this.memNo = memNo;
 	}
+	
+	
+	
+	
+	public CobuyingPost(int postNo, String postName, Date postEnrollDate, int postViews) {
+		super();
+		this.postNo = postNo;
+		this.postName = postName;
+		this.postEnrollDate = postEnrollDate;
+		this.postViews = postViews;
+	}
+
+
+
 
 	public int getPostNo() {
 		return postNo;
 	}
-
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
-
 	public String getPostName() {
 		return postName;
 	}
-
 	public void setPostName(String postName) {
 		this.postName = postName;
 	}
-
-	public Date getGpCreateDate() {
-		return gpCreateDate;
+	public Date getPostEnrollDate() {
+		return postEnrollDate;
 	}
-
-	public void setGpCreateDate(Date gpCreateDate) {
-		this.gpCreateDate = gpCreateDate;
+	public void setPostEnrollDate(Date postEnrollDate) {
+		this.postEnrollDate = postEnrollDate;
 	}
-
-	public String getGpStatus() {
-		return gpStatus;
+	public int getPostViews() {
+		return postViews;
 	}
-
-	public void setGpStatus(String gpStatus) {
-		this.gpStatus = gpStatus;
+	public void setPostViews(int postViews) {
+		this.postViews = postViews;
 	}
-
+	public String getBlindCheck() {
+		return blindCheck;
+	}
+	public void setBlindCheck(String blindCheck) {
+		this.blindCheck = blindCheck;
+	}
+	public int getGpPostCheck() {
+		return gpPostCheck;
+	}
+	public void setGpPostCheck(int gpPostCheck) {
+		this.gpPostCheck = gpPostCheck;
+	}
+	public int getMemNo() {
+		return memNo;
+	}
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "CobuyingPost [postNo=" + postNo + ", postName=" + postName + ", gpCreateDate=" + gpCreateDate
-				+ ", gpStatus=" + gpStatus + "]";
+		return "CobuyingPost [postNo=" + postNo + ", postName=" + postName + ", postEnrollDate=" + postEnrollDate
+				+ ", postViews=" + postViews + ", blindCheck=" + blindCheck + ", gpPostCheck=" + gpPostCheck
+				+ ", memNo=" + memNo + "]";
 	}
-
+	
 	
 	
 	

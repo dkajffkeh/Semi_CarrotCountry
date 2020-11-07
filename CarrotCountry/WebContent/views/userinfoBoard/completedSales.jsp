@@ -131,17 +131,17 @@
         <div class="paging-area" align="center">
 			
 	        <% if(pi.getCurrentPage() != 1){ %>			
-	            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 	        <% } %>
 	    
 	        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
 	        
-	            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%= p %>"><%= p %></a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
 	            
 	        <% } %>
 	    
 	        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-	            <a href="<%=contextPath%>/completedSales.me.jw?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
 	        <% } %>
 	        
     	</div>

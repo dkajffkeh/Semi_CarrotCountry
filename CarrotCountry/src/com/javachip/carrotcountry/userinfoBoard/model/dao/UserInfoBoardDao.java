@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.member.model.vo.Member;
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
@@ -246,8 +247,8 @@ public class UserInfoBoardDao {
 			while(rset.next()) {
 				list.add(new CobuyingPost(rset.getInt("POST_NO"),
 								 		  rset.getString("POST_NAME"),
-								 		  rset.getDate("GP_CREATEDATE"),
-								 		  rset.getString("GP_STATUS")));
+								 		  rset.getDate("POST_ENROLL_DATE"),
+								 		  rset.getInt("POST_VIEWS")));
 			}
 			
 		} catch (SQLException e) {
@@ -284,7 +285,7 @@ public class UserInfoBoardDao {
 		
 		return listCount;
 	}
-	
+	// 찜목록 조회
 	public ArrayList<WishList> selectWishList(Connection conn ,PageInfo pi, int memNo){
 		
 		ArrayList<WishList> list = new ArrayList<>();
@@ -332,6 +333,41 @@ public class UserInfoBoardDao {
 		
 		
 	}
+	
+	// 사진 조회
+	public ArrayList<Photo> selectAttachmentList(Connection conn, int bno){
+
+		
+		ArrayList<Photo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPhoto");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Photo ph = new Photo();
+				
+				list.add(ph);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 	
 	// 판매완료 조회
 	public ArrayList<SaleProduct> selectCompletedSales(Connection conn, int memNo, PageInfo pi){
