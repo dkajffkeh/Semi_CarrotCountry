@@ -250,8 +250,8 @@
                 
                         function showRefund(){
                             var showArea = document.getElementById("showContent");
-                            showArea.innerHTML = <%= pb.getPostRefund() %>
-                            console.log(<%= pb.getPostRefund() %>);
+                            showArea.innerHTML = <%= pd.getGpRefund() %>
+                            console.log(<%= pd.getGpRefund() %>);
                         }
                     </script>
 
