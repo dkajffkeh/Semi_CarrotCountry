@@ -231,7 +231,7 @@
                         <div id="showContent"><%= pb.getPostContent() %></div>
                     </div>
 
-
+					
 
                     <script>
                         function showExplan(){
