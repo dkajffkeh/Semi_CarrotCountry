@@ -97,7 +97,6 @@ tbody td:hover{cursor: pointer;}
             <div id="content1">
                 <div id="title">
                     <h5 align="center">Q & A</h5>
-                    <input type="hidden" name="bno" value="<%= pb.getPostNo() %>">
                 </div>
             </div>
             <div id="content2" align="center">

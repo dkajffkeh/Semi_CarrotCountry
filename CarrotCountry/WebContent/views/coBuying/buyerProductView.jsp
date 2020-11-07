@@ -76,11 +76,11 @@
            float: left;
            padding-bottom: 10px;
        }
-       #content2_2_2>div>button{
+      /* #content2_2_2>div>button{
            width: 100px;
            display: block;
            margin: auto;
-       }
+       }*/
        #content2_2_2>div>button:hover{
             background: rgb(139, 139, 139);
         }
@@ -160,12 +160,12 @@
                       
                 </div>
                 
-                    <form action="<%= contextPath %>/buyerPurchase.pro.jy" method="post"  enctype="multipart/form-data" >
-                       
+                    <form action="<%= contextPath %>/buyerPurchase.pro.jy?memNo=<%= loginMember.getMemNo() %>&bno=<%= pb.getPostNo() %>" method="post"  enctype="multipart/form-data" >
+                    
                        <div id="content2_2">
                
                         <div id="content2_2_1">
-                        	<input type="hidden" name="postNo" value="<%= pb.getPostNo() %>">
+                        	<input type="hidden" name="bno" value="<%= pb.getPostNo() %>">
                             <span>모집 기간 :</span> <%= pd.getPostEnrollDate() %> ~ <%= pd.getGpDeadline() %> <br>
                             <span>최소 인원 :</span> <%= pd.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
@@ -194,13 +194,13 @@
 
                         <div id="content2_2_2">
                             <div id="interst">
-                                <a href="찜하기목록이랑연결" class="btn btn-secondary btn-sm">찜하기</a>
+                                <button href="찜하기목록이랑연결" class="btn btn-secondary btn-sm">찜하기</button>
                             </div>
                             <div id="buy">
-                                <a href="구매결제창으로연결" class="btn btn-secondary btn-sm">구매하기</a>
+                                <button type="submit" class="btn btn-secondary btn-sm">구매하기</button>
                             </div>
                             <div id="report">
-                                <a href="신고하기페이지로연결" class="btn btn-secondary btn-sm">신고하기<a>
+                                <button href="신고하기페이지로연결" class="btn btn-secondary btn-sm">신고하기</button>
                             </div>
                             
                         </div>
@@ -219,7 +219,7 @@
                             <a type="button" onclick="showAccount();" class="btn btn-dark">입금방법</a>
                         </div>
                         <div id="content3_1_3">
-                            <a href="<%= contextPath %>/buyerlist.qna.jy?bno=<%= pb.getPostNo() %>" type="button" class="btn btn-dark">Q&A</a>
+                            <a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1&bno=<%= pb.getPostNo() %>" type="button" class="btn btn-dark">Q&A</a>
                         </div>
                         <div id="content3_1_4">
                             <a type="button" onclick="showRefund();" class="btn btn-dark">교환 및 환불</a>

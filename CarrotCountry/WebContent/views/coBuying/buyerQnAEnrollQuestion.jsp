@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@
+	page import="com.javachip.carrotcountry.coBuying.model.vo.*"
+ %>    
+
+<%
+	QnA qa = (QnA)request.getAttribute("qa");
+	Product pd = (Product)request.getAttribute("pd");
+	PostBoardJY pb = (PostBoardJY)request.getAttribute("pb"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
