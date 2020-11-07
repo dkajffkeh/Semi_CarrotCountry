@@ -72,12 +72,12 @@
 										<tr>
 											<td>${ab.postNo}</td>
 											<c:choose>
-												<c:when test="${ab.post_type = 1 }">
+												<c:when test="${ab.postType == 1}">
 													<td>중고거래</td>
 												</c:when>
-												<c:when test="${ab.post_type = 2 }">
-														<td>공동구매</td>
-												</c:when>
+												<c:otherwise>
+													<td>공동구매</td>
+												</c:otherwise>
 											</c:choose>
 											<td>${ab.categoryName}</td>
 											<td>${ab.postName}</td>

@@ -12,14 +12,13 @@ public class AdminBoard {
 	private int postReports;
 	private int postViews;
 	private String blindCheck;
-	private int usedPostCheck;
-	private int gpPostCheck;
 	private int reportCount;
+	private int postType;
 	
 	public AdminBoard() {}
 
 	public AdminBoard(int postNo, String categoryName, String memNo, String postName, Date postEnrollDate,
-			int postReports, int postViews, String blindCheck) {
+			int postReports, int postViews, String blindCheck, int reportCount, int postType) {
 		super();
 		this.postNo = postNo;
 		this.categoryName = categoryName;
@@ -29,6 +28,8 @@ public class AdminBoard {
 		this.postReports = postReports;
 		this.postViews = postViews;
 		this.blindCheck = blindCheck;
+		this.reportCount = reportCount;
+		this.postType = postType;
 	}
 
 	public int getPostNo() {
@@ -95,22 +96,6 @@ public class AdminBoard {
 		this.blindCheck = blindCheck;
 	}
 
-	public int getUsedPostCheck() {
-		return usedPostCheck;
-	}
-
-	public void setUsedPostCheck(int usedPostCheck) {
-		this.usedPostCheck = usedPostCheck;
-	}
-
-	public int getGpPostCheck() {
-		return gpPostCheck;
-	}
-
-	public void setGpPostCheck(int gpPostCheck) {
-		this.gpPostCheck = gpPostCheck;
-	}
-
 	public int getReportCount() {
 		return reportCount;
 	}
@@ -119,12 +104,20 @@ public class AdminBoard {
 		this.reportCount = reportCount;
 	}
 
+	public int getPostType() {
+		return postType;
+	}
+
+	public void setPostType(int postType) {
+		this.postType = postType;
+	}
+
 	@Override
 	public String toString() {
 		return "AdminBoard [postNo=" + postNo + ", categoryName=" + categoryName + ", memNo=" + memNo + ", postName="
 				+ postName + ", postEnrollDate=" + postEnrollDate + ", postReports=" + postReports + ", postViews="
-				+ postViews + ", blindCheck=" + blindCheck + ", usedPostCheck=" + usedPostCheck + ", gpPostCheck="
-				+ gpPostCheck + "]";
+				+ postViews + ", blindCheck=" + blindCheck + ", reportCount=" + reportCount + ", postType=" + postType
+				+ "]";
 	}
 	
 }

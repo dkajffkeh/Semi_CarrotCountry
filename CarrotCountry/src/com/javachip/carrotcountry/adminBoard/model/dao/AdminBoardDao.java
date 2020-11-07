@@ -55,7 +55,7 @@ public class AdminBoardDao {
 
 				ab.setPostNo(rs.getInt("post_no"));
 				ab.setCategoryName(rs.getString("category_name"));
-				ab.setUsedPostCheck(rs.getInt("post_type"));
+				ab.setPostType(rs.getInt("post_type"));
 				ab.setPostName(rs.getString("post_name"));
 				ab.setMemNo(rs.getString("mem_userid"));
 				ab.setPostEnrollDate(rs.getDate("post_enroll_date"));
@@ -124,7 +124,7 @@ public class AdminBoardDao {
 				
 				ab.setPostNo(rset.getInt("post_no"));
 				ab.setCategoryName(rset.getString("category_name"));
-				ab.setUsedPostCheck(rset.getInt("post_type"));
+				ab.setPostType(rset.getInt("post_type"));
 				ab.setPostName(rset.getString("post_name"));
 				ab.setPostViews(rset.getInt("post_views"));
 				ab.setMemNo(rset.getString("mem_userid"));
@@ -172,8 +172,7 @@ public class AdminBoardDao {
 
 				ab.setPostNo(rs.getInt("post_no"));
 				ab.setCategoryName(rs.getString("category_name"));
-				ab.setUsedPostCheck(rs.getInt("used_post_check"));
-				ab.setGpPostCheck(rs.getInt("gp_post_check"));
+				ab.setPostType(rs.getInt("post_type"));
 				ab.setPostName(rs.getString("post_name"));
 				ab.setMemNo(rs.getString("mem_userid"));
 				ab.setPostEnrollDate(rs.getDate("post_enroll_date"));
@@ -220,8 +219,7 @@ public class AdminBoardDao {
 
 				ab.setPostNo(rset.getInt("post_no"));
 				ab.setCategoryName(rset.getString("category_name"));
-				ab.setUsedPostCheck(rset.getInt("used_post_check"));
-				ab.setGpPostCheck(rset.getInt("gp_post_check"));
+				ab.setPostType(rset.getInt("post_type"));
 				ab.setPostName(rset.getString("post_name"));
 				ab.setMemNo(rset.getString("mem_userid"));
 				ab.setPostEnrollDate(rset.getDate("post_enroll_date"));
