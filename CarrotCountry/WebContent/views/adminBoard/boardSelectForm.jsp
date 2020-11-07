@@ -72,7 +72,7 @@
 										<tr>
 											<td>${ab.postNo}</td>
 											<c:choose>
-												<c:when test="${ab.usedPostCheck > 0}">
+												<c:when test="${ab.postType == 1}">
 													<td>중고거래</td>
 												</c:when>
 												<c:otherwise>
