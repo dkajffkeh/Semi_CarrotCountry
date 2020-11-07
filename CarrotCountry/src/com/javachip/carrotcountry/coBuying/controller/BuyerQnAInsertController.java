@@ -32,11 +32,13 @@ public class BuyerQnAInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		String userNo = request.getParameter("userNo");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 		QnA qa = new QnA();
+		qa.setPostNo(bno);
 		qa.setMemNo(userNo);
 		qa.setGqTitle(title);
 		qa.setGqContent(content);

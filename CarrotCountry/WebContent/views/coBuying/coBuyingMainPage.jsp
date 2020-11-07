@@ -86,6 +86,7 @@
 }
 #proContent>*{width: 100%; float: left;}
 #proName{height: 20%;}
+#proName:hover{cursor:pointer;}
 #proName>div{
     height: 100%; 
     float: left;
@@ -304,6 +305,8 @@
 		        <script>
 		        	$(function(){
 		        		$("#proName").click(function(){
+		        			
+		        			
 		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
 		        		})
 		        	});

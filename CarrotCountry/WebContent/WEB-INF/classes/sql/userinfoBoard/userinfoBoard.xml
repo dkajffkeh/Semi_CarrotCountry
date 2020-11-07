@@ -60,8 +60,10 @@
 		    , MEM_USERNAME
 		    , MEM_PHONE
 		    , SHIPPING_DEFAULT
+		    , SL_STATUS
 		 FROM SHIPPING_LOCATION 
 		WHERE MEM_NO=?
+		  AND SL_STATUS='Y'
 	</entry>
 	
 	<entry key="selectLocation">
@@ -195,6 +197,34 @@
 		        POST
 		    SET PROD_STATUS = 'N'
 		  WHERE POST_NO=?
+	</entry>
+	
+	<entry key="insertAddress">
+		INSERT
+		  INTO SHIPPING_LOCATION
+		  (
+		    SHIPPING_NO
+		  , MEM_NO
+		  , SHIPPING_ADDRESS
+		  , MEM_USERNAME
+		  , MEM_PHONE
+		  , SHIPPING_DEFAULT
+		  )
+		  VALUES
+		  (
+		      SEQ_SNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		  )
+	</entry>
+	<entry key="deleteAddress">
+	 	 UPDATE
+		        SHIPPING_LOCATION
+		    SET SL_STATUS ='N'
+		  WHERE SHIPPING_NO=?
 	</entry>
 
 </properties>

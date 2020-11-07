@@ -29,14 +29,16 @@ public class PostBoard extends ShmarketPageInfo {
 	private String blindCheck;	
 	private String postRefund;
 	private int likeNum;
-	
 	public PostBoard() {
 		
-	}
+	}	
 
-	public PostBoard(int postNo, String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath) {
+	public PostBoard(int postNo, String postName, String postContent, String thumbnailPath, String thumbnailFilename,
+			String thumbnailLoadPath) {
 		super();
 		this.postNo = postNo;
+		this.postName = postName;
+		this.postContent = postContent;
 		this.thumbnailPath = thumbnailPath;
 		this.thumbnailFilename = thumbnailFilename;
 		this.thumbnailLoadPath = thumbnailLoadPath;
@@ -138,8 +140,6 @@ public class PostBoard extends ShmarketPageInfo {
 		this.prodPrice = prodPrice;
 	}
 	
-	
-
 	public PostBoard(int currentPage, int listCount, int boardLimit, int pageLimit, int maxPage, int startPage,
 			int endPage, int postNo, String categoryNo, int memNo, String localNo, String memNickname, String postName,
 			String postContent, String categoryName, String parcelNum, String prodStatus, String dealType, String site,
@@ -355,6 +355,10 @@ public class PostBoard extends ShmarketPageInfo {
 	public void setPostRefund(String postRefund) {
 		this.postRefund = postRefund;
 	}
+	
+	
+	
+	
 
 	@Override
 	public String toString() {

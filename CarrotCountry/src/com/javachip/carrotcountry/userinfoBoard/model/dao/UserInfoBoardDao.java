@@ -492,7 +492,51 @@ public class UserInfoBoardDao {
 	
 	}
 	
+	// 배송지 추가
 	
+	public int insertAddress(Connection conn, ShippingLocation sl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAddress");
+		try {
+			pstmt = conn.prepareStatement(sql); 
+			
+			pstmt.setInt(1, sl.getMemNo());
+			pstmt.setString(2, sl.getShippingAddress());
+			pstmt.setString(3, sl.getMemUserName());
+			pstmt.setString(4, sl.getMemPhone());
+			pstmt.setString(5, sl.getShippingDefault());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	// 배송지 삭제
+	
+	public int deleteAddress(Connection conn, int sno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAddress");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, sno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
+	}
 	
 
 }

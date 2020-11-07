@@ -26,7 +26,6 @@
         /* 전체 틀 */
        .wrap{width:1200px;height:2000px;margin:auto;}
        #content{height: 100%;}
-       #footer{height:100%; margin:10px 0px;}
 
        /* 콘텐트바의 전반적인 틀 */
        #content>div{width: 100%;}
@@ -98,7 +97,8 @@
          #showContent{
             padding-left:100px;
         }
-        #content3_1>div>button{
+        #content3_1>div>a{
+        	color:white;
             width: 90%;
             display: block;
             margin: auto;
@@ -106,7 +106,7 @@
             border-bottom-right-radius: 0px;
             border-bottom-left-radius: 0px;
         }
-        #content3_1>div>button:hover{
+        #content3_1>div>a:hover{
             background: rgb(139, 139, 139);
         }
         
@@ -120,7 +120,7 @@
     <div class="wrap">
         <div id="content">
             <div id="content1">
-                <h3><b>[물품게시글 제목]</b></h3>
+                <h3><b><%= pb.getPostName() %></b></h3>
             </div>
             <div id="content2">
                 <div id="content2_1">
@@ -213,16 +213,16 @@
               
                      <div id="content3_1">
                         <div id="content3_1_1">
-                            <button type="button" onclick="showExplan()" class="btn btn-dark">상세설명</button>
+                            <a type="button" onclick="showExplan();" class="btn btn-dark">상세설명</a>
                         </div>
                         <div id="content3_1_2">
-                            <button type="button" onclick="showAccount()" class="btn btn-dark">입금방법</button>
+                            <a type="button" onclick="showAccount();" class="btn btn-dark">입금방법</a>
                         </div>
                         <div id="content3_1_3">
-                            <button href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1" type="button" class="btn btn-dark">Q&A</button>
+                            <a href="<%= contextPath %>/buyerlist.qna.jy?bno=<%= pb.getPostNo() %>" type="button" class="btn btn-dark">Q&A</a>
                         </div>
                         <div id="content3_1_4">
-                            <button type="button" onclick="showRefund()" class="btn btn-dark">교환 및 환불</button>
+                            <a type="button" onclick="showRefund();" class="btn btn-dark">교환 및 환불</a>
                         </div>
                         
                         
@@ -231,26 +231,25 @@
                         <div id="showContent"><%= pb.getPostContent() %></div>
                     </div>
 
-
+					
 
                     <script>
                         function showExplan(){
 	                        var showArea = document.getElementById("showContent");
-	                        showArea.innerHTML = <%= pb.getPostContent() %>
+	                        showArea.innerHTML = "<%= pb.getPostContent() %>";
                         }
                         
 
                         function showAccount(){
                             var showArea = document.getElementById("showContent");
-                            for(Account ac : aList){ 	
-							    showArea.innerHTML = '입금 가능 계좌 : ' + <%= ac.getAccount() %>;
-							  } 
+                            <%for(Account account : aList){ %>	
+							    showArea.innerHTML = '입금 가능 계좌 : ' + "<%= account.getAccount() %>";
+							 <% } %>
                         }
-                        
-                        
+                
                         function showRefund(){
                             var showArea = document.getElementById("showContent");
-                            showArea.innerHTML = <%= pb.getPostRefund() %>
+                            showArea.innerHTML = "<%= pd.getGpRefund() %>";
                         }
                     </script>
 
@@ -258,7 +257,6 @@
 
 
                     
-            </div>
         </div>
 
     </div>

@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@
-	page import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.*"
+	page import="java.util.ArrayList, com.javachip.carrotcountry.coBuying.model.vo.*,com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*"
  %>    
 
 <%
 	ArrayList<QnA> list = (ArrayList<QnA>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
 %>
 
 <!DOCTYPE html>
@@ -96,9 +97,9 @@ tbody td:hover{cursor: pointer;}
             <div id="content1">
                 <div id="title">
                     <h5 align="center">Q & A</h5>
+                    <input type="hidden" name="bno" value="<%= pb.getPostNo() %>">
                 </div>
             </div>
-        
             <div id="content2" align="center">
                 <div id="qList">
                     <table id="list-area" width="1000" class="table-hover">

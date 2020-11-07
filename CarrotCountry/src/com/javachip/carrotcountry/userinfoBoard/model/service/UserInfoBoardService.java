@@ -249,5 +249,49 @@ public class UserInfoBoardService {
 			return result;
 		}
 		
+		/**
+		 * 12. 배송지 추가
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int insertAddress(ShippingLocation sl) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().insertAddress(conn, sl);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 13. 배송지 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public int deleteAddress(int sno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteAddress(conn,sno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
 
 }

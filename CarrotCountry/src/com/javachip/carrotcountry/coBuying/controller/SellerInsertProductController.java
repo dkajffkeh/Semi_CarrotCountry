@@ -88,7 +88,7 @@ public class SellerInsertProductController extends HttpServlet {
 			int gpPrice = Integer.parseInt(multiRequest.getParameter("gpPrice"));
 			int gpDRate = Integer.parseInt(multiRequest.getParameter("gpDRate"));
 			int gpDPrice = Integer.parseInt(multiRequest.getParameter("gpDPrice"));
-			String gpRefund = multiRequest.getParameter("gpRefund");
+			String gpRefund = multiRequest.getParameter("refund");
 			
 			Product pd = new Product();
 			pd.setGpDeadline(gpDeadline);

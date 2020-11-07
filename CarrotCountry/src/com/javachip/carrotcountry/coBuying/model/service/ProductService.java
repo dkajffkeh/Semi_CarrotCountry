@@ -70,11 +70,11 @@ public class ProductService {
 	public Product selectProduct(int bno) {
 		
 		Connection conn = getConnection();
-		Product p = new ProductDao().selectProduct(conn, bno);
+		Product pd = new ProductDao().selectProduct(conn, bno);
 		
 		close(conn);
 		
-		return p;
+		return pd;
 		
 	}
 	

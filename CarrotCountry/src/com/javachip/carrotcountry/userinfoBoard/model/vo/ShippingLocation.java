@@ -8,13 +8,13 @@ public class ShippingLocation {
 	private String memUserName;
 	private String memPhone;
 	private String shippingDefault;
+	private String slStatus; //주소지 사용 상태
 	
 	
 	public ShippingLocation() {}
 
-
 	public ShippingLocation(int shippingNo, int memNo, String shippingAddress, String memUserName, String memPhone,
-			String shippingDefault) {
+			String shippingDefault, String slStatus) {
 		super();
 		this.shippingNo = shippingNo;
 		this.memNo = memNo;
@@ -22,74 +22,84 @@ public class ShippingLocation {
 		this.memUserName = memUserName;
 		this.memPhone = memPhone;
 		this.shippingDefault = shippingDefault;
+		this.slStatus = slStatus;
 	}
 
+
+	/* 배송지추가 */
+	
+
+	public ShippingLocation(int memNo, String shippingAddress, String memUserName, String memPhone,
+			String shippingDefault) {
+		super();
+		this.memNo = memNo;
+		this.shippingAddress = shippingAddress;
+		this.memUserName = memUserName;
+		this.memPhone = memPhone;
+		this.shippingDefault = shippingDefault;
+	}
 
 	public int getShippingNo() {
 		return shippingNo;
 	}
 
-
 	public void setShippingNo(int shippingNo) {
 		this.shippingNo = shippingNo;
 	}
-
 
 	public int getMemNo() {
 		return memNo;
 	}
 
-
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-
 
 	public String getShippingAddress() {
 		return shippingAddress;
 	}
 
-
 	public void setShippingAddress(String shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-
 
 	public String getMemUserName() {
 		return memUserName;
 	}
 
-
 	public void setMemUserName(String memUserName) {
 		this.memUserName = memUserName;
 	}
-
 
 	public String getMemPhone() {
 		return memPhone;
 	}
 
-
 	public void setMemPhone(String memPhone) {
 		this.memPhone = memPhone;
 	}
-
 
 	public String getShippingDefault() {
 		return shippingDefault;
 	}
 
-
 	public void setShippingDefault(String shippingDefault) {
 		this.shippingDefault = shippingDefault;
 	}
 
+	public String getSlStatus() {
+		return slStatus;
+	}
+
+	public void setSlStatus(String slStatus) {
+		this.slStatus = slStatus;
+	}
 
 	@Override
 	public String toString() {
 		return "ShippingLocation [shippingNo=" + shippingNo + ", memNo=" + memNo + ", shippingAddress="
 				+ shippingAddress + ", memUserName=" + memUserName + ", memPhone=" + memPhone + ", shippingDefault="
-				+ shippingDefault + "]";
+				+ shippingDefault + ", slStatus=" + slStatus + "]";
 	}
 	
 	

@@ -14,16 +14,16 @@ import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 /**
- * Servlet implementation class OneToListViewController
+ * Servlet implementation class OneToMyListView
  */
-@WebServlet("/list.on.jm")
-public class OneToListViewController extends HttpServlet {
+@WebServlet("/myList.on.jm")
+public class OneToMyListView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneToListViewController() {
+    public OneToMyListView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,7 @@ public class OneToListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -68,13 +68,10 @@ public class OneToListViewController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 	
-		request.getRequestDispatcher("views/oneTo/oneToListView.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/userinfoBoard/ng/myOneToMyListView.jsp").forward(request, response);
+	
+	
 	}
-	
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
