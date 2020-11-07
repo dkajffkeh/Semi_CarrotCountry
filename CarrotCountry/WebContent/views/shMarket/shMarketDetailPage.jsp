@@ -156,10 +156,7 @@ cursor:pointer;
                 </li>
                 <li class="nav-item" style="background-color:lightskyblue;">
                   <a class="nav-link" style="cursor:pointer" onclick="statusUpdate();">판매완료</a>
-                </li>
-                <li class="nav-item" style="background-color: lightgray; ">
-                    <a class="nav-link" href="#">끌어올리기</a>
-                  </li>        
+                </li>        
               </ul>
               <% } %>
             </div>
@@ -201,11 +198,11 @@ cursor:pointer;
 				<div class="carousel-inner">
 				
 					<div class="carousel-item active">
-						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
+						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
 					</div>
 					<% for(int i = 1 ; i<pList.size() ; i++ ){ %>
 					<div class="carousel-item">
-						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
+						<img class="d-block w-100"  src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
 					</div>
 					<% } %>
 				</div>
@@ -387,9 +384,38 @@ cursor:pointer;
           </div>
         </div>
       </div>
-    
- 
- 
+      
+      <!-- 댓글 신고모달 -->
+      
+      <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+          <div class="modal-content">          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">댓글신고</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+              <label for="">신고유형:</label>
+              <select name="Comment_report_type" style="border:1px solid black; border-radius: 3px;">
+                  <% for(int i = 0 ; i<rList.size(); i++){ %>
+                  <option value="<%=rList.get(i).getReportReasonNo()%>"><%=rList.get(i).getReportReason()%></option>
+                  <% } %>
+              </select>
+              <br><br>
+              <label for="">신고 사유</label>
+              <br><textarea name="" id="reportContent1" cols="61" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="commentReportBtn" data-dismiss="modal">신고하기</button>
+            </div>     
+          </div>
+        </div>
+      </div>
  
 <script>
 //댓글 작성 ajax
@@ -475,7 +501,7 @@ cursor:pointer;
 					                     <div class="left_date">\${list[i].enrollDate}</div>
 					                     <div class="right_icons">		
 					                     <i class="fas fa-trash" title="댓글삭제" onclick=deleteFunc(\${list[i].commentNo})></i>
-					                     <i class="fas fa-exclamation" title="댓글신고"></i>
+					                     <i class="fas fa-exclamation" title="댓글신고" data-toggle="modal" data-target="#myModal2" onclick=reportScopre(this,\${list[i].commentNo})></i>
 					                     </div>
 					                 </div>
 					             </div>   
@@ -490,7 +516,7 @@ cursor:pointer;
 				                 <div class="comment_control_button">
 				                     <div class="left_date">\${list[i].enrollDate}</div>
 				                     <div class="right_icons">		
-				                     <i class="fas fa-exclamation" title="댓글신고"></i>
+				                     <i class="fas fa-exclamation" title="댓글신고" data-toggle="modal" data-target="#myModal2" onclick=reportScopre(this,\${list[i].commentNo})></i>
 				                     </div>
 				                 </div>
 				             </div>   
@@ -634,7 +660,7 @@ cursor:pointer;
         		<% }%> 		 
         	 })	 
          })
-         //신고기능 AJAX
+         //게시글 신고기능 AJAX
          $(function(){
         	 
         	 $("#boardReportBtn").click(function(){
@@ -661,7 +687,43 @@ cursor:pointer;
         	 })
  
          })
-        </script>  
+         //신고기능 번호 받아올 전역변수
+         function reportScopre(reportEvent,reportNum){
+        	 reportNumScope = reportNum;
+        	 rePortScope = reportEvent;   	
+ 
+         }
+         //댓글 신고기능 ajax
+          $(function(){
+        	 
+        	 $("#commentReportBtn").click(function(){
+        		 <%if(loginMember!=null){%>
+        		 //ajax 구간
+        		 
+        		 $.ajax({
+        			 url:"shMarketCommentReport.sh.hy",
+        			 type:"post",
+        			 data:{ 
+        				 memNo:"<%=loginMember.getMemNo()%>",
+        				 rReason:$("select[name=Comment_report_type]").val(),
+        				 postNo:"<%=pb.getPostNo()%>",
+        				 rContent:$("#reportContent1").val(),
+        			 },
+        			 success:function(result){
+    			  		 alert(result);
+    			  	 },
+    			  	 error:function(){
+    			  		 console.log("실패");
+    			  	 }
+        		 })//ajax 괄호
+	 
+        		 <%} else {%>
+        		 alert("신고는 회원만 가능합니다.")
+        		 <%}%>
+        	 })
+ 
+         })
+	 </script>  
   
       <%@ include file="../common/footerbar.jsp"%>   
          

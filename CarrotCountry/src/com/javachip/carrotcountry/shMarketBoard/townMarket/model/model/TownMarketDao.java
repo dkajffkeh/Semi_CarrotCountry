@@ -876,5 +876,68 @@ Properties prop = new Properties();
 		
 		return result;
 	}
+
+
+	public int shMarketCommentReportPrecheck(Connection conn, int memNo, int postNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketCommentReportPrecheck");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, postNo);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int shMarketCommentReportInsert(Connection conn, int memNo, String rReason, int postNo, String rContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketCommentReportInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, Integer.parseInt(rReason));
+			pstmt.setInt(3, postNo);
+			pstmt.setString(4, rContent);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public ArrayList<PostBoard> townMarketAjaxBoardSelector(Connection conn, ShmarketPageInfo sp) {
+		
+		
+		
+		
+		return null;
+	}
 	
 }

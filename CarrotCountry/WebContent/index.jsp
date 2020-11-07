@@ -93,12 +93,9 @@
     town_btn0.addEventListener('click',toTown);
   
     function toTown(){
-    	
-    	<%if(loginMember!=null){%>
+    	 	
         location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
-		<%} else {%>
-		location.href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=1";
-		<%}%>
+		
     }
     </script>
     <button type="button" class="btn btn-outline-success" id="coBuying_button">공구마켓</button>

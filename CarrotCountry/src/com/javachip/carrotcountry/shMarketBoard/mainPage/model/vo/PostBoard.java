@@ -2,7 +2,9 @@ package com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo;
 
 import java.sql.Date;
 
-public class PostBoard {
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
+
+public class PostBoard extends ShmarketPageInfo {
 	
 	private int postNo;
 	private String categoryNo;
@@ -24,9 +26,9 @@ public class PostBoard {
 	private int postLikes;
 	private int prodPrice;
 	private Date EnrollDate;
-	private String blindCheck;
-	
+	private String blindCheck;	
 	private String postRefund;
+	private int likeNum;
 	
 	public PostBoard() {
 		
@@ -134,6 +136,39 @@ public class PostBoard {
 		this.postName = postName;
 		this.postContent = postContent;
 		this.prodPrice = prodPrice;
+	}
+	
+	
+
+	public PostBoard(int currentPage, int listCount, int boardLimit, int pageLimit, int maxPage, int startPage,
+			int endPage, int postNo, String categoryNo, int memNo, String localNo, String memNickname, String postName,
+			String postContent, String categoryName, String parcelNum, String prodStatus, String dealType, String site,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postReports,
+			int postLikes, int prodPrice, Date enrollDate, String blindCheck, String postRefund) {
+		super(currentPage, listCount, boardLimit, pageLimit, maxPage, startPage, endPage);
+		
+		this.postNo = postNo;
+		this.categoryNo = categoryNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.memNickname = memNickname;
+		this.postName = postName;
+		this.postContent = postContent;
+		this.categoryName = categoryName;
+		this.parcelNum = parcelNum;
+		this.prodStatus = prodStatus;
+		this.dealType = dealType;
+		this.site = site;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postReports = postReports;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		EnrollDate = enrollDate;
+		this.blindCheck = blindCheck;
+		this.postRefund = postRefund;
 	}
 
 	public int getPostNo() {
@@ -304,9 +339,14 @@ public class PostBoard {
 		this.blindCheck = blindCheck;
 		
 	}
-	
-	
-	
+
+	public int getLikeNum() {
+		return likeNum;
+	}
+
+	public void setLikeNum(int likeNum) {
+		this.likeNum = likeNum;
+	}
 
 	public String getPostRefund() {
 		return postRefund;
@@ -327,8 +367,8 @@ public class PostBoard {
 				+ ", prodPrice=" + prodPrice + ", EnrollDate=" + EnrollDate + ", blindCheck=" + blindCheck
 				+ ", postRefund=" + postRefund + "]";
 	}
-	
-	
-	
+
 	
 }
+
+

@@ -122,11 +122,15 @@ img {height:100%; width:100%; border-radius: 5px;}
     width:300px;
 }
 .sorter_row > p {
-    color:darkgray;
+    color:orange;
     padding-left: 5px;
     margin-top: 35px;
     margin-bottom: 0;
     cursor: pointer;
+}
+
+.sorter_row > p:hover{
+color:green;
 }
 /* 메인 아티클 CSS */
 /*사이트바*/
@@ -291,18 +295,18 @@ img {height:100%; width:100%; border-radius: 5px;}
                                 style="width: 400px; margin-right: 6px;">
 
                             <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
-                                <option selected value="서울시">서울시</option>
-                                <option>Example one</option>
+                                <option value="서울특별시">서울특별시</option>
+                                
                             </select>
                             <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
-                                <option selected value="송파구">송파구</option>
-                                <option>Example one</option>
+                                <option value="송파구">송파구</option>
+                    			<option value="강서구">강서구</option>
                             </select>
                             <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
-                              <% for(int i = 0 ; i<list.size(); i++ ) { %>  
-                                <option value="<%=list.get(i).getCategoryNo()%>"><%=list.get(i).getCategoryName()%></option>
+                                <% for(int i = 0; i<list.size(); i++){ %>
+                                <option value="<%=40+10*0%>"><%=list.get(i).getCategoryName()%></option>
                                 <% } %>
-                            </select>
+                            </select>                     
                             <button type="button" class="btn btn-warning wrn-btn"><i class="fas fa-carrot"></i></button>
                         </div>
                     </div>
@@ -346,7 +350,7 @@ img {height:100%; width:100%; border-radius: 5px;}
         <% for(int i = 0 ; i < boardList.size(); i++){ %>
             <div class="article_frame">
             	<div class="borderNo"><%=boardList.get(i).getPostNo()%></div>
-                <div class="img_frame"><img src="<%=contextPath%>/<%=boardList.get(i).getThumbnailPath()+boardList.get(i).getThumbnailFilename()%>" alt=""></div>
+                <div class="img_frame"><img   src="<%=contextPath%>/<%=boardList.get(i).getThumbnailPath()+boardList.get(i).getThumbnailFilename()%>" alt=""></div>
                 <div class="product_title">
                     <h6 class="popular_board_title"><%=boardList.get(i).getPostName() %></h6>
                 </div>
@@ -412,6 +416,27 @@ img {height:100%; width:100%; border-radius: 5px;}
      }  
      </script>   
 <%@ include file="../common/footerbar.jsp"%>
+
+<script>
+$(document).ready(function(){
+	
+	$.ajax({
+		url:"townMarketBoardSelectAjax.sh.hy",
+		type:"post",
+		data:{currentPage:1},
+		success:function(list){
+			
+		},
+		error:function(){
+			console.log("실패");
+		}
+		
+	})
+	
+})
+
+</script>
+
 
 </body>
 </html>

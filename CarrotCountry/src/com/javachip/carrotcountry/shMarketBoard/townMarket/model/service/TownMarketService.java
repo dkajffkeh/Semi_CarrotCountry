@@ -343,5 +343,43 @@ public class TownMarketService {
 		return result;
 	}
 
+	public int shMarketCommentReportPrecheck(int memNo, int postNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketCommentReportPrecheck(conn,memNo,postNo);
+		
+		close(conn);
+		return result;
+	}
+
+	public int shMarketCommentReportInsert(int memNo, String rReason, int postNo, String rContent) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketCommentReportInsert(conn,memNo,rReason,postNo,rContent);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<PostBoard> townMarketAjaxBoardSelector(ShmarketPageInfo sp) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoard> list = new TownMarketDao().townMarketAjaxBoardSelector(conn,sp);
+		
+		close(conn);
+		
+		
+		return list;
+	}
+
 	
 }

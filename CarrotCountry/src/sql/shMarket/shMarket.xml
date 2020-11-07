@@ -33,7 +33,9 @@ FROM
   WHERE 
   	   BLIND_CHECK='N'
   	AND
-  	   PROD_STATUS='Y'	   
+  	   PROD_STATUS='Y'
+    AND
+       POST_TYPE=1	   	   
   ORDER BY POST_NO DESC)
        A
 )
@@ -54,6 +56,10 @@ SELECT
       POST
  WHERE
       BLIND_CHECK='N'
+ AND 
+      PROD_STATUS='Y'
+ AND          
+      POST_TYPE=1 
 </entry>
 <entry key="PostBoardDetailSelector">
 	SELECT
@@ -82,9 +88,7 @@ SELECT
 	WHERE 
 	     BLIND_CHECK='N'
 	  AND 
-		 POST_NO = ?
-	  AND
-	 	 BLIND_CHECK='N'		 
+		 POST_NO = ?	  	 		 
 </entry>
 <entry key="marketCommentSelector">
  SELECT 
@@ -152,6 +156,7 @@ INSERT INTO
             ,PROD_PRICE
             ,POST_ENROLL_DATE
             ,BLIND_CHECK
+            ,POST_TYPE
            )
            VALUES
            (
@@ -191,6 +196,7 @@ INSERT INTO
           ,?
           ,SYSDATE
           ,DEFAULT
+          ,1
            )
 </entry>
 <entry key="shMarketPhotoInsert">
@@ -220,7 +226,7 @@ INSERT INTO
            ,DEAL_STATUS
            ,USED_PRODSTATUS
            ,USED_PRICE
-           ,USED_POST_CHECK
+           
            )
       VALUES
            (
@@ -228,7 +234,7 @@ INSERT INTO
            ,DEFAULT
            ,?
            ,?  
-           ,1 
+           
            )
 </entry>
 <entry key="shMarketBoardCommentSelector">
@@ -530,5 +536,42 @@ UPDATE
       CONTENT=?
 WHERE
       COMM_NO=?
+</entry>
+<entry key="shMarketCommentReportPrecheck">
+SELECT
+      COUNT(*) COUNT
+ FROM
+      REPORT
+WHERE 
+     MEM_NO=?
+AND
+     REPORT_POST_NO=?
+AND  
+     REPORT_TYPE_NO=3
+</entry>
+<entry key="shMarketCommentReportInsert">
+INSERT INTO
+           REPORT
+           (
+             REPORT_NO
+            ,MEM_NO
+            ,REPORT_TYPE_NO
+            ,REPORT_REASON_NO
+            ,REPORT_DATE
+            ,REPORT_POST_NO
+            ,REPORT_CHECK
+            ,REPORT_CONTENT
+           )
+           VALUES
+           (
+           SEQ_REPORTNO.NEXTVAL
+          ,?
+          ,3
+          ,?
+          ,SYSDATE
+          ,?
+          ,DEFAULT
+          ,?
+           ) 
 </entry>
 </properties>
