@@ -120,7 +120,7 @@
 	                    <tr>
 	                        <td align="right"><span>배송지 선택 : </span></td>
 	                        <td>
-	                        	<button type="button" class="btn btn-secondary btn-sm">기본 배송지</button>
+	                        	<button type="button" class="btn btn-secondary btn-sm" id="">기본 배송지</button>
 	                            <button type="button" class="btn btn-secondary btn-sm">신규 배송지</button>
 	                            <button type="button" class="btn btn-secondary btn-sm">배송지 목록</button>
 	                        </td>
@@ -137,6 +137,7 @@
 	                        <td align="right"><span>주소 : </span></td>
 	                        <td>
 	                        	<input type="text">
+	                        	<input type="hidden" name="shippingNo" value="<%= shippingList.get(1).getShippingNo() %>">
 	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
 	                            <input type="text" id="particularAddress1"> &nbsp; <input type="text" id="particularAddress2" placeholder="상세주소 입력">
 	                        </td>
@@ -185,7 +186,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td rowspan="2" width="200" height="200">
-	                            <img src="../Common/images/무선청소기1.jpg" alt="" width="100%" height="100%">
+	                            <img src="<%= contextPath %>/<%= pb.getThumbnailLoadPath() %> + <%= pb.getThumbnailFilename() %>" width="100%" height="100%">
 	                        </td>
 	                        <td><p><%= pb.getPostName() %></p></td>
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>

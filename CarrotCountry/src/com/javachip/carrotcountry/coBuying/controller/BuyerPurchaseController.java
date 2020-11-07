@@ -33,7 +33,7 @@ public class BuyerPurchaseController extends HttpServlet {
 		Product p = new ProductService().selectProduct(bno);
 		ArrayList<Option> optionList = new ProductService().selectOption(bno);
 		ArrayList<Account> accountList = new ProductService().selectAccount(bno);
-		PostBoard pb = new ProductService().selectThumbnail(bno);
+		PostBoard pb = new ProductService().selectPostBoard(bno);
 		ArrayList<ShippingLocation> shippingList = new UserInfoBoardService().selectShippingLocation(memNo);
 		
 		request.getAttribute("p");

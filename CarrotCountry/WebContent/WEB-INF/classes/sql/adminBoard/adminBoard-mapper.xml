@@ -26,6 +26,7 @@
 					       member m on m.mem_no = p.mem_no
 					  join 
 					       category c on c.category_no = p.category_no
+					 where post_type != 3
 					 order
 					    by p.post_no
 		            ) a
@@ -70,6 +71,7 @@
 					  join 
 					       category c on c.category_no = p.category_no
 					 where blind_check = 'Y'
+					   and post_type != 3
 					 order
 					    by p.post_no
 		            ) a
@@ -104,6 +106,7 @@
 					 where post_name like '%'|| nvl(?, '') ||'%'
 					   and c.category_name like '%'|| nvl(?, '') ||'%'
 					   and mem_userid like '%'|| nvl(?, '') ||'%'
+					   and post_type != 3
 					 order
 					    by p.post_no
 		            ) a
@@ -145,6 +148,7 @@
 					   and post_name like '%'|| nvl(?, '') ||'%'
 					   and c.category_name like '%'|| nvl(?, '') ||'%'
 					   and mem_userid like '%'|| nvl(?, '') ||'%'
+					   and post_type != 3
 					 order
 					    by p.post_no
 		            ) a
