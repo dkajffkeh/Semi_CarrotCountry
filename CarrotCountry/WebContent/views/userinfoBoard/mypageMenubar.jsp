@@ -110,7 +110,7 @@
                 <td><a href="<%= contextPathUserinfo %>/coBuying.po.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">내 게시글</a></td>
             </tr>
             <tr>
-                <td><a href="">진행 현황</a></td>
+                <td><a href="<%= contextPathUserinfo %>/groupPurchaseList.gp.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">진행 현황</a></td>
             </tr>
             <tr>
 				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>
