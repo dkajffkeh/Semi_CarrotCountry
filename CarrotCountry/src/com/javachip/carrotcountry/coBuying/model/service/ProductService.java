@@ -8,6 +8,7 @@ import com.javachip.carrotcountry.coBuying.model.dao.QnADao;
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
+import com.javachip.carrotcountry.coBuying.model.vo.PostBoardJY;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
@@ -159,6 +160,22 @@ public class ProductService {
 		}
 		
 		
+	public int updateWishList(PostBoardJY pb) {
+			
+			Connection conn = getConnection();
+			
+			int result = new ProductDao().updateWishList(conn, pb);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
 		
 	
 	

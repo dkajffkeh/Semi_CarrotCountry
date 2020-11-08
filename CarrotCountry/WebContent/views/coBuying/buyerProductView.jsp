@@ -21,6 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 
         /* 전체 틀 */
@@ -203,7 +204,8 @@
 
                         <div id="content2_2_2">
                             <div id="interst">
-                                <button href="찜하기목록이랑연결" class="btn btn-secondary btn-sm">찜하기</button>
+                            	<input type="hidden" value="<%= loginMember.getMemNo() %>" id="memNo">
+                                <button type="button" id="addWishList" class="btn btn-secondary btn-sm">찜하기</button>
                             </div>
                             <div id="buy">
                                 <button type="submit" class="btn btn-secondary btn-sm">구매하기</button>
@@ -211,6 +213,34 @@
                             <div id="report">
                                 <button href="신고하기페이지로연결" class="btn btn-secondary btn-sm">신고하기</button>
                             </div>
+                            
+                            
+                            <script>
+                            $(function(){
+                           	 
+                           	 $("#addWishList").click(function(){
+	                           		 
+	                           		 if(confirm("찜목록에 추가하시겠습니까?")) {
+	                           		 
+	                           			 $.ajax({
+	                           				 url:"updatewish.jy",
+	                           				 data:{bno:"<%=pb.getPostNo()%>",
+	                           					   memNo:"<%=loginMember.getMemNo()%>"},
+	                           			     type:"post",
+	                           			     success:function(result){
+	                           			  		 alert("찜목록에 성공적으로 추가되었습니다!");
+	                           			  	 },	
+	                           				 error:function(){      					 
+	                           				 }
+	                           			 })
+	                           		 }	 
+	                           	 })	 
+                            })
+                            </script>
+                            
+                            
+                            
+                            
                             
                         </div>
                    

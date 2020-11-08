@@ -13,6 +13,7 @@ import java.util.Properties;
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
+import com.javachip.carrotcountry.coBuying.model.vo.PostBoardJY;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
@@ -508,7 +509,28 @@ private Properties prop = new Properties();
 			
 		}
 		
-		
+		public int updateWishList(Connection conn, PostBoardJY pb) {
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("updateWishList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, pb.getPostNo());
+
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
 
 	
 }
