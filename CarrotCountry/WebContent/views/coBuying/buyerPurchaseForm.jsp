@@ -8,9 +8,9 @@
     pageEncoding="UTF-8"%>
 <%
 	Product p = (Product)request.getAttribute("p");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	ArrayList<Option> optionList = (ArrayList<Option>)request.getAttribute("optionList");
 	ArrayList<Account> accountList = (ArrayList<Account>)request.getAttribute("accountList");
-	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	ArrayList<ShippingLocation> shippingList = (ArrayList<ShippingLocation>)request.getAttribute("shippingList");
 %>
 <!DOCTYPE html>
@@ -137,7 +137,6 @@
 	                        <td align="right"><span>주소 : </span></td>
 	                        <td>
 	                        	<input type="text">
-	                        	<input type="hidden" name="shippingNo" value="<%= shippingList.get(1).getShippingNo() %>">
 	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
 	                            <input type="text" id="particularAddress1"> &nbsp; <input type="text" id="particularAddress2" placeholder="상세주소 입력">
 	                        </td>
@@ -151,8 +150,7 @@
 		                            <option value="direct">직접입력</option>
 	                        	</select>
 	                        
-	                        <input type="text" id="selboxDirect" name="requests"/>
-	                    
+	                        	<input type="text" id="selboxDirect" name="requests"/>
 	    
 			                    <script>
 			                        $(function(){
@@ -213,7 +211,7 @@
 	                <table id="purchaseInfo">
 	                    <tr>
 	                        <td>입금자명 :</td>
-	                        <td><input type="text"><%= loginMember.getMemName() %></td>
+	                        <td><input type="text" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td>입금계좌 :</td>
@@ -230,7 +228,7 @@
 	
 	                <b>* 입금정보 확인 후 일치할시, 발송됩니다. </b>
 	                
-	                <br><br><br><br>
+	                <br><br>
 	                
 	                <button type="submit" id="purchaseBtn" class="btn btn-dark">주문하기</button>
 	            </div>
