@@ -395,7 +395,11 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	
+	<entry key="updateWishList">
+		 UPDATE POST
+		    SET POST_LIKES = POST_LIKES + 1
+		  WHERE POST_NO=?
+	</entry>
 	
 
 
