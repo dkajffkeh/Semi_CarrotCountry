@@ -44,7 +44,9 @@ public class PurchaseInfoDao {
 			pstmt.setInt(4, pi.getOptionNo());
 			pstmt.setString(5, pi.getDepositor());
 			pstmt.setInt(6, pi.getPurchasePrice());
-			pstmt.setString(7, pi.getRequests());
+			pstmt.setString(7, "");
+			pstmt.setString(8, "");
+			pstmt.setString(9, pi.getRequests());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

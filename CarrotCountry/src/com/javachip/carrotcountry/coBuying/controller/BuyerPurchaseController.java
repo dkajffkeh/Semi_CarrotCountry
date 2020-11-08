@@ -31,16 +31,16 @@ public class BuyerPurchaseController extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		Product p = new ProductService().selectProduct(bno);
+		PostBoard pb = new ProductService().selectPostBoard(bno);
 		ArrayList<Option> optionList = new ProductService().selectOption(bno);
 		ArrayList<Account> accountList = new ProductService().selectAccount(bno);
-		PostBoard pb = new ProductService().selectPostBoard(bno);
 		ArrayList<ShippingLocation> shippingList = new UserInfoBoardService().selectShippingLocation(memNo);
 		
-		request.getAttribute("p");
-		request.getAttribute("optionList");
-		request.getAttribute("accountList");
-		request.getAttribute("pb");
-		request.getAttribute("shippingList");
+		request.setAttribute("p", p);
+		request.setAttribute("pb", pb);
+		request.setAttribute("optionList", optionList);
+		request.setAttribute("accountList", accountList);
+		request.setAttribute("shippingList", shippingList);
 		
 		request.getRequestDispatcher("views/coBuying/buyerPurchaseForm.jsp").forward(request, response);
 		

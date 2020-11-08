@@ -160,7 +160,7 @@
                       
                 </div>
                 
-                    <form action="<%= contextPath %>/buyerPurchase.pro.jy?memNo=<%= loginMember.getMemNo() %>&bno=<%= pb.getPostNo() %>" method="post"  enctype="multipart/form-data" >
+                    <form action="<%= contextPath %>/buyerPurchase.pro.jy?memNo=<%= loginMember.getMemNo() %>&bno=<%= pb.getPostNo() %>" method="post" >
                     
                        <div id="content2_2">
                
