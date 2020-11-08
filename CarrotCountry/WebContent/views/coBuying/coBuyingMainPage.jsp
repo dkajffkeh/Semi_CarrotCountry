@@ -11,7 +11,9 @@
 	ArrayList<Product> pList = (ArrayList<Product>)request.getAttribute("pList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CategoryHY> cList = (ArrayList<CategoryHY>)request.getAttribute("cList");
-	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
 %>    
     
 <!DOCTYPE html>
@@ -167,6 +169,20 @@
 <%@ include file="../common/commonNavbar.jsp"%>
 
 
+
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
+
+
+
+
     <div class="wrap">
         <div id="header">
             <div id="header1" align="center">
@@ -189,8 +205,27 @@
             
             
                 <div id="createPro">
-                    <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-warning">새 공동구매 만들기</a>
+                    <button id="enrollPro"  type="button" class="btn btn-warning">새 공동구매 만들기</button>
                 </div>
+                
+                
+                <script>
+                
+                $("#enrollPro").click(function(){
+                	<%if(loginMember == null){%>
+	        			var result = confirm("로그인 한 회원만 이용할 수 있는 서비스 입니다. 로그인하시겠습니까?");
+	        			if(result){
+	        				location.href = "<%= contextPath %>/loginPage.me.ng";
+	        			}else{
+	        				location.href = "<%= contextPath %>/mainpage.co.jy?currentPage=1";
+	        			}
+                	<%}else{%>
+                		location.href = "<%= contextPath %>/enroll.pro.jy";
+                	<%}%>
+                	
+                	
+                });
+                </script>
                 
                 
                 <br><br>
@@ -268,48 +303,25 @@
                
 		           <%} %>    
                 
-                
-               <!-- 
-                    
-           
-                    
-                    
-                      <% for(Product pd : pList) {%>
-                 
-                    <div id="proName">
-                    	<input type="hidden" value="<%= pd.getPostNo() %>">
-                        <div id="proImg">
-                            <a href=""><img src="<%= contextPath %>/<%= pd.getThumbnailLoadpath() %>" width="100" height="100"></a>
-                        </div>
-                        <div id="proText">
-                            <div id="proText-title">
-                                <a href=""><h4><%= pd.getPostName() %></h4></a>
-                            </div>
-                            <div id="proText-like">
-                                <h6><%= pd.getGpPeople() %> | ♡ (<%= pd.getPostLikes() %>)</h6> 
-                            </div>
-                        </div>
-                        <div id="proPrice">
-                            <h6 id="realPrice"><s><%= pd.getGpPrice() %></s></h6>
-                            <span id="discount">공구할인률<%= pd.getGpDRate() %>%</span>
-                            <span id="discountPrice"><%= pd.getGpDPrice() %>원</span>
-                        </div>
-                    </div>
-                    <%} %>
-	               
-                    
-                    
-                   -->  
-                    
-                    
 		        <script>
 		        	$(function(){
 		        		$("#proName").click(function(){
 		        			
+		        		 	<%if(loginMember == null){%>
+		        			var result = confirm("로그인 한 회원만 열람 가능합니다. 로그인하시겠습니까?");
+		        			if(result){
+		        				location.href = "<%= contextPath %>/loginPage.me.ng";
+		        			}else{
+		        				location.href = "<%= contextPath %>/mainpage.co.jy?currentPage=1";
+		        			}
+	                	<%}else{%>
+	                		location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
+	                	<%}%>
 		        			
-		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
 		        		})
 		        	});
+		        	
+		        	
 		        </script>
 		                    
 
