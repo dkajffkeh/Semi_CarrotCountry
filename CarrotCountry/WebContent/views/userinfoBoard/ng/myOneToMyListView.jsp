@@ -49,7 +49,7 @@
 		<div class="myPageWrapper_content">
 		<br><br>
 			<div align="right" style="width:850px">
-				<a href="<%= contextPath %>/enrollForm.on.jm" class="btn btn-secondary btn-sm">글작성</a>
+				<a href="<%= contextPath %>/enrollForm.on.jm" class="btn btn-secondary btn-sm">문의하기</a>
 			</div>
 			<div class="outer">
 		       	<br>

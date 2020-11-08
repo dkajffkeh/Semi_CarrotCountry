@@ -36,7 +36,7 @@
       
       <br>
       <div class="form-group">
-        <p style="height:200px" class="border border-warning"><%=o.getAnswerContent() %></p>
+        <p style="height:200px" class="border border-warning"><%=o.getOneToContent() %></p>
       </div>
 		<!-- 답변이 완료됬을때 -->
       <%if(o.getAnswerState().equals("Y")){ %>
@@ -52,7 +52,7 @@
       
       	<!-- 관리자 -->
       	<%if(loginMember.getManagerCheck().equals("Y")){ %>
-        <a href="<%= contextPath %>/answer.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">답변하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="<%= contextPath %>/answerForm.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">답변하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <%} %>
         <!-- 사용자 -->
         <a href="<%= contextPath %>/modify.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
