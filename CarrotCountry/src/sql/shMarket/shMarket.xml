@@ -579,7 +579,7 @@ SELECT *
 FROM
 (
 SELECT  ROWNUM RNUM
-        ,LOCAL_SI ||' '|| LOCAL_GU LOCATION
+        ,LOCAL_GU ||' '|| LOCAL_DONG LOCATION
         ,A.*
 FROM      
 (
@@ -627,7 +627,7 @@ SELECT *
 FROM
 (
 SELECT  ROWNUM RNUM
-        ,LOCAL_SI ||' '|| LOCAL_GU LOCATION
+        ,LOCAL_GU ||' '|| LOCAL_DONG LOCATION
         ,A.*
 FROM      
 (
