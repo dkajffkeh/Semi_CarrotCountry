@@ -174,6 +174,7 @@
                
                         <div id="content2_2_1">
                         	<input type="hidden" name="bno" value="<%= pb.getPostNo() %>">
+                        	<input type="hidden" name="gpPrice" value="<%= pd.getGpPrice() %>">
                             <span>모집 기간 :</span> <%= pd.getPostEnrollDate() %> ~ <%= pd.getGpDeadline() %> <br>
                             <span>최소 인원 :</span> <%= pd.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
