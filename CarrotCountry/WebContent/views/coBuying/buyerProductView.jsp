@@ -92,10 +92,18 @@
             height: 100%; 
             width: 25%; 
             float: left;
-            display:block;
+            display:block;   
+            padding-top: 100px;
         }
-         #showContent{
-            padding-left:100px;
+        #showContent{
+            height: 100%;
+            border:5px solid rgb(255, 178, 34);
+            border-radius:50px;
+            height:780px;
+            padding:50px;
+            font-size: 25px;
+            font-weight: 700;
+            text-align: center;
         }
         #content3_1>div>a{
         	color:white;
@@ -166,6 +174,7 @@
                
                         <div id="content2_2_1">
                         	<input type="hidden" name="bno" value="<%= pb.getPostNo() %>">
+                        	<input type="hidden" name="gpPrice" value="<%= pd.getGpPrice() %>">
                             <span>모집 기간 :</span> <%= pd.getPostEnrollDate() %> ~ <%= pd.getGpDeadline() %> <br>
                             <span>최소 인원 :</span> <%= pd.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
@@ -236,7 +245,7 @@
                     <script>
                         function showExplan(){
 	                        var showArea = document.getElementById("showContent");
-	                        showArea.innerHTML = "<%= pb.getPostContent() %>";
+	                        showArea.innerHTML = "<%= pb.getPostContent() %>" ;
                         }
                         
 

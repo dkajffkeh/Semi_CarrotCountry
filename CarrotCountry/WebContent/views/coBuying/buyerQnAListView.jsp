@@ -79,7 +79,6 @@ tbody td:hover{cursor: pointer;}
 
 
 
-	<!-- 성공적으로 삭제되었습니다 alert -->
 	<% if(alertMsg != null){ %>
 		<script>
 			alert("<%= alertMsg %>");	

@@ -291,29 +291,40 @@ color:green;
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="section_contatiner">
-                            <input type="text" class="form-control search-slt" placeholder="제목 또는 제품명을 검색해주세요"
+                            <input type="text" name="userSearch" class="form-control search-slt" placeholder="제목 또는 제품명을 검색해주세요"
                                 style="width: 400px; margin-right: 6px;">
 
-                            <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
-                                <option value="서울특별시">서울특별시</option>
-                                
+                            <select class="form-control search-slt" name="district" style="width:150px; margin-right: 6px;">
+                                  <option value="송파구" selected>송파구</option>
+                    			  <option value="강서구">강서구</option>                       
                             </select>
-                            <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
-                                <option value="송파구">송파구</option>
-                    			<option value="강서구">강서구</option>
+                            <select class="form-control search-slt" name="town" style="width:150px; margin-right: 6px;">
+                                <option value="오금동">오금동</option>
+			                    <option value="오류동">오류동</option>
+			                    <option value="상일동">상일동</option>
                             </select>
-                            <select class="form-control search-slt" style="width:150px; margin-right: 6px;">
+                            <select class="form-control search-slt" name="prodCategory" style="width:150px; margin-right: 6px;">
                                 <% for(int i = 0; i<list.size(); i++){ %>
-                                <option value="<%=40+10*0%>"><%=list.get(i).getCategoryName()%></option>
+                                <option value="<%=list.get(i).getCategoryName()%>"><%=list.get(i).getCategoryName()%></option>
                                 <% } %>
                             </select>                     
-                            <button type="button" class="btn btn-warning wrn-btn"><i class="fas fa-carrot"></i></button>
+                            <button type="button" class="btn btn-warning wrn-btn" onclick="userSearchAjax();"><i class="fas fa-carrot"></i></button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </section>
+    <script>
+    $(function(){
+    	
+    	
+    		
+    	})
+    	
+    	
+    })
+    </script>
     <!-- 검색 구간 -->
 
     <!-- 정렬 구현 구간 -->
@@ -401,7 +412,7 @@ $(function(){
  }
  
 })
-
+//ajax 페이징 처리 ajax
 function ajaxSelector(num){
 	
 	let $articleOuter = $(".mainArticle_article");	
@@ -419,7 +430,7 @@ function ajaxSelector(num){
 	});
 	
 }
-
+//카테고리 버튼 누르면  불러오는 ajax
 function categoryAjax(tar){
 	
 	let categoryName = tar.innerHTML;
@@ -432,13 +443,22 @@ function categoryAjax(tar){
 		success:function(list){
 			
 			ArticleSelector(list)
-			
-			
+						
+			$("ul[class=pagination]").html('');
 		},		
 	})
 	
+}
+//검색기능 ajax
+function userSearchAjax(){
 	
+	let userLo = $("select[name=district]").val();
+	let userInput =	$("input[name=userSearch]").val();
+	let prodCategory = $("select[name=prodCategory]").val();
 	
+	console.log(userLo);
+	console.log(userInput);
+	console.log(prodCategory);
 	
 }
 
