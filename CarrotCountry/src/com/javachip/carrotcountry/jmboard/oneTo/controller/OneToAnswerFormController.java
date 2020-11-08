@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
+import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
+
 /**
  * Servlet implementation class OneToAnswerFormController
  */
@@ -27,7 +30,18 @@ public class OneToAnswerFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("views/oneTo/AnswerForm.jsp").forward(request, response);
+		
+		
+		int ono = Integer.parseInt(request.getParameter("ono"));
+		
+
+		OneTo o = new OneToService().selectOneTo(ono);
+		
+
+		request.setAttribute("o", o);
+		
+		
+		request.getRequestDispatcher("views/oneTo/oneToAnswerForm.jsp").forward(request, response);
 	
 	
 	}

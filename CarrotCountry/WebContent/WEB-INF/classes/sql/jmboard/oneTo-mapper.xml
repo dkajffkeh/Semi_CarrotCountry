@@ -6,7 +6,6 @@
 		SELECT 
 		       COUNT(*) LISTCOUNT
 		  FROM ONETOONE
-		 WHERE ANSWER_STATE = 'N' 
 	</entry>
 	<entry key="selectList">
 		SELECT *
@@ -18,14 +17,13 @@
 		                SELECT 
 		                       ONETO_NO
 		                     , MEM_NAME
-		                     , ONETO_TYPE
+		                     , FAQ_CATEGORY_NAME
 		                     , ONETO_NAME
 		                     , ANSWER_DATE
 		                     , ANSWER_STATE
 		                  FROM ONETOONE 
-		                  JOIN MEMBER ON(WRITER_NO=MEM_NO)
-		                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
-		                 WHERE ANSWER_STATE = 'N'
+		                  LEFT JOIN MEMBER ON(WRITER_NO=MEM_NO)
+		                  LEFT JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
 		                 ORDER
 		                    BY ONETO_NO ASC
 		               ) A

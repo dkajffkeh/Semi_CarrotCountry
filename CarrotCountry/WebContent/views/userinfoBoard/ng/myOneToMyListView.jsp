@@ -3,9 +3,11 @@
 <%@ page import="com.javachip.carrotcountry.jmboard.oneTo.model.vo.*, java.util.ArrayList, com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo" %>
     
 <%
+	
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<OneTo> list = (ArrayList)request.getAttribute("list");
 	String resultMsg = (String)request.getAttribute("resultMsg");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>    
 
 <!DOCTYPE html>
@@ -38,6 +40,16 @@
 </head>
 <body>
 
+		<!-- 성공적으로 삭제되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
 	<!--  headerNavbar -->
 	<%@ include file= "../../common/commonNavbar.jsp"%>
 	
@@ -74,15 +86,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%for(OneTo o : list){ %>
 						
-							<tr>
-								<td><%= o.getOneToNo() %></td>
-								<td><%= o.getOneToName() %></td>
-								<td><%= o.getOneToType() %></td>
-								<td><%= o.getAnswerDate() %></td>
-								<td><%= o.getAnswerState().equals("N") ? "처리중" : "처리완료"%></td>
-							</tr>
+						<%for(OneTo o : list){ %>
+							<!-- <%//if(loginMember != null && loginMember.getMemNickname().equals(o.getAnswererNo())){ %> -->
+								<tr>
+									<td><%= o.getOneToNo() %></td>
+									<td><%= o.getOneToName() %></td>
+									<td><%= o.getOneToType() %></td>
+									<td><%= o.getAnswerDate() %></td>
+									<td><%= o.getAnswerState().equals("N") ? "처리중" : "처리완료"%></td>
+								</tr>
+							<%//} %>
 						<%} %>
 					<%} %>
 					</tbody>

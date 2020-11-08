@@ -18,7 +18,11 @@
     </style>
 </head>
 <body>
+
 <%@ include file="../common/commonNavbar.jsp"%>
+
+		<!--  mypageMenubar -->
+	<%@ include file= "../userinfoBoard/mypageMenubar.jsp" %>
 <div class="outer">
 
 
@@ -30,10 +34,14 @@
 	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
 	    <ul>
 	        <li>
-	            <label for="title">
+
+	           	<div style="width:400px;">
+	           	<label for="title">
 	               	 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            </label>
-	            <input type="text"  name="title" id="title">
+	           	<input type="text" class="form-control" name="title" id="title" maxlength="20" required>
+	           	</div>
+	            
 	        </li>
 	    </ul>
 	    <ul>
@@ -50,7 +58,7 @@
 	        <li>
 	            <label for="content">내용</label>
 	            <br>
-	            <textarea name="content" id="content" cols="60" rows="10"  name="" style="resize: none"></textarea>
+	            <textarea name="content" class="form-control" id="content" cols="60" rows="10" style="resize: none" required></textarea>
 	        </li>
 	    </ul>
 	    

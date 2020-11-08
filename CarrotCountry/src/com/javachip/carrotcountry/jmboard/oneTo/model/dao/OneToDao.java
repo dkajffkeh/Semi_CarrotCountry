@@ -250,8 +250,6 @@ public class OneToDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("DAO");
-		System.out.println(o);
 		return o;
 	}
 

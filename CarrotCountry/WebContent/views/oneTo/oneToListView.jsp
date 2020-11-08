@@ -53,8 +53,7 @@
 								</div>
 									
 								<% } else { %>
-									<% for (OneTo o : list) { %>
-										<table class="table table-sm table-hover">
+									<table class="table table-sm table-hover list-area">
 										<thead class="thead-dark table-fixed">
 											<tr class="d-flax">
 												<th width="60">문의번호</th>
@@ -66,6 +65,8 @@
 												<th width="60">문의상태</th>
 											</tr>
 										</thead>
+									<% for (OneTo o : list) { %>
+
 										<tbody class="tbody">
 										<tr>
 											<td><%= o.getOneToNo() %></td>
@@ -73,8 +74,8 @@
 											<td><%= o.getOneToType() %></td>
 											<td><%= o.getOneToName() %></td>
 											<td><%= o.getWriterNo() %></td>
-											<td><%= o.getAnswererNo() %></td>
-											<td><%= o.getAnswerState().equals('N')?"문의중":"답변완료" %></td>
+											<td><%= o.getWriterNo() %></td>
+											<td><%= o.getAnswerState().equals("N")? "문의중" : "답변완료" %></td>
 											
 										</tr>
 									<% } %>
@@ -82,6 +83,19 @@
 							</tbody>
 						</table>
 					</div>
+					
+					<script>
+					$(function(){
+						$(".list-area>tbody>tr").click(function(){
+							location.href = "<%=contextPath%>/detail.on.jm?ono=" + $(this).children().eq(0).text();
+						});
+					});
+					</script>
+					
+					
+					
+					
+					
 					<!-- 페이지 번호 -->
 					<div id="boardNum" align="center">
 						<% if (pi.getCurrentPage() != 1) { %>

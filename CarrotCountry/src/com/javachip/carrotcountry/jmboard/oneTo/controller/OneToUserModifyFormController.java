@@ -12,59 +12,35 @@ import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 /**
- * Servlet implementation class OneToAnswerController
+ * Servlet implementation class OneToUserModifyFormController
  */
-@WebServlet("/answer.on.jm")
-public class OneToAnswerController extends HttpServlet {
+@WebServlet("/modifyForm.on.jm")
+public class OneToUserModifyFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneToAnswerController() {
+    public OneToUserModifyFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 답변 겸 답변 수정 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("utf-8");
-		
-		
-		
+	
+	
 		int ono = Integer.parseInt(request.getParameter("ono"));
-		String content = request.getParameter("content");
-		String answer = request.getParameter("memNo");
 		
-		OneTo o = new OneTo();
+		OneTo o = new OneToService().selectOneTo(ono);
 		
-		o.setOneToNo(ono);
-		o.setAnswerContent(content);
-		o.setAnswererNo(answer);
-		//System.out.println();
-		int result = new OneToService().answer(o); 
+		request.setAttribute("o", o);
 		
-		
-		if(result > 0) {
-			
-			
-			request.getSession().setAttribute("alertMsg", "답변완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.on.jm?ono=" + ono);
-		}else {
-			request.setAttribute("errorMsg", "답변등록 실패.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
-		}
-		
-
-		
-		
+		request.getRequestDispatcher("views/oneTo/oneToUpdateForm.jsp").forward(request, response);
 	
-	
+		
 	}
 
 	/**

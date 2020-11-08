@@ -81,12 +81,12 @@
 
                 <li>
                     <label for="">제목*</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="oneToTitle">
+                    <input type="text" name="oneToTitle" required>
                 </li>
 
                 <li>
                     <label for="">글작성*</label><br>
-                    <textarea cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;"></textarea>
+                    <textarea cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" maxlength="20" required></textarea>
                 </li>
 
             </ul>

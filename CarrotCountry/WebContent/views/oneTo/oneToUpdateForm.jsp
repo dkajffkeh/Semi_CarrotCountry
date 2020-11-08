@@ -23,8 +23,8 @@
         <!-- 개인정보 수집 및 이용동의칸 남겨둠 -->
         <h4>1:1문의</h4>
         <hr>
-        <form id="update" action="<%= contextPath %>/update.on.jm" method="post">
-        <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+        <form id="update" action="<%= contextPath %>/modify.on.jm" method="post">
+        <input type="hidden" name="ono" value="<%= o.getOneToNo() %>">
             <ul>
                 <li>
                     <label for="">유형분류*</label>&nbsp;
@@ -93,12 +93,12 @@
 
                 <li>
                     <label for="">제목*</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="oneToTitle" value="<%=o.getOneToName() %>">
+                    <input type="text" name="oneToTitle" value="<%=o.getOneToName() %>" required>
                 </li>
 
                 <li>
                     <label for="">글작성*</label><br>
-                    <textarea cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;"><%=o.getOneToContent() %></textarea>
+                    <textarea cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" required><%=o.getOneToContent() %></textarea>
                 </li>
 
             </ul>

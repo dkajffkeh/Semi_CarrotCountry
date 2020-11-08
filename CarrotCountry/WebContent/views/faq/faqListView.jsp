@@ -41,26 +41,17 @@
 
     <div class="CS_content">
         <div class="content_1">
-            <table class="table table-bordered center list-area"  align="center">
-
+        	<div  style="width:400px;" align="center">
+            <table class="table table-bordered center list-area"  >
                 <tbody>
                     <tr>
                         <td>운영정책</td>
                         <td>계정/인증</td>
                         <td>중고구매/판매</td>
                     </tr>
-                    <tr>
-                        <td>거래품목</td>
-                        <td>신고관련</td>
-                        <td>공동구매/판매</td>
-                    </tr>
-                    <tr>
-                        <td>이용 제재</td>
-                        <td>블랙리스트관련</td>
-                        <td >공구문의</td>
-                    </tr>
                 </tbody>
             </table>
+            </div>
         </div>
        <div class="CS_content_2">
         <center><b>사용자들이 자주 묻는 질문을 확인해보세요!</b></center>

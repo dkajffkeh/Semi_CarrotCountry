@@ -3,6 +3,7 @@
 <%@ page import="com.javachip.carrotcountry.jmboard.oneTo.model.vo.*" %>
 <%
 	OneTo o = (OneTo)request.getAttribute("o");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,17 @@
 </style>
 </head>
 <body>
+
+		<!-- 성공적으로 삭제되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
 	<%@ include file= "../common/commonNavbar.jsp"%>
     <div class="outer">
       <h5>상세보기</h5>
@@ -48,14 +60,13 @@
       <%} %>
       <div align="center">
       
-      
-      
+
       	<!-- 관리자 -->
       	<%if(loginMember.getManagerCheck().equals("Y")){ %>
         <a href="<%= contextPath %>/answerForm.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">답변하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <%} %>
         <!-- 사용자 -->
-        <a href="<%= contextPath %>/modify.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="<%= contextPath %>/modifyForm.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
       </div>
       

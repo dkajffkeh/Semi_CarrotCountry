@@ -34,9 +34,9 @@ public class OneToUserModifyController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int ono = Integer.parseInt(request.getParameter("ono"));
-		String type = request.getParameter("type");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		String type = request.getParameter("oneToType");
+		String title = request.getParameter("oneToTitle");
+		String content = request.getParameter("oneToContent");
 	
 		OneTo o = new OneTo(ono,type,title,content);
 	
