@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminMember;
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.Notice;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
 
@@ -258,6 +260,48 @@ public class NoticeDao {
 		return result;
 	}
 	
+	
+	public ArrayList<Notice> noticeSearchList(Connection conn, PageInfo pi, String category, String search) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("noticeSearchList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() -1) * pi.getNoticeLimit() + 1;
+			int endRow = startRow + pi.getNoticeLimit() - 1;
+			
+			pstmt.setString(1, "NOTICE_TITLE".equals(category) ? search : "");
+			pstmt.setString(2, "NOTICE_ENROLL_DATE".equals(category) ? search : "");
+			pstmt.setString(3, "MEM_USERID".equals(category) ? search : "");
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				list.add(new Notice(rset.getInt("NOTICE_NO"),
+						rset.getString("MEM_USERID"),
+						rset.getString("NOTICE_TITLE"),
+						rset.getDate("NOTICE_ENROLL_DATE"),
+						rset.getInt("NOTICE_COUNT")));
+				
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 	
 

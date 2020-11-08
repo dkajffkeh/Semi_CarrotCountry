@@ -91,7 +91,7 @@ public class OneToDao {
 			while(rset.next()) {
 				list.add(new OneTo(rset.getInt("ONETO_NO"),
 									rset.getString("MEM_NAME"),
-									rset.getString("ONETO_TYPE"),
+									rset.getString("FAQ_CATEGORY_NAME"),
 									rset.getString("ONETO_NAME"),
 									rset.getDate("ANSWER_DATE"),
 									rset.getString("ANSWER_STATE")));

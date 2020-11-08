@@ -17,7 +17,6 @@
 <style>
 #log>table{
 	margin:auto;
-	
 }
 
 
@@ -27,6 +26,8 @@
 
 	<!-- 상단바 -->
 	<%@ include file="../common/commonNavbar.jsp"%>
+	
+	
 	
 			<!-- 성공적으로 삭제되었습니다 alert -->
 	<% if(alertMsg != null){ %>
@@ -41,8 +42,8 @@
 
     <div class="CS_content">
         <div class="content_1">
-        	<div  style="width:400px;" align="center">
-            <table class="table table-bordered center list-area"  >
+        	<center>
+        	<table class="table table-bordered center list-area"  >
                 <tbody>
                     <tr>
                         <td>운영정책</td>
@@ -51,16 +52,20 @@
                     </tr>
                 </tbody>
             </table>
-            </div>
+        	</center>
+
+            
         </div>
        <div class="CS_content_2">
         <center><b>사용자들이 자주 묻는 질문을 확인해보세요!</b></center>
         <br>
        </div>
-	        <div align="right" style="width:700px;">
+       <%if(loginMember.getManagerCheck().equals("Y")){ %>
+	        <div align="right" style="width:800px;">
 	            <a href="<%= contextPath %>/enrollForm.fa.jm" class="btn btn-secondary btn-sm">글작성</a>
 	            <br><br>
 	        </div>
+	   <%} %>     
        <div class="content_3">
 	        <ul class="list-group" id="myList">
 	           <% if(list.isEmpty()){ %>

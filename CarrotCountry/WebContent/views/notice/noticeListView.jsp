@@ -49,12 +49,12 @@
 	<div class="outer">
 	    <h4>공지사항</h4>
 	    <hr>
-	<%if(loginMember.getManagerCheck().equals("Y")){ %>
+
     <div align="right" style="width:850px">
 	<a href="<%= contextPath %>/enrollForm.no.jm" class="btn btn-secondary btn-sm">글작성</a>
 	<br><br>
 	</div>
-	 <%} %>
+
 	
 	<table class="table table-bordered center list-area" id="list-area">
 
@@ -87,6 +87,24 @@
                <% } %>
 	    </tbody>
 	</table>
+	
+
+	<!-- search -->
+	<form action="<%= contextPath %>/list.no.jm" class="form-inline my-2 my-lg-0" id="search">
+		<input type="hidden" name="currentPage" value=1>
+		<select name="searchCategory" id="searchCategory">
+		  <option value="no_title">제목</option>
+		  <option value="no_userid">작성자</option>
+		  <option value="no_birthday">작성일</option>
+		</select>
+		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+		<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+	</form>
+	
+	
+	
+	
+	
 		<script>
 			$(function(){
 				$(".list-area>tbody>tr").click(function(){
