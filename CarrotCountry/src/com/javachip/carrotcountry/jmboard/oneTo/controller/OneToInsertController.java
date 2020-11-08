@@ -45,7 +45,9 @@ public class OneToInsertController extends HttpServlet {
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
 			//마이페이지로 연결할 예정
-			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
+			
+			response.sendRedirect(request.getContextPath() + "/myList.on.jm?repCurrentPage=1");
+			
 		}else {
 			
 			request.setAttribute("errorMsg", "공지사항 작성 실패");

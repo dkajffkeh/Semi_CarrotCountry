@@ -1,6 +1,7 @@
 package com.javachip.carrotcountry.jmboard.oneTo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
 import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 /**
- * Servlet implementation class OneToDetailController
+ * Servlet implementation class OneToAdListView
  */
-@WebServlet("/detail.on.jm")
-public class OneToDetailController extends HttpServlet {
+@WebServlet("/adList.on.jm")
+public class OneToAdListViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneToDetailController() {
+    public OneToAdListViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +32,44 @@ public class OneToDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int ono = Integer.parseInt(request.getParameter("ono"));
-		
-
-		OneTo o = new OneToService().selectOneTo(ono);
-		
-
-		request.setAttribute("o", o);
-		
-		
-		
-		
+	
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int oneToLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
 		//
-		//System.out.println("detailController");
-		//System.out.print(o);
-		request.getRequestDispatcher("views/oneTo/oneToDetailView.jsp").forward(request, response);
+		listCount = new OneToService().selectListCount();
+		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 10;
+		
+		oneToLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount/oneToLimit);
+		
+		startPage = (currentPage - 1)/pageLimit * pageLimit + 1;
+		
+		
+		
+		endPage = startPage + pageLimit -1; 
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, oneToLimit, maxPage, startPage, endPage);
+		//
+		ArrayList<OneTo> list = new OneToService().selectList(pi);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("views/oneTo/oneToListView.jsp").forward(request, response);
+	
 	
 	}
 

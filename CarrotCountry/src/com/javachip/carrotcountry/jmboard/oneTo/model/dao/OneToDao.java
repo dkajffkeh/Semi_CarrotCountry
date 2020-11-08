@@ -232,9 +232,9 @@ public class OneToDao {
 			
 			if(rset.next()) {
 				o = new OneTo(rset.getInt("ONETO_NO"),
-							  rset.getString("U.WRITER"),
-							  rset.getString("M.ANSWERER"),
-							  rset.getString("ONETO_TYPE"),
+							  rset.getString("WRITER"),
+							  rset.getString("ANSWERER"),
+							  rset.getString("FAQ_CATEGORY_NAME"),
 							  rset.getString("ONETO_NAME"),
 							  rset.getString("ONETO_CONTENT"),
 							  rset.getString("ANSWER_CONTENT"),

@@ -34,6 +34,14 @@
             <tr>
                 <td><a href="<%= contextPathAdmin %>/reportSelect.sb?currentPage=1">신고조회</a></td>
             </tr>
+            
+            <tr>
+            	<th>1:1문의관리</th>
+            </tr>
+            <tr>
+            	<td><a href="<%= contextPathAdmin %>/adList.on.jm?currentPage=1">문의조회</a>
+            </tr>
+            
             <tr>
                 <th>공지사항관리</th>
             </tr>
