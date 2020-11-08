@@ -4,7 +4,7 @@
     
 <%
 	RepPageInfo pi = (RepPageInfo)request.getAttribute("pi");
-	ArrayList<MyReport> list = (ArrayList)request.getAttribute("list");
+	ArrayList<MyReport> list = (ArrayList<MyReport>)request.getAttribute("list");
 	
 	String resultMsg = (String)request.getAttribute("resultMsg");
 %>    

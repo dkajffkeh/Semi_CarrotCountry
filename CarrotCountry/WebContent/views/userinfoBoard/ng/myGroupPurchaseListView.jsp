@@ -34,17 +34,42 @@
 		padding:12px;
 	}
     .gp{
-        width:260px;
-        height:305px;
-        border:5px solid rgb(228, 183, 87);
+        width:100%;
+        height:180px;
+        border:3px solid white;
         box-shadow:5px 5px 10px 5px rgb(247, 233, 205);
         margin: 20px;
         float: left;
-        border-radius:0px 0px 10px 10px;
+        border-radius:10px 10px 10px 10px;
     }
-    .gp>img{
+    .gp div{
+    	height:100%;
+    	float:left;
+    }
+    .gpLeft{
+    	width:20%;
+    }
+    .gpCenter{
+    	margin-left:100px;
+    	width:30%;
+    }
+    .gpRight{
+    	margin-left:100px;
+    	width:25%;
+    }
+    
+    .gpCenter>table{
+    	margin-top:20px;
+    }
+    .gpCenter td{
+    	height:30px;
+    	font-size:40px;
+    }
+    
+    .gpLeft>img{
         width:100%;
-        height:150px;
+        height:100%;
+        border-radius:30px 30px 30px 30px;
     }
 
     .gp td{
@@ -52,7 +77,12 @@
         font-weight:900;
     }
     .gp:hover{
-        background:rgba(175, 175, 175, 0.3);
+        border:3px solid #ffa500;
+    }
+    .gpRight a{
+    	padding-top:60px;
+    	width:20%;
+    	height:100%;
     }
 
 		
@@ -83,31 +113,34 @@
 				<% }else { %>
 				<% for(MyPurchaseInfo m : list){ %>
 			    <div class="gp">
-			        <img src="<%= contextPath %>/<%= m.getThumbnailLoadpath() %>">
+			    	<div class="gpLeft">
+			        	<img src="<%= contextPath %>/<%= m.getThumbnailLoadpath() %>">
+			    	</div>
+			    	<div class="gpCenter">
 			            <table>
 			                <tr>
-			                    <td colspan="2">상품명</td><td colspan="2"><%= m.getPostName() %></td>
+			                    <td colspan="2">상품명</td><td colspan="2">&nbsp;&nbsp;<%= m.getPostName() %></td>
+			                </tr>
+
+			                <tr>
+			                    <td colspan="2">진행자</td><td colspan="2">&nbsp;&nbsp;<%= m.getMemNickname() %></td>
 			                </tr>
 			                <tr>
-			                    <td colspan="2">진행자</td><td colspan="2"><%= m.getMemNickname() %></td>
+			                    <td colspan="2">최소인원/현재인원</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpMinpeople() %>/<%= m.getGpPeople() %></td>
 			                </tr>
 			                <tr>
-			                    <td colspan="2">최소인원/현재인원</td><td colspan="2"><%= m.getGpMinpeople() %>/<%= m.getGpPeople() %></td>
+			                    <td colspan="2">마감일</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpDeadLine() %></td>
 			                </tr>
 			                <tr>
-			                    <td colspan="2">마감일</td><td colspan="2"><%= m.getGpDeadLine() %></td>
-			                </tr>
-			                <tr>
-			                	<td colspan="2">상태</td><td colspan="2"><%= m.getGpStatus() %></td>
-			                </tr>
-			                <tr>
-			                	<td><a href="" class="btn btn-warning btn-sm" style="color:white; margin-left:1.8px;">상품조회</a></td>
-			                	<td><a href="" class="btn btn-warning btn-sm" style="color:white;">구매정보</a></td>
-			                	<td><a href="" class="btn btn-warning btn-sm" style="color:white;">문의하기</a></td>
-			                    <td><a href="" class="btn btn-warning btn-sm" style="color:white;">배송조회</a></td>
+			                	<td colspan="2">진행상태</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpStatus() %></td>
 			                </tr>
 			            </table>
-			
+					</div>
+					<div class="gpRight">
+			                	<a href="" class="btn btn-warning btn-sm" style="color:white;">상품조회</a>
+			                	<a href="<%= contextPath %>/groupPurchaseDetail.gp.ng?memNo=<%= loginMember.getMemNo() %>&purchaseNo=<%= m.getPurchaseNo() %>" class="btn btn-warning btn-sm" style="color:white;">구매정보</a>
+			                	<a href="" class="btn btn-warning btn-sm" style="color:white;">문의하기</a>
+			        </div>
 			    </div>
 				<% } %>
 			<% } %>
