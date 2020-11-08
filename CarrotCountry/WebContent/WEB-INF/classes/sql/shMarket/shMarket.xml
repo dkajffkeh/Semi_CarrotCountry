@@ -574,4 +574,101 @@ INSERT INTO
           ,?
            ) 
 </entry>
+<entry key="townMarketAjaxBoardSelector">
+SELECT *
+FROM
+(
+SELECT  ROWNUM RNUM
+        ,LOCAL_SI ||' '|| LOCAL_GU LOCATION
+        ,A.*
+FROM      
+(
+SELECT POST_NO
+      ,LIKECOUNT
+      ,MEM_NO
+      ,LOCAL_NO
+      ,POST_NAME
+      ,CATEGORY_NAME
+      ,THUMBNAIL_PATH
+      ,THUMBNAIL_FILENAME
+      ,THUMBNAIL_LOADPATH
+      ,POST_VIEWS
+      ,POST_LIKES
+      ,PROD_PRICE
+      ,PROD_STATUS
+      ,BLIND_CHECK
+      ,POST_TYPE
+FROM
+(
+SELECT 
+       P.POST_NO
+      ,COUNT(L.POST_NO) LIKECOUNT
+ FROM     
+      LIKE_POST L
+ RIGHT JOIN POST P ON(P.POST_NO=L.POST_NO)
+ GROUP BY P.POST_NO
+)
+JOIN POST USING (POST_NO)
+WHERE
+     PROD_STATUS = 'Y'
+  AND
+     BLIND_CHECK = 'N'
+  AND
+     POST_TYPE=1
+ORDER BY POST_NO DESC)
+         A
+JOIN LOCATION L ON(A.LOCAL_NO=L.LOCAL_NO)
+)
+WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="TownMarketBoardAjaxCategorySelector">
+SELECT *
+FROM
+(
+SELECT  ROWNUM RNUM
+        ,LOCAL_SI ||' '|| LOCAL_GU LOCATION
+        ,A.*
+FROM      
+(
+SELECT POST_NO
+      ,LIKECOUNT
+      ,MEM_NO
+      ,LOCAL_NO
+      ,POST_NAME
+      ,CATEGORY_NAME
+      ,THUMBNAIL_PATH
+      ,THUMBNAIL_FILENAME
+      ,THUMBNAIL_LOADPATH
+      ,POST_VIEWS
+      ,POST_LIKES
+      ,PROD_PRICE
+      ,PROD_STATUS
+      ,BLIND_CHECK
+      ,POST_TYPE
+FROM
+(
+SELECT 
+       P.POST_NO
+      ,COUNT(L.POST_NO) LIKECOUNT
+ FROM     
+      LIKE_POST L
+ RIGHT JOIN POST P ON(P.POST_NO=L.POST_NO)
+ GROUP BY P.POST_NO
+)
+JOIN POST USING (POST_NO)
+WHERE
+     PROD_STATUS = 'Y'
+  AND
+     BLIND_CHECK = 'N'
+  AND
+     POST_TYPE=1
+  
+ORDER BY POST_NO DESC)
+         A
+JOIN LOCATION L ON(A.LOCAL_NO=L.LOCAL_NO)
+)
+WHERE RNUM BETWEEN ? AND ?
+AND CATEGORY_NAME LIKE ?
+</entry>
 </properties>

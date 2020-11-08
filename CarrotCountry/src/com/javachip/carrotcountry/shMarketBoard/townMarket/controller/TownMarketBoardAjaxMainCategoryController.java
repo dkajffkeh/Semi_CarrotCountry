@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
@@ -33,6 +34,8 @@ public class TownMarketBoardAjaxMainCategoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		response.setContentType("application/json; charset=utf-8");
+		
 		int currentPage;
 		int listCount; //게시글 총 갯수.
 		int boardLimit;//한페이지에 몇개 보여줄건지
@@ -63,8 +66,10 @@ public class TownMarketBoardAjaxMainCategoryController extends HttpServlet {
                 ,startPage
                 ,endPage);
 		
-		ArrayList<PostBoard> bList;
+		ArrayList<PostBoard> bList = new TownMarketService().townMarketAjaxBoardSelector(sp);
 		
+		Gson gson = new Gson();
+		gson.toJson(bList,response.getWriter());
 	
 	}
 

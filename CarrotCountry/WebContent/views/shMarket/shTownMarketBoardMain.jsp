@@ -7,7 +7,6 @@
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
 //카테고리 이름
-ArrayList<PostBoard> boardList = (ArrayList)request.getAttribute("boardList");
 //게시글 번호, 맴버번호 , 지역정보, 글제목, 카테고리 , 카테고리 이름,썸네일 경로 파일이름,파일명, views , like , 가격  
 ShmarketPageInfo sp = (ShmarketPageInfo)request.getAttribute("sp");
 /*
@@ -41,6 +40,7 @@ ArrayList<Integer> likeCount = (ArrayList)request.getAttribute("likeCount");
         a:hover {
             color: black;
             text-decoration: none;
+            cursor:pointer;
         }
         html {
     position: relative;
@@ -143,7 +143,7 @@ color:green;
      justify-content: center;
  }
  .mainArticle_sidebar {
-     height:39.5%;
+     height:33.3%;
      width:200px;
      
      background-color: rgb(255, 213, 122);
@@ -330,8 +330,7 @@ color:green;
     <!-- 정렬 구현 구간 -->
 
     <!-- main 아티클 구간 -->
-	
-	
+
 	<div class="location_display">서울특별시 송파구</div>
 	
 	
@@ -340,61 +339,21 @@ color:green;
         <div class="mainArticle_sidebar">
             <div>
             <% for(int i = 0 ; i<list.size(); i++) { %>
-                <div class="side_bar font">
-                    <%= list.get(i).getCategoryName() %>
-                </div>
+                <div class="side_bar font" style="cursor:pointer" onclick="categoryAjax(this);"><%= list.get(i).getCategoryName() %></div>
               <% } %>
             </div>      
         </div>
         <div class="mainArticle_article">
-        <% for(int i = 0 ; i < boardList.size(); i++){ %>
-            <div class="article_frame">
-            	<div class="borderNo"><%=boardList.get(i).getPostNo()%></div>
-                <div class="img_frame"><img   src="<%=contextPath%>/<%=boardList.get(i).getThumbnailPath()+boardList.get(i).getThumbnailFilename()%>" alt=""></div>
-                <div class="product_title">
-                    <h6 class="popular_board_title"><%=boardList.get(i).getPostName() %></h6>
-                </div>
-                <div class="location_area"><%=boardList.get(i).getLocalNo() %></div>
-                <div class="ratring_counter">
-                    <p>조회수:<%=boardList.get(i).getPostViews() %> 찜:<%=boardList.get(i).getPostLikes() %></p>
-                </div>
-                <div class="price_display"><%=boardList.get(i).getProdPrice() %></div>
-            </div>
-       <% } %>        
+  
         </div>
-        <script>
-       $(function(){    	   
-    	   $(".article_frame").click(function(){  		   
-    		   let bno = $(this).children().eq(0).text();
-    		   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;	   
-    	   });    	   
-       });      
-        </script>
      </div>
      <div class="page_display" style="margin-bottom:25px; margin-top: 10px;">
         <div style="width:100px"><!-- 간격 유지용 div --></div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-            <% if(sp.getCurrentPage()!=1) { %>
-              <li class="page-item">
-                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()-1%>" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>         
-              </li>
-              <% } %>
-              <% for(int i = sp.getStartPage() ; i<=sp.getEndPage() ; i++) { %>
-              <li class="page-item"><a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=i%>"><%=i%></a></li>
-             <% } %>
+            
+
              
-             <% if(sp.getCurrentPage()!=sp.getMaxPage()) { %>
-              <li class="page-item">
-                <a class="page-link" href="<%=contextPath%>/shMarketBoardMain.sh?currentPage=<%=sp.getCurrentPage()+1%>" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-              <% } %>
             </ul>
           </nav>         
           <button type="button" class="btn btn-warning" id="postEnroll_btn">게시글 올리기</button>
@@ -418,25 +377,133 @@ color:green;
 <%@ include file="../common/footerbar.jsp"%>
 
 <script>
-$(document).ready(function(){
+$(function(){
 	
+	mainArticleAjaxFunc();
+
+ function mainArticleAjaxFunc(){	
+ 
 	$.ajax({
 		url:"townMarketBoardSelectAjax.sh.hy",
 		type:"post",
 		data:{currentPage:1},
 		success:function(list){
-			
+
+			ArticleSelector(list);	
+		
+			PagingSort(list);        
+		
 		},
 		error:function(){
 			console.log("실패");
-		}
-		
-	})
-	
+		}	
+	})		
+ }
+ 
 })
 
-</script>
+function ajaxSelector(num){
+	
+	let $articleOuter = $(".mainArticle_article");	
+	$.ajax({
+		url:"townMarketBoardSelectAjax.sh.hy",
+		type:"post",
+		data:{currentPage:num},
+		success:function(list){
+				
+			ArticleSelector(list);
+			
+			PagingSort(list);
+	
+		}
+	});
+	
+}
 
+function categoryAjax(tar){
+	
+	let categoryName = tar.innerHTML;
+	
+	$.ajax({
+		url:"townMarketBoardCategoryAjax.sh.hy",
+		type:"post",
+		data:{currentPage:1,
+			  cName:categoryName},
+		success:function(list){
+			
+			ArticleSelector(list)
+			
+			
+		},		
+	})
+	
+	
+	
+	
+}
+
+function ArticleSelector(list){
+	
+	let $articleOuter = $(".mainArticle_article");
+	let str = "";
+	
+	for(let i = 0; i<list.length ; i++){			
+	
+		str += `<div class="article_frame" onclick=detailfunc(this)>
+            	<div class="borderNo">\${list[i].postNo}</div>
+                <div class="img_frame"><img   src="<%=contextPath%>/\${list[i].thumbnailLoadPath+list[i].thumbnailFilename}" alt=""></div>
+                <div class="product_title">
+                    <h6 class="popular_board_title">\${list[i].postName}</h6>
+                </div>
+                <div class="location_area">\${list[i].localNo}</div>
+                <div class="ratring_counter">
+                    <p>\${"조회수:" + list[i].postViews + " 찜:" + list[i].postLikes}</p>
+                </div>
+                <div class="price_display">\${list[i].prodPrice}</div>
+            </div>`;				
+	}		
+	$articleOuter.html(str);	
+}
+function PagingSort(list){
+	
+	let pagingNodes = "";
+	let backBtn   ="";
+	let pagingNum = "";
+	let nextBtn   ="";
+	let result = "";
+	if(list[0].currentPage!=1){
+	backBtn += `<li class="page-item" onclick=ajaxSelector(\${list[0].currentPage-1})>
+        <a class="page-link" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>         
+      </li>`};       
+    
+    for(let j = list[0].startPage ; j<=list[0].endPage ; j++){
+    pagingNum +=`<li class="page-item"><a class="page-link" onclick=ajaxSelector(\${j})>\${j}</a></li>`
+    };
+           
+    if(list[0].currentPage!=list[0].maxPage){
+    nextBtn += `<li class="page-item" onclick=ajaxSelector(\${list[0].currentPage+1})>
+        <a class="page-link" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>`};
+      result = backBtn + pagingNum + nextBtn;
+
+      $("ul[class=pagination]").html(result);
+
+}
+
+function detailfunc(t){
+	
+   let bno = t.childNodes[1].innerHTML;
+   location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
+
+}
+
+</script>
 
 </body>
 </html>

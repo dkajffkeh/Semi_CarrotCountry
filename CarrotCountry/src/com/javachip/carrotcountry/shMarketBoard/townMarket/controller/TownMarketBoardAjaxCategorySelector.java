@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
-import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 /**
- * Servlet implementation class TownMarketBoardMainCategoryController
+ * Servlet implementation class TownMarketBoardAjaxCategorySelector
  */
-@WebServlet("/shMarketBoardMain.sh")
-public class TownMarketBoardMainCategoryController extends HttpServlet {
+@WebServlet("/townMarketBoardCategoryAjax.sh.hy")
+public class TownMarketBoardAjaxCategorySelector extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TownMarketBoardMainCategoryController() {
+    public TownMarketBoardAjaxCategorySelector() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +34,8 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		response.setContentType("application/json; charset=utf-8"); 
+		
 		int currentPage;
 		int listCount; //게시글 총 갯수.
 		int boardLimit;//한페이지에 몇개 보여줄건지
@@ -55,12 +57,22 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 		if(endPage>maxPage) {
 			endPage = maxPage;
 		}
+	
+		ShmarketPageInfo sp = new ShmarketPageInfo(currentPage
+                ,listCount
+                ,boardLimit
+                ,pageLimit
+                ,maxPage
+                ,startPage
+                ,endPage);
 		
-
-		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
-
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);
+		String cName = request.getParameter("cName");
+	
+		
+		ArrayList<PostBoard> pb = new TownMarketService().TownMarketBoardAjaxCategorySelector(cName,sp);
+		Gson gson = new Gson();
+		gson.toJson(pb,response.getWriter());
+		
 		
 	}
 
@@ -68,7 +80,7 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

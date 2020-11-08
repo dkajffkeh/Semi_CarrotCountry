@@ -372,11 +372,22 @@ public class TownMarketService {
 	public ArrayList<PostBoard> townMarketAjaxBoardSelector(ShmarketPageInfo sp) {
 		
 		Connection conn = getConnection();
-		
 		ArrayList<PostBoard> list = new TownMarketDao().townMarketAjaxBoardSelector(conn,sp);
 		
+
 		close(conn);
 		
+		
+		return list;
+	}
+
+	public ArrayList<PostBoard> TownMarketBoardAjaxCategorySelector(String cName, ShmarketPageInfo sp) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoard> list = new TownMarketDao().TownMarketBoardAjaxCategorySelector(conn,cName,sp);
+		
+		close(conn);
 		
 		return list;
 	}
