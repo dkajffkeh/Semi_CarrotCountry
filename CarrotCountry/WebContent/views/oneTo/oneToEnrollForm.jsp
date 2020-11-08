@@ -52,7 +52,9 @@
                       </div>
                       <br>
                       <div class="form-check-inline">
+                      
                         <label class="form-check-label">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <input type="radio" class="form-check-input" id="radio4" name="oneToType" value="66">공동구매/판매
                         </label>
                       </div>
@@ -81,12 +83,12 @@
 
                 <li>
                     <label for="">제목*</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" name="oneToTitle" required>
+                    <input type="text" name="oneToTitle" class="border border-warning" required>
                 </li>
 
                 <li>
                     <label for="">글작성*</label><br>
-                    <textarea cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" maxlength="20" required></textarea>
+                    <textarea class="border border-warning" cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" maxlength="20" required></textarea>
                 </li>
 
             </ul>

@@ -22,7 +22,7 @@
             <table>
             <tr>
               <td width="55">제목:</td>&nbsp;
-              <td><input type="text" class="form-control" name="faqTitle"></td>
+              <td><input type="text" class="form-control" name="faqTitle" required></td>
             </tr>
             <tr>
               <td width="80">카테고리 :</td>
@@ -45,7 +45,7 @@
         
          
         <div class="form-group">
-          <textarea class="border border-warning" cols="60" rows="20" id="comment" name="faqContent" style="resize: none"></textarea>
+          <textarea class="border border-warning" cols="150" rows="35" id="comment" name="faqContent" style="resize: none" required></textarea>
         </div>
         <div align="center">
           <input type="submit" value="작성하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;

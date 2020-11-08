@@ -22,7 +22,7 @@
 <%@ include file="../common/commonNavbar.jsp"%>
 
 		<!--  mypageMenubar -->
-	<%@ include file= "../userinfoBoard/mypageMenubar.jsp" %>
+	
 <div class="outer">
 
 
