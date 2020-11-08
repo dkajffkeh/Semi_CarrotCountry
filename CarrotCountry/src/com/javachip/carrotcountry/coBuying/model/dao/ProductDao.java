@@ -531,6 +531,66 @@ private Properties prop = new Properties();
 			return result;
 			
 		}
+		
+		
+		
+		public int reportCheck(Connection conn,int bno, int memNo) {
+			
+			int repCheck = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("reportPreCheck");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				pstmt.setInt(2, memNo);
+				
+			    rs = pstmt.executeQuery();
+			    if(rs.next()) {
+			    	repCheck = rs.getInt("COUNT(*)");
+			    }
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			
+			return repCheck;
+		}
+
+		
+		
+		
+		
+		
+		public int reportProduct(Connection conn, int bno) {
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("reportProduct");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, bno);
+
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+		
 
 	
 }

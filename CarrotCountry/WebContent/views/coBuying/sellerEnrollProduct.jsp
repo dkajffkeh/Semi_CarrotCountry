@@ -5,17 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
 .textOrange{
 	color:orange;
 	font-weight:800;	
+	 font-family: 'Nanum Gothic', sans-serif;
 }
 .CS_content>div{
     width:100%;
     margin:auto;
-    padding:100px;
+    padding:100px; font-family: 'Nanum Gothic', sans-serif;
 }
 
 .GPForm table{margin:auto;}

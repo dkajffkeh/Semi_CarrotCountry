@@ -400,7 +400,18 @@
 		    SET POST_LIKES = POST_LIKES + 1
 		  WHERE POST_NO=?
 	</entry>
+	<entry key="reportPreCheck">
+		SELECT COUNT(*)
+		  FROM REPORT
+		WHERE MEM_NO=?
+		  AND REPORT_POST_NO=?
+	</entry>
 	
+	<entry key="reportProduct">
+		 UPDATE POST
+		    SET POST_REPORTS = POST_REPORTS + 1
+		  WHERE POST_NO = ?
+	</entry>
 
 
 </properties>

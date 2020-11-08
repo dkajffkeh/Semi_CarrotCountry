@@ -13,6 +13,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
@@ -178,6 +179,36 @@ public class ProductService {
 		}
 		
 	
+	
+	public int reportCheck(int bno, int memNo) {
+		
+		Connection conn = getConnection();
+		
+		int repCheck = new ProductDao().reportCheck(conn, bno, memNo);
+				
+		close(conn);
+		
+		return repCheck;
+	}
+	
+	
+	
+	public int reportProduct(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ProductDao().reportProduct(conn, bno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

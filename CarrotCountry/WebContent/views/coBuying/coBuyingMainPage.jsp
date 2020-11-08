@@ -21,9 +21,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 
-.wrap{width:1200px;height:1250px;margin:auto; }
+.wrap{width:1200px;height:1250px;margin:auto; font-family: 'Nanum Gothic', sans-serif;  }
 
 /* 전반적인 큰 틀 (3개의 영역) */
 #header{height:20%;}
@@ -136,6 +137,7 @@
     border-bottom: 1px solid black;
     text-align: center;
     padding-top: 15px;
+    
 }
 #content1 ul li:hover{
     background: lightgray;
@@ -146,6 +148,7 @@
     color: white;
     margin: auto;
     margin-top: 10%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 /* 정렬 */

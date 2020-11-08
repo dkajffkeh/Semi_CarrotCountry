@@ -21,11 +21,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 
         /* 전체 틀 */
-       .wrap{width:1200px;height:2000px;margin:auto;}
+       .wrap{width:1200px;height:2000px;margin:auto; font-family: 'Nanum Gothic', sans-serif;}
        #content{height: 100%;}
 
        /* 콘텐트바의 전반적인 틀 */
@@ -211,7 +211,7 @@
                                 <button type="submit" class="btn btn-secondary btn-sm">구매하기</button>
                             </div>
                             <div id="report">
-                                <button href="신고하기페이지로연결" class="btn btn-secondary btn-sm">신고하기</button>
+                                <button type="button" id="addReport" class="btn btn-secondary btn-sm">신고하기</button>
                             </div>
                             
                             
@@ -234,6 +234,29 @@
 	                           				 }
 	                           			 })
 	                           		 }	 
+	                           	 })	 
+                            })
+                            
+                            
+                            
+                             $(function(){
+                           	 
+                           	 $("#addReport").click(function(){
+                           		
+	                           		 if(confirm("이 게시글을 신고하시겠습니까?")) {
+	                           			 $.ajax({
+	                           				 url:"report.pro.jy",
+	                           				 data:{bno:"<%=pb.getPostNo()%>",
+	                           					   memNo:"<%=loginMember.getMemNo()%>"},
+	                           			     type:"post",
+	                           			     success:function(result){
+	                           			  		 alert("게시글이 신고되었습니다");
+	                           			  	 },	
+	                           				 error:function(){      					 
+	                           				 }
+	                           			 })
+	                           		 }	
+	                           		 
 	                           	 })	 
                             })
                             </script>
