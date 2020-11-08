@@ -49,15 +49,15 @@
 		<div class="myPageWrapper_content">
 		<br><br>
 			<div align="right" style="width:850px">
-				<a href="<%= contextPath %>/enrollForm.no.jm" class="btn btn-secondary btn-sm">글작성</a>
+				<a href="<%= contextPath %>/enrollForm.on.jm" class="btn btn-secondary btn-sm">문의하기</a>
 			</div>
 			<div class="outer">
 		       	<br>
-		       	<h1>신고 내역</h1>
+		       	<h1>문의 내역</h1>
 		        <hr color="gray">
 		        
 				<div class="wrapReport">
-				<table class="table table-striped table-hover" style="text-align:center">
+				<table class="table table-striped table-hover list-area" style="text-align:center">
 
 					<% if(list.isEmpty()){ %>
 						
@@ -104,17 +104,17 @@
 
 			
 			<% if(pi.getCurrentPage() != 1){ %>			
-            	<a href="<%=contextPath%>/myList.on.jm?currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+            	<a href="<%=contextPath%>/myList.on.jm?repCurrentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 			<% } %>
 
 			<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
 			
-            	<a href="<%=contextPath%>/myList.on.jm?currentPage=<%= p %>"><%= p %></a>
+            	<a href="<%=contextPath%>/myList.on.jm?repCurrentPage=<%= p %>"><%= p %></a>
             	
             <% } %>
 
 			<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-            	<a href="<%=contextPath%>/myList.on.jm?currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+            	<a href="<%=contextPath%>/myList.on.jm?repCurrentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
 			<% } %>
 
 			</div>

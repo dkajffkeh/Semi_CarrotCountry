@@ -211,4 +211,73 @@ public class UserInfoBoardDaoNg {
 		
 	}
 	
+	public MyPurchaseInfo selectPurchase(Connection conn, int memNo, int purchaseNo) {
+		// SELECT문 => 한 행
+		MyPurchaseInfo mpi = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPurchase");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, purchaseNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				mpi = new MyPurchaseInfo(rset.getInt("PURCHASE_NO"),
+										 rset.getInt("POST_NO"),
+										 rset.getInt("MEM_NO"),
+										 rset.getInt("SHIPPING_NO"),
+										 rset.getInt("OPTION_NO"),
+										 rset.getString("DEPOSITOR"),
+										 rset.getInt("PURCHASE_PRICE"),
+										 rset.getDate("PURCHASE_DATE"),
+										 rset.getString("COURIER"),
+										 rset.getLong("TRACKING_NO"),
+										 rset.getString("REQUESTS"),
+										 
+										 rset.getString("THUMBNAIL_LOADPATH"),
+										 rset.getString("POST_NAME"),
+										 rset.getString("MEM_NICKNAME"),
+										 rset.getString("MEM_PHONE"),
+										 rset.getInt("GP_MINPEOPLE"),
+										 rset.getInt("GP_PEOPLE"),
+										 rset.getDate("GP_DEADLINE"),
+										 rset.getString("GP_STATUS"),
+										 
+										 
+										 rset.getInt("GP_PRICE"),
+										 rset.getInt("GP_DPRICE"),
+										 rset.getInt("GP_DRATE"),
+										 rset.getInt("D_DAY"),
+										 
+										 rset.getString("OPTION_NAME"),
+										 
+										 rset.getString("SHIPPING_ADDRESS"),
+										 rset.getString("MEM_PHONE"),
+										 rset.getString("MEM_USERNAME"),
+										 rset.getString("SL_STATUS"),
+										 
+										 rset.getString("MEM_NAME"),
+										 rset.getString("ACCOUNT"),
+										 rset.getString("BANK")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mpi;
+		
+	}
+	
+	
 }

@@ -29,9 +29,47 @@ public class PostBoard extends ShmarketPageInfo {
 	private String blindCheck;	
 	private String postRefund;
 	private int likeNum;
+	
 	public PostBoard() {
 		
 	}	
+	
+	public PostBoard(int currentPage, int listCount, int boardLimit, int pageLimit, int maxPage, int startPage,
+			int endPage, int postNo, int memNo, String localNo, String postName, String categoryName,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes,
+			int prodPrice, int likeNum) {
+		super(currentPage, listCount, boardLimit, pageLimit, maxPage, startPage, endPage);
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		this.likeNum = likeNum;
+	}
+	
+	public PostBoard(int postNo, int memNo, String localNo, String postName, String categoryName, String thumbnailPath,
+			String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes, int prodPrice,
+			int likeNum) {
+		super();
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		this.likeNum = likeNum;
+	}
 
 	public PostBoard(int postNo, String postName, String postContent, String thumbnailPath, String thumbnailFilename,
 			String thumbnailLoadPath) {
@@ -170,6 +208,8 @@ public class PostBoard extends ShmarketPageInfo {
 		this.blindCheck = blindCheck;
 		this.postRefund = postRefund;
 	}
+	
+	
 
 	public int getPostNo() {
 		return postNo;

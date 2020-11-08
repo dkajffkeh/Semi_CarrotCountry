@@ -37,14 +37,16 @@ public class OneToDetailController extends HttpServlet {
 		OneTo o = new OneToService().selectOneTo(ono);
 		
 
-		if(o.getAnswerState() == null) {
-
-			request.setAttribute("o", o);
-			request.getRequestDispatcher("views/oneTo/oneToDetailView.jsp").forward(request, response);
-		}else {
-			request.setAttribute("err+orMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		request.setAttribute("o", o);
+		
+		
+		
+		
+		/*
+		System.out.println("detailController");
+		System.out.print(o);
+		*/
+		request.getRequestDispatcher("views/oneTo/oneToDetailView.jsp").forward(request, response);
 	
 	}
 

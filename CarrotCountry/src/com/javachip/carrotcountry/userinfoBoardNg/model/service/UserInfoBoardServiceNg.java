@@ -88,5 +88,16 @@ public class UserInfoBoardServiceNg {
 		
 	}
 	
+	public MyPurchaseInfo selectPurchase(int memNo, int purchaseNo) {
+		Connection conn = getConnection();
+		
+		MyPurchaseInfo mpi = new UserInfoBoardDaoNg().selectPurchase(conn, memNo, purchaseNo);
+		
+		close(conn);
+		
+		return mpi;
+		
+	}
+	
 	
 }
