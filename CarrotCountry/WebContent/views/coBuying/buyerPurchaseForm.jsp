@@ -109,7 +109,7 @@
             </div>
             <h4>배송정보</h4>
             <hr style="border-bottom: 2px solid grey; border-top: none;">
-			<form action="<%= contextPath %>/purchaseInfo.pro.jy" method="POST">
+			<form action="<%= contextPath %>/purchaseInfo.pro.jy?memNo=<%= loginMember.getMemNo() %>&bno=<%= p.getPostNo() %>" method="POST">
 	            <div id="content2">
 	
 	                <table id="deliveryInfo">
@@ -124,8 +124,8 @@
 	                            <div class="btn-group" role="group">
 	                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="shippingList" onclick="shippingList();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">배송지 목록</button>
 		                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-			                            <% for (ShippingLocation list : shippingList) { %>
-			                            	<a class="dropdown-item"><%= list.getShippingAddress() %></a>
+			                            <% for (int i = 0; i < shippingList.size(); i++) { %>
+			                            	<a class="dropdown-item" onclick="address(<%= shippingList.get(i).getShippingNo() %>);"><%= shippingList.get(i).getShippingAddress() %></a>
 			                            <% } %>		                            
 		                            </div>
 	                            </div>
@@ -135,7 +135,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>이름 : </span></td>
-	                        <td><input type="text" name="depositor" value="<%= loginMember.getMemName() %>" required></td>
+	                        <td><input type="text" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>연락처 : </span></td>
@@ -146,6 +146,7 @@
 	                        <td>
 	                        	<input type="text">
 	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
+	                            <input type="hidden" id="shippingNo"  name="shippingNo">
 	                            <input type="text" id="address"> &nbsp; <input type="text" id="detailAddress" placeholder="상세주소 입력">
 	                        </td>
 	                    </tr>
@@ -153,41 +154,56 @@
 	                        <td align="right"><span>배송시 요청사항 : </span></td>
 	                        <td>
 	                        	<select id="selbox" name="selbox">
-		                            <option name="requests" value="1">부재시 경비실에 맡겨주세요</option>
-		                            <option name="requests" value="2">배송 전 연락주세요</option>
+		                            <option value="1">부재시 경비실에 맡겨주세요</option>
+		                            <option value="2">배송 전 연락주세요</option>
 		                            <option value="direct">직접입력</option>
 	                        	</select>
 	                        
 	                        	<input type="text" id="selboxDirect" name="requests"/>
-	    
-			                    <script>
-			                        $(function(){
-			                            $("#selboxDirect").hide();
-			                            
-			                            $("#selbox").change(function() {
-			                            
-			                                    if($("#selbox").val() == "direct") {
-			                                        $("#selboxDirect").show();
-			                                    }  else {
-			                                        $("#selboxDirect").hide();
-			                                    }
-			                                }) 
-			                        });
-			                    </script>
 	                    	</td>
 	                    </tr>
 	                </table>
 	            </div>
 	            <script>
+			        $(function(){
+			            $("#selboxDirect").hide();
+			            
+			            $("#selbox").change(function() {
+			            
+			                    if($("#selbox").val() == "direct") {
+			                        $("#selboxDirect").show();
+			                    }  else {
+			                        $("#selboxDirect").hide();
+			                    }
+			                }) 
+			        });
+			                        
 	            	function defaultShipping() {
 	            		
 	            		var address = document.getElementById("address");
+	            		var shippingNo = document.getElementById("shippingNo");
 	            		
 	            		<% for (ShippingLocation list : shippingList) {%>
 	            			<% if ("Y".equals(list.getShippingDefault())) { %>
-	            				address.innerHTML = "<%= list.getShippingAddress() %>";
+	            				shippingNo.value = "<%= list.getShippingNo() %>";
+	            				address.value = "<%= list.getShippingAddress() %>";
 	            			<% } %>
 	            		<% } %>
+	            	}
+	            	
+	            	function address(index) {
+
+	            		var address = document.getElementById("address");
+	            		var shippingNo = document.getElementById("shippingNo");
+	            		
+	            				console.log(index);
+	            		<% for (ShippingLocation list : shippingList) {%>
+	            			if (index == <%= list.getShippingNo() %>) {
+	            				shippingNo.value = "<%= list.getShippingNo() %>";
+	            				address.value = "<%= list.getShippingAddress() %>";
+	            			}
+            			<% } %>
+	            		
 	            	}
 	            </script>
 	
@@ -209,12 +225,12 @@
 	                        <td><p><%= pb.getPostName() %></p></td>
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
 	                        <td rowspan="3" class="price"><%= p.getGpDPrice() %>원</td>
-	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() %>원</td>
-	                        <td rowspan="3" class="price">????원</td>
+	                        <td rowspan="3" class="price"><%= p.getGpDPrice()%>원</td>
+	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpDPrice()%>">
 	                    </tr>
 	                    <tr>
 	                        <td>
-	                            <select name="option" id="option">
+	                            <select name="optionNo" id="option">
 	                            	<% for (int i = 0; i < optionList.size(); i++) { %>
 		                                <option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
 	                            	<% } %>
@@ -231,7 +247,7 @@
 	                <table id="purchaseInfo">
 	                    <tr>
 	                        <td>입금자명 :</td>
-	                        <td><input type="text" value="<%= loginMember.getMemName() %>" required></td>
+	                        <td><input type="text" name="depositor" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td>입금계좌 :</td>
@@ -249,7 +265,6 @@
 	                <b>* 입금정보 확인 후 일치할시, 발송됩니다. </b>
 	                
 	                <br><br>
-	                
 	                <button type="submit" id="purchaseBtn" class="btn btn-dark">주문하기</button>
 	            </div>
 			</form>

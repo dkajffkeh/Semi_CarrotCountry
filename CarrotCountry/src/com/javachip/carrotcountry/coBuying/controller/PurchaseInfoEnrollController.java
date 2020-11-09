@@ -21,18 +21,25 @@ public class PurchaseInfoEnrollController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+
 		
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int postNo = Integer.parseInt(request.getParameter("bno"));
 		int shippingNo = Integer.parseInt(request.getParameter("shippingNo"));
-		int optionNo = Integer.parseInt(request.getParameter("optionNo"));
 		String depositor = request.getParameter("depositor");
 		int purchasePrice = Integer.parseInt(request.getParameter("purchasePrice"));
-		String reqeusts = request.getParameter("requests");
+		int optionNo = Integer.parseInt(request.getParameter("optionNo"));
+		String reqeusts = request.getParameter("selbox");
 		
 		PurchaseInfo pi = new PurchaseInfo(postNo, memNo, shippingNo, optionNo, depositor, purchasePrice, reqeusts);
 		
 		int result = new PurchaseInfoService().insertPurchaseInfo(pi);
+		
+		if (result > 0) {
+			
+		} else {
+			
+		}
 		
 	}
 
