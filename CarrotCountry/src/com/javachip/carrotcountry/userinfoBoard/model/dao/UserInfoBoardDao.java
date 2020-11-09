@@ -189,7 +189,7 @@ public class UserInfoBoardDao {
 		
 	}
 	
-	public Location selectLocation(Connection conn, int memNo) {
+	public Location selectLocation(Connection conn, int locNo) {
 		
 		Location lo = null;
 		
@@ -201,7 +201,7 @@ public class UserInfoBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, memNo);
+			pstmt.setInt(1, locNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -313,10 +313,8 @@ public class UserInfoBoardDao {
 				w.setPostLikes(rset.getInt("POST_LIKES"));
 				w.setPostName(rset.getString("POST_NAME"));
 				w.setProdPrice(rset.getInt("PROD_PRICE"));
-				w.setBlindCheck(rset.getString("BLIND_CHECK"));
-				w.setThumbNailPath(rset.getString("BLIND_CHECK"));
-				w.setThumbNailFileName(rset.getString("BLIND_CHECK"));
-				w.setThumbNailLoadPath(rset.getString("BLIND_CHECK"));
+				w.setThumbNailPath(rset.getString("THUMBNAIL_PATH"));
+				w.setThumbNailFileName(rset.getString("THUMBNAIL_FILENAME"));
 
 				list.add(w);
 			}

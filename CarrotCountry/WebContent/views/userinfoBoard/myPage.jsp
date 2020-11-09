@@ -166,8 +166,7 @@
                 <button type="button" class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#deleteAddress">삭제</button>    
             </div>
             
-            
-         <br><br>
+       <br><br>
             <div id="content_bottom2_2">
             	<input type="hidden" name="memNo" value="<%= memNo %>">
    			<% for (ShippingLocation sl : list)  { %>
@@ -404,8 +403,6 @@
 		
 		
 		
-		
-	
 
 
 </body>

@@ -90,11 +90,11 @@
                 <!--  리스트 중 postNo이 해당 열에 속하는 no만 구해야되는데 아마도 여러개의 no이 나와서 java.lang.IndexOutOfBoundsException 발생?. 어떻게?  -->
                 <tr align="center">
                     <th rowspan="2"><%=list.indexOf(s)+1%></th>
-                    <td id="saleImage"  onClick = " location.href='<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=<%=s.getPostNo() %>' "rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
+                    <td id="saleImage"  onClick = " location.href='<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=<%=s.getPostNo() %>' "rowspan="2"><img src="<%=contextPath%>/<%=s.getThumbNailPath()%><%=s.getThumbNailFileName() %>" style= "width:100%; height:100%; border-radius: 20px;" ></td>
                     <td>
                     	<%= s.getPostName() %>    				
                     </td>
-                    <td><%= s.getProdPrice() %> 원</td>
+                    <td><%= s.getProdPrice() %> 원</tds>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;
                         <%= s.getPostEnrollDate() %>
                     </td>
@@ -103,8 +103,48 @@
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
                     </td>
                 </tr>
-               
-     <!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
+                <tr></tr>
+	
+	          	<% } %>
+			<%} %>
+                    
+            </table>
+
+    </div>
+
+
+    <div class="paging-area" align="center">
+			
+        <% if(pi.getCurrentPage() != 1){ %>			
+            <a href="<%=contextPath%>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+        <% } %>
+    
+        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+        
+            <a href="<%=contextPath%>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
+            
+        <% } %>
+    
+        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+            <a href="<%=contextPath%>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+        <% } %>
+        
+    	</div>
+
+
+
+</div>
+
+<!------------------------------------------------------------------------------------->
+</div>
+</div>
+
+<!-- footerbar -->
+	<%@ include file="../common/footerbar.jsp" %>
+	
+	
+	 <% for( SaleProduct s : list) { %>
+	<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
 
  		<div class="modal" id="deletePost">
 		        <div class="modal-dialog">
@@ -154,45 +194,7 @@
 		    </div>
     
     <!------------------------------------------------------------------------------------->
-    
-    
-	          	<% } %>
-			<%} %>
-                    
-            </table>
-
-    </div>
-
-
-    <div class="paging-area" align="center">
-			
-        <% if(pi.getCurrentPage() != 1){ %>			
-            <a href="<%=contextPath%>/onSale.me.jw?memNo<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
-        <% } %>
-    
-        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-        
-            <a href="<%=contextPath%>/onSale.me.jw?memNo<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
-            
-        <% } %>
-    
-        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-            <a href="<%=contextPath%>/onSale.me.jw?memNo<%= loginMemberUserinfo.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
-        <% } %>
-        
-    	</div>
-
-
-
-</div>
-
-<!------------------------------------------------------------------------------------->
-</div>
-</div>
-
-<!-- footerbar -->
-	<%@ include file="../common/footerbar.jsp" %>
-
+		<%} %>
 
 
 </body>

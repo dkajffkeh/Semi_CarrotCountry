@@ -89,9 +89,9 @@ public class UserInfoBoardService {
 	 * @return 			
 	 *
 	 */
-	public Location selectLocation(int memNo) {
+	public Location selectLocation(int locNo) {
 		Connection conn = getConnection();
-		Location lo = new UserInfoBoardDao().selectLocation(conn, memNo);
+		Location lo = new UserInfoBoardDao().selectLocation(conn, locNo);
 		close(conn);
 		return lo;
 		
