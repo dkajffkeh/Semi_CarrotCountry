@@ -195,7 +195,7 @@
 									<%}else{ %>
 						                	<!-- 조회된 옵션이 있을 경우-->
 							            <% for(Option o : oList){ %>	
-							                <option><%= o.getOptionName() %></option>
+							                <option value="<%= o.getOptionNo()%>"><%= o.getOptionName() %></option>
 							             <%} %>
 					                <%} %>
 					                </select>

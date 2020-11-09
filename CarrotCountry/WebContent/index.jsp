@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="resources/css/common/mainMenu.css">
     <title>CarrotCountry</title>
     <style>
+div,p,a,h2{
+font-family: 'Jua';
+}    
 #top8_board_wrapper {
     width:1200px;
     height:750px;
@@ -192,7 +195,7 @@ cursor:pointer;
 				                  style="font-size: 1.3rem;">\${list[i].postName}</div>
 				             <div class="location_area">\${list[i].localNo}</div>
 				             <div class="ratring_counter">
-				                 <p style="font-size: small; color:darkgray">조회수:\${list[i].postViews} 찜:\${list[i].postLikes}</p>
+				                 <p style="font-size: small; color:darkgray;">조회수:\${list[i].postViews} 찜:\${list[i].postLikes}</p>
 				             </div>
 				             <div class="price_display" style="float:right; color:orange; font-size: 1.5rem;">\${list[i].prodPrice}</div>
 				            </div>`					

@@ -31,6 +31,9 @@ Location l = (Location)request.getAttribute("l");
     box-shadow: 3px 3px 0.5px 0.5px rgb(255, 189, 35);
     background-color: whitesmoke;
 }
+div,p{
+font-family: 'Jua';
+}
 i{
 cursor:pointer;
 }

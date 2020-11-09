@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	int optionNo = (Integer)request.getAttribute("optionNo");
 	Product p = (Product)request.getAttribute("p");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	ArrayList<Option> optionList = (ArrayList<Option>)request.getAttribute("optionList");
@@ -109,7 +110,8 @@
             </div>
             <h4>배송정보</h4>
             <hr style="border-bottom: 2px solid grey; border-top: none;">
-			<form action="<%= contextPath %>/purchaseInfo.pro.jy?memNo=<%= loginMember.getMemNo() %>&bno=<%= p.getPostNo() %>" method="POST">
+			<form action="<%= contextPath %>/purchaseInfo.pro.jy?&bno=<%= p.getPostNo() %>" method="POST">
+			<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
 	            <div id="content2">
 	
 	                <table id="deliveryInfo">
@@ -220,7 +222,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td rowspan="2" width="200" height="200">
-	                            <img src="<%= contextPath %>/<%= pb.getThumbnailLoadPath() %> + <%= pb.getThumbnailFilename() %>" width="100%" height="100%">
+	                            <img src="<%= contextPath %>/<%= pb.getThumbnailLoadPath() %> + <%= pb.getThumbnailFilename() %>" width="100%" height="100%" onerror="this.src='https://cdn.pixabay.com/photo/2016/10/18/19/24/carrot-1751148_960_720.png'">
 	                        </td>
 	                        <td><p><%= pb.getPostName() %></p></td>
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
@@ -232,7 +234,11 @@
 	                        <td>
 	                            <select name="optionNo" id="option">
 	                            	<% for (int i = 0; i < optionList.size(); i++) { %>
-		                                <option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+	                            		<% if (optionNo == optionList.get(i).getOptionNo()) { %>
+			                                <option value="<%= optionList.get(i).getOptionNo() %>" selected><%= optionList.get(i).getOptionName() %></option>                            			
+	                            		<% } else { %>
+		                                	<option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+										<% } %>
 	                            	<% } %>
 	                            </select>
 	                        </td>

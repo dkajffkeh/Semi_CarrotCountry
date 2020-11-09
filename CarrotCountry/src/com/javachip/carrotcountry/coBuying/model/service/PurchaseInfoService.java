@@ -29,4 +29,19 @@ public class PurchaseInfoService {
 		return result;
 	}
 
+	public int increasePeople(int postNo) {
+
+		Connection conn = getConnection();
+		
+		int gpPeople = new PurchaseInfoDao().increasePeople(conn, postNo);
+		
+		if (gpPeople > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return gpPeople;
+	}
+
 }
