@@ -236,8 +236,9 @@
 	                            	<% for (int i = 0; i < optionList.size(); i++) { %>
 	                            		<% if (optionNo == optionList.get(i).getOptionNo()) { %>
 			                                <option value="<%= optionList.get(i).getOptionNo() %>" selected><%= optionList.get(i).getOptionName() %></option>                            			
-	                            		<% } %>
-		                                <option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+	                            		<% } else { %>
+		                                	<option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+										<% } %>
 	                            	<% } %>
 	                            </select>
 	                        </td>
