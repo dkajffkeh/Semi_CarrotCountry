@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.javachip.carrotcountry.coBuying.model.service.ProductService;
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
@@ -33,7 +35,7 @@ public class BuyerPurchaseController extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		String optionVal = request.getParameter("option");
 		Integer optionNo = null;
-		if(optionVal == null || "".equals(optionVal)) {		
+		if(StringUtils.isNumeric(optionVal)) {
 			optionNo = Integer.parseInt(optionVal);
 		}
 		

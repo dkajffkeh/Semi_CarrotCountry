@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation"%>
 <%@page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard"%>
 <%@page import="com.javachip.carrotcountry.coBuying.model.vo.Account"%>
@@ -6,8 +7,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
-	int optionNo = (Integer)request.getAttribute("optionNo");
+	String optionVal = request.getParameter("option");
+	Integer optionNo = null;
+	if(StringUtils.isNumeric(optionVal)) {		
+		optionNo = Integer.parseInt(optionVal);
+	}
 	Product p = (Product)request.getAttribute("p");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
 	ArrayList<Option> optionList = (ArrayList<Option>)request.getAttribute("optionList");
@@ -216,9 +223,9 @@
 	                    <tr>
 	                        <th colspan="2" width=700><span>상품정보/수량</span></th>
 	                        <th width=125><span>상품금액</span> </th>
-	                        <th width=125><span>할인금액</span></th>
 	                        <th width=125><span>할인적용금액</span></th>
 	                        <th width=125><span>배송비</span></th>
+	                        <th width=125><span>총액</span></th>
 	                    </tr>
 	                    <tr>
 	                        <td rowspan="2" width="200" height="200">
@@ -228,22 +235,24 @@
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
 	                        <td rowspan="3" class="price"><%= p.getGpDPrice() %>원</td>
 	                        <td rowspan="3" class="price">2500원</td>
-	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() %>원</td>
-	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpPrice() - p.getGpDPrice() %>">
+	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() + 2500 %>원</td>
+	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpPrice() - p.getGpDPrice() + 2500 %>">
 	                    </tr>
-	                    <tr>
-	                        <td>
-	                            <select name="optionNo" id="option">
-	                            	<% for (int i = 0; i < optionList.size(); i++) { %>
-	                            		<% if (optionNo == optionList.get(i).getOptionNo()) { %>
-			                                <option value="<%= optionList.get(i).getOptionNo() %>" selected><%= optionList.get(i).getOptionName() %></option>                            			
-	                            		<% } else { %>
-		                                	<option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
-										<% } %>
-	                            	<% } %>
-	                            </select>
-	                        </td>
-	                    </tr>
+                   		<c:if test="${not empty optionList and fn:length(optionList) ne 0}">
+		                    <tr>
+		                        <td>
+		                            <select name="optionNo" id="option">
+		                            	<% for (int i = 0; i < optionList.size(); i++) { %>
+		                            		<% if (optionNo == optionList.get(i).getOptionNo()) { %>
+				                                <option value="<%= optionList.get(i).getOptionNo() %>" selected><%= optionList.get(i).getOptionName() %></option>                            			
+		                            		<% } else { %>
+			                                	<option value="<%= optionList.get(i).getOptionNo() %>"><%= optionList.get(i).getOptionName() %></option>
+											<% } %>
+		                            	<% } %>
+		                            </select>
+		                        </td>
+		                    </tr>
+                   		</c:if>
 	                </table>
 	            </div>
 	

@@ -190,7 +190,7 @@
                            		 <select name="option" id="product">
 	                            	<% if(oList.isEmpty()){ %>
 						                <!-- 조회된 옵션이 없을 경우-->
-						                	<option>옵션이 없습니다.</option>
+						                	<option value="">옵션이 없습니다.</option>
 						                
 									<%}else{ %>
 						                	<!-- 조회된 옵션이 있을 경우-->
