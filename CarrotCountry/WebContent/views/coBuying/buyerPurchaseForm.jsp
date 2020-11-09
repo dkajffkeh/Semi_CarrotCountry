@@ -120,9 +120,17 @@
 	                    <tr>
 	                        <td align="right"><span>배송지 선택 : </span></td>
 	                        <td>
-	                        	<button type="button" class="btn btn-secondary btn-sm" id="">기본 배송지</button>
+	                        	<button type="button" class="btn btn-secondary btn-sm" onclick="defaultShipping();">기본 배송지</button>
+	                            <div class="btn-group" role="group">
+	                            <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="shippingList" onclick="shippingList();" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">배송지 목록</button>
+		                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+			                            <% for (ShippingLocation list : shippingList) { %>
+			                            	<a class="dropdown-item"><%= list.getShippingAddress() %></a>
+			                            <% } %>		                            
+		                            </div>
+	                            </div>
 	                            <button type="button" class="btn btn-secondary btn-sm">신규 배송지</button>
-	                            <button type="button" class="btn btn-secondary btn-sm">배송지 목록</button>
+	                            
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -138,7 +146,7 @@
 	                        <td>
 	                        	<input type="text">
 	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
-	                            <input type="text" id="particularAddress1"> &nbsp; <input type="text" id="particularAddress2" placeholder="상세주소 입력">
+	                            <input type="text" id="address"> &nbsp; <input type="text" id="detailAddress" placeholder="상세주소 입력">
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -170,6 +178,18 @@
 	                    </tr>
 	                </table>
 	            </div>
+	            <script>
+	            	function defaultShipping() {
+	            		
+	            		var address = document.getElementById("address");
+	            		
+	            		<% for (ShippingLocation list : shippingList) {%>
+	            			<% if ("Y".equals(list.getShippingDefault())) { %>
+	            				address.innerHTML = "<%= list.getShippingAddress() %>";
+	            			<% } %>
+	            		<% } %>
+	            	}
+	            </script>
 	
 	            <h4>상품정보</h4>
 	            <hr style="border-bottom: 2px solid grey; border-top: none;">
