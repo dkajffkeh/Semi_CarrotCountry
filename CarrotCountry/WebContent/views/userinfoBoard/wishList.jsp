@@ -100,7 +100,7 @@
 	    <hr color="gray">
 	    <br>
 	    
-	 <form action="<%= contextPath %>/wishList.jw" method="post" id="wishList">
+	 <form action="<%= contextPath %>/delete.wish.jw" method="post" id="wishList">
 	   <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
 	    
 	    <!-- 찜한 개수 -->
@@ -115,7 +115,7 @@
 	    	 	
 			        <div class="content1">
 						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
-			            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
+			            <input style='zoom:2.0;' type="checkbox" name="wishList" value="<%=w.getPostNo()%>">
 			           <div class="img1">
 						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
 			           	<img src="<%= contextPath %>/<%= w.getThumbNailPath() %><%= w.getThumbNailFileName() %>"> <br>
@@ -132,24 +132,16 @@
 	     </div>
 
 	    </div>
-	</form>
-		
-		
-	<form action="<%= contextPath %>/delete.wish.jw" method="post" id="wishList" >
-	    <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
+	    
 	    <div class= "button">
-	        <button type="button"  onclick="deleteWishList()" class="btn btn-secondary btn-lg">관심상품 삭제</button>
+	        <button type="submit" class="btn btn-secondary btn-lg">관심상품 삭제</button>
 	 	</div>
-	
 	</form>
+	
 	   
 	    <br>
 	
 	</div>
-	
-	  <%
- 			String[] sCheck = request.getParameterValues("wishList");
-	  %>
 
 	<script>
         	$(function(){
@@ -157,30 +149,7 @@
         		location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=" + $(this).children().eq(0).val();
         		});
         	});
-        	
-        	function deleteWishList() {
-        		var wishList = "";
         		
-        		$( "input[name='wishList']:checked" ).each(function(){
-        			wishList = wishList + $(this).val()+",";
-        		});
-        		
-        		wishList = wishList.substring(0,wishList.lastIndexOf(",")); 
-        		
-        		if(wishList == '') {
-        			alert("삭제할 대상을 선택하세요.");
-        			return false;
-        		}
-
-        		if(confirm("해당 상품을 삭제 하시겠습니까?")) {
-
-        			location.href="<%= contextPathUserinfo %>/delete.wish.jw?memNo=<%=loginMember.getMemNo()%>&bno??&currentPage=1"
-        	
-        		}
-        		
-        		
-        	}
-        	
         	
      </script>
 
@@ -217,6 +186,7 @@
 	
 	<!-- footerbar -->
 	<%@ include file="../common/footerbar.jsp" %>
+	
 	
 
 </body>

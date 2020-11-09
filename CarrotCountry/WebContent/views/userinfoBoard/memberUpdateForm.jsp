@@ -69,7 +69,7 @@
                 <tr>
                     <th>* 성함</th>
                     <td>
-                    <input type="text" name="memName" id="userName" maxlength="6" required value="<%= memName %>">
+                    <input type="text" name="memName" id="memName" maxlength="6" required value="<%= memName %>">
                     <b style="color:red;">&nbsp;&nbsp;2-6자 한글</b>
                     </td>
                 </tr>
@@ -93,7 +93,7 @@
                 <tr>
                     <th>닉네임</th>
                     <td>
-                   		 <input type="text" name="nickName" id="nickname" maxlength="8" value="<%= nickName %>">
+                   		 <input type="text" name="nickName" id="nickName" maxlength="8" value="<%= nickName %>">
                    		 <b style="color:red;">&nbsp;&nbsp;2-8자 한글, 영문, 숫자</b>
                     </td>
                     
@@ -154,10 +154,10 @@
             		// 유효성 검사
             	function validate() {
             			
-            		var userId = document.getElementById("userId");
-                    var userName = document.getElementById("userName");
+            		var userId = document.getElementById("userid");
+                    var memName = document.getElementById("memName");
 		            var birthday = document.getElementById("birthday");
-                    var nickname = document.getElementById("nickname");
+                    var nickName = document.getElementById("nickName");
                     var phone = document.getElementById("phone");
                     var address = document.getElementById("address");
 
@@ -166,7 +166,7 @@
                     // 이름 검사
                     var regExp = /^[가-힇]{2,6}$/;
                     
-                    if(!regExp.test(userName.value)){
+                    if(!regExp.test(memName.value)){
                         alert("유효한 이름을 입력하세요!");
 
                         userName.value="";
@@ -177,7 +177,7 @@
                     // 생일 검사
                     var regExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
                     
-                    if(!regExp.test(userName.value)){
+                    if(!regExp.test(birthday.value)){
                         alert("유효한 생일을 입력하세요!");
 
                         userName.value="";
@@ -190,7 +190,7 @@
                     // 닉네임 검사
                     var regExp = /^[a-z가-힇\d]{2,8}$/i;
                    
-                    if(!regExp.test(nickname.value)){
+                    if(!regExp.test(nickName.value)){
                         alert("유효한 닉네임을 입력하세요!");
 
                         nickname.value="";

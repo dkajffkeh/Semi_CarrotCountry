@@ -24,13 +24,13 @@ public class UserInfoBoardService {
 	 * @param m		변경할 내용들+변경요청한회원의아이디 가 담겨있는 객체
 	 * @return		갱신된 회원 객체/null
 	 */
-	public UserinfoMember updateMember(UserinfoMember m) {
+	public Member updateMember(Member m) {
 		
 		Connection conn = getConnection();
 		
 		int result = new UserInfoBoardDao().updateMember(conn, m);
 		
-		UserinfoMember updateMem = null;
+		Member updateMem = null;
 		
 		if(result >0) {
 			commit(conn);
@@ -167,10 +167,10 @@ public class UserInfoBoardService {
 		 *
 		 */
 
-		public int deleteWishList(int bno) {
+		public int deleteWishList(String[] wishLists) {
 			Connection conn = getConnection();
 			
-			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			int result = new UserInfoBoardDao().deleteWishList(conn,wishLists);
 			
 			if(result>0){
 				commit(conn);
@@ -189,10 +189,10 @@ public class UserInfoBoardService {
 		 * @return 			
 		 *
 		 */
-		public int deletePostBoardLike(int bno) {
+		public int deletePostBoardLike(String[] wishLists) {
 			Connection conn = getConnection();
 			
-			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			int result = new UserInfoBoardDao().deletePostBoardLike(conn,wishLists);
 			
 			if(result>0){
 				commit(conn);

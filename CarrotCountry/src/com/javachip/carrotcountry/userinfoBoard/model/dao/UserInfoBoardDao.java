@@ -39,7 +39,7 @@ public class UserInfoBoardDao {
 	
 	
 	// 회원정보수정
-	public int updateMember(Connection conn, UserinfoMember m) {
+	public int updateMember(Connection conn, Member m) {
 		
 		int result = 0;
 		
@@ -69,8 +69,8 @@ public class UserInfoBoardDao {
 		return result;
 	}
 	
-	public UserinfoMember selectMember(Connection conn, String userId) {
-		UserinfoMember m = null;
+	public Member selectMember(Connection conn, String userId) {
+		Member m = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -85,7 +85,7 @@ public class UserInfoBoardDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m = new UserinfoMember
+				m = new Member
 						(rset.getInt("MEM_NO"),
 						 rset.getInt("LOCAL_NO"),
 						 rset.getString("MEM_USERID"),
@@ -103,10 +103,7 @@ public class UserInfoBoardDao {
 						 rset.getString("PROFILE_PATH"),
 						 rset.getString("PROFILE_MODIFYNAME"),
 						 rset.getString("PROFILE_ORIGNNAME"),
-						 rset.getString("PROFILE_LOADNAME"),
-						 rset.getString("LOCAL_SI"),
-						 rset.getString("LOCAL_GU"),
-						 rset.getString("LOCAL_DONG")
+						 rset.getString("PROFILE_LOADNAME")
 						);
 			}
 			
@@ -371,14 +368,23 @@ public class UserInfoBoardDao {
 	}
 	
 	//찜목록 삭제
-	public int deleteWishList(Connection conn, int bno) {
+	public int deleteWishList(Connection conn, String[] wishLists) {
+		
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deleteWishList");
-		
+		 String sql = prop.getProperty("deleteWishList");
+		         sql += "(";
+		         for(int i=0; i<wishLists.length; i++){
+		            if(i==wishLists.length-1){
+		            sql +=  Integer.parseInt(wishLists[i]);
+		            }else{
+		                sql +=  Integer.parseInt(wishLists[i]) + ",";
+		            }
+		         }
+		         sql += ")";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -389,14 +395,23 @@ public class UserInfoBoardDao {
 	}
 	
 	//찜목록 count -1
-	public int deletePostBoardLike(Connection conn, int bno) {
+	public int deletePostBoardLike(Connection conn, String[] wishLists) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("deletePostBoardLike");
 		
+				sql += "(";
+		        for(int i=0; i<wishLists.length; i++){
+		           if(i==wishLists.length-1){
+		           sql +=  Integer.parseInt(wishLists[i]);
+		           }else{
+		               sql +=  Integer.parseInt(wishLists[i]) + ",";
+		           }
+		        }
+		        sql += ")";
+		        
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

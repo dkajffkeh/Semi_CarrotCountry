@@ -132,7 +132,7 @@
 	
 	<entry key="deleteWishList">
 		DELETE FROM LIKE_POST
-   		 WHERE POST_NO=?
+   		 WHERE POST_NO IN
 	</entry>
 	
 	<entry key="deletePostBoardLike">
@@ -141,7 +141,7 @@
 		SET 
 		      POST_LIKES=POST_LIKES-1
 		WHERE 
-		      POST_NO=?
+		      POST_NO IN
 	</entry>
 	<entry key="selectMyPagePhoto">
 			SELECT 

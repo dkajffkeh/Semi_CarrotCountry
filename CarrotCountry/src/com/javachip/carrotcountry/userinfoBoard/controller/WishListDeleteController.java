@@ -28,20 +28,27 @@ public class WishListDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String list = request.getParameter("wishList");
+		System.out.println(request.getParameter("wishList"));
+		
+		String[]wishLists = request.getParameterValues("wishList");
+				
 		
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		int result1 = new UserInfoBoardService().deleteWishList(bno);
-		int result2 = new UserInfoBoardService().deletePostBoardLike(bno);
+		int result1 = new UserInfoBoardService().deleteWishList(wishLists);
+		int result2 = new UserInfoBoardService().deletePostBoardLike(wishLists);
+		
+		
 		
 		if(result1 * result2 >0) {
 			
 			response.sendRedirect(request.getContextPath()+"/wishList.jw?memNo="+memNo+"&currentPage=1");
-
+			
+				
+			}else {
+				
+			}
 			
 		}
 	
@@ -49,7 +56,7 @@ public class WishListDeleteController extends HttpServlet {
 	
 	
 	
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -215,36 +215,7 @@
 			       <%= sl.getShippingAddress() %>
 			       		<br><br>
 			       		
-		<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
-		
-
-		
-		
-		
-		
-					 <div class="modal" id="deleteAddress">
-					    <div class="modal-dialog">
-					    <div class="modal-content"> 
-					    
-					        <!-- Modal body -->
-					        <div class="modal-body" align="center">
-					           삭제하시겠습니까?
-					           <br><br>
-					            <form action="<%= contextPath %>/delete.shippingLocation.jw" id = "deleteSl" method="post">
-								<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
-								<input type="hidden" name="sno" value="<%= sl.getShippingNo() %>">
-					           <button type="button" class="btn btn-primary">확인</button>
-					           
-					        </div>
-					        
-					    </div>
-					    </div>
-					</div>
-						
-						
-
-			
-		<!------------------------------------------------------------------------------- -->
+	
 			       		
 			       		
 			       		
@@ -339,14 +310,14 @@
           <h4 class="modal-title">배송지 추가</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
-        
+        <% if ( list.size() < 3)  {%>
         <!-- Modal body -->
         <div class="modal-body" align="center">
           <form action="<%= contextPath %>/insert.lo.jw" method="post" name="insertSl">
                 <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>" >
                 <input type="hidden" name="userName" value="<%= loginMember.getMemName() %>" >
                 <input type="hidden" name="phone" value="<%= loginMember.getMemPhone() %>" >
-                <input type="hidden" name="defaultAddress">
+                <input type="hidden" name="defaultAddress" value="">
                 배송지를 입력하세요 <br><br>
                 <input type="text" name="address" size="40" style="border: 3px solid orange;">
               <br><br><br><br>
@@ -380,7 +351,13 @@
           <%} %>
           
           </div>
-     
+     		<%}else { %> <!--  배송지가 3개 이상일때 -->
+          	
+          	<div class="modal-body" align="center">
+      			
+          		배송지를 삭제 후 등록해주세요.
+          	</div>
+          <%} %>
               <br>
           
           
@@ -401,7 +378,32 @@
 
 <!--------------------------------------------------------------------------------->
 		
+			<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
 		
+		<% for (ShippingLocation sl : list)  {%>
+		
+					 <div class="modal" id="deleteAddress">
+					    <div class="modal-dialog">
+					    <div class="modal-content"> 
+					    
+					        <!-- Modal body -->
+					        <div class="modal-body" align="center">
+					           삭제하시겠습니까?
+					           <br><br>
+					            <form action="<%= contextPath %>/delete.shippingLocation.jw" id = "deleteSl" method="post">
+								<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+								<input type="hidden" name="sno" value="<%= sl.getShippingNo() %>">
+					           <button type="submit" class="btn btn-primary">확인</button>
+					           </form>
+					        </div>
+					        
+					    </div>
+					    </div>
+					</div>
+						
+			<%} %>
+			
+		<!------------------------------------------------------------------------------- -->
 		
 
 
