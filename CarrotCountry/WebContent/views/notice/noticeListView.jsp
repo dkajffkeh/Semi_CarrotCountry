@@ -90,7 +90,7 @@
 	
 
 	<!-- search -->
-	<form action="<%= contextPath %>/list.no.jm" class="form-inline my-2 my-lg-0" id="search">
+	<form action="<%= contextPath %>/noticeSearch.no.jm" class="form-inline my-2 my-lg-0" id="search">
 		<input type="hidden" name="currentPage" value=1>
 		<select name="searchCategory" id="searchCategory">
 		  <option value="no_title">제목</option>

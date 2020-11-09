@@ -51,7 +51,7 @@
       <form action="<%= contextPath %>/answer.on.jm" method="post">
       <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
       <input type="hidden" name="ono" value="<%= o.getOneToNo() %>">
-      	<textarea name="content" id="content" cols="60" rows="10" style="resize: none" required></textarea>
+      	<textarea name="content" id="content" cols="97" rows="10" style="resize: none" class="border border-warning" required></textarea>
       	<div align="center">
           <input type="submit" value="작성하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;
           <input type="button" value="뒤로가기" class="btn btn-warning btn-sm" onclick="history.back();">

@@ -115,7 +115,7 @@
 		                  , NOTICE_COUNT
 		               from 
 		                    NOTICE
-		               JOIN USING(MEM_NO)    
+		               JOIN MEMBER USING(MEM_NO)    
 		              where NOTICE_STATUS = 'N'
 		                and NOTICE_TITLE like '%'|| nvl(?, '') ||'%'
 		                and NOTICE_ENROLL_DATE like '%'|| nvl(?, '') ||'%'
