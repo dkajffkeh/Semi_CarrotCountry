@@ -88,9 +88,9 @@
 
 }
 #proContent>*{width: 100%; float: left;}
-#proName{height: 20%;}
-#proName:hover{cursor:pointer;}
-#proName>div{
+.proName{height: 20%;}
+.proName:hover{cursor:pointer;}
+.proName>div{
     height: 100%; 
     float: left;
     border-bottom: 1px solid black;
@@ -282,7 +282,7 @@
                 	<div id="emptyDiv" align="center"><h4>진행중인 공동구매가 없습니다 !</h4></div>
                 <%}else{ %>
 	                  <% for(Product pd : pList) {%>
-	                    <div id="proName">
+	                    <div class="proName">
 	                    	<input type="hidden" value="<%= pd.getPostNo() %>">
 	                        <div id="proImg">
 	                            <a href=""><img src="<%= contextPath %>/<%= pd.getThumbnailLoadpath() %>" width="100" height="100"></a>
@@ -306,7 +306,7 @@
                 
 		        <script>
 		        	$(function(){
-		        		$("#proName").click(function(){
+		        		$(".proName").click(function(){
 		        			
 		        		 	<%if(loginMember == null){%>
 		        			var result = confirm("로그인 한 회원만 열람 가능합니다. 로그인하시겠습니까?");
