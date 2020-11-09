@@ -60,7 +60,7 @@
         <center><b>사용자들이 자주 묻는 질문을 확인해보세요!</b></center>
         <br>
        </div>
-       <%if(loginMember.getManagerCheck().equals("Y")){ %>
+       <%if(loginMember != null && loginMember.getManagerCheck().equals("Y")){ %>
 	        <div align="right" style="width:800px;">
 	            <a href="<%= contextPath %>/enrollForm.fa.jm" class="btn btn-secondary btn-sm">글작성</a>
 	            <br><br>

@@ -37,7 +37,7 @@
 	            <label for="title">
 	               	 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            </label>
-	            <input type="text" value="<%=n.getNoticeTitle() %>" name="title" id="title" required>
+	            <input type="text" class="border border-warning" value="<%=n.getNoticeTitle() %>" name="title" id="title" required>
 	        </li>
 	    </ul>
 	    
@@ -60,7 +60,7 @@
 	        <li>
 	            <label for="content">내용</label>
 	            <br>
-	            <textarea name="content" id="content" cols="60" rows="10" style="resize: none" required><%=n.getNoticeContent() %></textarea>
+	            <textarea name="content" class="border border-warning" id="content" cols="60" rows="10" style="resize: none" required><%=n.getNoticeContent() %></textarea>
 	        </li>
 	    </ul>
 	    

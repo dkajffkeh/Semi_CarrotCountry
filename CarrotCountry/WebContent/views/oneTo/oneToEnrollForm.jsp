@@ -88,7 +88,7 @@
 
                 <li>
                     <label for="">글작성*</label><br>
-                    <textarea class="border border-warning" cols="60" rows="10" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" maxlength="20" required></textarea>
+                    <textarea class="border border-warning" cols="100" rows="20" placeholder="내용을 입력하세요" name="oneToContent" style="resize: none;" maxlength="20" required></textarea>
                 </li>
 
             </ul>

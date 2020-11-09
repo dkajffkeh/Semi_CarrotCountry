@@ -49,12 +49,12 @@
 	<div class="outer">
 	    <h4>공지사항</h4>
 	    <hr>
-
+	<%if(loginMember != null && loginMember.getManagerCheck().equals("Y")){ %>
     <div align="right" style="width:850px">
 	<a href="<%= contextPath %>/enrollForm.no.jm" class="btn btn-secondary btn-sm">글작성</a>
 	<br><br>
 	</div>
-
+	<%} %> 
 	
 	<table class="table table-bordered center list-area" id="list-area">
 
