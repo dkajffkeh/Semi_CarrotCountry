@@ -29,15 +29,17 @@ public class BuyerPurchaseController extends HttpServlet {
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		int optionNo = Integer.parseInt(request.getParameter("option"));
 		
 		Product p = new ProductService().selectProduct(bno);
 		PostBoard pb = new ProductService().selectPostBoard(bno);
 		ArrayList<Option> optionList = new ProductService().selectOption(bno);
 		ArrayList<Account> accountList = new ProductService().selectAccount(bno);
-		ArrayList<ShippingLocation> shippingList = new UserInfoBoardService().selectShippingLocation(memNo);
+		ArrayList<ShippingLocation> shippingList = new UserInfoBoardService().selectShippingLocation(memNo);		
 		
 		request.setAttribute("p", p);
 		request.setAttribute("pb", pb);
+		request.setAttribute("optionNo", optionNo);
 		request.setAttribute("optionList", optionList);
 		request.setAttribute("accountList", accountList);
 		request.setAttribute("shippingList", shippingList);

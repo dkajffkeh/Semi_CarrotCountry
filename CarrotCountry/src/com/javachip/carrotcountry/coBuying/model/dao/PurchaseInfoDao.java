@@ -58,4 +58,25 @@ public class PurchaseInfoDao {
 		return result;
 	}
 
+	public int increasePeople(Connection conn, int postNo) {
+
+		int gpPeople = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increasePeople");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, postNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return gpPeople;
+	}
+
 }

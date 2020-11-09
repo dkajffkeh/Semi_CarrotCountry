@@ -33,4 +33,10 @@
 			  , ?
 			  )
 	</entry>
+	<entry key="increasePeople">
+		UPDATE
+		       group_purchase
+		   SET GP_PEOPLE = GP_PEOPLE + 1
+		 WHERE POST_NO = ?
+	</entry>
 </properties>
