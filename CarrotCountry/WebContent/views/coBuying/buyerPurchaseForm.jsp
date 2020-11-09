@@ -227,8 +227,9 @@
 	                        <td><p><%= pb.getPostName() %></p></td>
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
 	                        <td rowspan="3" class="price"><%= p.getGpDPrice() %>원</td>
-	                        <td rowspan="3" class="price"><%= p.getGpDPrice()%>원</td>
-	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpDPrice()%>">
+	                        <td rowspan="3" class="price">2500원</td>
+	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() %>원</td>
+	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpPrice() - p.getGpDPrice() %>">
 	                    </tr>
 	                    <tr>
 	                        <td>

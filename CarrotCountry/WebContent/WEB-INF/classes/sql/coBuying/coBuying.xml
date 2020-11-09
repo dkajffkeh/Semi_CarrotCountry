@@ -322,6 +322,8 @@
 		       POST_NO
 		     , POST_ENROLL_DATE
 		     , TO_CHAR(GP_DEADLINE, 'YYYY-MM-DD') GP_DEADLINE
+		     , GP_PRICE
+		     , GP_DRATE
 		     , GP_MINPEOPLE
 		     , GP_PEOPLE
 		     , GP_DPRICE

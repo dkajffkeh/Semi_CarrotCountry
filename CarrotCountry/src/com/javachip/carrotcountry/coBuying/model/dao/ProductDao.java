@@ -160,6 +160,8 @@ private Properties prop = new Properties();
 				pd = new Product(rs.getInt("post_no"),
 							  rs.getDate("POST_ENROLL_DATE"),
 							  rs.getString("gp_deadline"),
+							  rs.getInt("gp_price"),
+							  rs.getInt("GP_DRATE"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),

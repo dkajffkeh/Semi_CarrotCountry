@@ -41,7 +41,7 @@ public class Product {
 
 
 	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice,
-			String gpRefund) {
+			int gpPrice, int gpDRate, String gpRefund) {
 		super();
 		this.postNo = postNo;
 		this.postEnrollDate = postEnrollDate;
@@ -49,6 +49,8 @@ public class Product {
 		this.gpMinPeople = gpMinPeople;
 		this.gpPeople = gpPeople;
 		this.gpDPrice = gpDPrice;
+		this.gpPrice = gpPrice;
+		this.gpDRate = gpDRate;
 		this.gpRefund = gpRefund;
 	}
 
