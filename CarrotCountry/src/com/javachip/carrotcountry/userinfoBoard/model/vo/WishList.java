@@ -18,6 +18,33 @@ public class WishList {
 	public WishList() {}
 
 
+ 
+
+
+	
+	public WishList(int postNo, int postLikes, String postName, int prodPrice, String blindCheck, String thumbNailPath,
+			String thumbNailFileName, String thumbNailLoadPath) {
+		super();
+		this.postNo = postNo;
+		this.postLikes = postLikes;
+		this.postName = postName;
+		this.prodPrice = prodPrice;
+		this.blindCheck = blindCheck;
+		this.thumbNailPath = thumbNailPath;
+		this.thumbNailFileName = thumbNailFileName;
+		this.thumbNailLoadPath = thumbNailLoadPath;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	public WishList(int memNo, int postNo, int postLikes, String postName, int prodPrice, String blindCheck,
 			String thumbNailPath, String thumbNailFileName, String thumbNailLoadPath) {
 		super();
@@ -33,21 +60,13 @@ public class WishList {
 	}
 
 
-	
-	
-	
-	public WishList(int memNo, int postLikes, String postName, int prodPrice, String blindCheck, String thumbNailPath,
-			String thumbNailFileName, String thumbNailLoadPath) {
-		super();
-		this.memNo = memNo;
-		this.postLikes = postLikes;
-		this.postName = postName;
-		this.prodPrice = prodPrice;
-		this.blindCheck = blindCheck;
-		this.thumbNailPath = thumbNailPath;
-		this.thumbNailFileName = thumbNailFileName;
-		this.thumbNailLoadPath = thumbNailLoadPath;
-	}
+
+
+
+
+
+
+
 
 
 	public int getMemNo() {

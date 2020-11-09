@@ -86,10 +86,11 @@
                
                <input type="hidden" value="<%= s.getMemNo() %>" name="memNo">
                 
-                
+        
+                <!--  리스트 중 postNo이 해당 열에 속하는 no만 구해야되는데 아마도 여러개의 no이 나와서 java.lang.IndexOutOfBoundsException 발생?. 어떻게?  -->
                 <tr align="center">
                     <th rowspan="2"><%=list.indexOf(s)+1%></th>
-                    <td id="saleImage"  onClick = " location.href='' "rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
+                    <td id="saleImage"  onClick = " location.href='<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=<%=s.getPostNo() %>' "rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
                     <td>
                     	<%= s.getPostName() %>    				
                     </td>
@@ -102,8 +103,7 @@
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
                     </td>
                 </tr>
-                <tr>
-
+               
      <!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
 
  		<div class="modal" id="deletePost">
@@ -129,8 +129,7 @@
 		    </div>
     
     <!------------------------------------------------------------------------------------->
-    
-     <!----------------------판매완료 클릭시 보여질 modal---------------------------------------->
+<!----------------------판매완료 클릭시 보여질 modal---------------------------------------->
 
  		<div class="modal" id="updatePost">
 		        <div class="modal-dialog">

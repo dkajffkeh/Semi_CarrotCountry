@@ -7,8 +7,10 @@
  <%
  	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<WishList> list = (ArrayList<WishList>)request.getAttribute("list");
-	
+	ArrayList<MyPagePhoto> photolist= (ArrayList<MyPagePhoto>)request.getAttribute("photolist");
+ 	
  %>
+ 
  
 <!DOCTYPE html>
 <html>
@@ -110,65 +112,79 @@
 	    
 	     <div id="content1">
 	    	 <% for(WishList w : list) { %>
+	    	 	
 			        <div class="content1">
-						<input type="hidden" value="<%= w.getMemNo() %>">
+						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
 			            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-			            <img src="<%= contextPath %>/<%= w.getThumbNailPath()+w.getThumbNailFileName()%>"alt=""> <br>
+			           <div class="img1">
+						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
+			           	<img src="<%= contextPath %>/<%= w.getThumbNailPath() %><%= w.getThumbNailFileName() %>"> <br>
+			           </div>
 			           	 &nbsp; &nbsp;
 			           	 <%= w.getPostName() %> <br>
 			             &nbsp; &nbsp;&nbsp;
 			             <%= w.getProdPrice() %>
 			             &nbsp;원
-	
 	        		</div>
-	     	 <%} %>
+	     	  <%} %>
+	 
 	     
 	     </div>
 
 	    </div>
 	</form>
-	
+		
+		
+	<form action="<%= contextPath %>/delete.wish.jw" method="post" id="wishList" >
+	    <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
 	    <div class= "button">
-	        <button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#deleteWishlist">관심상품 삭제</button>
-	    </div>
+	        <button type="button"  onclick="deleteWishList()" class="btn btn-secondary btn-lg">관심상품 삭제</button>
+	 	</div>
 	
+	</form>
+	   
 	    <br>
 	
 	</div>
 	
-	 
-	
-
-	
-	
-	<!-- 체크박스 선택 후 삭제버튼 클릭 시 뜨는 창 -->
-	
-	<div class="modal" id="deleteWishlist">
-	    <div class="modal-dialog">
-	    <div class="modal-content">
-	    
-	        <!-- Modal body -->
-	        <div class="modal-body" align="center">
-	           삭제하시겠습니까?
-	           <br><br>
-	           <button type="button" class="btn btn-primary">확인</button>
-	           
-	        </div>
-	        
-	    </div>
-	    </div>
-	</div>
-
+	  <%
+ 			String[] sCheck = request.getParameterValues("wishList");
+	  %>
 
 	<script>
         	$(function(){
-        		$("#content1").click(function(){
-        			location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh??bno=" + $(this).children().eq(0).text();
+        		$(".img1").click(function(){
+        		location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=" + $(this).children().eq(0).val();
         		});
         	});
+        	
+        	function deleteWishList() {
+        		var wishList = "";
+        		
+        		$( "input[name='wishList']:checked" ).each(function(){
+        			wishList = wishList + $(this).val()+",";
+        		});
+        		
+        		wishList = wishList.substring(0,wishList.lastIndexOf(",")); 
+        		
+        		if(wishList == '') {
+        			alert("삭제할 대상을 선택하세요.");
+        			return false;
+        		}
+
+        		if(confirm("해당 상품을 삭제 하시겠습니까?")) {
+
+        			location.href="<%= contextPathUserinfo %>/delete.wish.jw?memNo=<%=loginMember.getMemNo()%>&bno=<%=???????? %>&currentPage=1"
+        	
+        		}
+        		
+        		
+        	}
+        	
+        	
      </script>
 
-
+	
 
 
 
@@ -176,7 +192,7 @@
 	
 		<div class="paging-area" align="center">
 			
-			<% if(pi.getCurrentPage() != 1){ %>			
+			<% if(pi.getCurrentPage() != 1){ %>		
             	<a href="<%=contextPath%>/wishList.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 			<% } %>
 
