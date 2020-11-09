@@ -138,19 +138,13 @@
             			}
             		});
             	});
-            </script>
-            	
-            	<script>
+            
             	// 지역값 가져오기
     			
 			     var local = "<%= localNo %>";
 					$("#local").val("<%= localNo %>").prop("selected", true);
 		
-            	</script>
-            	
-            	
-            	<script>
-          
+            
             		// 유효성 검사
             	function validate() {
             			
@@ -169,8 +163,8 @@
                     if(!regExp.test(memName.value)){
                         alert("유효한 이름을 입력하세요!");
 
-                        userName.value="";
-                        userName.focus();
+                        memName.value="";
+                        memName.focus();
                         return false;
                     }
                     
@@ -180,8 +174,8 @@
                     if(!regExp.test(birthday.value)){
                         alert("유효한 생일을 입력하세요!");
 
-                        userName.value="";
-                        userName.focus();
+                        birthday.value="";
+                        birthday.focus();
                         return false;
               		 }
                     
@@ -193,8 +187,8 @@
                     if(!regExp.test(nickName.value)){
                         alert("유효한 닉네임을 입력하세요!");
 
-                        nickname.value="";
-                        nickname.focus();
+                        nickName.value="";
+                        nickName.focus();
                         return false;
                     }
 
@@ -211,7 +205,6 @@
             	}
             		
           
-            
     	
           
             </script>
@@ -219,7 +212,7 @@
             <br>
             
             <div id="updateButton" align="center">
-            	<button type="submit" class="btn btn-primary ">변경하기</button>
+            	<button type="submit" class="btn btn-primary " onclick="return validate();">변경하기</button>
         	</div>
             
           
