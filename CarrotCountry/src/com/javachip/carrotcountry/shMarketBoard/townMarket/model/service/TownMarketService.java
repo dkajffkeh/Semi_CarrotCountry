@@ -392,5 +392,26 @@ public class TownMarketService {
 		return list;
 	}
 
+	public ArrayList<PostBoard> townMarketAjaxUserSearchMain(ShmarketPageInfo sp, String userSearch, String userGu,
+			String userDong, String userCategory) {
+		Connection conn = getConnection();
+		ArrayList<PostBoard> bList = new TownMarketDao().townMarketAjaxUserSearchMain(conn,sp,userSearch,userGu,userDong,userCategory);
+		
+		close(conn);
+		
+		return bList;
+	}
+
+	public ArrayList<PostBoard> shMarketArticleAjaxSortng(ShmarketPageInfo sp, int sortNum) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoard> pList = new TownMarketDao().townMarketAjaxSorter(conn,sp,sortNum);
+		
+		close(conn);
+		
+		return pList;
+	}
+
 	
 }
