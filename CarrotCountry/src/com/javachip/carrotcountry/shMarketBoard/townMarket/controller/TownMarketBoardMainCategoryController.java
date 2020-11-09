@@ -33,31 +33,8 @@ public class TownMarketBoardMainCategoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		int currentPage;
-		int listCount; //게시글 총 갯수.
-		int boardLimit;//한페이지에 몇개 보여줄건지
-		int pageLimit; //페이지 하단에 보여질 페이지 갯수
-		int maxPage; //마지막페이지
-		int startPage; // 첫 페이지
-		int endPage; // 마지막 페이지
-		
-		listCount = new TownMarketService().selectListCount();
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		boardLimit = 16;
-		pageLimit=5;
-		maxPage = (int)Math.ceil(((double)listCount/boardLimit));
-		
-		startPage =((currentPage-1)/pageLimit)*pageLimit+1; 
-		
-		endPage = startPage + pageLimit-1;
-		
-		if(endPage>maxPage) {
-			endPage = maxPage;
-		}
-		
 
-		ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
+	ArrayList<CategoryHY> list = new TownMarketService().CategorySelector();
 
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/shMarket/shTownMarketBoardMain.jsp").forward(request, response);

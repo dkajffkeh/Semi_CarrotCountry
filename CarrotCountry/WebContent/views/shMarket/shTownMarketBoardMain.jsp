@@ -316,24 +316,35 @@ color:green;
         </div>
     </section>
     <script>
-    $(function(){
-    	
-    	
-    		
-    	})
-    	
-    	
+    $(function(){    	
+    	$("select[name=district]").click(function(){  		
+    		let str="";
+    	 if($("select[name=district] option:selected").val()=="강서구"){
+    		 
+    		 str+=   `<option value="화곡동">화곡동</option>
+                 	  <option value="목동">목동</option>`;
+		
+	   		$("select[name=town]").html(str);				    		 
+    	 } else {  		 
+    		 str+=   `<option value="오금동">오금동</option>
+	                  <option value="오류동">오류동</option>
+	                  <option value="상일동">상일동</option>`;		
+  		$("select[name=town]").html(str);
+    		 
+    	 }	
+    	})  	
     })
     </script>
+
     <!-- 검색 구간 -->
 
     <!-- 정렬 구현 구간 -->
     <div id="sorter_wrapper">
         <div class="sorter_row">
-            <p>최신순 </p>
-            <p>낮은가격 </p>
-            <p>인기상품 </p>
-            <p>조회수</p>
+            <p onclick="articleSorter(1)">최신순 </p>
+            <p onclick="articleSorter(2)">낮은가격 </p>
+            <p onclick="articleSorter(3)">인기상품 </p>
+            <p onclick="articleSorter(4)">조회수</p>
         </div>
     </div>
 
@@ -342,7 +353,7 @@ color:green;
 
     <!-- main 아티클 구간 -->
 
-	<div class="location_display">서울특별시 송파구</div>
+	<div class="location_display"></div>
 	
 	
 	
@@ -452,15 +463,64 @@ function categoryAjax(tar){
 //검색기능 ajax
 function userSearchAjax(){
 	
-	let userLo = $("select[name=district]").val();
+	let userGu = $("select[name=district]").val();
+	let userDo = $("select[name=town]").val();
 	let userInput =	$("input[name=userSearch]").val();
 	let prodCategory = $("select[name=prodCategory]").val();
 	
-	console.log(userLo);
-	console.log(userInput);
-	console.log(prodCategory);
+	$.ajax({
+		url:"shMarketUserSearch.sh.hy",
+		type:"get",
+		data:{
+			currentPage:1,
+			userSearch:userInput,
+			userGu:userGu,
+			userDo:userDo,
+			category:prodCategory
+		},
+		success:function(list){
+			ArticleSelector(list)
+			$("input[name=userSearch]").val('');
+			$("ul[class=pagination]").html('');
+			
+			$(".location_display").html(userGu+" "+userDo);
+			
+		},
+		error:function(){
+			
+		}
+
+	})
+		
+}
+//정렬 ajax
+function articleSorter(num){
+	
+	let sortNo = num;
+	
+	$.ajax({
+		url:"postSort.sh.hy",
+		type:"post",
+		data:{
+			sortNo:num,
+		 currentPage:1		
+		},
+		success:function(list){
+			ArticleSelector(list);
+			
+			$("ul[class=pagination]").html('');
+			
+		},
+		error:function(){
+			
+		}	
+	
+	})
+	
+	
 	
 }
+
 
 function ArticleSelector(list){
 	
