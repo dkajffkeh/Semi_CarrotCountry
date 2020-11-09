@@ -1,6 +1,6 @@
 package com.javachip.carrotcountry.userinfoBoard.model.vo;
 
-public class Photo {
+public class MyPagePhoto {
 	
 	private int photoNo;
 	private int postNo;
@@ -9,7 +9,7 @@ public class Photo {
 	private String photoLoadPath;
 	
 	
-	public Photo(int photoNo, int postNo, String photoPath, String photoFileName, String photoLoadPath) {
+	public MyPagePhoto(int photoNo, int postNo, String photoPath, String photoFileName, String photoLoadPath) {
 		super();
 		this.photoNo = photoNo;
 		this.postNo = postNo;
@@ -20,6 +20,11 @@ public class Photo {
 
 	
 	
+
+	public MyPagePhoto() {}
+
+
+
 
 	public int getPhotoNo() {
 		return photoNo;

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class UserinfoMember {
 	
 	private int memNo; 				
-	private String localNo;			// 지역 (string)			
+	private int localNo;					
 	private String memUserId;		
 	private String memUserPwd;		
 	private String memName;			
@@ -28,7 +28,7 @@ public class UserinfoMember {
 
     public UserinfoMember() {}
 
-	public UserinfoMember(int memNo, String localNo, String memUserId, String memUserPwd, String memName,
+	public UserinfoMember(int memNo, int localNo, String memUserId, String memUserPwd, String memName,
 			String memNickname, String memBirthday, String memGender, String memPhone, String memEmail,
 			Date memEnrollDate, String bListCheck, String leaveCheck, String managerCheck, String profilePath,
 			String profileModifyname, String profileOrignname, String profileLoadname, String localSi, String localGu,
@@ -58,10 +58,12 @@ public class UserinfoMember {
 	}
 	
 	
+
 	
 
+
 	public UserinfoMember(String memUserId, String memName, String memGender, String memBirthday, String memNickname,
-			String memPhone, String localNo, String memEmail) {
+			String memPhone, int localNo, String memEmail) {
 		super();
 		this.memUserId = memUserId;
 		this.memName = memName;
@@ -81,11 +83,11 @@ public class UserinfoMember {
 		this.memNo = memNo;
 	}
 
-	public String getLocalNo() {
+	public int getLocalNo() {
 		return localNo;
 	}
 
-	public void setLocalNo(String localNo) {
+	public void setLocalNo(int localNo) {
 		this.localNo = localNo;
 	}
 
@@ -251,7 +253,8 @@ public class UserinfoMember {
 				+ ", profileOrignname=" + profileOrignname + ", profileLoadname=" + profileLoadname + ", localSi="
 				+ localSi + ", localGu=" + localGu + ", localDong=" + localDong + "]";
 	}
-    
+
+	
 	
     
     

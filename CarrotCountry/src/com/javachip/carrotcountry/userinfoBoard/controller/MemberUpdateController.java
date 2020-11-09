@@ -41,10 +41,10 @@ public class MemberUpdateController extends HttpServlet {
 		String birthday = request.getParameter("birthday");
 		String nickName = request.getParameter("nickName");
 		String phone = request.getParameter("phone");
-		String localNo = request.getParameter("local");
+		int local = Integer.parseInt(request.getParameter("local"));
 		String email = request.getParameter("email");
 		
-		UserinfoMember m = new UserinfoMember(userId, memName, gender, birthday, nickName, phone, localNo, email);
+		UserinfoMember m = new UserinfoMember(userId, memName, gender, birthday, nickName, phone, local, email);
 		
 		UserinfoMember updateMem = new UserInfoBoardService().updateMember(m);
 		

@@ -3,11 +3,10 @@ package com.javachip.carrotcountry.userinfoBoard.model.service;
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
-import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
-import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.MyPagePhoto;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.SaleProduct;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
@@ -146,23 +145,68 @@ public class UserInfoBoardService {
 		}
 		
 		/**
-		 * 6_2 찜목록 사진 조회 / 판매중, 판매완료 사진조회
+		 * 6_2 찜목록 사진 조회 / 판매중, 판매완료 사진조회 
 		 * @param 
 		 * @return 			
 		 *
 		 */
-		/* --------수정할거임
-		public ArrayList<Photo> selectPhtoList(int bno){
+		public ArrayList<MyPagePhoto> selectMyPagePhotoList(int memNo){
 			Connection conn = getConnection();
 			
-			ArrayList<Photo> list = new UserInfoBoardDao().selectPhotoList(conn, bno);
+			ArrayList<MyPagePhoto> list = new UserInfoBoardDao().selectMyPagePhotoList(conn, memNo);
 			
 			close(conn);
 			
 			return list;
 		}
-		*/
+		
+		/**
+		 * 6_3 찜목록 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
 
+		public int deleteWishList(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 6_4 게시글에서 찜 수 count
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public int deletePostBoardLike(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+			
+		
+		
 		/**
 		 * 7. 판매완료 조회
 		 * @param 

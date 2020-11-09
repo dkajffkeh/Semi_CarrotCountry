@@ -12,9 +12,9 @@ import java.util.Properties;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import com.javachip.carrotcountry.member.model.vo.Member;
-import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.MyPagePhoto;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.SaleProduct;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
@@ -55,7 +55,7 @@ public class UserInfoBoardDao {
 			pstmt.setString(3, m.getMemBirthday());
 			pstmt.setString(4, m.getMemNickname());
 			pstmt.setString(5, m.getMemPhone());
-			pstmt.setString(6, m.getLocalNo());
+			pstmt.setInt(6, m.getLocalNo());
 			pstmt.setString(7, m.getMemEmail());
 			pstmt.setString(8, m.getMemUserId());
 
@@ -87,7 +87,7 @@ public class UserInfoBoardDao {
 			if(rset.next()) {
 				m = new UserinfoMember
 						(rset.getInt("MEM_NO"),
-						 rset.getString("LOCAL_NO"),
+						 rset.getInt("LOCAL_NO"),
 						 rset.getString("MEM_USERID"),
 						 rset.getString("MEM_USERPWD"),
 						 rset.getString("MEM_NAME"),
@@ -309,7 +309,7 @@ public class UserInfoBoardDao {
 			
 			while(rset.next()) {
 				WishList w = new WishList();
-				w.setMemNo(rset.getInt("MEM_NO"));
+			    w.setPostNo(rset.getInt("POST_NO"));
 				w.setPostLikes(rset.getInt("POST_LIKES"));
 				w.setPostName(rset.getString("POST_NAME"));
 				w.setProdPrice(rset.getInt("PROD_PRICE"));
@@ -318,7 +318,6 @@ public class UserInfoBoardDao {
 				w.setThumbNailFileName(rset.getString("BLIND_CHECK"));
 				w.setThumbNailLoadPath(rset.getString("BLIND_CHECK"));
 
-				
 				list.add(w);
 			}
 			
@@ -334,25 +333,30 @@ public class UserInfoBoardDao {
 		
 	}
 	
+	
 	// 사진 조회
-	public ArrayList<Photo> selectAttachmentList(Connection conn, int bno){
+	public ArrayList<MyPagePhoto> selectMyPagePhotoList(Connection conn, int memNo){
 
 		
-		ArrayList<Photo> list = new ArrayList<>();
+		ArrayList<MyPagePhoto> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectPhoto");
+		String sql = prop.getProperty("selectMyPagePhoto");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Photo ph = new Photo();
+				MyPagePhoto ph = new MyPagePhoto();
+				ph.setPhotoNo(rset.getInt("PHOTO_NO"));
+				ph.setPostNo(rset.getInt("POST_NO"));
+				ph.setPhotoPath(rset.getString("PHOTO_PATH"));
+				ph.setPhotoFileName(rset.getString("PHOTO_FILENAME"));
 				
 				list.add(ph);
 			}
@@ -368,6 +372,41 @@ public class UserInfoBoardDao {
 		
 	}
 	
+	//찜목록 삭제
+	public int deleteWishList(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteWishList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//찜목록 count -1
+	public int deletePostBoardLike(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deletePostBoardLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	// 판매완료 조회
 	public ArrayList<SaleProduct> selectCompletedSales(Connection conn, int memNo, PageInfo pi){

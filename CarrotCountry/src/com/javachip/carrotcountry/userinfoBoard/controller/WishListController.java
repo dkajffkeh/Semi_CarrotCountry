@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.service.TownMarketService;
 import com.javachip.carrotcountry.userinfoBoard.model.service.UserInfoBoardService;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.MyPagePhoto;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.WishList;
 
@@ -60,13 +62,14 @@ public class WishListController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		ArrayList<WishList> list = new UserInfoBoardService().selectWishList(pi, memNo);
-		
+		ArrayList<MyPagePhoto> photolist = new UserInfoBoardService().selectMyPagePhotoList(memNo);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("photolist", photolist);
 		
 		request.getRequestDispatcher("views/userinfoBoard/wishList.jsp").forward(request, response);
 

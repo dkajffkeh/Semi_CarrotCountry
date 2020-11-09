@@ -1,4 +1,3 @@
-<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,7 +43,7 @@
 	String birthday = (loginMember.getMemBirthday() == null) ? "" : loginMember.getMemBirthday();
 	String nickName = (loginMember.getMemNickname() == null) ? "" : loginMember.getMemNickname();
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
-	int local = loginMember.getLocalNo();
+	int localNo = loginMember.getLocalNo();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 
 	
@@ -65,12 +64,12 @@
             <table id="myPageTable">
                 <tr>
                     <th>* 아이디</th>
-                    <td><input type="text" id="userId" maxlength="12" required value="<%= userId %>"readonly></td>
+                    <td><input type="text" name="userid" id="userId" maxlength="12" required value="<%= userId %>"readonly></td>
                 </tr>
                 <tr>
                     <th>* 성함</th>
                     <td>
-                    <input type="text" id="userName" maxlength="6" required value="<%= memName %>">
+                    <input type="text" name="memName" id="userName" maxlength="6" required value="<%= memName %>">
                     <b style="color:red;">&nbsp;&nbsp;2-6자 한글</b>
                     </td>
                 </tr>
@@ -87,14 +86,14 @@
                 <tr>
                     <th>생년월일</th>
  					<td colspan="2">
-                        <input type="text" id="birthday" maxlength="6" value="<%= birthday %>">
+                        <input type="text" name="birthday" id="birthday" maxlength="6" value="<%= birthday %>">
                         <b style="color:red;">&nbsp;&nbsp;숫자 6자리</b>
                     </td>               
                </tr>
                 <tr>
                     <th>닉네임</th>
                     <td>
-                   		 <input type="text" id="nickname" maxlength="8" value="<%= nickName %>">
+                   		 <input type="text" name="nickName" id="nickname" maxlength="8" value="<%= nickName %>">
                    		 <b style="color:red;">&nbsp;&nbsp;2-8자 한글, 영문, 숫자</b>
                     </td>
                     
@@ -103,14 +102,14 @@
                 <tr>
                     <th>연락처</th>
                     <td colspan="3">
-                        <input type="text" id="phone" maxlength="13" value="<%= phone %>">
+                        <input type="text" name="phone" id="phone" maxlength="13" value="<%= phone %>">
                         <b style="color:red;">&nbsp;&nbsp;  - 와 숫자를 포함한 13자 </b>
                     </td> 
                 </tr>
                 <tr>
                     <th>지역</th>
                     <td>
-                    <select name="local">
+                    <select id="local"name = "local" value="<%= localNo%>">
 		                <option value="1">서울특별시 송파구 오금동</option>
 		                <option value="2">서울특별시 송파구 오류동</option>
 		                <option value="3">서울특별시 송파구 상일동</option>
@@ -122,7 +121,7 @@
                 </tr>
                 <tr>
                     <th>E-Mail</th>
-                    <td><input type="email" id="email" value="<%= email %>" style="width:300px;"></td>
+                    <td><input type="email" name="email" id="email" value="<%= email %>" style="width:300px;"></td>
                 </tr>
             </table>
             
@@ -139,21 +138,14 @@
             			}
             		});
             	});
-            	</script>
+            </script>
             	
             	<script>
             	// 지역값 가져오기
     			
-			     var local = "<%= local %>";
-			      		
-			     	$("select[name=Local]").each(function(){
-			      			
-			      			
-			      		if(local.search($(this).val()) != -1) {
-			      			$(this).attr("selected", true);
-			      		}
-			      	});
-			     	});
+			     var local = "<%= localNo %>";
+					$("#local").val("<%= localNo %>").prop("selected", true);
+		
             	</script>
             	
             	

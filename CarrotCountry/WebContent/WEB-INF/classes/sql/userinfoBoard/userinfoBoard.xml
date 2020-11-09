@@ -83,7 +83,7 @@
 	                ROWNUM RNUM
 	               , A.*
 	         FROM (
-	               SELECT 
+	                SELECT 
 	                      POST_NO
 	                    , POST_NAME
 	                    , POST_ENROLL_DATE
@@ -91,7 +91,7 @@
 	                 FROM GROUP_PURCHASE G    
 	                 JOIN POST USING(POST_NO)
 	                 WHERE BLIND_CHECK = 'N'
-	                  AND G.GP_POST_CHECK = 2
+	                  AND POST_TYPE = 2
 	                  AND MEM_NO =?
 	                 ORDER
 	                      BY POST_NO DESC
@@ -106,34 +106,55 @@
 		  FROM GROUP_PURCHASE
 	</entry>
 	<entry key="selectWihsiList">
-	     SELECT *
-		  FROM (
-		        SELECT 
-		                ROWNUM RNUM
-		               , A.*
-		         FROM (
-		                SELECT
-		                       MEM_NO 
-		                     , POST_LIKES
-		                     , POST_NAME
-		                     , PROD_PRICE
-		                     , BLIND_CHECK
-		                     , THUMBNAIL_PATH
-		                     , THUMBNAIL_FILENAME
-		                     , THUMBNAIL_LOADPATH
-		                  FROM LIKE_POST L
-		                  JOIN POST P USING (MEM_NO)
-		                 WHERE BLIND_CHECK = 'N'
-		                   AND MEM_NO=?
-		                   AND THUMBNAIL_PATH!='NULL'
-		               ) A
-     		     )
-		WHERE RNUM BETWEEN ? AND ?
+	             SELECT *
+				  FROM (
+				        SELECT 
+				                ROWNUM RNUM
+				               , A.*
+				         FROM (
+				                SELECT
+				                       POST_NO
+				                     , POST_LIKES
+				                     , POST_NAME
+				                     , PROD_PRICE
+				                     , BLIND_CHECK
+				                     , THUMBNAIL_PATH
+				                     , THUMBNAIL_FILENAME
+				                     , THUMBNAIL_LOADPATH
+				                  FROM LIKE_POST L
+				                  JOIN POST P USING (POST_NO)
+				                 WHERE BLIND_CHECK = 'N'
+				                   AND L.MEM_NO=?
+				               ) A
+				       )
+				WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="selectPhoto">
+	<entry key="deleteWishList">
+		DELETE FROM LIKE_POST
+   		 WHERE POST_NO=?
+	</entry>
 	
-	
+	<entry key="deletePostBoardLike">
+	  UPDATE
+		      POST
+		SET 
+		      POST_LIKES=POST_LIKES-1
+		WHERE 
+		      POST_NO=?
+	</entry>
+	<entry key="selectMyPagePhoto">
+			SELECT 
+			       PHOTO_NO
+			     , POST_NO
+			     , PHOTO_PATH
+			     , PHOTO_FILENAME
+			     , PHOTO_LOADPATH
+			  FROM PHOTO P
+			  JOIN POST USING (POST_NO)
+			 WHERE MEM_NO =? 
+			 ORDER
+			    BY POST_NO DESC
 	</entry>
 	
 	
@@ -208,6 +229,7 @@
 		        POST
 		    SET PROD_STATUS = 'N'
 		  WHERE POST_NO=?
+		    AND BLIND_CHECK = 'N'
 	</entry>
 	
 	<entry key="insertAddress">
@@ -237,6 +259,7 @@
 		    SET SL_STATUS ='N'
 		  WHERE SHIPPING_NO=?
 	</entry>
+	
 	
 
 
