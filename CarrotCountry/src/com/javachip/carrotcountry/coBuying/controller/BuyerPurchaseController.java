@@ -16,6 +16,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.userinfoBoard.model.service.UserInfoBoardService;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
+import com.sun.media.jfxmedia.track.Track.Encoding;
 
 @WebServlet("/buyerPurchase.pro.jy")
 public class BuyerPurchaseController extends HttpServlet {
@@ -26,10 +27,15 @@ public class BuyerPurchaseController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		int optionNo = Integer.parseInt(request.getParameter("option"));
+		String optionVal = request.getParameter("option");
+		Integer optionNo = null;
+		if(optionVal == null || "".equals(optionVal)) {		
+			optionNo = Integer.parseInt(optionVal);
+		}
 		
 		Product p = new ProductService().selectProduct(bno);
 		PostBoard pb = new ProductService().selectPostBoard(bno);
