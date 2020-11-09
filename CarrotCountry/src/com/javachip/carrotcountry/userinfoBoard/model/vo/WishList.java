@@ -22,6 +22,22 @@ public class WishList {
 
 
 	
+	public WishList(int postNo, int postLikes, String postName, int prodPrice, String thumbNailPath,
+			String thumbNailFileName) {
+		super();
+		this.postNo = postNo;
+		this.postLikes = postLikes;
+		this.postName = postName;
+		this.prodPrice = prodPrice;
+		this.thumbNailPath = thumbNailPath;
+		this.thumbNailFileName = thumbNailFileName;
+	}
+
+
+
+
+
+
 	public WishList(int postNo, int postLikes, String postName, int prodPrice, String blindCheck, String thumbNailPath,
 			String thumbNailFileName, String thumbNailLoadPath) {
 		super();

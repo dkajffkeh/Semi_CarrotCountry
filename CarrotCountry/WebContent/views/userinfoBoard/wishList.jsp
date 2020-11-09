@@ -174,7 +174,7 @@
 
         		if(confirm("해당 상품을 삭제 하시겠습니까?")) {
 
-        			location.href="<%= contextPathUserinfo %>/delete.wish.jw?memNo=<%=loginMember.getMemNo()%>&bno=<%=???????? %>&currentPage=1"
+        			location.href="<%= contextPathUserinfo %>/delete.wish.jw?memNo=<%=loginMember.getMemNo()%>&bno??&currentPage=1"
         	
         		}
         		
@@ -193,17 +193,17 @@
 		<div class="paging-area" align="center">
 			
 			<% if(pi.getCurrentPage() != 1){ %>		
-            	<a href="<%=contextPath%>/wishList.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 			<% } %>
 
 			<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
 			
-            	<a href="<%=contextPath%>/wishList.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
             	
             <% } %>
 
 			<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-            	<a href="<%=contextPath%>/wishList.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
 			<% } %>
         </div>
 	

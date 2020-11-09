@@ -508,17 +508,40 @@ function articleSorter(num){
 		success:function(list){
 			ArticleSelector(list);
 			
-			$("ul[class=pagination]").html('');
+			numberSortPage(list,num);
+	
+		},
+		error:function(){
+			
+		}	
+	
+	})	
+}
+
+//정렬ajax페이지 구현 함수
+function articleSorterPaging(Cnum,num){
+	
+	let sortNo = num;
+    
+	$.ajax({
+		url:"postSort.sh.hy",
+		type:"post",
+		data:{
+			sortNo:num,
+		 currentPage:Cnum		
+		},
+		success:function(list){
+			
+			ArticleSelector(list);
+				
+			numberSortPage(list,num)
 			
 		},
 		error:function(){
 			
 		}	
 	
-	})
-	
-	
-	
+	})	
 }
 
 
@@ -544,6 +567,40 @@ function ArticleSelector(list){
 	}		
 	$articleOuter.html(str);	
 }
+
+
+function numberSortPage(list,num){
+	
+	let pagingNodes = "";
+	let backBtn   ="";
+	let pagingNum = "";
+	let nextBtn   ="";
+	let result = "";
+	if(list[0].currentPage!=1){
+	backBtn += `<li class="page-item" onclick=articleSorterPaging(\${list[0].currentPage-1},\${num})>
+        <a class="page-link" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>         
+      </li>`};       
+    
+    for(let j = list[0].startPage ; j<=list[0].endPage ; j++){
+    pagingNum +=`<li class="page-item"><a class="page-link" onclick=articleSorterPaging(\${j},\${num})>\${j}</a></li>`
+    };
+           
+    if(list[0].currentPage!=list[0].maxPage){
+    nextBtn += `<li class="page-item" onclick=articleSorterPaging(\${list[0].currentPage+1},\${num})>
+        <a class="page-link" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>`};
+      result = backBtn + pagingNum + nextBtn;
+
+      $("ul[class=pagination]").html(result);
+	
+}
+//초기화면 list
 function PagingSort(list){
 	
 	let pagingNodes = "";
@@ -573,7 +630,6 @@ function PagingSort(list){
       result = backBtn + pagingNum + nextBtn;
 
       $("ul[class=pagination]").html(result);
-
 }
 
 function detailfunc(t){

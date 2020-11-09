@@ -38,18 +38,23 @@ public class MyPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println(request.getParameter("memNo"));
+		int locNo = ((Member)request.getSession().getAttribute("loginMember")).getLocalNo();
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 			ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
 			
 		
-			Location lo = new UserInfoBoardService().selectLocation(memNo);
+			Location lo = new UserInfoBoardService().selectLocation(locNo);
+			
+			System.out.println(list);
+			System.out.println(lo);
 			
 			
 			request.setAttribute("list", list);
 			request.setAttribute("lo", lo);
 			
 			request.getRequestDispatcher("views/userinfoBoard/myPage.jsp").forward(request, response);
+			
 		}
 	
 	

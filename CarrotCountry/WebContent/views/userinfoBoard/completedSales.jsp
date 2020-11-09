@@ -82,7 +82,7 @@
                 
                     <tr align="center">
                         <th rowspan="2"><%=list.indexOf(s)+1%></th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
+                        <td id="saleImage" onClick = " location.href='<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=<%=s.getPostNo() %>' "rowspan="2"><img src="<%=contextPath%>/<%=s.getThumbNailPath()%><%=s.getThumbNailFileName() %>" style= "width:200px; height:150px; border-radius: 20px;" ></td>
                         <td><%= s.getPostName() %> <br><%= s.getProdPrice() %> 원</td>
                         <td><%= s.getPostEnrollDate() %></td>
                         <td>
@@ -90,9 +90,7 @@
                         </td>
                     </tr>
 
-                    <tr align="center" valign="top">
-                        <td></td>
-                    </tr>
+               
                     
                     
                     
@@ -131,17 +129,17 @@
         <div class="paging-area" align="center">
 			
 	        <% if(pi.getCurrentPage() != 1){ %>			
-	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
 	        <% } %>
 	    
 	        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
 	        
-	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
 	            
 	        <% } %>
 	    
 	        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-	            <a href="<%=contextPath%>/completedSales.me.jw?memNo<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
 	        <% } %>
 	        
     	</div>
