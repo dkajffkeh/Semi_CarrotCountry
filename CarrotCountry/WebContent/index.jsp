@@ -147,6 +147,8 @@ cursor:pointer;
   $(function(){
 	  
 	  mainIndexArticleSelector();
+	  
+	  window.setInterval(mainIndexArticleSelector,1000*60*5);
 	  	  
 	function mainIndexArticleSelector(){
 		
@@ -157,7 +159,7 @@ cursor:pointer;
 				
 				let $top8Board = $("#top8_board_wrapper");
 				let str = "";
-				console.log(list);
+				
 				//하단 메인 아티클 부분 보여줄곳.
 				if(list.length==0){
 					
@@ -251,10 +253,8 @@ cursor:pointer;
 	                       </div>`   	
               
               }
-				
-				
-			}
-			
+							
+			}			
 			cc.html(pstr);
 			
 			if(list.length<4){
@@ -304,9 +304,6 @@ cursor:pointer;
          	}
 			
 			cc1.html(pstr1)
-
-			
-			
 			
 			},
 			error:function(){
@@ -330,6 +327,8 @@ function toBoardDetailFromPic(t){
 	let bno = t.childNodes[1].innerHTML;
 	location.href="<%=contextPath%>/townMarketBoardDetail.sh?bno="+bno;
 }
+
+
   </script>
 </body>
 </html>
