@@ -129,7 +129,7 @@
 
 
 /* 카테고리영역 */
-#content1 ul{padding-top: 28px;list-style: none;}
+#content1 ul{list-style: none;}
 #content1 ul li{
     height: 58px;
     background: #3f3f3f;

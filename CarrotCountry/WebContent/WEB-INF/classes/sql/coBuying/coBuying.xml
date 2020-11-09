@@ -321,7 +321,7 @@
 		SELECT
 		       POST_NO
 		     , POST_ENROLL_DATE
-		     , GP_DEADLINE
+		     , TO_CHAR(GP_DEADLINE, 'YYYY-MM-DD') GP_DEADLINE
 		     , GP_MINPEOPLE
 		     , GP_PEOPLE
 		     , GP_DPRICE

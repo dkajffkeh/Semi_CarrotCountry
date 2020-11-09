@@ -28,18 +28,17 @@ public class Product {
 	private String thumbnailPath;
 	private String thumbnailFilename;
 	
+	
+	
+	
 	public Product() {}
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
 
 	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice,
 			String gpRefund) {
@@ -521,8 +520,6 @@ public class Product {
 	public void setThumbnailFilename(String thumbnailFilename) {
 		this.thumbnailFilename = thumbnailFilename;
 	}
-
-
 
 
 

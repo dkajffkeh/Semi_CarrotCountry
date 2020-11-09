@@ -37,8 +37,9 @@
        /* 콘텐트바의 세부적인 틀 */
        #content1>h3{margin-top: 50px; padding: 20px;}
        #content2>*{height: 100%; float: left;}
+       #emptyDiv{width:100px}
        #content2_1{
-           width: 40%; 
+           width: 400px; 
            padding: 30px;
            padding-top: 0px;
            padding-bottom: 50px;
@@ -48,7 +49,7 @@
        #demo>div{width: 100%; height: 100%;}
        .carousel-inner>img{width: 100%; height: 100%; margin: auto;} 
        #content2_2{
-           width: 60%;
+           width: 500px;
            display: inline-block;
            padding-left: 50px;
         }
@@ -62,7 +63,7 @@
            padding-left: 50px;
            padding-bottom: 10px;
         }
-       #content2_2_2{height: 20%;}
+       #content2_2_2{height: 20%; width:350px; padding-left:100px; padding-top:70px;}
        #content2_2_1 span{
             display: inline-block;
             padding-bottom: 10px;
@@ -132,6 +133,8 @@
                 <h3><b><%= pb.getPostName() %></b></h3>
             </div>
             <div id="content2">
+            
+            	<div id="emptyDiv"></div>
                 <div id="content2_1">
                     <div id="demo" class="carousel slide" data-ride="carousel">
 
