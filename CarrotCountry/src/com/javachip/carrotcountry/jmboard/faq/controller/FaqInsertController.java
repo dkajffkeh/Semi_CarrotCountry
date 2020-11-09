@@ -1,6 +1,7 @@
 package com.javachip.carrotcountry.jmboard.faq.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.jmboard.faq.model.service.FaqService;
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
+import com.javachip.carrotcountry.member.model.vo.Member;
 
 /**
  * Servlet implementation class FaqInsertController
@@ -33,26 +35,40 @@ public class FaqInsertController extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 		
+		response.setContentType("text/html;charset=UTF-8");
 		
-		String faqWriter = request.getParameter("memNo");
-		String faqTitle = request.getParameter("faqTitle");
-		String faqContent = request.getParameter("faqContent");
-		String category = request.getParameter("category");
-	
-		Faq f = new Faq(faqWriter, faqTitle, faqContent, category);
+		Member member = (Member) request.getSession().getAttribute("loginMember");
 		
-		int result = new FaqService().insertFaq(f);
+		PrintWriter writer = response.getWriter();
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
+			if (member == null) {
+				
+				writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href = '" + request.getContextPath() + "';</script>");
 			
-			response.sendRedirect(request.getContextPath() + "/list.fa.jm");
-		}else {
+			} else if(!"Y".equals(member.getManagerCheck())) {	
+				
+				writer.println("<script>alert('권한이 없습니다.'); location.href = '" + request.getContextPath() + "';</script>");
 			
-			request.setAttribute("errorMsg", "공지사항 작성 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			} else {
+			String faqWriter = request.getParameter("memNo");
+			String faqTitle = request.getParameter("faqTitle");
+			String faqContent = request.getParameter("faqContent");
+			String category = request.getParameter("category");
+		
+			Faq f = new Faq(faqWriter, faqTitle, faqContent, category);
 			
+			int result = new FaqService().insertFaq(f);
 			
+			if(result > 0) {
+				request.getSession().setAttribute("alertMsg", "성공적으로 공지사항 등록됐습니다.");
+				
+				response.sendRedirect(request.getContextPath() + "/list.fa.jm");
+			}else {
+				
+				request.setAttribute("errorMsg", "공지사항 작성 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+			}
 		}
 		
 	}

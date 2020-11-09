@@ -67,7 +67,6 @@
         <%} %>
         <!-- 사용자 -->
         <a href="<%= contextPath %>/modifyForm.on.jm?ono=<%= o.getOneToNo() %>" class="btn btn-warning btn-sm">수정하기페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="button" value="뒤로가기" class="btn btn-warning btn-sm">
       </div>
       
   </div>

@@ -76,6 +76,11 @@
         </table>
 
         <br>
+        
+        
+        
+        
+        
 
         <div align="center">
 			<% if(loginMember != null && loginMember.getMemUserId().equals(n.getMemNo())){ %>

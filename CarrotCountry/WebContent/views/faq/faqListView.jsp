@@ -124,11 +124,11 @@
 		        <table>
                 <tr>
                 	<td>아이디 </td>
-                    <td colspan="2"><input type="text" name="userId" id="userId" placeholder="" required></td>
+                    <td colspan="2"><input type="text" class="border border-warning" name="userId" id="userId" placeholder="" required></td>
                 </tr>
                 <tr>
                 	<td>비밀번호 </td>
-                    <td colspan="2"><input type="password" name="userPwd" id="userPwd" placeholder="" required></td>
+                    <td colspan="2"><input type="password" class="border border-warning" name="userPwd" id="userPwd" placeholder="" required></td>
                 </tr>
                 </table>
                 <tr>
@@ -196,6 +196,8 @@
             });
           });
         });
+        
+        <!---->
         </script>
 
     </div>
