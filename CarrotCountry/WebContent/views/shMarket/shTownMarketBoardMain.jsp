@@ -56,6 +56,9 @@ ArrayList<Integer> likeCount = (ArrayList)request.getAttribute("likeCount");
     vertical-align: baseline;
     box-sizing: border-box;
 }
+div,p,a,h2,h1{
+font-family: 'Jua';
+}  
 body {min-height: 100%;}
 img {height:100%; width:100%; border-radius: 5px;}
 /*   <!-- ===============================최 상단 bar  ======================= -->       */
