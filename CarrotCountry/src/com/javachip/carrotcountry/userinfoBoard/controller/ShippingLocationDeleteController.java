@@ -29,10 +29,11 @@ public class ShippingLocationDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int sno = Integer.parseInt(request.getParameter("sno"));
+		System.out.println(request.getParameterValues("addressList"));
+		String[]addressLists = request.getParameterValues("addressList");
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		int result = new UserInfoBoardService().deleteAddress(sno);
+		int result = new UserInfoBoardService().deleteAddress(addressLists);
 		
 		if(result >0) {
 			

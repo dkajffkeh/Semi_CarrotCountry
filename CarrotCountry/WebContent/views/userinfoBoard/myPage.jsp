@@ -34,6 +34,7 @@
 	int memNo = loginMember.getMemNo();
 	int localNo = loginMember.getLocalNo();
 	
+	
 	String localSi = (lo.getLocalSi() == null) ? "" : lo.getLocalSi();
 	String localGu = (lo.getLocalGu() == null) ? "" : lo.getLocalGu();
 	String localDong = (lo.getLocalDong() == null) ? "" : lo.getLocalDong();
@@ -51,7 +52,6 @@
      <hr color="gray">
      <br><br>
      <!-- content영역의 윗부분 -->
-    <form action="<%= contextPath %>/myPage.me.jw" method="post" id="myPage">
     	 <input type="hidden" value="<%= memNo %>" name="memNo">
     	 <input type="hidden" value="<%= localNo %>" name="localNo">
     	 
@@ -66,8 +66,6 @@
                 <br>
                 <label for="file1">프로필변경</label>
         </div>
-
-
 		<!-- 프로필 사진 미리보기, 변경 -->
         <script>
             $(function(){
@@ -94,10 +92,6 @@
                 }
             }
         </script>
-
-
-
-
         <!-- 3가지 건수 노출부분 -->
         <div id="content_top2">
             <span align="center"><h4>지역거래</h4><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">2</a> 건</span>
@@ -157,49 +151,24 @@
         </div>
         <!-- 배송지 정보  -->
         <div id="content_bottom2">
-            <h3  align="center" ><b>배송지 등록 정보</b></h3> 
-            <br>
-            
-           
+      <form action="<%= contextPath %>/delete.shippingLocation.jw" method="post" id="myPage">
+        
+            <h3  align="center" ><b>배송지 등록 정보</b></h3> <br>
             <div id = "content_bottom2_1">
                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#addAdressForm">등록</button>
-                <button type="button" class="btn btn-secondary btn-sm"  data-toggle="modal" data-target="#deleteAddress">삭제</button>    
+                <button type="submit" class="btn-secondary btn-sm" onclick="deleteAddress();">삭제</button>
             </div>
             
        <br><br>
+       
             <div id="content_bottom2_2">
-            	<input type="hidden" name="memNo" value="<%= memNo %>">
+            
    			<% for (ShippingLocation sl : list)  { %>
-   
-            
-            <!-- 체크박스 선택 시 value값 -->
-            <!-- 
-            <script>
-        		function deleteAddress() {
-        			var insertSl = document.getElementById("insertSl");
-        			
-        			if(document.insertSl.delete_address.checked){	
-        				
-        				document.insertSl.delete_address.value = 'Y';
-        			}else{
-        				document.insertSl.delete_address.value = 'N';
-        			}
-        		}
-         	 </script>
-             -->
-            
-            
-            
-            
-            
-            <input type="checkbox" style="height:24px; width:24px;" onclick="deleteAddress()" name="delete_address" value="<%= sl.getShippingNo() %>">
+   			<input type="hidden" name="memNo" value="<%= memNo %>">
+            <input type="checkbox" style="height:24px; width:24px;" name="addressList" value="<%= sl.getShippingNo() %>">
             &nbsp;&nbsp;배송지<%=list.indexOf(sl)+1%>)
 
-
-            
-            
-            <!----------------------기본배송지 설정 시 보여질 문구---------------------->
-
+			<!-- 기본 배송지 설정시 보여질 문구 -->
 					<% if(sl.getShippingDefault().equals("Y")) { %>
 					
 					
@@ -209,202 +178,97 @@
 		 
 		            
 		            <% } %>
-            <!------------------------------------------------------------------------>
-
-			            <br>
-			       <%= sl.getShippingAddress() %>
-			       		<br><br>
-			       		
-	
-			       		
-			       		
-			       		
-			       		
-			 		  <%} %><!-- for (ShippingLocation sl : list)  -->
-			 
-			 
-			 
-<!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-	   
-   
-			<!--  x -->
-
-<!------------------------------------------------------------------------------- -->
-			 
-			 
-			   </div><!-- content bottom2_2 -->
-	
-<!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-	   
-   			<!-- x -->
-<!------------------------------------------------------------------------------- -->
-	
-	
-	
-	</div><!-- content bottom2 -->
-			
-<!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-	   
-   				<!--  x -->
-
-<!------------------------------------------------------------------------------- -->
-			
-			
-			
-			
-			
-			
-	</div> <!-- content-bottom -->
-			    
+			<!-- -------------------- -->
+			       <br> <%= sl.getShippingAddress() %> <br><br>
+			 <%} %><!-- for (ShippingLocation sl : list)  -->
 			  
-			
-			    <div id="updateButton" align="center">
-			        
-			        <button type="submit" class="btn btn-primary">변경하기</button>
-			       
-			    </div>
-		</form>	    
-	</div>
-  
-    
-
-
-<!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-	   
-		<!-- x -->	    
- 
-  
-<!------------------------------------------------------------------------------- -->
-
-<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
-
-
-				
-				</div>
-				</div>
-				
-<!------------------------------------------------------------------------------- -->
-
-		<!-- footerbar -->
-		<%@ include file="../common/footerbar.jsp" %>
+			   <div id="updateButton" align="center">
+				        <button type="submit" class="btn btn-primary">변경하기</button>
+			   </div>
+			  
+			  
+			  
+			 
+				   </div><!-- content bottom2_2 -->
+		</form>
+		</div><!-- content bottom2 -->
+		</div> <!-- content-bottom -->
 		
+				   
+		   
+		</div>
 		
-<!-------------------------------- 배송지 등록 버튼 클릭시 보여질 modal------------------>
-	   <script>
-        		function defaultCheck() {
-        			var insertSl = document.getElementById("insertSl");
-        			if(document.insertSl.defaultAddress.checked){
-        				document.insertSl.defaultAddress.value = 'Y';
-        			}else{
-        				document.insertSl.defaultAdress.value = 'N';
-        			}
-        		}
-       </script>
-   
-<div class="modal fade" id="addAdressForm">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">배송지 추가</h4>
-          <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        <% if ( list.size() < 3)  {%>
-        <!-- Modal body -->
-        <div class="modal-body" align="center">
-          <form action="<%= contextPath %>/insert.lo.jw" method="post" name="insertSl">
-                <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>" >
-                <input type="hidden" name="userName" value="<%= loginMember.getMemName() %>" >
-                <input type="hidden" name="phone" value="<%= loginMember.getMemPhone() %>" >
-                <input type="hidden" name="defaultAddress" value="">
-                배송지를 입력하세요 <br><br>
-                <input type="text" name="address" size="40" style="border: 3px solid orange;">
-              <br><br><br><br>
-              <!-- Modal footer -->
-          <div class="modal-footer">
-             
-         
-         <% Boolean flag = false;  %>
-         
-         <% for (ShippingLocation sl : list)  {%>
-            
-		  <% if("Y".equals(sl.getShippingDefault())) { 
-          		flag = true;} %>
-          <%} %>
-         
-         <!-- 이미 기본배송지 있을 때 -->
-			<% if(flag){ %>
-          
-              <p style="color:gray;">기본 배송지로 설정하려면 기존의 기본배송지를 삭제하세요.</p>			
-              <button type="submit" class="btn btn-primary">등록</button>
-          	
-          <!--  기본배송지 없을 때 --> 
-          <% }else {%>
-              
-              
-              <input type="checkbox" name="defaultAddress"  onclick="defaultCheck()" value="">&nbsp;
-              <label for="default">기본 배송지로 등록</label>
-              <button type="submit" class="btn btn-primary">등록</button>
-          
-          
-          <%} %>
-          
-          </div>
-     		<%}else { %> <!--  배송지가 3개 이상일때 -->
-          	
-          	<div class="modal-body" align="center">
-      			
-          		배송지를 삭제 후 등록해주세요.
-          	</div>
-          <%} %>
-              <br>
-          
-          
-            <!--  (ShippingLocation sl : list)   -->
-          
-          
-  
-
-
-
-          </form>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-
+					</div>
+					</div>
+			<!-- footerbar -->
+			<%@ include file="../common/footerbar.jsp" %>
+			<!-- 배송지 등록 버튼 클릭 시 modal창 -->
+		<div class="modal fade" id="addAdressForm">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">배송지 추가</h4>
+		          <button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+		        <% if ( list.size() < 3)  {%>
+		        <!-- Modal body -->
+		        <div class="modal-body" align="center">
+		          <form action="<%= contextPath %>/insert.lo.jw" method="post" name="insertSl">
+		                <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>" >
+		                <input type="hidden" name="userName" value="<%= loginMember.getMemName() %>" >
+		                <input type="hidden" name="phone" value="<%= loginMember.getMemPhone() %>" >
+		               
+		                배송지를 입력하세요 <br><br>
+		                <input type="text" name="address" size="40" style="border: 3px solid orange;">
+		              <br><br><br><br>
+		              <!-- Modal footer -->
+		          <div class="modal-footer">
+		             
+		         
+		         <% Boolean flag = false;  %>
+		         
+		         <% for (ShippingLocation sl : list)  {%>
+		            
+				  <% if("Y".equals(sl.getShippingDefault())) { 
+		          		flag = true;} %>
+		          <%} %>
+		         
+		         <!-- 이미 기본배송지 있을 때 -->
+					<% if(flag){ %>
+		          
+		              <p style="color:gray;">기본 배송지로 설정하려면 기존의 기본배송지를 삭제하세요.</p>			
+		              <button type="submit" class="btn btn-primary">등록</button>
+		          	
+		          <!--  기본배송지 없을 때 --> 
+		          <% }else {%>
+		              
+		              
+		              <input type="checkbox" id ="defaultAddress" name= "defaultAddress" value="Y">&nbsp;
+		              <label for="defaultAddress">기본 배송지로 등록</label>
+		              <button type="submit" class="btn btn-primary">등록</button>
+		          
+		          
+		          <%} %>
+		          
+		          </div>
+		     		<%}else { %> <!--  배송지가 3개 이상일때 -->
+		          	
+		          	<div class="modal-body" align="center">
+		      			
+		          		배송지를 삭제 후 등록해주세요.
+		          	</div>
+		          <%} %>
+		              <br>
+		          </form>
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div>
 
 <!--------------------------------------------------------------------------------->
-		
-			<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
-		
-		<% for (ShippingLocation sl : list)  {%>
-		
-					 <div class="modal" id="deleteAddress">
-					    <div class="modal-dialog">
-					    <div class="modal-content"> 
-					    
-					        <!-- Modal body -->
-					        <div class="modal-body" align="center">
-					           삭제하시겠습니까?
-					           <br><br>
-					            <form action="<%= contextPath %>/delete.shippingLocation.jw" id = "deleteSl" method="post">
-								<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
-								<input type="hidden" name="sno" value="<%= sl.getShippingNo() %>">
-					           <button type="submit" class="btn btn-primary">확인</button>
-					           </form>
-					        </div>
-					        
-					    </div>
-					    </div>
-					</div>
-						
-			<%} %>
-			
-		<!------------------------------------------------------------------------------- -->
-		
 
 
 </body>

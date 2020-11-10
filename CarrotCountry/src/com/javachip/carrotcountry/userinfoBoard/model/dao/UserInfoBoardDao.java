@@ -261,8 +261,10 @@ public class UserInfoBoardDao {
 	
 	public int selectListCount(Connection conn) {
 		int listCount = 0;
+		
 		Statement stmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectCobuyingListCount");
 		try {
 			stmt = conn.createStatement();
@@ -286,6 +288,7 @@ public class UserInfoBoardDao {
 	public ArrayList<WishList> selectWishList(Connection conn ,PageInfo pi, int memNo){
 		
 		ArrayList<WishList> list = new ArrayList<>();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -331,15 +334,12 @@ public class UserInfoBoardDao {
 	
 	// 사진 조회
 	public ArrayList<MyPagePhoto> selectMyPagePhotoList(Connection conn, int memNo){
-
-		
 		ArrayList<MyPagePhoto> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectMyPagePhoto");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memNo);
@@ -364,15 +364,14 @@ public class UserInfoBoardDao {
 		}
 		
 		return list;
-		
 	}
 	
 	//찜목록 삭제
 	public int deleteWishList(Connection conn, String[] wishLists) {
-		
-		
 		int result = 0;
+		
 		PreparedStatement pstmt = null;
+		
 		 String sql = prop.getProperty("deleteWishList");
 		         sql += "(";
 		         for(int i=0; i<wishLists.length; i++){
@@ -397,9 +396,10 @@ public class UserInfoBoardDao {
 	//찜목록 count -1
 	public int deletePostBoardLike(Connection conn, String[] wishLists) {
 		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deletePostBoardLike");
 		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deletePostBoardLike");
 				sql += "(";
 		        for(int i=0; i<wishLists.length; i++){
 		           if(i==wishLists.length-1){
@@ -409,7 +409,6 @@ public class UserInfoBoardDao {
 		           }
 		        }
 		        sql += ")";
-		        
 		try {
 			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeUpdate();
@@ -430,8 +429,6 @@ public class UserInfoBoardDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectCompletedSales");
-		
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -473,7 +470,9 @@ public class UserInfoBoardDao {
 	
 	public int deleteCompletedSales(Connection conn, int bno) {
 		int result = 0;
+		
 		PreparedStatement pstmt = null;
+		
 		String sql = prop.getProperty("deleteCompletedSales");
 		
 		try {
@@ -607,14 +606,21 @@ public class UserInfoBoardDao {
 	
 	// 배송지 삭제
 	
-	public int deleteAddress(Connection conn, int sno) {
+	public int deleteAddress(Connection conn, String[]addressLists) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deleteAddress");
-		
+		 String sql = prop.getProperty("deleteAddress");
+		         sql += "(";
+		         for(int i=0; i<addressLists.length; i++){
+		            if(i==addressLists.length-1){
+		            sql +=  Integer.parseInt(addressLists[i]);
+		            }else{
+		                sql +=  Integer.parseInt(addressLists[i]) + ",";
+		            }
+		         }
+		         sql += ")";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, sno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
