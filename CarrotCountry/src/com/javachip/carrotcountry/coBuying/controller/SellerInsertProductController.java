@@ -64,7 +64,7 @@ public class SellerInsertProductController extends HttpServlet {
 			String memNick = multiRequest.getParameter("memNick");
 			String postName = multiRequest.getParameter("postName");
 			String postComment = multiRequest.getParameter("content");
-			String thumbnailFileName = multiRequest.getParameter("file1");
+			String thumbnailFileName = multiRequest.getFilesystemName("file1");
 			String dealType ="C";
 			String site ="서울특별시";
 			int prodPrice = 1;
