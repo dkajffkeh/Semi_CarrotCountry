@@ -211,7 +211,16 @@ public class ProductService {
 		return result;
 	}
 	
-	
+	public ArrayList<PostBoardJY> mainCategoryAjax(String cName, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoardJY> list = new ProductDao().mainCategoryAjax(conn,cName,pi);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	
 	

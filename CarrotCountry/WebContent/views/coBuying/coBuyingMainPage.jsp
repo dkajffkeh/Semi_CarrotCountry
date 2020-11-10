@@ -288,8 +288,19 @@
             
             <script>
             function category(e){
-            	console.log(e);
-            	e.children[0].innerHTML
+            	var cName = e.children[0].innerHTML
+            	
+            	console.log(cName);
+            	
+            	$.ajax({
+            		url:"categoryajax.pro.jy",
+            		type:"post",
+            		data:{currentPage:1,
+            			  cName:cName},
+            		success:function(result){
+            			
+            		}
+            	})
             }
             </script>
             
