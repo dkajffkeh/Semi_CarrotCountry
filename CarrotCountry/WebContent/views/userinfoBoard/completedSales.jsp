@@ -1,5 +1,17 @@
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import= "com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
+ 				,com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%
+	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<SaleProduct> list = (ArrayList<SaleProduct>)request.getAttribute("list");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +41,8 @@
         <br>
         <!-- 메뉴선택 버튼 -->
         <div class="navWrap">
-            <div class="menu" align ="center"><a href="<%= contextPath %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매중</a></div>
-            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매완료</a></div>
+            <div class="menu" align ="center"><a href="<%= contextPath %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">판매중</a></div>
+            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">판매완료</a></div>
         </div>
         <br>
         <!-- 검색필터 드롭다운 -->
@@ -49,129 +61,103 @@
         <br>
         <!-- 내용 -->
         <div id="content">
-            <!-- form태그 진행상태값 받아와야해서 넣음 -->
-            <form action="" method="post" id="saleStatus">
-                <table id="saleStatusTable">
-                    <tr align="center">
-                        <th></th>
-                        <th><b>상품정보</b></th>
-                        <th></th>
-                        <th><b>거래일자</b></th>
-                    </tr>
-                 
-                        
-                    <tr align="center">
-                        <th rowspan="2">1</th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/3.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>슈즈</td>
-                        <td>xxxx-xx-xx</td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
-                        </td>
-                    </tr>
-
-                    <tr align="center" valign="top">
-                        <td>xxxx원</td>
-                    </tr>
-
-                    <tr align="center">
-                        <th rowspan="2">2</th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/카메라.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>상품명ddddddddd</td>
-                        <td>xxxx-xx-xx</td>
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
-                        </td>
-                    </tr>
-                    
-                    <tr align="center" valign="top">
-                        <td >xxxx원</td>
-                    </tr>
-                    
-                    <tr align="center">
-                        <th rowspan="2">3</th>
-                        <td id="saleImage" onClick = " location.href='' " rowspan="2"><img src="../../Common/images/1.jpg" alt="" style= "width:200px; height:150px; border-radius: 20px;" ></td>
-                        <td>상품명</td>
-                        <td>xxxx-xx-xx</td>
-                        <td>
-                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePost">삭제</button>
-                        </td>
-                    </tr>
-                    <tr align="center" valign="top">
-                        <td>xxxx원</td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-
-    </div>
-
-
-<!--------------------------수정 버튼 클릭시 보여질 modal----------------------------------------->
-
-
-<div class="modal" id="updateState">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    
-        <!-- Modal Header -->
-        <div class="modal-header">
-        <h4 class="modal-title">진행상태 변경</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" align="center">
             
-            <form action="" method="post">
-             
+                <table id="saleStatusTable">
+                
+                <tr align="center" style="height:50px;">
+                    <th colspan="2"><b>상품정보</b></th>
+                    <th colspan="3"><b>등록일</b></th>
+                </tr>
+                
+                <% if(list.isEmpty()) {%>
+                <!--  조회된 리스트가 없을 경우 -->
+                 <tr>
+                    <th colspan="5">판매완료된 상품이 없습니다.</th>
+                </tr>
+                <% } else { %>
+                
+                <% for( SaleProduct s : list) { %> 
+                
+                <input type="hidden" value="<%= s.getMemNo() %>">
+                
+                    <tr align="center">
+                        <th rowspan="2"><%=list.indexOf(s)+1%></th>
+                        <td id="saleImage" onClick = " location.href='<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=<%=s.getPostNo() %>' "rowspan="2"><img src="<%=contextPath%>/<%=s.getThumbNailPath()%><%=s.getThumbNailFileName() %>" style= "width:200px; height:150px; border-radius: 20px;" ></td>
+                        <td><%= s.getPostName() %> <br><%= s.getProdPrice() %> 원</td>
+                        <td><%= s.getPostEnrollDate() %></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePost">삭제</button>
+                        </td>
+                    </tr>
+
+               
+                    
+                    
+                    
+              <!----------------------삭제버튼 클릭시 보여질 알람창---------------------------------------->
+		 <div class="modal" id="deletePost">
+		        <div class="modal-dialog">
+		        <div class="modal-content">
+		            
+		            <!-- Modal body -->
+		            <div class="modal-body" align="center">
+		                
+		               	삭제하시겠습니까?
+							 <br><br>
+		                <form action="<%= contextPath %>/completedSalesDelete.jw" method="post">
+						<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+						<input type="hidden" name="bno" value="<%= s.getPostNo() %>">
+						
+		                    <button type="submit" class="btn btn-primary">확인</button>
+		                </form>
+		
+		            </div>
+		            
+		        </div>
+		        </div>
+		    </div>
+		
+		<!------------------------------------------------------------------------------------->
+				<% } %>
+			<%} %>
+                   
+                </table>
            
-                <input id="radioC" type="radio" name="salesStatus" value="판매완료" checked> <label for="radioC">판매완료</label><br><br>
-                <input id="radioO" type="radio" name="salesStatus" value="판매중" > <label for="radioO">판매중</label><br><br>
-                <input id="radioR" type="radio" name="salesStatus" value="예약중" > <label for="radioR">예약중</label><br><br>
-                <br>
-            </form>
-
         </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">변경하기</button>
-        </div>
-          
         
-    </div>
-    </div>
-</div>
-
-<!-- ============================================================================================ -->
-
-
-
-<!----------------------삭제버튼 클릭시 보여질 modal---------------------------------------->
-
-
-<div class="modal" id="deletePost">
-    <div class="modal-dialog">
-    <div class="modal-content">
+        
+        <div class="paging-area" align="center">
+			
+	        <% if(pi.getCurrentPage() != 1){ %>			
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+	        <% } %>
+	    
+	        <% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+	        
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
+	            
+	        <% } %>
+	    
+	        <% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+	            <a href="<%=contextPath%>/completedSales.me.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+	        <% } %>
+	        
+    	</div>
     
-        <!-- Modal body -->
-        <div class="modal-body" align="center">
-           삭제하시겠습니까?
-           <br><br>
-           <button type="button" class="btn btn-primary">확인</button>
-           
-        </div>
-        
+    
+
     </div>
-    </div>
-</div>
-<!------------------------------------------------------------------------------------->
+
+
 
 	</div>
 	</div>
 	
+	
+	
 	<!-- footerbar -->
 	<%@ include file="../common/footerbar.jsp" %>
+	
 
 </body>
 </html>

@@ -5,8 +5,8 @@
  %>    
 
 <%
-	QnA qa = (QnA)request.getAttribute("qa");
-
+	QnAHY qa = (QnAHY)request.getAttribute("qa");
+    int bno = (int)request.getAttribute("bno");
 %>
 <!DOCTYPE html>
 <html>
@@ -93,9 +93,19 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td colspan="4" height="250">
+                            <td colspan="4" style="height:100px">
                              	  <%= qa.getGqContent() %>
                             </td>
+                          </tr>
+                          <tr>
+                          	<td colspan="4" width="800px" align="center" style="background-color:lightblue;">
+                             	 답변내용
+                            </td>
+                          </tr>
+                          <tr>
+                          	<td colspan="4">
+                          	<%= qa.getGqAnswer() %>
+                          	</td>
                           </tr>
                         </tbody>
                       </table>
@@ -109,7 +119,7 @@
             <% if(loginMember != null && loginMember.getMemName().equals(qa.getMemNo())){%>
                 <a href="<%= contextPath %>/buyerupdateform.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-secondary btn-sm">수정하기</a>
                 &nbsp; &nbsp;
-                <a href="<%= contextPath %>/buyerdelete.qna.jy?bno=<%= qa.getGqNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
+                <a href="<%= contextPath %>/buyerdelete.qna.jy?qno=<%=qa.getGqNo()%>&bno=<%=bno%>" class="btn btn-danger btn-sm">삭제하기</a>
             <%} %>
             </div>
 

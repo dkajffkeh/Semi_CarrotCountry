@@ -11,20 +11,23 @@ public class Product {
 	private int gpMinPeople;
 	private int gpPeople;
 	private String gpStatus;
-	private Date gpDeadline;
+	private String gpDeadline;
 
 	private Date postEnrollDate;
 	private String postComment;
 	private String gpRefund;
 
-	private int memNo;
-	private String categoryNo;
-	private String gpContent; 
-	private int gpPostCheck; 
+	private int memNo;			// 얘네 안써요
+	private String categoryNo;	
+	private String gpContent; 	// 얘네 안써요
+	private int gpPostCheck;	
 	
 	private String thumbnailLoadpath;
 	private String postName;
 	private int postLikes;
+	private String thumbnailPath;
+	private String thumbnailFilename;
+	
 	
 	
 	
@@ -32,10 +35,61 @@ public class Product {
 
 	
 	
-	
-	
-	
-	
+
+
+
+
+
+	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpPrice, int gpDRate, int gpMinPeople, int gpPeople, int gpDPrice,
+			String gpRefund) {
+		super();
+		this.postNo = postNo;
+		this.postEnrollDate = postEnrollDate;
+		this.gpDeadline = gpDeadline;
+		this.gpMinPeople = gpMinPeople;
+		this.gpPeople = gpPeople;
+		this.gpDPrice = gpDPrice;
+		this.gpPrice = gpPrice;
+		this.gpDRate = gpDRate;
+		this.gpRefund = gpRefund;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public Product(int postNo, String thumbnailPath, String thumbnailFilename, String thumbnailLoadpath,
+			String postName, int gpPeople, int postLikes, int gpPrice, int gpDRate, int gpDPrice) {
+		super();
+		this.postNo = postNo;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadpath = thumbnailLoadpath;
+		this.postName = postName;
+		this.gpPeople = gpPeople;
+		this.postLikes = postLikes;
+		this.gpPrice = gpPrice;
+		this.gpDRate = gpDRate;
+		this.gpDPrice = gpDPrice;
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 	public Product(String thumbnailLoadpath, String postName) {
 		super();
@@ -72,7 +126,7 @@ public class Product {
 
 
 
-	public Product(int postNo, Date postEnrollDate, Date gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
+	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpMinPeople, int gpPeople, int gpDPrice, 
 			String postComment, String gpRefund) {
 		super();
 		this.postNo = postNo;
@@ -88,7 +142,7 @@ public class Product {
 
 
 	public Product(int postNo, int gpPrice, int gpDPrice, int gpDRate, int gpMinPeople, int gpPeople, String gpStatus,
-			Date gpDeadline, Date postEnrollDate, String postComment, String gpRefund, int memNo, String categoryNo,
+			String gpDeadline, Date postEnrollDate, String postComment, String gpRefund, int memNo, String categoryNo,
 			String gpContent, int gpPostCheck, String thumbnailLoadpath, String postName, int postLikes) {
 		super();
 		this.postNo = postNo;
@@ -188,12 +242,12 @@ public class Product {
 	}
 
 
-	public Date getGpDeadline() {
+	public String getGpDeadline() {
 		return gpDeadline;
 	}
 
 
-	public void setGpDeadline(Date gpDeadline) {
+	public void setGpDeadline(String gpDeadline) {
 		this.gpDeadline = gpDeadline;
 	}
 
@@ -408,6 +462,68 @@ public class Product {
 	public void setGpPostCheck(int gpPostCheck) {
 		this.gpPostCheck = gpPostCheck;
 	}
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+	public String getThumbnailPath() {
+		return thumbnailPath;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setThumbnailPath(String thumbnailPath) {
+		this.thumbnailPath = thumbnailPath;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public String getThumbnailFilename() {
+		return thumbnailFilename;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setThumbnailFilename(String thumbnailFilename) {
+		this.thumbnailFilename = thumbnailFilename;
+	}
+
+
 
 
 

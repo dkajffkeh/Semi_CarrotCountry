@@ -18,7 +18,11 @@
     </style>
 </head>
 <body>
+
 <%@ include file="../common/commonNavbar.jsp"%>
+
+		<!--  mypageMenubar -->
+	
 <div class="outer">
 
 
@@ -30,10 +34,14 @@
 	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
 	    <ul>
 	        <li>
-	            <label for="title">
+
+	           	<div style="width:400px;">
+	           	<label for="title">
 	               	 제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            </label>
-	            <input type="text"  name="title" id="title">
+	           	<input type="text" class="form-control" name="title" id="title" maxlength="20" required>
+	           	</div>
+	            
 	        </li>
 	    </ul>
 	    <ul>
@@ -50,9 +58,40 @@
 	        <li>
 	            <label for="content">내용</label>
 	            <br>
-	            <textarea name="content" id="content" cols="60" rows="10"  name="" style="resize: none"></textarea>
+	            <textarea name="content" class="form-control" id="content" cols="60" rows="10" style="resize: none" required></textarea>
 	        </li>
 	    </ul>
+	    
+	    
+	    
+	    <div id="replyArea">
+        	<table border="1" align="center">
+        		<thead>
+        			<tr>
+        				<th>댓글작성</th>
+        				<% if(loginMember == null){ // 로그인 전 %>
+	        				<td>
+	        					<textarea cols="50" rows="2" style="resize:none" readonly>로그인후 이용가능한 서비스입니다.</textarea>
+	        				</td>
+	        				<td><button disabled>댓글등록</button></td>
+        				<%}else{ // 로그인 후 %>
+	        				<td>
+	        					<input type="hidden" value="<%= loginMember.getMemNo() %>" id="userNo">
+	        					<textarea cols="50" rows="2" style="resize:none" id="replyContent"></textarea>
+	        				</td>
+	        				<td><button onclick="addReply();">댓글등록</button></td>
+        				<%} %>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			
+        		</tbody>
+        	</table>
+        </div>
+	    
+	    
+	    
+	    
 	    
         <div align="center">
           <input type="submit" value="작성하기" class="btn btn-warning btn-sm">&nbsp;&nbsp;

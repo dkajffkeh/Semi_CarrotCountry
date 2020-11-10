@@ -6,10 +6,17 @@ public class Option {
 	private int postNo;
 	private String optionName;
 	
-	
 	public Option() {}
 	
 	
+
+
+	
+
+
+
+
+
 
 
 	public Option(int optionNo, String optionName) {
@@ -18,7 +25,7 @@ public class Option {
 		this.optionName = optionName;
 	}
 
-
+	
 
 
 	public Option(int optionNo, int postNo, String optionName) {
@@ -57,6 +64,18 @@ public class Option {
 	public void setOptionName(String optionName) {
 		this.optionName = optionName;
 	}
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
 
 
 	@Override

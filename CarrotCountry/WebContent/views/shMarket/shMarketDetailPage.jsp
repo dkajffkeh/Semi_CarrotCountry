@@ -31,6 +31,9 @@ Location l = (Location)request.getAttribute("l");
     box-shadow: 3px 3px 0.5px 0.5px rgb(255, 189, 35);
     background-color: whitesmoke;
 }
+div,p{
+font-family: 'Jua';
+}
 i{
 cursor:pointer;
 }
@@ -156,10 +159,7 @@ cursor:pointer;
                 </li>
                 <li class="nav-item" style="background-color:lightskyblue;">
                   <a class="nav-link" style="cursor:pointer" onclick="statusUpdate();">판매완료</a>
-                </li>
-                <li class="nav-item" style="background-color: lightgray; ">
-                    <a class="nav-link" href="#">끌어올리기</a>
-                  </li>        
+                </li>        
               </ul>
               <% } %>
             </div>
@@ -201,11 +201,11 @@ cursor:pointer;
 				<div class="carousel-inner">
 				
 					<div class="carousel-item active">
-						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
+						<img class="d-block w-100" src="<%=contextPath%>/<%=pList.get(0).getPhotoPath() + pList.get(0).getPhotoFileName()%>" >
 					</div>
 					<% for(int i = 1 ; i<pList.size() ; i++ ){ %>
 					<div class="carousel-item">
-						<img class="d-block w-100" style="object-fit: contain" src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
+						<img class="d-block w-100"  src="<%=contextPath%>/<%=pList.get(i).getPhotoPath() + pList.get(i).getPhotoFileName()%>">
 					</div>
 					<% } %>
 				</div>
@@ -387,16 +387,44 @@ cursor:pointer;
           </div>
         </div>
       </div>
- 
- 
- 
+      
+      <!-- 댓글 신고모달 -->
+      
+      <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+          <div class="modal-content">          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">댓글신고</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+              <label for="">신고유형:</label>
+              <select name="Comment_report_type" style="border:1px solid black; border-radius: 3px;">
+                  <% for(int i = 0 ; i<rList.size(); i++){ %>
+                  <option value="<%=rList.get(i).getReportReasonNo()%>"><%=rList.get(i).getReportReason()%></option>
+                  <% } %>
+              </select>
+              <br><br>
+              <label for="">신고 사유</label>
+              <br><textarea name="" id="reportContent1" cols="61" rows="10" style="resize: none; border:1px solid black; border-radius: 3px;"></textarea>
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="commentReportBtn" data-dismiss="modal">신고하기</button>
+            </div>     
+          </div>
+        </div>
+      </div>
  
 <script>
 //댓글 작성 ajax
          $(function(){
            	 
         	 CommentListUpdate();      	 
-
          }) 
          
          function CommentListUpdate(){
@@ -449,6 +477,7 @@ cursor:pointer;
 		         <% } else if (loginMember!=null) { %>					
 		         if(<%=pb.getMemNickname().equals(loginMember.getMemNickname())%>||list[i].secretCheck=="N" || list[i].userNickName=="<%=loginMember.getMemNickname()%>"){
 						
+		        	 if(list[i].memNo==<%=loginMember.getMemNo()%>){
 		        	 	str += 	 `<div class="comment_display">
 			             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
 			             <div class="comment_content">
@@ -457,16 +486,45 @@ cursor:pointer;
 			                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
 			                 <div class="comment_control_button">
 			                     <div class="left_date">\${list[i].enrollDate}</div>
-			                     <div class="right_icons">   
-			                     <%if(pb.getMemNickname().equals(loginMember.getMemNickname())){%>
-			                         <i class="fas fa-pen" title="댓글 수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>   
-			                         <i class="fas fa-trash" title="댓글 삭제" onclick=deleteFunc(\${list[i].commentNo})></i>  
-			                     <% }%>
-			                         <i class="fas fa-exclamation" title="댓글 신고"></i>
+			                     <div class="right_icons">
+			                     <i class="fas fa-pen" title="댓글수정" onclick=modifyComment(this,\${list[i].commentNo},\${list[i].memNo})></i>
+			                     <i class="fas fa-trash" title="댓글삭제" onclick=deleteFunc(\${list[i].commentNo})></i>    			                     
 			                     </div>
 			                 </div>
 			             </div>   
 			         </div>`
+		        	 } else if(<%=pb.getMemNo()==loginMember.getMemNo()%>) {
+				        	 	str += 	 `<div class="comment_display">
+					             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+					             <div class="comment_content">
+					                 <p class="comment_user_info">\${list[i].userNickName}</p>
+					                 <div class="comment_textarea">\${list[i].Content}</div>
+					                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+					                 <div class="comment_control_button">
+					                     <div class="left_date">\${list[i].enrollDate}</div>
+					                     <div class="right_icons">		
+					                     <i class="fas fa-trash" title="댓글삭제" onclick=deleteFunc(\${list[i].commentNo})></i>
+					                     <i class="fas fa-exclamation" title="댓글신고" data-toggle="modal" data-target="#myModal2" onclick=reportScopre(this,\${list[i].commentNo})></i>
+					                     </div>
+					                 </div>
+					             </div>   
+					         </div>` 		        		 
+		        	       } else if(list[i].memNo!=<%=loginMember.getMemNo()%>){
+		        	    	   str += 	 `<div class="comment_display">
+				             		<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
+				             <div class="comment_content">
+				                 <p class="comment_user_info">\${list[i].userNickName}</p>
+				                 <div class="comment_textarea">\${list[i].Content}</div>
+				                 <!-- ↓ 코멘트 버튼  div if 문 달아야함 나중에 ↓ -->
+				                 <div class="comment_control_button">
+				                     <div class="left_date">\${list[i].enrollDate}</div>
+				                     <div class="right_icons">		
+				                     <i class="fas fa-exclamation" title="댓글신고" data-toggle="modal" data-target="#myModal2" onclick=reportScopre(this,\${list[i].commentNo})></i>
+				                     </div>
+				                 </div>
+				             </div>   
+				         </div>`
+		        	       }
 					} else if(list[i].secretCheck=="Y" || list[i].userNickName!="<%=loginMember.getMemNickname()%>") {
 						str += `<div class="comment_display">
 				            <div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
@@ -485,14 +543,15 @@ cursor:pointer;
 				            <div class="comment_condition"><i class="fas fa-lock"></i></div>
 						 </div> `		
 					}
-        <%}%>
-				}//for문 괄호
+        <%}%>	
+					}//for문 괄호
 			
 					$outer.html(str);
-				
-				
+					
+					
 					},//success
-			  })//.ajax 대활호			
+			  })//.ajax 대활호		
+			  
 		 }//function 괄호
 	  <%if(loginMember!=null){%> 
 		 function insertComment(){
@@ -515,24 +574,45 @@ cursor:pointer;
 		 }
 		 <%}%>	//댓글 수정버튼 눌렀을떄 나오는 textarea js 
 		 function modifyComment(e,num,userNum){
-	
+				
+			 let userText = e.parentNode.parentNode.parentNode.childNodes[3].innerHTML
 			 commentNoScope = num;
 			 userNoScope = userNum;
 			 let commentContent = e.parentNode.parentNode.parentNode.parentNode;
 			 
              commentContent.innerHTML=`<div class="comment_icon"><i class="fas fa-user" style="font-size: 2rem;"></i></div>
                                          <div class="comment_content">  
-                                         <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;"></textarea>
+                                         <textarea name="UserModify" id="UserModify" cols="75" rows="5" style="resize: none;">\${userText}</textarea>
                                          </div>
                                          <button class="btn btn-warning" style="height:5%; font-weight: bold; margin-top:90px; margin-left: 10px;" onclick=commentUpdate(this);>수정하기</button>`        		 
-		 }	 
+		 }
+		 
+		 function commentUpdate(from){
+		 	
+			$.ajax({
+				url:"commentModifier.sh.hy",
+				type:"post",
+				data:{
+					userNo:userNoScope,
+					commentNo:commentNoScope,
+					userContent:$("#UserModify").val(),
+					
+				},
+				success:function(){
+					CommentListUpdate();
+				},
+				error:function(){
+					
+				}
+				
+			})
+			 
+		 }
 		 //댓글 삭제js
 		 function deleteFunc(deleteNo){
 			 
 			 if(confirm("삭제하시겠습니까?")){
-				 
-				 console.log(deleteNo);
-				 
+		 
 				 $.ajax({
 					 url:"deleteComment.sh.hy",
 					 type:"post",
@@ -550,8 +630,7 @@ cursor:pointer;
         	 if(confirm("게시글을 삭제하시겠습니까?")){
         		 location.href="<%=contextPath%>/shMarketDeleteForm.sh?bno=<%=pb.getPostNo()%>"
         	 }      	 
-         } 
-         
+         }      
          function statusUpdate(){
         	 
         	 if(confirm("판매완료시 게시글은 게시판에서 조회하실수 없습니다.")){
@@ -584,7 +663,7 @@ cursor:pointer;
         		<% }%> 		 
         	 })	 
          })
-         //신고기능 AJAX
+         //게시글 신고기능 AJAX
          $(function(){
         	 
         	 $("#boardReportBtn").click(function(){
@@ -611,7 +690,43 @@ cursor:pointer;
         	 })
  
          })
-        </script>  
+         //신고기능 번호 받아올 전역변수
+         function reportScopre(reportEvent,reportNum){
+        	 reportNumScope = reportNum;
+        	 rePortScope = reportEvent;   	
+ 
+         }
+         //댓글 신고기능 ajax
+          $(function(){
+        	 
+        	 $("#commentReportBtn").click(function(){
+        		 <%if(loginMember!=null){%>
+        		 //ajax 구간
+        		 
+        		 $.ajax({
+        			 url:"shMarketCommentReport.sh.hy",
+        			 type:"post",
+        			 data:{ 
+        				 memNo:"<%=loginMember.getMemNo()%>",
+        				 rReason:$("select[name=Comment_report_type]").val(),
+        				 postNo:"<%=pb.getPostNo()%>",
+        				 rContent:$("#reportContent1").val(),
+        			 },
+        			 success:function(result){
+    			  		 alert(result);
+    			  	 },
+    			  	 error:function(){
+    			  		 console.log("실패");
+    			  	 }
+        		 })//ajax 괄호
+	 
+        		 <%} else {%>
+        		 alert("신고는 회원만 가능합니다.")
+        		 <%}%>
+        	 })
+ 
+         })
+	 </script>  
   
       <%@ include file="../common/footerbar.jsp"%>   
          

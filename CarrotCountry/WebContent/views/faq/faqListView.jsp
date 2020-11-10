@@ -4,6 +4,8 @@
 <%
 	ArrayList<Faq> list = (ArrayList<Faq>)request.getAttribute("list");
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	String loginFail = (String)request.getAttribute("loginFail");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -12,11 +14,20 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="resources/css/faq/faqListView.css">
+<style>
+#log>table{
+	margin:auto;
+}
+
+
+</style>
 </head>
 <body>
 
 	<!-- 상단바 -->
 	<%@ include file="../common/commonNavbar.jsp"%>
+	
+	
 	
 			<!-- 성공적으로 삭제되었습니다 alert -->
 	<% if(alertMsg != null){ %>
@@ -31,35 +42,30 @@
 
     <div class="CS_content">
         <div class="content_1">
-            <table class="table table-bordered center list-area"  align="center">
-
+        	<center>
+        	<table class="table table-bordered center list-area"  >
                 <tbody>
                     <tr>
                         <td>운영정책</td>
                         <td>계정/인증</td>
                         <td>중고구매/판매</td>
                     </tr>
-                    <tr>
-                        <td>거래품목</td>
-                        <td>신고관련</td>
-                        <td>공동구매/판매</td>
-                    </tr>
-                    <tr>
-                        <td>이용 제재</td>
-                        <td>블랙리스트관련</td>
-                        <td >공구문의</td>
-                    </tr>
                 </tbody>
             </table>
+        	</center>
+
+            
         </div>
        <div class="CS_content_2">
         <center><b>사용자들이 자주 묻는 질문을 확인해보세요!</b></center>
         <br>
        </div>
-	        <div align="right" style="width:700px;">
+       <%if(loginMember != null && loginMember.getManagerCheck().equals("Y")){ %>
+	        <div align="right" style="width:800px;">
 	            <a href="<%= contextPath %>/enrollForm.fa.jm" class="btn btn-secondary btn-sm">글작성</a>
 	            <br><br>
 	        </div>
+	   <%} %>     
        <div class="content_3">
 	        <ul class="list-group" id="myList">
 	           <% if(list.isEmpty()){ %>
@@ -80,7 +86,12 @@
         <div class="container">
             <div class="jumbotron" align="center">
             <h6>안녕하세요</h1>      
-            <a href="<%=contextPath%>">1:1문의<a>
+            <%if(loginMember == null){ %>
+            	  <a data-toggle="modal" data-target="#myModal">1:1문의</a>
+            <%}else{ %>
+            	<a href="<%=contextPath%>/enrollForm.on.jm">1:1문의<a>
+            <%} %>
+            
             </div>
         </div>
        </div>
@@ -89,7 +100,75 @@
         <br>
         <center><a href="">개인정보이용방침</a></center>
         <br><br>
+        <!-- The Modal -->
+		  <div class="modal" id="myModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">로그인해야 사용가능한 서비스입니다.</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        
+		        
+		        
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		        
+		        
+		        
+		        <form action="<%= contextPath %>/login.me.ng" method="post" id="log">
+		        <table>
+                <tr>
+                	<td>아이디 </td>
+                    <td colspan="2"><input type="text" class="border border-warning" name="userId" id="userId" placeholder="" required></td>
+                </tr>
+                <tr>
+                	<td>비밀번호 </td>
+                    <td colspan="2"><input type="password" class="border border-warning" name="userPwd" id="userPwd" placeholder="" required></td>
+                </tr>
+                </table>
+                <tr>
+                    <td colspan="2">
+                        <!-- 로그인 오류시 출력문구 입력 -->
+                    	<% if(loginFail != null){ %>
+                    		<label id="p"><%= loginFail %><label>
+                    	<% } %>
+                    </td>
+                </tr>
+                
+                <div align="right">
+                	<input type="submit" id="loginSubmit" class="btn btn-warning" value="로그인">
+                </div>
+                    
+                    
+                
+	            </form>
+		        </div>
+		        
+		        
+		        
+		      </div>
+		    </div>
+		  </div>
        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
        <script>
 	   	$(function(){
@@ -102,8 +181,12 @@
 				
 			});
 		});
+	   	<!--------------------------------------------->
+	   	$(document).ready(function(){
+	   	  $('[data-toggle="popover"]').popover();   
+	   	});
        
-       
+	   	<!--------------------------------------------->
        
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
@@ -113,6 +196,8 @@
             });
           });
         });
+        
+        <!---->
         </script>
 
     </div>

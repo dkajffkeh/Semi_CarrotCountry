@@ -83,6 +83,32 @@ public class Member {
 		this.memEmail = memEmail;
 	}
 	
+	
+	
+	public Member(int memNo, int localNo, String memUserId, String memName, String memNickname, String memBirthday,
+			String memGender, String memPhone, String memEmail, Date memEnrollDate, String bListCheck,
+			String leaveCheck, String managerCheck, String profilePath, String profileModifyname,
+			String profileOrignname, String profileLoadname) {
+		super();
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.memUserId = memUserId;
+		this.memName = memName;
+		this.memNickname = memNickname;
+		this.memBirthday = memBirthday;
+		this.memGender = memGender;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.memEnrollDate = memEnrollDate;
+		this.bListCheck = bListCheck;
+		this.leaveCheck = leaveCheck;
+		this.managerCheck = managerCheck;
+		this.profilePath = profilePath;
+		this.profileModifyname = profileModifyname;
+		this.profileOrignname = profileOrignname;
+		this.profileLoadname = profileLoadname;
+	}
+
 	// setter/getter 메소드
 	public int getMemNo() {
 		return memNo;

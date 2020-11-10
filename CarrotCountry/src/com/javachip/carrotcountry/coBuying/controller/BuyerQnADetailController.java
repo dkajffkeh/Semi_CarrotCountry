@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.coBuying.model.service.QnAService;
+import com.javachip.carrotcountry.coBuying.model.service.QnAServiceHY;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
+import com.javachip.carrotcountry.coBuying.model.vo.QnAHY;
 
 /**
  * Servlet implementation class BuyerQnADetailController
@@ -30,16 +32,16 @@ public class BuyerQnADetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		
-		int result = new QnAService().increaseQnACount(bno);
+		int result = new QnAService().increaseQnACount(qno);
 		
 		if(result > 0) { // 유효한 게시글
 			
-			QnA qa = new QnAService().selectQnADetail(bno);
+			QnAHY qa = new QnAServiceHY().qnaSelector(qno);
 			
 			request.setAttribute("qa", qa);
-			
+			request.setAttribute("bno", bno);
 			request.getRequestDispatcher("views/coBuying/buyerQnADetail.jsp").forward(request, response);
 			
 		}else { // 유효 X => 에러문구

@@ -12,9 +12,8 @@
 		     , MEM_PHONE=?
 		     , LOCAL_NO=?
 		     , MEM_EMAIL=?
-		 WHERE MEM_USERID=?
+		WHERE MEM_USERID=?
 	</entry>
-	
 	<entry key="selectMember">
 		SELECT
 		       MEM_NO
@@ -74,5 +73,190 @@
 		 FROM LOCATION
 		WHERE LOCAL_NO=?
 	</entry>
+	
+	<entry key="selectCobuyingPostList">
+	 SELECT *
+	  FROM (
+	        SELECT 
+	                ROWNUM RNUM
+	               , A.*
+	         FROM (
+	                SELECT 
+	                      POST_NO
+	                    , POST_NAME
+	                    , POST_ENROLL_DATE
+	                    , POST_VIEWS
+	                 FROM GROUP_PURCHASE G    
+	                 JOIN POST USING(POST_NO)
+	                 WHERE BLIND_CHECK = 'N'
+	                  AND POST_TYPE = 2
+	                  AND MEM_NO =?
+	                 ORDER
+	                      BY POST_NO DESC
+	               ) A
+	       )
+	 WHERE RNUM BETWEEN ? AND ?	
+	</entry>
+	
+	<entry key="selectCobuyingListCount">
+		SELECT
+		       COUNT(*) "LISTCOUNT"
+		  FROM GROUP_PURCHASE
+	</entry>
+	<entry key="selectWihsiList">
+	             SELECT *
+				  FROM (
+				        SELECT 
+				                ROWNUM RNUM
+				               , A.*
+				         FROM (
+				                SELECT
+				                       POST_NO
+				                     , POST_LIKES
+				                     , POST_NAME
+				                     , PROD_PRICE
+				                     , BLIND_CHECK
+				                     , THUMBNAIL_PATH
+				                     , THUMBNAIL_FILENAME
+				                     , THUMBNAIL_LOADPATH
+				                  FROM LIKE_POST L
+				                  JOIN POST P USING (POST_NO)
+				                 WHERE BLIND_CHECK = 'N'
+				                   AND L.MEM_NO=?
+				               ) A
+				       )
+				WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteWishList">
+		DELETE FROM LIKE_POST
+   		 WHERE POST_NO IN
+	</entry>
+	
+	<entry key="deletePostBoardLike">
+	  UPDATE
+		      POST
+		SET 
+		      POST_LIKES=POST_LIKES-1
+		WHERE 
+		      POST_NO IN
+	</entry>
+	<entry key="selectMyPagePhoto">
+			SELECT 
+			       PHOTO_NO
+			     , POST_NO
+			     , PHOTO_PATH
+			     , PHOTO_FILENAME
+			     , PHOTO_LOADPATH
+			  FROM PHOTO P
+			  JOIN POST USING (POST_NO)
+			 WHERE MEM_NO =? 
+			 ORDER
+			    BY POST_NO DESC
+	</entry>
+	
+	
+	
+	
+	<entry key="selectCompletedSales">
+	SELECT *
+	  FROM (
+	        SELECT 
+	                ROWNUM RNUM
+	               , A.*
+	         FROM (
+	                 SELECT
+	                       POST_NO
+	                     , MEM_NO
+	                     , POST_NAME
+	                     , PROD_PRICE
+	                     , PROD_STATUS
+	                     , POST_ENROLL_DATE
+	                     , THUMBNAIL_PATH
+	                     , THUMBNAIL_FILENAME
+	                  FROM POST P
+	                 WHERE MEM_NO=?
+	                   AND P.BLIND_CHECK ='N'
+	                   AND PROD_STATUS='N'
+	               ) A
+	       )
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteCompletedSales">
+		  UPDATE
+		        POST
+		    SET BLIND_CHECK = 'Y'
+		  WHERE POST_NO=?
+	</entry>
+	
+	<entry key="selectOnSales">
+	            SELECT *
+				  FROM (
+				        SELECT 
+				                ROWNUM RNUM
+				               , A.*
+				         FROM (
+				                  SELECT
+				                       POST_NO
+				                     , MEM_NO
+				                     , POST_NAME
+				                     , PROD_PRICE
+				                     , PROD_STATUS
+				                     , POST_ENROLL_DATE
+				                     , THUMBNAIL_PATH
+				                     , THUMBNAIL_FILENAME
+				                  FROM POST P
+				                 WHERE MEM_NO=?
+				                   AND P.BLIND_CHECK ='N'
+				                   AND PROD_STATUS='Y'
+				               ) A
+				       )
+				WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteOnSales">
+	 	 UPDATE
+		        POST
+		    SET BLIND_CHECK = 'Y'
+		  WHERE POST_NO=?
+	</entry>
+	
+	<entry key="updateOnSales">
+		 UPDATE
+		        POST
+		    SET PROD_STATUS = 'N'
+		  WHERE POST_NO=?
+		    AND BLIND_CHECK = 'N'
+	</entry>
+	
+	<entry key="insertAddress">
+		INSERT
+		  INTO SHIPPING_LOCATION
+		  (
+		    SHIPPING_NO
+		  , MEM_NO
+		  , SHIPPING_ADDRESS
+		  , MEM_USERNAME
+		  , MEM_PHONE
+		  , SHIPPING_DEFAULT
+		  )
+		  VALUES
+		  (
+		      SEQ_SNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		  )
+	</entry>
+	<entry key="deleteAddress">
+	 	 DELETE FROM SHIPPING_LOCATION
+		  WHERE SHIPPING_NO IN
+	</entry>
+	
+	
+
 
 </properties>

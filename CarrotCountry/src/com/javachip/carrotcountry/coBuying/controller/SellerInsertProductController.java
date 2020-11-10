@@ -1,11 +1,26 @@
 package com.javachip.carrotcountry.coBuying.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.javachip.carrotcountry.coBuying.model.service.ProductService;
+import com.javachip.carrotcountry.coBuying.model.vo.Account;
+import com.javachip.carrotcountry.coBuying.model.vo.Option;
+import com.javachip.carrotcountry.coBuying.model.vo.Product;
+import com.javachip.carrotcountry.common.MyFileRenamePolicy;
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
+import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class SellerInsertProductController
@@ -22,77 +37,135 @@ public class SellerInsertProductController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
+		
 		request.setCharacterEncoding("utf-8");
 	
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
-			// 1_1. 용량 제한 (int maxSize)
 			int maxSize = 10 * 1024 * 1024;
 			
-			// 1_2. 저장할 폴더의 물리적인 경로 (String savePath)
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/thumbnail_upfiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/images/coBuying/");
 			
-			// 2. 전달된 파일들 수정명 작업 및 업로드
 			MultipartRequest multiRequest =  new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			// 3. DB에 기록할 값들 뽑기 (요청시 전달되는 값들)
-			// 3_1. Board
-			String boardWriter = multiRequest.getParameter("userNo");
-			String boardTitle = multiRequest.getParameter("title");
-			String boardContent = multiRequest.getParameter("content");
 			
-			Board b = new Board();
-			b.setBoardWriter(boardWriter);
-			b.setBoardTitle(boardTitle);
-			b.setBoardContent(boardContent);
+			// 1. post
+			String localSi = multiRequest.getParameter("si");
+			String localGu = multiRequest.getParameter("gu");
+			String localDong = multiRequest.getParameter("dong");
 			
-			// 3_2. Attachment
-			ArrayList<Attachment> list = new ArrayList<>();
+			Location lo = new Location();
+			lo.setLocal_si(localSi);
+			lo.setLocal_gu(localGu);
+			lo.setLocal_dong(localDong);
 			
-			for(int i=1; i<=4; i++) {
+			
+			
+			String category = multiRequest.getParameter("category");
+			int memNo = Integer.parseInt(multiRequest.getParameter("memNo"));
+			String memNick = multiRequest.getParameter("memNick");
+			String postName = multiRequest.getParameter("postName");
+			String postComment = multiRequest.getParameter("content");
+			String thumbnailFileName = multiRequest.getFilesystemName("file1");
+			String dealType ="C";
+			String site ="서울특별시";
+			int prodPrice = 1;
+			
+			PostBoard pb = new PostBoard();
+			pb.setCategoryNo(category);
+			pb.setMemNo(memNo);
+			pb.setMemNickname(memNick);
+			pb.setPostName(postName);
+			pb.setPostContent(postComment);
+			pb.setThumbnailFilename(thumbnailFileName);
+			pb.setThumbnailPath("resources/images/coBuying/");
+			pb.setThumbnailLoadPath("resources/images/coBuying/");
+			
+			
+			
+			
+			// 2. group_purchase
+			String gpDeadline = multiRequest.getParameter("gpDeadline");
+			int gpMinPeople = Integer.parseInt(multiRequest.getParameter("gpMinPeople"));
+			int gpPrice = Integer.parseInt(multiRequest.getParameter("gpPrice"));
+			int gpDRate = Integer.parseInt(multiRequest.getParameter("gpDRate"));
+			int gpDPrice = Integer.parseInt(multiRequest.getParameter("gpDPrice"));
+			String gpRefund = multiRequest.getParameter("refund");
+			
+			Product pd = new Product();
+			pd.setGpDeadline(gpDeadline);
+			pd.setGpMinPeople(gpMinPeople);
+			pd.setGpPrice(gpPrice);
+			pd.setGpDRate(gpDRate);
+			pd.setGpDPrice(gpDPrice);
+			pd.setGpRefund(gpRefund);
+			
+			
+			/*
+			// 3. location
+			String localSi = multiRequest.getParameter("si");
+			String localGu = multiRequest.getParameter("gu");
+			String localDong = multiRequest.getParameter("dong");
+			
+			Location lo = new Location();
+			lo.setLocal_si(localSi);
+			lo.setLocal_gu(localGu);
+			lo.setLocal_dong(localDong);
+			*/
+			
+			// 4. option
+			String[] option = multiRequest.getParameterValues("option"); 
+
+			
+			// 5. account
+			String[] account = multiRequest.getParameterValues("account"); 
+
+
+			// 6. photo
+			ArrayList<Photo> pList = new ArrayList<>();
+			
+			for(int i=2; i<=6; i++) {
 				
 				String key = "file" + i ;
 				
 				if(multiRequest.getOriginalFileName(key) != null) {
-					// Attachment객체 생성 <= 원본명, 수정명, 폴더경로, 파일레벨(1/2) 담아서
-					// list 추가
-					Attachment at = new Attachment();
-					at.setOriginName(multiRequest.getOriginalFileName(key));
-					at.setChangeName(multiRequest.getFilesystemName(key));
-					at.setFilePath("resources/thumbnail_upfiles/");
+					Photo pt = new Photo();
+					pt.setPhotoPath("resources/images/coBuying/");
+					pt.setPhotoFileName(multiRequest.getFilesystemName(key));
+					pt.setPhotoLoadPath("resources/images/coBuying/");
 					
-					if(i == 1) {					
-						at.setFileLevel(1);
-					}else {
-						at.setFileLevel(2);
-					}
-					
-					list.add(at);
+					pList.add(pt);
 					
 				}
 				
 			}
 			
 			
-			int result = new BoardService().insertThumbnailBoard(b, list);
+			int result = new ProductService().insertProduct(pb, pd, lo, option, account, pList);
 			
-			if(result > 0) { // 성공 => 리스트페이지(list.th url로 재요청) 요청
+			
+			
+			if(result > 0) { // 성공 
 				
-				request.getSession().setAttribute("alertMsg", "사진게시판 등록 성공!");
-				response.sendRedirect(request.getContextPath() + "/list.th");
+				request.getSession().setAttribute("alertMsg", "공동구매가  성공적으로 등록되었습니다");
+				response.sendRedirect(request.getContextPath() + "/mainpage.co.jy?currentPage=1");
 			
 			}else { // 실패 => 업로드 된 파일 찾아 삭제 => 에러문구 담은 후 에러페이지로 포워딩
 				
-				for(Attachment at : list) {
-					new File(savePath + at.getChangeName()).delete();
+				for(Photo pt : pList) {
+					new File(savePath + pt.getPhotoFileName()).delete();
 				}
 				
-				request.setAttribute("errorMsg", "사진게시판 등록 실패");
+				request.setAttribute("errorMsg", "공동구매 등록에 실패하였습니다");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				
 			}
@@ -100,7 +173,7 @@ public class SellerInsertProductController extends HttpServlet {
 			
 		}
 		
-		*/
+		
 	}
 	
 

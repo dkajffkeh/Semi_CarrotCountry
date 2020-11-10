@@ -7,16 +7,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.javachip.carrotcountry.coBuying.model.vo.Account;
 import com.javachip.carrotcountry.coBuying.model.vo.Option;
 import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
+import com.javachip.carrotcountry.coBuying.model.vo.PostBoardJY;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -54,6 +57,7 @@ private Properties prop = new Properties();
 					close(pstmt);
 				}
 				
+				System.out.println(result);
 				return result;
 				}
 	
@@ -94,11 +98,51 @@ private Properties prop = new Properties();
 	
 	//
 	
+
+	
+	
+	public PostBoard selectPostBoard(Connection conn, int bno) {
+		// select문 => 한 행 
+		PostBoard pb = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectPostBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pb = new PostBoard(rs.getInt("post_no"),
+							  rs.getString("post_name"),
+							  rs.getString("post_comment"),
+							  rs.getString("thumbnail_path"),
+							  rs.getString("thumbnail_filename"),
+							  rs.getString("thumbnail_loadpath"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return pb;
+		
+	}
+	
 	
 	
 	public Product selectProduct(Connection conn, int bno) {
 		// select문 => 한 행 
-		Product p = null;
+		Product pd = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -113,13 +157,14 @@ private Properties prop = new Properties();
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				p = new Product(rs.getInt("post_no"),
+				pd = new Product(rs.getInt("post_no"),
 							  rs.getDate("POST_ENROLL_DATE"),
-							  rs.getDate("gp_deadline"),
+							  rs.getString("gp_deadline"),
+							  rs.getInt("gp_price"),
+							  rs.getInt("GP_DRATE"),
 							  rs.getInt("gp_minpeople"),
 							  rs.getInt("gp_people"),
 							  rs.getInt("gp_dprice"),
-							  rs.getString("post_comment"),
 							  rs.getString("gp_refund"));
 			}
 			
@@ -131,7 +176,7 @@ private Properties prop = new Properties();
 			
 		}
 		
-		return p;
+		return pd;
 		
 	}
 	
@@ -191,7 +236,7 @@ private Properties prop = new Properties();
 			
 			while(rs.next()) {
 				Account a = new Account();
-				a.setAccount(rs.getString("account"));
+				a.setAccount(rs.getString("bank"));
 				aList.add(a);
 			}
 		} catch (SQLException e) {
@@ -205,44 +250,6 @@ private Properties prop = new Properties();
 		
 		
 	}
-	
-	
-	
-	public PostBoard selectThumbnail(Connection conn, int bno) {
-		// select문 => 한 행 
-		PostBoard pb = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = prop.getProperty("selectThumbnail");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, bno);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				pb = new PostBoard(rs.getInt("post_no"),
-							  rs.getString("thumbnail_path"),
-							  rs.getString("thumbnail_filename"),
-							  rs.getString("thumbnail_loadpath"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-			
-		}
-		
-		return pb;
-		
-	}
-	
 	
 	
 	public ArrayList<Photo> selectPhoto(Connection conn, int bno){
@@ -305,6 +312,8 @@ private Properties prop = new Properties();
 			
 			while(rs.next()) {
 				pList.add(new Product(rs.getInt("post_no"),
+										rs.getString("thumbnail_path"),
+										rs.getString("thumbnail_filename"),
 										rs.getString("thumbnail_loadpath"),
 										rs.getString("post_name"),
 										rs.getInt("gp_people"),
@@ -327,12 +336,467 @@ private Properties prop = new Properties();
 	
 	
 	
+
+	// insert
 	
+
+	// 1. post
+	public int insertProductPost(Connection conn, PostBoard pb, Location lo) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProductPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pb.getCategoryNo());
+			pstmt.setInt(2, pb.getMemNo());
+			pstmt.setString(3, lo.getLocal_si());
+			pstmt.setString(4, lo.getLocal_gu());
+			pstmt.setString(5, lo.getLocal_dong());
+			pstmt.setString(6, pb.getMemNickname());
+			pstmt.setString(7, pb.getPostName());
+			pstmt.setString(8, pb.getPostContent());
+			pstmt.setString(9, pb.getCategoryNo());
+			pstmt.setString(10, pb.getThumbnailPath());
+			pstmt.setString(11, pb.getThumbnailFilename());
+			pstmt.setString(12, pb.getThumbnailLoadPath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
+
+	// 2. group_purchase
+	public int insertProductGroupPurchase(Connection conn, Product pd) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertProductGroupPurchase");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pd.getGpDeadline());
+			pstmt.setInt(2, pd.getGpMinPeople());
+			pstmt.setInt(3, pd.getGpPrice());
+			pstmt.setInt(4, pd.getGpDRate());
+			pstmt.setInt(5, pd.getGpDPrice());
+			pstmt.setString(6, pd.getGpRefund());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
+	/*
+		// 3. location
+		public int insertProductLocation(Connection conn, Location lo) {
+			// insert문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductLocation");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, lo.getLocal_si());
+				pstmt.setString(2, lo.getLocal_gu());
+				pstmt.setString(3, lo.getLocal_dong());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
 	
-	
-	
-	
+		*/
+		// 4. option
+		public int insertProductOption(Connection conn, String[] option) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductOption");
+			
+			try {
+				
+				for(int i=0; i<option.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, option[i]);
+				result = pstmt.executeUpdate();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
+		// 5. account
+		public int insertProductAccount(Connection conn, String[] account) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductAccount");
+			
+			try {
+				
+				for(int i=0; i<account.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, account[i]);
+				result = pstmt.executeUpdate();
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
+		
+		// 6. photo
+		public int insertProductPhoto(Connection conn, ArrayList<Photo> pList) {
+			// 여러번의 insert문 
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("insertProductPhoto");
+			
+			try {
+				
+				for(Photo pt : pList) {		
+					pstmt = conn.prepareStatement(sql);
+					
+					pstmt.setString(1, pt.getPhotoPath());
+					pstmt.setString(2, pt.getPhotoFileName());
+					pstmt.setString(3, pt.getPhotoLoadPath());
+						
+					result = pstmt.executeUpdate();
+					
+					if(result == 0) {
+						return 0;
+					}
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return 0;
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+			
+		}
+		
+		public int updateWishList(Connection conn, PostBoardJY pb) {
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("updateWishList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, pb.getPostNo());
+
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+		
+		
+		
+		public int reportCheck(Connection conn,int bno, int memNo) {
+			
+			int repCheck = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("reportPreCheck");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				pstmt.setInt(2, memNo);
+				
+			    rs = pstmt.executeQuery();
+			    if(rs.next()) {
+			    	repCheck = rs.getInt("COUNT(*)");
+			    }
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			
+			return repCheck;
+		}
+
+		
+		
+		
+		
+		
+		public int reportProduct(Connection conn, int bno) {
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("reportProduct");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, bno);
+
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public ArrayList<Product> selectMainProductList1(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort1");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList2(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort2");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList3(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort3");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList4(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort4");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+
 	
 }

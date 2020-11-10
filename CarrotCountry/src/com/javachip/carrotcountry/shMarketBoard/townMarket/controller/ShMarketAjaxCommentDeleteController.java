@@ -31,6 +31,7 @@ public class ShMarketAjaxCommentDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		int delCommentNo = Integer.parseInt(request.getParameter("delCommentNo"));
 		
 		int result = new TownMarketService().shMarketcommentDelete(delCommentNo);

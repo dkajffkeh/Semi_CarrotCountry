@@ -5,17 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <style>
 .textOrange{
 	color:orange;
 	font-weight:800;	
+	 font-family: 'Nanum Gothic', sans-serif;
 }
 .CS_content>div{
     width:100%;
     margin:auto;
-    padding:100px;
+    padding:100px; font-family: 'Nanum Gothic', sans-serif;
 }
 
 .GPForm table{margin:auto;}
@@ -57,10 +59,13 @@ select {
 
 
     <div class="CS_content">
-        <form name="form" action="<%= contextPath %>/insert.pro.jy" method="post" class="GPForm" enctype="multipart/form-data">
-        <%if(loginMember != null){ %>
-		<input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
+        <form name="form" id="insertForm" action="<%= contextPath %>/insert.pro.jy" method="post" class="GPForm" enctype="multipart/form-data">
+        
+         <%if(loginMember != null){ %>
+		<input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
+        <input type="hidden" name="memNick" value="<%=loginMember.getMemNickname()%>">
             <%} %>	<!-- 이거 나중에 지우기 어짜피 로그인된 유저임 -->
+        
             <table id="enrollTable">
 
                 <tr>
@@ -155,7 +160,7 @@ select {
                 </tr>
                 <tr>
                     <td class="textOrange">모집기간</td>
-                    <td><input type="date" name="gpDeadLine" id="gpDeadline" class="form-control"></td>
+                    <td><input type="date" name="gpDeadline" id="gpDeadline" class="form-control"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -181,7 +186,7 @@ select {
                 <tr>
                     <td class="textOrange">옵션</td>
                     <td>
-                        <input type="text" class="form-control" id="option-add">
+                        <input type="text" name="option" class="form-control" id="option-add">
                         <select name="selectArea1" id="selectArea1" style="width: 300px;"> 
                         </select>
                     </td>
@@ -208,9 +213,13 @@ select {
 
                                 // select안에 value없는 option들 추가하기 (단지 시각용)
                                 $("#selectArea1").append("<option>" + optAdd + "</option>");
+                                
+                                $("#insertForm").append(a);
                             }else{
                                 alert("아무것도 입력하지 않았습니다. 다시 입력해주세요");
                             }
+                            
+                            $("#option-add").val(" ");
                         });
 
                     });
@@ -220,68 +229,43 @@ select {
                 <tr>
                     <td class="textOrange"> <br> 주소입력</td>
                     <td> <br>
-                   	     서울특별시 &nbsp; &nbsp;
+                   	    <select id="si" name="si" class="form-control">
+		                    <option value="서울특별시">서울특별시</option>
+		                </select>
                         
-                        <select name="gu" id="gu">
+                        
+                         <select id="gu" name="gu">
+		                    <option value="송파구">송파구</option>
+		                    <option value="강서구">강서구</option>
+		                </select>
+		                        
+                        <select id="dong" name="dong">
+		                    <option value="오금동">오금동</option>
+		                    <option value="오류동">오류동</option>
+		                    <option value="상일동">상일동</option>
+		                </select>
 
-                            <option value="">구 선택</option>
-
-                            <option value="gn">강남구</option>
-
-                            <option value="gs">강서구</option>
-
-                            <option value="sp">송파구</option>
-
-                        </select>
-
-                        <select id="dong">
-                            <option value="">동 선택</option>
-                        </select>
-
-                        <script type="text/javascript">
-
-                            $(function() {
-
-                                $('#gu').change(function() {
-
-                                    var gn = ["역삼동", "개포동", "삼성동"];
-
-                                    var gs = ["가양동", "등촌동", "우장산동"];
-
-                                    var sp = ["오류동", "오금동", "잠실동"];
-
-                                    var changeItem;
-
-                                    if (this.value == "gn") {
-
-                                        changeItem = gn;
-
-                                    } else if (this.value == "gs") {
-
-                                        changeItem = gs;
-
-                                    } else if (this.value == "sp") {
-
-                                        changeItem = sp;
-                                    }
-
-                                    $('#dong').empty();
-
-                                    for (var count = 0; count < changeItem.length; count++) {
-
-                                        var option = $("<option>" + changeItem[count] + "</option>");
-
-                                        $('#dong').append(option);
-
-
-
-                                    }
-
-                                });
-
-                            });
-
-                        </script>
+                         <script>
+			            $(function(){
+			            	
+								$("#gu").click(function(){
+									let str="";
+									if($("#gu option:selected").val()=="강서구")
+									{
+										str+=   `<option value="화곡동">화곡동</option>
+					                             <option value="목동">목동</option>`;
+										
+									   $("#dong").html(str);				
+									} else {
+										str+= `<option value="오금동">오금동</option>
+						                   	   <option value="오류동">오류동</option>
+						                       <option value="상일동">상일동</option>`;
+						                       
+									   $("#dong").html(str);        
+										   }					
+								})     	
+			            })
+			            </script>
 
 
                     <td></td>
@@ -362,9 +346,13 @@ select {
 
                                 // select안에 value없는 option들 추가하기 (단지 시각용)
                                 $("#selectArea2").append("<option>" + accAdd + "</option>");
+                                
+                                $("#insertForm").append(a);
                             }else{
                                 alert("아무것도 입력하지 않았습니다. 다시 입력해주세요")
                             }
+                            
+                            $("#account-add").val(" ");
                         });
 
                     });
@@ -378,16 +366,30 @@ select {
 
                 <tr>
                     <td class="textOrange"><br> 교환 및 환불 방법</td>
-                    <td><br><textarea class="form-control" cols="5" rows="5" id="comment" name="text" style="resize: none;"></textarea></td>
+                    <td><br><textarea class="form-control" cols="5" rows="5" id="comment" name="refund" style="resize: none;"></textarea></td>
                     <td></td>
                 </tr>
             </table>
 
             <br><br><br><br>
             <div align="center">
+                <button id="backbtn" type="button" class="btn btn-secondary btn-sm">뒤로가기</button>
                 <button type="submit" class="btn btn-warning btn-sm">등록하기</button>
-                <button type="button" class="btn btn-warning btn-sm">뒤로가기</button>
+                <button type="reset" class="btn btn-danger btn-sm">초기화하기</button>
             </div>
+            
+            
+            <script type="text/javascript">
+				
+				$(document).ready(function(){
+				
+					$("#backbtn").click(function(){
+						window.history.back();
+					});
+				});
+
+			</script>
+			
 
         </form>
 

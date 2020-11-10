@@ -327,5 +327,91 @@ public class TownMarketService {
 		return l;
 	}
 
+	public int shMarketCommentModifier(int commentNo, String userContent) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketCommentModifier(conn,commentNo,userContent);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int shMarketCommentReportPrecheck(int memNo, int postNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketCommentReportPrecheck(conn,memNo,postNo);
+		
+		close(conn);
+		return result;
+	}
+
+	public int shMarketCommentReportInsert(int memNo, String rReason, int postNo, String rContent) {
+		
+		Connection conn = getConnection();
+		
+		int result = new TownMarketDao().shMarketCommentReportInsert(conn,memNo,rReason,postNo,rContent);
+		
+		if(result>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<PostBoard> townMarketAjaxBoardSelector(ShmarketPageInfo sp) {
+		
+		Connection conn = getConnection();
+		ArrayList<PostBoard> list = new TownMarketDao().townMarketAjaxBoardSelector(conn,sp);
+		
+
+		close(conn);
+		
+		
+		return list;
+	}
+
+	public ArrayList<PostBoard> TownMarketBoardAjaxCategorySelector(String cName, ShmarketPageInfo sp) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoard> list = new TownMarketDao().TownMarketBoardAjaxCategorySelector(conn,cName,sp);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<PostBoard> townMarketAjaxUserSearchMain(ShmarketPageInfo sp, String userSearch, String userGu,
+			String userDong, String userCategory) {
+		Connection conn = getConnection();
+		ArrayList<PostBoard> bList = new TownMarketDao().townMarketAjaxUserSearchMain(conn,sp,userSearch,userGu,userDong,userCategory);
+		
+		close(conn);
+		
+		return bList;
+	}
+
+	public ArrayList<PostBoard> shMarketArticleAjaxSortng(ShmarketPageInfo sp, int sortNum) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoard> pList = new TownMarketDao().townMarketAjaxSorter(conn,sp,sortNum);
+		
+		close(conn);
+		
+		return pList;
+	}
+
 	
 }

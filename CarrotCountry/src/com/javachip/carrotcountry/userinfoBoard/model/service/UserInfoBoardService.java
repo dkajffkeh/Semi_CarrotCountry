@@ -4,9 +4,14 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.dao.UserInfoBoardDao;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.CobuyingPost;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.MyPagePhoto;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.PageInfo;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.SaleProduct;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 import com.javachip.carrotcountry.userinfoBoard.model.vo.UserinfoMember;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.WishList;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -19,13 +24,13 @@ public class UserInfoBoardService {
 	 * @param m		변경할 내용들+변경요청한회원의아이디 가 담겨있는 객체
 	 * @return		갱신된 회원 객체/null
 	 */
-	public UserinfoMember updateMember(UserinfoMember m) {
+	public Member updateMember(Member m) {
 		
 		Connection conn = getConnection();
 		
 		int result = new UserInfoBoardDao().updateMember(conn, m);
 		
-		UserinfoMember updateMem = null;
+		Member updateMem = null;
 		
 		if(result >0) {
 			commit(conn);
@@ -84,15 +89,272 @@ public class UserInfoBoardService {
 	 * @return 			
 	 *
 	 */
-	public Location selectLocation(int memNo) {
+	public Location selectLocation(int locNo) {
 		Connection conn = getConnection();
-		Location lo = new UserInfoBoardDao().selectLocation(conn, memNo);
+		Location lo = new UserInfoBoardDao().selectLocation(conn, locNo);
 		close(conn);
 		return lo;
 		
 	}
 	
+	/**
+	 * 5. 공동구매 게시글 조회
+	 * @param 
+	 * @return 			
+	 *
+	 */
+		public ArrayList<CobuyingPost> selectCobuyingList(PageInfo pi, int memNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<CobuyingPost> list = new UserInfoBoardDao().selectCobuyingList(conn, pi, memNo);
+		
+		close(conn);
+		
+		return list;
 	
+		}
+		
+		public int selectListCount() {
+			
+			Connection conn = getConnection();
+			
+			int listCount = new  UserInfoBoardDao().selectListCount(conn);
+			
+			close(conn);
+			
+			return listCount;
+		}
 	
+		/**
+		 * 6_1 찜목록 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<WishList> selectWishList(PageInfo pi, int memNo){
+			Connection conn = getConnection();
+			
+			ArrayList<WishList> list = new UserInfoBoardDao().selectWishList(conn, pi, memNo);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+		
+		/**
+		 * 6_2 찜목록 사진 조회 / 판매중, 판매완료 사진조회 
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public ArrayList<MyPagePhoto> selectMyPagePhotoList(int memNo){
+			Connection conn = getConnection();
+			
+			ArrayList<MyPagePhoto> list = new UserInfoBoardDao().selectMyPagePhotoList(conn, memNo);
+			
+			close(conn);
+			
+			return list;
+		}
+		
+		/**
+		 * 6_3 찜목록 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+
+		public int deleteWishList(String[] wishLists) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteWishList(conn,wishLists);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 6_4 게시글에서 찜 수 count
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public int deletePostBoardLike(String[] wishLists) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deletePostBoardLike(conn,wishLists);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+			
+		
+		
+		/**
+		 * 7. 판매완료 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<SaleProduct> selectCompletedSales(int memNo, PageInfo pi){
+			Connection conn = getConnection();
+			
+			ArrayList<SaleProduct> list = new UserInfoBoardDao().selectCompletedSales(conn, memNo, pi);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+		
+		/**
+		 * 8. 판매완료 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int deleteCompletedSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteCompletedSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 9.  판매중 조회
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public ArrayList<SaleProduct> selectOnSales(int memNo, PageInfo pi){
+			Connection conn = getConnection();
+			
+			ArrayList<SaleProduct> list = new UserInfoBoardDao().selectOnSales(conn, memNo, pi);
+			
+			close(conn);
+			
+			return list;
+			
+		}
+		
+		/**
+		 * 10.  판매중 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int deleteOnSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 11.  판매중 변경
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int updateOnSales(int bno) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().updateOnSales(conn,bno);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 12. 배송지 추가
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		
+		public int insertAddress(ShippingLocation sl) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().insertAddress(conn, sl);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
+		
+		/**
+		 * 13. 배송지 삭제
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public int deleteAddress(String[] addressLists) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().deleteAddress(conn,addressLists);
+			
+			if(result>0){
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return result;
+		}
 
 }

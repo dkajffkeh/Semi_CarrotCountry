@@ -48,35 +48,27 @@ public class MainPageController extends HttpServlet {
 		int endPage;					// 현재 사용자가 요청한 페이지에 하단에 보여질 페이징바의 끝수
 		
 		
-		// * listCount : 현재 일반 게시판 총 갯수
 		listCount = new ProductService().selectProductListCount();
 		
-		// * currentPage : 사용자가 요청한 페이지 (즉, 현재 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대갯수 (몇 개 단위씩 보여지게 할건지)
 		pageLimit = 5;
 		
-		// * boardLimit : 한 페이지 내에 보여질 게시글 최대갯수 (몇 개 단위씩 보여지게 할건지)
 		boardLimit = 5;
 		
-		// * maxPage : 제일 마지막 페이지 수
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
 
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 	
 		endPage = startPage + pageLimit - 1;
 		
-		// 만약 maxPage가 고작 13까지밖에 안된다면? endPage를 다시 13으로 해줘야됨
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
-		// 페이징바를 만들때 필요한 정보들이 담겨있는 pageInfo 객체
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		
-		// 메인에 띄울 공동구매 상품리스트 조회
 		ArrayList<Product> pList = new ProductService().selectMainProductList(pi);
 		
 		

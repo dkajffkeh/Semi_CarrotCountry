@@ -852,5 +852,388 @@ Properties prop = new Properties();
 
 		return l;
 	}
+
+
+	public int shMarketCommentModifier(Connection conn, int commentNo, String userContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketCommentModifier");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,userContent);
+			pstmt.setInt(2, commentNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public int shMarketCommentReportPrecheck(Connection conn, int memNo, int postNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("shMarketCommentReportPrecheck");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, postNo);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int shMarketCommentReportInsert(Connection conn, int memNo, String rReason, int postNo, String rContent) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shMarketCommentReportInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, Integer.parseInt(rReason));
+			pstmt.setInt(3, postNo);
+			pstmt.setString(4, rContent);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public ArrayList<PostBoard> townMarketAjaxBoardSelector(Connection conn, ShmarketPageInfo sp) {
+		
+		ArrayList<PostBoard> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("townMarketAjaxBoardSelector");
+				
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+						
+				if(list.isEmpty()) {
+					PostBoard pb = new PostBoard(
+							                      sp.getCurrentPage()
+							                     ,sp.getListCount()
+							                     ,sp.getBoardLimit()
+							                     ,sp.getPageLimit()
+							                     ,sp.getMaxPage()
+							                     ,sp.getStartPage()
+							                     ,sp.getEndPage()
+							                     ,rs.getInt("POST_NO")		                  
+							                     ,rs.getInt("MEM_NO")
+							                     ,rs.getString("LOCATION")
+							                     ,rs.getString("POST_NAME")
+							                     ,rs.getString("CATEGORY_NAME")
+							                     ,rs.getString("THUMBNAIL_PATH")
+							                     ,rs.getString("THUMBNAIL_FILENAME")
+							                     ,rs.getString("THUMBNAIL_LOADPATH")
+							                     ,rs.getInt("POST_VIEWS")
+							                     ,rs.getInt("POST_LIKES")
+							                     ,rs.getInt("PROD_PRICE")
+							                     ,rs.getInt("LIKECOUNT"));
+					list.add(pb);
+		
+				} else {
+					
+					PostBoard pb = new PostBoard(rs.getInt("POST_NO")		                  
+						                        ,rs.getInt("MEM_NO")
+						                        ,rs.getString("LOCATION")
+						                        ,rs.getString("POST_NAME")
+						                        ,rs.getString("CATEGORY_NAME")
+						                        ,rs.getString("THUMBNAIL_PATH")
+						                        ,rs.getString("THUMBNAIL_FILENAME")
+						                        ,rs.getString("THUMBNAIL_LOADPATH")
+						                        ,rs.getInt("POST_VIEWS")
+						                        ,rs.getInt("POST_LIKES")
+						                        ,rs.getInt("PROD_PRICE")
+						                        ,rs.getInt("LIKECOUNT"));
+					list.add(pb);		
+				}
+	
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+
+	public ArrayList<PostBoard> TownMarketBoardAjaxCategorySelector(Connection conn, String cName,
+			ShmarketPageInfo sp) {
+		
+		ArrayList<PostBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("TownMarketBoardAjaxCategorySelector");
+		
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, "%"+ cName +"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+						
+				if(list.isEmpty()) {
+					PostBoard pb = new PostBoard(
+							                      sp.getCurrentPage()
+							                     ,sp.getListCount()
+							                     ,sp.getBoardLimit()
+							                     ,sp.getPageLimit()
+							                     ,sp.getMaxPage()
+							                     ,sp.getStartPage()
+							                     ,sp.getEndPage()
+							                     ,rs.getInt("POST_NO")		                  
+							                     ,rs.getInt("MEM_NO")
+							                     ,rs.getString("LOCATION")
+							                     ,rs.getString("POST_NAME")
+							                     ,rs.getString("CATEGORY_NAME")
+							                     ,rs.getString("THUMBNAIL_PATH")
+							                     ,rs.getString("THUMBNAIL_FILENAME")
+							                     ,rs.getString("THUMBNAIL_LOADPATH")
+							                     ,rs.getInt("POST_VIEWS")
+							                     ,rs.getInt("POST_LIKES")
+							                     ,rs.getInt("PROD_PRICE")
+							                     ,rs.getInt("LIKECOUNT"));
+					list.add(pb);
+		
+				} else {
+			
+					PostBoard pb = new PostBoard(rs.getInt("POST_NO")		                  
+						                        ,rs.getInt("MEM_NO")
+						                        ,rs.getString("LOCATION")
+						                        ,rs.getString("POST_NAME")
+						                        ,rs.getString("CATEGORY_NAME")
+						                        ,rs.getString("THUMBNAIL_PATH")
+						                        ,rs.getString("THUMBNAIL_FILENAME")
+						                        ,rs.getString("THUMBNAIL_LOADPATH")
+						                        ,rs.getInt("POST_VIEWS")
+						                        ,rs.getInt("POST_LIKES")
+						                        ,rs.getInt("PROD_PRICE")
+						                        ,rs.getInt("LIKECOUNT"));
+					list.add(pb);		
+				}
+	
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		
+		return list;
+	}
+
+
+	public ArrayList<PostBoard> townMarketAjaxUserSearchMain(Connection conn, ShmarketPageInfo sp, String userSearch,
+			String userGu, String userDong, String userCategory) {
+		ArrayList<PostBoard> bList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = prop.getProperty("townMarketAjaxUserSearchMain");
+		
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, "%"+userSearch+"%");
+			pstmt.setString(4, "%"+userCategory+"%");
+			pstmt.setString(5, "%"+userDong+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(bList.isEmpty()) {
+					PostBoard pb = new PostBoard(
+							                      sp.getCurrentPage()
+							                     ,sp.getListCount()
+							                     ,sp.getBoardLimit()
+							                     ,sp.getPageLimit()
+							                     ,sp.getMaxPage()
+							                     ,sp.getStartPage()
+							                     ,sp.getEndPage()
+							                     ,rs.getInt("POST_NO")		                  
+							                     ,rs.getInt("MEM_NO")
+							                     ,rs.getString("LOCATION")
+							                     ,rs.getString("POST_NAME")
+							                     ,rs.getString("CATEGORY_NAME")
+							                     ,rs.getString("THUMBNAIL_PATH")
+							                     ,rs.getString("THUMBNAIL_FILENAME")
+							                     ,rs.getString("THUMBNAIL_LOADPATH")
+							                     ,rs.getInt("POST_VIEWS")
+							                     ,rs.getInt("POST_LIKES")
+							                     ,rs.getInt("PROD_PRICE")
+							                     ,rs.getInt("LIKECOUNT"));
+					bList.add(pb);
+		
+				} else {
+			
+					PostBoard pb = new PostBoard(rs.getInt("POST_NO")		                  
+						                        ,rs.getInt("MEM_NO")
+						                        ,rs.getString("LOCATION")
+						                        ,rs.getString("POST_NAME")
+						                        ,rs.getString("CATEGORY_NAME")
+						                        ,rs.getString("THUMBNAIL_PATH")
+						                        ,rs.getString("THUMBNAIL_FILENAME")
+						                        ,rs.getString("THUMBNAIL_LOADPATH")
+						                        ,rs.getInt("POST_VIEWS")
+						                        ,rs.getInt("POST_LIKES")
+						                        ,rs.getInt("PROD_PRICE")
+						                        ,rs.getInt("LIKECOUNT"));
+					bList.add(pb);		
+				}
+	
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return bList;
+	}
+
+
+	public ArrayList<PostBoard> townMarketAjaxSorter(Connection conn, ShmarketPageInfo sp, int sortNum) {
+		
+		ArrayList<PostBoard> bList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		
+		int startNum = (sp.getCurrentPage()-1)*sp.getBoardLimit()+1;
+		int endRow = startNum + sp.getBoardLimit() -1;
+		
+		switch(sortNum) {
+		
+		case 1: sql=prop.getProperty("townMarketAjaxSorter1"); break;
+		case 2: sql=prop.getProperty("townMarketAjaxSorter2"); break;
+		case 3: sql=prop.getProperty("townMarketAjaxSorter3"); break;
+		case 4: sql=prop.getProperty("townMarketAjaxSorter4"); break;	
+		}		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endRow);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(bList.isEmpty()) {
+					PostBoard pb = new PostBoard(
+							                      sp.getCurrentPage()
+							                     ,sp.getListCount()
+							                     ,sp.getBoardLimit()
+							                     ,sp.getPageLimit()
+							                     ,sp.getMaxPage()
+							                     ,sp.getStartPage()
+							                     ,sp.getEndPage()
+							                     ,rs.getInt("POST_NO")		                  
+							                     ,rs.getInt("MEM_NO")
+							                     ,rs.getString("LOCATION")
+							                     ,rs.getString("POST_NAME")
+							                     ,rs.getString("CATEGORY_NAME")
+							                     ,rs.getString("THUMBNAIL_PATH")
+							                     ,rs.getString("THUMBNAIL_FILENAME")
+							                     ,rs.getString("THUMBNAIL_LOADPATH")
+							                     ,rs.getInt("POST_VIEWS")
+							                     ,rs.getInt("POST_LIKES")
+							                     ,rs.getInt("PROD_PRICE")
+							                     ,rs.getInt("LIKECOUNT"));
+					bList.add(pb);
+		
+				} else {
+			
+					PostBoard pb = new PostBoard(rs.getInt("POST_NO")		                  
+						                        ,rs.getInt("MEM_NO")
+						                        ,rs.getString("LOCATION")
+						                        ,rs.getString("POST_NAME")
+						                        ,rs.getString("CATEGORY_NAME")
+						                        ,rs.getString("THUMBNAIL_PATH")
+						                        ,rs.getString("THUMBNAIL_FILENAME")
+						                        ,rs.getString("THUMBNAIL_LOADPATH")
+						                        ,rs.getInt("POST_VIEWS")
+						                        ,rs.getInt("POST_LIKES")
+						                        ,rs.getInt("PROD_PRICE")
+						                        ,rs.getInt("LIKECOUNT"));
+					bList.add(pb);		
+				}
+	
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return bList;
+	}
 	
 }

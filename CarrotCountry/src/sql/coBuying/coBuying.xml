@@ -6,7 +6,7 @@
 		UPDATE
 		       POST
 		   SET POST_VIEWS = POST_VIEWS + 1
-		 WHERE BLIND_CHECK = 'Y'
+		 WHERE BLIND_CHECK = 'N'
 		   AND POST_NO = ?
 	</entry>
 	
@@ -41,6 +41,7 @@
 		                  FROM GROUPBUY_QUESTION 
 		                  JOIN MEMBER USING(MEM_NO)
 		                 WHERE GQ_STATUS = 'Y'
+		                   AND POST_NO = ?
 		                 ORDER
 		                    BY GQ_NO DESC
 		                ) A 
@@ -53,9 +54,11 @@
 		  INTO GROUPBUY_QUESTION
 		  (
 		    GQ_NO
+		  , POST_NO
 		  , GQ_TITLE
 		  , GQ_CONTENT
 		  , MEM_NO
+		  , GQ_STATUS
 		  )
 		  VALUES
 		  (
@@ -63,6 +66,8 @@
 		  , ?
 		  , ?
 		  , ?
+		  , ?
+		  , 'Y'
 		  )
 	</entry>
 	
@@ -103,7 +108,7 @@
 			             , A.*
 			          FROM (
 			                SELECT
-	                             , GQ_NO
+	                               GQ_NO
 			                     , MEM_USERID
 			                     , GQ_TITLE
 			                     , GQ_VIEWS
@@ -119,7 +124,7 @@
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="selectProductQnAList"> 아직임
+	<entry key="selectProductQnAList"> 
 		SELECT
 		       THUMBNAIL_LOADPATH
 		     , POST_NAME
@@ -140,6 +145,172 @@
 	
 	
 	
+	
+	
+	
+	
+	<entry key="insertProductPost">
+		INSERT
+		   INTO POST
+		   (
+		      POST_NO
+		    , CATEGORY_NO
+		    , MEM_NO
+		    , LOCAL_NO
+		    , MEM_NICKNAME
+		    , POST_NAME
+		    , POST_COMMENT
+		    , CATEGORY_NAME
+		    , PROD_STATUS
+		    , DEAL_TYPE
+		    , SITE
+		    , THUMBNAIL_PATH
+		    , THUMBNAIL_FILENAME
+		    , THUMBNAIL_LOADPATH
+		    , POST_VIEWS
+		    , POST_REPORTS
+		    , POST_LIKES
+		    , PROD_PRICE
+		    , POST_ENROLL_DATE
+		    , POST_TYPE
+		   )
+		  VALUES
+		  (
+		      SEQ_PNO.NEXTVAL
+		    , ?
+		    , ?
+		    , (
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+          	 )	
+		    , ?
+		    , ?
+		    , ?
+		    ,(SELECT 
+	                 CATEGORY_NAME
+	             FROM
+	                 CATEGORY
+	           WHERE CATEGORY_NO=?)
+		    , DEFAULT
+		    , 'C'
+		    , '서울'
+		    , ?
+		    , ?
+		    , ?
+		    , DEFAULT
+		    , DEFAULT
+		    , DEFAULT
+		    , 1
+		    , SYSDATE
+		    , 2
+		  )
+	</entry>
+	<entry key="insertProductGroupPurchase">
+		INSERT
+		  INTO GROUP_PURCHASE
+		  (
+		       POST_NO
+		     , GP_DEADLINE
+		     , GP_MINPEOPLE
+		     , GP_PRICE
+		     , GP_DRATE
+		     , GP_DPRICE
+		     , GP_STATUS
+		     , GP_REFUND
+		  )
+		  VALUES
+		  (
+		       SEQ_PNO.CURRVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , 'Y'
+		     , ?
+		  )
+	</entry>
+	<entry key="insertProductLocation">
+		INSERT
+		  INTO LOCATION
+		  (
+		     LOCAL_NO
+		  )
+		  VALUES
+		  (
+		     (
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+           )
+		  )
+	</entry>
+	<entry key="insertProductOption">
+		INSERT
+		  INTO PROD_OPTION
+		  (
+		      OPTION_NO
+		    , POST_NO
+		    , OPTION_NAME
+		  )
+		  VALUES
+		  (
+		      SEQ_PONO.NEXTVAL
+		    , SEQ_PNO.CURRVAL
+		    , ?
+		  )
+	</entry>
+	<entry key="insertProductAccount">
+		INSERT
+		  INTO ACCOUNT
+		  (
+		      POST_NO
+		    , ACCOUNT
+		    , BANK
+		  )
+		  VALUES
+		  (
+		      SEQ_PNO.CURRVAL
+		    , SEQ_ACNO.NEXTVAL
+		    , ?
+		  )
+	</entry>
+	<entry key="insertProductPhoto">
+		INSERT
+		  INTO PHOTO
+		  (
+		     PHOTO_NO
+		   , POST_NO
+		   , PHOTO_PATH
+		   , PHOTO_FILENAME
+		   , PHOTO_LOADPATH
+		  )
+		  VALUES
+		  (
+		      SEQ_IMGNO.NEXTVAL
+		    , SEQ_PNO.CURRVAL
+		    , ?
+		    , ?
+		    , ?
+		  )
+	</entry>
+	
+	
 	<entry key="selectProductListCount">
 		SELECT
 		       COUNT(*) "LISTCOUNT"
@@ -148,21 +319,45 @@
 	
 	
 	
+	
+	
+	<entry key="selectPostBoard">
+		SELECT
+		       POST_NO
+		     , POST_NAME
+		     , POST_COMMENT
+		     , THUMBNAIL_PATH
+		     , THUMBNAIL_FILENAME
+		     , THUMBNAIL_LOADPATH
+		  FROM POST
+		 WHERE POST_NO = ?
+	</entry>
+	
 	<entry key="selectProduct">
 		SELECT
 		       POST_NO
 		     , POST_ENROLL_DATE
-		     , GP_DEADLINE
+		     , TO_CHAR(GP_DEADLINE, 'YYYY-MM-DD') GP_DEADLINE
+		     , GP_PRICE
+		     , GP_DRATE
 		     , GP_MINPEOPLE
 		     , GP_PEOPLE
 		     , GP_DPRICE
-             , POST_COMMENT
              , GP_REFUND
 		  FROM GROUP_PURCHASE 
 		  LEFT
 		  JOIN POST USING(POST_NO)
 		 WHERE POST_NO = ?
-		   AND GP_POST_CHECK = 2
+		   AND POST_TYPE = 2
+	</entry>
+	
+	<entry key="selectLocation">
+		 SELECT
+	           LOCAL_GU
+	         , LOCAL_DONG
+	      FROM LOCATION
+	      JOIN POST USING(LOCAL_NO)
+	     WHERE POST_NO = ?
 	</entry>
 	
 	<entry key="selectOption">
@@ -175,19 +370,9 @@
 	
 	<entry key="selectAccount">
 		SELECT
-               ACCOUNT
+               BANK
           FROM ACCOUNT
          WHERE POST_NO = ?
-	</entry>
-
-	<entry key="selectThumbnail">
-		SELECT
-		       POST_NO
-		     , THUMBNAIL_PATH
-		     , THUMBNAIL_FILENAME
-		     , THUMBNAIL_LOADPATH
-		  FROM POST
-		 WHERE POST_NO = ?
 	</entry>
 	
 	<entry key="selectPhoto">
@@ -209,6 +394,8 @@
 		          FROM (
 		                SELECT
 		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
 		                     , THUMBNAIL_LOADPATH
 		                     , POST_NAME
 		                     , GP_PEOPLE
@@ -218,16 +405,173 @@
 		                     , GP_DPRICE
 		                  FROM GROUP_PURCHASE
 		                  JOIN POST USING (POST_NO)
-		                 WHERE BLIND_CHECK = 'Y'
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
 		                 ORDER
 		                    BY POST_NO DESC
 		                ) A 
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="updateWishList">
+		 UPDATE POST
+		    SET POST_LIKES = POST_LIKES + 1
+		  WHERE POST_NO=?
+	</entry>
+	<entry key="reportPreCheck">
+		SELECT COUNT(*)
+		  FROM REPORT
+		WHERE MEM_NO=?
+		  AND REPORT_POST_NO=?
+	</entry>
 	
-	
-	
+	<entry key="reportProduct">
+		 UPDATE POST
+		    SET POST_REPORTS = POST_REPORTS + 1
+		  WHERE POST_NO = ?
+	</entry>
+
+
+
+
+
+
+
+
+
+
+<entry key="selectMainProductListSort1">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_ENROLL_DATE DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort2">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY GP_DPRICE ASC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort3">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_LIKES DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort4">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_VIEWS DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </properties>

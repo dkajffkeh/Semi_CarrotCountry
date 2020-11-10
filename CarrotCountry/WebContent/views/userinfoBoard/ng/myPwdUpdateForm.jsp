@@ -42,6 +42,7 @@
 	
 	<%
 		String userId = loginMember.getMemUserId();
+		int userNo = loginMember.getMemNo();
 	%>
 	
 	<div class="myPageWrapper">
@@ -56,6 +57,7 @@
          <hr color="gray">
          
          <form action="<%= contextPath %>/pwdUpdate.me.ng" method="post" id="myPageForm">
+         <input type="hidden" name="userNo" value="<%= userNo %>">
          <input type="hidden" name="userId" value="<%= userId %>">
             <table id="myPageTable">
                 <tr>

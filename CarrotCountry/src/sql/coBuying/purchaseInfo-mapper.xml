@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertPurchaseInfo">
+		insert
+			  into
+			       purchase_info
+			  (
+			    PURCHASE_NO
+			  , post_no
+			  , mem_no
+			  , shipping_no
+			  , option_no
+			  , depositor
+			  , purchase_price
+			  , purchase_date
+			  , courier
+			  , tracking_no
+			  , requests
+			  )
+			  values
+			  (
+			    seq_pinfono.nextval
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  , sysdate
+			  , ?
+			  , ?
+			  , ?
+			  )
+	</entry>
+	<entry key="increasePeople">
+		UPDATE
+		       group_purchase
+		   SET GP_PEOPLE = GP_PEOPLE + 1
+		 WHERE POST_NO = ?
+	</entry>
+</properties>

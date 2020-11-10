@@ -72,7 +72,7 @@
 										<tr>
 											<td>${ab.postNo}</td>
 											<c:choose>
-												<c:when test="${ab.usedPostCheck > 0}">
+												<c:when test="${ab.postType == 1}">
 													<td>중고거래</td>
 												</c:when>
 												<c:otherwise>
@@ -89,7 +89,7 @@
 											<!-- 클릭시 게시물 블라인드 => 알림 -->
 											<c:if test="${ab.blindCheck eq 'N'}">
 												<td>
-													<a href="<%= contextPath %>/blindEnroll.sb?&postNo=${ab.postNo}&bCheck=Y" class="btn btn-outline-danger btn-sm">등록</a>
+													<button onclick="registBlindList(${ab.postNo});" class="btn btn-outline-danger btn-sm">등록</button>
 												</td>
 											</c:if>
 											<c:if test="${ab.blindCheck eq 'Y'}">
@@ -119,7 +119,15 @@
             </div>
         </div>
     </div>
-    
+    <script>
+		function registBlindList(postNo) {
+			const registYN = confirm('등록하시겠습니까?');
+			const url = "<%= contextPath %>/blindEnroll.sb?&postNo=" + postNo + "&bCheck=Y";
+			if(registYN){
+				location.href = url;
+			}
+		}
+	</script>
     <!-- footer 영역 -->
     <%@ include file="../common/footerbar.jsp" %>
 

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="category20">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 20
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category30">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 30
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category40">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 40
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category50">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 50
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category60">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 60
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category70">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 70
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category80">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 80
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category90">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 90
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category100">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 100
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category110">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 110
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category120">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 120
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+<entry key="category130">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 130
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+<entry key="category140">
+SELECT *
+  FROM (
+        SELECT 
+               ROWNUM RNUM
+             , A.*
+          FROM (
+                SELECT
+                       POST_NO
+                     , THUMBNAIL_LOADPATH
+                     , POST_NAME
+                     , GP_PEOPLE
+                     , POST_LIKES
+                     , GP_PRICE
+                     , GP_DRATE
+                     , GP_DPRICE
+                  FROM GROUP_PURCHASE
+                  JOIN POST USING (POST_NO)
+                 WHERE BLIND_CHECK = 'N'
+                   AND POST_TYPE = 2
+                   AND CATEGORY_NO = 140
+                 ORDER
+                    BY POST_ENROLL_DATE DESC
+                ) A 
+        )
+ WHERE RNUM BETWEEN ? AND ?
+ 
+</entry>
+
+
+</properties>

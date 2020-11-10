@@ -32,11 +32,13 @@ public class BuyerQnAInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		
+		int bno = Integer.parseInt(request.getParameter("Bbno"));
 		String userNo = request.getParameter("userNo");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		
 		QnA qa = new QnA();
+		qa.setPostNo(bno);
 		qa.setMemNo(userNo);
 		qa.setGqTitle(title);
 		qa.setGqContent(content);
@@ -47,7 +49,7 @@ public class BuyerQnAInsertController extends HttpServlet {
 			
 			request.getSession().setAttribute("alertMsg", "성공적으로 질문이 등록됐습니다!");
 			
-			response.sendRedirect(request.getContextPath() + "/buyerlist.qna.jy?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/buyerlist.qna.jy?currentPage=1&bno="+bno);
 			
 		}else { // 실패
 			

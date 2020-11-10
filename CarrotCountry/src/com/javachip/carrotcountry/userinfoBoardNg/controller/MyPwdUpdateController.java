@@ -29,7 +29,8 @@ public class MyPwdUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userId = request.getParameter("userId"); 		// 현재 로그인한 아이디
 		String myPwd = request.getParameter("myPwd");			// 현재 비밀번호
 		String updatePwd = request.getParameter("updatePwd");	// 변경할 비밀번호
@@ -38,7 +39,7 @@ public class MyPwdUpdateController extends HttpServlet {
 		int result = new MemberService().myPwdUpdate(userId, myPwd, updatePwd);
 		
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/myPage.me.jw"); // 성공시 마이페이지로
+			response.sendRedirect(request.getContextPath() + "/myPage.me.jw?memNo=" + userNo); // 성공시 마이페이지로
 			
 		}else {
 			request.setAttribute("errorMsg", "비밀번호 변경에 실패했습니다.");

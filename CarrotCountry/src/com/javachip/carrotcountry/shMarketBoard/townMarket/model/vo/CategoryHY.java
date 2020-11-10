@@ -4,6 +4,7 @@ public class CategoryHY {
 
 	private int categoryNo;
 	private String categoryName;
+	private String categotyNo;
 	
 	
 	public CategoryHY() {
@@ -34,6 +35,17 @@ public class CategoryHY {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	
+	
+	
+
+	public String getCategotyNo() {
+		return categotyNo;
+	}
+
+	public void setCategotyNo(String categotyNo) {
+		this.categotyNo = categotyNo;
 	}
 
 	@Override

@@ -6,7 +6,9 @@
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.PhotoBoardVo" %>
 <%
 ArrayList<CategoryHY> clist = (ArrayList)request.getAttribute("clist");
+//카테고리 이름.
 ArrayList<PhotoBoardVo> pList = (ArrayList)request.getAttribute("pblist");
+//사진경로, System이름
 PostBoard pb = (PostBoard)request.getAttribute("pb");
 
 %>
@@ -27,6 +29,9 @@ PostBoard pb = (PostBoard)request.getAttribute("pb");
             color: black;
             text-decoration: none;}
 body {min-height: 100%;}
+div,p,a,h2,h1{
+font-family: 'Jua';
+}  
 #page_total_wrapper {
     width:850px;
     height:100%;
@@ -192,7 +197,6 @@ border:2px solid green;
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
                 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%> <%=loginMember.getMemPhone() %></h4>
-                <button type="button" class="btn btn-success btn-sm">본인인증</button>
             </div>
             <h5 align="center">사진업로드</h5>  
             <div id="preview_frame">

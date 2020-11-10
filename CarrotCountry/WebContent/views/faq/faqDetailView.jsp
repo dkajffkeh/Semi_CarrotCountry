@@ -37,10 +37,16 @@
     <div class="outer">
     <h5><%=f.getFaqTitle() %></h5>
     <hr>
-    <pre><%=f.getMemNo() %>                                                                 작성일 <%=f.getFaqEnrollDate() %></pre>
+    <table>
+    <tr>
+    	<td width="500">작성자 :<%=f.getMemNo() %></td>
+    	
+    	<td width="200">작성일 :<%=f.getFaqEnrollDate() %></td>
+    </tr>
+    </table>
       
         <div class="form-group" align="center">
-          <p style="height:150px;" class="border border-warning"><%=f.getFaqContent() %></p>
+          <p style="height:500px;" class="border border-warning"><%=f.getFaqContent() %></p>
         </div>
         <div align="center">
 			<% if(loginMember != null && loginMember.getMemUserId().equals(f.getMemNo())){ %>

@@ -3,8 +3,9 @@
     
 <% String contextPathUserinfo = request.getContextPath(); %>   
 <%@ page import="com.javachip.carrotcountry.member.model.vo.Member" %> 
+<%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <% Member loginMemberUserinfo = (Member)session.getAttribute("loginMember"); // 로그인된 유저 정보 %>
-    
+
     
 <!DOCTYPE html>
 <html>
@@ -91,7 +92,7 @@
                 <th>관심 상품</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathUserinfo %>/wishList.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">찜</a></td>
+                <td><a href="<%= contextPathUserinfo %>/wishList.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">찜</a></td>
             </tr>
             <tr>
                 <td><a href="">최근 본 상품</a></td>
@@ -100,19 +101,23 @@
                 <th>판매 이력 조회</th>
             </tr>
             <tr>
-                <td><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>">판매 현황</a></td>
+                <td><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">판매 현황</a></td>
             </tr>
             <tr>
                 <th>공동구매</th>
             </tr>
             <tr>
-                <td><a href="">내 게시글</a></td>
+                <td><a href="<%= contextPathUserinfo %>/coBuying.po.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">내 게시글</a></td>
             </tr>
             <tr>
-                <td><a href="">진행 현황</a></td>
+                <td><a href="<%= contextPathUserinfo %>/groupPurchaseList.gp.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">진행 현황</a></td>
             </tr>
             <tr>
-				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>            </tr>
+				<th><a href="<%= contextPathUserinfo %>/reportDetail.ng?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">신고내역</a></th>
+				<!-- 작업중 -->
+			<tr>
+				<th><a href="<%= contextPathUserinfo %>/myList.on.jm?memNo=<%= loginMemberUserinfo.getMemNo() %>&repCurrentPage=1">1:1문의내역</a></th>
+			</tr>                     
             <tr>
                 <th id="admin"><a href="<%= contextPathUserinfo %>/userList.sb?currentPage=1">관리자 페이지</a></th>
             </tr>

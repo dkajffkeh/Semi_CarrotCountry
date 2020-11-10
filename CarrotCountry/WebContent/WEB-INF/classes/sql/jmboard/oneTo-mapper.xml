@@ -6,7 +6,6 @@
 		SELECT 
 		       COUNT(*) LISTCOUNT
 		  FROM ONETOONE
-		 WHERE ANSWER_STATE = 'N' 
 	</entry>
 	<entry key="selectList">
 		SELECT *
@@ -18,20 +17,75 @@
 		                SELECT 
 		                       ONETO_NO
 		                     , MEM_NAME
-		                     , ONETO_TYPE
+		                     , FAQ_CATEGORY_NAME
 		                     , ONETO_NAME
 		                     , ANSWER_DATE
 		                     , ANSWER_STATE
 		                  FROM ONETOONE 
-		                  JOIN MEMBER ON(WRITER_NO=MEM_NO)
-		                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
-		                 WHERE ANSWER_STATE = 'N'
+		                  LEFT JOIN MEMBER ON(WRITER_NO=MEM_NO)
+		                  LEFT JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
 		                 ORDER
 		                    BY ONETO_NO ASC
 		               ) A
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="insertOneTo">
+	    INSERT
+		  INTO ONETOONE
+		  (
+		     ONETO_NO
+		   , WRITER_NO
+		   , ONETO_TYPE
+		   , ONETO_NAME
+		   , ONETO_CONTENT
+           , ANSWER_DATE
+		  )
+		  VALUES
+		  (
+		     SEQ_ONETONO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , SYSDATE
+		  )
+	
+	</entry>
+	<entry key="answer">
+			UPDATE
+		       ONETOONE
+		   SET ANSWERER_NO = ?
+		     , ANSWER_CONTENT = ?
+             , ANSWER_STATE = 'Y'
+		 WHERE ONETO_NO = ?
+	</entry>
+	<entry key="userModify">
+			UPDATE
+		       ONETOONE
+		   SET ONETO_TYPE = ?
+		     , ONETO_NAME = ?
+             , ONETO_CONTENT = ?
+		 WHERE ONETO_NO = ?
+	</entry>
+	<entry key="selectOneTo">
+		SELECT 
+	       ONETO_NO
+	     , U.MEM_NICKNAME WRITER
+	     , M.MEM_NICKNAME ANSWERER
+	     , FAQ_CATEGORY_NAME
+	     , ONETO_NAME
+	     , ONETO_CONTENT
+	     , ANSWER_CONTENT
+	     , ANSWER_DATE
+	     , ANSWER_STATE
+	  FROM ONETOONE 
+	  LEFT 
+	  JOIN MEMBER U ON(WRITER_NO=U.MEM_NO)
+ LEFT JOIN MEMBER M ON(ANSWERER_NO=M.MEM_NO)
+      JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
+	 WHERE ONETO_NO = ?
+	 </entry>
 	
 	
 </properties>

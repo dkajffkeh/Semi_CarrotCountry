@@ -3,6 +3,7 @@
 <%@ page import="com.javachip.carrotcountry.jmboard.notice.model.vo.*" %>    
 <%
 	Notice n = (Notice)request.getAttribute("n");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,8 @@
 
 
     .outer{
-        width:700px;
-        height:800px;
+        width:1000px;
+        height:1000px;
         margin:auto;
         margin-top:50px;
     }
@@ -22,6 +23,16 @@
     </style>
 </head>
 <body>
+		<!-- 성공적으로 삭제되었습니다 alert -->
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
 	<%@ include file="../common/commonNavbar.jsp"%>
 	<input type="hidden" name="nno" value="<%= n.getNoticeNo() %>">
 	<div class="outer">
@@ -32,24 +43,27 @@
 
         <table id="detail-area" align="center" border="1">
             <tr>
-                <th width="70">제목</th>
-                <td width="350"colspan="3"><%= n.getNoticeTitle() %></td>
+                <th width="150"><li>제목</li></th>
+                <td width="300" colspan="5""><%= n.getNoticeTitle() %></td>
             </tr>
             <tr>
-                <th>작성자</th>
+                <th><li>작성자</li></th>
                 <td><%= n.getMemNo() %></td>
-                <th>작성일</th>
-                <td><%= n.getNoticeEnrollDate() %></td>
+                <td width="300"></td>
+                <th><li>작성일</li></th>
+                <td>&nbsp;&nbsp;<%= n.getNoticeEnrollDate() %></td>
+                <td width="200"></td>
+                
             </tr>
             <tr>
-                <th>내용</th>
-                <td colspan="3">
-                    <p style="height:200px"><%=n.getNoticeContent()%></p>
+                <th><li>내용</li></th>
+                <td colspan="5">
+                    <p style="height:800px" class="border border-warning"><%=n.getNoticeContent()%></p>
                 </td>
             </tr>
             <tr>
-                <th>첨부파일</th>
-                <td colspan="3">
+                <th><li>첨부파일</li></th>
+                <td colspan="5">
                 	<% if(n.getFileOriginName() == null) { %>
                     	<!--첨부파일이 없을 경우-->
                     	첨부파일이 없습니다.
@@ -62,6 +76,11 @@
         </table>
 
         <br>
+        
+        
+        
+        
+        
 
         <div align="center">
 			<% if(loginMember != null && loginMember.getMemUserId().equals(n.getMemNo())){ %>
@@ -72,7 +91,7 @@
 		</div>
 
     </div>
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
         
 </div>
 </body>

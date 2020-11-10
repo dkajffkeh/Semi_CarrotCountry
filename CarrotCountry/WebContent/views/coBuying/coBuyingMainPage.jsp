@@ -11,7 +11,9 @@
 	ArrayList<Product> pList = (ArrayList<Product>)request.getAttribute("pList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CategoryHY> cList = (ArrayList<CategoryHY>)request.getAttribute("cList");
-	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	PostBoard pb = (PostBoard)request.getAttribute("pb");	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
 %>    
     
 <!DOCTYPE html>
@@ -19,14 +21,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
 
-.wrap{width:1200px;height:1250px;margin:auto; }
+.wrap{width:1200px;height:1250px;margin:auto; font-family: 'Nanum Gothic', sans-serif;  }
 
 /* 전반적인 큰 틀 (3개의 영역) */
 #header{height:20%;}
-#content{height:80%;}
-#footer{height:100%; margin:10px 0px;}
+#content{height:70%;}
+.paginationArea{height:10%}
 
 /* 헤더영역의 전반적인 틀 */
 #header>div{width:100%;  float: left;}
@@ -85,8 +88,9 @@
 
 }
 #proContent>*{width: 100%; float: left;}
-#proName{height: 20%;}
-#proName>div{
+.proName{height: 20%;}
+.proName:hover{cursor:pointer;}
+.proName>div{
     height: 100%; 
     float: left;
     border-bottom: 1px solid black;
@@ -125,7 +129,7 @@
 
 
 /* 카테고리영역 */
-#content1 ul{padding-top: 28px;list-style: none;}
+#content1 ul{list-style: none;}
 #content1 ul li{
     height: 58px;
     background: #3f3f3f;
@@ -133,6 +137,7 @@
     border-bottom: 1px solid black;
     text-align: center;
     padding-top: 15px;
+    
 }
 #content1 ul li:hover{
     background: lightgray;
@@ -143,6 +148,7 @@
     color: white;
     margin: auto;
     margin-top: 10%;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
 /* 정렬 */
@@ -164,6 +170,20 @@
 </head>
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
+
+
+
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");	
+		</script>
+		
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+	<%} %>
+
+
 
 
     <div class="wrap">
@@ -188,8 +208,27 @@
             
             
                 <div id="createPro">
-                    <a href="<%= contextPath %>/enroll.pro.jy" type="button" class="btn btn-warning">새 공동구매 만들기</a>
+                    <button id="enrollPro"  type="button" class="btn btn-warning">새 공동구매 만들기</button>
                 </div>
+                
+                
+                <script>
+                
+                $("#enrollPro").click(function(){
+                	<%if(loginMember == null){%>
+	        			var result = confirm("로그인 한 회원만 이용할 수 있는 서비스 입니다. 로그인하시겠습니까?");
+	        			if(result){
+	        				location.href = "<%= contextPath %>/loginPage.me.ng";
+	        			}else{
+	        				location.href = "<%= contextPath %>/mainpage.co.jy?currentPage=1";
+	        			}
+                	<%}else{%>
+                		location.href = "<%= contextPath %>/enroll.pro.jy";
+                	<%}%>
+                	
+                	
+                });
+                </script>
                 
                 
                 <br><br>
@@ -202,7 +241,7 @@
             <div id="content1">
             
                 <ul>
-                    <li><a href="">디지털/가전</a></li>
+                    <li onclick="category(this)"><a href="">디지털/가전</a></li>
                     <li><a href="">가구/인테리어</a></li>
                     <li><a href="">유아동/유아도서</a></li>
                     <li><a href="">생활/가공식품</a></li>
@@ -218,12 +257,22 @@
                 </ul>
               
             </div>
+            
+            <script>
+            function category(e){
+            	console.log(e);
+            	e.children[0].innerHTML
+            }
+            </script>
+            
+            
+            
             <div id="content2">
                 <div id="array">
-                    <a href="">최신순 |</a>
-                    <a href="">낮은가격 |</a>
-                    <a href="">인기상품 |</a>
-                    <a href="">조회순</a>
+                    <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>
+                    <a href="<%= contextPath %>/sortlow.pro.jy?currentPage=1">낮은가격 |</a>
+                    <a href="<%= contextPath %>/sortlike.pro.jy?currentPage=1">인기상품 |</a>
+                    <a href="<%= contextPath %>/sortview.pro.jy?currentPage=1">조회순</a>
                 </div>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">
@@ -242,99 +291,73 @@
                 <% if(pList.isEmpty()){ %>
                 	<div id="emptyDiv" align="center"><h4>진행중인 공동구매가 없습니다 !</h4></div>
                 <%}else{ %>
-                
-                 <% for(Product pd : pList) {%>
-                 
-                    <div id="proName">
-                    	<input type="hidden" value="<%= pd.getPostNo() %>">
-                        <div id="proImg">
-                            <a href=""><img src="<%= contextPath %>/<%= pd.getThumbnailLoadpath() %>" width="100" height="100"></a>
-                        </div>
-                        <div id="proText">
-                            <div id="proText-title">
-                                <a href=""><h4><%= pd.getPostName() %></h4></a>
-                            </div>
-                            <div id="proText-like">
-                                <h6><%= pd.getGpPeople() %> | ♡ (<%= pd.getPostLikes() %>)</h6> 
-                            </div>
-                        </div>
-                        <div id="proPrice">
-                            <h6 id="realPrice"><s><%= pd.getGpPrice() %></s></h6>
-                            <span id="discount">공구할인률<%= pd.getGpDRate() %>%</span>
-                            <span id="discountPrice"><%= pd.getGpDPrice() %>원</span>
-                        </div>
-                    </div>
-                    <%} %>
-	               
+	                   <% for(int i = 0 ; i < pList.size(); i++){ %>
+				            <div class="proName">
+				           		<input type="hidden" value="<%= pList.get(i).getPostNo() %>">
+				            	<div id="proImg"><a href=""><img src="<%= contextPath %>/<%= pList.get(i).getThumbnailPath()+pList.get(i).getThumbnailFilename() %>" width="100" height="100"></a></div>
+					           
+					            <div id="proText">
+					                <div id="proText-title">
+		                               <a href=""><h4><%= pList.get(i).getPostName() %></h4></a>
+		                            </div>
+		                            <div id="proText-like">
+		                                <h6><%= pList.get(i).getGpPeople() %> | ♡ (<%= pList.get(i).getPostLikes() %>)</h6> 
+		                            </div>
+						        </div>
+						        <div id="proPrice">
+			                            <h6 id="realPrice"><s><%= pList.get(i).getGpPrice() %></s></h6>
+			                            <span id="discount">공구할인률<%= pList.get(i).getGpDRate() %>%</span>
+			                            <span id="discountPrice"><%= pList.get(i).getGpDPrice() %>원</span>
+			                     </div>
+				            </div>
+			       	<% } %>
+               
+
 		           <%} %>    
                 
-                
-               <!-- 
-                    
-                    
-                    
-                     <% for(int i = 0 ; i < pList.size(); i++){ %>
-			            <div id="proName">
-			           		<input type="hidden" value="<%= pList.get(i).getPostNo() %>">
-			            	<div id="proImg"><a href=""><img src="<%= contextPath %>/<%= pList.get(i).getThumbnailLoadpath() %>" width="100" height="100"></a></div>
-				           
-				            <div id="proText">
-				                <div id="proText-title">
-	                               <a href=""><h4><%= pList.get(i).getPostName() %></h4></a>
-	                            </div>
-	                            <div id="proText-like">
-	                                <h6><%= pList.get(i).getGpPeople() %> | ♡ (<%= pList.get(i).getPostLikes() %>)</h6> 
-	                            </div>
-					        </div>
-					        <div id="proPrice">
-		                            <h6 id="realPrice"><s><%= pList.get(i).getGpPrice() %></s></h6>
-		                            <span id="discount">공구할인률<%= pList.get(i).getGpDRate() %>%</span>
-		                            <span id="discountPrice"><%= pList.get(i).getGpDPrice() %>원</span>
-		                     </div>
-			            </div>
-			       	<% } %>
-                    
-                    
-                    
-                    
-                    
-                   -->  
-                    
-                    
 		        <script>
 		        	$(function(){
-		        		$("#proName").click(function(){
-		        			location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
+		        		$(".proName").click(function(){
+		        			
+		        		 	<%if(loginMember == null){%>
+		        			var result = confirm("로그인 한 회원만 열람 가능합니다. 로그인하시겠습니까?");
+		        			if(result){
+		        				location.href = "<%= contextPath %>/loginPage.me.ng";
+		        			}else{
+		        				location.href = "<%= contextPath %>/mainpage.co.jy?currentPage=1";
+		        			}
+	                	<%}else{%>
+	                		location.href = "<%= contextPath %>/buyerdetail.pro.jy?bno=" + $(this).children().eq(0).val();
+	                	<%}%>
+		        			
 		        		})
 		        	});
+		        	
 		        </script>
 		                    
-		                    
-		                    
-		                    
-
-                <div class="paginationArea" align="center">
-
-					<% if(pi.getCurrentPage() != 1){ %>
-		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
-		            <% } %>
-					<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
-		            	
-		            	<a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= p %>"><%= p %></a>
-		            
-		            <% } %>
-		            
-		            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
-		           		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
-		            <% } %>
-	       		</div>
-                
-                   
 
                 </div>
 
             </div>
         </div>
+
+		 <div class="paginationArea" align="center">
+
+				<% if(pi.getCurrentPage() != 1){ %>
+		          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() - 1 %>">&lt; 이전</a>
+		           <% } %>
+				<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+		           	
+		           	<a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= p %>"><%= p %></a>
+	           
+	            <% } %>
+	           
+	            <%if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+	          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
+	            <% } %>
+     		</div>
+                
+
 
     </div>
     

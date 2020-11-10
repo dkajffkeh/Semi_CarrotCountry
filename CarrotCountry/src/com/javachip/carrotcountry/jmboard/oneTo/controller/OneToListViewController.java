@@ -43,7 +43,7 @@ public class OneToListViewController extends HttpServlet {
 		//
 		listCount = new OneToService().selectListCount();
 		
-		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		currentPage = Integer.parseInt(request.getParameter("repCurrentPage"));
 		
 		pageLimit = 10;
 		

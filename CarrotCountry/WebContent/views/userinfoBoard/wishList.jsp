@@ -2,12 +2,16 @@
 <%@ page import="com.javachip.carrotcountry.userinfoBoard.model.vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import= "com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
+			     ,com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*" %>
  <%
  	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<WishList> list = (ArrayList<WishList>)request.getAttribute("list");
-	
+	ArrayList<MyPagePhoto> photolist= (ArrayList<MyPagePhoto>)request.getAttribute("photolist");
+ 	
  %>
+ 
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +38,10 @@
                 width:1000px;
                 height:500px;
                 /* background-color:blue; */
+            }
+             #content > div :hover{
+                background:rgb(255, 224, 166);
+                cursor:pointer;
             }
             .content1{
                 box-shadow:5px 5px 10px 5px rgb(247, 233, 205);
@@ -63,9 +71,13 @@
             .paging-area {
                 width:1000px;
                 height:100px;
-                /* background-color:red; */
                 float:left;
-        }
+                text-align:center;
+                font-size:25px;
+                font-weight:500;
+                margin-top:10%;
+               
+            }
 
 </style>
 </head>
@@ -82,94 +94,90 @@
 	<div class="myPageWrapper_content">
 	<!-- # 찜 body영역 -->
 	<div class="outer">
-	    <br>
+	
+	 	<br>
 	    <h1>찜 목록</h1>
 	    <hr color="gray">
 	    <br>
+	    
+	 <form action="<%= contextPath %>/delete.wish.jw" method="post" id="wishList">
+	   <input type="hidden" value="<%= loginMember.getMemNo() %>" name="memNo">
+	    
 	    <!-- 찜한 개수 -->
 	    <div id="countWish">
-	        <p>찜한 상품 : 9 </p>
+	        <p>찜한 상품 : <%= list.size() %> </p>
 	    </div>
 	    <!-- 물품 정보 -->
 	    <div id="content">
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""> <br>
-	            물품명 <br>
-	            13,800
-	
-	        </div>
+	    
+	     <div id="content1">
+	    	 <% for(WishList w : list) { %>
+	    	 	
+			        <div class="content1">
+						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
+			            <input style='zoom:2.0;' type="checkbox" name="wishList" value="<%=w.getPostNo()%>">
+			           <div class="img1">
+			           	<img src="<%= contextPath %>/<%= w.getThumbNailPath() %><%= w.getThumbNailFileName() %>"> <br>
+			           </div>
+			           	 &nbsp; &nbsp;
+			           	 <%= w.getPostName() %> <br>
+			             &nbsp; &nbsp;&nbsp;
+			             <%= w.getProdPrice() %>
+			             &nbsp;원
+	        		</div>
+	     	  <%} %>
+	 
 	     
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""><br>
-	            물품명 <br>
-	            13,800
-	            
-	        </div>
-	
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""><br>
-	            물품명 <br>
-	            13,800
-	            
-	        </div>
-	
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""><br>
-	            물품명 <br>
-	            13,800
-	            
-	        </div>
-	
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""><br>
-	            물품명 <br>
-	            13,800
-	            
-	        </div>
-	
-	        <div class="content1">
-	            <input style='zoom:2.0;' type="checkbox" name="wishList" value="">
-	            <img src="../../Common/images/맥북.jpg" alt=""><br>
-	            물품명 <br>
-	            13,800
-	            
-	        </div>
+	     </div>
+
 	    </div>
-	
+	    
 	    <div class= "button">
-	        <button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#deleteWishlist">관심상품 삭제</button>
-	    </div>
+	        <button type="submit" class="btn btn-secondary btn-lg">관심상품 삭제</button>
+	 	</div>
+	</form>
 	
+	   
 	    <br>
 	
 	</div>
+
+	<script>
+        	$(function(){
+        		$(".img1").click(function(){
+        		location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=" + $(this).children().eq(0).val();
+        		});
+        	});
+        		
+        	
+     </script>
+
 	
-	
-	
-	<!-- 체크박스 선택 후 삭제버튼 클릭 시 뜨는 창 -->
-	
-	<div class="modal" id="deleteWishlist">
-	    <div class="modal-dialog">
-	    <div class="modal-content">
-	    
-	        <!-- Modal body -->
-	        <div class="modal-body" align="center">
-	           삭제하시겠습니까?
-	           <br><br>
-	           <button type="button" class="btn btn-primary">확인</button>
-	           
-	        </div>
-	        
-	    </div>
-	    </div>
-	</div>
+
+
 
 	<!------------------------------------------------------------------------------------->
+	
+		<div class="paging-area" align="center">
+			
+			<% if(pi.getCurrentPage() != 1){ %>		
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()-1%>">&lt; 이전 </a>
+			<% } %>
+
+			<% for(int p=pi.getStartPage(); p<=pi.getEndPage(); p++){ %>
+			
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%= p %>"><%= p %></a>
+            	
+            <% } %>
+
+			<% if(pi.getCurrentPage() != pi.getMaxPage()){ %>
+            	<a href="<%=contextPath%>/wishList.jw?memNo=<%= loginMember.getMemNo() %>&currentPage=<%=pi.getCurrentPage()+1%>">다음 &gt;</a>
+			<% } %>
+        </div>
+	
+	
+	
+	
 	
         
 	</div>
@@ -177,6 +185,7 @@
 	
 	<!-- footerbar -->
 	<%@ include file="../common/footerbar.jsp" %>
+	
 	
 
 </body>

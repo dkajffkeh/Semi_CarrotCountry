@@ -97,6 +97,36 @@
 		   SET NOTICE_STATUS = 'Y'
 		 WHERE NOTICE_NO = ?
 	</entry>
+		<entry key="noticeSearchList">
+		select
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+		             select
+		                    NOTICE_NO
+		                  , MEM_USERID 
+		                  , NOTICE_TITLE 
+		                  , NOTICE_ENROLL_DATE 
+		                  , NOTICE_COUNT
+		               from 
+		                    NOTICE
+		               JOIN MEMBER USING(MEM_NO)    
+		              where NOTICE_STATUS = 'N'
+		                and NOTICE_TITLE like '%'|| nvl(?, '') ||'%'
+		                and NOTICE_ENROLL_DATE like '%'|| nvl(?, '') ||'%'
+		                and MEM_USERID like '%'|| nvl(?, '') ||'%'
+		              order
+		                 by
+		                    NOTICE_NO asc
+		            ) a
+		     )
+		where rnum between ? and ?
+	</entry>
 
 	
 	

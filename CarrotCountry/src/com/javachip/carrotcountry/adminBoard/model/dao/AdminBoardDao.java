@@ -55,13 +55,12 @@ public class AdminBoardDao {
 
 				ab.setPostNo(rs.getInt("post_no"));
 				ab.setCategoryName(rs.getString("category_name"));
+				ab.setPostType(rs.getInt("post_type"));
 				ab.setPostName(rs.getString("post_name"));
 				ab.setMemNo(rs.getString("mem_userid"));
 				ab.setPostEnrollDate(rs.getDate("post_enroll_date"));
 				ab.setPostViews(rs.getInt("post_views"));
 				ab.setBlindCheck(rs.getString("blind_check"));
-				ab.setUsedPostCheck(rs.getInt("used_post_check"));
-				ab.setGpPostCheck(rs.getInt("gp_post_check"));
 
 				list.add(ab);
 			}
@@ -124,9 +123,8 @@ public class AdminBoardDao {
 				AdminBoard ab = new AdminBoard();
 				
 				ab.setPostNo(rset.getInt("post_no"));
-				ab.setUsedPostCheck(rset.getInt("used_post_check"));
-				ab.setGpPostCheck(rset.getInt("gp_post_check"));
 				ab.setCategoryName(rset.getString("category_name"));
+				ab.setPostType(rset.getInt("post_type"));
 				ab.setPostName(rset.getString("post_name"));
 				ab.setPostViews(rset.getInt("post_views"));
 				ab.setMemNo(rset.getString("mem_userid"));
@@ -164,11 +162,8 @@ public class AdminBoardDao {
 			pstmt.setString(1, "post_name".equals(category) ? search : "");
 			pstmt.setString(2, "category_name".equals(category) ? search : "");
 			pstmt.setString(3, "mem_userid".equals(category) ? search : "");
-			pstmt.setString(4, "post_name".equals(category) ? search : "");
-			pstmt.setString(5, "category_name".equals(category) ? search : "");
-			pstmt.setString(6, "mem_userid".equals(category) ? search : "");
-			pstmt.setInt(7, startRow);
-			pstmt.setInt(8, endRow);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rs = pstmt.executeQuery();
 			
@@ -177,13 +172,12 @@ public class AdminBoardDao {
 
 				ab.setPostNo(rs.getInt("post_no"));
 				ab.setCategoryName(rs.getString("category_name"));
+				ab.setPostType(rs.getInt("post_type"));
 				ab.setPostName(rs.getString("post_name"));
 				ab.setMemNo(rs.getString("mem_userid"));
 				ab.setPostEnrollDate(rs.getDate("post_enroll_date"));
 				ab.setPostViews(rs.getInt("post_views"));
 				ab.setBlindCheck(rs.getString("blind_check"));
-				ab.setUsedPostCheck(rs.getInt("used_post_check"));
-				ab.setGpPostCheck(rs.getInt("gp_post_check"));
 
 				list.add(ab);
 			}
@@ -215,11 +209,8 @@ public class AdminBoardDao {
 			pstmt.setString(1, "post_name".equals(category) ? search : "");
 			pstmt.setString(2, "category_name".equals(category) ? search : "");
 			pstmt.setString(3, "mem_userid".equals(category) ? search : "");
-			pstmt.setString(4, "post_name".equals(category) ? search : "");
-			pstmt.setString(5, "category_name".equals(category) ? search : "");
-			pstmt.setString(6, "mem_userid".equals(category) ? search : "");
-			pstmt.setInt(7, startRow);
-			pstmt.setInt(8, endRow);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -227,9 +218,8 @@ public class AdminBoardDao {
 				AdminBoard ab = new AdminBoard();
 
 				ab.setPostNo(rset.getInt("post_no"));
-				ab.setUsedPostCheck(rset.getInt("used_post_check"));
-				ab.setGpPostCheck(rset.getInt("gp_post_check"));
 				ab.setCategoryName(rset.getString("category_name"));
+				ab.setPostType(rset.getInt("post_type"));
 				ab.setPostName(rset.getString("post_name"));
 				ab.setMemNo(rset.getString("mem_userid"));
 				ab.setPostEnrollDate(rset.getDate("post_enroll_date"));

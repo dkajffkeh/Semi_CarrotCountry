@@ -73,12 +73,12 @@
 		                                    <tr>
 		                                        <td>${ab.postNo}</td>
 		                                        <c:choose>
-													<c:when test="${ab.usedPostCheck > 0}">
+													<c:when test="${ab.postType == 1}">
 														<td>중고거래</td>
 													</c:when>
-													<c:otherwise>
+													<c:when test="${ab.postType == 2 }">
 														<td>공동구매</td>
-													</c:otherwise>
+													</c:when>
 												</c:choose>
 		                                        <td>${ab.categoryName}</td>
 		                                        <td>${ab.postName}</td>
@@ -116,7 +116,6 @@
             </div>
         </div>
     </div>
-    
     <!-- footer 영역 -->
     <%@ include file="../common/footerbar.jsp" %>
 	
