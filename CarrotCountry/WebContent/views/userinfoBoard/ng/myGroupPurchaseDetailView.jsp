@@ -48,13 +48,16 @@
     .gpDetailWrap th{
         text-align:left;
     }
+    .gpDetailWrap td{
+        color:gray;
+    }
     .sRed{
         color:red;
     }
     .sOrange{
         color:#ffa500;
     }
-
+	
 
 		
 </style>
@@ -72,7 +75,7 @@
 		<div class="myPageWrapper_content">
 			<div class="outer">
 		       	<br>
-		       	<h1>공동구매 진행현황</h1>
+		       	<h1>공동구매 진행현황 (상세조회)</h1>
 		        <hr color="gray">
 		        
 				<div class="gpWrap">
@@ -87,16 +90,16 @@
         <hr>
         <h2>상품 정보 <span class="sOrange">(<%= mpi.getGpStatus() %>)</span></h2>
         <div class="gpTop">
-            <img src="<%= mpi.getThumbnailLoadpath() %>">
+            <img src="<%= contextPath %>/<%= mpi.getThumbnailLoadpath() %>">
             <table>
                 <tr>
-                    <th width="100" height="30">상품명</th><td width="200px"><%= mpi.getPostName() %></td><th width="100">진행자</th><td width="200px"><%= mpi.getMemNickname() %></td>
+                    <th width="70" height="30">상품명</th><td width="200px"><%= mpi.getPostName() %></td><th width="70">진행자</th><td width="200px"><%= mpi.getMemNickname() %><th width="70">거래유형</th><td><%= mpi.getDealType() %></td>
                 </tr>
                 <tr>
-                    <th height="30">상품가격</th><td><s><%= mpi.getGpPrice() %></s></td><th>최소/현재 인원</th><td><%= mpi.getGpMinpeople() %>/<% if(mpi.getGpMinpeople() > mpi.getGpPeople()){ %> <span class="sRed"> <%= mpi.getGpPeople() %> </span> <% }else{ %> <span class="rOrange"><%= mpi.getGpPeople() %></span> <% } %>  </td>
+                    <th height="30">상품가격</th><td><s><%= mpi.getGpPrice() %></s></td><th>은행명</th><td><%= mpi.getBank() %></td><th>마감일</th><td><%= mpi.getGpDeadLine() %>&nbsp;&nbsp;&nbsp;<span class="sOrange"><%= mpi.getdDay()<0 ? "마감" : mpi.getdDay()+1%></span></td>
                 </tr>
                 <tr>
-                    <th height="30">할인가</th><td><span class="sRed"><%= mpi.getGpDrate()%>% &#10140; </span><span class="sOrange"><%= mpi.getGpDprice() %></span></td><th>마감일</th><td><%= mpi.getGpDeadLine() %>&nbsp;&nbsp;&nbsp;<span class="sOrange"><%= mpi.getdDay()<0 ? "마감" : mpi.getdDay()%></span></td>
+                    <th height="30">할인가</th><td><span class="sRed"><%= mpi.getGpDrate()%>% &#10140; </span><span class="sOrange"><%= mpi.getGpDprice() %></span></td><th>계좌번호</th><td><%= mpi.getAccount() %>&nbsp;(<%= mpi.getMemName() %>)</td><th>인원</th><td><%= mpi.getGpMinpeople() %>/<% if(mpi.getGpMinpeople() > mpi.getGpPeople()){ %> <span class="sRed"> <%= mpi.getGpPeople() %> </span> <% }else{ %> <span class="rOrange"><%= mpi.getGpPeople() %></span> <% } %>  </td>
                 </tr>
             </table>
         </div>
@@ -105,13 +108,13 @@
         <div class="gpMid">
             <table>
                 <tr>
-                    <th width="100" height="30">구매번호</th><td width="200px"><%= mpi.getPurchaseNo() %></td><th width="100">옵션</th><td width="200px"><%= mpi.getOptionName() %></td><th width="100">결제금액</th><td ><span class="sOrange"><%= mpi.getPurchasePrice() %></span></td>
+                    <th width="70" height="30">구매번호</th><td width="200px"><%= mpi.getPurchaseNo() %></td><th width="70">옵션</th><td width="200px"><%= mpi.getOptionName() %></td><th width="70">결제금액</th><td ><span class="sOrange"><%= mpi.getPurchasePrice() %></span></td>
                 </tr>
                 <tr>
-                    <th height="30">구매일</th><td><%= mpi.getPurchaseDate() %></td><th>은행명</th><td><%= mpi.getBank() %></td><th rowspan="2">요청사항</th><td rowspan="2" width="200" style="border:2px solid black; font-size:13px;"><%= mpi.getRequests() %></td>
+                    <th height="30">구매일</th><td><%= mpi.getPurchaseDate() %></td><th rowspan="2">요청사항</th><td rowspan="2" colspan="3" width="400px" style="border:2px solid gray; font-size:13px;"><%= mpi.getRequests() %></td>
                 </tr>
                 <tr>
-                    <th height="30">입금자명</th><td><%= mpi.getDepositor() %></td><th>계좌번호</th><td><%= mpi.getAccount() %>&nbsp;(<%= mpi.getMemName() %>)</td>
+                    <th height="30">입금자명</th><td><%= mpi.getDepositor() %></td>
                 </tr>
             </table>
         </div>
@@ -122,7 +125,7 @@
         <div class="gpBottom">
             <table>
                 <tr>
-                    <th height="30" width="100" >수령인</th><td width="200"><%= mpi.getMyName() %></td><th width="100">택배사명</th><td width="200"><%= mpi.getCourier() %></td>
+                    <th width="70" height="30">수령인</th><td width="200"><%= mpi.getMyName() %></td><th width="70">택배사명</th><td width="200"><%= mpi.getCourier() %></td>
                 </tr>
                 <tr>
                 	<th height="30">연락처</th><td><%= mpi.getMyPhone() %></td><th>운송장번호</th><td><%= mpi.getTrackingNo() %></td>

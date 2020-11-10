@@ -46,9 +46,13 @@ public class MyPurchaseInfo {
 	private String slStatus;			// 배송 상태 (기본값이 'Y' ?)
 	
 	// 진행자 계좌
-	private String memName; // 진행자 이름
-	private String account;// 계좌
-	private String bank;// 은행
+	private String memName; 			// 진행자 이름
+	private String account;				// 계좌
+	private String bank;				// 은행
+	
+	// 상품
+	private String dealType;	// 결제방식
+	private String site;		// 배송지 (POST테이블에 배송지?)
 	
 	// 기본 생성자
 	public MyPurchaseInfo() {}
@@ -100,7 +104,7 @@ public class MyPurchaseInfo {
 			String thumbnailLoadpath, String postName, String memNickname, String memPhone, int gpMinpeople,
 			int gpPeople, Date gpDeadLine, String gpStatus, int gpPrice, int gpDprice, int gpDrate, int dDay,
 			String optionName, String shippingAddress, String myPhone, String myName, String slStatus, String memName,
-			String account, String bank) {
+			String account, String bank, String dealType, String site) {
 		super();
 		this.purchaseNo = purchaseNo;
 		this.postNo = postNo;
@@ -133,6 +137,8 @@ public class MyPurchaseInfo {
 		this.memName = memName;
 		this.account = account;
 		this.bank = bank;
+		this.dealType = dealType;
+		this.site = site;
 	}
 
 	public int getPurchaseNo() {
@@ -383,6 +389,22 @@ public class MyPurchaseInfo {
 		this.bank = bank;
 	}
 
+	public String getDealType() {
+		return dealType;
+	}
+
+	public void setDealType(String dealType) {
+		this.dealType = dealType;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
 	@Override
 	public String toString() {
 		return "MyPurchaseInfo [purchaseNo=" + purchaseNo + ", postNo=" + postNo + ", memNo=" + memNo + ", shippingNo="
@@ -393,7 +415,8 @@ public class MyPurchaseInfo {
 				+ ", gpPeople=" + gpPeople + ", gpDeadLine=" + gpDeadLine + ", gpStatus=" + gpStatus + ", gpPrice="
 				+ gpPrice + ", gpDprice=" + gpDprice + ", gpDrate=" + gpDrate + ", dDay=" + dDay + ", optionName="
 				+ optionName + ", shippingAddress=" + shippingAddress + ", myPhone=" + myPhone + ", myName=" + myName
-				+ ", slStatus=" + slStatus + ", memName=" + memName + ", account=" + account + ", bank=" + bank + "]";
+				+ ", slStatus=" + slStatus + ", memName=" + memName + ", account=" + account + ", bank=" + bank
+				+ ", dealType=" + dealType + ", site=" + site + "]";
 	}
 	
 }

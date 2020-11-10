@@ -264,7 +264,10 @@ public class UserInfoBoardDaoNg {
 										 
 										 rset.getString("MEM_NAME"),
 										 rset.getString("ACCOUNT"),
-										 rset.getString("BANK")
+										 rset.getString("BANK"),
+										 
+										 rset.getString("DEAL_TYPE"),
+										 rset.getString("SITE")
 						);
 			}
 			
