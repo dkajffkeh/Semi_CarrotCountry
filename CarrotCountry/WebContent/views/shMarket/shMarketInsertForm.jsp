@@ -178,30 +178,11 @@ border:2px solid green;
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
                 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>    
             </div>
-            <div id="preview_frame">
-                <div class="image_wrapper">
-                  <img src="" alt="썸네일 업로드" title="썸네일 업로드">
-                </div>
-                <div class="image_wrapper">
-                    <img src="" alt="사진업로드">
-                </div>
-                <div class="image_wrapper">
-                  <img src="" alt="사진업로드">
-                </div>
-                <div class="image_wrapper">
-                  <img src="" alt="사진업로드">
-                </div>
-                <div class="image_wrapper">
-                  <img src="" alt="사진업로드">
-                </div>    
+            <div id="preview_frame">    
             </div>
             <div class="image_upload" style="margin-top:15px ;">
-                    <input type="file" name="pictures1" id="thumnail_input" onchange="loadImg(this,1);" accept="image/*" multiple required>
-                    <input type="file" name="pictures2" id="file_input1" onchange="loadImg(this,2);" accept="image/*">
-                    <input type="file" name="pictures3" id="file_input2" onchange="loadImg(this,3);" accept="image/*">
-                    <input type="file" name="pictures4" id="file_input3" onchange="loadImg(this,4);" accept="image/*">
-                    <input type="file" name="pictures5" id="file_input4" onchange="loadImg(this,5);" accept="image/*">
-            </div>
+                <input type="file" onchange="setThumbnail(event);" name="file" id="picture_uploader" accept="image/*" multiple  required>
+        </div>
             <div class="textarea_wrapper" style="margin: 30px 30px 10px 30px;">
             <textarea name="content" id="editor"></textarea>
         </div>
@@ -222,65 +203,47 @@ border:2px solid green;
             } );
     </script>
     <script>
-            let pFrame = document.getElementById("preview_frame");
-            
-        for(let i = 1 ; i<=4; i++){
-        $("#preview_frame").children().eq(i).css('display','none');
-        }
+        function setThumbnail(event){
 
-        function loadImg(inputFile,num){
-            if(inputFile.files.length==1){
-               
-               if(num<5){
-                pFrame.children[num].style.display="flex";
-               } else {
-                pFrame.children[num-1].style.display="flex";   
-               }
-               
-               let reader = new FileReader();
+                        let preview = document.querySelector("div#preview_frame");
+                        let fileCounter = document.getElementById("picture_uploader").files.length;
 
-               reader.readAsDataURL(inputFile.files[0]);
-               reader.onload = function(e){
-                   switch(num){
-                      case 1: pFrame.children[num-1].children[0].setAttribute('src',e.target.result); break;
-                      case 2: pFrame.children[num-1].children[0].setAttribute('src',e.target.result); break; 
-                      case 3: pFrame.children[num-1].children[0].setAttribute('src',e.target.result); break;
-                      case 4: pFrame.children[num-1].children[0].setAttribute('src',e.target.result); break;
-                      case 5: pFrame.children[num-1].children[0].setAttribute('src',e.target.result); break;  
-                   }
-               }
-   	
-            } else {
-            	 switch(num){
-                 case 1: pFrame.children[num-1].children[0].setAttribute('src',null); break;
-                 case 2: pFrame.children[num-1].children[0].setAttribute('src',null); break; 
-                 case 3: pFrame.children[num-1].children[0].setAttribute('src',null); break;
-                 case 4: pFrame.children[num-1].children[0].setAttribute('src',null); break;
-                 case 5: pFrame.children[num-1].children[0].setAttribute('src',null); break;  
-              }
-            } 
-        }
-        $(function(){
-        	$(".image_upload").hide();
-        	
-            $("#preview_frame").children().eq(0).click(function(){
-                $("#thumnail_input").click();     
-            })
-            $("#preview_frame").children().eq(1).click(function(){
-                $("#file_input1").click();            
-            })
-            $("#preview_frame").children().eq(2).click(function(){
-                $("#file_input2").click();
-            })
-            $("#preview_frame").children().eq(3).click(function(){
-                $("#file_input3").click();
-            })
-            $("#preview_frame").children().eq(4).click(function(){
-                $("#file_input4").click();
-            })
-        })
+                        if(fileCounter<=5) {
 
-    </script>  
+                        document.getElementById("picture_uploader").addEventListener("change", function() {
+                        console.log(this.files.length);
+                        });
+
+                        while(preview.hasChildNodes()){
+                            preview.removeChild(preview.firstChild);
+                        };
+
+                        for (let image of event.target.files){
+                            let reader = new FileReader();
+                
+
+                        reader.onload = function(event){
+                            /* <div class="image_wrapper">
+                        <img src="../Common/images/맥북.jpg" alt="">
+                        <i class="far fa-times-circle" onclick="deletePic(event);"></i>
+                        </div> */
+                            let preview_Wrapper = document.createElement('div');
+                            preview_Wrapper.setAttribute('class','image_wrapper');
+                            let img = document.createElement('img');
+                            img.setAttribute("src",event.target.result);
+                            preview.appendChild(preview_Wrapper);
+                            preview_Wrapper.appendChild(img);
+                          
+
+                        };
+                    reader.readAsDataURL(image);
+                    
+                    };
+                    } else if(fileCounter>5) {
+                    alert("사진은 최대 5개까지만 업로드가 가능합니다.")
+                    } 
+                    }
+    </script>    
 <%@ include file="../common/footerbar.jsp"%>
 </body>
 </html>
