@@ -82,7 +82,14 @@ a {text-decoration: none;}
 .menu_bar>table tr td a {color: white}
 .user_inter_font 		{font-size: 0.7rem;}
 .menu_bar table tr td   {padding-left: 10px;}
-
+#LogoImg{
+width:150px;
+height:90px;
+margin:0px;
+position: relative;
+top:10px;
+left:40px;
+}
         a {
             text-decoration: none
         }
@@ -104,7 +111,7 @@ a {text-decoration: none;}
 <body>
 <nav class="navbar_Wrapper">
         <div class="navbar_sizeWraper_1200px">
-            <div class="user_info_display_sectionWrapper">
+            <div class="user_info_display_sectionWrapper" style="margin:0px;">
                 <div><a href=""><i class="fas fa-user"></i></a></div>
                 
                 <% if(loginMember == null) { %>
@@ -116,11 +123,11 @@ a {text-decoration: none;}
                 <% } %>
                 
             </div>
-            <div class=MainLogo_Wrapper>
-                <div><a href=""><i class="fas fa-carrot"></i></a></div>
-                <div><a href="<%=contextPath%>">당근나라</a></div>
+            <div class=MainLogo_Wrapper style="position:relative; right:50px;">
+                <div><a href=""><img id="LogoImg" src="<%=contextPath%>/resources/images/commonImg/KakaoTalk_20201015_022259571_01.png" alt=""></a></div>
+                <div><a href="<%=contextPath%>" style="font-size:2rem">당근나라</a></div>
             </div>
-            <div class="menu_bar">
+            <div class="menu_bar" style="margin:0px;">
                 <table>
                     <tr align="center" class="user_inter_icon">
                     
