@@ -259,10 +259,10 @@
             </div>
             <div id="content2">
                 <div id="array">
-                    <a href="">최신순 |</a>
-                    <a href="">낮은가격 |</a>
-                    <a href="">인기상품 |</a>
-                    <a href="">조회순</a>
+                    <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>
+                    <a href="<%= contextPath %>/sortlow.pro.jy?currentPage=1">낮은가격 |</a>
+                    <a href="<%= contextPath %>/sortlike.pro.jy?currentPage=1">인기상품 |</a>
+                    <a href="<%= contextPath %>/sortview.pro.jy?currentPage=1">조회순</a>
                 </div>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">

@@ -214,5 +214,61 @@ public class ProductService {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Product> selectMainProductList1(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectMainProductList1(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	public ArrayList<Product> selectMainProductList2(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectMainProductList2(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	public ArrayList<Product> selectMainProductList3(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectMainProductList3(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	public ArrayList<Product> selectMainProductList4(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectMainProductList4(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	
+	
+	
 
 }

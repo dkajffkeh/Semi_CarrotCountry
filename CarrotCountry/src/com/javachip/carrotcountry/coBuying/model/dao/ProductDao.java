@@ -594,6 +594,205 @@ private Properties prop = new Properties();
 			
 		}
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public ArrayList<Product> selectMainProductList1(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort1");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList2(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort2");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList3(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort3");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		public ArrayList<Product> selectMainProductList4(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectMainProductListSort4");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 
 	
 }
