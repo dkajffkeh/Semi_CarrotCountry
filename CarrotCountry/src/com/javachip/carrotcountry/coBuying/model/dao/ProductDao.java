@@ -866,6 +866,58 @@ private Properties prop = new Properties();
 		}
 		
 		
+		public ArrayList<Product> selectRegionProduct(Connection conn, PageInfo pi, String localGu, String localDong){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selecRegionProduct");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setString(1, localGu);
+				pstmt.setString(2, localDong);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("post_name"),
+											rs.getInt("gp_people"),
+											rs.getInt("post_likes"),
+											rs.getInt("gp_price"),
+											rs.getInt("gp_drate"),
+											rs.getInt("gp_dprice")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 		public ArrayList<PostBoardJY> mainSearchAjax(Connection conn,PageInfo pi, String keyword) {
 			ArrayList<PostBoardJY> bList = new ArrayList();
 			PreparedStatement pstmt = null;

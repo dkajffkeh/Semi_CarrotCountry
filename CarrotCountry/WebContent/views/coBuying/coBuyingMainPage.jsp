@@ -6,7 +6,6 @@
 			   , com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
 			   ,  com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*"
  %>    
-
 <%
 	ArrayList<Product> pList = (ArrayList<Product>)request.getAttribute("pList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -14,7 +13,6 @@
 	PostBoard pb = (PostBoard)request.getAttribute("pb");	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	ArrayList<PostBoardJY> bList = (ArrayList<PostBoardJY>)request.getAttribute("bList");
-
 %>    
     
 <!DOCTYPE html>
@@ -24,20 +22,16 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-
 .wrap{width:1200px;height:1250px;margin:auto; font-family: 'Nanum Gothic', sans-serif;  }
-
 /* 전반적인 큰 틀 (3개의 영역) */
 #header{height:20%;}
 #content{height:70%;}
 .paginationArea{height:10%}
-
 /* 헤더영역의 전반적인 틀 */
 #header>div{width:100%;  float: left;}
 #header1{height:30%;}
 #header2{height:40%;}
 #header3{height:30%;}
-
 /* 헤더영역의 세부적인 틀 */
 #header1>h1{padding: 10px;}
 #header2>div{height: 100%; float: left;}
@@ -55,18 +49,14 @@
     float:right;
     margin:25px;
 }
-
 /* 검색창 추가적인 스타일 */
 #searchForm>*{height:100%; float:left;}
 #searchForm>input{width:80%;}
 #searchForm>button{width:20%}
-
 /* 콘텐트영역의 전반적인 틀 */
 #content>div{height: 100%; float: left;}
 #content1{width: 20%;}
 #content2{width: 80%}
-
-
 /* 콘텐트영역의 세부적인 틀 */
 #content2>div{width: 100%;}
 #array{
@@ -80,13 +70,11 @@
 #proTitle>div{height: 100%; float: left;}
 #proTitle{padding: 20px;}
 #regionText{width: 80%; padding-left: 20px;}
-#regionButton{width: 20%;}
-
+#regionButton{width: 20%; padding-left: 20px;}
 /* 페이징 */
 #paginationArea>ul{
     padding-top: 50px;
     padding-left: 400px;
-
 }
 #proContent>*{width: 100%; float: left;}
 .proName{height: 20%;}
@@ -126,9 +114,6 @@
     font-size: 20px;
     font-weight: 600;
 }
-
-
-
 /* 카테고리영역 */
 #content1 ul{list-style: none;}
 #content1 ul li{
@@ -142,7 +127,6 @@
 }
 #content1 ul li:hover{
     background: lightgray;
-
 }
 #content1 ul li a{
     text-decoration: none;
@@ -151,23 +135,17 @@
     margin-top: 10%;
     font-family: 'Nanum Gothic', sans-serif;
 }
-
 /* 정렬 */
 #array a{
     text-decoration: none;
     color: black;
 }
-
-
 #emptyDiv{
 	height:500px;
 	padding:100px
 }
 #emptyDiv>h4{color:orange; font-weight:800;}
-
-
 </style>
-
 </head>
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
@@ -315,13 +293,49 @@
                 </div>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">
+                 <form action="<%= contextPath %>/sortRegion.pro.jy?currentPage=1">
                     <div id="regionText">
-                        <b>xx시 xx동의 공동구매</b>
+                        
+                         <select id="gu" name="gu">
+		                    <option value="송파구">송파구</option>
+		                    <option value="강서구">강서구</option>
+		                </select>
+		                        
+                        <select id="dong" name="dong">
+		                    <option value="오금동">오금동</option>
+		                    <option value="오류동">오류동</option>
+		                    <option value="상일동">상일동</option>
+		                </select>
+						의 공동구매
+                         <script>
+			            $(function(){
+			            	
+								$("#gu").click(function(){
+									let str="";
+									if($("#gu option:selected").val()=="강서구")
+									{
+										str+=   `<option value="화곡동">화곡동</option>
+					                             <option value="목동">목동</option>`;
+										
+									   $("#dong").html(str);				
+									} else {
+										str+= `<option value="오금동">오금동</option>
+						                   	   <option value="오류동">오류동</option>
+						                       <option value="상일동">상일동</option>`;
+						                       
+									   $("#dong").html(str);        
+										   }					
+								})     	
+			            })
+			            </script>
+
                     </div>
                     <div id="regionButton">
-                        <button type="button" class="btn btn-secondary btn-sm">지역선택</button>
-                        <button type="button" class="btn btn-secondary btn-sm">동네선택</button>
+                        <button type="submit" class="btn btn-secondary btn-sm">동네선택</button>
                     </div>
+                   
+                
+                    
                    
                 </div>
                 <div id="proContent">
@@ -396,7 +410,7 @@
 	            <% } %>
      		</div>
                 
-
+</form>
 
     </div>
     

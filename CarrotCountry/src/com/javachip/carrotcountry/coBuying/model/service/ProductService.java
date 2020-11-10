@@ -277,6 +277,19 @@ public class ProductService {
 		
 	}
 	
+	public ArrayList<Product> selectRegionProduct(PageInfo pi, String localGu, String localDong){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectRegionProduct(conn, pi, localGu, localDong);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	
+	
 	
 	public ArrayList<PostBoardJY> mainSearchAjax(PageInfo pi, String keyword) {
 		Connection conn = getConnection();
