@@ -42,39 +42,39 @@ public class OneToAnswerController extends HttpServlet {
 		
 		PrintWriter writer = response.getWriter();
 		
-		if (member == null) {
+			if (member == null) {
+				
+				writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href = '" + request.getContextPath() + "';</script>");
 			
-			writer.println("<script>alert('로그인 후 이용 가능합니다.'); location.href = '" + request.getContextPath() + "';</script>");
-		
-		} else if(!"Y".equals(member.getManagerCheck())) {	
+			} else if(!"Y".equals(member.getManagerCheck())) {	
+				
+				writer.println("<script>alert('권한이 없습니다.'); location.href = '" + request.getContextPath() + "';</script>");
 			
-			writer.println("<script>alert('권한이 없습니다.'); location.href = '" + request.getContextPath() + "';</script>");
-		
-		} else {
-		
-		int ono = Integer.parseInt(request.getParameter("ono"));
-		String content = request.getParameter("content");
-		String answer = request.getParameter("memNo");
-		
-		OneTo o = new OneTo();
-		
-		o.setOneToNo(ono);
-		o.setAnswerContent(content);
-		o.setAnswererNo(answer);
-		//System.out.println();
-		int result = new OneToService().answer(o); 
-		
-		
-		if(result > 0) {
+			} else {
+			
+			int ono = Integer.parseInt(request.getParameter("ono"));
+			String content = request.getParameter("content");
+			String answer = request.getParameter("memNo");
+			
+			OneTo o = new OneTo();
+			
+			o.setOneToNo(ono);
+			o.setAnswerContent(content);
+			o.setAnswererNo(answer);
+			//System.out.println();
+			int result = new OneToService().answer(o); 
 			
 			
-			request.getSession().setAttribute("alertMsg", "답변완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.on.jm?ono=" + ono);
-		}else {
-			request.setAttribute("errorMsg", "답변등록 실패.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
-		}
+			if(result > 0) {
+				
+				
+				request.getSession().setAttribute("alertMsg", "답변완료되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/detail.on.jm?ono=" + ono);
+			}else {
+				request.setAttribute("errorMsg", "답변등록 실패.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+			}
 		
 		}
 		
