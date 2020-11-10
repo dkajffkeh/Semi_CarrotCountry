@@ -178,7 +178,9 @@ border:2px solid green;
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
                 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>    
             </div>
-            <div id="preview_frame">    
+            <h6 align="center">사진은 최대 5개까지 업로드가 가능합니다.</h6>
+            <div id="preview_frame">
+            
             </div>
             <div class="image_upload" style="margin-top:15px ;">
                 <input type="file" onchange="setThumbnail(event);" name="file" id="picture_uploader" accept="image/*" multiple  required>
