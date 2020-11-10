@@ -39,8 +39,8 @@
        #content2>*{height: 100%; float: left;}
        #emptyDiv{width:100px}
        #content2_1{
-           width: 400px; 
-           padding: 30px;
+           width: 500px; 
+           padding: 0px;
            padding-top: 0px;
            padding-bottom: 50px;
            

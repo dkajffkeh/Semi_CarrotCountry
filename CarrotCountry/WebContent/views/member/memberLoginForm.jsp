@@ -8,10 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-	<%@ include file="../common/commonNavbar.jsp" %>
-	<style>
+<style>
         .wrap{
             border:5px solid darkgray;
             width:400px;
@@ -63,6 +60,10 @@
         }
         #p{font-size:12px; color:red;}
     </style>
+</head>
+<body>	
+	<%@ include file="../common/commonNavbar.jsp" %>
+	
 
     <div class="wrap">
         <h1>당근나라</h1>
@@ -86,7 +87,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="userCheck" id="userCheck"> <label for="userCheck">로그인 상태 유지</label></td>
+                    <td><input type="checkbox" name="userCheck" id="userCheck" value="Y"> <label for="userCheck">로그인 상태 유지</label></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" id="loginSubmit" class="btn btn-warning" value="로그인"></td>

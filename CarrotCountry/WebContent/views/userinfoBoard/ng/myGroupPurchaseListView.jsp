@@ -137,9 +137,9 @@
 			            </table>
 					</div>
 					<div class="gpRight">
-			                	<a href="" class="btn btn-warning btn-sm" style="color:white;">상품조회</a>
+			                	<a href="<%= contextPath %>/buyerdetail.pro.jy?bno=<%= m.getPostNo() %>" class="btn btn-warning btn-sm" style="color:white;">상품조회</a>
 			                	<a href="<%= contextPath %>/groupPurchaseDetail.gp.ng?memNo=<%= loginMember.getMemNo() %>&purchaseNo=<%= m.getPurchaseNo() %>" class="btn btn-warning btn-sm" style="color:white;">구매정보</a>
-			                	<a href="" class="btn btn-warning btn-sm" style="color:white;">문의하기</a>
+			                	<a href="<%= contextPath %>/buyerlist.qna.jy?currentPage=1&bno=<%= m.getPostNo() %>" class="btn btn-warning btn-sm" style="color:white;">문의하기</a>
 			        </div>
 			    </div>
 				<% } %>

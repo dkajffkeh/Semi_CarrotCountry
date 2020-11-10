@@ -416,6 +416,148 @@
 	</entry>
 
 
+
+
+
+
+
+
+
+
+<entry key="selectMainProductListSort1">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_ENROLL_DATE DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort2">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY GP_DPRICE ASC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort3">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_LIKES DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+<entry key="selectMainProductListSort4">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT
+		                       POST_NO
+		                     , THUMBNAIL_PATH
+		                     , THUMBNAIL_FILENAME
+		                     , THUMBNAIL_LOADPATH
+		                     , POST_NAME
+		                     , GP_PEOPLE
+		                     , POST_LIKES
+		                     , GP_PRICE
+		                     , GP_DRATE
+		                     , GP_DPRICE
+		                  FROM GROUP_PURCHASE
+		                  JOIN POST USING (POST_NO)
+		                 WHERE BLIND_CHECK = 'N'
+		                   AND POST_TYPE = 2
+		                 ORDER
+		                    BY POST_VIEWS DESC
+		                ) A 
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </properties>
 
 

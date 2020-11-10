@@ -3,6 +3,7 @@ package com.javachip.carrotcountry.member.controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +36,11 @@ public class MemberLoginController extends HttpServlet {
 		
 		String memUserId = request.getParameter("userId");
 		String memUserPwd = request.getParameter("userPwd");
-		String userCheck = request.getParameter("userCheck"); // 로그인 유지(쿠키사용)
+		String userCheck = request.getParameter("userCheck"); // "Y"면 로그인 유지(쿠키사용)
 		
 		Member loginMember = new MemberService().loginMember(memUserId, memUserPwd);
+		
+
 		
 		if(loginMember == null) { 
 			
@@ -53,8 +56,7 @@ public class MemberLoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			session.setMaxInactiveInterval(-1);
-			
-			
+									
 			response.sendRedirect(request.getContextPath());
 		}
 		

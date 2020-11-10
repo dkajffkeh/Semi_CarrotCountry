@@ -121,6 +121,10 @@ SELECT PI.PURCHASE_NO   <!-- 구매 넘 -->
     , M.MEM_NAME
     , A.ACCOUNT               <!-- 송금 보내야될 계좌번호 -->
     , A.BANK                  <!-- 송금 보내야될 은행 -->
+    
+    <!-- post 테이블 더 추가 -->
+    , P.DEAL_TYPE
+    , P.SITE
 
 FROM PURCHASE_INFO PI
 JOIN SHIPPING_LOCATION SL ON (SL.SHIPPING_NO = PI.SHIPPING_NO)

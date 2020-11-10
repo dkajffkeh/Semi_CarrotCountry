@@ -55,7 +55,7 @@ public class MyGroupPurchaseListController extends HttpServlet {
 		repPageLimit = 5;
 		
 		// 한페이지 게시글 최대 갯수
-		repBoardLimit = 6;
+		repBoardLimit = 4;
 		
 		// 가장 마지막수
 		repMaxPage = (int)Math.ceil((double)repListCount / repBoardLimit);
