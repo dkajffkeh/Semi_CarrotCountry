@@ -8,13 +8,12 @@ public class ShippingLocation {
 	private String memUserName;
 	private String memPhone;
 	private String shippingDefault;
-	private String slStatus; //주소지 사용 상태
 	
 	
 	public ShippingLocation() {}
 
 	public ShippingLocation(int shippingNo, int memNo, String shippingAddress, String memUserName, String memPhone,
-			String shippingDefault, String slStatus) {
+			String shippingDefault) {
 		super();
 		this.shippingNo = shippingNo;
 		this.memNo = memNo;
@@ -22,7 +21,6 @@ public class ShippingLocation {
 		this.memUserName = memUserName;
 		this.memPhone = memPhone;
 		this.shippingDefault = shippingDefault;
-		this.slStatus = slStatus;
 	}
 
 
@@ -87,19 +85,12 @@ public class ShippingLocation {
 		this.shippingDefault = shippingDefault;
 	}
 
-	public String getSlStatus() {
-		return slStatus;
-	}
-
-	public void setSlStatus(String slStatus) {
-		this.slStatus = slStatus;
-	}
 
 	@Override
 	public String toString() {
 		return "ShippingLocation [shippingNo=" + shippingNo + ", memNo=" + memNo + ", shippingAddress="
 				+ shippingAddress + ", memUserName=" + memUserName + ", memPhone=" + memPhone + ", shippingDefault="
-				+ shippingDefault + ", slStatus=" + slStatus + "]";
+				+ shippingDefault  + "]";
 	}
 	
 	
