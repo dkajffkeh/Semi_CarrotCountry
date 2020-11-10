@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@
 	page import="com.javachip.carrotcountry.coBuying.model.vo.*"
- %>    
+%>    
 
 <%
 	QnA qa = (QnA)request.getAttribute("qa");
 	Product pd = (Product)request.getAttribute("pd");
 	PostBoardJY pb = (PostBoardJY)request.getAttribute("pb"); 
+	int Bbno = (int)request.getAttribute("bno");	
 %>
 <!DOCTYPE html>
 <html>
@@ -51,10 +52,8 @@
 }
 #writeBtn{
     display: inline-block;
-    margin: 85px;
+    margin-right:95px;
 }
-
-
 </style>    
 </head>
 <body>
@@ -70,9 +69,10 @@
             </div>
             
         <form id="questionEnrollForm" action="<%= contextPath %>/buyerinsert.qna.jy">
+        	<input type="hidden" name="Bbno" value="<%=Bbno%>">
             <br><br><br>
             <div id="btnArea">
-                <button id="writeBtn" class="btn btn-secondary" style="float: right;">등록하기</button>
+                
             </div>
             <div id="content2"  align="center">
             <input type="hidden" name="userNo" value="<%= loginMember.getMemNo() %>">
@@ -85,7 +85,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td> &nbsp;&nbsp;<input name="title" id="textTitle" type="text" name="title" placeholder="제목을 입력하세요"></td>
+                            <td> &nbsp;&nbsp;<input name="title" id="textTitle" type="text" name="title" style="height:40px; width:900px;" placeholder="제목을 입력하세요" required></td>
                         </tr>
                         <tr>
                             <td>
@@ -93,10 +93,8 @@
                             </td>
                         </tr>
                 </table>
-               
+               <button id="writeBtn" class="btn btn-secondary" style="float: right;">등록하기</button>
             </div>
-        
-
             </form>
         </div>
 

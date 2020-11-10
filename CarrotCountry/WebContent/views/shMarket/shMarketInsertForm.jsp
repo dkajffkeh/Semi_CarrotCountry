@@ -23,6 +23,9 @@ ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
             color: black;
             text-decoration: none;}
 body {min-height: 100%;}
+div,p,a,h2,h1{
+font-family: 'Jua';
+}  
 #page_total_wrapper {
     width:850px;
     height:100%;
@@ -173,8 +176,7 @@ border:2px solid green;
             </script>
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
-                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>
-                <button type="button" class="btn btn-success btn-sm">본인인증</button>
+                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>    
             </div>
             <div id="preview_frame">
                 <div class="image_wrapper">

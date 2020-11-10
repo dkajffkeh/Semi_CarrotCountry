@@ -9,6 +9,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");
+	int bno = (int)request.getAttribute("bno");
 %>
 
 <!DOCTYPE html>
@@ -139,11 +140,11 @@ tbody td:hover{cursor: pointer;}
 							$("#list-area>tbody>tr").click(function(){
 								
 								// 클릭했을 때의 행에 존재하는 글번호
-								var bno = $(this).children().eq(1).text();
+								var qno = $(this).children().eq(1).text();
 								
 								
 								// 쿼리스트링으로 만들어서 요청시 값 전달
-								location.href = "<%=contextPath%>/detail.qna.jy?bno=" + bno;
+								location.href = "<%=contextPath%>/detail.qna.jy?qno=" + qno +"&bno="+"<%=bno%>";
 								
 							});
 						});
@@ -151,7 +152,7 @@ tbody td:hover{cursor: pointer;}
                     
                     <!-- 현재 로그인한 회원일경우에만 보여지는 버튼 -->
                     <% if(loginMember != null){ %>
-                    <a href="<%= contextPath %>/buyerenroll.qna.jy" id="writeBtn" class="btn btn-secondary" style="float: right;">글 작성하기</a>
+                    <a href="<%= contextPath %>/buyerenroll.qna.jy?bno=<%=bno%>" id="writeBtn" class="btn btn-secondary" style="float: right;">글 작성하기</a>
                 	<%} %>
 
                 </div>
