@@ -196,7 +196,7 @@ border:2px solid green;
                 </div>    
             </div>
             <div class="image_upload" style="margin-top:15px ;">
-                    <input type="file" name="pictures1" id="thumnail_input" onchange="loadImg(this,1);" accept="image/*" required>
+                    <input type="file" name="pictures1" id="thumnail_input" onchange="loadImg(this,1);" accept="image/*" multiple required>
                     <input type="file" name="pictures2" id="file_input1" onchange="loadImg(this,2);" accept="image/*">
                     <input type="file" name="pictures3" id="file_input2" onchange="loadImg(this,3);" accept="image/*">
                     <input type="file" name="pictures4" id="file_input3" onchange="loadImg(this,4);" accept="image/*">
