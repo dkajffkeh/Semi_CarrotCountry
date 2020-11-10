@@ -190,7 +190,7 @@ border:2px solid green;
         </div>
             <div class="submit_button_wrapper">
                 <div></div>
-                <button type="submit" class="btn btn-success" style="margin-bottom:10px">게시글 올리기</button>
+                <button type="submit" class="btn btn-success" id="uploadBtn" style="margin-bottom:10px">게시글 올리기</button>
             </div>
         </form>
     </div>
@@ -209,7 +209,7 @@ border:2px solid green;
 
                         let preview = document.querySelector("div#preview_frame");
                         let fileCounter = document.getElementById("picture_uploader").files.length;
-
+                        let uploadButton = document.getElementById("uploadBtn");	
                         if(fileCounter<=5) {
 
                         document.getElementById("picture_uploader").addEventListener("change", function() {
@@ -239,10 +239,14 @@ border:2px solid green;
 
                         };
                     reader.readAsDataURL(image);
-                    
+                    uploadButton.disabled=false;
                     };
                     } else if(fileCounter>5) {
-                    alert("사진은 최대 5개까지만 업로드가 가능합니다.")
+                    alert("사진은 최대 5개까지만 업로드가 가능합니다. 5개 이하로 사진을 선택해 주십시오.")
+                    
+                    
+                    uploadButton.disabled=true;
+                    
                     } 
                     }
     </script>    
