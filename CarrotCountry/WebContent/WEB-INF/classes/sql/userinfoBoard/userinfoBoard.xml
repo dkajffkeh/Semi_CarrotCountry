@@ -178,6 +178,7 @@
 	                 WHERE MEM_NO=?
 	                   AND P.BLIND_CHECK ='N'
 	                   AND PROD_STATUS='N'
+	                   AND POST_TYPE=1
 	               ) A
 	       )
 	WHERE RNUM BETWEEN ? AND ?
@@ -210,6 +211,7 @@
 				                 WHERE MEM_NO=?
 				                   AND P.BLIND_CHECK ='N'
 				                   AND PROD_STATUS='Y'
+				                   AND POST_TYPE=1
 				               ) A
 				       )
 				WHERE RNUM BETWEEN ? AND ?

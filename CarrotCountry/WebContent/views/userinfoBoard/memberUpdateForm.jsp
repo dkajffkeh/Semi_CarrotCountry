@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+   	 String alertMsg = (String)session.getAttribute("alertMsg");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +35,15 @@
 </style>
 </head>
 <body>
+	<% if(alertMsg != null){ %>
+		<script>
+			alert("<%= alertMsg %>");
+		</script>
+		<%
+			session.removeAttribute("alertMsg");
+		%>
+		
+	<% } %>
 	<!--  headerNavbar -->
 	<%@ include file= "../common/commonNavbar.jsp"%>
 	
@@ -225,8 +238,5 @@
     <!-- footerbar -->
 	<%@ include file="../common/footerbar.jsp" %>
 	
-	
-
-
 </body>
 </html>

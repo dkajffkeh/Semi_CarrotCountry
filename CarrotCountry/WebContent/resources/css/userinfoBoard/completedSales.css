@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
-           
-        .outer{
-            margin-top:50px;
-           margin-left:50px;
-           height:100%;
-           font-family: 'Nanum Gothic', sans-serif; 
-           }
+        
+		.outer{
+	            margin-top:50px;
+	           margin-left:50px;
+	           height:100%;
+	           font-family: 'Nanum Gothic', sans-serif; 
+	           }
              /* 메뉴선택 세부영역 */
      
         .menu{
@@ -40,17 +40,27 @@
             border:5px solid rgb(255, 178, 34);
             border-radius:50px;
             height:780px;
-            padding:50px;
+            padding:30px;
 
         }
         #saleStatusTable{
-         margin:auto;
-         font-size:20px;
+                 margin:auto;
+                 font-size:20px;
+                 
              }
-         #saleStatusTable td{
-         width:230px;
-         height:80px;
-            }
+             #saleStatusTable th{
+                    padding-bottom:13px;
+                    padding-right:10px;
+             }
+             #saleStatusTable td{
+                width:180px;
+                height:90px;
+               
+                border-bottom:3px solid lightgray;
+                padding-bottom:10px;
+                margin:auto;
+             }
+
         #saleImage:hover {
                 box-shadow:5px 5px 10px 5px gray;
                 cursor:pointer;
@@ -63,4 +73,7 @@
                 font-size:25px;
                 font-weight:500;
             }
+    
+    
+
     

@@ -32,7 +32,7 @@ public class OnSalesUpdateController extends HttpServlet {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		int result = new UserInfoBoardService().deleteOnSales(bno);
+		int result = new UserInfoBoardService().updateOnSales(bno);
 		
 		if(result >0) {
 			

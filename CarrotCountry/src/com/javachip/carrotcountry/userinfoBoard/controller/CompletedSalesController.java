@@ -49,7 +49,7 @@ public class CompletedSalesController extends HttpServlet {
 		
 		listCount = new UserInfoBoardService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		boardLimit = 3;
+		boardLimit = 6;
 		pageLimit=5;
 		maxPage = (int)Math.ceil(((double)listCount/boardLimit));
 		
