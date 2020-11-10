@@ -134,9 +134,9 @@ public class ProductService {
 			
 			Connection conn = getConnection();
 
-			int result1 = new ProductDao().insertProductPost(conn, pb);
+			int result1 = new ProductDao().insertProductPost(conn, pb, lo);
 			int result2 = new ProductDao().insertProductGroupPurchase(conn, pd);
-			int result3 = new ProductDao().insertProductLocation(conn, lo);
+			//int result3 = new ProductDao().insertProductLocation(conn, lo);
 			int result4 = new ProductDao().insertProductOption(conn, option);
 			int result5 = new ProductDao().insertProductAccount(conn, account);
 			int result6 = new ProductDao().insertProductPhoto(conn, pList);
@@ -145,19 +145,19 @@ public class ProductService {
 
 			System.out.println(result1);
 			System.out.println(result2);
-			System.out.println(result3);
+			//System.out.println(result3);
 			System.out.println(result4);
 			System.out.println(result5);
 			System.out.println(result6);
 			
 			
-			if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 ) {
+			if(result1 > 0 && result2 > 0 && result4 > 0 && result5 > 0 && result6 > 0 ) {
 				commit(conn);
 			}else {
 				rollback(conn);
 			}
 			close(conn);
-			return result1 * result2 * result3 * result4 * result5 * result6;
+			return result1 * result2 * result4 * result5 * result6;
 		}
 		
 		

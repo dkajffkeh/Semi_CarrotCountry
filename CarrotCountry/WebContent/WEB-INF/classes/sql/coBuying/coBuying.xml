@@ -179,7 +179,18 @@
 		      SEQ_PNO.NEXTVAL
 		    , ?
 		    , ?
-		    , 1
+		    , (
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+          	 )	
 		    , ?
 		    , ?
 		    , ?
@@ -232,16 +243,21 @@
 		  INTO LOCATION
 		  (
 		     LOCAL_NO
-		   , LOCAL_SI
-		   , LOCAL_GU
-		   , LOCAL_DONG
 		  )
 		  VALUES
 		  (
-		     SEQ_LNO.NEXTVAL
-		   , '서울특별시'
-		   , ?
-		   , ?
+		     (
+                SELECT
+                      LOCAL_NO
+                  FROM 
+                      LOCATION
+                 WHERE 
+                      LOCAL_SI=?
+                   AND   
+                      LOCAL_GU=?
+                   AND   
+                      LOCAL_DONG=?
+           )
 		  )
 	</entry>
 	<entry key="insertProductOption">

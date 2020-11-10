@@ -341,7 +341,7 @@ private Properties prop = new Properties();
 	
 
 	// 1. post
-	public int insertProductPost(Connection conn, PostBoard pb) {
+	public int insertProductPost(Connection conn, PostBoard pb, Location lo) {
 		// insert문 => 처리된 행 수
 		int result = 0;
 		
@@ -353,13 +353,16 @@ private Properties prop = new Properties();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pb.getCategoryNo());
 			pstmt.setInt(2, pb.getMemNo());
-			pstmt.setString(3, pb.getMemNickname());
-			pstmt.setString(4, pb.getPostName());
-			pstmt.setString(5, pb.getPostContent());
-			pstmt.setString(6, pb.getCategoryNo());
-			pstmt.setString(7, pb.getThumbnailPath());
-			pstmt.setString(8, pb.getThumbnailFilename());
-			pstmt.setString(9, pb.getThumbnailLoadPath());
+			pstmt.setString(3, lo.getLocal_si());
+			pstmt.setString(4, lo.getLocal_gu());
+			pstmt.setString(5, lo.getLocal_dong());
+			pstmt.setString(6, pb.getMemNickname());
+			pstmt.setString(7, pb.getPostName());
+			pstmt.setString(8, pb.getPostContent());
+			pstmt.setString(9, pb.getCategoryNo());
+			pstmt.setString(10, pb.getThumbnailPath());
+			pstmt.setString(11, pb.getThumbnailFilename());
+			pstmt.setString(12, pb.getThumbnailLoadPath());
 			
 			result = pstmt.executeUpdate();
 			
@@ -400,7 +403,7 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-	
+	/*
 		// 3. location
 		public int insertProductLocation(Connection conn, Location lo) {
 			// insert문 => 처리된 행 수
@@ -412,8 +415,9 @@ private Properties prop = new Properties();
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, lo.getLocal_gu());
-				pstmt.setString(2, lo.getLocal_dong());
+				pstmt.setString(1, lo.getLocal_si());
+				pstmt.setString(2, lo.getLocal_gu());
+				pstmt.setString(3, lo.getLocal_dong());
 				
 				result = pstmt.executeUpdate();
 				
@@ -425,7 +429,7 @@ private Properties prop = new Properties();
 			return result;
 		}
 	
-		
+		*/
 		// 4. option
 		public int insertProductOption(Connection conn, String[] option) {
 			// 여러번의 insert문 

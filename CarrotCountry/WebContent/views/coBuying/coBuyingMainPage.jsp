@@ -241,7 +241,7 @@
             <div id="content1">
             
                 <ul>
-                    <li><a href="">디지털/가전</a></li>
+                    <li onclick="category(this)"><a href="">디지털/가전</a></li>
                     <li><a href="">가구/인테리어</a></li>
                     <li><a href="">유아동/유아도서</a></li>
                     <li><a href="">생활/가공식품</a></li>
@@ -257,6 +257,16 @@
                 </ul>
               
             </div>
+            
+            <script>
+            function category(e){
+            	console.log(e);
+            	e.children[0].innerHTML
+            }
+            </script>
+            
+            
+            
             <div id="content2">
                 <div id="array">
                     <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>

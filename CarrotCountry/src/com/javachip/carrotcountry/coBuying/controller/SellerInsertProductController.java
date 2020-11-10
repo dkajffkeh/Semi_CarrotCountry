@@ -59,6 +59,17 @@ public class SellerInsertProductController extends HttpServlet {
 			
 			
 			// 1. post
+			String localSi = multiRequest.getParameter("si");
+			String localGu = multiRequest.getParameter("gu");
+			String localDong = multiRequest.getParameter("dong");
+			
+			Location lo = new Location();
+			lo.setLocal_si(localSi);
+			lo.setLocal_gu(localGu);
+			lo.setLocal_dong(localDong);
+			
+			
+			
 			String category = multiRequest.getParameter("category");
 			int memNo = Integer.parseInt(multiRequest.getParameter("memNo"));
 			String memNick = multiRequest.getParameter("memNick");
@@ -69,7 +80,7 @@ public class SellerInsertProductController extends HttpServlet {
 			String site ="서울특별시";
 			int prodPrice = 1;
 			
-			PostBoard pb = new PostBoard(); 
+			PostBoard pb = new PostBoard();
 			pb.setCategoryNo(category);
 			pb.setMemNo(memNo);
 			pb.setMemNickname(memNick);
@@ -99,15 +110,17 @@ public class SellerInsertProductController extends HttpServlet {
 			pd.setGpRefund(gpRefund);
 			
 			
-			
+			/*
 			// 3. location
+			String localSi = multiRequest.getParameter("si");
 			String localGu = multiRequest.getParameter("gu");
 			String localDong = multiRequest.getParameter("dong");
 			
 			Location lo = new Location();
+			lo.setLocal_si(localSi);
 			lo.setLocal_gu(localGu);
 			lo.setLocal_dong(localDong);
-			
+			*/
 			
 			// 4. option
 			String[] option = multiRequest.getParameterValues("option"); 

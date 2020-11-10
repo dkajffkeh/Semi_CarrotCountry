@@ -229,60 +229,43 @@ select {
                 <tr>
                     <td class="textOrange"> <br> 주소입력</td>
                     <td> <br>
-                   	     서울특별시 &nbsp; &nbsp;
+                   	    <select id="si" name="si" class="form-control">
+		                    <option value="서울특별시">서울특별시</option>
+		                </select>
                         
-                        <select name="gu" id="gu">
+                        
+                         <select id="gu" name="gu">
+		                    <option value="송파구">송파구</option>
+		                    <option value="강서구">강서구</option>
+		                </select>
+		                        
+                        <select id="dong" name="dong">
+		                    <option value="오금동">오금동</option>
+		                    <option value="오류동">오류동</option>
+		                    <option value="상일동">상일동</option>
+		                </select>
 
-                            <option value="">구 선택</option>
-
-                            <option name="gu" value="gs">강서구</option>
-
-                            <option name="gu" value="sp">송파구</option>
-
-                        </select>
-
-                        <select name="dong" id="dong">
-                            <option value="">동 선택</option>
-                        </select>
-
-                        <script type="text/javascript">
-
-                            $(function() {
-
-                                $('#gu').change(function() {
-
-                                    var gs = ["화곡동", "목동"];
-
-                                    var sp = ["오류동", "오금동", "상일동"];
-
-                                    var changeItem;
-
-                                	if (this.value == "gs") {
-
-                                        changeItem = gs;
-
-                                    } else if (this.value == "sp") {
-
-                                        changeItem = sp;
-                                    }
-
-                                    $('#dong').empty();
-
-                                    for (var count = 0; count < changeItem.length; count++) {
-
-                                        var option = $("<option name='dong'>" + changeItem[count] + "</option>");
-
-                                        $('#dong').append(option);
-
-
-
-                                    }
-
-                                });
-
-                            });
-
-                        </script>
+                         <script>
+			            $(function(){
+			            	
+								$("#gu").click(function(){
+									let str="";
+									if($("#gu option:selected").val()=="강서구")
+									{
+										str+=   `<option value="화곡동">화곡동</option>
+					                             <option value="목동">목동</option>`;
+										
+									   $("#dong").html(str);				
+									} else {
+										str+= `<option value="오금동">오금동</option>
+						                   	   <option value="오류동">오류동</option>
+						                       <option value="상일동">상일동</option>`;
+						                       
+									   $("#dong").html(str);        
+										   }					
+								})     	
+			            })
+			            </script>
 
 
                     <td></td>
