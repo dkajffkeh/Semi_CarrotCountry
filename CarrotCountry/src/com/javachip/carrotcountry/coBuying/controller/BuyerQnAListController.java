@@ -37,7 +37,7 @@ public class BuyerQnAListController extends HttpServlet {
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				int result = new QnAService().increaseCount(bno);
 		
-				System.out.println(result);
+				
 				
 				if(result > 0) { // 유효한게시글
 			
@@ -84,7 +84,7 @@ public class BuyerQnAListController extends HttpServlet {
 				
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
-				
+				request.setAttribute("bno", bno);
 				request.getRequestDispatcher("views/coBuying/buyerQnAListView.jsp").forward(request, response);
 				
 				}else {

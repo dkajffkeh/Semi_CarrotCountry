@@ -29,14 +29,14 @@ public class BuyerQnADeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int qno = Integer.parseInt(request.getParameter("qno"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		
-		int result = new QnAService().deleteBuyerQnA(bno);
+		int result = new QnAService().deleteBuyerQnA(qno);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
 			
-			response.sendRedirect(request.getContextPath() + "/buyerlist.qna.jy?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/buyerlist.qna.jy?currentPage=1&bno="+bno);
 		}else {
 			
 			request.setAttribute("errorMsg", "삭제 실패했습니다.");
