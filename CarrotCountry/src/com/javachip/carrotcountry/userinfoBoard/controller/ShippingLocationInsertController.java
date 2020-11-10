@@ -36,22 +36,29 @@ public class ShippingLocationInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("utf-8");
-		//유저조회랑 배송지값 추가를 같이 해야함
+		
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		String address = request.getParameter("address");
 		String userName = request.getParameter("userName");
 		String phone = request.getParameter("phone");
 		String defaultAddress = request.getParameter("defaultAddress");
 		
-		ShippingLocation sl = new ShippingLocation(memNo, address, userName, phone, defaultAddress);
+		if(defaultAddress == null) {
+			ShippingLocation sl = new ShippingLocation(memNo, address, userName, phone, "N");
+			int result = new UserInfoBoardService().insertAddress(sl);
+			if(result >0) {
+				response.sendRedirect(request.getContextPath()+"/myPage.me.jw?memNo="+memNo+"&currentPage=1");
+			}
+		}else {
 		
+		ShippingLocation sl = new ShippingLocation(memNo, address, userName, phone, defaultAddress);
 		int result = new UserInfoBoardService().insertAddress(sl);
 		if(result >0) {
-			
 			response.sendRedirect(request.getContextPath()+"/myPage.me.jw?memNo="+memNo+"&currentPage=1");
-				
 			}
-	}
+	
+		}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

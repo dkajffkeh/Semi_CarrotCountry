@@ -341,10 +341,10 @@ public class UserInfoBoardService {
 		 * @return 			
 		 *
 		 */
-		public int deleteAddress(int sno) {
+		public int deleteAddress(String[] addressLists) {
 			Connection conn = getConnection();
 			
-			int result = new UserInfoBoardDao().deleteAddress(conn,sno);
+			int result = new UserInfoBoardDao().deleteAddress(conn,addressLists);
 			
 			if(result>0){
 				commit(conn);

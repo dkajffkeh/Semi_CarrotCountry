@@ -35,11 +35,11 @@ public class SellerQnAListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//=========== bno numberformatexception 뜸  아마도 넘어오는 bno이 없어서? ajax로 다시 해보기 / 나중에 마이페이지랑 연결하기============ 
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		int result = new QnAService().increaseQnACount(bno);
+		//int result = new QnAService().increaseQnACount(bno);
 
-		System.out.println(result);
 		
-		if(result > 0) { // 유효한게시글
+		
+		// 유효한게시글
 			
 		// 사용자가 요청한 페이지에 뿌려줄 공구물품 Product
 		Product pd = new QnAService().selectProductQnAList(bno);
@@ -92,12 +92,7 @@ public class SellerQnAListController extends HttpServlet {
 		
 		request.getRequestDispatcher("views/coBuying/sellerQnAListView.jsp").forward(request, response);
 		
-		}else {
-			
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
-		}
+		
 	
 	}
 

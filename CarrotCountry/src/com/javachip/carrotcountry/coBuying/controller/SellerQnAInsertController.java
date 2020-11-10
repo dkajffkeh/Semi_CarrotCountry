@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.coBuying.model.service.QnAServiceHY;
+
 /**
  * Servlet implementation class SellerQnAInsertController
  */
@@ -26,8 +28,19 @@ public class SellerQnAInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int qno = Integer.parseInt(request.getParameter("qno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		String content = request.getParameter("content");
+		
+		int result = new QnAServiceHY().SellerQnAInsert(qno,content);
+		
+		if(result>0) {
+			
+		response.sendRedirect(request.getContextPath()+"/sellerlist.qna.jy?bno="+bno+"&currentPage=1");	
+			
+		}
+		
 	}
 
 	/**

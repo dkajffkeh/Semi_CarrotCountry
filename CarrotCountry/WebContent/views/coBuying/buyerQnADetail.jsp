@@ -5,7 +5,7 @@
  %>    
 
 <%
-	QnA qa = (QnA)request.getAttribute("qa");
+	QnAHY qa = (QnAHY)request.getAttribute("qa");
     int bno = (int)request.getAttribute("bno");
 %>
 <!DOCTYPE html>
@@ -93,9 +93,19 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td colspan="4" height="250">
+                            <td colspan="4" style="height:100px">
                              	  <%= qa.getGqContent() %>
                             </td>
+                          </tr>
+                          <tr>
+                          	<td colspan="4" width="800px" align="center" style="background-color:lightblue;">
+                             	 답변내용
+                            </td>
+                          </tr>
+                          <tr>
+                          	<td colspan="4">
+                          	<%= qa.getGqAnswer() %>
+                          	</td>
                           </tr>
                         </tbody>
                       </table>
