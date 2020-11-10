@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javachip.carrotcountry.coBuying.model.service.QnAService;
+import com.javachip.carrotcountry.coBuying.model.service.QnAServiceHY;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
+import com.javachip.carrotcountry.coBuying.model.vo.QnAHY;
 
 /**
  * Servlet implementation class BuyerQnADetailController
@@ -36,7 +38,7 @@ public class BuyerQnADetailController extends HttpServlet {
 		
 		if(result > 0) { // 유효한 게시글
 			
-			QnA qa = new QnAService().selectQnADetail(qno);
+			QnAHY qa = new QnAServiceHY().qnaSelector(qno);
 			
 			request.setAttribute("qa", qa);
 			request.setAttribute("bno", bno);

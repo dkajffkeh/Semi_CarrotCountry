@@ -108,7 +108,7 @@
 			             , A.*
 			          FROM (
 			                SELECT
-	                             , GQ_NO
+	                               GQ_NO
 			                     , MEM_USERID
 			                     , GQ_TITLE
 			                     , GQ_VIEWS
@@ -124,7 +124,7 @@
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="selectProductQnAList"> 아직임
+	<entry key="selectProductQnAList"> 
 		SELECT
 		       THUMBNAIL_LOADPATH
 		     , POST_NAME

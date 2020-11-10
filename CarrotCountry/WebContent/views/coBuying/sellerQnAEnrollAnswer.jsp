@@ -3,14 +3,11 @@
 <%@
 	page import="com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*
 			   , com.javachip.carrotcountry.coBuying.model.vo.*"
- %>    
-
+ %>     
 <%
-	PostBoard pb = (PostBoard)request.getAttribute("pb");
-	QnA qa = (QnA)request.getAttribute("qa");
-%>     
-    
-    
+QnAHY qa = (QnAHY)request.getAttribute("qa");
+
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,6 +82,8 @@
             </div>
         </div>
         <form id="answerEnrollForm" action="<%= contextPath %>/sellerinsert.qna.jy">
+        <input type="hidden" name="qno" value="<%=qa.getGqNo()%>">
+        <input type="hidden" name="bno" value="<%=qa.getPostNo()%>">
          <br><br><br>
           <div id="btnArea">
               <button id="writeBtn" class="btn btn-secondary" style="float: right;">등록하기</button>
@@ -97,14 +96,14 @@
                     </tr>
                     <tr>
                         <td>작성자</td>
-                        <td style="background: white;"><%= qa.getMemNo() %></td>
+                        <td style="background: white;"><%=qa.getMemNo() %></td>
                         <td>작성일</td>
-                        <td style="background: white;"><%= qa.getGqEnrollDate() %></td>
+                        <td style="background: white;"><%=qa.getGqEnrollDate() %></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" height="200"><%= qa.getGqContent() %></td>
+                        <td colspan="4" height="200"><%=qa.getGqContent() %></td>
                     </tr>
                 </tbody>
             </table>

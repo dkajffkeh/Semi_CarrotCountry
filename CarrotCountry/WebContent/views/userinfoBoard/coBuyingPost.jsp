@@ -94,7 +94,7 @@
                     <td><%= c.getPostEnrollDate()%> </td>
                     <td><%= c.getPostViews() %></td>
                     <td>
-                        <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo() %>" class="btn btn-light "> Q&A 답변하기</a>
+                        <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo()%>&currentPage=1" class="btn btn-light "> Q&A 답변하기</a>
                     </td>
                 </tr>
                 

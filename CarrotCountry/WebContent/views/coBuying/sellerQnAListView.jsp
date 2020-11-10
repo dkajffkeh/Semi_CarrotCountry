@@ -156,19 +156,19 @@
 						$("#qListTable>tbody>tr>td>button").click(function(){
 							
 							// 클릭했을 때의 행에 존재하는 글번호
-							var bno = $(this).children().eq(0).text();
+							var qno = $(this).parent().parent().children().eq(0).text();
 							
+							location.href = "<%= contextPath %>/sellerenroll.qna.jy?qno=" + qno;
 							
 							// 쿼리스트링으로 만들어서 요청시 값 전달
-							location.href = "<%=contextPath%>/판매자답변하기서블릿.qna.jy?bno=" + bno;
+							
 							
 						});
 					});
 				</script>
                     
                 
-                 <a href="<%= contextPath %>/sellerenroll.qna.jy" id="writeBtn" class="btn btn-secondary" style="float: right;">답변하기</a>
-                
+                  
                 
             </div>
 
