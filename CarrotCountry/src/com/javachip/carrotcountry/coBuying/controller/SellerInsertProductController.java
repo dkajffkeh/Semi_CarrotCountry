@@ -120,7 +120,7 @@ public class SellerInsertProductController extends HttpServlet {
 			// 6. photo
 			ArrayList<Photo> pList = new ArrayList<>();
 			
-			for(int i=1; i<=6; i++) {
+			for(int i=2; i<=6; i++) {
 				
 				String key = "file" + i ;
 				
