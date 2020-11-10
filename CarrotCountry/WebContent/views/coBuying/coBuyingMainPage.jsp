@@ -13,6 +13,7 @@
 	ArrayList<CategoryHY> cList = (ArrayList<CategoryHY>)request.getAttribute("cList");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");	
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	ArrayList<PostBoardJY> bList = (ArrayList<PostBoardJY>)request.getAttribute("bList");
 
 %>    
     
@@ -197,9 +198,36 @@
                 <div id="header2_2">
                     <form action="" id="searchForm">
                         <input type="search" name="keyword">
-                        <button class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
+                        <button onclick="searchAjax();" class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
                     </form>
                 </div>
+                
+                
+                <script>
+                function searchAjax(){
+                	
+                	let keyword = $("input[name=keyword]").val();
+                	
+                	$.ajax({
+                		url:"search.pro.jy",
+                		type:"get",
+                		data:{
+                			currentPage:1,
+                			keyword:keyword
+                		},
+                		success:function(result){
+                			console.log(result);
+                			 $("input[name=keyword]").val('');
+                			 $("a[class=pagination]").html('');
+                		},
+                		error:function(){
+                			
+                		}
+                	})
+                	
+                }
+                
+                </script>
                
                 <div id="header2_3"></div>
      
@@ -242,18 +270,18 @@
             
                 <ul>
                     <li onclick="category(this)"><a href="">디지털/가전</a></li>
-                    <li><a href="">가구/인테리어</a></li>
-                    <li><a href="">유아동/유아도서</a></li>
-                    <li><a href="">생활/가공식품</a></li>
-                    <li><a href="">스포츠/레저</a></li>
-                    <li><a href="">여성잡화</a></li>
-                    <li><a href="">여성의류</a></li>
-                    <li><a href="">남성패션/잡화</a></li>
-                    <li><a href="">게임/취미</a></li>
-                    <li><a href="">뷰티/미용</a></li>
-                    <li><a href="">반려동물용품</a></li>
-                    <li><a href="">도서/티켓/음반</a></li>
-                    <li><a href="">기타물품</a></li>
+                    <li onclick="category(this)"><a href="">가구/인테리어</a></li>
+                    <li onclick="category(this)"><a href="">유아동/유아도서</a></li>
+                    <li onclick="category(this)"><a href="">생활/가공식품</a></li>
+                    <li onclick="category(this)"><a href="">스포츠/레저</a></li>
+                    <li onclick="category(this)"><a href="">여성잡화</a></li>
+                    <li onclick="category(this)"><a href="">여성의류</a></li>
+                    <li onclick="category(this)"><a href="">남성패션/잡화</a></li>
+                    <li onclick="category(this)"><a href="">게임/취미</a></li>
+                    <li onclick="category(this)"><a href="">뷰티/미용</a></li>
+                    <li onclick="category(this)"><a href="">반려동물용품</a></li>
+                    <li onclick="category(this)"><a href="">도서/티켓/음반</a></li>
+                    <li onclick="category(this)"><a href="">기타물품</a></li>
                 </ul>
               
             </div>

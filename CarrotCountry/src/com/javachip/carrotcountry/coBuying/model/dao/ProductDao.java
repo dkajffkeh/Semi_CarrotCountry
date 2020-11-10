@@ -20,6 +20,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.QnA;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -792,8 +793,79 @@ private Properties prop = new Properties();
 		}
 		
 		
+		public ArrayList<PostBoardJY> mainSearchAjax(Connection conn,PageInfo pi, String keyword) {
+			ArrayList<PostBoardJY> bList = new ArrayList();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("mainSearchAjax");
+			
+
+			int startNum = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+			int endRow = startNum + pi.getBoardLimit() -1;
+
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startNum);
+				pstmt.setInt(2, endRow);
+				pstmt.setString(3, "%"+ keyword+"%");
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					if(bList.isEmpty()) {
+						PostBoardJY pb = new PostBoardJY( pi.getCurrentPage()
+								                     ,pi.getListCount()
+								                     ,pi.getBoardLimit()
+								                     ,pi.getPageLimit()
+								                     ,pi.getMaxPage()
+								                     ,pi.getStartPage()
+								                     ,pi.getEndPage()
+													 ,rs.getInt("POST_NO")		                  
+								                     ,rs.getInt("MEM_NO")
+								                     ,rs.getString("LOCATION")
+								                     ,rs.getString("POST_NAME")
+								                     ,rs.getString("CATEGORY_NAME")
+								                     ,rs.getString("THUMBNAIL_PATH")
+								                     ,rs.getString("THUMBNAIL_FILENAME")
+								                     ,rs.getString("THUMBNAIL_LOADPATH")
+								                     ,rs.getInt("POST_VIEWS")
+								                     ,rs.getInt("POST_LIKES")
+								                     ,rs.getInt("PROD_PRICE")
+								                     ,rs.getInt("LIKECOUNT"));
+						bList.add(pb);
+					} else {
+						
+						PostBoardJY pb = new PostBoardJY(rs.getInt("POST_NO")		                  
+							                        ,rs.getInt("MEM_NO")
+							                        ,rs.getString("LOCATION")
+							                        ,rs.getString("POST_NAME")
+							                        ,rs.getString("CATEGORY_NAME")
+							                        ,rs.getString("THUMBNAIL_PATH")
+							                        ,rs.getString("THUMBNAIL_FILENAME")
+							                        ,rs.getString("THUMBNAIL_LOADPATH")
+							                        ,rs.getInt("POST_VIEWS")
+							                        ,rs.getInt("POST_LIKES")
+							                        ,rs.getInt("PROD_PRICE")
+							                        ,rs.getInt("LIKECOUNT"));
+						bList.add(pb);		
+					}
 		
-		
+				}
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return bList;
+		}
+
 		
 		
 		
