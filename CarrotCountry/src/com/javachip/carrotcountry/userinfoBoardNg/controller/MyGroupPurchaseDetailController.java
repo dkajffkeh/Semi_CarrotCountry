@@ -41,7 +41,8 @@ public class MyGroupPurchaseDetailController extends HttpServlet {
 			request.getRequestDispatcher("views/userinfoBoard/ng/myGroupPurchaseDetailView.jsp").forward(request, response);
 			
 		}else {
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+			request.setAttribute("errorMsg", "오류가 발생하였습니다 잠시후 다시 시도해주세요.(DB문제)");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
 		}
 		
 	}
