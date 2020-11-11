@@ -11,6 +11,7 @@ import com.javachip.carrotcountry.coBuying.model.vo.PageInfo;
 import com.javachip.carrotcountry.coBuying.model.vo.PostBoardJY;
 import com.javachip.carrotcountry.coBuying.model.vo.Product;
 import com.javachip.carrotcountry.coBuying.model.vo.QnA;
+import com.javachip.carrotcountry.shMarketBoard.mainPage.model.dao.TownMarketIndexDao;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
@@ -467,6 +468,19 @@ public class ProductService {
 		return bList;
 	}
 	
+	
+	
+	public ArrayList<PostBoardJY> boardTop4Selector(PageInfo pi) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoardJY> pList = new ProductDao().boardTop4Selector(conn, pi);
+		
+		close(conn);
+		
+		return pList;
+	}
+
 	
 	
 

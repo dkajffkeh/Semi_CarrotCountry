@@ -1625,6 +1625,43 @@ private Properties prop = new Properties();
 		}
 
 		
+		public ArrayList<PostBoardJY> boardTop4Selector(Connection conn, PageInfo pi) {
+			
+			ArrayList<PostBoardJY> pList = new ArrayList();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("boardTop4Selector");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					PostBoardJY pb = new PostBoardJY(rs.getInt("POST_NO")
+												,rs.getInt("MEM_NO")
+												,rs.getString("LOCATION")
+												,rs.getString("POST_NAME")
+												,rs.getString("CATEGORY_NAME")
+												,rs.getString("THUMBNAIL_PATH")
+												,rs.getString("THUMBNAIL_FILENAME")
+												,rs.getString("THUMBNAIL_LOADPATH")
+												,rs.getInt("POST_VIEWS")
+												,rs.getInt("POST_LIKES")
+												,rs.getInt("PROD_PRICE"));
+					pList.add(pb);				
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}		
+			
+			return pList;
+		}
 		
 		
 
