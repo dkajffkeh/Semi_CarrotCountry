@@ -247,43 +247,23 @@
             <div id="content1">
             
                 <ul>
-                    <li onclick="category(this)"><a href="">디지털/가전</a></li>
-                    <li onclick="category(this)"><a href="">가구/인테리어</a></li>
-                    <li onclick="category(this)"><a href="">유아동/유아도서</a></li>
-                    <li onclick="category(this)"><a href="">생활/가공식품</a></li>
-                    <li onclick="category(this)"><a href="">스포츠/레저</a></li>
-                    <li onclick="category(this)"><a href="">여성잡화</a></li>
-                    <li onclick="category(this)"><a href="">여성의류</a></li>
-                    <li onclick="category(this)"><a href="">남성패션/잡화</a></li>
-                    <li onclick="category(this)"><a href="">게임/취미</a></li>
-                    <li onclick="category(this)"><a href="">뷰티/미용</a></li>
-                    <li onclick="category(this)"><a href="">반려동물용품</a></li>
-                    <li onclick="category(this)"><a href="">도서/티켓/음반</a></li>
-                    <li onclick="category(this)"><a href="">기타물품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory.pro.jy?currentPage=1">디지털/가전</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory30.pro.jy?currentPage=1">가구/인테리어</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory40.pro.jy?currentPage=1">유아동/유아도서</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory50.pro.jy?currentPage=1">생활/가공식품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory60.pro.jy?currentPage=1">스포츠/레저</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory70.pro.jy?currentPage=1">여성잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory80.pro.jy?currentPage=1">여성의류</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory90.pro.jy?currentPage=1">남성패션/잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory100.pro.jy?currentPage=1">게임/취미</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory110.pro.jy?currentPage=1">뷰티/미용</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory120.pro.jy?currentPage=1">반려동물용품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory130.pro.jy?currentPage=1">도서/티켓/음반</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory140.pro.jy?currentPage=1">기타물품</a></li>
                 </ul>
               
             </div>
-            
-            <script>
-            function category(e){
-            	var cName = e.children[0].innerHTML
-            	
-            	console.log(cName);
-            	
-            	$.ajax({
-            		url:"categoryajax.pro.jy",
-            		type:"post",
-            		data:{currentPage:1,
-            			  cName:cName},
-            		success:function(result){
-            			
-            		}
-            	})
-            }
-            </script>
-            
-            
-            
+           
             <div id="content2">
                 <div id="array">
                     <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>
@@ -392,7 +372,54 @@
 		        	});
 		        	
 		        </script>
-		                    
+		          
+            <script>
+            function category(e){
+            	let cName = e.children[0].innerHTML
+            	
+            	console.log(cName);
+            	
+            	$.ajax({
+            		url:"categoryajax.pro.jy",
+            		type:"post",
+            		data:{currentPage:1,
+            			  cName:cName},
+            		success:function(result){
+            			
+            			console.log(result);
+            			let $articleOuter = $("#proContent");
+            			let str = "";
+            			
+            			for(let i=0; i<result.length; i++){
+            				
+	            		str +=	`<div class="proName">
+				           		<input type="hidden" value="\${result[i].postNo }">
+				            	<div id="proImg"><a href=""><img src="<%= contextPath %>/\${result[i].thumbnailLoadPath+result[i].thumbnailFilename}" width="100" height="100"></a></div>
+					           
+					            <div id="proText">
+					                <div id="proText-title">
+		                               <a href=""><h4>\${result[i].postName}</h4></a>
+		                            </div>
+		                            <div id="proText-like">
+		                                <h6> \${result[i].gpPeople} | ♡ (\${result[i].postLikes})</h6> 
+		                            </div>
+						        </div>
+						        <div id="proPrice">
+			                            <h6 id="realPrice"><s>\${result[i].gpPrice}</s></h6>
+			                            <span id="discount">공구할인률 \${result[i].gpDRate} %</span>
+			                            <span id="discountPrice">\${result[i].gpDPrice}원</span>
+			                     </div>
+				            </div>`;
+            			} 
+            			
+            			$articleOuter.html(str);
+            		}
+            	})
+            }
+            </script>
+            
+            
+                       
 
                 </div>
 

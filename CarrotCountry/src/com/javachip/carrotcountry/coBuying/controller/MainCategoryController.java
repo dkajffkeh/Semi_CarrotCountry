@@ -37,7 +37,6 @@ public class MainCategoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json; charset=utf-8"); 
-		
 		int currentPage;
 		int listCount; //게시글 총 갯수.
 		int boardLimit;//한페이지에 몇개 보여줄건지

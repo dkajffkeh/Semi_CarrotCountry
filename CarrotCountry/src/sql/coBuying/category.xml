@@ -10,6 +10,8 @@ SELECT *
           FROM (
                 SELECT
                        POST_NO
+                     , THUMBNAIL_PATH
+                     , THUMBNAIL_FILENAME
                      , THUMBNAIL_LOADPATH
                      , POST_NAME
                      , GP_PEOPLE
@@ -27,6 +29,7 @@ SELECT *
                 ) A 
         )
  WHERE RNUM BETWEEN ? AND ?
+ 
  
 </entry>
 
