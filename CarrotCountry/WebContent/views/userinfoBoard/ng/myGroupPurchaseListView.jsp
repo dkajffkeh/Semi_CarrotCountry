@@ -132,7 +132,7 @@
 			                    <td colspan="2">마감일</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpDeadLine() %></td>
 			                </tr>
 			                <tr>
-			                	<td colspan="2">진행상태</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpStatus() %></td>
+			                	<td colspan="2">진행상태</td><td colspan="2">&nbsp;&nbsp;<%= m.getGpStatus().equals("Y") ? "진행중" : "마감" %></td>
 			                </tr>
 			            </table>
 					</div>
