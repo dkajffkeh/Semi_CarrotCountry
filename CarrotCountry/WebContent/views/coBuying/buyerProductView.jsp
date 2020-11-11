@@ -151,11 +151,11 @@
                         <!-- The slideshow -->
                         <div class="carousel-inner">
                           <div class="carousel-item active">
-                            <img src="<%=contextPath%>/<%=pb.getThumbnailPath() + pb.getThumbnailFilename() %>" alt="" width="100%">
+                            <img src="<%=contextPath%>/<%=pb.getThumbnailPath() + pb.getThumbnailFilename() %>" alt="" height="500px" width="500px">
                           </div>
                           <%for(int i=0; i < ptList.size(); i++){ %>
                           <div class="carousel-item">
-                            <img src="<%=contextPath%>/<%= ptList.get(i).getPhotoPath() + ptList.get(i).getPhotoFileName() %>" alt="">
+                            <img src="<%=contextPath%>/<%= ptList.get(i).getPhotoPath() + ptList.get(i).getPhotoFileName() %>" height="500px" width="500px" alt="">
                           </div>
                           <%} %>
                         </div>
