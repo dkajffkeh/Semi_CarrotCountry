@@ -32,6 +32,10 @@
             font-size:20px;
 
         }
+         .list-area thead>tr {
+            background:lightgray;
+            height:40px;
+        }
         .list-area tbody>tr:hover{
             background:rgb(252, 177, 37);
             cursor:pointer;

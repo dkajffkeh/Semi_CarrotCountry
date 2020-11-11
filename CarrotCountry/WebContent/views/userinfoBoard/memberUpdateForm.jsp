@@ -58,7 +58,7 @@
 	String phone = (loginMember.getMemPhone() == null) ? "" : loginMember.getMemPhone();
 	int localNo = loginMember.getLocalNo();
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
-
+	int memNo = loginMember.getMemNo();
 	
 	%>
 	
@@ -73,7 +73,7 @@
         <h2>회원 정보 수정</h2>
          <hr color="gray">
          <form action="<%= contextPath %>/update.me.jw" method="post" id="myPageForm">
-            <input type="hidden" value="<%= userId %>" name="userId">
+            <input type="hidden" value="<%= memNo %>" name="memNo">
             <table id="myPageTable">
                 <tr>
                     <th>* 아이디</th>

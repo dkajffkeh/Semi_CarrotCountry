@@ -12,7 +12,7 @@
 		     , MEM_PHONE=?
 		     , LOCAL_NO=?
 		     , MEM_EMAIL=?
-		WHERE MEM_USERID=?
+		WHERE MEM_NO=?
 	</entry>
 	<entry key="selectMember">
 		SELECT
@@ -40,8 +40,18 @@
 		  FROM MEMBER M
           LEFT
           JOIN LOCATION USING(LOCAL_NO)
-		 WHERE MEM_USERID =?
+		 WHERE MEM_NO=?
 		   AND LEAVE_CHECK = 'N'
+	</entry>
+	
+	<entry key="updateProfile">
+		   UPDATE 
+	              MEMBER
+	          SET  PROFILE_ORIGNNAME =? 
+	            , PROFILE_MODIFYNAME =?
+	            , PROFILE_PATH = ?
+	            , PROFILE_LOADNAME =?
+	        WHERE MEM_NO = ?
 	</entry>
 	
 	<entry key="deleteMember">
@@ -258,15 +268,17 @@
 		  WHERE SHIPPING_NO IN
 	</entry>
 	
-	<entry key="updateProfile">
-		   UPDATE 
-	              MEMBER
-	          SET PROFILE_ORIGINNAME =? 
-	            , PROFILE_MODIFYNAME =?
-	            , PROFILE_PATH = ?
-	            , PROFILE_LOADNAME =?
-	        WHERE MEM_NO = ?
+	<entry key="selectCountMarket">
+	 	      SELECT COUNT (*) "COUNTMARKET"
+                      FROM POST P    
+                      JOIN MEMBER USING(MEM_NO)
+                      WHERE MEM_NO =1
+                      AND P.BLIND_CHECK='N'
+                      AND PROD_STATUS='Y'
+                      AND P.POST_TYPE = ?
 	</entry>
-
-
+	
+	<entry key="deleteCobuyingPost">
+	
+	</entry>
 </properties>
