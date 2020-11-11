@@ -39,7 +39,7 @@
 					<form action="<%= contextPath %>/reportSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <option value="mem_userid">작성자</option>
+						  <option value="mem_userid">신고자</option>
 						  <option value="report_type_name">글유형</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">

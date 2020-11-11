@@ -1067,16 +1067,11 @@ SELECT *
 		                 WHERE BLIND_CHECK = 'N'
 		                   AND POST_TYPE = 2
                            AND LOCAL_NO =(
-                                            SELECT
-                                                  LOCAL_NO
-                                              FROM 
-                                                  LOCATION
-                                             WHERE 
-                                                  LOCAL_SI='서울특별시'
-                                               AND   
-                                                  LOCAL_GU=?
-                                               AND   
-                                                  LOCAL_DONG=?
+                                            SELECT LOCAL_NO
+                                              FROM LOCATION
+                                             WHERE LOCAL_SI='서울특별시'
+                                               AND LOCAL_GU=?
+                                               AND LOCAL_DONG=?
                                        )
 		                 ORDER
 		                    BY POST_NO DESC
@@ -1085,7 +1080,35 @@ SELECT *
 		 WHERE RNUM BETWEEN ? AND ?
 
 </entry>
-
+<entry key="searchKeyword">
+	SELECT *
+	  FROM (
+	        SELECT 
+	               ROWNUM RNUM
+	             , A.*
+	          FROM (
+	                SELECT
+	                       POST_NO
+	                     , THUMBNAIL_PATH
+	                     , THUMBNAIL_FILENAME
+	                     , THUMBNAIL_LOADPATH
+	                     , POST_NAME
+	                     , GP_PEOPLE
+	                     , POST_LIKES
+	                     , GP_PRICE
+	                     , GP_DRATE
+	                     , GP_DPRICE
+	                  FROM GROUP_PURCHASE
+	                  JOIN POST USING (POST_NO)
+	                 WHERE BLIND_CHECK = 'N'
+	                   AND POST_TYPE = 2
+	                   AND POST_NAME LIKE ?
+	                 ORDER
+	                    BY POST_ENROLL_DATE DESC
+	                ) A 
+	        )
+	 WHERE RNUM BETWEEN ? AND ?
+</entry>
 
 
 
