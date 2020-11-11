@@ -178,6 +178,7 @@
 	                 WHERE MEM_NO=?
 	                   AND P.BLIND_CHECK ='N'
 	                   AND PROD_STATUS='N'
+	                   AND POST_TYPE=1
 	               ) A
 	       )
 	WHERE RNUM BETWEEN ? AND ?
@@ -210,6 +211,7 @@
 				                 WHERE MEM_NO=?
 				                   AND P.BLIND_CHECK ='N'
 				                   AND PROD_STATUS='Y'
+				                   AND POST_TYPE=1
 				               ) A
 				       )
 				WHERE RNUM BETWEEN ? AND ?
@@ -256,7 +258,15 @@
 		  WHERE SHIPPING_NO IN
 	</entry>
 	
-	
+	<entry key="updateProfile">
+		   UPDATE 
+	              MEMBER
+	          SET PROFILE_ORIGINNAME =? 
+	            , PROFILE_MODIFYNAME =?
+	            , PROFILE_PATH = ?
+	            , PROFILE_LOADNAME =?
+	        WHERE MEM_NO = ?
+	</entry>
 
 
 </properties>

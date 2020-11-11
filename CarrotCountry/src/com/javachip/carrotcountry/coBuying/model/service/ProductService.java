@@ -15,6 +15,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -210,7 +211,16 @@ public class ProductService {
 		return result;
 	}
 	
-	
+	public ArrayList<PostBoardJY> mainCategoryAjax(String cName, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoardJY> list = new ProductDao().mainCategoryAjax(conn,cName,pi);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	
 	
@@ -267,6 +277,28 @@ public class ProductService {
 		
 	}
 	
+	public ArrayList<Product> selectRegionProduct(PageInfo pi, String localGu, String localDong){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectRegionProduct(conn, pi, localGu, localDong);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	
+	
+	
+	public ArrayList<PostBoardJY> mainSearchAjax(PageInfo pi, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<PostBoardJY> bList = new ProductDao().mainSearchAjax(conn,pi,keyword);
+		
+		close(conn);
+		
+		return bList;
+	}
 	
 	
 	

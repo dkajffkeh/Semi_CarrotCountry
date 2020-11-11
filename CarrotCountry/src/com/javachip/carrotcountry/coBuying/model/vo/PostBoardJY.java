@@ -1,8 +1,9 @@
 package com.javachip.carrotcountry.coBuying.model.vo;
 
 import java.sql.Date;
+import com.javachip.carrotcountry.coBuying.model.vo.*;
 
-public class PostBoardJY {
+public class PostBoardJY extends PageInfo {
 	
 	private int postNo;
 	private String categoryNo;
@@ -31,6 +32,52 @@ public class PostBoardJY {
 	
 
 	public PostBoardJY() {}
+
+
+	public PostBoardJY(int currentPage, int listCount, int boardLimit, int pageLimit, int maxPage, int startPage,
+			int endPage, int postNo, int memNo, String localNo, String postName, String categoryName,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes,
+			int prodPrice, int likeNum) {
+		super(currentPage, listCount, boardLimit, pageLimit, maxPage, startPage, endPage);
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		this.likeNum = likeNum;
+	}
+	
+	
+	
+	
+
+	public PostBoardJY(int postNo, int memNo, String localNo, String postName, String categoryName,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes,
+			int prodPrice, int likeNum) {
+		super();
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+		this.likeNum = likeNum;
+	}
+
+
+
+
 
 
 

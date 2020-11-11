@@ -632,5 +632,34 @@ public class UserInfoBoardDao {
 	
 	}
 	
+	// 프로빌 변경
+	public int updateProfile(Connection conn, int memNo ,Member m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getProfileOrignname());
+			pstmt.setString(2, m.getProfileModifyname());
+			pstmt.setString(3, m.getProfilePath());
+			pstmt.setString(4, m.getProfileLoadname());
+			pstmt.setInt(5, m.getMemNo());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	
+}
 
 }

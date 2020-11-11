@@ -33,8 +33,6 @@
 	String email = (loginMember.getMemEmail() == null) ? "" : loginMember.getMemEmail();
 	int memNo = loginMember.getMemNo();
 	int localNo = loginMember.getLocalNo();
-	
-	
 	String localSi = (lo.getLocalSi() == null) ? "" : lo.getLocalSi();
 	String localGu = (lo.getLocalGu() == null) ? "" : lo.getLocalGu();
 	String localDong = (lo.getLocalDong() == null) ? "" : lo.getLocalDong();
@@ -52,46 +50,22 @@
      <hr color="gray">
      <br><br>
      <!-- content영역의 윗부분 -->
-    	 <input type="hidden" value="<%= memNo %>" name="memNo">
-    	 <input type="hidden" value="<%= localNo %>" name="localNo">
-    	 
-    
      <div id="content_top">
          <!-- 프로필 사진 -->
         <div id="content_top1">
+       <form action="<%= contextPath %>/update.pro.jw" method="post">
+		 <input type="hidden" value="<%= memNo %>" name="memNo">
                 <div id="fileArea">
-                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
+                		<input type="file" name="reUpfile" id="file1" onchange="loadImg(this, 1);" required>
                 </div>
-                <img id="profileImg" width="150" height="150" style="border-radius:1500px; border:1px solid lightgray;">
-                <br>
-                <label for="file1">프로필변경</label>
+                <img id="profileImg" width= 200px; height= 200px; style="border-radius:100%; border:1px solid lightgray;"><br>
+                <label for="file1">사진선택</label>
+                 <div id="updateButton" align="center">
+                        <button type="submit">변경하기</button>
+                 </div>
+        
+        </form>
         </div>
-		<!-- 프로필 사진 미리보기, 변경 -->
-        <script>
-            $(function(){
-                $("#fileArea").hide();
-                $("#profileImg").click(function(){
-                    $("#file1").click();
-                });
-            });
-            function loadImg(inputFile, num){
-                if(inputFile.files.length == 1){
-                    var reader = new FileReader();
-                    
-                    reader.readAsDataURL(inputFile.files[0]);
-                    reader.onload = function(e){
-                    	
-                        switch(num){
-                            case 1: $("#profileImg").attr("src", e.target.result); break;
-                        }
-                    };
-                }else{ 
-                    switch(num){
-                        case 1: $("#profileImg").attr("src", null); break;
-                    }
-                }
-            }
-        </script>
         <!-- 3가지 건수 노출부분 -->
         <div id="content_top2">
             <span align="center"><h4>지역거래</h4><a href="<%= contextPathUserinfo %>/onSale.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">2</a> 건</span>
@@ -107,7 +81,7 @@
 	    <br><br><br><br>
 	    <!-- content영역의 아랫부분 (회원정보, 배송지정보) -->
 	    <div id="content_bottom">
-	            <!--회원정보 -->
+	    <!--회원정보 -->
 	     <div id="content_bottom1">
 	     
         <table>
@@ -181,12 +155,6 @@
 			<!-- -------------------- -->
 			       <br> <%= sl.getShippingAddress() %> <br><br>
 			 <%} %><!-- for (ShippingLocation sl : list)  -->
-			  
-			   <div id="updateButton" align="center">
-				        <button type="submit" class="btn btn-primary">변경하기</button>
-			   </div>
-			  
-			  
 			  
 			 
 				   </div><!-- content bottom2_2 -->
@@ -269,7 +237,32 @@
 		  </div>
 
 <!--------------------------------------------------------------------------------->
-
+<!-- 프로필 사진 미리보기-->
+        <script>
+            $(function(){
+                $("#fileArea").hide();
+                $("#profileImg").click(function(){
+                    $("#file1").click();
+                });
+            });
+            function loadImg(inputFile, num){
+                if(inputFile.files.length == 1){
+                    var reader = new FileReader();
+                    
+                    reader.readAsDataURL(inputFile.files[0]);
+                    reader.onload = function(e){
+                    	
+                        switch(num){
+                            case 1: $("#profileImg").attr("src", e.target.result); break;
+                        }
+                    };
+                }else{ 
+                    switch(num){
+                        case 1: $("#profileImg").attr("src", null); break;
+                    }
+                }
+            }
+        </script>
 
 </body>
 </html>

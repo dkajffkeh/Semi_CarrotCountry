@@ -47,7 +47,7 @@ public class OnSalesController extends HttpServlet {
 		
 		listCount = new UserInfoBoardService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		boardLimit = 3;
+		boardLimit = 6;
 		pageLimit=6;
 		maxPage = (int)Math.ceil(((double)listCount/boardLimit));
 		
