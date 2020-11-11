@@ -74,8 +74,8 @@
         
 	
         
-        <table border="1px" width="100%">
             <form action="<%= contextPath %>/login.me.ng" method="post">
+        <table border="1px" width="100%">
                 <tr>
                     <td colspan="2"><input type="text" name="userId" id="userId" placeholder="아이디" required></td>
                 </tr>
@@ -86,17 +86,13 @@
                     <td colspan="2">
                         <!-- 로그인 오류시 출력문구 입력 -->
                     	<% if(loginFail != null){ %>
-                    		<label id="p"><%= loginFail %><label>
+                    		<label id="p"><%= loginFail %></label>
                     	<% } %>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="userCheck" id="userCheck" value="T"> <label for="userCheck">로그인 상태 유지</label></td>
-                </tr>
-                <tr>
                     <td colspan="2"><input type="submit" id="loginSubmit" class="btn btn-warning" value="로그인"></td>
                 </tr>
-            </form>    
 
             <tr align="center" >
                 <td><a href="<%= contextPath %>/findIdPage.me.ng" class="button1 btn btn-outline-secondary">아이디 찾기</a></td>
@@ -108,6 +104,7 @@
                 <td colspan="2"><a href="<%= contextPath %>/enrollAgreePage.me.ng" id="button3" class="button3 btn btn-secondary">회원가입</a></td>
             </tr>
         </table>
+            </form>    
         
         <br>
         <br>
