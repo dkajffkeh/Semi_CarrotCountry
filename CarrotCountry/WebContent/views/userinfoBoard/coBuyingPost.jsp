@@ -77,6 +77,7 @@
                     <th width="200">작성일</th>
                     <th>조회수</th>
                     <th>Q&A 답변하기</th>
+                    <th>구매자 리스트</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,6 +101,9 @@
                     <td>
                         <a href="<%= contextPathUserinfo %>/sellerlist.qna.jy?bno=<%=c.getPostNo()%>&currentPage=1" class="btn btn-light "> Q&A 답변하기</a>
                     </td>
+                    <td>
+						<a href="<%= contextPathUserinfo %>/buyerList.co.ng?bno=<%= c.getPostNo() %>&repCurrentPage=1" class="btn btn-light">구매자 리스트</a>
+					</td>
                 </tr>
                 
                 <% } %>
