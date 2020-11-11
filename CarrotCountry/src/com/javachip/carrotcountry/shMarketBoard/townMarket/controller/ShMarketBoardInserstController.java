@@ -65,8 +65,9 @@ public class ShMarketBoardInserstController extends HttpServlet {
 		String renamed = new UploadRename().randomString(getFileName(part));
 		part.write(savePath+File.separator+renamed);
 		Flist.add(renamed);		
-		}
+			}
 	    }
+	  
 	//Flist 에는 지금 파일 이름이 담겨있음.
 	ArrayList<PhotoBoardVo> pList = new ArrayList<>();
 	  for(int i = 0; i<Flist.size(); i++) {    	  
@@ -78,7 +79,6 @@ public class ShMarketBoardInserstController extends HttpServlet {
 	      } 
 	  String category1 = request.getParameter("category");
 	 
-   
          String category = request.getParameter("category");
          int memNo = Integer.parseInt(request.getParameter("memNo"));
          String memNick = request.getParameter("memNick");
@@ -106,11 +106,8 @@ public class ShMarketBoardInserstController extends HttpServlet {
             
             response.sendRedirect(request.getContextPath()+"/shMarketBoardMain.sh?currentPage=1");
             
-         }  
-         
-   		
+         }            		
 }
-
    //}
    /**
     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -119,7 +116,6 @@ public class ShMarketBoardInserstController extends HttpServlet {
       // TODO Auto-generated method stub
       doGet(request, response);
    }
-
    private String getFileName(Part part) {
        String contentDisp = part.getHeader("content-disposition");      
        String[] tokens = contentDisp.split(";");

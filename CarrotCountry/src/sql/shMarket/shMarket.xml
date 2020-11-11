@@ -6,6 +6,7 @@ SELECT
 	  CATEGORY_NAME 
 FROM 
       CATEGORY
+ORDER BY CATEGORY_NO      
 </entry>
 <entry key="MainArticleSelector"> 
 SELECT *

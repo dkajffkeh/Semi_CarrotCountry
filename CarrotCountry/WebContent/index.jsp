@@ -159,7 +159,7 @@ cursor:pointer;
 			url:"mainIndexArticle.sh.hy",
 			type:"post",
 			success:function(list){
-				
+				console.log(list);
 				let $top8Board = $("#top8_board_wrapper");
 				let str = "";
 				

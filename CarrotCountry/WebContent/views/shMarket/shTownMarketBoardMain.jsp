@@ -484,23 +484,19 @@ function userSearchAjax(){
 		success:function(list){
 			ArticleSelector(list)
 			$("input[name=userSearch]").val('');
-			$("ul[class=pagination]").html('');
-			
-			$(".location_display").html(userGu+" "+userDo);
-			
+			$("ul[class=pagination]").html('');		
+			$(".location_display").html(userGu+" "+userDo);			
 		},
 		error:function(){
 			
 		}
-
 	})
 		
 }
 //정렬 ajax
 function articleSorter(num){
 	
-	let sortNo = num;
-	
+	let sortNo = num;	
 	$.ajax({
 		url:"postSort.sh.hy",
 		type:"post",
@@ -509,15 +505,11 @@ function articleSorter(num){
 		 currentPage:1		
 		},
 		success:function(list){
-			ArticleSelector(list);
-			
-			numberSortPage(list,num);
-	
+			ArticleSelector(list);			
+			numberSortPage(list,num);	
 		},
-		error:function(){
-			
-		}	
-	
+		error:function(){			
+		}		
 	})	
 }
 
