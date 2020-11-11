@@ -873,7 +873,7 @@ private Properties prop = new Properties();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = prop.getProperty("selecRegionProduct");
+			String sql = prop.getProperty("selectRegionProduct");
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
