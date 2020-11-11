@@ -274,7 +274,8 @@
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">
                     <div id="regionText">
-                        
+                      <form action="<%= contextPath %>/sortRegion.pro.jy">
+                      <input type="hidden" name="currentPage" value=1>
                          <select id="gu" name="gu">
 		                    <option value="송파구">송파구</option>
 		                    <option value="강서구">강서구</option>
@@ -286,11 +287,11 @@
 		                    <option value="상일동">상일동</option>
 		                </select>
 						의 공동구매
-						
 	                    </div>
 	                    <div id="regionButton">
 	                        <button id="regionbtn" type="submit" class="btn btn-secondary btn-sm">동네선택</button>
 	                    </div>
+	                  </form>
 	                <script>
 			            $(function(){
 			            	
@@ -310,11 +311,6 @@
 									   $("#dong").html(str);        
 										   }					
 								})   
-								
-								
-								$("#regionbtn").click(function(){
-									location.href = "<%= contextPath %>/sortRegion.pro.jy?currentPage=1";
-								})
 			            })
 			            </script>
 
