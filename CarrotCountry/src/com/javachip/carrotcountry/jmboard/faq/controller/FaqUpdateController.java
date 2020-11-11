@@ -35,12 +35,14 @@ public class FaqUpdateController extends HttpServlet {
 		
 		int fno = Integer.parseInt(request.getParameter("fno"));
 		String faqTitle = request.getParameter("title");
+		String faqCategory = request.getParameter("category");
 		String faqContent = request.getParameter("content");
 		
 		Faq f = new Faq();
 		
 		f.setFaqNo(fno);
 		f.setFaqTitle(faqTitle);
+		f.setCategory(faqCategory);
 		f.setFaqContent(faqContent);
 		//System.out.println(f);
 		

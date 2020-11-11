@@ -272,9 +272,7 @@ public class OneToDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("oneToListSearch");
-		System.out.println("DAO");
-		System.out.println("WRITER".equals(category) ? search : "");
-		System.out.println(search);
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
