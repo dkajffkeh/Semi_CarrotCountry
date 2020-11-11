@@ -46,9 +46,10 @@
         	<table class="table table-bordered center list-area"  >
                 <tbody>
                     <tr>
-                        <td>운영정책</td>
-                        <td>계정/인증</td>
-                        <td>중고구매/판매</td>
+                        <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=11"'>운영정책</td>
+                        <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=22"'>계정/인증</td>
+                        <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=33"'>중고구매/판매</td>
+                        <td onclick='location.href="<%=contextPath%>/list.fa.jm"'>전채보기</td>
                     </tr>
                 </tbody>
             </table>
@@ -79,9 +80,17 @@
                 <% } %>
         	</ul>  
           <br><br><br>
+          
+          
+          
+          
+          
+          
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
 
+
        </div>
+		<br><br>
        <div class="content_4">
         <div class="container">
             <div class="jumbotron" align="center">
@@ -100,6 +109,11 @@
         <br>
         <center><a href="">개인정보이용방침</a></center>
         <br><br>
+        
+        
+        
+        
+        
         <!-- The Modal -->
 		  <div class="modal" id="myModal">
 		    <div class="modal-dialog">

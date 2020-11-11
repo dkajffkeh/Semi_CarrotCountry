@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
+import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 public class FaqDao {
 
@@ -191,6 +192,40 @@ public class FaqDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Faq> selectViewList(Connection conn, int type) {
+		
+		
+		ArrayList<Faq> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectViewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, type);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Faq(
+						         rset.getInt("faq_no"),
+						         rset.getString("faq_title")));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
 	}
 
 	
