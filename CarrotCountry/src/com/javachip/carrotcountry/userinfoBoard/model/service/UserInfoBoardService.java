@@ -356,5 +356,27 @@ public class UserInfoBoardService {
 			
 			return result;
 		}
-
+		
+		/**
+		 * 14. 프로필 수정
+		 * @param 
+		 * @return 			
+		 *
+		 */
+		public int updateProfile(int memNo, Member m) {
+			Connection conn = getConnection();
+			
+			int result = new UserInfoBoardDao().updateProfile(conn, memNo, m);
+			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			
+			close(conn);
+			
+			return  result;
+			
+		}
 }
