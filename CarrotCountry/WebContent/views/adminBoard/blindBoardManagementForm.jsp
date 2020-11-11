@@ -71,7 +71,14 @@
                                 	<% } else { %>
 	                                	<c:forEach items="${list}" var="ab">
 		                                    <tr>
-		                                        <td>${ab.postNo}</td>
+		                                        <c:choose>
+													<c:when test="${ab.postType == 1}">
+														<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postNo}</a></td>
+													</c:when>
+													<c:when test="${ab.postType == 2}">
+														<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postNo}</a></td>
+													</c:when>
+												</c:choose>
 		                                        <c:choose>
 													<c:when test="${ab.postType == 1}">
 														<td>중고거래</td>

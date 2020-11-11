@@ -39,7 +39,7 @@
                     <form action="<%= contextPath %>/boardSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <option value="post_name">게시글명</option>
+						  <option value="post_name">글제목</option>
 						  <option value="category_name">카테고리</option>
 						  <option value="mem_userid">작성자</option>
 						</select>
@@ -70,7 +70,14 @@
 								<% } else { %>
 									<c:forEach items="${list}" var="ab">
 										<tr>
-											<td>${ab.postNo}</td>
+											<c:choose>
+												<c:when test="${ab.postType == 1}">
+													<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postNo}</a></td>
+												</c:when>
+												<c:when test="${ab.postType == 2}">
+													<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postNo}</a></td>
+												</c:when>
+											</c:choose>
 											<c:choose>
 												<c:when test="${ab.postType == 1}">
 													<td>중고거래</td>
