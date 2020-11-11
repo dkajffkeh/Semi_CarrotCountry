@@ -124,7 +124,7 @@ left:40px;
                 
             </div>
             <div class=MainLogo_Wrapper style="position:relative; right:50px;">
-                <div><a href=""><img id="LogoImg" src="<%=contextPath%>/resources/images/commonImg/KakaoTalk_20201015_022259571_01.png" alt=""></a></div>
+                <div><a href="<%=contextPath%>"><img id="LogoImg" src="<%=contextPath%>/resources/images/commonImg/KakaoTalk_20201015_022259571_01.png" alt=""></a></div>
                 <div><a href="<%=contextPath%>" style="font-size:2rem">당근나라</a></div>
             </div>
             <div class="menu_bar" style="margin:0px;">

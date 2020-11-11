@@ -146,7 +146,7 @@ color:green;
      justify-content: center;
  }
  .mainArticle_sidebar {
-     height:33.3%;
+     height:42.5%;
      width:200px;
      
      background-color: rgb(255, 213, 122);

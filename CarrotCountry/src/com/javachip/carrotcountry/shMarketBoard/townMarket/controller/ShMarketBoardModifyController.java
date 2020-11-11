@@ -32,7 +32,6 @@ public class ShMarketBoardModifyController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -55,10 +54,8 @@ public class ShMarketBoardModifyController extends HttpServlet {
 			Location l = new Location(mr.getParameter("province"),mr.getParameter("district"),mr.getParameter("town")); //주소객체에 들어감.	
 			String pCondition = mr.getParameter("p_condition"); //USEDPROD 에 들어감.
 			
-			
 			PostBoard b = new PostBoard(bno,category,title,content,price);
-			//USEDPROD 에 들어감
-			
+			//USEDPROD 에 들어감			
 			
 			if(mr.getOriginalFileName("pictures1")==null) {
 				//Board 랑 Usedprod 만 업데이트 하면됨.
@@ -93,8 +90,7 @@ public class ShMarketBoardModifyController extends HttpServlet {
 					response.sendRedirect(request.getContextPath()+"/townMarketBoardDetail.sh?bno="+bno);
 				}
 			}
-		
-			
+
 		}
 	
 	}
