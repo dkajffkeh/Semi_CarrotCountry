@@ -49,20 +49,44 @@ public class NoticeUpdateController extends HttpServlet {
 			int nno = Integer.parseInt(multiRequest.getParameter("nno"));
 			String noticeTitle = multiRequest.getParameter("title");
 			String noticeContent = multiRequest.getParameter("content");
-			String fileOrigin = multiRequest.getOriginalFileName("reUpfile");
-			String fileModify = multiRequest.getFilesystemName("reUpfile");
+			
+			
+			//String fileOrigin = multiRequest.getOriginalFileName("reUpfile");
+			//String fileModify = multiRequest.getFilesystemName("reUpfile");
+			 String fileOrigin = null;
+	         String fileModify = null;
+			
+			
 			String filePath = "resources/notice_upfiles/";
+			
+			
+			if(multiRequest.getOriginalFileName("reUpfile") != null){ // 새로운 첨부파일이 넘어왔을 경우
+
+	            fileOrigin = multiRequest.getOriginalFileName("reUpfile");
+	            fileModify = multiRequest.getFilesystemName("reUpfile");
+
+	         }else{
+	             fileOrigin = multiRequest.getParameter("originFileName");
+	             fileModify = multiRequest.getParameter("modifyFileName");
+
+	         }
+			
+			
+			
+			
+			
 			
 			Notice n = new Notice(nno, noticeTitle, noticeContent, 
 					 filePath, fileModify, fileOrigin);
 			
 			int result = new NoticeService().updateNotice(n);
 	
+			
 			if(result > 0) {
 				
-				if(multiRequest.getParameter("originFileName") != null) {
+				if(multiRequest.getParameter("modifyFileName") != null) {
 					
-					File deleteFile = new File(savePath + multiRequest.getParameter("originFileName"));
+					File deleteFile = new File(savePath + multiRequest.getParameter("modifyFileName"));
 					deleteFile.delete();
 					
 				}
