@@ -144,7 +144,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>이름 : </span></td>
-	                        <td><input type="text" value="<%= loginMember.getMemName() %>" required></td>
+	                        <td><input type="text" name="userName" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>연락처 : </span></td>
@@ -156,7 +156,7 @@
 	                        	<input type="text">
 	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
 	                            <input type="hidden" id="shippingNo"  name="shippingNo">
-	                            <input type="text" id="address"> &nbsp; <input type="text" id="detailAddress" placeholder="상세주소 입력">
+	                            <input type="text" id="address" name="shippingAddress"> &nbsp; <input type="text" id="detailAddress" placeholder="상세주소 입력">
 	                        </td>
 	                    </tr>
 	                    <tr>
