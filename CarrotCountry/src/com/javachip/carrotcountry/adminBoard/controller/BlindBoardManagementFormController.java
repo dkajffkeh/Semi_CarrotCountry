@@ -46,7 +46,7 @@ public class BlindBoardManagementFormController extends HttpServlet {
 			int listCount = new AdminPageInfoService().selectListCount();
 			int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 			int pageLimit = 10;
-			int boardLimit = 10;
+			int boardLimit = 13;
 			
 			int maxPage = (int)Math.ceil((double)listCount/boardLimit);
 			int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
