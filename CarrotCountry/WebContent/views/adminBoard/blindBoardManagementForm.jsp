@@ -88,7 +88,14 @@
 													</c:when>
 												</c:choose>
 		                                        <td>${ab.categoryName}</td>
-		                                        <td>${ab.postName}</td>
+		                                        <c:choose>
+													<c:when test="${ab.postType == 1}">
+														<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postName}</a></td>
+													</c:when>
+													<c:when test="${ab.postType == 2}">
+														<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postName}</a></td>
+													</c:when>
+												</c:choose>
 		                                        <td>${ab.memNo}</td>
 		                                        <td>${ab.postEnrollDate}</td>
 		                                        <td>${ab.postViews}</td>

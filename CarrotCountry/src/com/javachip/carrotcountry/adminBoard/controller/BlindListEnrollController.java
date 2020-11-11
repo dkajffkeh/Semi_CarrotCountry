@@ -27,7 +27,7 @@ public class BlindListEnrollController extends HttpServlet {
 		int result = new AdminBoardService().blindListEnroll(postNo, bCheck);
 		
 		if (result > 0) {
-			response.sendRedirect(request.getContextPath() + "/boardSelect.sb?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/blindList.sb?currentPage=1");
 		} else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>alert('등록에 실패했습니다.');</script>");
