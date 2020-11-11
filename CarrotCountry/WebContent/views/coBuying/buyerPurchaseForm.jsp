@@ -61,7 +61,7 @@
 #deliveryInfo td input{
     border: 1px solid lightgray;
     display: inline-block;
-    margin: 10px;
+    margin: 8px;
 } 
 
 /* 상품정보 */
@@ -94,7 +94,7 @@
 #purchaseInfo td input{
     border: 1px solid lightgray;
     display: inline-block;
-    margin: 10px;
+    margin: 8px;
 } 
 #purchaseBtn{
     display: inline-block;
@@ -124,7 +124,7 @@
 	                <table id="deliveryInfo">
 	                    <tr>
 	                        <td align="right"><span>주문자 : </span></td>
-	                        <td><input type="text"></td>
+	                        <td><input type="text" class="form-control" value="<%= loginMember.getMemName() %>"></td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>배송지 선택 : </span></td>
@@ -138,25 +138,23 @@
 			                            <% } %>		                            
 		                            </div>
 	                            </div>
-	                            <button type="button" class="btn btn-secondary btn-sm">신규 배송지</button>
+	                            <button type="button" class="btn btn-secondary btn-sm" onclick="newAddressInput();">신규 배송지</button>
 	                            
 	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>이름 : </span></td>
-	                        <td><input type="text" name="userName" value="<%= loginMember.getMemName() %>" required></td>
+	                        <td><input type="text" class="form-control" name="userName" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>연락처 : </span></td>
-	                        <td><input type="tel" name="buyerPhone" placeholder="(- 포함해서 입력)" value="<%= loginMember.getMemPhone() %>" required></td>
+	                        <td><input type="tel" class="form-control" name="buyerPhone" placeholder="(- 포함해서 입력)" value="<%= loginMember.getMemPhone() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td align="right"><span>주소 : </span></td>
 	                        <td>
-	                        	<input type="text">
-	                            <button type="button" id="buyerAddress" class="btn btn-secondary btn-sm">우편번호찾기</button> <br>
 	                            <input type="hidden" id="shippingNo"  name="shippingNo">
-	                            <input type="text" id="address" name="shippingAddress"> &nbsp; <input type="text" id="detailAddress" placeholder="상세주소 입력">
+	                            <input type="text" id="address" class="form-control" name="shippingAddress">
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -205,7 +203,6 @@
 	            		var address = document.getElementById("address");
 	            		var shippingNo = document.getElementById("shippingNo");
 	            		
-	            				console.log(index);
 	            		<% for (ShippingLocation list : shippingList) {%>
 	            			if (index == <%= list.getShippingNo() %>) {
 	            				shippingNo.value = "<%= list.getShippingNo() %>";
@@ -213,6 +210,10 @@
 	            			}
             			<% } %>
 	            		
+	            	}
+	            	
+	            	function newAddressInput() {
+	            		var address = document.getElementById("address").value="신규 배송지 입력!";
 	            	}
 	            </script>
 	
@@ -264,7 +265,7 @@
 	                <table id="purchaseInfo">
 	                    <tr>
 	                        <td>입금자명 :</td>
-	                        <td><input type="text" name="depositor" value="<%= loginMember.getMemName() %>" required></td>
+	                        <td><input type="text" class="form-control" name="depositor" value="<%= loginMember.getMemName() %>" required></td>
 	                    </tr>
 	                    <tr>
 	                        <td>입금계좌 :</td>
@@ -272,7 +273,7 @@
 	                            <select name="account" id="account">
 	                                <option>:: 입금하실 계좌를 선택해주세요 ::</option>
 	                                <% for (int i = 0; i < accountList.size(); i++) { %>
-		                                <option value="<%= accountList.get(i).getAccount() %>"><%= accountList.get(i).getBank() %> <%= accountList.get(i).getAccount() %></option>
+		                                <option value="<%= accountList.get(i).getAccount() %>"><%= accountList.get(i).getAccount() %></option>
 	                                <% } %>
 	                            </select>
 	                        </td>
@@ -281,7 +282,7 @@
 	
 	                <b>* 입금정보 확인 후 일치할시, 발송됩니다. </b>
 	                
-	                <br><br>
+	                <br>
 	                <button type="submit" id="purchaseBtn" class="btn btn-dark">주문하기</button>
 	            </div>
 			</form>
