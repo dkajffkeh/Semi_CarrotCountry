@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.javachip.carrotcountry.jmboard.oneTo.model.vo.*, java.util.ArrayList,com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo" %>
+<%@ page import="com.javachip.carrotcountry.jmboard.oneTo.model.vo.*,
+				 java.util.ArrayList,
+				 com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -33,17 +35,17 @@
 				</div>
 				<div id="pageContent">
 					<!-- search -->
-					<!--  
-					<form action="<%= contextPath %>/reportSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
+					
+					<form action="<%= contextPath %>/search.on.jm" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <option value="mem_userid">작성자</option>
-						  <option value="report_type_name">글유형</option>
+						  <option value="WRITER">작성자</option>
+						  <option value="ONETO_TYPE">문의유형</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    -->
+                    
 					<!-- 신고자 리스트 -->
 					<div id="board">
 
@@ -73,7 +75,7 @@
 											<td><%= o.getAnswerDate() %></td>
 											<td><%= o.getOneToType() %></td>
 											<td><%= o.getOneToName() %></td>
-											<td><%= o.getWriterNo() %></td>
+											<td><%= o.getAnswererNo()==null?"": o.getAnswererNo()%></td>
 											<td><%= o.getWriterNo() %></td>
 											<td><%= o.getAnswerState().equals("N")? "문의중" : "답변완료" %></td>
 											
