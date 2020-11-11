@@ -41,11 +41,7 @@ public class MyPageController extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
 			ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
-			
-		
 			Location lo = new UserInfoBoardService().selectLocation(locNo);
-			
-			
 			
 			request.setAttribute("list", list);
 			request.setAttribute("lo", lo);

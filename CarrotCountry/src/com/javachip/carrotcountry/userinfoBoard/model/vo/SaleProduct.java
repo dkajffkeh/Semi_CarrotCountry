@@ -13,6 +13,7 @@ public class SaleProduct {
 	private String thumbNailPath;   //상품사진
 	private String thumbNailFileName;
 	private String thumbNailLoadPath;
+	private int countMarket; // 판매중인 상품 개수
 	
 	public SaleProduct() {};
 	
@@ -43,6 +44,23 @@ public class SaleProduct {
 		this.postEnrollDate = postEnrollDate;
 		this.thumbNailPath = thumbNailPath;
 		this.thumbNailFileName = thumbNailFileName;
+	}
+	
+	
+
+	public SaleProduct(int postNo, int memNo, String postName, int prodPrice, String prodStatus, Date postEnrollDate,
+			String thumbNailPath, String thumbNailFileName, String thumbNailLoadPath, int countMarket) {
+		super();
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.postName = postName;
+		this.prodPrice = prodPrice;
+		this.prodStatus = prodStatus;
+		this.postEnrollDate = postEnrollDate;
+		this.thumbNailPath = thumbNailPath;
+		this.thumbNailFileName = thumbNailFileName;
+		this.thumbNailLoadPath = thumbNailLoadPath;
+		this.countMarket = countMarket;
 	}
 
 	public int getPostNo() {
@@ -98,6 +116,16 @@ public class SaleProduct {
 	}
 	public void setThumbNailLoadPath(String thumbNailLoadPath) {
 		this.thumbNailLoadPath = thumbNailLoadPath;
+	}
+
+	
+	
+	public int getCountMarket() {
+		return countMarket;
+	}
+
+	public void setCountMarket(int countMarket) {
+		this.countMarket = countMarket;
 	}
 
 	@Override

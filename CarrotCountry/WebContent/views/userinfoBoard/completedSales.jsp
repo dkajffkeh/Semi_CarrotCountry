@@ -43,8 +43,9 @@
 	            <div class="menu" align ="center"><a href="<%= contextPath %>/completedSales.me.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">판매완료</a></div>
 	        </div>
 	        <br>
-	        <!-- 검색필터 드롭다운 -->
-	        <div class="container">
+	        
+	        <!-- 검색 필터 다운
+	        	        <div class="container">
 	            <div class="dropdown">
 	                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 	                등록일순
@@ -55,6 +56,8 @@
 	                </div>
 	            </div>
 	        </div>
+	        
+	         -->
 	        <br>
 	        <!-- 내용 -->
 	        <div id="content">
