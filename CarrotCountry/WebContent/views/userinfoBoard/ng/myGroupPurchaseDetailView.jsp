@@ -93,13 +93,13 @@
             <img src="<%= contextPath %>/<%= mpi.getThumbnailLoadpath() %>">
             <table>
                 <tr>
-                    <th width="70" height="30">상품명</th><td width="200px"><%= mpi.getPostName() %></td><th width="70">진행자</th><td width="200px"><%= mpi.getMemNickname() %><th width="70">거래유형</th><td><%= mpi.getDealType() %></td>
+                    <th width="70" height="30">상품명</th><td width="200px"><%= mpi.getPostName() %></td><th width="70">진행자</th><td width="200px"><%= mpi.getMemNickname() %>&nbsp;&nbsp;&nbsp;<%= mpi.getMemPhone() %></td><th width="70"><% %>거래유형</th><td><%= mpi.getDealType() %></td>
                 </tr>
                 <tr>
                     <th height="30">상품가격</th><td><s><%= mpi.getGpPrice() %></s></td><th>은행명</th><td><%= mpi.getBank() %></td><th>마감일</th><td><%= mpi.getGpDeadLine() %>&nbsp;&nbsp;&nbsp;<span class="sOrange"><%= mpi.getdDay()<0 ? "마감" : mpi.getdDay()+1%></span></td>
                 </tr>
                 <tr>
-                    <th height="30">할인가</th><td><span class="sRed"><%= mpi.getGpDrate()%>% &#10140; </span><span class="sOrange"><%= mpi.getGpDprice() %></span></td><th>계좌번호</th><td><%= mpi.getAccount() %>&nbsp;(<%= mpi.getMemName() %>)</td><th>인원</th><td><%= mpi.getGpMinpeople() %>/<% if(mpi.getGpMinpeople() > mpi.getGpPeople()){ %> <span class="sRed"> <%= mpi.getGpPeople() %> </span> <% }else{ %> <span class="rOrange"><%= mpi.getGpPeople() %></span> <% } %>  </td>
+                    <th height="30">할인가</th><td><span class="sRed"><%= mpi.getGpDrate()%>% &#10140; </span><span class="sOrange"><%= mpi.getGpDprice() %></span></td><th>계좌번호</th><td><%= mpi.getAccount() %>&nbsp;&nbsp;&nbsp;(<%= mpi.getMemName() %>)</td><th>인원</th><td><%= mpi.getGpMinpeople() %>/<% if(mpi.getGpMinpeople() > mpi.getGpPeople()){ %> <span class="sRed"> <%= mpi.getGpPeople() %> </span> <% }else{ %> <span class="rOrange"><%= mpi.getGpPeople() %></span> <% } %>  </td>
                 </tr>
             </table>
         </div>

@@ -243,7 +243,7 @@ public class UserInfoBoardDaoNg {
 										 rset.getString("THUMBNAIL_LOADPATH"),
 										 rset.getString("POST_NAME"),
 										 rset.getString("MEM_NICKNAME"),
-										 rset.getString("MEM_PHONE"),
+										 rset.getString("MEMPHONE"),
 										 rset.getInt("GP_MINPEOPLE"),
 										 rset.getInt("GP_PEOPLE"),
 										 rset.getDate("GP_DEADLINE"),
@@ -258,7 +258,7 @@ public class UserInfoBoardDaoNg {
 										 rset.getString("OPTION_NAME"),
 										 
 										 rset.getString("SHIPPING_ADDRESS"),
-										 rset.getString("MEM_PHONE"),
+										 rset.getString("MYPHONE"),
 										 rset.getString("MEM_USERNAME"),
 										 rset.getString("SL_STATUS"),
 										 
