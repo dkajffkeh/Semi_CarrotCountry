@@ -88,7 +88,7 @@
 					<tbody>
 						
 						<%for(OneTo o : list){ %>
-							<!-- <%//if(loginMember != null && loginMember.getMemNickname().equals(o.getAnswererNo())){ %> -->
+							
 								<tr>
 									<td><%= o.getOneToNo() %></td>
 									<td><%= o.getOneToName() %></td>
@@ -96,7 +96,7 @@
 									<td><%= o.getAnswerDate() %></td>
 									<td><%= o.getAnswerState().equals("N") ? "처리중" : "처리완료"%></td>
 								</tr>
-							<%//} %>
+							
 						<%} %>
 					<%} %>
 					</tbody>

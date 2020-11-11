@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
+
 import com.javachip.carrotcountry.jmboard.notice.model.dao.NoticeDao;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
 import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
@@ -89,12 +91,21 @@ public class OneToDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new OneTo(rset.getInt("ONETO_NO"),
-									rset.getString("MEM_NAME"),
-									rset.getString("FAQ_CATEGORY_NAME"),
-									rset.getString("ONETO_NAME"),
-									rset.getDate("ANSWER_DATE"),
-									rset.getString("ANSWER_STATE")));
+				OneTo o = new OneTo();
+				
+				o.setOneToNo(rset.getInt("ONETO_NO"));
+				o.setWriterNo(rset.getString("WRITER"));
+				o.setAnswererNo(rset.getString("ANSWERER"));
+				o.setOneToType(rset.getString("FAQ_CATEGORY_NAME"));
+				o.setOneToName(rset.getString("ONETO_NAME"));
+				o.setAnswerDate(rset.getDate("ANSWER_DATE"));
+				o.setAnswerState(rset.getString("ANSWER_STATE"));
+				
+				
+				
+				
+				
+				list.add(o);
 			}
 			
 		} catch (SQLException e) {
@@ -253,6 +264,97 @@ public class OneToDao {
 		return o;
 	}
 
+	public ArrayList<OneTo> OneToListSearch(Connection conn, PageInfo pi, String category, String search) {
+		
+		ArrayList<OneTo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("oneToListSearch");
+		System.out.println("DAO");
+		System.out.println("WRITER".equals(category) ? search : "");
+		System.out.println(search);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getNoticeLimit() + 1;
+			int endRow = startRow + pi.getNoticeLimit() - 1;
+			
+			pstmt.setString(1, "ONETO_TYPE".equals(category) ? search : "");
+			pstmt.setString(2, "WRITER".equals(category) ? search : "");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				OneTo o = new OneTo();
+
+				o = new OneTo(rset.getInt("ONETO_NO"),
+						  rset.getString("WRITER"),
+						  rset.getString("ANSWERER"),
+						  rset.getString("FAQ_CATEGORY_NAME"),
+						  rset.getString("ONETO_NAME"),
+						  rset.getString("ONETO_CONTENT"),
+						  rset.getString("ANSWER_CONTENT"),
+						  rset.getDate("ANSWER_DATE"),
+						  rset.getString("ANSWER_STATE"));
+
+				list.add(o);
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<OneTo> selectMyList(Connection conn,int ono, PageInfo pi) {
+		ArrayList<OneTo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMyList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getNoticeLimit() + 1;
+			int endRow = startRow + pi.getNoticeLimit() - 1;
+			
+			pstmt.setInt(1, ono);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new OneTo(rset.getInt("ONETO_NO"),
+									rset.getString("MEM_NAME"),
+									rset.getString("FAQ_CATEGORY_NAME"),
+									rset.getString("ONETO_NAME"),
+									rset.getDate("ANSWER_DATE"),
+									rset.getString("ANSWER_STATE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		
+		return list;
+	}
 	
 	
 	

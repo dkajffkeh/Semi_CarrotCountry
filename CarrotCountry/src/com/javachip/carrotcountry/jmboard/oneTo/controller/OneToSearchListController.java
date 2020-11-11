@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
-import com.javachip.carrotcountry.adminBoard.model.service.AdminReportService;
-import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
-import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
+import com.javachip.carrotcountry.jmboard.notice.model.service.NoticeService;
+import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
+import com.javachip.carrotcountry.jmboard.oneTo.model.service.OneToService;
+import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 /**
  * Servlet implementation class OneToSearchListController
@@ -36,7 +36,7 @@ public class OneToSearchListController extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 		
-		int listCount = new AdminPageInfoService().selectListCount();
+		int listCount = new NoticeService().selectListCount();
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		int pageLimit = 10;
 		int boardLimit = 10;
@@ -49,13 +49,17 @@ public class OneToSearchListController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 
 		String category = request.getParameter("searchCategory");
 		String search = request.getParameter("search");
 		
-		ArrayList<AdminReport> list = new AdminReportService().reportSearchList(pi, category, search);
-	
+		ArrayList<OneTo> list = new OneToService().OneToSearchList(pi, category, search);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		
+		request.getRequestDispatcher("views/oneTo/oneToListView.jsp").forward(request, response);
 	
 	}
 

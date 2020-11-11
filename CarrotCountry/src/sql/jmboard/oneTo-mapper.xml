@@ -16,14 +16,18 @@
 		          FROM (
 		                SELECT 
 		                       ONETO_NO
-		                     , MEM_NAME
+		                     , U.MEM_NICKNAME WRITER
+		                     , M.MEM_NICKNAME ANSWERER
 		                     , FAQ_CATEGORY_NAME
 		                     , ONETO_NAME
 		                     , ANSWER_DATE
 		                     , ANSWER_STATE
 		                  FROM ONETOONE 
-		                  LEFT JOIN MEMBER ON(WRITER_NO=MEM_NO)
-		                  LEFT JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
+		                  LEFT 
+		                  JOIN MEMBER U ON(WRITER_NO=U.MEM_NO)
+		                  LEFT
+		                  JOIN MEMBER M ON(ANSWERER_NO=M.MEM_NO)
+		                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
 		                 ORDER
 		                    BY ONETO_NO ASC
 		               ) A
@@ -86,6 +90,65 @@
       JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
 	 WHERE ONETO_NO = ?
 	 </entry>
+	 <entry key="oneToListSearch">
+		select
+		       *
+		  from
+		     (
+		       select
+		              rownum rnum
+		            , a.*
+		         from
+		            (
+                    SELECT 
+                       ONETO_NO
+                     , U.MEM_NICKNAME WRITER
+                     , M.MEM_NICKNAME ANSWERER
+                     , FAQ_CATEGORY_NAME
+                     , ONETO_NAME
+                     , ONETO_CONTENT
+                     , ANSWER_CONTENT
+                     , ANSWER_DATE
+                     , ANSWER_STATE
+                  FROM ONETOONE 
+                  LEFT 
+                  JOIN MEMBER U ON(WRITER_NO=U.MEM_NO)
+                  LEFT
+             JOIN MEMBER M ON(ANSWERER_NO=M.MEM_NO)
+                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
+		                where 
+		                      FAQ_CATEGORY_NAME like '%'|| nvl(?, '') ||'%'
+		                  and U.MEM_NICKNAME like '%'|| nvl(?, '') ||'%'
+		            ) a
+		     )
+		where rnum between ? and ?
+	 </entry>
+	 	<entry key="selectMyList">
+		SELECT *
+		  FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       ONETO_NO
+		                     , MEM_NAME
+		                     , FAQ_CATEGORY_NAME
+		                     , ONETO_NAME
+		                     , ANSWER_DATE
+		                     , ANSWER_STATE
+		                  FROM ONETOONE 
+		                  LEFT 
+		                  JOIN MEMBER ON(WRITER_NO=MEM_NO)
+		                  LEFT 
+		                  JOIN FAQ_CATEGORY ON(ONETO_TYPE=FAQ_CATEGORY_NO)
+	                     WHERE WRITER_NO = ?
+		                 ORDER
+		                    BY ONETO_NO ASC
+		               ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 	
 	
 </properties>
