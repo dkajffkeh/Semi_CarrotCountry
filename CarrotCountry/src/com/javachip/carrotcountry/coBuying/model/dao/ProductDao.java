@@ -1455,7 +1455,6 @@ private Properties prop = new Properties();
 		public ArrayList<Product> selectRegionProduct(Connection conn, PageInfo pi, String localGu, String localDong){
 			// select문 => 여러행 조회
 			ArrayList<Product> pList = new ArrayList<>();
-			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
@@ -1471,7 +1470,6 @@ private Properties prop = new Properties();
 				pstmt.setInt(3, startRow);
 				pstmt.setInt(4, endRow);
 				
-				
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()) {
@@ -1485,7 +1483,6 @@ private Properties prop = new Properties();
 											rs.getInt("gp_price"),
 											rs.getInt("gp_drate"),
 											rs.getInt("gp_dprice")));
-					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1493,9 +1490,7 @@ private Properties prop = new Properties();
 				close(rs);
 				close(pstmt);
 			}
-	 		
 			return pList;
-			
 		}
 		
 		

@@ -1067,16 +1067,11 @@ SELECT *
 		                 WHERE BLIND_CHECK = 'N'
 		                   AND POST_TYPE = 2
                            AND LOCAL_NO =(
-                                            SELECT
-                                                  LOCAL_NO
-                                              FROM 
-                                                  LOCATION
-                                             WHERE 
-                                                  LOCAL_SI='서울특별시'
-                                               AND   
-                                                  LOCAL_GU=?
-                                               AND   
-                                                  LOCAL_DONG=?
+                                            SELECT LOCAL_NO
+                                              FROM LOCATION
+                                             WHERE LOCAL_SI='서울특별시'
+                                               AND LOCAL_GU=?
+                                               AND LOCAL_DONG=?
                                        )
 		                 ORDER
 		                    BY POST_NO DESC

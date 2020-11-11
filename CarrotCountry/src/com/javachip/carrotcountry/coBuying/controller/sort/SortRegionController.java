@@ -36,42 +36,30 @@ public class SortRegionController extends HttpServlet {
 		String localGu = request.getParameter("gu");
 		String localDong = request.getParameter("dong");
 		
-		
 		// ---------------------------- 페이징 처리 -------------------------------------
-		int listCount;					// 현재 일반게시판 총 갯수
-		int currentPage;				// 사용자가 요청한 페이지 (즉, 현재 페이지)
-		int pageLimit;					// 한 페이지 하단에 보여질 페이지 최대갯수
-		int boardLimit;					// 한 페이지 내에 보여질 게시글 최대갯수
-		
-		int maxPage;					// 전체 페이지들 중에서 가장 마지막 페이지 수
-		int startPage;					// 현재 사용자가 요청한 페이지에 하단에 보여질 페이징바의 시작수
-		int endPage;					// 현재 사용자가 요청한 페이지에 하단에 보여질 페이징바의 끝수
-		
+		int listCount;				
+		int currentPage;			
+		int pageLimit;					
+		int boardLimit;					
+		int maxPage;					
+		int startPage;					
+		int endPage;				
 		
 		listCount = new ProductService().selectProductListCount();
-		
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		
 		pageLimit = 5;
-		
 		boardLimit = 5;
-		
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-	
 		endPage = startPage + pageLimit - 1;
-		
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
 		ArrayList<Product> pList = new ProductService().selectRegionProduct(pi, localGu, localDong);
-		
-		
+
 		request.setAttribute("pi", pi);
 		request.setAttribute("pList", pList);
 		
