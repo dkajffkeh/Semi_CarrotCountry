@@ -1452,6 +1452,58 @@ private Properties prop = new Properties();
 		
 		
 		
+		public ArrayList<Product> searchKeyword(Connection conn, PageInfo pi, String keyword){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("searchKeyword");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setString(1, "%" + keyword + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		public ArrayList<Product> selectRegionProduct(Connection conn, PageInfo pi, String localGu, String localDong){
 			// select문 => 여러행 조회
 			ArrayList<Product> pList = new ArrayList<>();

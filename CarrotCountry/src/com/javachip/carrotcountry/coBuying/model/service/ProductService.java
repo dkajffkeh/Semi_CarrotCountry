@@ -419,7 +419,16 @@ public class ProductService {
 	
 	
 	
-	
+	public ArrayList<Product> searchKeyword(PageInfo pi, String keyword){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().searchKeyword(conn, pi, keyword);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
 	
 	
 	

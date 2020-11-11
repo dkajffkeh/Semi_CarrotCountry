@@ -174,38 +174,14 @@
             <div id="header2">
                 <div id="header2_1"></div>
                 <div id="header2_2">
-                    <form action="" id="searchForm">
+                    <form action="<%= contextPath %>/search.pro.jy" id="searchForm">
+                        <input type="hidden" name="currentPage" value=1>
                         <input type="search" name="keyword">
-                        <button onclick="searchAjax();" class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
+                        <button class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
                     </form>
                 </div>
                 
                 
-                <script>
-                function searchAjax(){
-                	
-                	let keyword = $("input[name=keyword]").val();
-                	
-                	$.ajax({
-                		url:"search.pro.jy",
-                		type:"get",
-                		data:{
-                			currentPage:1,
-                			keyword:keyword
-                		},
-                		success:function(result){
-                			console.log(result);
-                			 $("input[name=keyword]").val('');
-                			 $("a[class=pagination]").html('');
-                		},
-                		error:function(){
-                			
-                		}
-                	})
-                	
-                }
-                
-                </script>
                
                 <div id="header2_3"></div>
      
@@ -369,50 +345,7 @@
 		        	
 		        </script>
 		          
-            <script>
-            function category(e){
-            	let cName = e.children[0].innerHTML
-            	
-            	console.log(cName);
-            	
-            	$.ajax({
-            		url:"categoryajax.pro.jy",
-            		type:"post",
-            		data:{currentPage:1,
-            			  cName:cName},
-            		success:function(result){
-            			
-            			console.log(result);
-            			let $articleOuter = $("#proContent");
-            			let str = "";
-            			
-            			for(let i=0; i<result.length; i++){
-            				
-	            		str +=	`<div class="proName">
-				           		<input type="hidden" value="\${result[i].postNo }">
-				            	<div id="proImg"><a href=""><img src="<%= contextPath %>/\${result[i].thumbnailLoadPath+result[i].thumbnailFilename}" width="100" height="100"></a></div>
-					           
-					            <div id="proText">
-					                <div id="proText-title">
-		                               <a href=""><h4>\${result[i].postName}</h4></a>
-		                            </div>
-		                            <div id="proText-like">
-		                                <h6> \${result[i].gpPeople} | ♡ (\${result[i].postLikes})</h6> 
-		                            </div>
-						        </div>
-						        <div id="proPrice">
-			                            <h6 id="realPrice"><s>\${result[i].gpPrice}</s></h6>
-			                            <span id="discount">공구할인률 \${result[i].gpDRate} %</span>
-			                            <span id="discountPrice">\${result[i].gpDPrice}원</span>
-			                     </div>
-				            </div>`;
-            			} 
-            			
-            			$articleOuter.html(str);
-            		}
-            	})
-            }
-            </script>
+           
             
             
                        
