@@ -36,6 +36,14 @@ public class PurchaseInfoEnrollController extends HttpServlet {
 		int purchasePrice = Integer.parseInt(request.getParameter("purchasePrice"));
 		int optionNo = Integer.parseInt(request.getParameter("optionNo"));
 		String reqeusts = request.getParameter("selbox");
+
+		
+		String reqeustsText = request.getParameter("requests");
+		if(reqeusts.equals("direct")) {
+			reqeusts = reqeustsText; 
+		}
+		 
+		
 		
 		PurchaseInfo pi = new PurchaseInfo(postNo, memNo, shippingNo, optionNo, depositor, purchasePrice, reqeusts);
 		

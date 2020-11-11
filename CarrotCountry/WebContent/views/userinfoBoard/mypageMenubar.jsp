@@ -95,9 +95,6 @@
                 <td><a href="<%= contextPathUserinfo %>/wishList.jw?memNo=<%= loginMemberUserinfo.getMemNo() %>&currentPage=1">찜</a></td>
             </tr>
             <tr>
-                <td><a href="">최근 본 상품</a></td>
-            </tr>
-            <tr>
                 <th>판매 이력 조회</th>
             </tr>
             <tr>

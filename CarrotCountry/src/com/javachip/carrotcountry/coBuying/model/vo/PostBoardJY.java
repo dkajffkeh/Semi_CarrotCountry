@@ -34,6 +34,32 @@ public class PostBoardJY extends PageInfo {
 	public PostBoardJY() {}
 
 
+	
+	
+	
+	
+	public PostBoardJY(int postNo, int memNo, String localNo, String postName, String categoryName,
+			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes,
+			int prodPrice) {
+		super();
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.localNo = localNo;
+		this.postName = postName;
+		this.categoryName = categoryName;
+		this.thumbnailPath = thumbnailPath;
+		this.thumbnailFilename = thumbnailFilename;
+		this.thumbnailLoadPath = thumbnailLoadPath;
+		this.postViews = postViews;
+		this.postLikes = postLikes;
+		this.prodPrice = prodPrice;
+	}
+
+
+
+
+
+
 	public PostBoardJY(int currentPage, int listCount, int boardLimit, int pageLimit, int maxPage, int startPage,
 			int endPage, int postNo, int memNo, String localNo, String postName, String categoryName,
 			String thumbnailPath, String thumbnailFilename, String thumbnailLoadPath, int postViews, int postLikes,

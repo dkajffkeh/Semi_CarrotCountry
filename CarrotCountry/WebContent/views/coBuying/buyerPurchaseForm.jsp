@@ -235,8 +235,9 @@
 	                        <td rowspan="3" class="price"><%= p.getGpPrice() %>원</td>
 	                        <td rowspan="3" class="price"><%= p.getGpDPrice() %>원</td>
 	                        <td rowspan="3" class="price">2500원</td>
-	                        <td rowspan="3" class="price"><%= p.getGpPrice() - p.getGpDPrice() + 2500 %>원</td>
-	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpPrice() - p.getGpDPrice() + 2500 %>">
+	                      	<td rowspan="3" class="price"><%= p.getGpDPrice() + 2500 %>원</td>
+	                        <input type="hidden" name="purchasePrice" value="<%= p.getGpDPrice() + 2500 %>">
+	                        
 	                    </tr>
                    		<c:if test="${not empty optionList and fn:length(optionList) ne 0}">
 		                    <tr>
