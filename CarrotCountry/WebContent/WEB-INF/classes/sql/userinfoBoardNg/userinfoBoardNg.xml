@@ -61,7 +61,7 @@
 	          FROM (
 	                SELECT PI.PURCHASE_NO       <!-- 구매 번호 -->
 	                     , P.POST_NO            <!-- 게시글 번호 -->
-	                     , P.THUMBNAIL_LOADPATH <!-- 썸네일 경로 -->
+	                     , P.THUMBNAIL_PATH || P.THUMBNAIL_FILENAME THUMBNAIL_LOADPATH <!-- 썸네일 경로 -->
 	                     , p.POST_NAME          <!-- 상품명 -->
 	                     , M.MEM_NICKNAME       <!-- 진행자 닉네임 -->
 	                     , GP.GP_MINPEOPLE      <!-- 최소인원 -->
@@ -93,7 +93,7 @@ SELECT PI.PURCHASE_NO   <!-- 구매 넘 -->
      , PI.TRACKING_NO   <!-- 운송장 번호 -->
      , PI.REQUESTS      <!-- 요청사항  -->
 
-     , P.THUMBNAIL_LOADPATH     <!-- 썸네일 경로 -->
+     , P.THUMBNAIL_PATH || P.THUMBNAIL_FILENAME THUMBNAIL_LOADPATH     <!-- 썸네일 경로 -->
      , p.POST_NAME              <!-- 상품명 -->
      , M.MEM_NICKNAME           <!-- 진행자 닉네임 -->
      , M.MEM_PHONE MEMPHONE     <!-- 진행자 전화번호 -->
