@@ -70,16 +70,14 @@
 								<% } else { %>
 									<c:forEach items="${list}" var="ab">
 										<tr>
+											<c:if test="${ab.postType eq 1}">
+												<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postNo}</a></td>
+											</c:if>
+											<c:if test="${ab.postType eq 2}">
+												<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postNo}</a></td>
+											</c:if>
 											<c:choose>
-												<c:when test="${ab.postType == 1}">
-													<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postNo}</a></td>
-												</c:when>
-												<c:when test="${ab.postType == 2}">
-													<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postNo}</a></td>
-												</c:when>
-											</c:choose>
-											<c:choose>
-												<c:when test="${ab.postType == 1}">
+												<c:when test="${ab.postType eq 1}">
 													<td>중고거래</td>
 												</c:when>
 												<c:otherwise>
@@ -87,7 +85,12 @@
 												</c:otherwise>
 											</c:choose>
 											<td>${ab.categoryName}</td>
-											<td>${ab.postName}</td>
+											<c:if test="${ab.postType eq 1}">
+												<td><a href="<%= contextPath %>/townMarketBoardDetail.sh?bno=${ab.postNo}">${ab.postName}</a></td>
+											</c:if>
+											<c:if test="${ab.postType eq 2}">
+												<td><a href="<%= contextPath %>/buyerdetail.pro.jy?bno=${ab.postNo}">${ab.postName}</a></td>
+											</c:if>
 											<td>${ab.memNo}</td>
 											<td>${ab.postEnrollDate}</td>
 											<td>${ab.postViews}</td>

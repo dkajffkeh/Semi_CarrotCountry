@@ -1,11 +1,13 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard"%>
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminReport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
-	ArrayList<AdminReport> list = (ArrayList<AdminReport>)request.getAttribute("list");
+	ArrayList<AdminReport> rlist = (ArrayList<AdminReport>)request.getAttribute("rlist");
 %>
 <!DOCTYPE html>
 <html>
@@ -61,12 +63,12 @@
 								</tr>
 							</thead>
 							<tbody class="tbody">
-								<% if (list.isEmpty()) { %>
+								<% if (rlist.isEmpty()) { %>
 									<tr>
 										<th colspan="7">조회된 리스트가 없습니다.</th>
 									</tr>
 								<% } else { %>
-									<% for (AdminReport ar : list) { %>
+									<% for (AdminReport ar : rlist) { %>
 										<tr>
 											<td><%= ar.getReportNo() %></td>
 											<td><%= ar.getReportDate() %></td>

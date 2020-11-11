@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javachip.carrotcountry.adminBoard.model.service.AdminBoardService;
 import com.javachip.carrotcountry.adminBoard.model.service.AdminPageInfoService;
 import com.javachip.carrotcountry.adminBoard.model.service.AdminReportService;
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 import com.javachip.carrotcountry.adminBoard.model.vo.AdminReport;
 import com.javachip.carrotcountry.member.model.vo.Member;
@@ -58,10 +60,10 @@ public class ReportSelectFormController extends HttpServlet {
 			
 			AdminPageInfo pi = new AdminPageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 			
-			ArrayList<AdminReport> list = new AdminReportService().reportListSelectAll(pi);
+			ArrayList<AdminReport> rlist = new AdminReportService().reportListSelectAll(pi);
 			
 			request.setAttribute("pi", pi);
-			request.setAttribute("list", list);
+			request.setAttribute("rlist", rlist);
 			
 			request.getRequestDispatcher("views/adminBoard/reportSelectForm.jsp").forward(request, response);
 			

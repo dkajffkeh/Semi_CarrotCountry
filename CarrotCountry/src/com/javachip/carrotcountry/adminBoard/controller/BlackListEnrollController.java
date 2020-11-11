@@ -27,12 +27,12 @@ public class BlackListEnrollController extends HttpServlet {
 		int result = new AdminMemberService().blackListEnroll(memNo, bList);
 		
 		if (result > 0) { 	// 블랙리스트 등록 성공 시
-			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/blackList.sb?currentPage=1");
 		} else {	// 블랙리스트 등록 실패 시
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>alert('등록에 실패했습니다.');</script>");
 			
-			response.sendRedirect(request.getContextPath() + "/userList.sb?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/blackList.sb?currentPage=1");
 		}
 		
 	}
