@@ -3,6 +3,7 @@
 <%
 	String loginFail = (String)request.getAttribute("loginFail");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +71,9 @@
         <br>
         <br>
         
+        
+	
+        
         <table border="1px" width="100%">
             <form action="<%= contextPath %>/login.me.ng" method="post">
                 <tr>
@@ -87,7 +91,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox" name="userCheck" id="userCheck" value="Y"> <label for="userCheck">로그인 상태 유지</label></td>
+                    <td><input type="checkbox" name="userCheck" id="userCheck" value="T"> <label for="userCheck">로그인 상태 유지</label></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" id="loginSubmit" class="btn btn-warning" value="로그인"></td>

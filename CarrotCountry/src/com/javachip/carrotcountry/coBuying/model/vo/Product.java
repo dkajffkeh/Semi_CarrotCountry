@@ -40,6 +40,7 @@ public class Product {
 
 
 
+
 	public Product(int postNo, Date postEnrollDate, String gpDeadline, int gpPrice, int gpDRate, int gpMinPeople, int gpPeople, int gpDPrice,
 			String gpRefund) {
 		super();

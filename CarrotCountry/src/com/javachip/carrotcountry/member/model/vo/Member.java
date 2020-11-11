@@ -85,6 +85,17 @@ public class Member {
 	
 	
 	
+	// 매개변수 생성자 (프로필사진변경용)
+	public Member(int memNo, String profileOrignname, String profileModifyname, String profilePath,
+			String profileLoadname) {
+		super();
+		this.memNo = memNo;
+		this.profileOrignname = profileOrignname;
+		this.profileModifyname = profileModifyname;
+		this.profilePath = profilePath;
+		this.profileLoadname = profileLoadname;
+	}
+
 	public Member(int memNo, int localNo, String memUserId, String memName, String memNickname, String memBirthday,
 			String memGender, String memPhone, String memEmail, Date memEnrollDate, String bListCheck,
 			String leaveCheck, String managerCheck, String profilePath, String profileModifyname,

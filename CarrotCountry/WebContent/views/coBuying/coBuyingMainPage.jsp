@@ -6,14 +6,13 @@
 			   , com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.*
 			   ,  com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.*"
  %>    
-
 <%
 	ArrayList<Product> pList = (ArrayList<Product>)request.getAttribute("pList");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CategoryHY> cList = (ArrayList<CategoryHY>)request.getAttribute("cList");
 	PostBoard pb = (PostBoard)request.getAttribute("pb");	
 	String alertMsg = (String)session.getAttribute("alertMsg");
-
+	ArrayList<PostBoardJY> bList = (ArrayList<PostBoardJY>)request.getAttribute("bList");
 %>    
     
 <!DOCTYPE html>
@@ -23,20 +22,16 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-
 .wrap{width:1200px;height:1250px;margin:auto; font-family: 'Nanum Gothic', sans-serif;  }
-
 /* 전반적인 큰 틀 (3개의 영역) */
 #header{height:20%;}
 #content{height:70%;}
 .paginationArea{height:10%}
-
 /* 헤더영역의 전반적인 틀 */
 #header>div{width:100%;  float: left;}
 #header1{height:30%;}
 #header2{height:40%;}
 #header3{height:30%;}
-
 /* 헤더영역의 세부적인 틀 */
 #header1>h1{padding: 10px;}
 #header2>div{height: 100%; float: left;}
@@ -54,18 +49,14 @@
     float:right;
     margin:25px;
 }
-
 /* 검색창 추가적인 스타일 */
 #searchForm>*{height:100%; float:left;}
 #searchForm>input{width:80%;}
 #searchForm>button{width:20%}
-
 /* 콘텐트영역의 전반적인 틀 */
 #content>div{height: 100%; float: left;}
 #content1{width: 20%;}
 #content2{width: 80%}
-
-
 /* 콘텐트영역의 세부적인 틀 */
 #content2>div{width: 100%;}
 #array{
@@ -79,13 +70,11 @@
 #proTitle>div{height: 100%; float: left;}
 #proTitle{padding: 20px;}
 #regionText{width: 80%; padding-left: 20px;}
-#regionButton{width: 20%;}
-
+#regionButton{width: 20%; padding-left: 20px;}
 /* 페이징 */
 #paginationArea>ul{
     padding-top: 50px;
     padding-left: 400px;
-
 }
 #proContent>*{width: 100%; float: left;}
 .proName{height: 20%;}
@@ -125,9 +114,6 @@
     font-size: 20px;
     font-weight: 600;
 }
-
-
-
 /* 카테고리영역 */
 #content1 ul{list-style: none;}
 #content1 ul li{
@@ -141,7 +127,6 @@
 }
 #content1 ul li:hover{
     background: lightgray;
-
 }
 #content1 ul li a{
     text-decoration: none;
@@ -150,23 +135,17 @@
     margin-top: 10%;
     font-family: 'Nanum Gothic', sans-serif;
 }
-
 /* 정렬 */
 #array a{
     text-decoration: none;
     color: black;
 }
-
-
 #emptyDiv{
 	height:500px;
 	padding:100px
 }
 #emptyDiv>h4{color:orange; font-weight:800;}
-
-
 </style>
-
 </head>
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
@@ -197,9 +176,36 @@
                 <div id="header2_2">
                     <form action="" id="searchForm">
                         <input type="search" name="keyword">
-                        <button class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
+                        <button onclick="searchAjax();" class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
                     </form>
                 </div>
+                
+                
+                <script>
+                function searchAjax(){
+                	
+                	let keyword = $("input[name=keyword]").val();
+                	
+                	$.ajax({
+                		url:"search.pro.jy",
+                		type:"get",
+                		data:{
+                			currentPage:1,
+                			keyword:keyword
+                		},
+                		success:function(result){
+                			console.log(result);
+                			 $("input[name=keyword]").val('');
+                			 $("a[class=pagination]").html('');
+                		},
+                		error:function(){
+                			
+                		}
+                	})
+                	
+                }
+                
+                </script>
                
                 <div id="header2_3"></div>
      
@@ -241,32 +247,23 @@
             <div id="content1">
             
                 <ul>
-                    <li onclick="category(this)"><a href="">디지털/가전</a></li>
-                    <li><a href="">가구/인테리어</a></li>
-                    <li><a href="">유아동/유아도서</a></li>
-                    <li><a href="">생활/가공식품</a></li>
-                    <li><a href="">스포츠/레저</a></li>
-                    <li><a href="">여성잡화</a></li>
-                    <li><a href="">여성의류</a></li>
-                    <li><a href="">남성패션/잡화</a></li>
-                    <li><a href="">게임/취미</a></li>
-                    <li><a href="">뷰티/미용</a></li>
-                    <li><a href="">반려동물용품</a></li>
-                    <li><a href="">도서/티켓/음반</a></li>
-                    <li><a href="">기타물품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory.pro.jy?currentPage=1">디지털/가전</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory30.pro.jy?currentPage=1">가구/인테리어</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory40.pro.jy?currentPage=1">유아동/유아도서</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory50.pro.jy?currentPage=1">생활/가공식품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory60.pro.jy?currentPage=1">스포츠/레저</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory70.pro.jy?currentPage=1">여성잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory80.pro.jy?currentPage=1">여성의류</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory90.pro.jy?currentPage=1">남성패션/잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory100.pro.jy?currentPage=1">게임/취미</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory110.pro.jy?currentPage=1">뷰티/미용</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory120.pro.jy?currentPage=1">반려동물용품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory130.pro.jy?currentPage=1">도서/티켓/음반</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory140.pro.jy?currentPage=1">기타물품</a></li>
                 </ul>
               
             </div>
-            
-            <script>
-            function category(e){
-            	console.log(e);
-            	e.children[0].innerHTML
-            }
-            </script>
-            
-            
-            
+           
             <div id="content2">
                 <div id="array">
                     <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>
@@ -277,12 +274,53 @@
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">
                     <div id="regionText">
-                        <b>xx시 xx동의 공동구매</b>
-                    </div>
-                    <div id="regionButton">
-                        <button type="button" class="btn btn-secondary btn-sm">지역선택</button>
-                        <button type="button" class="btn btn-secondary btn-sm">동네선택</button>
-                    </div>
+                        
+                         <select id="gu" name="gu">
+		                    <option value="송파구">송파구</option>
+		                    <option value="강서구">강서구</option>
+		                </select>
+		                        
+                        <select id="dong" name="dong">
+		                    <option value="오금동">오금동</option>
+		                    <option value="오류동">오류동</option>
+		                    <option value="상일동">상일동</option>
+		                </select>
+						의 공동구매
+						
+	                    </div>
+	                    <div id="regionButton">
+	                        <button id="regionbtn" type="submit" class="btn btn-secondary btn-sm">동네선택</button>
+	                    </div>
+	                <script>
+			            $(function(){
+			            	
+								$("#gu").click(function(){
+									let str="";
+									if($("#gu option:selected").val()=="강서구")
+									{
+										str+=   `<option value="화곡동">화곡동</option>
+					                             <option value="목동">목동</option>`;
+										
+									   $("#dong").html(str);				
+									} else {
+										str+= `<option value="오금동">오금동</option>
+						                   	   <option value="오류동">오류동</option>
+						                       <option value="상일동">상일동</option>`;
+						                       
+									   $("#dong").html(str);        
+										   }					
+								})   
+								
+								
+								$("#regionbtn").click(function(){
+									location.href = "<%= contextPath %>/sortRegion.pro.jy?currentPage=1";
+								})
+			            })
+			            </script>
+
+                   
+                
+                    
                    
                 </div>
                 <div id="proContent">
@@ -334,7 +372,54 @@
 		        	});
 		        	
 		        </script>
-		                    
+		          
+            <script>
+            function category(e){
+            	let cName = e.children[0].innerHTML
+            	
+            	console.log(cName);
+            	
+            	$.ajax({
+            		url:"categoryajax.pro.jy",
+            		type:"post",
+            		data:{currentPage:1,
+            			  cName:cName},
+            		success:function(result){
+            			
+            			console.log(result);
+            			let $articleOuter = $("#proContent");
+            			let str = "";
+            			
+            			for(let i=0; i<result.length; i++){
+            				
+	            		str +=	`<div class="proName">
+				           		<input type="hidden" value="\${result[i].postNo }">
+				            	<div id="proImg"><a href=""><img src="<%= contextPath %>/\${result[i].thumbnailLoadPath+result[i].thumbnailFilename}" width="100" height="100"></a></div>
+					           
+					            <div id="proText">
+					                <div id="proText-title">
+		                               <a href=""><h4>\${result[i].postName}</h4></a>
+		                            </div>
+		                            <div id="proText-like">
+		                                <h6> \${result[i].gpPeople} | ♡ (\${result[i].postLikes})</h6> 
+		                            </div>
+						        </div>
+						        <div id="proPrice">
+			                            <h6 id="realPrice"><s>\${result[i].gpPrice}</s></h6>
+			                            <span id="discount">공구할인률 \${result[i].gpDRate} %</span>
+			                            <span id="discountPrice">\${result[i].gpDPrice}원</span>
+			                     </div>
+				            </div>`;
+            			} 
+            			
+            			$articleOuter.html(str);
+            		}
+            	})
+            }
+            </script>
+            
+            
+                       
 
                 </div>
 
@@ -356,8 +441,7 @@
 	          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
 	            <% } %>
      		</div>
-                
-
+    
 
     </div>
     

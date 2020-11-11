@@ -112,11 +112,11 @@
 	    
 	     <div id="content1">
 	    	 <% for(WishList w : list) { %>
-	    	 	
+	    	 <input type="hidden" value="<%= w.getPostNo() %>">
 			        <div class="content1">
-						<input type="hidden" value="<%= w.getPostNo() %>" name="bno">
 			            <input style='zoom:2.0;' type="checkbox" name="wishList" value="<%=w.getPostNo()%>">
 			           <div class="img1">
+			           <input type="hidden" value="<%= w.getPostNo() %>" name="bno">
 			           	<img src="<%= contextPath %>/<%= w.getThumbNailPath() %><%= w.getThumbNailFileName() %>"> <br>
 			           </div>
 			           	 &nbsp; &nbsp;
@@ -145,7 +145,8 @@
 	<script>
         	$(function(){
         		$(".img1").click(function(){
-        		location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=" + $(this).children().eq(0).val();
+        			var bno = $(this).children().eq(0).val()
+        		location.href = "<%= contextPathUserinfo %>/townMarketBoardDetail.sh?bno=" + bno;
         		});
         	});
         		

@@ -15,6 +15,7 @@ import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.Photo;
 import com.javachip.carrotcountry.shMarketBoard.mainPage.model.vo.PostBoard;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.model.TownMarketDao;
 import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.Location;
+import com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.ShmarketPageInfo;
 
 import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 
@@ -210,7 +211,16 @@ public class ProductService {
 		return result;
 	}
 	
-	
+	public ArrayList<PostBoardJY> mainCategoryAjax(String cName, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<PostBoardJY> list = new ProductDao().mainCategoryAjax(conn,cName,pi);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	
 	
@@ -267,6 +277,186 @@ public class ProductService {
 		
 	}
 	
+	
+	public ArrayList<Product> sortCategory(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory30(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory30(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory40(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory40(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory50(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory50(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory60(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory60(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory70(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory70(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory80(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory80(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory90(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory90(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory100(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory100(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory110(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory110(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory120(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory120(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory130(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory130(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	public ArrayList<Product> sortCategory140(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().sortCategory140(conn, pi);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Product> selectRegionProduct(PageInfo pi, String localGu, String localDong){
+		Connection conn = getConnection();
+		
+		ArrayList<Product> pList = new ProductDao().selectRegionProduct(conn, pi, localGu, localDong);
+		
+		close(conn);
+		return pList;
+		
+		
+	}
+	
+	
+	
+	
+	public ArrayList<PostBoardJY> mainSearchAjax(PageInfo pi, String keyword) {
+		Connection conn = getConnection();
+		ArrayList<PostBoardJY> bList = new ProductDao().mainSearchAjax(conn,pi,keyword);
+		
+		close(conn);
+		
+		return bList;
+	}
 	
 	
 	
