@@ -1,17 +1,23 @@
 package com.javachip.carrotcountry.userinfoBoard.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.javachip.carrotcountry.common.MyFileRenamePolicy;
 import com.javachip.carrotcountry.member.model.vo.Member;
 import com.javachip.carrotcountry.userinfoBoard.model.service.UserInfoBoardService;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.Location;
+import com.javachip.carrotcountry.userinfoBoard.model.vo.ShippingLocation;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -37,14 +43,21 @@ public class ProfileUpdateController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		if(ServletFileUpload.isMultipartContent(request)) {
-			
 			int maxSize = 10 * 1024 * 1024;
 			
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/userinfo_profile/");
-			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			
+			
 			int memNo = Integer.parseInt(request.getParameter("memNo"));
-
+			int locNo = ((Member)request.getSession().getAttribute("loginMember")).getLocalNo();
+			ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
+			Location lo = new UserInfoBoardService().selectLocation(locNo);
+			
+			request.setAttribute("list", list);
+			request.setAttribute("lo", lo);
+			
+			
 			Member m = null;
 			if(multiRequest.getOriginalFileName("reUpfile") != null) {
 				m = new Member();
@@ -52,20 +65,19 @@ public class ProfileUpdateController extends HttpServlet {
 				m.setProfileModifyname(multiRequest.getFilesystemName("reUpfile"));
 				m.setProfilePath("resources/userinfo_profile/");
 				m.setProfileLoadname("resources/userinfo_profile/"+ multiRequest.getFilesystemName("reUpfile"));
-				}
-			
-			
-			int result = new UserInfoBoardService().updateProfile(memNo,m);
-			if(result >0) {
-				response.sendRedirect(request.getContextPath() + "/myPage.me.jw?memNo=" + memNo);
-				
-				
-			}else {
-				request.setAttribute("errorMsg", "사진 변경 실패!");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
 			}
 			
+			Member updateMem = new UserInfoBoardService().updateProfile(memNo,m);
 			
+			if(updateMem == null) {
+				request.setAttribute("errorMsg", "사진 변경 실패!");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
+			}else {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginMember", updateMem); // 동일한 키값으로 담으면 덮어씌워짐
+				response.sendRedirect(request.getContextPath() + "/myPage.me.jw?memNo=" + memNo);
+				
+			}
 		}
 	
 	

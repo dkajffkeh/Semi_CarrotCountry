@@ -22,6 +22,7 @@
         <hr>
         <form action="<%= contextPath %>/insert.on.jm" method="post">
         <input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
+        
             <ul>
                 <li>
                     <label for="">유형분류*</label>&nbsp;

@@ -126,7 +126,7 @@ border:2px solid green;
                     style="margin-right: 5px;" value="<%=pb.getPostName()%>">
                 <select name="category" id="category" class="form-control" style="color:drakgray;">             
 						<% for(int i =0 ; i<clist.size(); i++){ %>
-						<option value="<%=40+10*i%>"><%=clist.get(i).getCategoryName()%></option>
+						<option value="<%=10+10*i%>"><%=clist.get(i).getCategoryName()%></option>
 						<% } %>
                 </select>
                 <script>

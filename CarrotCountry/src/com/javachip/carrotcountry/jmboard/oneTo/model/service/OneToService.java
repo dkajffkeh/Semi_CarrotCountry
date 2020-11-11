@@ -5,6 +5,9 @@ import static com.javachip.carrotcountry.common.JDBCtemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.javachip.carrotcountry.adminBoard.model.dao.AdminMemberDao;
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminMember;
+import com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo;
 import com.javachip.carrotcountry.jmboard.faq.model.dao.FaqDao;
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
 import com.javachip.carrotcountry.jmboard.notice.model.vo.PageInfo;
@@ -94,6 +97,27 @@ public class OneToService {
 		
 		return o;
 	}
+
+	public ArrayList<OneTo> OneToSearchList(PageInfo pi, String category, String search) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<OneTo> list = new OneToDao().OneToListSearch(conn, pi, category, search);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<OneTo> selectMyList(PageInfo pi, int ono) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<OneTo> list = new OneToDao().selectMyList(conn,ono,pi);
+		
+		return list;
+	}
+	
 	
 
 	

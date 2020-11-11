@@ -35,7 +35,7 @@ public class UserInfoBoardService {
 		if(result >0) {
 			commit(conn);
 			
-			updateMem = new UserInfoBoardDao().selectMember(conn, m.getMemUserId());
+			updateMem = new UserInfoBoardDao().selectMember(conn, m.getMemNo());
 		}else {
 			rollback(conn);
 		}
@@ -363,20 +363,39 @@ public class UserInfoBoardService {
 		 * @return 			
 		 *
 		 */
-		public int updateProfile(int memNo, Member m) {
+		public Member updateProfile(int memNo, Member m) {
 			Connection conn = getConnection();
 			
 			int result = new UserInfoBoardDao().updateProfile(conn, memNo, m);
 			
+			Member updateMem = null;
+			
 			if(result > 0) {
 				commit(conn);
+				
+				updateMem = new UserInfoBoardDao().selectMember(conn, memNo);
+				
 			}else {
 				rollback(conn);
 			}
+			close(conn);
+			
+			return updateMem;
+			
+		}
+		
+		/* 
+		 * 지역거래 건수
+		 */
+		public int selectCountMarket(int memNo) {
+			
+			Connection conn = getConnection();
+			
+			int listCount = new  UserInfoBoardDao().selectCountMarket(conn, memNo);
 			
 			close(conn);
 			
-			return  result;
-			
+			return listCount;
 		}
+		 
 }

@@ -118,7 +118,7 @@ border:2px solid green;
                     style="margin-right: 5px;">
                 <select name="category" id="" class="form-control" style="color:gray;">
                    		<% for(int i =0 ; i<list.size(); i++){ %>
-						<option value="<%=40+10*i%>"><%=list.get(i).getCategoryName() %></option>
+						<option value="<%=10+10*i%>"><%=list.get(i).getCategoryName() %></option>
 						<% } %>
                 </select>
             </div>

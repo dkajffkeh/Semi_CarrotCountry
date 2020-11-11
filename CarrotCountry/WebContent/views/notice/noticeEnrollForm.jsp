@@ -64,31 +64,6 @@
 	    
 	    
 	    
-	    <div id="replyArea">
-        	<table border="1" align="center">
-        		<thead>
-        			<tr>
-        				<th>댓글작성</th>
-        				<% if(loginMember == null){ // 로그인 전 %>
-	        				<td>
-	        					<textarea cols="50" rows="2" style="resize:none" readonly>로그인후 이용가능한 서비스입니다.</textarea>
-	        				</td>
-	        				<td><button disabled>댓글등록</button></td>
-        				<%}else{ // 로그인 후 %>
-	        				<td>
-	        					<input type="hidden" value="<%= loginMember.getMemNo() %>" id="userNo">
-	        					<textarea cols="50" rows="2" style="resize:none" id="replyContent"></textarea>
-	        				</td>
-	        				<td><button onclick="addReply();">댓글등록</button></td>
-        				<%} %>
-        			</tr>
-        		</thead>
-        		<tbody>
-        			
-        		</tbody>
-        	</table>
-        </div>
-	    
 	    
 	    
 	    

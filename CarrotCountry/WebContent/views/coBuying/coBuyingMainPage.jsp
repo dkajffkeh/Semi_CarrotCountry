@@ -174,38 +174,14 @@
             <div id="header2">
                 <div id="header2_1"></div>
                 <div id="header2_2">
-                    <form action="" id="searchForm">
+                    <form action="<%= contextPath %>/search.pro.jy" id="searchForm">
+                        <input type="hidden" name="currentPage" value=1>
                         <input type="search" name="keyword">
-                        <button onclick="searchAjax();" class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
+                        <button class="btn btn-warning btn-sm"><i class="fas fa-carrot"></i></button>
                     </form>
                 </div>
                 
                 
-                <script>
-                function searchAjax(){
-                	
-                	let keyword = $("input[name=keyword]").val();
-                	
-                	$.ajax({
-                		url:"search.pro.jy",
-                		type:"get",
-                		data:{
-                			currentPage:1,
-                			keyword:keyword
-                		},
-                		success:function(result){
-                			console.log(result);
-                			 $("input[name=keyword]").val('');
-                			 $("a[class=pagination]").html('');
-                		},
-                		error:function(){
-                			
-                		}
-                	})
-                	
-                }
-                
-                </script>
                
                 <div id="header2_3"></div>
      
@@ -247,43 +223,23 @@
             <div id="content1">
             
                 <ul>
-                    <li onclick="category(this)"><a href="">디지털/가전</a></li>
-                    <li onclick="category(this)"><a href="">가구/인테리어</a></li>
-                    <li onclick="category(this)"><a href="">유아동/유아도서</a></li>
-                    <li onclick="category(this)"><a href="">생활/가공식품</a></li>
-                    <li onclick="category(this)"><a href="">스포츠/레저</a></li>
-                    <li onclick="category(this)"><a href="">여성잡화</a></li>
-                    <li onclick="category(this)"><a href="">여성의류</a></li>
-                    <li onclick="category(this)"><a href="">남성패션/잡화</a></li>
-                    <li onclick="category(this)"><a href="">게임/취미</a></li>
-                    <li onclick="category(this)"><a href="">뷰티/미용</a></li>
-                    <li onclick="category(this)"><a href="">반려동물용품</a></li>
-                    <li onclick="category(this)"><a href="">도서/티켓/음반</a></li>
-                    <li onclick="category(this)"><a href="">기타물품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory.pro.jy?currentPage=1">디지털/가전</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory30.pro.jy?currentPage=1">가구/인테리어</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory40.pro.jy?currentPage=1">유아동/유아도서</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory50.pro.jy?currentPage=1">생활/가공식품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory60.pro.jy?currentPage=1">스포츠/레저</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory70.pro.jy?currentPage=1">여성잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory80.pro.jy?currentPage=1">여성의류</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory90.pro.jy?currentPage=1">남성패션/잡화</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory100.pro.jy?currentPage=1">게임/취미</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory110.pro.jy?currentPage=1">뷰티/미용</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory120.pro.jy?currentPage=1">반려동물용품</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory130.pro.jy?currentPage=1">도서/티켓/음반</a></li>
+                    <li><a href="<%= contextPath %>/sortcategory140.pro.jy?currentPage=1">기타물품</a></li>
                 </ul>
               
             </div>
-            
-            <script>
-            function category(e){
-            	var cName = e.children[0].innerHTML
-            	
-            	console.log(cName);
-            	
-            	$.ajax({
-            		url:"categoryajax.pro.jy",
-            		type:"post",
-            		data:{currentPage:1,
-            			  cName:cName},
-            		success:function(result){
-            			
-            		}
-            	})
-            }
-            </script>
-            
-            
-            
+           
             <div id="content2">
                 <div id="array">
                     <a href="<%= contextPath %>/sortnew.pro.jy?currentPage=1">최신순 |</a>
@@ -293,9 +249,9 @@
                 </div>
                 <hr style="border-bottom: 2px solid grey; border-top: none;">
                 <div id="proTitle">
-                 <form action="<%= contextPath %>/sortRegion.pro.jy?currentPage=1">
                     <div id="regionText">
-                        
+                      <form action="<%= contextPath %>/sortRegion.pro.jy">
+                      <input type="hidden" name="currentPage" value=1>
                          <select id="gu" name="gu">
 		                    <option value="송파구">송파구</option>
 		                    <option value="강서구">강서구</option>
@@ -307,7 +263,12 @@
 		                    <option value="상일동">상일동</option>
 		                </select>
 						의 공동구매
-                         <script>
+	                    </div>
+	                    <div id="regionButton">
+	                        <button id="regionbtn" type="submit" class="btn btn-secondary btn-sm">동네선택</button>
+	                    </div>
+	                  </form>
+	                <script>
 			            $(function(){
 			            	
 								$("#gu").click(function(){
@@ -325,14 +286,10 @@
 						                       
 									   $("#dong").html(str);        
 										   }					
-								})     	
+								})   
 			            })
 			            </script>
 
-                    </div>
-                    <div id="regionButton">
-                        <button type="submit" class="btn btn-secondary btn-sm">동네선택</button>
-                    </div>
                    
                 
                     
@@ -387,7 +344,11 @@
 		        	});
 		        	
 		        </script>
-		                    
+		          
+           
+            
+            
+                       
 
                 </div>
 
@@ -409,8 +370,7 @@
 	          		 <a href="<%= contextPath %>/mainpage.co.jy?currentPage=<%= pi.getCurrentPage() + 1 %>">다음 &gt; </a>
 	            <% } %>
      		</div>
-                
-</form>
+    
 
     </div>
     

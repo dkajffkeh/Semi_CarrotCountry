@@ -57,7 +57,7 @@ public class UserInfoBoardDao {
 			pstmt.setString(5, m.getMemPhone());
 			pstmt.setInt(6, m.getLocalNo());
 			pstmt.setString(7, m.getMemEmail());
-			pstmt.setString(8, m.getMemUserId());
+			pstmt.setInt(8, m.getMemNo());
 
 			result = pstmt.executeUpdate();
 			
@@ -69,7 +69,7 @@ public class UserInfoBoardDao {
 		return result;
 	}
 	
-	public Member selectMember(Connection conn, String userId) {
+	public Member selectMember(Connection conn, int memNo) {
 		Member m = null;
 		
 		PreparedStatement pstmt = null;
@@ -80,7 +80,7 @@ public class UserInfoBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, userId);
+			pstmt.setInt(1, memNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -632,8 +632,8 @@ public class UserInfoBoardDao {
 	
 	}
 	
-	// 프로빌 변경
-	public int updateProfile(Connection conn, int memNo ,Member m) {
+	// 프로필 변경
+	public int updateProfile(Connection conn, int memNo, Member m) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -643,11 +643,12 @@ public class UserInfoBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			
 			pstmt.setString(1, m.getProfileOrignname());
 			pstmt.setString(2, m.getProfileModifyname());
 			pstmt.setString(3, m.getProfilePath());
 			pstmt.setString(4, m.getProfileLoadname());
-			pstmt.setInt(5, m.getMemNo());
+			pstmt.setInt(5, memNo);
 			
 			result = pstmt.executeUpdate();			
 			
@@ -660,6 +661,40 @@ public class UserInfoBoardDao {
 		return result;
 		
 	
-}
+		}
+	
+	public int selectCountMarket(Connection conn, int memNo) {
+		
+		int countMarket = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCountMarket");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				countMarket = rset.getInt("COUNTMARKET");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return countMarket;
+	}
+	
+	
+	
+	
+	
 
 }

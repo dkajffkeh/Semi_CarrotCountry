@@ -36,28 +36,29 @@ public class MemberLoginController extends HttpServlet {
 		
 		String memUserId = request.getParameter("userId");
 		String memUserPwd = request.getParameter("userPwd");
-		String userCheck = request.getParameter("userCheck"); // "Y"면 로그인 유지(쿠키사용)
+		
+		String userCheck = request.getParameter("userCheck");
 		
 		Member loginMember = new MemberService().loginMember(memUserId, memUserPwd);
-		
-
 		
 		if(loginMember == null) { 
 			
 			// 로그인 실패
 			request.setAttribute("loginFail", "ID 혹은 비밀번호를 잘못 입력하셨거나 가입하지 않은 ID 입니다.");
 			request.getRequestDispatcher("/views/member/memberLoginForm.jsp").forward(request, response);
-
-			
-			
 			
 		}else { 
+
 			// 로그인 성공
+
 			HttpSession session = request.getSession();
+			
+
 			session.setAttribute("loginMember", loginMember);
 			session.setMaxInactiveInterval(-1);
-									
+
 			response.sendRedirect(request.getContextPath());
+			
 		}
 		
 	}

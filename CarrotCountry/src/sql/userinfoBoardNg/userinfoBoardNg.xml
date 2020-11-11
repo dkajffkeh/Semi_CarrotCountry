@@ -61,7 +61,7 @@
 	          FROM (
 	                SELECT PI.PURCHASE_NO       <!-- 구매 번호 -->
 	                     , P.POST_NO            <!-- 게시글 번호 -->
-	                     , P.THUMBNAIL_LOADPATH <!-- 썸네일 경로 -->
+	                     , P.THUMBNAIL_PATH || P.THUMBNAIL_FILENAME THUMBNAIL_LOADPATH <!-- 썸네일 경로 -->
 	                     , p.POST_NAME          <!-- 상품명 -->
 	                     , M.MEM_NICKNAME       <!-- 진행자 닉네임 -->
 	                     , GP.GP_MINPEOPLE      <!-- 최소인원 -->
@@ -81,63 +81,98 @@
 
 <!-- 마이페이지 공동구매 상세 조회 -->
 <entry key="selectPurchase">
-SELECT PI.PURCHASE_NO   <!-- 구매 넘 -->
-     , PI.POST_NO       <!-- 게시글 넘 -->
-     , PI.MEM_NO        <!-- 멤버 넘 -->
-     , PI.SHIPPING_NO   <!-- 배송 넘 -->
-     , PI.OPTION_NO     <!-- 옵션 넘 -->
-     , PI.DEPOSITOR     <!-- 입금자명 -->
-     , PI.PURCHASE_PRICE<!-- 가격 -->
-     , PI.PURCHASE_DATE <!-- 구매 신청일 -->
-     , PI.COURIER       <!-- 택배사 -->
-     , PI.TRACKING_NO   <!-- 운송장 번호 -->
-     , PI.REQUESTS      <!-- 요청사항  -->
-
-     , P.THUMBNAIL_LOADPATH     <!-- 썸네일 경로 -->
-     , p.POST_NAME              <!-- 상품명 -->
-     , M.MEM_NICKNAME           <!-- 진행자 닉네임 -->
-     , M.MEM_PHONE              <!-- 진행자 전화번호 -->
-     , GP.GP_MINPEOPLE          <!-- 최소인원 -->
-     , GP.GP_PEOPLE             <!-- 현재인원 -->
-     , GP.GP_DEADLINE           <!-- 마감일 -->
-     , GP.GP_STATUS             <!-- 상태 -->
-         
-     <!-- 상품 -->
-     , GP.GP_PRICE            <!-- 원가 -->
-     , GP.GP_DPRICE           <!-- 할인가 -->
-     , GP.GP_DRATE            <!-- 할인율 -->
-     , TRUNC(GP_DEADLINE - SYSDATE) D_DAY     <!-- 남은 날짜 0보다 작으면 날짜 지남 -->
-
-     <!-- 옵션 -->
-     , PO.OPTION_NAME         <!-- 선택한 옵션명 -->
-       
-     <!-- 배송 -->
-     , SL.SHIPPING_ADDRESS    <!-- 수령할 주소 -->
-     , SL.MEM_PHONE           <!-- 수령인 연락처 -->
-     , SL.MEM_USERNAME        <!-- 수령인 -->
-     , SL.SL_STATUS           <!-- 배송상태(기본값이 Y?) -->
-     
-     <!-- 계좌 -->
-    , M.MEM_NAME
-    , A.ACCOUNT               <!-- 송금 보내야될 계좌번호 -->
-    , A.BANK                  <!-- 송금 보내야될 은행 -->
-    
-    <!-- post 테이블 더 추가 -->
-    , P.DEAL_TYPE
-    , P.SITE
-
-FROM PURCHASE_INFO PI
-JOIN SHIPPING_LOCATION SL ON (SL.SHIPPING_NO = PI.SHIPPING_NO)
-JOIN PROD_OPTION PO ON (PO.OPTION_NO = PI.OPTION_NO)
-JOIN GROUP_PURCHASE GP ON (GP.POST_NO = PI.POST_NO)
-JOIN POST P ON (P.POST_NO = GP.POST_NO)
-JOIN ACCOUNT A ON (P.POST_NO = A.POST_NO)
-JOIN MEMBER M ON (M.MEM_NO = P.MEM_NO)
-WHERE PI.MEM_NO = ?
-AND PURCHASE_NO = ?
+	SELECT PI.PURCHASE_NO   <!-- 구매 넘 -->
+	     , PI.POST_NO       <!-- 게시글 넘 -->
+	     , PI.MEM_NO        <!-- 멤버 넘 -->
+	     , PI.SHIPPING_NO   <!-- 배송 넘 -->
+	     , PI.OPTION_NO     <!-- 옵션 넘 -->
+	     , PI.DEPOSITOR     <!-- 입금자명 -->
+	     , PI.PURCHASE_PRICE<!-- 가격 -->
+	     , PI.PURCHASE_DATE <!-- 구매 신청일 -->
+	     , PI.COURIER       <!-- 택배사 -->
+	     , PI.TRACKING_NO   <!-- 운송장 번호 -->
+	     , PI.REQUESTS      <!-- 요청사항  -->
+	
+	     , P.THUMBNAIL_PATH || P.THUMBNAIL_FILENAME THUMBNAIL_LOADPATH     <!-- 썸네일 경로 -->
+	     , p.POST_NAME              <!-- 상품명 -->
+	     , M.MEM_NICKNAME           <!-- 진행자 닉네임 -->
+	     , M.MEM_PHONE MEMPHONE     <!-- 진행자 전화번호 -->
+	     , GP.GP_MINPEOPLE          <!-- 최소인원 -->
+	     , GP.GP_PEOPLE             <!-- 현재인원 -->
+	     , GP.GP_DEADLINE           <!-- 마감일 -->
+	     , GP.GP_STATUS             <!-- 상태 -->
+	         
+	     <!-- 상품 -->
+	     , GP.GP_PRICE            <!-- 원가 -->
+	     , GP.GP_DPRICE           <!-- 할인가 -->
+	     , GP.GP_DRATE            <!-- 할인율 -->
+	     , TRUNC(GP_DEADLINE - SYSDATE) D_DAY     <!-- 남은 날짜 0보다 작으면 날짜 지남 -->
+	
+	     <!-- 옵션 -->
+	     , PO.OPTION_NAME         <!-- 선택한 옵션명 -->
+	       
+	     <!-- 배송 -->
+	     , SL.SHIPPING_ADDRESS    <!-- 수령할 주소 -->
+	     , SL.MEM_PHONE MYPHONE   <!-- 수령인 연락처 -->
+	     , SL.MEM_USERNAME        <!-- 수령인 -->
+	     , SL.SL_STATUS           <!-- 배송상태(기본값이 Y?) -->
+	     
+	     <!-- 계좌 -->
+	    , M.MEM_NAME
+	    , A.ACCOUNT               <!-- 송금 보내야될 계좌번호 -->
+	    , A.BANK                  <!-- 송금 보내야될 은행 -->
+	    
+	    <!-- post 테이블 더 추가 -->
+	    , P.DEAL_TYPE
+	    , P.SITE
+	
+	FROM PURCHASE_INFO PI
+	JOIN SHIPPING_LOCATION SL ON (SL.SHIPPING_NO = PI.SHIPPING_NO)
+	JOIN PROD_OPTION PO ON (PO.OPTION_NO = PI.OPTION_NO)
+	JOIN GROUP_PURCHASE GP ON (GP.POST_NO = PI.POST_NO)
+	JOIN POST P ON (P.POST_NO = GP.POST_NO)
+	JOIN ACCOUNT A ON (P.POST_NO = A.POST_NO)
+	JOIN MEMBER M ON (M.MEM_NO = P.MEM_NO)
+	WHERE PI.MEM_NO = ?
+	AND PURCHASE_NO = ?
 </entry>
 
+<!-- 선택한 공구 구매자 수 조회  -->
+<entry key="buyerListCount">
+	SELECT COUNT(*)
+	  FROM PURCHASE_INFO
+	 WHERE POST_NO = ?
+</entry>
 
+<!-- 선택한 공구 구매자 리스트 조회 -->
+<entry key="buyerList">
+	SELECT *
+	  FROM (
+	        SELECT ROWNUM RNUM 
+	             , A.*
+	          FROM(
+	                SELECT PI.PURCHASE_NO
+	                     , PI.POST_NO
+	                     , PI.MEM_NO
+	                     , PI.DEPOSITOR
+	                     , PI.PURCHASE_DATE
+	                     , PI.COURIER
+	                     , PI.TRACKING_NO
+	                 FROM purchase_info PI 
+	                WHERE POST_NO = ?
+	                ORDER BY PURCHASE_NO DESC
+	               ) A
+	               
+	        )
+	        WHERE RNUM BETWEEN ? AND ?
+</entry>
 
+<!-- 택배사/송장번호 업데이트 -->
+<entry key="buyingBuyerUpdate">
+	UPDATE purchase_info
+   SET COURIER = ?
+     , TRACKING_NO = ?
+ WHERE PURCHASE_NO = ?
+</entry>
 
 </properties>

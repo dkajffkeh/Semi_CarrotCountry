@@ -47,8 +47,8 @@
 			
 				<%= n.getFileOriginName() %> <br>
 				
-				<input type="hidden" name="originFileName" value="<%= n.getFileModifyName() %>">
-			
+				<input type="hidden" name="modifyFileName" value="<%= n.getFileModifyName() %>">
+				<input type="hidden" name="originFileName" value="<%= n.getFileOriginName() %>">
 			<% } %>
 			
 			<input type="file" name="reUpfile">

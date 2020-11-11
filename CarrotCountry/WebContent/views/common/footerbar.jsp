@@ -51,7 +51,7 @@
                 <button class="btn btn-warning">회사소개</button>
             </div>
             <div class="footer_belowWrapper">
-                <p style="color:white">잡소리</p>
+                <p style="color:white" style="font-size:4rem;">유호연,김남규,손지원,정종민,이지연,홍석범</p>
             </div>
         </div>
     </footer>

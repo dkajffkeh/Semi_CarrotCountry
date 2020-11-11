@@ -36,6 +36,9 @@
 	String localSi = (lo.getLocalSi() == null) ? "" : lo.getLocalSi();
 	String localGu = (lo.getLocalGu() == null) ? "" : lo.getLocalGu();
 	String localDong = (lo.getLocalDong() == null) ? "" : lo.getLocalDong();
+	
+	String profileLoadName =  (loginMember.getProfileLoadname() == null) ? "" : loginMember.getProfileLoadname();
+	
 	%>
 	
 	<div class="myPageWrapper">
@@ -53,15 +56,16 @@
      <div id="content_top">
          <!-- 프로필 사진 -->
         <div id="content_top1">
-       <form action="<%= contextPath %>/update.pro.jw" method="post">
+       <form action="<%= contextPath %>/update.pro.jw?memNo=<%= memNo %>"  method="post" enctype="multipart/form-data">
 		 <input type="hidden" value="<%= memNo %>" name="memNo">
+		 <input type="hidden" value="<%= localNo %>" name="localNo">
                 <div id="fileArea">
                 		<input type="file" name="reUpfile" id="file1" onchange="loadImg(this, 1);" required>
                 </div>
-                <img id="profileImg" width= 200px; height= 200px; style="border-radius:100%; border:1px solid lightgray;"><br>
-                <label for="file1">사진선택</label>
+                <img src="<%= contextPath %>/<%= profileLoadName %>" id="profileImg" width=180px; height=180px; style="border-radius:100%; border:1px solid lightgray;"><br>
+                <label for="file1">프로필선택</label>
                  <div id="updateButton" align="center">
-                        <button type="submit">변경하기</button>
+                        <button type="submit">변경</button>
                  </div>
         
         </form>

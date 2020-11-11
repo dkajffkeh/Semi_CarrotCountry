@@ -35,6 +35,9 @@ private Properties prop = new Properties();
 		}  catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 	}
 	
 	public int increaseCount(Connection conn, int bno) {
@@ -632,7 +635,7 @@ private Properties prop = new Properties();
 								                     ,pi.getEndPage()
 								                     ,rs.getInt("POST_NO")		                  
 								                     ,rs.getInt("MEM_NO")
-								                     ,rs.getString("LOCATION")
+								                     ,rs.getString("LOCAL_NO")
 								                     ,rs.getString("POST_NAME")
 								                     ,rs.getString("CATEGORY_NAME")
 								                     ,rs.getString("THUMBNAIL_PATH")
@@ -648,7 +651,7 @@ private Properties prop = new Properties();
 				
 						PostBoardJY pb = new PostBoardJY(rs.getInt("POST_NO")		                  
 							                        ,rs.getInt("MEM_NO")
-							                        ,rs.getString("LOCATION")
+							                        ,rs.getString("LOCAL_NO")
 							                        ,rs.getString("POST_NAME")
 							                        ,rs.getString("CATEGORY_NAME")
 							                        ,rs.getString("THUMBNAIL_PATH")
@@ -865,15 +868,649 @@ private Properties prop = new Properties();
 			
 		}
 		
-		
-		public ArrayList<Product> selectRegionProduct(Connection conn, PageInfo pi, String localGu, String localDong){
+		public ArrayList<Product> sortCategory(Connection conn, PageInfo pi){
 			// select문 => 여러행 조회
 			ArrayList<Product> pList = new ArrayList<>();
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
-			String sql = prop.getProperty("selecRegionProduct");
+			String sql = prop.getProperty("sortCategory20");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory30(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory30");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory40(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory40");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory50(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory50");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory60(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory60");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory70(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory70");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory80(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory80");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory90(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory90");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory100(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory100");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory110(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory110");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory120(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory120");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory130(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory130");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		public ArrayList<Product> sortCategory140(Connection conn, PageInfo pi){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("sortCategory140");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public ArrayList<Product> searchKeyword(Connection conn, PageInfo pi, String keyword){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("searchKeyword");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() - 1;
+				
+				pstmt.setString(1, "%" + keyword + "%");
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pList.add(new Product(rs.getInt("post_no"),
+											rs.getString("thumbnail_path"),
+											rs.getString("thumbnail_filename"),
+											rs.getString("thumbnail_loadpath"),
+											rs.getString("POST_NAME"),
+											rs.getInt("GP_PEOPLE"),
+											rs.getInt("POST_LIKES"),
+											rs.getInt("GP_PRICE"),
+											rs.getInt("GP_DRATE"),
+											rs.getInt("GP_DPRICE")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+	 		
+			return pList;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		public ArrayList<Product> selectRegionProduct(Connection conn, PageInfo pi, String localGu, String localDong){
+			// select문 => 여러행 조회
+			ArrayList<Product> pList = new ArrayList<>();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String sql = prop.getProperty("selectRegionProduct");
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -884,7 +1521,6 @@ private Properties prop = new Properties();
 				pstmt.setString(2, localDong);
 				pstmt.setInt(3, startRow);
 				pstmt.setInt(4, endRow);
-				
 				
 				rs = pstmt.executeQuery();
 				
@@ -899,7 +1535,6 @@ private Properties prop = new Properties();
 											rs.getInt("gp_price"),
 											rs.getInt("gp_drate"),
 											rs.getInt("gp_dprice")));
-					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -907,9 +1542,7 @@ private Properties prop = new Properties();
 				close(rs);
 				close(pstmt);
 			}
-	 		
 			return pList;
-			
 		}
 		
 		
@@ -948,7 +1581,7 @@ private Properties prop = new Properties();
 								                     ,pi.getEndPage()
 													 ,rs.getInt("POST_NO")		                  
 								                     ,rs.getInt("MEM_NO")
-								                     ,rs.getString("LOCATION")
+								                     ,rs.getString("LOCAL_NO")
 								                     ,rs.getString("POST_NAME")
 								                     ,rs.getString("CATEGORY_NAME")
 								                     ,rs.getString("THUMBNAIL_PATH")
@@ -963,7 +1596,7 @@ private Properties prop = new Properties();
 						
 						PostBoardJY pb = new PostBoardJY(rs.getInt("POST_NO")		                  
 							                        ,rs.getInt("MEM_NO")
-							                        ,rs.getString("LOCATION")
+							                        ,rs.getString("LOCAL_NO")
 							                        ,rs.getString("POST_NAME")
 							                        ,rs.getString("CATEGORY_NAME")
 							                        ,rs.getString("THUMBNAIL_PATH")
@@ -992,6 +1625,43 @@ private Properties prop = new Properties();
 		}
 
 		
+		public ArrayList<PostBoardJY> boardTop4Selector(Connection conn, PageInfo pi) {
+			
+			ArrayList<PostBoardJY> pList = new ArrayList();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("boardTop4Selector");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					PostBoardJY pb = new PostBoardJY(rs.getInt("POST_NO")
+												,rs.getInt("MEM_NO")
+												,rs.getString("LOCATION")
+												,rs.getString("POST_NAME")
+												,rs.getString("CATEGORY_NAME")
+												,rs.getString("THUMBNAIL_PATH")
+												,rs.getString("THUMBNAIL_FILENAME")
+												,rs.getString("THUMBNAIL_LOADPATH")
+												,rs.getInt("POST_VIEWS")
+												,rs.getInt("POST_LIKES")
+												,rs.getInt("PROD_PRICE"));
+					pList.add(pb);				
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}		
+			
+			return pList;
+		}
 		
 		
 

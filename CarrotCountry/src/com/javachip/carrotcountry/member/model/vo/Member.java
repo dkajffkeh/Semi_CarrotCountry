@@ -70,10 +70,22 @@ public class Member {
 
 
 	// 매개변수 생성자 (회원정보수정용)
-	public Member(String memUserId, String memName, String memGender, String memBirthday, String memNickname,
-			String memPhone, int localNo, String memEmail) {
+
+	
+	
+	// 매개변수 생성자 (프로필사진변경용)
+	public Member(String profileOrignname, String profileModifyname, String profilePath, String profileLoadname
+			) {
 		super();
-		this.memUserId = memUserId;
+		this.profileOrignname = profileOrignname;
+		this.profileModifyname = profileModifyname;
+		this.profilePath = profilePath;
+		this.profileLoadname = profileLoadname;
+	}
+
+	public Member(String memName, String memGender, String memBirthday, String memNickname, String memPhone,
+			int localNo, String memEmail, int memNo) {
+		super();
 		this.memName = memName;
 		this.memGender = memGender;
 		this.memBirthday = memBirthday;
@@ -81,19 +93,7 @@ public class Member {
 		this.memPhone = memPhone;
 		this.localNo = localNo;
 		this.memEmail = memEmail;
-	}
-	
-	
-	
-	// 매개변수 생성자 (프로필사진변경용)
-	public Member(int memNo, String profileOrignname, String profileModifyname, String profilePath,
-			String profileLoadname) {
-		super();
 		this.memNo = memNo;
-		this.profileOrignname = profileOrignname;
-		this.profileModifyname = profileModifyname;
-		this.profilePath = profilePath;
-		this.profileLoadname = profileLoadname;
 	}
 
 	public Member(int memNo, int localNo, String memUserId, String memName, String memNickname, String memBirthday,
@@ -117,6 +117,27 @@ public class Member {
 		this.profilePath = profilePath;
 		this.profileModifyname = profileModifyname;
 		this.profileOrignname = profileOrignname;
+		this.profileLoadname = profileLoadname;
+	}
+
+	
+
+	public Member(int localNo, String memUserId, String memUserPwd, String memName, String memNickname,
+			String memBirthday, String memGender, String memPhone, String memEmail, String profileOrignname,
+			String profileModifyname, String profilePath, String profileLoadname) {
+		super();
+		this.localNo = localNo;
+		this.memUserId = memUserId;
+		this.memUserPwd = memUserPwd;
+		this.memName = memName;
+		this.memNickname = memNickname;
+		this.memBirthday = memBirthday;
+		this.memGender = memGender;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.profileOrignname = profileOrignname;
+		this.profileModifyname = profileModifyname;
+		this.profilePath = profilePath;
 		this.profileLoadname = profileLoadname;
 	}
 

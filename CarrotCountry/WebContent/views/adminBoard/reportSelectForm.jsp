@@ -1,11 +1,13 @@
+<%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminBoard"%>
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminReport"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.javachip.carrotcountry.adminBoard.model.vo.AdminPageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	AdminPageInfo pi = (AdminPageInfo)request.getAttribute("pi");
-	ArrayList<AdminReport> list = (ArrayList<AdminReport>)request.getAttribute("list");
+	ArrayList<AdminReport> rlist = (ArrayList<AdminReport>)request.getAttribute("rlist");
 %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +41,7 @@
 					<form action="<%= contextPath %>/reportSearchList.sb" class="form-inline my-2 my-lg-0" id="search">
                     	<input type="hidden" name="currentPage" value=1>
 						<select name="searchCategory" id="searchCategory">
-						  <option value="mem_userid">작성자</option>
+						  <option value="mem_userid">신고자</option>
 						  <option value="report_type_name">글유형</option>
 						</select>
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -61,12 +63,12 @@
 								</tr>
 							</thead>
 							<tbody class="tbody">
-								<% if (list.isEmpty()) { %>
+								<% if (rlist.isEmpty()) { %>
 									<tr>
 										<th colspan="7">조회된 리스트가 없습니다.</th>
 									</tr>
 								<% } else { %>
-									<% for (AdminReport ar : list) { %>
+									<% for (AdminReport ar : rlist) { %>
 										<tr>
 											<td><%= ar.getReportNo() %></td>
 											<td><%= ar.getReportDate() %></td>

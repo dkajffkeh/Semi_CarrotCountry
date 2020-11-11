@@ -34,8 +34,6 @@ public class MemberUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		
-		String userId = request.getParameter("userId");
 		String memName = request.getParameter("memName");
 		String gender = request.getParameter("gender");
 		String birthday = request.getParameter("birthday");
@@ -43,8 +41,9 @@ public class MemberUpdateController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		int local = Integer.parseInt(request.getParameter("local"));
 		String email = request.getParameter("email");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		Member m = new Member(userId, memName, gender, birthday, nickName, phone, local, email);
+		Member m = new Member( memName, gender, birthday, nickName, phone, local, email, memNo);
 		
 		Member updateMem = new UserInfoBoardService().updateMember(m);
 		

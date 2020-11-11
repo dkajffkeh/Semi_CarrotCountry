@@ -243,7 +243,7 @@ public class UserInfoBoardDaoNg {
 										 rset.getString("THUMBNAIL_LOADPATH"),
 										 rset.getString("POST_NAME"),
 										 rset.getString("MEM_NICKNAME"),
-										 rset.getString("MEM_PHONE"),
+										 rset.getString("MEMPHONE"),
 										 rset.getInt("GP_MINPEOPLE"),
 										 rset.getInt("GP_PEOPLE"),
 										 rset.getDate("GP_DEADLINE"),
@@ -258,7 +258,7 @@ public class UserInfoBoardDaoNg {
 										 rset.getString("OPTION_NAME"),
 										 
 										 rset.getString("SHIPPING_ADDRESS"),
-										 rset.getString("MEM_PHONE"),
+										 rset.getString("MYPHONE"),
 										 rset.getString("MEM_USERNAME"),
 										 rset.getString("SL_STATUS"),
 										 
@@ -282,5 +282,118 @@ public class UserInfoBoardDaoNg {
 		
 	}
 	
+	
+	public int buyerListCount(Connection conn, int bno) {
+		// SELECT문 => count
+		
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("buyerListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
+	
+	
+	
+	public ArrayList<MyPurchaseInfo> buyerList(Connection conn, RepPageInfo pi, int bno){
+		// SELECT => 여러행
+		
+		ArrayList<MyPurchaseInfo> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("buyerList");
+		
+		try {
+			
+			
+			int repStartRow = (pi.getRepCurrentPage() - 1) * pi.getRepBoardLimit() + 1;
+			int repEndRow = repStartRow + pi.getRepBoardLimit() - 1;
+			
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, repStartRow);
+			pstmt.setInt(3, repEndRow);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				
+				list.add(new MyPurchaseInfo(
+							rset.getInt("PURCHASE_NO"),
+							rset.getInt("POST_NO"),
+							rset.getInt("MEM_NO"),
+							rset.getString("DEPOSITOR"),
+							rset.getDate("PURCHASE_DATE"),
+							rset.getString("COURIER"),
+							rset.getLong("TRACKING_NO")
+						));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
+	}
+
+	
+	public int buyingBuyerUpdate(Connection conn, int pNo, String co, long tNo) {
+		// UPDATE문 => result
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("buyingBuyerUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, co);
+			pstmt.setLong(2, tNo);
+			pstmt.setInt(3, pNo);
+			
+			result = pstmt.executeUpdate();
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+
+	}
 	
 }

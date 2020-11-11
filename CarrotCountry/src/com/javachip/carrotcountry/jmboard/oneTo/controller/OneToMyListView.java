@@ -41,6 +41,9 @@ public class OneToMyListView extends HttpServlet {
 		int startPage;
 		int endPage;
 		//
+
+		int ono = Integer.parseInt(request.getParameter("memNo"));
+		
 		listCount = new OneToService().selectListCount();
 		
 		currentPage = Integer.parseInt(request.getParameter("repCurrentPage"));
@@ -63,7 +66,7 @@ public class OneToMyListView extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, oneToLimit, maxPage, startPage, endPage);
 		//
-		ArrayList<OneTo> list = new OneToService().selectList(pi);
+		ArrayList<OneTo> list = new OneToService().selectMyList(pi,ono);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

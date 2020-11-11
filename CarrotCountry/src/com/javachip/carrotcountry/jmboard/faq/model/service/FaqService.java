@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import com.javachip.carrotcountry.jmboard.faq.model.dao.FaqDao;
 import com.javachip.carrotcountry.jmboard.faq.model.vo.Faq;
+import com.javachip.carrotcountry.jmboard.oneTo.model.dao.OneToDao;
+import com.javachip.carrotcountry.jmboard.oneTo.model.vo.OneTo;
 
 public class FaqService {
 
@@ -93,6 +95,17 @@ public class FaqService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	public ArrayList<Faq> FaqSearchList(int type) {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Faq> list = new FaqDao().selectViewList(conn,type);
+		
+		return list;
 	}
 
 
