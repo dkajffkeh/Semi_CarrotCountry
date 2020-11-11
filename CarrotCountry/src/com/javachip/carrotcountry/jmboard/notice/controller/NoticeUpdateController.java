@@ -49,12 +49,8 @@ public class NoticeUpdateController extends HttpServlet {
 			int nno = Integer.parseInt(multiRequest.getParameter("nno"));
 			String noticeTitle = multiRequest.getParameter("title");
 			String noticeContent = multiRequest.getParameter("content");
-			
-			
-			//String fileOrigin = multiRequest.getOriginalFileName("reUpfile");
-			//String fileModify = multiRequest.getFilesystemName("reUpfile");
-			 String fileOrigin = null;
-	         String fileModify = null;
+			String fileOrigin = null;
+	        String fileModify = null;
 			
 			
 			String filePath = "resources/notice_upfiles/";
@@ -84,7 +80,7 @@ public class NoticeUpdateController extends HttpServlet {
 			
 			if(result > 0) {
 				
-				if(multiRequest.getParameter("modifyFileName") != null) {
+				if(multiRequest.getParameter("modifyFileName") != null && multiRequest.getOriginalFileName("reUpfile") != null) {
 					
 					File deleteFile = new File(savePath + multiRequest.getParameter("modifyFileName"));
 					deleteFile.delete();

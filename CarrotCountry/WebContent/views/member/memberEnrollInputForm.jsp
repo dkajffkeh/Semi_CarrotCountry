@@ -193,6 +193,7 @@
         var cPhone = false;
         var cGender = false;
 
+        
         // 회원가입버튼 활성화 or 비활성화 (모든 이벤트 발생시 해당 function 실행)
         function buttonAble(){
             if(cId === true && cPwd === true && cPwdCheck === true && cName === true && cNickName === true 
@@ -203,7 +204,7 @@
             }
         }
 
-        // 아이디 유효성검사 / 중복확인
+        // 아이디 유효성검사 / 중복확인 (이벤트는 focusout시 발생)
         function checkId(){
             var userId = document.getElementById("userId");
             var checkId = document.getElementById("checkId");
@@ -233,7 +234,7 @@
             }
         }
 
-        // 비밀번호 유효성검사
+        // 비밀번호 유효성검사 (이벤트는 focusout시 발생)
         function checkPwd(){
             var userPwd = document.getElementById("userPwd");
             var checkPwd = document.getElementById("checkPwd");
@@ -250,7 +251,7 @@
             }
         }
 
-        // 비밀번호 확인 유효성검사
+        // 비밀번호 확인 유효성검사 (이벤트는 focusout시 발생)
         function checkPwdCheck(){
             var userPwd = document.getElementById("userPwd");
             var userPwdCheck = document.getElementById("userPwdCheck");
@@ -272,7 +273,7 @@
             }
         }
 
-        // 이름 유효성검사
+        // 이름 유효성검사 (이벤트는 focusout시 발생)
         function checkName(){
             var userName = document.getElementById("userName");
             var checkName = document.getElementById("checkName");
@@ -289,7 +290,7 @@
             }
         }
 
-        // 닉네임 유효성검사 / 중복확인
+        // 닉네임 유효성검사 / 중복확인 (이벤트는 focusout시 발생)
         function checkNickName(){
             var nickName = document.getElementById("nickName")
             var checkNickName = document.getElementById("checkNickName");
@@ -319,7 +320,7 @@
             }
         }
 
-        // 생일 유효성검사
+        // 생일 유효성검사 (이벤트는 focusout시 발생)
         function checkBirthday(){
             var birthday = document.getElementById("birthday");
             var checkBirthday = document.getElementById("checkBirthday");
@@ -336,7 +337,7 @@
             }
         }
 
-        // 성별
+        // 성별 (이벤트는 focusout시 발생)
         function checkGenderM(){
             var checkGender = document.getElementById("checkGender");
             checkGender.innerHTML = "<p class='success''>'남' 선택 완료되었습니다!</p>";
@@ -350,7 +351,7 @@
             buttonAble();
         }
 
-        // 전화번호 유효성검사
+        // 전화번호 유효성검사 (이벤트는 focusout시 발생)
         function checkPhone(){
             var phone = document.getElementById("phone");
             var checkPhone = document.getElementById("checkPhone");

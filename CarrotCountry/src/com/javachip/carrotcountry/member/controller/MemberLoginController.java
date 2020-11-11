@@ -37,7 +37,6 @@ public class MemberLoginController extends HttpServlet {
 		String memUserId = request.getParameter("userId");
 		String memUserPwd = request.getParameter("userPwd");
 		
-		String userCheck = request.getParameter("userCheck");
 		
 		Member loginMember = new MemberService().loginMember(memUserId, memUserPwd);
 		
@@ -50,13 +49,9 @@ public class MemberLoginController extends HttpServlet {
 		}else { 
 
 			// 로그인 성공
-
 			HttpSession session = request.getSession();
-			
-
 			session.setAttribute("loginMember", loginMember);
 			session.setMaxInactiveInterval(-1);
-
 			response.sendRedirect(request.getContextPath());
 			
 		}

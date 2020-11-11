@@ -276,9 +276,9 @@ public class NoticeDao {
 			int startRow = (pi.getCurrentPage() -1) * pi.getNoticeLimit() + 1;
 			int endRow = startRow + pi.getNoticeLimit() - 1;
 			
-			pstmt.setString(1, "NOTICE_TITLE".equals(category) ? search : "");
-			pstmt.setString(2, "NOTICE_ENROLL_DATE".equals(category) ? search : "");
-			pstmt.setString(3, "MEM_USERID".equals(category) ? search : "");
+			pstmt.setString(1, "no_title".equals(category) ? search : "");
+			pstmt.setString(2, "no_birthday".equals(category) ? search : "");
+			pstmt.setString(3, "no_userid".equals(category) ? search : "");
 			pstmt.setInt(4, startRow);
 			pstmt.setInt(5, endRow);
 			

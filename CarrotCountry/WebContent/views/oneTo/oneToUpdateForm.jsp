@@ -18,65 +18,66 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/commonNavbar.jsp"%>
+<%@ include file="../common/commonNavbar.jsp"%>
     <div class="outer">
         <!-- 개인정보 수집 및 이용동의칸 남겨둠 -->
         <h4>1:1문의</h4>
         <hr>
-        <form id="update" action="<%= contextPath %>/modify.on.jm" method="post">
+        <form id="updatef" action="<%= contextPath %>/modify.on.jm" method="post">
         <input type="hidden" name="ono" value="<%= o.getOneToNo() %>">
             <ul>
                 <li>
                     <label for="">유형분류*</label>&nbsp;
                     <div class="form-check-inline">
-                      <input type="radio" id="11" class="form-check-input" name="oneToType" value="11">
+                      <input type="radio" id="11" class="form-check-input" name="oneToType" value="11" checked>
                         <label class="form-check-label" for="11">운영정책 </label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="22">
-                        <label class="form-check-label">계정/인증</label>
+                      <input type="radio" id="22" class="form-check-input" name="oneToType" value="22">
+                        <label class="form-check-label" for="22">계정/인증</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="33">
-                        <label class="form-check-label">중고구매/판매</label>
+                      <input type="radio" id="33" class="form-check-input" name="oneToType" value="33">
+                        <label class="form-check-label" for="33">중고구매/판매</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="44">
-                        <label class="form-check-label">거래품목</label>
+                      <input type="radio" id="44" class="form-check-input" name="oneToType" value="44">
+                        <label class="form-check-label" for="44">거래품목</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="55">
-                        <label class="form-check-label">신고관련</label>
+                      <input type="radio" id="55" class="form-check-input" name="oneToType" value="55">
+                        <label class="form-check-label" for="55">신고관련</label>
                       </div>
                       <br>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="66">
-                        <label class="form-check-label">공동구매/판매</label>
+                      <input type="radio" id="66" class="form-check-input" name="oneToType" value="66">
+                        <label class="form-check-label" for="66">공동구매/판매</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="77">
-                        <label class="form-check-label">이용제재</label>
+                      <input type="radio" id="77" class="form-check-input" name="oneToType" value="77">
+                        <label class="form-check-label" for="77">이용제재</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="88">
-                        <label class="form-check-label">블랙리스트관련</label>
+                      <input type="radio" id="88" class="form-check-input" name="oneToType" value="88">
+                        <label class="form-check-label" for="88">블랙리스트관련</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="99">
-                        <label class="form-check-label">공구문의</label>
+                      <input type="radio" id="99" class="form-check-input" name="oneToType" value="99">
+                        <label class="form-check-label" for="99">공구문의</label>
                       </div>
                       <div class="form-check-inline">
-                      <input type="radio" class="form-check-input" name="oneToType" value="100">
-                        <label class="form-check-label">기타문의</label>
+                      <input type="radio" id="100" class="form-check-input" name="oneToType" value="100">
+                        <label class="form-check-label" for="100">기타문의</label>
                       </div>
                       <script>
-                        	$(function(){
-                        		$("#update input[type=radio]").each(function(){
-                        			if($(this).next().text() == "<%=o.getOneToType()%>"){
-                        				$(this).attr("checked", true);
-                        			}
-                        		});
-                        	});
+                           $(function(){
+                              $("#updatef input[type=radio]").each(function(){
+                            	  $(this).next().text().log
+                                 if($(this).next().text() == "<%=o.getOneToType()%>"){
+                                    $(this).attr("checked", true);
+                                 }
+                              });
+                           });
                         </script>
                       
                 </li>
@@ -98,6 +99,9 @@
             </div>
 
         </form>
+        <br><br>
     </div>
+
+<br><br>
 </body>
 </html>

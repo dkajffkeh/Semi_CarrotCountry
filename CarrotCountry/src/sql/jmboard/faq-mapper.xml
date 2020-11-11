@@ -62,6 +62,7 @@
 		UPDATE
 		       FAQ
 		   SET FAQ_TITLE = ?
+		   	 , FAQ_CATEGORY = ?
 		     , FAQ_CONTENT = ?
 		 WHERE FAQ_NO = ?
 	</entry>
