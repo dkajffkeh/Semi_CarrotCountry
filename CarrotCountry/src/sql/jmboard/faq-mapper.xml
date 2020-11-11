@@ -72,6 +72,17 @@
 		   SET FAQ_STATUS = 'Y'
 		 WHERE FAQ_NO = ?
 	</entry>
+	
+		<entry key="selectViewList">
+		SELECT
+		       FAQ_NO
+		     , FAQ_TITLE
+		  FROM FAQ 
+		 WHERE FAQ_STATUS='N'
+           AND FAQ_CATEGORY = ?
+		 ORDER
+		    BY FAQ_NO DESC
+	</entry>
 
 
 
