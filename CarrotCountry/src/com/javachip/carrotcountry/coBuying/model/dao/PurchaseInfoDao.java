@@ -70,6 +70,8 @@ public class PurchaseInfoDao {
 			pstmt = conn.prepareStatement(sql);
 		
 			pstmt.setInt(1, postNo);
+			
+			gpPeople = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
