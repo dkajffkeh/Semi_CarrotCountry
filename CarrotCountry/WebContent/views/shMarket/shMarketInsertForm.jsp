@@ -124,7 +124,7 @@ border:2px solid green;
             </div>
             <h5>가격입력</h5>
             <div class="price_info_input" style="display: flex;">
-                <input type="text" class="form-control" name="price" placeholder="가격을 넣어주세요" style="margin-right: 10px;">
+                <input type="text" class="form-control" name="price" placeholder="가격을 넣어주세요" required style="margin-right: 10px;">
                 <h4 style="line-height: 180%;">원</h4>
             </div>
             <h5>상품상태</h5>
