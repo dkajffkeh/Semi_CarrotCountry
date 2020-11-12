@@ -14,6 +14,12 @@
 	font-weight:800;	
 	 font-family: 'Nanum Gothic', sans-serif;
 }
+.textGray{
+	color:gray;
+	font-weight:800;	
+	 font-family: 'Nanum Gothic', sans-serif;
+}
+
 .CS_content>div{
     width:100%;
     margin:auto;
@@ -67,7 +73,13 @@ select {
             <%} %>	<!-- 이거 나중에 지우기 어짜피 로그인된 유저임 -->
         
             <table id="enrollTable">
-
+				<tr>
+					<td colspan="3"  class="textGray"><br>
+						* 두장 이상의 사진과 모든 값을 입력해주세요 
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
                 <tr>
                     <td class="textOrange" width="150"> <br> 대표 이미지 등록 <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( 0 / 6 )</td>
                     <td width="400"> <br>
@@ -119,13 +131,9 @@ select {
                         if(inputFile.files.length == 1){
                             var reader = new FileReader();
     
-                            // 파일을 읽어들이는 메소드 호출
-                            // --> 해당 파일을 읽어들이는 순간 해당 그 파일만의 고유한 url 주어짐
                             reader.readAsDataURL(inputFile.files[0]); 
     
-                            // 파일 읽어들이기가 다 완료가 되었을 때 실행할 함수를 정의
                             reader.onload = function(e){
-                                // 각 영역에 맞춰서 이미지 미리보기
                                 switch(num){
                                     case 1 : $("#titleImg").attr("src", e.target.result); break;
                                     case 2 : $("#contentImg1").attr("src", e.target.result); break;
@@ -137,7 +145,6 @@ select {
                             };
     
                         }else{ 
-                            // 현재 선택된 file이 사라졌을 경우 => 미리보기 해제
                             switch(num){
                                 case 1 : $("#titleImg").attr("src", null); break;
                                 case 2 : $("#contentImg1").attr("src", null); break;
@@ -183,6 +190,7 @@ select {
                     <td><input type="number" name="gpDPrice" class="form-control" min="0" placeholder="원 단위로 입력해주세요"></td>
                     <td></td>
                 </tr>
+                
                 <tr>
                     <td class="textOrange">옵션</td>
                     <td>
@@ -196,22 +204,18 @@ select {
                 </tr>
 
                 <script>
-
                     $(function(){
 
                         $("#add1").click(function(){
 
-                            // 사용자가 입력한 값
                             var optAdd = $("#option-add").val();
 
                             if(optAdd != ""){
-                                // hidden타입으로 input생성하고 입력값 담기
                                 var a = document.createElement("input");
                                 a.setAttribute("value", optAdd);
                                 a.setAttribute("type", "hidden");
                                 a.setAttribute("name", "option");
 
-                                // select안에 value없는 option들 추가하기 (단지 시각용)
                                 $("#selectArea1").append("<option>" + optAdd + "</option>");
                                 
                                 $("#insertForm").append(a);

@@ -1,6 +1,8 @@
 package com.javachip.carrotcountry.coBuying.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,19 +32,28 @@ public class UpdateWishListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		PostBoardJY pb = new PostBoardJY();
-		pb.setPostNo(bno);
-		pb.setMemNo(memNo);
+		int likeCheck = new ProductService().likeCheck(bno, memNo);
 		
-		int result = new ProductService().updateWishList(pb);
+		String alert = "찜목록에 추가되었습니다!";
+		String already = "이미 추가되어있는 상품입니다!";
+		String fail = "찜목록 추가에 실패하였습니다.";
 		
-		if(result > 0) {
-			response.getWriter().print("success");
+		if(likeCheck == 0) {
+			int result = new ProductService().insertLike(bno, memNo);
+			
+			if(result > 0) {
+				out.print(alert);
+			}else {
+				out.print(fail);
+			}
 		}else {
-			response.getWriter().print("fail");
+			out.print(already);
 		}
 	}
 

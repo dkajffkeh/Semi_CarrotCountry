@@ -520,28 +520,109 @@ private Properties prop = new Properties();
 			
 		}
 		
-		public int updateWishList(Connection conn, PostBoardJY pb) {
-			int result = 0;
+		public int likeCheck(Connection conn, int bno, int memNo) {
 			
+			int likeCheck = 0;
 			PreparedStatement pstmt = null;
-			String sql = prop.getProperty("updateWishList");
+			ResultSet rs = null;
+			String sql = prop.getProperty("likeCheck");
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memNo);
+				pstmt.setInt(2, bno);
+				rs = pstmt.executeQuery();
 				
-				pstmt.setInt(1, pb.getPostNo());
-
-				result = pstmt.executeUpdate();
-				
+				if(rs.next()) {
+					likeCheck = rs.getInt("COUNT");
+				}
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}finally {
+			} finally {
+				close(rs);
 				close(pstmt);
 			}
-			
-			return result;
-			
+			return likeCheck;
 		}
+
+		public int insertLike(Connection conn, int bno, int memNo) {
+			
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertLike");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memNo);
+				pstmt.setInt(2, bno);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		
+			return result;
+		}
+
+		public ArrayList<Integer> likeCountSelector(Connection conn, PageInfo pi) {
+			
+			ArrayList<Integer> likeCount = new ArrayList();
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = prop.getProperty("likeCountSelector");
+			
+			int startNum = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+			int endRow = startNum + pi.getBoardLimit() -1;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startNum);
+				pstmt.setInt(2, endRow);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					likeCount.add(rs.getInt("LIKECOUNT"));
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+
+			return likeCount;
+		}
+
+		public int insertPostBoardLike(Connection conn, int bno, int memNo) {
+			
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertPostBoardLike");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bno);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+					
+			return result;
+		}
+
+		
 		
 		
 		
@@ -1453,12 +1534,11 @@ private Properties prop = new Properties();
 		
 		
 		public ArrayList<Product> searchKeyword(Connection conn, PageInfo pi, String keyword){
-			// select문 => 여러행 조회
+			
 			ArrayList<Product> pList = new ArrayList<>();
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			
 			String sql = prop.getProperty("searchKeyword");
 			
 			try {
@@ -1469,7 +1549,6 @@ private Properties prop = new Properties();
 				pstmt.setString(1, "%" + keyword + "%");
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
-				
 				
 				rs = pstmt.executeQuery();
 				
@@ -1484,7 +1563,6 @@ private Properties prop = new Properties();
 											rs.getInt("GP_PRICE"),
 											rs.getInt("GP_DRATE"),
 											rs.getInt("GP_DPRICE")));
-					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -1492,9 +1570,7 @@ private Properties prop = new Properties();
 				close(rs);
 				close(pstmt);
 			}
-	 		
 			return pList;
-			
 		}
 		
 		

@@ -69,8 +69,8 @@
 #paginationArea{height: 10%;}
 #proTitle>div{height: 100%; float: left;}
 #proTitle{padding: 20px;}
-#regionText{width: 80%; padding-left: 20px;}
-#regionButton{width: 20%; padding-left: 20px;}
+#regionText{width: 90%; padding-left: 20px;}
+#regionButton{width: 10%; padding-left: 20px;}
 /* 페이징 */
 #paginationArea>ul{
     padding-top: 50px;
@@ -133,7 +133,7 @@
     color: white;
     margin: auto;
     margin-top: 10%;
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
 }
 /* 정렬 */
 #array a{

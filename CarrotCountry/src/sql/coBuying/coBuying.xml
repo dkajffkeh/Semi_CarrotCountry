@@ -413,11 +413,55 @@
 		        )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
-	<entry key="updateWishList">
-		 UPDATE POST
-		    SET POST_LIKES = POST_LIKES + 1
-		  WHERE POST_NO=?
+	<entry key="likeCheck"> 
+		SELECT COUNT(MEM_NO) COUNT
+		 FROM LIKE_POST
+		WHERE MEM_NO = ?
+		  AND POST_NO = ?
 	</entry>
+	<entry key="insertLike">
+		INSERT INTO
+		           LIKE_POST
+		          (
+			           MEM_NO
+			          ,POST_NO
+		          )
+		          VALUES
+		          (
+			          ?
+			         ,?
+		          )
+	</entry>
+	<entry key="likeCountSelector">
+		SELECT *
+		FROM(
+		SELECT ROWNUM RNUM
+		      ,A.*
+		FROM
+		(  
+		SELECT
+		        COUNT(LP.POST_NO) LIKECOUNT
+		  FROM 
+		      POST P
+		LEFT JOIN 
+		    LIKE_POST LP ON(P.POST_NO=LP.POST_NO)
+		WHERE 
+		  	   BLIND_CHECK='N'
+		  	AND
+		  	   PROD_STATUS='Y'
+		GROUP BY P.POST_NO
+		ORDER BY P.POST_NO DESC
+		)A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="insertPostBoardLike">
+		UPDATE POST
+		   SET POST_LIKES=POST_LIKES+1
+		 WHERE POST_NO=?
+	</entry>
+	
+	
+	
 	<entry key="reportPreCheck">
 		SELECT COUNT(*)
 		  FROM REPORT

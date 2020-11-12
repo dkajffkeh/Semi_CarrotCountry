@@ -30,7 +30,7 @@
 
        /* 콘텐트바의 전반적인 틀 */
        #content>div{width: 100%;}
-       #content1{height: 5%;}
+       #content1{height: 5%; padding-left:100px;}
        #content2{height: 20%;}
        #content3{height: 75%;}
 
@@ -58,12 +58,12 @@
            float: left;
         }
        #content2_2_1{
-           height: 80%;
+           height: 70%;
            display: inline-block;
            padding-left: 50px;
            padding-bottom: 10px;
         }
-       #content2_2_2{height: 20%; width:350px; padding-left:100px; padding-top:70px;}
+       #content2_2_2{height: 20%; width:450px; padding-left:100px; padding-top:70px;}
        #content2_2_1 span{
             display: inline-block;
             padding-bottom: 10px;
@@ -98,10 +98,9 @@
             padding-top: 100px;
         }
         #showContent{
-            height: 100%;
+            height: 2500px;
             border:5px solid rgb(255, 178, 34);
             border-radius:50px;
-            height:780px;
             padding:50px;
             font-size: 25px;
             font-weight: 700;
@@ -211,13 +210,11 @@
                                 <button type="button" id="addWishList" class="btn btn-secondary btn-sm">찜하기</button>
                             </div>
                             <div id="buy">
-                                <button type="submit" class="btn btn-secondary btn-sm">구매하기</button>
+                                <button id="buybtn" type="submit" class="btn btn-secondary btn-sm">구매하기</button>
                             </div>
                             <div id="report">
                                 <button type="button" id="addReport" class="btn btn-secondary btn-sm">신고하기</button>
                             </div>
-                            
-                            
                             <script>
                             $(function(){
                            	 
@@ -231,7 +228,7 @@
 	                           					   memNo:"<%=loginMember.getMemNo()%>"},
 	                           			     type:"post",
 	                           			     success:function(result){
-	                           			  		 alert("찜목록에 성공적으로 추가되었습니다!");
+	                           			  		 alert(result);
 	                           			  	 },	
 	                           				 error:function(){      					 
 	                           				 }
@@ -262,6 +259,11 @@
 	                           		 
 	                           	 })	 
                             })
+                            
+                            
+                            
+                   
+                            
                             </script>
                             
                             
@@ -293,7 +295,14 @@
                         
                     </div>
                     <div id="content3_2">
-                        <div id="showContent"><%= pb.getPostContent() %></div>
+                        <div id="showContent">
+                        <%= pb.getPostContent() %>
+                        <%for(int i=0; i < ptList.size(); i++){ %>
+                          <div class="photoarea">
+                            <img src="<%=contextPath%>/<%= ptList.get(i).getPhotoPath() + ptList.get(i).getPhotoFileName() %>" height="500px" width="500px" alt="">
+                          </div>
+                          <%} %>
+                        </div>
                     </div>
 
 					
@@ -301,7 +310,8 @@
                     <script>
                         function showExplan(){
 	                        var showArea = document.getElementById("showContent");
-	                        showArea.innerHTML = "<%= pb.getPostContent() %>" ;
+	                        showArea.innerHTML = "<%= pb.getPostContent() %>" 
+	                      
                         }
                         
 
@@ -326,7 +336,6 @@
 
     </div>
 
-	<%@ include file="../common/footerbar.jsp"%>
 
 </body>
 </html>

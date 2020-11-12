@@ -163,24 +163,33 @@ public class ProductService {
 		}
 		
 		
-	public int updateWishList(PostBoardJY pb) {
+	public int likeCheck(int bno, int memNo) {
 			
 			Connection conn = getConnection();
 			
-			int result = new ProductDao().updateWishList(conn, pb);
-			
-			if(result > 0) {
-				commit(conn);
-			}else {
-				rollback(conn);
-			}
+			int likeCheck = new TownMarketDao().dibsCheck(conn,bno,memNo);
 			
 			close(conn);
 			
-			return result;
+			return likeCheck;
 		}
 		
-	
+	public int insertLike(int bno, int memNo) {
+		Connection conn = getConnection();
+		
+		int result1 = new ProductDao().insertLike(conn,bno,memNo);
+		int result2 = new ProductDao().insertPostBoardLike(conn,bno,memNo);
+		
+		if(result1>0 && result2>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1*result2;
+	}
 	
 	public int reportCheck(int bno, int memNo) {
 		
