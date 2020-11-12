@@ -39,7 +39,7 @@ public class CoBuyingBuyerListController extends HttpServlet {
 		int repListCount;	// 공동구매 총 갯수
 		int repCurrentPage;	// 현재 페이지
 		int repPageLimit;	// 하단에 보여질 페이지 최대 갯수(5)
-		int repBoardLimit; 	// 한 페이지에 보열질 공동구매 최대 갯수(10)
+		int repBoardLimit; 	// 한 페이지에 보열질 공동구매 최대 갯수(5)
 		
 		int repMaxPage;		// 가장 마지막 페이지
 		int repStartPage;	// 페이징바의 시작페이지
@@ -55,7 +55,7 @@ public class CoBuyingBuyerListController extends HttpServlet {
 		repPageLimit = 5;
 		
 		// 한페이지 게시글 최대 갯수
-		repBoardLimit = 10;
+		repBoardLimit = 5;
 		
 		// 가장 마지막수
 		repMaxPage = (int)Math.ceil((double)repListCount / repBoardLimit);

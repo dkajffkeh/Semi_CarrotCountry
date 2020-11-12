@@ -51,7 +51,9 @@ public class PurchaseInfoEnrollController extends HttpServlet {
 			
 			if (result > 0) {
 				ArrayList<ShippingLocation> list = new UserInfoBoardService().selectShippingLocation(memNo);
-				shippingNo = list.get(0).getShippingNo();
+				for (int i = 0; i < list.size(); i++) {
+					shippingNo = list.get(list.size() - 1).getShippingNo();
+				}
 			} else {
 				
 			}

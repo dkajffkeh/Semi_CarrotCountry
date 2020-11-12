@@ -67,17 +67,14 @@ public class UserInfoBoardDaoNg {
 	public ArrayList<MyReport> selectRepList(Connection conn, RepPageInfo pi, int memNo){
 		// SELECT문 => 여러행
 		ArrayList<MyReport> list = new ArrayList<>();
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String sql = prop.getProperty("selectRepList");
 		
 		try {
 			
 			int repStartRow = (pi.getRepCurrentPage() - 1) * pi.getRepBoardLimit() + 1;
 			int repEndRow = repStartRow + pi.getRepBoardLimit() - 1;
-			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, memNo);
@@ -99,7 +96,6 @@ public class UserInfoBoardDaoNg {
 						 			  rset.getInt("REPORT_POST_NO")));
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -110,6 +106,8 @@ public class UserInfoBoardDaoNg {
 		return list;
 		
 	}
+	
+	
 	
 	public int updateRep(Connection conn, int memNo, int reportNo, String reportContent) {
 		// UPDATE문 => result

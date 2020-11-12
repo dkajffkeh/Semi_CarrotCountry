@@ -74,7 +74,7 @@
 								<td><%= mpi.getPurchaseDate() %></td>
 								<td>				
 									<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target=".re<%= mpi.getPurchaseNo() %>">
-										<%= mpi.getCourier() == null && mpi.getTrackingNo() == 0 ? "배송 입력하기" : "배송 수정하기"%>
+										<%= mpi.getCourier() == null && mpi.getTrackingNo() == 0 ? "배송하기" : "배송완료"%>
 									</button>
 								</td>
 							</tr>
@@ -103,7 +103,7 @@
 										
 								      <!-- Modal footer -->
 								      <div class="modal-footer">
-							      	  <button type="submit"  class="btn btn-warning"> <%= mpi.getCourier() == null && mpi.getTrackingNo() == 0 ? "배송 입력하기" : "배송 수정하기"%> </button> 	
+							      	  <button type="submit"  class="btn btn-warning"> <%= mpi.getCourier() == null && mpi.getTrackingNo() == 0 ? "배송하기" : "배송 수정하기"%> </button> 	
 								      <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 								      </div>
 							
