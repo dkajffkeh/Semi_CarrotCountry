@@ -182,7 +182,7 @@
                             <span>최소 인원 :</span> <%= pd.getGpMinPeople() %> <br>
                             <span>현재 인원 :</span>
                               <div class="progress" style="width: 100%">
-                                <div class="progress-bar bg-success" style="width:<%= pd.getGpPeople() %> %"> <%= pd.getGpPeople() %>명 </div>
+                                <div class="progress-bar bg-success" style="width:<%=((double)pd.getGpPeople()/100)*100%>%"> <%= pd.getGpPeople() %>명 </div>
                               </div> <br>
                             <span>가격 :</span> <%= pd.getGpDPrice() %> <br>
                             <span>옵션 : </span>
@@ -316,7 +316,7 @@
                         
 
                         function showAccount(){
-                            var showArea = document.getElementById("showContent");
+                            var showArea = document.getElementById("showContent");                 
                             <%for(Account account : aList){ %>	
 							    showArea.innerHTML = '입금 가능 계좌 : ' + "<%= account.getAccount() %>";
 							 <% } %>

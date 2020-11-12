@@ -413,7 +413,7 @@ $(function(){
 		type:"post",
 		data:{currentPage:1},
 		success:function(list){
-
+			console.log(list)
 			ArticleSelector(list);	
 		
 			PagingSort(list);        
