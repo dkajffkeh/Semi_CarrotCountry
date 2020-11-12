@@ -104,7 +104,9 @@
 								      <div class="modal-body">
 									      	<input type="hidden" name="memNo" value="<%= loginMember.getMemNo() %>">
 									      	<input type="hidden" name="reportNo" value="<%= rep.getReportNo() %>">
-									      	<textarea cols="62" rows="10" style="resize:none;" name="reportContent"><%= rep.getReportContent() == null ? "신고내용을 입력해주세요." : rep.getReportContent() %></textarea>
+									      	<textarea cols="62" rows="10" style="resize:none;" name="reportContent">
+									      		<%= rep.getReportContent() == null ? "신고내용을 입력해주세요." : rep.getReportContent() %>
+									      	</textarea>
 									  </div>
 										
 								      <!-- Modal footer -->
