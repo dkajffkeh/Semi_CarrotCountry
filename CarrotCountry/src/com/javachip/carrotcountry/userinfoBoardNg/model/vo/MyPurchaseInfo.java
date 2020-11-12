@@ -141,6 +141,19 @@ public class MyPurchaseInfo {
 		this.site = site;
 	}
 
+	// 공구 구매한사람 리스트 조회하기위한 생성자 
+	public MyPurchaseInfo(int purchaseNo, int postNo, int memNo, String depositor, Date purchaseDate, String courier,
+			long trackingNo) {
+		super();
+		this.purchaseNo = purchaseNo;
+		this.postNo = postNo;
+		this.memNo = memNo;
+		this.depositor = depositor;
+		this.purchaseDate = purchaseDate;
+		this.courier = courier;
+		this.trackingNo = trackingNo;
+	}
+
 	public int getPurchaseNo() {
 		return purchaseNo;
 	}

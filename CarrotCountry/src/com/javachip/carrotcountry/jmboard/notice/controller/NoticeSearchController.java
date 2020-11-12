@@ -39,7 +39,7 @@ public class NoticeSearchController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
-		Member member = (Member) request.getSession().getAttribute("loginMember");
+		
 		
 		
 

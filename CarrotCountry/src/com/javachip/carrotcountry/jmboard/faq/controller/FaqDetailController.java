@@ -38,14 +38,10 @@ public class FaqDetailController extends HttpServlet {
 			Faq f = new FaqService().selectFaq(fno);
 			
 
-			if(f.getFaqstatus() == null) {
 
-				request.setAttribute("f", f);
-				request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
-			}else {
-				request.setAttribute("errorMsg", "유효한 게시글이 아닙니다. 또는 해당 게시글이 삭제되었을 수 있습니다.");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			}
+			request.setAttribute("f", f);
+			request.getRequestDispatcher("views/faq/faqDetailView.jsp").forward(request, response);
+
 
 			
 

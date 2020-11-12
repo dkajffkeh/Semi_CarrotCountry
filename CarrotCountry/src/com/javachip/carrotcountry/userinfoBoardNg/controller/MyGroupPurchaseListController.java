@@ -78,7 +78,7 @@ public class MyGroupPurchaseListController extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("views/userinfoBoard/ng/myGroupPurchaseListView.jsp").forward(request, response);;
+		request.getRequestDispatcher("views/userinfoBoard/ng/myGroupPurchaseListView.jsp").forward(request, response);
 		
 	}
 

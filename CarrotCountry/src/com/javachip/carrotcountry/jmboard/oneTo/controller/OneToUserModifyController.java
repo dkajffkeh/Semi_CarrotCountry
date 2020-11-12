@@ -43,10 +43,10 @@ public class OneToUserModifyController extends HttpServlet {
 		int result = new OneToService().userModify(o);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "성공적으로 질문이 수정되었습니다.");
+			request.getSession().setAttribute("alertMsg", "성공적으로 문의가 수정되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/detail.on.jm?ono=" + ono);
 		}else {
-			request.setAttribute("errorMsg", "FAQ 수정 실패.");
+			request.setAttribute("errorMsg", "문의 수정 실패.");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
 		}

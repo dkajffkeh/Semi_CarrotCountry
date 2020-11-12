@@ -49,7 +49,7 @@
                         <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=11"'>운영정책</td>
                         <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=22"'>계정/인증</td>
                         <td onclick='location.href="<%=contextPath%>/search.fa.jm?type=33"'>중고구매/판매</td>
-                        <td onclick='location.href="<%=contextPath%>/list.fa.jm"'>전채보기</td>
+                        <td onclick='location.href="<%=contextPath%>/list.fa.jm"'>전체보기</td>
                     </tr>
                 </tbody>
             </table>

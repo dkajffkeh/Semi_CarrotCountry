@@ -100,4 +100,43 @@ public class UserInfoBoardServiceNg {
 	}
 	
 	
+	public int buyerListCount(int bno) {
+		
+		Connection conn = getConnection();
+		
+		int count = new UserInfoBoardDaoNg().buyerListCount(conn, bno);
+		
+		close(conn);
+		
+		return count;
+		
+	}
+	
+	public ArrayList<MyPurchaseInfo> buyerList(RepPageInfo pi, int bno){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<MyPurchaseInfo> list = new UserInfoBoardDaoNg().buyerList(conn, pi, bno);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public int buyingBuyerUpdate(int pNo, String co, long tNo) {
+		Connection conn = getConnection();
+		
+		int result = new UserInfoBoardDaoNg().buyingBuyerUpdate(conn, pNo, co, tNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }
