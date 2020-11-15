@@ -44,7 +44,7 @@ public class ShMarketEmailCheckController extends HttpServlet {
 		String hash = new SHA256().getSHA256(request.getParameter("userEmail"));
 		String host = "http://localhost:8888/carrot";
 		String from = "dkajffkem@gmail.com";
-		String content = "ㅎㅎㅎ";
+		String content = "당근나라 회원인증 메세지 입니다.";
 		
 		p.put("mail.smtp.user","구글 이메일계정");
 		p.put("mail.smtp.host","smtp.googlemail.com");
