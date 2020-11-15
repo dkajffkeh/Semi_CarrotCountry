@@ -59,8 +59,8 @@ public class ShMarketBoardInserstController extends HttpServlet {
       if(!fileSaveDir.exists()) {
 			fileSaveDir.mkdirs();	
 		}	
-	  List<String> Flist = new ArrayList<String>();
-	  for(Part part : request.getParts()) {				
+	  List<String> Flist = new ArrayList<String>(); //파일 이름을 담을 List
+	  for(Part part : request.getParts()) {	   // 반복문들 돌면서 enctype 이 multipart 인 입력값을 part 객체에 저장. 
 	if(part.getName().equals("file")) {			
 		String renamed = new UploadRename().randomString(getFileName(part));
 		part.write(savePath+File.separator+renamed);
@@ -77,6 +77,7 @@ public class ShMarketBoardInserstController extends HttpServlet {
 	      pbv.setPhotoLoadPath(photoPath);     
 	      pList.add(pbv);       
 	      } 
+	 
 	  String category1 = request.getParameter("category");
 	 
          String category = request.getParameter("category");
@@ -116,6 +117,8 @@ public class ShMarketBoardInserstController extends HttpServlet {
       // TODO Auto-generated method stub
       doGet(request, response);
    }
+
+
    private String getFileName(Part part) {
        String contentDisp = part.getHeader("content-disposition");      
        String[] tokens = contentDisp.split(";");
@@ -126,4 +129,6 @@ public class ShMarketBoardInserstController extends HttpServlet {
        }
        return "";
    }
+
+
 }
