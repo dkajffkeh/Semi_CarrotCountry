@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="SellerQnAInsert">
+
+UPDATE
+      GROUPBUY_QUESTION
+   SET
+      GQ_ANSWER=?
+WHERE 
+     GQ_NO=?
+
+</entry>
+<entry key="qnaSelector">
+SELECT
+           GQ_NO
+         , POST_NO
+         , GQ_TITLE
+         , MEM_NAME
+         , GQ_ENROLLDATE
+         , GQ_CONTENT
+         , GQ_ANSWER
+      FROM GROUPBUY_QUESTION
+      JOIN MEMBER USING (MEM_NO)
+     WHERE GQ_STATUS = 'Y'
+       AND GQ_NO = ?
+</entry>
+
+</properties>
