@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>  
 <%@ page import="com.javachip.carrotcountry.shMarketBoard.townMarket.model.vo.CategoryHY" %>
+<%@ page import="javax.mail.*" %>
+<%@ page import ="com.javachip.carrotcountry.common.Gmail" %>
+<%@ page import ="com.javachip.carrotcountry.common.SHA256" %>
+<%@ page import ="java.util.Properties" %>
 <!DOCTYPE html>
 <%
 ArrayList<CategoryHY> list = (ArrayList)request.getAttribute("list");
-
+Properties p = new Properties();
 %>
 <html>
 <head>
@@ -107,6 +111,13 @@ border:2px solid green;
 <body>
 <%@ include file="../common/commonNavbar.jsp"%>
 
+<% String userId = loginMember.getMemUserId();  
+   String to = loginMember.getMemEmail();
+   
+%>
+
+
+
 <div id="page_total_wrapper">
         <form action="shBoardEnrollForm.sh.hy" id="form1" enctype="multipart/form-data" method="post">
         <input type="hidden" name="memNo"   value="<%=loginMember.getMemNo()%>">
@@ -176,7 +187,8 @@ border:2px solid green;
             </script>
             <h5>판매자 정보</h5>
             <div class="user_info" style="display: flex; margin-bottom: 30px; ">
-                <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>    
+			 <h4 style="line-height: 100%; margin:2px; margin-right: 15px;"><%=loginMember.getMemNickname()%>  <%=loginMember.getMemPhone() %></h4>    
+            <button class="btn btn-success" id="emailCheck">이메일 인증</button>
             </div>
             <h6 align="center">사진은 최대 5개까지 업로드가 가능합니다.</h6>
             <div id="preview_frame">
@@ -249,6 +261,36 @@ border:2px solid green;
                     
                     } 
                     }
+        
+        $(function(){
+        	
+        	
+        	$("#emailCheck").click(function(){
+        		
+        		$.ajax({
+        			url:"emailCheck.sh",
+        			type:"post",
+        			data:{
+        				userEmail:"<%=to%>"	
+        			},
+        			success:function(){
+        			console.log("성공");
+        				
+        			},
+        			error:function(){
+        			console.log("실패");	
+        				
+        			}
+        			
+        			
+        		})
+        		
+        		
+        		
+        		
+        	})
+        	
+        })
     </script>    
 <%@ include file="../common/footerbar.jsp"%>
 </body>
