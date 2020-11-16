@@ -276,18 +276,9 @@ border:2px solid green;
         			success:function(){
         			console.log("성공");
         				
-        			},
-        			error:function(){
-        			console.log("실패");	
-        				
-        			}
-        			
-        			
+        			},    			
         		})
-        		
-        		
-        		
-        		
+      		
         	})
         	
         })
