@@ -21,16 +21,14 @@ public class SHA256 {
 				if(hex.length()==1) result.append("0");
 				result.append(hex);
 				
-			}
-			
+			}		
 			
 		} catch(Exception e) {
 			
 			e.printStackTrace();
 			
 		}
-		
-		
+
 		return result.toString();
 		
 	}
