@@ -93,6 +93,7 @@
         <a href="<%= contextPath %>/loginPage.me.ng" class="btn btn-warning" style="color:white;">로그인페이지로 가기</a>
     </div>
     
+   
     <%@ include file="../common/footerbar.jsp" %>
     
 </body>
