@@ -11,7 +11,5 @@ public class Gmail extends Authenticator {
 		return new PasswordAuthentication("dkajffkem@gmail.com", "ghduswkd11");
 		
 	}
-	
-	
-	
+
 }

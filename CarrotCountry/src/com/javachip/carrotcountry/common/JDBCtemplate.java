@@ -42,7 +42,7 @@ public class JDBCtemplate {
 		return conn;
 	}
 	
-public static void commit(Connection conn) {
+	public static void commit(Connection conn) {
 		
 		try {
 			if(!conn.isClosed()&&conn!=null) {

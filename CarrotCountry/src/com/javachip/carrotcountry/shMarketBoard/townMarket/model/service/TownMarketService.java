@@ -25,7 +25,7 @@ public class TownMarketService {
 		Connection conn = getConnection();
 		ArrayList<CategoryHY> list = new TownMarketDao().CategorySelector(conn);
 		
-		
+		close(conn);
 		return list;
 	}
 
@@ -34,7 +34,7 @@ public class TownMarketService {
 		Connection conn = getConnection();
 		ArrayList<PostBoard> boardList = new TownMarketDao().mainArticleSelector(conn,sp);
 		
-		
+		close(conn);
 		return boardList;
 	}
 
