@@ -13,7 +13,7 @@ Semi_CarrotCountry
     1. 동네 주민들과의 공동구매
     
 * ## 개발기간
-    2020.09.18 ~ 2020.11.13
+    2020.09.18 ~ 2020.11.12
 * ## 사용기술
     ![캡처](https://user-images.githubusercontent.com/54658104/102349993-89649e00-3fe7-11eb-87ee-b62edcb203f4.PNG)
 
