@@ -17,7 +17,7 @@ Semi_CarrotCountry
 * ## 사용기술
     ![캡처](https://user-images.githubusercontent.com/54658104/102349993-89649e00-3fe7-11eb-87ee-b62edcb203f4.PNG)
 
-* ## 데이터 베이스
+* ## 데이터베이스
     ![Carrot_Contry ERD](https://user-images.githubusercontent.com/54658104/102349493-bf555280-3fe6-11eb-9f19-3fec314bbc82.png)
 
 * ## 기능상세
